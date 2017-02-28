@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><!--suppress XmlUnusedNamespaceDeclaration -->
+<html lang="tr" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>Dashboard</title>
+        <h:outputStylesheet name="css/bootstrap.min.css"/>
+        <h:outputStylesheet name="css/font-awesome.min.css"/>
+        <h:outputStylesheet name="css/style.css"/>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <div class="card">
+                <div class="card-block">
+                    <h1>Hoşgeldin ${person.username}</h1>
+                    <h:form prependId="false">
+                        <h:commandButton value="Çıkış" styleClass="btn btn-primary" action="#{person.logout}"/>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </h:body>
+
+    <h:outputScript name="js/jquery.min.js"/>
+    <h:outputScript name="js/tether.min.js"/>
+    <h:outputScript name="js/bootstrap.min.js"/>
+</html>
