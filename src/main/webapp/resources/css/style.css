@@ -1,16 +1,13 @@
 /*noinspection CssUnknownTarget*/
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&subset=latin-ext');
-
 *:focus {
   outline: none !important;
 }
-
 body {
   font-family: 'Open Sans', sans-serif;
   background-color: #E6E6E6;
   padding: 40px 0;
 }
-
 ul,
 ol,
 li,
@@ -24,38 +21,37 @@ h6 {
   padding: 0;
   margin: 0;
 }
-
 ul,
 ol,
 li {
   list-style-type: none;
 }
-
 a {
   color: #000;
 }
-
 a:hover {
   text-decoration: none;
   color: #000;
 }
-
 a:focus {
   text-decoration: none;
 }
-
 button,
 select,
 input.btn {
   cursor: pointer;
 }
-
 .card {
   margin-bottom: 30px;
 }
-
 .error {
   display: block;
   color: red;
   margin-top: 5px;
+}
+
+.info {
+  display: block;
+  color: green;
+  margin: 5px 0;
 }

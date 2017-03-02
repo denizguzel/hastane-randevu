@@ -1,6 +1,7 @@
 package com.hastanerandevu.beans;
 
 import com.hastanerandevu.DAO.LoginDAO;
+import com.hastanerandevu.DAO.RegisterDAO;
 import com.hastanerandevu.service.SessionUtils;
 
 import javax.faces.application.FacesMessage;
@@ -16,6 +17,7 @@ public class PersonBean implements Serializable {
   private static final long serialVersionUID = 1094801825228386363L;
   private String username;
   private String password;
+  private String tcNo;
 
   public String getUsername () {
     return username;
@@ -33,15 +35,34 @@ public class PersonBean implements Serializable {
     this.password = password;
   }
 
-  public String validateUsernamePassword () {
-    boolean valid = LoginDAO.validate(username, password);
+  public String getTcNo () {
+    return tcNo;
+  }
+
+  public void setTcNo (String tcNo) {
+    this.tcNo = tcNo;
+  }
+
+  public String validateLogin () {
+    boolean valid = LoginDAO.loginValidate(username, password);
     if ( valid ) {
       HttpSession session = SessionUtils.getSession();
       session.setAttribute("username", username);
       return "view/dashboard?faces-redirect=true";
     } else {
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Incorrect Username and Password", "Please enter correct username and Password"));
-      return "/index?faces-redirect=true";
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Kullanıcı adı ya da şifre yanlış", "Lütfen kullanıcı adı ve şifrenizi tekrar giriniz"));
+      return "/";
+    }
+  }
+
+  public String validateRegister () {
+    boolean valid = RegisterDAO.addUser(username, password);
+    if ( valid ) {
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Kayıt başarılı", null));
+      return "/";
+    } else {
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Kullaıcı kaydı yapılamadı", "Bilgileri tekrar kontrol edin"));
+      return "/";
     }
   }
 

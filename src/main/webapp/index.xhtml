@@ -1,35 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><!--suppress XmlUnusedNamespaceDeclaration -->
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><!--suppress XmlUnusedNamespaceDeclaration -->
 <html lang="tr" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://xmlns.jcp.org/jsf/passthrough" xmlns:f="http://java.sun.com/jsf/core">
-    <h:head>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <title>JSF</title>
-        <h:outputStylesheet name="css/bootstrap.min.css"/>
-        <h:outputStylesheet name="css/font-awesome.min.css"/>
-        <h:outputStylesheet name="css/style.css"/>
-    </h:head>
-    <h:body>
-        <div class="container">
-            <div class="card">
-                <div class="card-block">
-                    <h:form prependId="false" id="login">
-                        <div class="form-group">
-                            <h:inputText id="username" value="#{person.username}" p:placeholder="İsim giriniz" styleClass="form-control" required="true" requiredMessage="Please enter your username"/>
-                            <h:message for="username" errorClass="error"/>
-                        </div>
-                        <div class="form-group">
-                            <h:inputSecret id="password" value="#{person.password}" p:placeholder="Şifre giriniz" styleClass="form-control" required="true" requiredMessage="Please enter your password"/>
-                            <h:message for="password" errorClass="error"/>
-                        </div>
-                        <h:commandButton value="Gönder" styleClass="btn btn-primary" action="#{person.validateUsernamePassword}"/>
-                    </h:form>
-                </div>
+  <h:head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>JSF</title>
+    <h:outputStylesheet name="css/bootstrap.min.css"/>
+    <h:outputStylesheet name="css/font-awesome.min.css"/>
+    <h:outputStylesheet name="css/style.css"/>
+  </h:head>
+  <h:body>
+    <div class="container">
+      <div class="card">
+        <div class="card-header">Login</div>
+        <div class="card-block">
+          <h:form prependId="false" id="loginForm">
+            <div class="form-group">
+              <h:inputText id="username" value="#{person.username}" p:placeholder="Kullanıcı adı giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen kullanıcı adı giriniz">
+                <f:ajax event="keyup" execute="@this" render="usernameMessage"/>
+              </h:inputText>
+              <h:message id="usernameMessage" for="username" errorClass="error"/>
             </div>
+            <div class="form-group">
+              <h:inputText id="tc" value="#{person.tcNo}" p:placeholder="T.C. No giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen T.C. No Giriniz">
+                <f:validator validatorId="TCNoValidator"/>
+                <f:ajax event="blur" execute="@this" render="tcMessage"/>
+              </h:inputText>
+              <h:message id="tcMessage" for="tc" errorClass="error"/>
+            </div>
+            <div class="form-group">
+              <h:inputSecret id="password" value="#{person.password}" p:placeholder="Şifre giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen şifrenizi giriniz">
+                <f:ajax event="keyup" execute="@this" render="passwordMessage"/>
+              </h:inputSecret>
+              <h:message id="passwordMessage" for="password" errorClass="error"/>
+            </div>
+            <h:commandButton value="Gönder" styleClass="btn btn-primary" action="#{person.validateLogin}">
+              <f:ajax execute="@form" render="@form"/>
+            </h:commandButton>
+          </h:form>
         </div>
-    </h:body>
+      </div>
+      <div class="card">
+        <div class="card-header">Register</div>
+        <div class="card-block">
+          <h:form prependId="false" id="registerForm">
+            <div class="form-group">
+              <h:inputText id="usernameAdd" value="#{person.username}" p:placeholder="Kullanıcı adı giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen kullanıcı adı giriniz">
+                <f:ajax event="keyup" execute="@this" render="usernameAddMessage"/>
+              </h:inputText>
+              <h:message id="usernameAddMessage" for="usernameAdd" errorClass="error"/>
+            </div>
+            <div class="form-group">
+              <h:inputText id="tcAdd" value="#{person.tcNo}" p:placeholder="T.C. No giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen T.C. No Giriniz">
+                <f:validator validatorId="TCNoValidator"/>
+                <f:ajax event="blur" execute="@this" render="tcAddMessage"/>
+              </h:inputText>
+              <h:message id="tcAddMessage" for="tcAdd" errorClass="error"/>
+            </div>
+            <div class="form-group">
+              <h:inputSecret id="passwordAdd" value="#{person.password}" p:placeholder="Şifre giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen şifrenizi giriniz">
+                <f:ajax event="keyup" execute="@this" render="passwordAddMessage"/>
+              </h:inputSecret>
+              <h:message id="passwordAddMessage" for="passwordAdd" errorClass="error"/>
+            </div>
+            <h:messages styleClass="info"/>
+            <h:commandButton value="Gönder" styleClass="btn btn-primary" action="#{person.validateRegister}">
+              <f:ajax execute="@form" render="@form"/>
+            </h:commandButton>
+          </h:form>
+        </div>
+      </div>
+    </div>
+  </h:body>
 
-    <h:outputScript name="js/jquery.min.js"/>
-    <h:outputScript name="js/tether.min.js"/>
-    <h:outputScript name="js/bootstrap.min.js"/>
+  <h:outputScript name="js/jquery.min.js"/>
+  <h:outputScript name="js/tether.min.js"/>
+  <h:outputScript name="js/bootstrap.min.js"/>
 </html>

@@ -4,26 +4,23 @@ import com.hastanerandevu.database.DatabaseConnect;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class LoginDAO {
-  public static boolean loginValidate (String username, String password) {
+public class RegisterDAO {
+  public static boolean addUser (String username, String password) {
     Connection        con = null;
     PreparedStatement ps;
 
     try {
       con = DatabaseConnect.getConnection();
       assert con != null;
-      ps = con.prepareStatement("SELECT username, password from users where username = ? AND password = ?");
+      ps = con.prepareStatement("INSERT INTO users(username, password) VALUES(?,?)");
       ps.setString(1, username);
       ps.setString(2, password);
 
-      ResultSet result = ps.executeQuery();
-      if ( result.next() )
-        return true;
+      ps.executeUpdate();
     } catch ( SQLException ex ) {
-      System.out.println("Login error --> " + ex.getMessage());
+      System.out.println("Register error --> " + ex.getMessage());
     } finally {
       try {
         DatabaseConnect.closeConnection(con);
@@ -31,6 +28,6 @@ public class LoginDAO {
         e.printStackTrace();
       }
     }
-    return false;
+    return true;
   }
 }
