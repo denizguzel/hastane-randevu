@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
  * Created by Okan on 2.3.2017.
  */
 
-@FacesValidator("passwordValidation")
+@FacesValidator("passwordValidator")
 public class PasswordValidator implements Validator {
 
   private static final String PASSWORD_PATTERN = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
