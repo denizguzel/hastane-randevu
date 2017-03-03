@@ -1,7 +1,6 @@
 package com.hastanerandevu.beans;
 
-import com.hastanerandevu.DAO.LoginDAO;
-import com.hastanerandevu.DAO.RegisterDAO;
+import com.hastanerandevu.DAO.AccountDAO;
 import com.hastanerandevu.service.SessionUtils;
 
 import javax.faces.application.FacesMessage;
@@ -44,7 +43,7 @@ public class PersonBean implements Serializable {
   }
 
   public String validateLogin () {
-    boolean valid = LoginDAO.loginValidate(username, password);
+    boolean valid = AccountDAO.loginUser(username, password);
     if ( valid ) {
       HttpSession session = SessionUtils.getSession();
       session.setAttribute("username", username);
@@ -56,7 +55,7 @@ public class PersonBean implements Serializable {
   }
 
   public String validateRegister () {
-    boolean valid = RegisterDAO.addUser(username, password);
+    boolean valid = AccountDAO.createUser(username, password, tcNo);
     if ( valid ) {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Kayıt başarılı", null));
       return "/";

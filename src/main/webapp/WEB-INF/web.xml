@@ -56,7 +56,7 @@
   <!-- Error Page -->
   <error-page>
     <error-code>404</error-code>
-    <location>/view/errorpages/404.xhtml</location>
+    <location>/view/error/404.xhtml</location>
   </error-page>
 
 </web-app>

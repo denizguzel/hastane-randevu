@@ -1,14 +1,12 @@
 <ui:composition template="/view/master/masterTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
-  <ui:define name="title">Dashboard</ui:define>
+  <ui:define name="title">Oops.. Aradığınız sayfa bulunamadı</ui:define>
 
   <ui:define name="content">
     <div class="container">
       <div class="card">
-        <div class="card-header">Hoşgeldin ${person.username}</div>
+        <div class="card-header">Aradığınız içerik bulunamadı <i class="fa fa-exclamation-triangle"></i></div>
         <div class="card-block">
-          <h:form prependId="false">
-            <h:commandButton value="Çıkış" styleClass="btn btn-primary" action="#{person.logout}"/>
-          </h:form>
+          <h:outputLink value="/hastane_randevu/" styleClass="btn btn-primary">Ana sayfaya dön</h:outputLink>
         </div>
       </div>
     </div>

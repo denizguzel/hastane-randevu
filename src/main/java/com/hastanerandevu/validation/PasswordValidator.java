@@ -1,7 +1,5 @@
 package com.hastanerandevu.validation;
 
-import org.jboss.logging.Logger;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -11,11 +9,8 @@ import javax.faces.validator.ValidatorException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by Okan on 2.3.2017.
- */
 
-@FacesValidator("passwordValidator")
+@FacesValidator ("passwordValidator")
 public class PasswordValidator implements Validator {
 
   private static final String PASSWORD_PATTERN = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
@@ -37,20 +32,12 @@ public class PasswordValidator implements Validator {
 
   public void validate (FacesContext context, UIComponent component, Object value) throws ValidatorException {
 
-    if (!isValidPassword(value.toString())) {
-      FacesMessage msg = new FacesMessage("Geçersiz şifre. Lütfen şifrenizi belirtilen formatta giriniz");
+    Matcher matcher = pattern.matcher(value.toString());
+
+    if ( !matcher.matches() ) {
+      FacesMessage msg = new FacesMessage("Geçersiz şifre. Lütfen şifrenizi belirtilen formatta giriniz", "Şifreniz en az 1 rakam, 1 küçük harf, 1 büyük harf, 1 özel karakter ve en az 8 haneli olmalıdır.");
       msg.setSeverity(FacesMessage.SEVERITY_ERROR);
       throw new ValidatorException(msg);
     }
-  }
-
-  private static boolean isValidPassword (String value) {
-    Matcher matcher = pattern.matcher(value.toString());
-
-    if (!matcher.matches()){
-      return false;
-    }
-    else
-      return true;
   }
 }
