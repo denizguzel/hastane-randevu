@@ -6,29 +6,22 @@
       <div class="card">
         <div class="card-header">Login</div>
         <div class="card-block">
-          <h:form prependId="false" id="loginForm">
+          <h:form prependId="false">
             <div class="form-group">
-              <h:inputText id="username" value="#{person.username}" p:placeholder="Kullanıcı adı giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen kullanıcı adı giriniz">
+              <h:inputText id="username" value="#{patient.patientModel.firstName}" p:placeholder="Kullanıcı adı giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen kullanıcı adı giriniz">
                 <f:ajax event="blur" execute="@this" render="usernameMessage"/>
               </h:inputText>
               <h:message id="usernameMessage" for="username" errorClass="error"/>
             </div>
             <div class="form-group">
-              <h:inputSecret id="password" value="#{person.password}" p:placeholder="Şifre giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen şifrenizi giriniz">
+              <h:inputSecret id="password" value="#{patient.patientModel.password}" p:placeholder="Şifre giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen şifrenizi giriniz">
                 <f:validator validatorId="passwordValidator"/>
                 <f:ajax event="blur" execute="@this" render="passwordMessage"/>
               </h:inputSecret>
               <h:message id="passwordMessage" for="password" errorClass="error"/>
             </div>
-            <div class="form-group">
-              <h:inputText id="tc" value="#{person.tcNo}" p:placeholder="T.C. No giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen T.C. No Giriniz">
-                <f:validator validatorId="TCNoValidator"/>
-                <f:ajax event="blur" execute="@this" render="tcMessage"/>
-              </h:inputText>
-              <h:message id="tcMessage" for="tc" errorClass="error"/>
-            </div>
             <h:messages globalOnly="true" errorClass="error" infoClass="info"/>
-            <h:commandButton value="Gönder" styleClass="btn btn-primary" action="#{person.validateLogin}">
+            <h:commandButton value="Gönder" styleClass="btn btn-primary" action="#{patient.validateLogin}">
               <f:ajax execute="@form" render="@form"/>
             </h:commandButton>
           </h:form>
@@ -37,29 +30,22 @@
       <div class="card">
         <div class="card-header">Register</div>
         <div class="card-block">
-          <h:form prependId="false" id="registerForm">
+          <h:form prependId="false">
             <div class="form-group">
-              <h:inputText id="usernameAdd" value="#{person.username}" p:placeholder="Kullanıcı adı giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen kullanıcı adı giriniz">
+              <h:inputText id="usernameAdd" value="#{patient.patientModel.firstName}" p:placeholder="Kullanıcı adı giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen kullanıcı adı giriniz">
                 <f:ajax event="blur" execute="@this" render="usernameAddMessage"/>
               </h:inputText>
               <h:message id="usernameAddMessage" for="usernameAdd" errorClass="error"/>
             </div>
             <div class="form-group">
-              <h:inputSecret id="passwordAdd" value="#{person.password}" p:placeholder="Şifre giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen şifrenizi giriniz">
+              <h:inputSecret id="passwordAdd" value="#{patient.patientModel.password}" p:placeholder="Şifre giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen şifrenizi giriniz">
                 <f:validator validatorId="passwordValidator"/>
                 <f:ajax event="blur" execute="@this" render="passwordAddMessage"/>
               </h:inputSecret>
               <h:message id="passwordAddMessage" for="passwordAdd" errorClass="error"/>
             </div>
-            <div class="form-group">
-              <h:inputText id="tcAdd" value="#{person.tcNo}" p:placeholder="T.C. No giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen T.C. No Giriniz">
-                <f:validator validatorId="TCNoValidator"/>
-                <f:ajax event="blur" execute="@this" render="tcAddMessage"/>
-              </h:inputText>
-              <h:message id="tcAddMessage" for="tcAdd" errorClass="error"/>
-            </div>
             <h:messages globalOnly="true" errorClass="error" infoClass="info"/>
-            <h:commandButton value="Gönder" styleClass="btn btn-primary" action="#{person.validateRegister}">
+            <h:commandButton value="Gönder" styleClass="btn btn-primary" action="#{patient.validateCreate}">
               <f:ajax execute="@form" render="@form"/>
             </h:commandButton>
           </h:form>

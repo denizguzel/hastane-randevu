@@ -1,35 +1,30 @@
 package com.hastanerandevu.service.impl;
 
-import com.hastanerandevu.dao.DistrictDao;
-import com.hastanerandevu.dao.impl.DistrictDaoImpl;
 import com.hastanerandevu.model.CityModel;
 import com.hastanerandevu.model.DistrictModel;
 import com.hastanerandevu.service.DistrictService;
 
-/**
- * Created by Okan on 4.3.2017.
- */
+;
+
 public class DistrictServiceImpl implements DistrictService {
 
-  DistrictDao districtDao = new DistrictDaoImpl();
-
   @Override
-  public void createDistrict(String districtName,CityModel cityModel) {
-    districtDao.createDistrict(districtName,cityModel);
+  public void createDistrict (String districtName, CityModel cityModel) {
+
   }
 
   @Override
-  public void updateDistrict(long id, String districtName) {
-    districtDao.updateDistrict(id,districtName);
+  public void updateDistrict (long id, String districtName) {
+
   }
 
   @Override
-  public void deleteDistrict(long id) {
-    districtDao.deleteDistrict(id);
+  public void deleteDistrict (long id) {
+
   }
 
   @Override
-  public DistrictModel findDistrict(long id) {
-    return districtDao.findDistrict(id);
+  public DistrictModel findDistrict (long id) {
+    return null;
   }
 }

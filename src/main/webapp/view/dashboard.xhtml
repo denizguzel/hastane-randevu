@@ -4,10 +4,10 @@
   <ui:define name="content">
     <div class="container">
       <div class="card">
-        <div class="card-header">Hoşgeldin ${person.username}</div>
+        <div class="card-header">Hoşgeldin ${patient.patientModel.firstName}</div>
         <div class="card-block">
           <h:form prependId="false">
-            <h:commandButton value="Çıkış" styleClass="btn btn-primary" action="#{person.logout}"/>
+            <h:commandButton value="Çıkış" styleClass="btn btn-primary" action="#{patient.logout}"/>
           </h:form>
         </div>
       </div>

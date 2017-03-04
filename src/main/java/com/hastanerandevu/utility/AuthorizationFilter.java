@@ -1,4 +1,4 @@
-package com.hastanerandevu.service;
+package com.hastanerandevu.utility;
 
 import javax.faces.application.ResourceHandler;
 import javax.servlet.*;
@@ -25,7 +25,7 @@ public class AuthorizationFilter implements Filter {
 
       String loginURL = request.getContextPath() + "/";
 
-      boolean loggedIn        = (session != null) && (session.getAttribute("username") != null);
+      boolean loggedIn        = (session != null) && (session.getAttribute("firstName") != null);
       boolean loginRequest    = request.getRequestURI().equals(loginURL);
       boolean resourceRequest = request.getRequestURI().startsWith(request.getContextPath() + ResourceHandler.RESOURCE_IDENTIFIER + "/");
       boolean ajaxRequest     = "partial/ajax".equals(request.getHeader("Faces-Request"));

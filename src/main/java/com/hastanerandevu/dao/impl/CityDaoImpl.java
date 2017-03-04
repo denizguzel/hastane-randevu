@@ -1,6 +1,6 @@
-package com.hastanerandevu.dao.impl;
+package com.hastanerandevu.DAO.impl;
 
-import com.hastanerandevu.dao.CityDao;
+import com.hastanerandevu.DAO.CityDao;
 import com.hastanerandevu.constants.ProjectConstants;
 import com.hastanerandevu.model.CityModel;
 import com.hastanerandevu.model.DistrictModel;
@@ -10,14 +10,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 
-/**
- * Created by Okan on 4.3.2017.
- */
 public class CityDaoImpl implements CityDao {
-  EntityManagerFactory emfactory = Persistence.createEntityManagerFactory(ProjectConstants.persistenceUnitName);
+  private EntityManagerFactory emfactory = Persistence.createEntityManagerFactory(ProjectConstants.persistenceUnitName);
 
   @Override
-  public void createCity(String cityName) {
+  public void createCity (String cityName) {
     EntityManager entitymanager = emfactory.createEntityManager();
     entitymanager.getTransaction().begin();
 
@@ -32,50 +29,49 @@ public class CityDaoImpl implements CityDao {
   }
 
   @Override
-  public void updateCity(long id, String cityName) {
+  public void updateCity (long id, String cityName) {
 
-    EntityManager entitymanager = emfactory.createEntityManager( );
-    entitymanager.getTransaction( ).begin( );
-    CityModel cityModel = entitymanager.find( CityModel.class,id);
+    EntityManager entitymanager = emfactory.createEntityManager();
+    entitymanager.getTransaction().begin();
+    CityModel cityModel = entitymanager.find(CityModel.class, id);
 
     cityModel.setCityName(cityName);
-    entitymanager.getTransaction( ).commit( );
+    entitymanager.getTransaction().commit();
 
     entitymanager.close();
     emfactory.close();
   }
 
   @Override
-  public void deleteCity(long id) {
-    EntityManager entitymanager = emfactory.createEntityManager( );
-    entitymanager.getTransaction( ).begin( );
+  public void deleteCity (long id) {
+    EntityManager entitymanager = emfactory.createEntityManager();
+    entitymanager.getTransaction().begin();
 
-    CityModel cityModel = entitymanager.find( CityModel.class, id );
-    entitymanager.remove( cityModel );
-    entitymanager.getTransaction( ).commit( );
-    entitymanager.close( );
-    emfactory.close( );
+    CityModel cityModel = entitymanager.find(CityModel.class, id);
+    entitymanager.remove(cityModel);
+    entitymanager.getTransaction().commit();
+    entitymanager.close();
+    emfactory.close();
   }
 
   @Override
-  public CityModel findCity(long id) {
-    EntityManager entitymanager = emfactory.createEntityManager( );
-    return entitymanager.find( CityModel.class, id );
+  public CityModel findCity (long id) {
+    EntityManager entitymanager = emfactory.createEntityManager();
+    return entitymanager.find(CityModel.class, id);
   }
 
   @Override
-  public List<DistrictModel> getAllDistrictsByCity(CityModel cityModel) {
-    EntityManager entitymanager = emfactory.createEntityManager( );
-    List<DistrictModel> districtModels = entitymanager.createQuery("SELECT e FROM DistrictModel e WHERE e.owner = :cityModel",DistrictModel.class).setParameter("cityModel",cityModel).getResultList();
-    return districtModels;
+  public List<DistrictModel> getAllDistrictsByCity (CityModel cityModel) {
+    EntityManager entitymanager = emfactory.createEntityManager();
+    return entitymanager.createQuery("SELECT e FROM DistrictModel e WHERE e.owner = :cityModel", DistrictModel.class).setParameter("cityModel", cityModel).getResultList();
   }
 
   @Override
-  public void createDistricts(List<DistrictModel> districtModels, CityModel cityModel) {
-    EntityManager entitymanager = emfactory.createEntityManager( );
-    entitymanager.getTransaction( ).begin( );
+  public void createDistricts (List<DistrictModel> districtModels, CityModel cityModel) {
+    EntityManager entitymanager = emfactory.createEntityManager();
+    entitymanager.getTransaction().begin();
 
-    for (DistrictModel districtModel : districtModels){
+    for ( DistrictModel districtModel : districtModels ) {
       entitymanager.persist(districtModel);
     }
 

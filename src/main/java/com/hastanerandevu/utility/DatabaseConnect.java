@@ -1,4 +1,4 @@
-package com.hastanerandevu.database;
+package com.hastanerandevu.utility;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,7 +7,7 @@ public class DatabaseConnect {
   public static Connection getConnection () {
     try {
       Class.forName("com.mysql.jdbc.Driver");
-      return DriverManager.getConnection("jdbc:mysql://localhost:3306/jsfdeneme", "root", "");
+      return DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "");
     } catch ( Exception ex ) {
       System.out.println("Database.getConnection() --> Error " + ex.getMessage());
       return null;

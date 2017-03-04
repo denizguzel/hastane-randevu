@@ -1,4 +1,4 @@
-package com.hastanerandevu.service;
+package com.hastanerandevu.utility;
 
 import com.hastanerandevu.controller.ControllerDoctor;
 

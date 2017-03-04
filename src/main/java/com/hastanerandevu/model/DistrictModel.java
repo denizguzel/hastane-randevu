@@ -3,78 +3,76 @@ package com.hastanerandevu.model;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * Created by Okan on 3.3.2017.
- */
+
 @Entity
-@Table (name="district")
+@Table (name = "district")
 public class DistrictModel {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "PK")
-  long pk;
+  @GeneratedValue (strategy = GenerationType.AUTO)
+  @Column (name = "PK")
+  private long pk;
 
-  @Column(name = "DISTRICT_NAME")
-  String districtName;
+  @Column (name = "DISTRICT_NAME")
+  private String districtName;
 
-  @Column(name = "CREATION_TIME")
-  Date creationTime;
+  @Column (name = "CREATION_TIME")
+  private Date creationTime;
 
-  @Column(name = "MODIFIED_TIME")
-  Date modifiedTime;
+  @Column (name = "MODIFIED_TIME")
+  private Date modifiedTime;
 
-  @Column(name = "IS_ACTIVE")
-  char isActive;
+  @Column (name = "IS_ACTIVE")
+  private char isActive;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne (fetch = FetchType.LAZY)
   @JoinColumn (name = "FK_CITY")
-  CityModel owner;
+  private CityModel owner;
 
-  public long getPk() {
+  public long getPk () {
     return pk;
   }
 
-  public void setPk(long pk) {
+  public void setPk (long pk) {
     this.pk = pk;
   }
 
-  public String getDistrictName() {
+  public String getDistrictName () {
     return districtName;
   }
 
-  public void setDistrictName(String districtName) {
+  public void setDistrictName (String districtName) {
     this.districtName = districtName;
   }
 
-  public Date getCreationTime() {
+  public Date getCreationTime () {
     return creationTime;
   }
 
-  public void setCreationTime(Date creationTime) {
+  public void setCreationTime (Date creationTime) {
     this.creationTime = creationTime;
   }
 
-  public Date getModifiedTime() {
+  public Date getModifiedTime () {
     return modifiedTime;
   }
 
-  public void setModifiedTime(Date modifiedTime) {
+  public void setModifiedTime (Date modifiedTime) {
     this.modifiedTime = modifiedTime;
   }
 
-  public char getIsActive() {
+  public char getIsActive () {
     return isActive;
   }
 
-  public void setIsActive(char isActive) {
+  public void setIsActive (char isActive) {
     this.isActive = isActive;
   }
 
-  public CityModel getOwner() {
+  public CityModel getOwner () {
     return owner;
   }
 
-  public void setOwner(CityModel owner) {
+  public void setOwner (CityModel owner) {
     this.owner = owner;
   }
 }

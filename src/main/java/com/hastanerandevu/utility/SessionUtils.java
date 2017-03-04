@@ -1,4 +1,4 @@
-package com.hastanerandevu.service;
+package com.hastanerandevu.utility;
 
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
