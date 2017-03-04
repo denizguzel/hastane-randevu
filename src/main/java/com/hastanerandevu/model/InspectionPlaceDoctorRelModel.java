@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class InspectionPlaceDoctorRelModel {
   private long pk;
-  private InspectionPlaceModel ınspectionPlaceModel;
+  private InspectionPlaceModel inspectionPlaceModel;
   private DoctorModel doctorModel;
   private Date activeFrom;
   private Date activeTo;
@@ -21,11 +21,11 @@ public class InspectionPlaceDoctorRelModel {
   }
 
   public InspectionPlaceModel getInspectionPlaceModel () {
-    return ınspectionPlaceModel;
+    return inspectionPlaceModel;
   }
 
-  public void setInspectionPlaceModel (InspectionPlaceModel ınspectionPlaceModel) {
-    this.ınspectionPlaceModel = ınspectionPlaceModel;
+  public void setInspectionPlaceModel (InspectionPlaceModel inspectionPlaceModel) {
+    this.inspectionPlaceModel = inspectionPlaceModel;
   }
 
   public DoctorModel getDoctorModel () {

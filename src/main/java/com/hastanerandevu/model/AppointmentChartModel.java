@@ -5,7 +5,7 @@ import java.util.Date;
 public class AppointmentChartModel {
   private long pk;
   private Date appointmentDate;
-  private InspectionPlaceDoctorRelModel ınspectionPlaceDoctorRelModel;
+  private InspectionPlaceDoctorRelModel inspectionPlaceDoctorRelModel;
   private Date creationTime;
   private Date modifiedTime;
   private char isActive;
@@ -28,11 +28,11 @@ public class AppointmentChartModel {
   }
 
   public InspectionPlaceDoctorRelModel getInspectionPlaceDoctorRelModel () {
-    return ınspectionPlaceDoctorRelModel;
+    return inspectionPlaceDoctorRelModel;
   }
 
-  public void setInspectionPlaceDoctorRelModel (InspectionPlaceDoctorRelModel ınspectionPlaceDoctorRelModel) {
-    this.ınspectionPlaceDoctorRelModel = ınspectionPlaceDoctorRelModel;
+  public void setInspectionPlaceDoctorRelModel (InspectionPlaceDoctorRelModel inspectionPlaceDoctorRelModel) {
+    this.inspectionPlaceDoctorRelModel = inspectionPlaceDoctorRelModel;
   }
 
   public Date getCreationTime () {
