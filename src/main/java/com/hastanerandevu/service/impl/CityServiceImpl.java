@@ -5,6 +5,7 @@ package com.hastanerandevu.service.impl;
  */
 
 
+import com.hastanerandevu.constants.ProjectConstants;
 import com.hastanerandevu.model.CityModel;
 import com.hastanerandevu.model.DistrictModel;
 import com.hastanerandevu.service.CityService;
@@ -15,7 +16,7 @@ import javax.persistence.Persistence;
 import java.util.List;
 
 public class CityServiceImpl implements CityService {
-  EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "Eclipselink_JPA" );
+  EntityManagerFactory emfactory = Persistence.createEntityManagerFactory(ProjectConstants.persistenceUnitName);
   @Override
   public CityModel findCity(long id){
     EntityManager entitymanager = emfactory.createEntityManager( );

@@ -1,5 +1,6 @@
 package com.hastanerandevu.service.impl;
 
+import com.hastanerandevu.constants.ProjectConstants;
 import com.hastanerandevu.model.CityModel;
 import com.hastanerandevu.model.DistrictModel;
 import com.hastanerandevu.service.DistrictService;
@@ -13,7 +14,7 @@ import javax.persistence.Persistence;
  */
 public class DistrictServiceImpl implements DistrictService {
 
-  EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+  EntityManagerFactory emfactory = Persistence.createEntityManagerFactory(ProjectConstants.persistenceUnitName);
 
   @Override
   public void createDistrict(String districtName,CityModel cityModel) {
