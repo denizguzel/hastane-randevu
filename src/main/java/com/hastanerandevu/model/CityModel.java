@@ -1,16 +1,35 @@
 package com.hastanerandevu.model;
 
 import java.util.Date;
+import java.util.List;
+import javax.persistence.*;
 
 /**
  * Created by Okan on 3.3.2017.
  */
+@Entity
+@Table (name="city")
 public class CityModel {
-  long pk;
-  String cityName;
-  Date creationTime;
-  Date modifiedTime;
-  char isActive;
+
+  @Id
+  @GeneratedValue(strategy=GenerationType.AUTO)
+  @Column (name = "PK")
+  private long pk;
+
+  @Column (name = "CITY_NAME")
+  private String cityName;
+
+  @Column (name = "CREATION_TIME")
+  private Date modifiedTime;
+
+  @Column (name = "MODIFIED_TIME")
+  private Date creationTime;
+
+  @Column (name = "IS_ACTIVE")
+  private char isActive;
+
+  @OneToMany (mappedBy = "owner")
+  private List<DistrictModel> districtModels;
 
   public long getPk() {
     return pk;
@@ -28,14 +47,6 @@ public class CityModel {
     this.cityName = cityName;
   }
 
-  public Date getCreationTime() {
-    return creationTime;
-  }
-
-  public void setCreationTime(Date creationTime) {
-    this.creationTime = creationTime;
-  }
-
   public Date getModifiedTime() {
     return modifiedTime;
   }
@@ -44,11 +55,27 @@ public class CityModel {
     this.modifiedTime = modifiedTime;
   }
 
+  public Date getCreationTime() {
+    return creationTime;
+  }
+
+  public void setCreationTime(Date creationTime) {
+    this.creationTime = creationTime;
+  }
+
   public char getIsActive() {
     return isActive;
   }
 
   public void setIsActive(char isActive) {
     this.isActive = isActive;
+  }
+
+  public List<DistrictModel> getDistrictModels() {
+    return districtModels;
+  }
+
+  public void setDistrictModels(List<DistrictModel> districtModels) {
+    this.districtModels = districtModels;
   }
 }

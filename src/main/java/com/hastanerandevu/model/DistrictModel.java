@@ -1,17 +1,34 @@
 package com.hastanerandevu.model;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by Okan on 3.3.2017.
  */
+@Entity
+@Table (name="district")
 public class DistrictModel {
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "PK")
   long pk;
+
+  @Column(name = "DISTRICT_NAME")
   String districtName;
+
+  @Column(name = "CREATION_TIME")
   Date creationTime;
+
+  @Column(name = "MODIFIED_TIME")
   Date modifiedTime;
+
+  @Column(name = "IS_ACTIVE")
   char isActive;
-  CityModel cityModel;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_CITY")
+  CityModel owner;
 
   public long getPk() {
     return pk;
@@ -53,11 +70,11 @@ public class DistrictModel {
     this.isActive = isActive;
   }
 
-  public CityModel getCityModel() {
-    return cityModel;
+  public CityModel getOwner() {
+    return owner;
   }
 
-  public void setCityModel(CityModel cityModel) {
-    this.cityModel = cityModel;
+  public void setOwner(CityModel owner) {
+    this.owner = owner;
   }
 }
