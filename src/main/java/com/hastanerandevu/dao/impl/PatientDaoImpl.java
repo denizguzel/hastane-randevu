@@ -12,6 +12,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.List;
 
 public class PatientDaoImpl implements PatientDao {
   private EntityManagerFactory emfactory = Persistence.createEntityManagerFactory(ProjectConstants.persistenceUnitName);
@@ -52,20 +53,18 @@ public class PatientDaoImpl implements PatientDao {
     EntityManager entitymanager = emfactory.createEntityManager();
     entitymanager.getTransaction().begin();
 
-    Query query = entitymanager.createQuery("SELECT e FROM PatientModel e WHERE e.tcNumber = :tcNumber AND e.password = :password", PatientModel.class);
+    Query query = entitymanager.createQuery("SELECT e FROM PatientModel e WHERE e.tcNumber = :tcNumber AND e.password = :password");
     query.setParameter("tcNumber", tcNumber).setParameter("password", PasswordEncryptor.encryptPassword(password));
-    PatientModel patientModel = (PatientModel) query.getSingleResult();
 
-    if ( patientModel != null ) {
+    @SuppressWarnings ("unchecked") List<PatientModel> list = (List<PatientModel>) query.getResultList();
+
+    if ( list.size() > 0 ) {
       HttpSession session = SessionUtils.getSession();
-      session.setAttribute("firstName", patientModel.getFirstName());
+      session.setAttribute("firstName", list.get(0).getFirstName());
       entitymanager.close();
       emfactory.close();
       return true;
-    }
-    else{
-      entitymanager.close();
-      emfactory.close();
+    } else {
       return false;
     }
   }

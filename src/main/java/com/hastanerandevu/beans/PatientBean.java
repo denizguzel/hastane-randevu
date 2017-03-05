@@ -29,7 +29,7 @@ public class PatientBean {
     if ( patientService.loginPatient(patientModel.getTcNumber(), patientModel.getPassword()) ) {
       return "view/dashboard?faces-redirect=true";
     } else {
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Kullanıcı adı ya da şifre yanlış", "Lütfen kullanıcı adı ve şifrenizi tekrar giriniz"));
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "TC No veya şifre yanlış", null));
       return "/";
     }
   }
