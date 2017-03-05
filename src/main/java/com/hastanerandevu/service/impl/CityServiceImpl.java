@@ -33,6 +33,11 @@ public class CityServiceImpl implements CityService {
   }
 
   @Override
+  public List<CityModel> getAllCities() {
+    return cityDao.getAllCities();
+  }
+
+  @Override
   public List<DistrictModel> getAllDistrictsByCity (CityModel cityModel) {
     return cityDao.getAllDistrictsByCity(cityModel);
   }

@@ -14,6 +14,8 @@ public interface CityDao {
 
   CityModel findCity (long id);
 
+  List<CityModel> getAllCities();
+
   List<DistrictModel> getAllDistrictsByCity (CityModel cityModel);
 
   void createDistricts (List<DistrictModel> districtModels, CityModel cityModel);

@@ -61,6 +61,12 @@ public class CityDaoImpl implements CityDao {
   }
 
   @Override
+  public List<CityModel> getAllCities() {
+    EntityManager entitymanager = emfactory.createEntityManager();
+    return entitymanager.createQuery("SELECT e FROM CityModel e", CityModel.class).getResultList();
+  }
+
+  @Override
   public List<DistrictModel> getAllDistrictsByCity (CityModel cityModel) {
     EntityManager entitymanager = emfactory.createEntityManager();
     return entitymanager.createQuery("SELECT e FROM DistrictModel e WHERE e.city = :cityModel", DistrictModel.class).setParameter("cityModel", cityModel).getResultList();
