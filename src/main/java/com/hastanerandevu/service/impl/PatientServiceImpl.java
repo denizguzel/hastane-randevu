@@ -6,7 +6,7 @@ import com.hastanerandevu.service.PatientService;
 
 public class PatientServiceImpl implements PatientService {
 
-  PatientDao patientDao = new PatientDaoImpl();
+  private PatientDao patientDao = new PatientDaoImpl();
 
   @Override
   public void createPatient (String firstName, String password) {

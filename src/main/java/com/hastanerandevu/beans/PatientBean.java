@@ -1,6 +1,6 @@
 package com.hastanerandevu.beans;
 
-import com.hastanerandevu.DAO.impl.PatientDaoImpl;
+import com.hastanerandevu.dao.impl.PatientDaoImpl;
 import com.hastanerandevu.model.PatientModel;
 import com.hastanerandevu.utility.SessionUtils;
 
