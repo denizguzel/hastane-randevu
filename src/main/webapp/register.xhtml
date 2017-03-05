@@ -1,0 +1,89 @@
+<ui:composition template="/view/master/masterTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+  <ui:define name="title">Hasta Kayıt</ui:define>
+
+  <ui:define name="content">
+    <div class="container">
+      <div class="card">
+        <div class="card-header">Kayıt</div>
+        <div class="card-block">
+          <h:form prependId="false">
+            <div class="form-group">
+              <h:inputText id="firstname" value="#{patient.patientModel.firstName}" p:placeholder="Adınızı giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen adınızı giriniz">
+                <f:ajax event="blur" execute="@this" render="firstnameMessage"/>
+              </h:inputText>
+              <h:message id="firstnameMessage" for="firstname" errorClass="error"/>
+            </div>
+            <div class="form-group">
+              <h:inputText id="lastname" value="#{patient.patientModel.lastName}" p:placeholder="Soyadınızı giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen soyadınızı giriniz">
+                <f:ajax event="blur" execute="@this" render="lastnameMessage"/>
+              </h:inputText>
+              <h:message id="lastnameMessage" for="lastname" errorClass="error"/>
+            </div>
+            <div class="form-group">
+              <h:inputSecret id="password" value="#{patient.patientModel.password}" p:placeholder="Şifrenizi giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen şifrenizi giriniz">
+                <f:validator validatorId="password"/>
+                <f:ajax event="blur" execute="@this" render="passwordMessage"/>
+              </h:inputSecret>
+              <h:message id="passwordMessage" for="password" errorClass="error"/>
+            </div>
+            <div class="form-group">
+              <h:inputText id="tcNumber" value="#{patient.patientModel.tcNumber}" p:placeholder="TC No giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen TC No giriniz">
+                <f:validator validatorId="tcNumber"/>
+                <f:ajax event="blur" execute="@this" render="tcNumberMessage"/>
+              </h:inputText>
+              <h:message id="tcNumberMessage" for="tcNumber" errorClass="error"/>
+            </div>
+            <div class="form-group">
+              <h:inputText id="birthdate" value="#{patient.patientModel.dateOfBirth}" p:placeholder="Doğum tarihinizi giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen doğum tarihinizi giriniz">
+                <f:convertDateTime pattern="dd-MM-yyyy"/>
+                <f:ajax event="blur" execute="@this" render="birthdateMessage"/>
+              </h:inputText>
+              <h:message id="birthdateMessage" for="birthdate" errorClass="error"/>
+            </div>
+            <div class="form-group">
+              <h:inputText id="birthplace" value="#{patient.patientModel.placeOfBirth}" p:placeholder="Doğum yerinizi giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen doğum yerinizi giriniz">
+                <f:ajax event="blur" execute="@this" render="birthplaceMessage"/>
+              </h:inputText>
+              <h:message id="birthplaceMessage" for="birthplace" errorClass="error"/>
+            </div>
+            <div class="form-group">
+              <h:inputText id="email" value="#{patient.patientModel.email}" p:placeholder="Email giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen email giriniz">
+                <f:validator validatorId="email"/>
+                <f:ajax event="blur" execute="@this" render="emailMessage"/>
+              </h:inputText>
+              <h:message id="emailMessage" for="email" errorClass="error"/>
+            </div>
+            <div class="form-group">
+              <h:inputText id="phone" value="#{patient.patientModel.phoneNumber}" p:placeholder="Telefon no giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen telefon no giriniz">
+                <f:ajax event="blur" execute="@this" render="phoneMessage"/>
+              </h:inputText>
+              <h:message id="phoneMessage" for="phone" errorClass="error"/>
+            </div>
+            <div class="form-group">
+              <h:inputText id="address" value="#{patient.patientModel.address}" p:placeholder="Adres giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen adres giriniz">
+                <f:ajax event="blur" execute="@this" render="addressMessage"/>
+              </h:inputText>
+              <h:message id="addressMessage" for="address" errorClass="error"/>
+            </div>
+            <div class="form-group">
+              <h:inputText id="fathername" value="#{patient.patientModel.fatherName}" p:placeholder="Baba adı giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen baba adınızı giriniz">
+                <f:ajax event="blur" execute="@this" render="fathernameMessage"/>
+              </h:inputText>
+              <h:message id="fathernameMessage" for="fathername" errorClass="error"/>
+            </div>
+            <div class="form-group">
+              <h:inputText id="mothername" value="#{patient.patientModel.motherName}" p:placeholder="Anne adı giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen anne adınızı giriniz">
+                <f:ajax event="blur" execute="@this" render="mothernameMessage"/>
+              </h:inputText>
+              <h:message id="mothernameMessage" for="mothername" errorClass="error"/>
+            </div>
+            <h:messages globalOnly="true" errorClass="error" infoClass="info"/>
+            <h:commandButton value="Gönder" styleClass="btn btn-primary" action="#{patient.validateCreate}">
+              <f:ajax execute="@form" render="@form"/>
+            </h:commandButton>
+          </h:form>
+        </div>
+      </div>
+    </div>
+  </ui:define>
+</ui:composition>

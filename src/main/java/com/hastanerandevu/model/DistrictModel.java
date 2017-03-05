@@ -5,8 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 
-@Entity
-@Table (name = "district")
 public class DistrictModel {
   @Id
   @GeneratedValue (strategy = GenerationType.AUTO)
@@ -29,7 +27,7 @@ public class DistrictModel {
   @JoinColumn (name = "FK_CITY")
   private CityModel city;
 
-  @OneToMany(mappedBy = "district")
+  @OneToMany (mappedBy = "district")
   private List<HospitalModel> hospitalModels;
 
   public long getPk () {
@@ -72,19 +70,19 @@ public class DistrictModel {
     this.isActive = isActive;
   }
 
-  public CityModel getCity() {
+  public CityModel getCity () {
     return city;
   }
 
-  public void setCity(CityModel city) {
+  public void setCity (CityModel city) {
     this.city = city;
   }
 
-  public List<HospitalModel> getHospitalModels() {
+  public List<HospitalModel> getHospitalModels () {
     return hospitalModels;
   }
 
-  public void setHospitalModels(List<HospitalModel> hospitalModels) {
+  public void setHospitalModels (List<HospitalModel> hospitalModels) {
     this.hospitalModels = hospitalModels;
   }
 }

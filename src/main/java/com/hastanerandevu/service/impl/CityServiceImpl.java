@@ -10,7 +10,7 @@ import java.util.List;
 
 public class CityServiceImpl implements CityService {
 
-  CityDao cityDao = new CityDaoImpl();
+  private CityDao cityDao = new CityDaoImpl();
 
   @Override
   public void createCity (String cityName) {
@@ -19,7 +19,7 @@ public class CityServiceImpl implements CityService {
 
   @Override
   public void updateCity (long id, String cityName) {
-    cityDao.updateCity(id,cityName);
+    cityDao.updateCity(id, cityName);
   }
 
   @Override
@@ -33,7 +33,7 @@ public class CityServiceImpl implements CityService {
   }
 
   @Override
-  public List<CityModel> getAllCities() {
+  public List<CityModel> getAllCities () {
     return cityDao.getAllCities();
   }
 
@@ -44,7 +44,6 @@ public class CityServiceImpl implements CityService {
 
   @Override
   public void createDistricts (List<DistrictModel> districtModels, CityModel cityModel) {
-    cityDao.createDistricts(districtModels,cityModel);
-
+    cityDao.createDistricts(districtModels, cityModel);
   }
 }

@@ -10,25 +10,51 @@ public class PatientModel {
   @GeneratedValue (strategy = GenerationType.AUTO)
   @Column (name = "PK")
   private long pk;
+
   @Column (name = "FIRST_NAME")
   private String firstName;
+
+  @Column (name = "LAST_NAME")
   private String lastName;
-  private Date dateOfBirth;
-  private Date placeOfBirth;
-  private String tcNumber;
+
   @Column (name = "PASSWORD")
   private String password;
+
+  @Column (name = "TC_NUMBER")
+  private String tcNumber;
+
+  @Column (name = "DATE_OF_BIRTH")
+  private Date dateOfBirth;
+
+  @Column (name = "PLACE_OF_BIRTH")
+  private String placeOfBirth;
+
+  @Column (name = "EMAIL")
   private String email;
+
+  @Column (name = "PHONE_NUMBER")
   private String phoneNumber;
+
+  @Column (name = "ADDRESS")
   private String address;
+
+  @Column (name = "FATHER_NAME")
   private String fatherName;
+
+  @Column (name = "MOTHER_NAME")
   private String motherName;
-  private String questionAnswer;
-  /*  private GenderModel genderModel;
+
+  /*  private String questionAnswer;
+    private GenderModel genderModel;
     private BloodGroupModel bloodGroupModel;
     private SecretQuestionModel secretQuestionModel;*/
+  @Column (name = "CREATION_TIME")
   private Date creationTime;
+
+  @Column (name = "MODIFIED_TIME")
   private Date modifiedTime;
+
+  @Column (name = "IS_ACTIVE")
   private char isActive;
 
   public long getPk () {
@@ -63,11 +89,11 @@ public class PatientModel {
     this.dateOfBirth = dateOfBirth;
   }
 
-  public Date getPlaceOfBirth () {
+  public String getPlaceOfBirth () {
     return placeOfBirth;
   }
 
-  public void setPlaceOfBirth (Date placeOfBirth) {
+  public void setPlaceOfBirth (String placeOfBirth) {
     this.placeOfBirth = placeOfBirth;
   }
 
@@ -126,38 +152,6 @@ public class PatientModel {
   public void setMotherName (String motherName) {
     this.motherName = motherName;
   }
-
-  public String getQuestionAnswer () {
-    return questionAnswer;
-  }
-
-  public void setQuestionAnswer (String questionAnswer) {
-    this.questionAnswer = questionAnswer;
-  }
-
-/*  public GenderModel getGenderModel () {
-    return genderModel;
-  }
-
-  public void setGenderModel (GenderModel genderModel) {
-    this.genderModel = genderModel;
-  }
-
-  public BloodGroupModel getBloodGroupModel () {
-    return bloodGroupModel;
-  }
-
-  public void setBloodGroupModel (BloodGroupModel bloodGroupModel) {
-    this.bloodGroupModel = bloodGroupModel;
-  }
-
-  public SecretQuestionModel getSecretQuestionModel () {
-    return secretQuestionModel;
-  }
-
-  public void setSecretQuestionModel (SecretQuestionModel secretQuestionModel) {
-    this.secretQuestionModel = secretQuestionModel;
-  }*/
 
   public Date getCreationTime () {
     return creationTime;

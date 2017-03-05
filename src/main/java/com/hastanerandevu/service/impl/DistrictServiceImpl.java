@@ -14,12 +14,12 @@ public class DistrictServiceImpl implements DistrictService {
 
   @Override
   public void createDistrict (String districtName, CityModel cityModel) {
-    districtDao.createDistrict(districtName,cityModel);
+    districtDao.createDistrict(districtName, cityModel);
   }
 
   @Override
   public void updateDistrict (long id, String districtName) {
-    districtDao.updateDistrict(id,districtName);
+    districtDao.updateDistrict(id, districtName);
   }
 
   @Override

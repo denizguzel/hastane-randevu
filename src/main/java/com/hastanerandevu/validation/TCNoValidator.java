@@ -9,7 +9,7 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-@FacesValidator ("TCNoValidator")
+@FacesValidator ("tcNumber")
 public class TCNoValidator implements Validator {
   private static final Logger LOG = Logger.getLogger(TCNoValidator.class);
 

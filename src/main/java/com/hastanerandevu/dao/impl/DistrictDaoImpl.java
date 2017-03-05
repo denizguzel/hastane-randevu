@@ -1,7 +1,7 @@
 package com.hastanerandevu.dao.impl;
 
-import com.hastanerandevu.dao.DistrictDao;
 import com.hastanerandevu.constants.ProjectConstants;
+import com.hastanerandevu.dao.DistrictDao;
 import com.hastanerandevu.model.CityModel;
 import com.hastanerandevu.model.DistrictModel;
 

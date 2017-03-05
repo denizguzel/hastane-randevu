@@ -9,7 +9,7 @@ import javax.faces.validator.ValidatorException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@FacesValidator ("emailValidation")
+@FacesValidator ("email")
 public class EmailValidator implements Validator {
 
   private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\." + "[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*" + "(\\.[A-Za-z]{2,})$";

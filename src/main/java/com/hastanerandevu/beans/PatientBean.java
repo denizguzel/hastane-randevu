@@ -1,7 +1,7 @@
 package com.hastanerandevu.beans;
 
-import com.hastanerandevu.dao.impl.PatientDaoImpl;
 import com.hastanerandevu.model.PatientModel;
+import com.hastanerandevu.service.impl.PatientServiceImpl;
 import com.hastanerandevu.utility.SessionUtils;
 
 import javax.faces.application.FacesMessage;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 @ManagedBean (name = "patient")
 @SessionScoped
 public class PatientBean {
-  private PatientDaoImpl patientDaoImpl = new PatientDaoImpl();
+  private PatientServiceImpl patientService = new PatientServiceImpl();
   private PatientModel patientModel = new PatientModel();
 
   public PatientModel getPatientModel () {
@@ -25,10 +25,7 @@ public class PatientBean {
   }
 
   public String validateLogin () {
-    patientModel = patientDaoImpl.loginPatient(patientModel.getFirstName(), patientModel.getPassword());
-    if ( patientModel != null ) {
-      HttpSession session = SessionUtils.getSession();
-      session.setAttribute("firstName", patientModel.getFirstName());
+    if ( patientService.loginPatient(patientModel.getTcNumber(), patientModel.getPassword()) ) {
       return "view/dashboard?faces-redirect=true";
     } else {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Kullanıcı adı ya da şifre yanlış", "Lütfen kullanıcı adı ve şifrenizi tekrar giriniz"));
@@ -37,12 +34,12 @@ public class PatientBean {
   }
 
   public String validateCreate () {
-    patientModel = patientDaoImpl.createPatient(patientModel.getFirstName(), patientModel.getPassword());
-    if ( patientModel != null ) {
+    boolean valid = patientService.createPatient(patientModel.getFirstName(), patientModel.getLastName(), patientModel.getPassword(), patientModel.getTcNumber(), patientModel.getDateOfBirth(), patientModel.getPlaceOfBirth(), patientModel.getEmail(), patientModel.getPhoneNumber(), patientModel.getAddress(), patientModel.getFatherName(), patientModel.getMotherName());
+    if ( valid ) {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Kayıt başarılı", null));
       return "/";
     } else {
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Kullaıcı kaydı yapılamadı", "Bilgileri tekrar kontrol edin"));
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Kullanıcı kaydı yapılamadı", "Bilgileri tekrar kontrol edin"));
       return "/";
     }
   }

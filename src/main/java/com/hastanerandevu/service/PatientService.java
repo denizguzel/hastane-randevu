@@ -1,7 +1,13 @@
 package com.hastanerandevu.service;
 
-public interface PatientService {
-  void createPatient (String firstName, String password);
+import com.hastanerandevu.model.PatientModel;
 
-  //void loginPatient (String firstName, String password);
+import java.util.Date;
+
+public interface PatientService {
+  boolean createPatient (String firstName, String lastName, String password, String tcNumber, Date birthDate, String birthPlace, String email, String phoneNumber, String address, String fatherName, String motherName);
+
+  boolean loginPatient (String tcNumber, String password);
+
+  PatientModel findPatient (long id);
 }

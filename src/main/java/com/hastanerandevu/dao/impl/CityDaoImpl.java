@@ -1,7 +1,7 @@
 package com.hastanerandevu.dao.impl;
 
-import com.hastanerandevu.dao.CityDao;
 import com.hastanerandevu.constants.ProjectConstants;
+import com.hastanerandevu.dao.CityDao;
 import com.hastanerandevu.model.CityModel;
 import com.hastanerandevu.model.DistrictModel;
 
@@ -30,7 +30,6 @@ public class CityDaoImpl implements CityDao {
 
   @Override
   public void updateCity (long id, String cityName) {
-
     EntityManager entitymanager = emfactory.createEntityManager();
     entitymanager.getTransaction().begin();
     CityModel cityModel = entitymanager.find(CityModel.class, id);
@@ -61,7 +60,7 @@ public class CityDaoImpl implements CityDao {
   }
 
   @Override
-  public List<CityModel> getAllCities() {
+  public List<CityModel> getAllCities () {
     EntityManager entitymanager = emfactory.createEntityManager();
     return entitymanager.createQuery("SELECT e FROM CityModel e", CityModel.class).getResultList();
   }
