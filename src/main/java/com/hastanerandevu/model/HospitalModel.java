@@ -1,16 +1,38 @@
 package com.hastanerandevu.model;
 
+import javax.persistence.*;
 import java.util.Date;
-
+@Entity
+@Table(name = "hospital")
 public class HospitalModel {
+
+  @Id
+  @Column (name = "PK")
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private long pk;
+
+  @Column(name="NAME")
   private String hospitalName;
+
+  @Column(name="ADDRESS")
   private String hospitalAddress;
-  private HospitalTypeModel hospitalTypeModel;
-  private DistrictModel districtModel;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "FK_DISTRICT")
+  private DistrictModel district;
+
+  @Column(name = "CREATION_TIME")
   private Date creationTime;
+
+  @Column(name = "MODIFIED_TIME")
   private Date modifiedTime;
+
+  @Column(name = "IS_ACTIVE")
   private char isActive;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "FK_HOSPITAL_TYPE")
+  private HospitalTypeModel hospitalType;
 
   public long getPk () {
     return pk;
@@ -36,22 +58,6 @@ public class HospitalModel {
     this.hospitalAddress = hospitalAddress;
   }
 
-  public HospitalTypeModel getHospitalTypeModel () {
-    return hospitalTypeModel;
-  }
-
-  public void setHospitalTypeModel (HospitalTypeModel hospitalTypeModel) {
-    this.hospitalTypeModel = hospitalTypeModel;
-  }
-
-  public DistrictModel getDistrictModel () {
-    return districtModel;
-  }
-
-  public void setDistrictModel (DistrictModel districtModel) {
-    this.districtModel = districtModel;
-  }
-
   public Date getCreationTime () {
     return creationTime;
   }
@@ -74,5 +80,21 @@ public class HospitalModel {
 
   public void setIsActive (char isActive) {
     this.isActive = isActive;
+  }
+
+  public DistrictModel getDistrict() {
+    return district;
+  }
+
+  public void setDistrict(DistrictModel district) {
+    this.district = district;
+  }
+
+  public HospitalTypeModel getHospitalType() {
+    return hospitalType;
+  }
+
+  public void setHospitalType(HospitalTypeModel hospitalType) {
+    this.hospitalType = hospitalType;
   }
 }

@@ -1,6 +1,6 @@
-package com.hastanerandevu.DAO.impl;
+package com.hastanerandevu.dao.impl;
 
-import com.hastanerandevu.DAO.PatientDao;
+import com.hastanerandevu.dao.PatientDao;
 import com.hastanerandevu.constants.ProjectConstants;
 import com.hastanerandevu.converter.PasswordEncryptor;
 import com.hastanerandevu.model.PatientModel;
@@ -31,12 +31,12 @@ public class PatientDaoImpl implements PatientDao {
     return patientModel;
   }
 
-  @Override
+  /*@Override
   public PatientModel loginPatient (String firstName, String password) {
     entitymanager.getTransaction().begin();
     PasswordEncryptor encryptor = new PasswordEncryptor();
     password = encryptor.encryptPassword(password);
 
     return (PatientModel) entitymanager.createQuery("SELECT e FROM PatientModel e WHERE e.firstName = :firstName AND e.password = :password").setParameter("firstName", firstName).setParameter("password", password).getSingleResult();
-  }
+  }*/
 }

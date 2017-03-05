@@ -1,6 +1,6 @@
-package com.hastanerandevu.DAO.impl;
+package com.hastanerandevu.dao.impl;
 
-import com.hastanerandevu.DAO.DistrictDao;
+import com.hastanerandevu.dao.DistrictDao;
 import com.hastanerandevu.constants.ProjectConstants;
 import com.hastanerandevu.model.CityModel;
 import com.hastanerandevu.model.DistrictModel;
@@ -20,7 +20,7 @@ public class DistrictDaoImpl implements DistrictDao {
 
     DistrictModel districtModel = new DistrictModel();
     districtModel.setDistrictName(districtName);
-    districtModel.setOwner(cityModel);
+    districtModel.setCity(cityModel);
 
     entitymanager.persist(districtModel);
     entitymanager.getTransaction().commit();

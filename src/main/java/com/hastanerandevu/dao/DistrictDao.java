@@ -1,4 +1,4 @@
-package com.hastanerandevu.DAO;
+package com.hastanerandevu.dao;
 
 import com.hastanerandevu.model.CityModel;
 import com.hastanerandevu.model.DistrictModel;

@@ -1,13 +1,32 @@
 package com.hastanerandevu.model;
 
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
+@Entity
+@Table (name = "hospital_type")
 public class HospitalTypeModel {
+  @Id
+  @Column(name = "PK")
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private long pk;
+
+  @Column(name = "TYPE_NAME")
   private String typeName;
+
+  @Column(name = "CREATION_TIME")
   private Date creationTime;
+
+  @Column(name = "MODIFIED_TIME")
   private Date modifiedTime;
+
+  @Column(name = "IS_ACTIVE")
   private char isActive;
+
+  @OneToMany (mappedBy = "hospitalType")
+  private List<HospitalModel> hospitalModels;
+
 
   public long getPk () {
     return pk;
@@ -47,5 +66,13 @@ public class HospitalTypeModel {
 
   public void setIsActive (char isActive) {
     this.isActive = isActive;
+  }
+
+  public List<HospitalModel> getHospitalModels() {
+    return hospitalModels;
+  }
+
+  public void setHospitalModels(List<HospitalModel> hospitalModels) {
+    this.hospitalModels = hospitalModels;
   }
 }

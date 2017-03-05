@@ -2,6 +2,7 @@ package com.hastanerandevu.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -26,7 +27,10 @@ public class DistrictModel {
 
   @ManyToOne (fetch = FetchType.LAZY)
   @JoinColumn (name = "FK_CITY")
-  private CityModel owner;
+  private CityModel city;
+
+  @OneToMany(mappedBy = "district")
+  private List<HospitalModel> hospitalModels;
 
   public long getPk () {
     return pk;
@@ -68,11 +72,19 @@ public class DistrictModel {
     this.isActive = isActive;
   }
 
-  public CityModel getOwner () {
-    return owner;
+  public CityModel getCity() {
+    return city;
   }
 
-  public void setOwner (CityModel owner) {
-    this.owner = owner;
+  public void setCity(CityModel city) {
+    this.city = city;
+  }
+
+  public List<HospitalModel> getHospitalModels() {
+    return hospitalModels;
+  }
+
+  public void setHospitalModels(List<HospitalModel> hospitalModels) {
+    this.hospitalModels = hospitalModels;
   }
 }

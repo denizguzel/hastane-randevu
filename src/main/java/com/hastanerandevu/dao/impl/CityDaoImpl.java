@@ -1,6 +1,6 @@
-package com.hastanerandevu.DAO.impl;
+package com.hastanerandevu.dao.impl;
 
-import com.hastanerandevu.DAO.CityDao;
+import com.hastanerandevu.dao.CityDao;
 import com.hastanerandevu.constants.ProjectConstants;
 import com.hastanerandevu.model.CityModel;
 import com.hastanerandevu.model.DistrictModel;
@@ -63,7 +63,7 @@ public class CityDaoImpl implements CityDao {
   @Override
   public List<DistrictModel> getAllDistrictsByCity (CityModel cityModel) {
     EntityManager entitymanager = emfactory.createEntityManager();
-    return entitymanager.createQuery("SELECT e FROM DistrictModel e WHERE e.owner = :cityModel", DistrictModel.class).setParameter("cityModel", cityModel).getResultList();
+    return entitymanager.createQuery("SELECT e FROM DistrictModel e WHERE e.city = :cityModel", DistrictModel.class).setParameter("cityModel", cityModel).getResultList();
   }
 
   @Override
