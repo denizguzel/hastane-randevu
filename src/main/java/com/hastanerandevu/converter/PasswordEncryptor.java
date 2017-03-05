@@ -3,7 +3,7 @@ package com.hastanerandevu.converter;
 import java.security.MessageDigest;
 
 public class PasswordEncryptor {
-  public String encryptPassword (String password) {
+  public static String encryptPassword (String password) {
     try {
       MessageDigest digest    = MessageDigest.getInstance("SHA-256");
       byte[]        hash      = digest.digest(password.getBytes("UTF-8"));

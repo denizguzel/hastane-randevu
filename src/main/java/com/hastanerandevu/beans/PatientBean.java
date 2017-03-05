@@ -1,6 +1,7 @@
 package com.hastanerandevu.beans;
 
 import com.hastanerandevu.model.PatientModel;
+import com.hastanerandevu.service.PatientService;
 import com.hastanerandevu.service.impl.PatientServiceImpl;
 import com.hastanerandevu.utility.SessionUtils;
 
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpSession;
 @ManagedBean (name = "patient")
 @SessionScoped
 public class PatientBean {
-  private PatientServiceImpl patientService = new PatientServiceImpl();
+  private PatientService patientService = new PatientServiceImpl();
   private PatientModel patientModel = new PatientModel();
 
   public PatientModel getPatientModel () {

@@ -20,8 +20,7 @@ public class PatientDaoImpl implements PatientDao {
   public boolean createPatient (String firstName, String lastName, String password, String tcNumber, Date birthDate, String birthPlace, String email, String phoneNumber, String address, String fatherName, String motherName) {
     EntityManager entitymanager = emfactory.createEntityManager();
     entitymanager.getTransaction().begin();
-    PasswordEncryptor encryptor = new PasswordEncryptor();
-    password = encryptor.encryptPassword(password);
+    password = PasswordEncryptor.encryptPassword(password);
 
     PatientModel patientModel = new PatientModel();
     patientModel.setFirstName(firstName);
@@ -52,14 +51,11 @@ public class PatientDaoImpl implements PatientDao {
   public boolean loginPatient (String tcNumber, String password) {
     EntityManager entitymanager = emfactory.createEntityManager();
     entitymanager.getTransaction().begin();
-    PasswordEncryptor encryptor = new PasswordEncryptor();
-    password = encryptor.encryptPassword(password);
-
-    PatientModel patientModel;
 
     Query query = entitymanager.createQuery("SELECT e FROM PatientModel e WHERE e.tcNumber = :tcNumber AND e.password = :password", PatientModel.class);
-    query.setParameter("tcNumber", tcNumber).setParameter("password", password);
-    patientModel = (PatientModel) query.getSingleResult();
+    query.setParameter("tcNumber", tcNumber).setParameter("password", PasswordEncryptor.encryptPassword(password));
+    PatientModel patientModel = (PatientModel) query.getSingleResult();
+
     if ( patientModel != null ) {
       HttpSession session = SessionUtils.getSession();
       session.setAttribute("firstName", patientModel.getFirstName());
@@ -67,9 +63,11 @@ public class PatientDaoImpl implements PatientDao {
       emfactory.close();
       return true;
     }
-    entitymanager.close();
-    emfactory.close();
-    return false;
+    else{
+      entitymanager.close();
+      emfactory.close();
+      return false;
+    }
   }
 
   @Override

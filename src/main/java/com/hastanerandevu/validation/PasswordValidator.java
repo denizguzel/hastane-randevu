@@ -15,6 +15,8 @@ public class PasswordValidator implements Validator {
 
   private static final String PASSWORD_PATTERN = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
 
+  private static Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
+
   /*
   (?=.*[0-9]) a digit must occur at least once
   (?=.*[a-z]) a lower case letter must occur at least once
@@ -23,12 +25,6 @@ public class PasswordValidator implements Validator {
   (?=\\S+$) no whitespace allowed in the entire string
   .{8,} at least 8 characters
   */
-
-  private static Pattern pattern;
-
-  public PasswordValidator () {
-    pattern = Pattern.compile(PASSWORD_PATTERN);
-  }
 
   public void validate (FacesContext context, UIComponent component, Object value) throws ValidatorException {
 
