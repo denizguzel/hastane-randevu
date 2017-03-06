@@ -1,6 +1,7 @@
 package com.hastanerandevu.validation;
 
 import com.google.gson.Gson;
+import com.hastanerandevu.constants.ProjectConstants;
 
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
@@ -11,8 +12,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class CaptchaValidator {
-  private static final String SECRET_KEY = "6LcjxBcUAAAAAP-NHMzhsDDRAck1fDX8vs_ZzC_3";
-  private static final String VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify?secret=%s&response=%s&remoteip=%s";
 
   public static boolean validate (FacesContext context) throws IOException {
     HttpServletRequest request    = (HttpServletRequest) context.getExternalContext().getRequest();
@@ -20,7 +19,7 @@ public class CaptchaValidator {
     String             recap      = request.getParameter("g-recaptcha-response");
     URL                url;
 
-    url = new URL(String.format(VERIFY_URL, SECRET_KEY, recap, remoteAddr));
+    url = new URL(String.format(ProjectConstants.CAPTCHA_VERIFY_URL, ProjectConstants.CAPTCHA_SECRET_KEY, recap, remoteAddr));
     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
     conn.setRequestMethod("GET");
     String         line;

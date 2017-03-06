@@ -1,5 +1,7 @@
 package com.hastanerandevu.validation;
 
+import com.hastanerandevu.constants.ProjectConstants;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -13,9 +15,7 @@ import java.util.regex.Pattern;
 @FacesValidator ("password")
 public class PasswordValidator implements Validator {
 
-  private static final String PASSWORD_PATTERN = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
-
-  private static Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
+  private static Pattern pattern = Pattern.compile(ProjectConstants.PASSWORD_PATTERN);
 
   /*
   (?=.*[0-9]) a digit must occur at least once

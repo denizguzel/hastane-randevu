@@ -10,15 +10,19 @@ public class HospitalModel {
   @GeneratedValue (strategy = GenerationType.AUTO)
   private long pk;
 
-  @Column (name = "NAME")
+  @Column (name = "HOSPITAL_NAME")
   private String hospitalName;
 
-  @Column (name = "ADDRESS")
+  @Column (name = "HOSPITAL_ADDRESS")
   private String hospitalAddress;
 
   @ManyToOne (fetch = FetchType.LAZY)
   @JoinColumn (name = "FK_DISTRICT")
   private DistrictModel district;
+
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_HOSPITAL_TYPE")
+  private HospitalTypeModel hospitalType;
 
   @Column (name = "CREATION_TIME")
   private Date creationTime;
@@ -29,9 +33,7 @@ public class HospitalModel {
   @Column (name = "IS_ACTIVE")
   private char isActive;
 
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_HOSPITAL_TYPE")
-  private HospitalTypeModel hospitalType;
+
 
   public long getPk () {
     return pk;
