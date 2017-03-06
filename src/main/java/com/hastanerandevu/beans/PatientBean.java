@@ -20,6 +20,7 @@ public class PatientBean {
   private PatientModel patientModel = new PatientModel();
   private int loginCounter = 0;
   private boolean showCaptcha = false;
+  private boolean verifyCaptcha = false;
 
   public boolean isShowCaptcha () {
     return showCaptcha;
@@ -39,8 +40,10 @@ public class PatientBean {
     if ( loginCounter > 2 ) {
       showCaptcha = true;
     }
-    FacesContext facesContext  = FacesContext.getCurrentInstance();
-    boolean      verifyCaptcha = CaptchaValidator.validate(facesContext);
+    if ( showCaptcha ) {
+      FacesContext facesContext = FacesContext.getCurrentInstance();
+      verifyCaptcha = CaptchaValidator.validate(facesContext);
+    }
 
     boolean verifyLogin = patientService.loginPatient(patientModel.getTcNumber(), patientModel.getPassword());
     if ( showCaptcha ) {

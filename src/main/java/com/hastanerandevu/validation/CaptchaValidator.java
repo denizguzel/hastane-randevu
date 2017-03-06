@@ -30,6 +30,5 @@ public class CaptchaValidator {
     }
     CaptchaResponse capRes = new Gson().fromJson(output.toString(), CaptchaResponse.class);
     return capRes.isSuccess();
-
   }
 }

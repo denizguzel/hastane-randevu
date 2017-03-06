@@ -9,6 +9,4 @@ public class ProjectConstants {
 
   public final static String CAPTCHA_SECRET_KEY = "6LcjxBcUAAAAAP-NHMzhsDDRAck1fDX8vs_ZzC_3";
   public final static String CAPTCHA_VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify?secret=%s&response=%s&remoteip=%s";
-
-
 }

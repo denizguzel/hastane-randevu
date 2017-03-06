@@ -1,14 +1,34 @@
 package com.hastanerandevu.model;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Date;
 
 public class FrequentlyAskedQuestionsModel {
+
+  @Id
+  @Column (name = "PK")
+  @GeneratedValue (strategy = GenerationType.AUTO)
   private long pk;
+
+  @Column (name = "QUESTION")
   private String question;
+
+  @Column (name = "ANSWER")
   private String answer;
+
+  @Column (name = "CREATION_TIME")
   private Date creationTime;
+
+  @Column (name = "MODIFIED_TIME")
   private Date modifiedTime;
+
+  @Column (name = "IS_ACTIVE")
   private char isActive;
+
+  @Column (name = "IS_APPROPRIATE")
   private char isAppropriate;
 
   public long getPk () {

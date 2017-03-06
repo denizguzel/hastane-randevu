@@ -2,6 +2,7 @@ package com.hastanerandevu.model;
 
 import java.util.Date;
 
+// TODO mapping gerekli
 public class TreatmentModel {
   private long pk;
   private String treatmentName;

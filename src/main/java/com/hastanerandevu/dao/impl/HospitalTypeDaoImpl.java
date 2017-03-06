@@ -9,15 +9,12 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 
-/**
- * Created by Okan on 6.3.2017.
- */
 public class HospitalTypeDaoImpl implements HospitalTypeDao {
 
   private EntityManagerFactory emfactory = Persistence.createEntityManagerFactory(ProjectConstants.persistenceUnitName);
 
   @Override
-  public void createHospitalType(String hospitalTypeName) {
+  public void createHospitalType (String hospitalTypeName) {
     EntityManager entitymanager = emfactory.createEntityManager();
     entitymanager.getTransaction().begin();
 
@@ -32,7 +29,7 @@ public class HospitalTypeDaoImpl implements HospitalTypeDao {
   }
 
   @Override
-  public void updateHospitalType(long id, String hospitalTypeName) {
+  public void updateHospitalType (long id, String hospitalTypeName) {
     EntityManager entitymanager = emfactory.createEntityManager();
     entitymanager.getTransaction().begin();
     HospitalTypeModel hospitalTypeModel = entitymanager.find(HospitalTypeModel.class, id);
@@ -45,7 +42,7 @@ public class HospitalTypeDaoImpl implements HospitalTypeDao {
   }
 
   @Override
-  public void deleteHospitalType(long id) {
+  public void deleteHospitalType (long id) {
     EntityManager entitymanager = emfactory.createEntityManager();
     entitymanager.getTransaction().begin();
 
@@ -57,7 +54,7 @@ public class HospitalTypeDaoImpl implements HospitalTypeDao {
   }
 
   @Override
-  public HospitalTypeModel findHospitalType(long id) {
+  public HospitalTypeModel findHospitalType (long id) {
     EntityManager entitymanager = emfactory.createEntityManager();
     return entitymanager.find(HospitalTypeModel.class, id);
   }

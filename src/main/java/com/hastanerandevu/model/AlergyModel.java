@@ -1,13 +1,30 @@
 package com.hastanerandevu.model;
 
+import javax.persistence.*;
 import java.util.Date;
 
+
 public class AlergyModel {
+
+  @Id
+  @Column (name = "PK")
+  @GeneratedValue (strategy = GenerationType.AUTO)
   private long pk;
+
+  @Column (name = "ALERGY_NAME")
   private String alergyName;
+
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_ALERGY_TYPE")
   private AlergyTypeModel alergyTypeModel;
+
+  @Column (name = "CREATION_TIME")
   private Date creationTime;
+
+  @Column (name = "MODIFIED_TIME")
   private Date modifiedTime;
+
+  @Column (name = "IS_ACTIVE")
   private char isActive;
 
   public long getPk () {

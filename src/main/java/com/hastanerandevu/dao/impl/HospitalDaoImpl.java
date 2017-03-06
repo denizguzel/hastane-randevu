@@ -9,15 +9,12 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 
-/**
- * Created by Okan on 6.3.2017.
- */
 public class HospitalDaoImpl implements HospitalDao {
 
   private EntityManagerFactory emfactory = Persistence.createEntityManagerFactory(ProjectConstants.persistenceUnitName);
 
   @Override
-  public void createHospital(String hospitalName) {
+  public void createHospital (String hospitalName) {
     EntityManager entitymanager = emfactory.createEntityManager();
     entitymanager.getTransaction().begin();
 
@@ -32,7 +29,7 @@ public class HospitalDaoImpl implements HospitalDao {
   }
 
   @Override
-  public void updateHospital(long id, String hospitalName) {
+  public void updateHospital (long id, String hospitalName) {
     EntityManager entitymanager = emfactory.createEntityManager();
     entitymanager.getTransaction().begin();
     HospitalModel hospitalModel = entitymanager.find(HospitalModel.class, id);
@@ -45,7 +42,7 @@ public class HospitalDaoImpl implements HospitalDao {
   }
 
   @Override
-  public void deleteHospital(long id) {
+  public void deleteHospital (long id) {
     EntityManager entitymanager = emfactory.createEntityManager();
     entitymanager.getTransaction().begin();
 
@@ -57,13 +54,13 @@ public class HospitalDaoImpl implements HospitalDao {
   }
 
   @Override
-  public HospitalModel findHospital(long id) {
+  public HospitalModel findHospital (long id) {
     EntityManager entitymanager = emfactory.createEntityManager();
     return entitymanager.find(HospitalModel.class, id);
   }
 
   @Override
-  public List<HospitalModel> getAllHospitals() {
+  public List<HospitalModel> getAllHospitals () {
     EntityManager entitymanager = emfactory.createEntityManager();
     return entitymanager.createQuery("SELECT e FROM HospitalModel e", HospitalModel.class).getResultList();
   }

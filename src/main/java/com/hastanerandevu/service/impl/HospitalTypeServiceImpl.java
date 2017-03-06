@@ -7,34 +7,32 @@ import com.hastanerandevu.service.HospitalTypeService;
 
 import java.util.List;
 
-/**
- * Created by Okan on 6.3.2017.
- */
+
 public class HospitalTypeServiceImpl implements HospitalTypeService {
-  HospitalTypeDao hospitalTypeDao = new HospitalTypeDaoImpl();
+  private HospitalTypeDao hospitalTypeDao = new HospitalTypeDaoImpl();
 
   @Override
-  public void createHospitalType(String hospitalTypeName) {
+  public void createHospitalType (String hospitalTypeName) {
     hospitalTypeDao.createHospitalType(hospitalTypeName);
   }
 
   @Override
-  public void updateHospitalType(long id, String hospitalTypeName) {
-    hospitalTypeDao.updateHospitalType(id,hospitalTypeName);
+  public void updateHospitalType (long id, String hospitalTypeName) {
+    hospitalTypeDao.updateHospitalType(id, hospitalTypeName);
   }
 
   @Override
-  public void deleteHospitalType(long id) {
+  public void deleteHospitalType (long id) {
     hospitalTypeDao.deleteHospitalType(id);
   }
 
   @Override
-  public HospitalTypeModel findHospitalType(long id) {
+  public HospitalTypeModel findHospitalType (long id) {
     return hospitalTypeDao.findHospitalType(id);
   }
 
   @Override
-  public List<HospitalTypeModel> getAllHospitalTypes() {
+  public List<HospitalTypeModel> getAllHospitalTypes () {
     return hospitalTypeDao.getAllHospitalTypes();
   }
 }

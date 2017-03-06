@@ -2,6 +2,7 @@ package com.hastanerandevu.model;
 
 import java.util.Date;
 
+// TODO mapping gerekli
 public class InspectionPlaceDoctorRelModel {
   private long pk;
   private InspectionPlaceModel inspectionPlaceModel;

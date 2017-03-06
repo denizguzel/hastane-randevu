@@ -1,5 +1,6 @@
 package com.hastanerandevu.model;
 
+// TODO mapping gerekli
 public class InspectionPlaceModel {
   private long pk;
   private String placeName;

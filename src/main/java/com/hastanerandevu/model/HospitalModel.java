@@ -34,7 +34,6 @@ public class HospitalModel {
   private char isActive;
 
 
-
   public long getPk () {
     return pk;
   }

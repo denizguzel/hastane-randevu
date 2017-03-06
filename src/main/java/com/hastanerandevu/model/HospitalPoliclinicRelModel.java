@@ -2,6 +2,7 @@ package com.hastanerandevu.model;
 
 import java.util.Date;
 
+// TODO mapping gerekli
 public class HospitalPoliclinicRelModel {
   private long pk;
   private HospitalModel hospitalModel;

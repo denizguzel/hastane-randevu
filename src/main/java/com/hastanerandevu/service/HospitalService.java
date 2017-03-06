@@ -4,9 +4,6 @@ import com.hastanerandevu.model.HospitalModel;
 
 import java.util.List;
 
-/**
- * Created by Okan on 6.3.2017.
- */
 public interface HospitalService {
   void createHospital (String hospitalName);
 
@@ -16,5 +13,5 @@ public interface HospitalService {
 
   HospitalModel findHospital (long id);
 
-  public List<HospitalModel> getAllHospitals ();
+  List<HospitalModel> getAllHospitals ();
 }

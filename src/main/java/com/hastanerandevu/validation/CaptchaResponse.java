@@ -1,7 +1,7 @@
 package com.hastanerandevu.validation;
 
 public class CaptchaResponse {
-  public boolean success;
+  private boolean success;
 
   public boolean isSuccess () {
     return success;

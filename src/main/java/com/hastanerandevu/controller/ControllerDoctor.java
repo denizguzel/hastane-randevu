@@ -5,7 +5,7 @@ import com.hastanerandevu.model.DoctorModel;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
-
+// TODO json işlemleri için bu tarz bir şey kullanılacak diye düşünüyorum
 @Path ("/doctors")
 public class ControllerDoctor {
 

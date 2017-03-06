@@ -4,9 +4,6 @@ import com.hastanerandevu.model.HospitalTypeModel;
 
 import java.util.List;
 
-/**
- * Created by Okan on 6.3.2017.
- */
 public interface HospitalTypeService {
   void createHospitalType (String hospitalTypeName);
 
@@ -16,5 +13,5 @@ public interface HospitalTypeService {
 
   HospitalTypeModel findHospitalType (long id);
 
-  public List<HospitalTypeModel> getAllHospitalTypes ();
+  List<HospitalTypeModel> getAllHospitalTypes ();
 }

@@ -2,6 +2,7 @@ package com.hastanerandevu.model;
 
 import java.util.Date;
 
+// TODO mapping gerekli
 public class AppointmentModel {
   private long pk;
   private Date appointmentDate;

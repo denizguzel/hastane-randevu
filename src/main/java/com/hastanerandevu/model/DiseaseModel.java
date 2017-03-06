@@ -1,13 +1,29 @@
 package com.hastanerandevu.model;
 
+import javax.persistence.*;
 import java.util.Date;
 
 public class DiseaseModel {
+
+  @Id
+  @Column (name = "PK")
+  @GeneratedValue (strategy = GenerationType.AUTO)
   private long pk;
+
+  @Column (name = "DISEASE_NAME")
   private String diseaseName;
+
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_DISEASE_TYPE")
   private DiseaseTypeModel diseaseTypeModel;
+
+  @Column (name = "CREATION_TIME")
   private Date creationTime;
+
+  @Column (name = "MODIFIED_TIME")
   private Date modifiedTime;
+
+  @Column (name = "IS_ACTIVE")
   private char isActive;
 
   public long getPk () {
