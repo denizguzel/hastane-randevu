@@ -61,8 +61,6 @@ public class PatientDaoImpl implements PatientDao {
     if ( list.size() > 0 ) {
       HttpSession session = SessionUtils.getSession();
       session.setAttribute("firstName", list.get(0).getFirstName());
-      entitymanager.close();
-      emfactory.close();
       return true;
     } else {
       return false;
