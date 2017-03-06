@@ -1,67 +1,78 @@
 package com.hastanerandevu.model;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
+@Entity
+@Table(name = "branch")
 public class BranchModel {
 
   @Id
-  @Column (name = "PK")
-  @GeneratedValue (strategy = GenerationType.AUTO)
+  @Column(name = "PK")
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private long pk;
 
-  @Column (name = "BRANCH_NAME")
+  @Column(name = "BRANCH_NAME")
   private String branchName;
 
-  @Column (name = "CREATION_TIME")
+  @Column(name = "CREATION_TIME")
   private Date creationTime;
 
-  @Column (name = "MODIFIED_TIME")
+  @Column(name = "MODIFIED_TIME")
   private Date modifiedTime;
 
-  @Column (name = "IS_ACTIVE")
+  @Column(name = "IS_ACTIVE")
   private char isActive;
 
-  public long getPk () {
+  @OneToMany(mappedBy = "branch")
+  private List<DoctorModel> doctorModels;
+
+  public long getPk() {
     return pk;
   }
 
-  public void setPk (long pk) {
+  public void setPk(long pk) {
     this.pk = pk;
   }
 
-  public String getBranchName () {
+  public String getBranchName() {
     return branchName;
   }
 
-  public void setBranchName (String branchName) {
+  public void setBranchName(String branchName) {
     this.branchName = branchName;
   }
 
-  public Date getCreationTime () {
+  public Date getCreationTime() {
     return creationTime;
   }
 
-  public void setCreationTime (Date creationTime) {
+  public void setCreationTime(Date creationTime) {
     this.creationTime = creationTime;
   }
 
-  public Date getModifiedTime () {
+  public Date getModifiedTime() {
     return modifiedTime;
   }
 
-  public void setModifiedTime (Date modifiedTime) {
+  public void setModifiedTime(Date modifiedTime) {
     this.modifiedTime = modifiedTime;
   }
 
-  public char getIsActive () {
+  public char getIsActive() {
     return isActive;
   }
 
-  public void setIsActive (char isActive) {
+  public void setIsActive(char isActive) {
     this.isActive = isActive;
+  }
+
+  public List<DoctorModel> getDoctorModels() {
+    return doctorModels;
+  }
+
+  public void setDoctorModels(List<DoctorModel> doctorModels) {
+    this.doctorModels = doctorModels;
   }
 }

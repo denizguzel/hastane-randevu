@@ -1,52 +1,81 @@
 package com.hastanerandevu.model;
 
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
-// TODO mapping gerekli
+@Entity
+@Table(name = "secretQuestion")
 public class SecretQuestionModel {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "PK")
   private long pk;
+
+  @Column(name = "QUESTION")
   private String question;
+
+  @Column(name = "CREATION_TIME")
   private Date creationTime;
+
+  @Column(name = "MODIFIED_TIME")
   private Date modifiedTime;
+
+  @Column(name = "IS_ACTIVE")
   private char isActive;
 
-  public long getPk () {
+  @OneToMany(mappedBy = "secretQuestion")
+  private List<DoctorModel> doctorModels;
+
+  @OneToMany(mappedBy = "secretQuestion")
+  private List<PatientModel> patientModels;
+
+  public long getPk() {
     return pk;
   }
 
-  public void setPk (long pk) {
+  public void setPk(long pk) {
     this.pk = pk;
   }
 
-  public String getQuestion () {
+  public String getQuestion() {
     return question;
   }
 
-  public void setQuestion (String question) {
+  public void setQuestion(String question) {
     this.question = question;
   }
 
-  public Date getCreationTime () {
+  public Date getCreationTime() {
     return creationTime;
   }
 
-  public void setCreationTime (Date creationTime) {
+  public void setCreationTime(Date creationTime) {
     this.creationTime = creationTime;
   }
 
-  public Date getModifiedTime () {
+  public Date getModifiedTime() {
     return modifiedTime;
   }
 
-  public void setModifiedTime (Date modifiedTime) {
+  public void setModifiedTime(Date modifiedTime) {
     this.modifiedTime = modifiedTime;
   }
 
-  public char getIsActive () {
+  public char getIsActive() {
     return isActive;
   }
 
-  public void setIsActive (char isActive) {
+  public void setIsActive(char isActive) {
     this.isActive = isActive;
+  }
+
+  public List<DoctorModel> getDoctorModels() {
+    return doctorModels;
+  }
+
+  public void setDoctorModels(List<DoctorModel> doctorModels) {
+    this.doctorModels = doctorModels;
   }
 }

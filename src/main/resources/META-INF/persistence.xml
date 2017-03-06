@@ -12,6 +12,14 @@
     <class>com.hastanerandevu.model.DistrictModel</class>
     <class>com.hastanerandevu.model.HospitalModel</class>
     <class>com.hastanerandevu.model.HospitalTypeModel</class>
+    <class>com.hastanerandevu.model.GenderModel</class>
+    <class>com.hastanerandevu.model.BranchModel</class>
+    <class>com.hastanerandevu.model.SecretQuestionModel</class>
+    <class>com.hastanerandevu.model.ProfessionModel</class>
+    <class>com.hastanerandevu.model.DoctorModel</class>
+    <class>com.hastanerandevu.model.PatientModel</class>
+    <class>com.hastanerandevu.model.AlergyTypeModel</class>
+    <class>com.hastanerandevu.model.AlergyModel</class>
 
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/test"/>

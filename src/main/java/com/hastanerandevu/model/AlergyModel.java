@@ -3,7 +3,8 @@ package com.hastanerandevu.model;
 import javax.persistence.*;
 import java.util.Date;
 
-
+@Entity
+@Table (name = "alergy")
 public class AlergyModel {
 
   @Id
@@ -14,10 +15,6 @@ public class AlergyModel {
   @Column (name = "ALERGY_NAME")
   private String alergyName;
 
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_ALERGY_TYPE")
-  private AlergyTypeModel alergyTypeModel;
-
   @Column (name = "CREATION_TIME")
   private Date creationTime;
 
@@ -26,6 +23,10 @@ public class AlergyModel {
 
   @Column (name = "IS_ACTIVE")
   private char isActive;
+
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_ALERGY_TYPE")
+  private AlergyTypeModel alergyType;
 
   public long getPk () {
     return pk;
@@ -41,14 +42,6 @@ public class AlergyModel {
 
   public void setAlergyName (String alergyName) {
     this.alergyName = alergyName;
-  }
-
-  public AlergyTypeModel getAlergyTypeModel () {
-    return alergyTypeModel;
-  }
-
-  public void setAlergyTypeModel (AlergyTypeModel alergyTypeModel) {
-    this.alergyTypeModel = alergyTypeModel;
   }
 
   public Date getCreationTime () {
@@ -73,5 +66,13 @@ public class AlergyModel {
 
   public void setIsActive (char isActive) {
     this.isActive = isActive;
+  }
+
+  public AlergyTypeModel getAlergyType() {
+    return alergyType;
+  }
+
+  public void setAlergyType(AlergyTypeModel alergyType) {
+    this.alergyType = alergyType;
   }
 }

@@ -1,11 +1,11 @@
 package com.hastanerandevu.model;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
+@Entity
+@Table (name = "alergyType")
 public class AlergyTypeModel {
   @Id
   @Column (name = "PK")
@@ -23,6 +23,9 @@ public class AlergyTypeModel {
 
   @Column (name = "IS_ACTIVE")
   private char isActive;
+
+  @OneToMany(mappedBy = "alergyType")
+  private List<AlergyModel> alergyModels;
 
   public long getPk () {
     return pk;
@@ -62,5 +65,13 @@ public class AlergyTypeModel {
 
   public void setIsActive (char isActive) {
     this.isActive = isActive;
+  }
+
+  public List<AlergyModel> getAlergyModels() {
+    return alergyModels;
+  }
+
+  public void setAlergyModels(List<AlergyModel> alergyModels) {
+    this.alergyModels = alergyModels;
   }
 }
