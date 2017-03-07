@@ -3,6 +3,8 @@ package com.hastanerandevu.model;
 import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table (name = "hospital")
 public class HospitalModel {
 
   @Id

@@ -4,7 +4,8 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-// TODO mapping gerekli
+@Entity
+@Table (name = "hospitaltype")
 public class HospitalTypeModel {
   @Id
   @Column (name = "PK")
