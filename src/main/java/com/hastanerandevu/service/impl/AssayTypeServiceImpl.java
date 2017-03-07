@@ -16,8 +16,8 @@ public class AssayTypeServiceImpl implements AssayTypeService {
   }
 
   @Override
-  public void updateAssayType (long id, String assayTypeDescription) {
-    assayTypeDao.updateAssayType(id, assayTypeDescription);
+  public void updateAssayType (long id, String assayTypeName) {
+    assayTypeDao.updateAssayType(id, assayTypeName);
   }
 
   @Override
