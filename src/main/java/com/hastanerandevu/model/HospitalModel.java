@@ -9,98 +9,98 @@ import java.util.List;
 public class HospitalModel {
 
   @Id
-  @Column(name = "PK")
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column (name = "PK")
+  @GeneratedValue (strategy = GenerationType.AUTO)
   private long pk;
 
-  @Column(name = "HOSPITAL_NAME")
+  @Column (name = "HOSPITAL_NAME")
   private String hospitalName;
 
-  @Column(name = "HOSPITAL_ADDRESS")
+  @Column (name = "HOSPITAL_ADDRESS")
   private String hospitalAddress;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "FK_DISTRICT")
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_DISTRICT")
   private DistrictModel district;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "FK_HOSPITAL_TYPE")
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_HOSPITAL_TYPE")
   private HospitalTypeModel hospitalType;
 
-  @Column(name = "CREATION_TIME")
+  @Column (name = "CREATION_TIME")
   private Date creationTime;
 
-  @Column(name = "MODIFIED_TIME")
+  @Column (name = "MODIFIED_TIME")
   private Date modifiedTime;
 
-  @Column(name = "IS_ACTIVE")
+  @Column (name = "IS_ACTIVE")
   private char isActive;
 
   @OneToMany (mappedBy = "hospitalModel")
   private List<HospitalPoliclinicRelModel> hospitalPoliclinicRelModels;
 
 
-  public long getPk() {
+  public long getPk () {
     return pk;
   }
 
-  public void setPk(long pk) {
+  public void setPk (long pk) {
     this.pk = pk;
   }
 
-  public String getHospitalName() {
+  public String getHospitalName () {
     return hospitalName;
   }
 
-  public void setHospitalName(String hospitalName) {
+  public void setHospitalName (String hospitalName) {
     this.hospitalName = hospitalName;
   }
 
-  public String getHospitalAddress() {
+  public String getHospitalAddress () {
     return hospitalAddress;
   }
 
-  public void setHospitalAddress(String hospitalAddress) {
+  public void setHospitalAddress (String hospitalAddress) {
     this.hospitalAddress = hospitalAddress;
   }
 
-  public Date getCreationTime() {
+  public Date getCreationTime () {
     return creationTime;
   }
 
-  public void setCreationTime(Date creationTime) {
+  public void setCreationTime (Date creationTime) {
     this.creationTime = creationTime;
   }
 
-  public Date getModifiedTime() {
+  public Date getModifiedTime () {
     return modifiedTime;
   }
 
-  public void setModifiedTime(Date modifiedTime) {
+  public void setModifiedTime (Date modifiedTime) {
     this.modifiedTime = modifiedTime;
   }
 
-  public char getIsActive() {
+  public char getIsActive () {
     return isActive;
   }
 
-  public void setIsActive(char isActive) {
+  public void setIsActive (char isActive) {
     this.isActive = isActive;
   }
 
-  public DistrictModel getDistrict() {
+  public DistrictModel getDistrict () {
     return district;
   }
 
-  public void setDistrict(DistrictModel district) {
+  public void setDistrict (DistrictModel district) {
     this.district = district;
   }
 
-  public HospitalTypeModel getHospitalType() {
+  public HospitalTypeModel getHospitalType () {
     return hospitalType;
   }
 
-  public void setHospitalType(HospitalTypeModel hospitalType) {
+  public void setHospitalType (HospitalTypeModel hospitalType) {
     this.hospitalType = hospitalType;
   }
 }

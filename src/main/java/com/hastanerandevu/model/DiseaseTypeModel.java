@@ -4,6 +4,8 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+@Entity
+@Table (name = "disease_type")
 public class DiseaseTypeModel {
 
   @Id

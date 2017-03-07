@@ -22,7 +22,7 @@
             </div>
             <h:panelGroup rendered="#{patient.showCaptcha}">
               <div class="g-recaptcha" data-sitekey="6LcjxBcUAAAAAKrzn6mU3wRdUiqEdCsxkKojNKeJ"></div>
-              <h:outputScript>grecaptcha.render( $('.g-recaptcha')[0], { sitekey : '6LcjxBcUAAAAAKrzn6mU3wRdUiqEdCsxkKojNKeJ' });</h:outputScript>
+              <h:outputScript>grecaptcha.render($('.g-recaptcha')[0], {sitekey: '6LcjxBcUAAAAAKrzn6mU3wRdUiqEdCsxkKojNKeJ'});</h:outputScript>
             </h:panelGroup>
             <h:messages globalOnly="true" errorClass="error"/>
             <h:commandButton value="Gönder" styleClass="btn btn-primary" action="#{patient.validateLogin}">

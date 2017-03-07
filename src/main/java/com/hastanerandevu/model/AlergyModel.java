@@ -72,11 +72,11 @@ public class AlergyModel {
     this.isActive = isActive;
   }
 
-  public AlergyTypeModel getAlergyType() {
+  public AlergyTypeModel getAlergyType () {
     return alergyType;
   }
 
-  public void setAlergyType(AlergyTypeModel alergyType) {
+  public void setAlergyType (AlergyTypeModel alergyType) {
     this.alergyType = alergyType;
   }
 }

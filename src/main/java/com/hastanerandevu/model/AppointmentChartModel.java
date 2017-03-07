@@ -36,59 +36,59 @@ public class AppointmentChartModel {
   @OneToMany (mappedBy = "appointmentChartModel")
   private List<AppointmentModel> appointmentModels;
 
-  public long getPk() {
+  public long getPk () {
     return pk;
   }
 
-  public void setPk(long pk) {
+  public void setPk (long pk) {
     this.pk = pk;
   }
 
-  public Date getAppointmentDate() {
+  public Date getAppointmentDate () {
     return appointmentDate;
   }
 
-  public void setAppointmentDate(Date appointmentDate) {
+  public void setAppointmentDate (Date appointmentDate) {
     this.appointmentDate = appointmentDate;
   }
 
-  public InspectionPlaceDoctorRelModel getInspectionPlaceDoctorRelModel() {
+  public InspectionPlaceDoctorRelModel getInspectionPlaceDoctorRelModel () {
     return inspectionPlaceDoctorRelModel;
   }
 
-  public void setInspectionPlaceDoctorRelModel(InspectionPlaceDoctorRelModel inspectionPlaceDoctorRelModel) {
+  public void setInspectionPlaceDoctorRelModel (InspectionPlaceDoctorRelModel inspectionPlaceDoctorRelModel) {
     this.inspectionPlaceDoctorRelModel = inspectionPlaceDoctorRelModel;
   }
 
-  public Date getCreationTime() {
+  public Date getCreationTime () {
     return creationTime;
   }
 
-  public void setCreationTime(Date creationTime) {
+  public void setCreationTime (Date creationTime) {
     this.creationTime = creationTime;
   }
 
-  public Date getModifiedTime() {
+  public Date getModifiedTime () {
     return modifiedTime;
   }
 
-  public void setModifiedTime(Date modifiedTime) {
+  public void setModifiedTime (Date modifiedTime) {
     this.modifiedTime = modifiedTime;
   }
 
-  public char getIsActive() {
+  public char getIsActive () {
     return isActive;
   }
 
-  public void setIsActive(char isActive) {
+  public void setIsActive (char isActive) {
     this.isActive = isActive;
   }
 
-  public char getIsReserved() {
+  public char getIsReserved () {
     return isReserved;
   }
 
-  public void setIsReserved(char isReserved) {
+  public void setIsReserved (char isReserved) {
     this.isReserved = isReserved;
   }
 }

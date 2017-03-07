@@ -24,7 +24,7 @@ public class AlergyTypeModel {
   @Column (name = "IS_ACTIVE")
   private char isActive;
 
-  @OneToMany(mappedBy = "alergyType")
+  @OneToMany (mappedBy = "alergyType")
   private List<AlergyModel> alergyModels;
 
   public long getPk () {
@@ -67,11 +67,11 @@ public class AlergyTypeModel {
     this.isActive = isActive;
   }
 
-  public List<AlergyModel> getAlergyModels() {
+  public List<AlergyModel> getAlergyModels () {
     return alergyModels;
   }
 
-  public void setAlergyModels(List<AlergyModel> alergyModels) {
+  public void setAlergyModels (List<AlergyModel> alergyModels) {
     this.alergyModels = alergyModels;
   }
 }
