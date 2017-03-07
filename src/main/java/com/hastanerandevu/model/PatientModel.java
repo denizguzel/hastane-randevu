@@ -69,22 +69,22 @@ public class PatientModel {
   @JoinColumn (name = "FK_BLOOD_GROUP")
   private BloodGroupModel bloodGroup;
 
-  @OneToMany (mappedBy = "patientModel")
+  @OneToMany (mappedBy = "patient")
   private List<AppointmentModel> appointmentModels;
 
-  @OneToMany (mappedBy = "patientModel")
+  @OneToMany (mappedBy = "patient")
   private List<PatientAlergyRelModel> patientAlergyRelModels;
 
-  @OneToMany (mappedBy = "patientModel")
+  @OneToMany (mappedBy = "patient")
   private List<PatientAssayRelModel> patientAssayRelModels;
 
-  @OneToMany (mappedBy = "patientModel")
+  @OneToMany (mappedBy = "patient")
   private List<PatientDiseaseRelModel> patientDiseaseRelModels;
 
-  @OneToMany (mappedBy = "patientModel")
+  @OneToMany (mappedBy = "patient")
   private List<PatientTreatmentRelModel> patientTreatmentRelModels;
 
-  @OneToMany (mappedBy = "patientModel")
+  @OneToMany (mappedBy = "patient")
   private List<ReviewsAboutDoctorsModel> reviewsAboutDoctorsModels;
 
   public long getPk () {
@@ -237,5 +237,53 @@ public class PatientModel {
 
   public void setQuestionAnswer (String questionAnswer) {
     this.questionAnswer = questionAnswer;
+  }
+
+  public List<AppointmentModel> getAppointmentModels() {
+    return appointmentModels;
+  }
+
+  public void setAppointmentModels(List<AppointmentModel> appointmentModels) {
+    this.appointmentModels = appointmentModels;
+  }
+
+  public List<PatientAlergyRelModel> getPatientAlergyRelModels() {
+    return patientAlergyRelModels;
+  }
+
+  public void setPatientAlergyRelModels(List<PatientAlergyRelModel> patientAlergyRelModels) {
+    this.patientAlergyRelModels = patientAlergyRelModels;
+  }
+
+  public List<PatientAssayRelModel> getPatientAssayRelModels() {
+    return patientAssayRelModels;
+  }
+
+  public void setPatientAssayRelModels(List<PatientAssayRelModel> patientAssayRelModels) {
+    this.patientAssayRelModels = patientAssayRelModels;
+  }
+
+  public List<PatientDiseaseRelModel> getPatientDiseaseRelModels() {
+    return patientDiseaseRelModels;
+  }
+
+  public void setPatientDiseaseRelModels(List<PatientDiseaseRelModel> patientDiseaseRelModels) {
+    this.patientDiseaseRelModels = patientDiseaseRelModels;
+  }
+
+  public List<PatientTreatmentRelModel> getPatientTreatmentRelModels() {
+    return patientTreatmentRelModels;
+  }
+
+  public void setPatientTreatmentRelModels(List<PatientTreatmentRelModel> patientTreatmentRelModels) {
+    this.patientTreatmentRelModels = patientTreatmentRelModels;
+  }
+
+  public List<ReviewsAboutDoctorsModel> getReviewsAboutDoctorsModels() {
+    return reviewsAboutDoctorsModels;
+  }
+
+  public void setReviewsAboutDoctorsModels(List<ReviewsAboutDoctorsModel> reviewsAboutDoctorsModels) {
+    this.reviewsAboutDoctorsModels = reviewsAboutDoctorsModels;
   }
 }

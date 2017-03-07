@@ -14,14 +14,6 @@ public class PatientAlergyRelModel {
   @GeneratedValue (strategy = GenerationType.AUTO)
   private long pk;
 
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_PATIENT")
-  private PatientModel patientModel;
-
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_ALERGY")
-  private AlergyModel alergyModel;
-
   @Column (name = "IS_STILL_PASS")
   private char isStillPass;
 
@@ -34,28 +26,20 @@ public class PatientAlergyRelModel {
   @Column (name = "IS_ACTIVE")
   private char isActive;
 
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_PATIENT")
+  private PatientModel patient;
+
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_ALERGY")
+  private AlergyModel alergy;
+
   public long getPk () {
     return pk;
   }
 
   public void setPk (long pk) {
     this.pk = pk;
-  }
-
-  public PatientModel getPatientModel () {
-    return patientModel;
-  }
-
-  public void setPatientModel (PatientModel patientModel) {
-    this.patientModel = patientModel;
-  }
-
-  public AlergyModel getAlergyModel () {
-    return alergyModel;
-  }
-
-  public void setAlergyModel (AlergyModel alergyModel) {
-    this.alergyModel = alergyModel;
   }
 
   public char getIsStillPass () {
@@ -88,5 +72,21 @@ public class PatientAlergyRelModel {
 
   public void setIsActive (char isActive) {
     this.isActive = isActive;
+  }
+
+  public PatientModel getPatient() {
+    return patient;
+  }
+
+  public void setPatient(PatientModel patient) {
+    this.patient = patient;
+  }
+
+  public AlergyModel getAlergy() {
+    return alergy;
+  }
+
+  public void setAlergy(AlergyModel alergy) {
+    this.alergy = alergy;
   }
 }

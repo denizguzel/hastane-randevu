@@ -55,10 +55,10 @@ public class DoctorModel {
   @JoinColumn (name = "FK_BRANCH")
   private BranchModel branch;
 
-  @OneToMany (mappedBy = "doctorModel")
-  private List<InspectionPlaceDoctorRelModel> ınspectionPlaceDoctorRelModels;
+  @OneToMany (mappedBy = "doctor")
+  private List<InspectionPlaceDoctorRelModel> inspectionPlaceDoctorRelModels;
 
-  @OneToMany (mappedBy = "doctorModel")
+  @OneToMany (mappedBy = "doctor")
   private List<ReviewsAboutDoctorsModel> reviewsAboutDoctorsModels;
 
   public long getPk () {
@@ -163,5 +163,21 @@ public class DoctorModel {
 
   public void setBranch (BranchModel branch) {
     this.branch = branch;
+  }
+
+  public List<InspectionPlaceDoctorRelModel> getInspectionPlaceDoctorRelModels() {
+    return inspectionPlaceDoctorRelModels;
+  }
+
+  public void setInspectionPlaceDoctorRelModels(List<InspectionPlaceDoctorRelModel> inspectionPlaceDoctorRelModels) {
+    this.inspectionPlaceDoctorRelModels = inspectionPlaceDoctorRelModels;
+  }
+
+  public List<ReviewsAboutDoctorsModel> getReviewsAboutDoctorsModels() {
+    return reviewsAboutDoctorsModels;
+  }
+
+  public void setReviewsAboutDoctorsModels(List<ReviewsAboutDoctorsModel> reviewsAboutDoctorsModels) {
+    this.reviewsAboutDoctorsModels = reviewsAboutDoctorsModels;
   }
 }

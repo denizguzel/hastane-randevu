@@ -29,7 +29,7 @@ public class AlergyModel {
   @JoinColumn (name = "FK_ALERGY_TYPE")
   private AlergyTypeModel alergyType;
 
-  @OneToMany (mappedBy = "alergyModel")
+  @OneToMany (mappedBy = "alergy")
   private List<PatientAlergyRelModel> patientAlergyRelModels;
 
   public long getPk () {
@@ -78,5 +78,13 @@ public class AlergyModel {
 
   public void setAlergyType (AlergyTypeModel alergyType) {
     this.alergyType = alergyType;
+  }
+
+  public List<PatientAlergyRelModel> getPatientAlergyRelModels() {
+    return patientAlergyRelModels;
+  }
+
+  public void setPatientAlergyRelModels(List<PatientAlergyRelModel> patientAlergyRelModels) {
+    this.patientAlergyRelModels = patientAlergyRelModels;
   }
 }

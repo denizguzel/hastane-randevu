@@ -16,10 +16,6 @@ public class QuestionModel {
   @Column (name = "QUESTION_TEXT")
   private String questionText;
 
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_SURVEY")
-  private SurveyModel surveyModel;
-
   @Column (name = "CREATION_TIME")
   private Date creationTime;
 
@@ -29,8 +25,12 @@ public class QuestionModel {
   @Column (name = "IS_ACTIVE")
   private char isActive;
 
-  @OneToMany (mappedBy = "questionModel")
+  @OneToMany (mappedBy = "question")
   private List<OptionModel> optionModels;
+
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_SURVEY")
+  private SurveyModel survey;
 
   public long getPk () {
     return pk;
@@ -46,14 +46,6 @@ public class QuestionModel {
 
   public void setQuestionText (String questionText) {
     this.questionText = questionText;
-  }
-
-  public SurveyModel getSurveyModel () {
-    return surveyModel;
-  }
-
-  public void setSurveyModel (SurveyModel surveyModel) {
-    this.surveyModel = surveyModel;
   }
 
   public Date getCreationTime () {
@@ -78,5 +70,21 @@ public class QuestionModel {
 
   public void setIsActive (char isActive) {
     this.isActive = isActive;
+  }
+
+  public List<OptionModel> getOptionModels() {
+    return optionModels;
+  }
+
+  public void setOptionModels(List<OptionModel> optionModels) {
+    this.optionModels = optionModels;
+  }
+
+  public SurveyModel getSurvey() {
+    return survey;
+  }
+
+  public void setSurvey(SurveyModel survey) {
+    this.survey = survey;
   }
 }

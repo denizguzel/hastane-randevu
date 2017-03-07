@@ -20,7 +20,7 @@ public class OptionModel {
 
   @ManyToOne (fetch = FetchType.LAZY)
   @JoinColumn (name = "FK_QUESTION")
-  private QuestionModel questionModel;
+  private QuestionModel question;
 
   @Column (name = "CREATION_TIME")
   private Date creationTime;
@@ -55,14 +55,6 @@ public class OptionModel {
     this.count = count;
   }
 
-  public QuestionModel getQuestionModel () {
-    return questionModel;
-  }
-
-  public void setQuestionModel (QuestionModel questionModel) {
-    this.questionModel = questionModel;
-  }
-
   public Date getCreationTime () {
     return creationTime;
   }
@@ -85,5 +77,13 @@ public class OptionModel {
 
   public void setIsActive (char isActive) {
     this.isActive = isActive;
+  }
+
+  public QuestionModel getQuestion() {
+    return question;
+  }
+
+  public void setQuestion(QuestionModel question) {
+    this.question = question;
   }
 }

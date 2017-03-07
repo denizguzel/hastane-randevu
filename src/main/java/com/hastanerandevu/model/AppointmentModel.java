@@ -3,7 +3,6 @@ package com.hastanerandevu.model;
 import javax.persistence.*;
 import java.util.Date;
 
-// TODO service ve dao gerekli
 @Entity
 @Table (name = "appointment")
 public class AppointmentModel {
@@ -16,18 +15,6 @@ public class AppointmentModel {
   @Column (name = "APPOINTMENT_DATE")
   private Date appointmentDate;
 
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_APPOINTMENT_STATUS")
-  private AppointmentStatusModel appointmentStatusModel;
-
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_APPOINTMENT_CHART")
-  private AppointmentChartModel appointmentChartModel;
-
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_PATIENT")
-  private PatientModel patientModel;
-
   @Column (name = "CREATION_TIME")
   private Date creationTime;
 
@@ -36,6 +23,18 @@ public class AppointmentModel {
 
   @Column (name = "IS_ACTIVE")
   private char isActive;
+
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_APPOINTMENT_STATUS")
+  private AppointmentStatusModel appointmentStatus;
+
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_APPOINTMENT_CHART")
+  private AppointmentChartModel appointmentChart;
+
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_PATIENT")
+  private PatientModel patient;
 
   public long getPk () {
     return pk;
@@ -51,30 +50,6 @@ public class AppointmentModel {
 
   public void setAppointmentDate (Date appointmentDate) {
     this.appointmentDate = appointmentDate;
-  }
-
-  public AppointmentStatusModel getAppointmentStatusModel () {
-    return appointmentStatusModel;
-  }
-
-  public void setAppointmentStatusModel (AppointmentStatusModel appointmentStatusModel) {
-    this.appointmentStatusModel = appointmentStatusModel;
-  }
-
-  public AppointmentChartModel getAppointmentChartModel () {
-    return appointmentChartModel;
-  }
-
-  public void setAppointmentChartModel (AppointmentChartModel appointmentChartModel) {
-    this.appointmentChartModel = appointmentChartModel;
-  }
-
-  public PatientModel getPatientModel () {
-    return patientModel;
-  }
-
-  public void setPatientModel (PatientModel patientModel) {
-    this.patientModel = patientModel;
   }
 
   public Date getCreationTime () {
@@ -99,5 +74,29 @@ public class AppointmentModel {
 
   public void setIsActive (char isActive) {
     this.isActive = isActive;
+  }
+
+  public AppointmentStatusModel getAppointmentStatus() {
+    return appointmentStatus;
+  }
+
+  public void setAppointmentStatus(AppointmentStatusModel appointmentStatus) {
+    this.appointmentStatus = appointmentStatus;
+  }
+
+  public AppointmentChartModel getAppointmentChart() {
+    return appointmentChart;
+  }
+
+  public void setAppointmentChart(AppointmentChartModel appointmentChart) {
+    this.appointmentChart = appointmentChart;
+  }
+
+  public PatientModel getPatient() {
+    return patient;
+  }
+
+  public void setPatient(PatientModel patient) {
+    this.patient = patient;
   }
 }

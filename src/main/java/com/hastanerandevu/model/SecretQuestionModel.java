@@ -78,4 +78,12 @@ public class SecretQuestionModel {
   public void setDoctorModels (List<DoctorModel> doctorModels) {
     this.doctorModels = doctorModels;
   }
+
+  public List<PatientModel> getPatientModels() {
+    return patientModels;
+  }
+
+  public void setPatientModels(List<PatientModel> patientModels) {
+    this.patientModels = patientModels;
+  }
 }

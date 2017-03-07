@@ -25,7 +25,7 @@ public class AppointmentStatusModel {
   @Column (name = "IS_ACTIVE")
   private char isActive;
 
-  @OneToMany (mappedBy = "appointmentStatusModel")
+  @OneToMany (mappedBy = "appointmentStatus")
   private List<AppointmentModel> appointmentModels;
 
   public long getPk () {
@@ -66,5 +66,13 @@ public class AppointmentStatusModel {
 
   public void setIsActive (char isActive) {
     this.isActive = isActive;
+  }
+
+  public List<AppointmentModel> getAppointmentModels() {
+    return appointmentModels;
+  }
+
+  public void setAppointmentModels(List<AppointmentModel> appointmentModels) {
+    this.appointmentModels = appointmentModels;
   }
 }

@@ -25,7 +25,7 @@ public class AssayTypeModel {
   @Column (name = "IS_ACTIVE")
   private char isActive;
 
-  @OneToMany (mappedBy = "assayTypeModel")
+  @OneToMany (mappedBy = "assayType")
   private List<AssayModel> assayModels;
 
   public long getPk () {
@@ -66,5 +66,13 @@ public class AssayTypeModel {
 
   public void setIsActive (char isActive) {
     this.isActive = isActive;
+  }
+
+  public List<AssayModel> getAssayModels() {
+    return assayModels;
+  }
+
+  public void setAssayModels(List<AssayModel> assayModels) {
+    this.assayModels = assayModels;
   }
 }

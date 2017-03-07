@@ -13,14 +13,6 @@ public class PatientDiseaseRelModel {
   @GeneratedValue (strategy = GenerationType.AUTO)
   private long pk;
 
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_PATIENT")
-  private PatientModel patientModel;
-
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_DISEASE")
-  private DiseaseModel diseaseModel;
-
   @Column (name = "IS_STILL_PASS")
   private char isStillPass;
 
@@ -33,28 +25,20 @@ public class PatientDiseaseRelModel {
   @Column (name = "IS_ACTIVE")
   private char isActive;
 
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_PATIENT")
+  private PatientModel patient;
+
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_DISEASE")
+  private DiseaseModel disease;
+
   public long getPk () {
     return pk;
   }
 
   public void setPk (long pk) {
     this.pk = pk;
-  }
-
-  public PatientModel getPatientModel () {
-    return patientModel;
-  }
-
-  public void setPatientModel (PatientModel patientModel) {
-    this.patientModel = patientModel;
-  }
-
-  public DiseaseModel getDiseaseModel () {
-    return diseaseModel;
-  }
-
-  public void setDiseaseModel (DiseaseModel diseaseModel) {
-    this.diseaseModel = diseaseModel;
   }
 
   public char getIsStillPass () {
@@ -87,5 +71,21 @@ public class PatientDiseaseRelModel {
 
   public void setIsActive (char isActive) {
     this.isActive = isActive;
+  }
+
+  public PatientModel getPatient() {
+    return patient;
+  }
+
+  public void setPatient(PatientModel patient) {
+    this.patient = patient;
+  }
+
+  public DiseaseModel getDisease() {
+    return disease;
+  }
+
+  public void setDisease(DiseaseModel disease) {
+    this.disease = disease;
   }
 }

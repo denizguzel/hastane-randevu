@@ -13,14 +13,6 @@ public class PatientTreatmentRelModel {
   @GeneratedValue (strategy = GenerationType.AUTO)
   private long pk;
 
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_PATIENT")
-  private PatientModel patientModel;
-
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_TREATMENT")
-  private TreatmentModel treatmentModel;
-
   @Column (name = "IS_STILL_PASS")
   private char isStillPass;
 
@@ -33,28 +25,20 @@ public class PatientTreatmentRelModel {
   @Column (name = "IS_ACTIVE")
   private char isActive;
 
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_PATIENT")
+  private PatientModel patient;
+
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_TREATMENT")
+  private TreatmentModel treatment;
+
   public long getPk () {
     return pk;
   }
 
   public void setPk (long pk) {
     this.pk = pk;
-  }
-
-  public PatientModel getPatientModel () {
-    return patientModel;
-  }
-
-  public void setPatientModel (PatientModel patientModel) {
-    this.patientModel = patientModel;
-  }
-
-  public TreatmentModel getTreatmentModel () {
-    return treatmentModel;
-  }
-
-  public void setTreatmentModel (TreatmentModel treatmentModel) {
-    this.treatmentModel = treatmentModel;
   }
 
   public char getIsStillPass () {
@@ -87,5 +71,21 @@ public class PatientTreatmentRelModel {
 
   public void setIsActive (char isActive) {
     this.isActive = isActive;
+  }
+
+  public PatientModel getPatient() {
+    return patient;
+  }
+
+  public void setPatient(PatientModel patient) {
+    this.patient = patient;
+  }
+
+  public TreatmentModel getTreatment() {
+    return treatment;
+  }
+
+  public void setTreatment(TreatmentModel treatment) {
+    this.treatment = treatment;
   }
 }

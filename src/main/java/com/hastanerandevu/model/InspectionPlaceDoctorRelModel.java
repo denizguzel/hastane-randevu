@@ -37,7 +37,7 @@ public class InspectionPlaceDoctorRelModel {
   @Column (name = "IS_ACTIVE")
   private char isActive;
 
-  @OneToMany (mappedBy = "inspectionPlaceDoctorRelModel")
+  @OneToMany (mappedBy = "inspectionPlaceDoctorRel")
   private List<AppointmentChartModel> appointmentChartModels;
 
   public long getPk () {
@@ -102,6 +102,14 @@ public class InspectionPlaceDoctorRelModel {
 
   public void setIsActive (char isActive) {
     this.isActive = isActive;
+  }
+
+  public List<AppointmentChartModel> getAppointmentChartModels() {
+    return appointmentChartModels;
+  }
+
+  public void setAppointmentChartModels(List<AppointmentChartModel> appointmentChartModels) {
+    this.appointmentChartModels = appointmentChartModels;
   }
 }
 

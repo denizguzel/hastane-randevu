@@ -16,15 +16,15 @@ public class InspectionPlaceModel {
   @Column (name = "PLACE_NAME")
   private String placeName;
 
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_HOSPITAL_POLICLINIC_REL")
-  private HospitalPoliclinicRelModel hospitalPoliclinicRelModel;
-
   @Column (name = "IS_ACTIVE")
   private char isActive;
 
-  @OneToMany (mappedBy = "inspectionPlaceModel")
-  private List<InspectionPlaceDoctorRelModel> ınspectionPlaceDoctorRelModels;
+  @OneToMany (mappedBy = "inspectionPlace")
+  private List<InspectionPlaceDoctorRelModel> inspectionPlaceDoctorRelModels;
+
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_HOSPITAL_POLICLINIC_REL")
+  private HospitalPoliclinicRelModel hospitalPoliclinicRel;
 
   public long getPk () {
     return pk;
@@ -42,19 +42,27 @@ public class InspectionPlaceModel {
     this.placeName = placeName;
   }
 
-  public HospitalPoliclinicRelModel getHospitalPoliclinicRelModel () {
-    return hospitalPoliclinicRelModel;
-  }
-
-  public void setHospitalPoliclinicRelModel (HospitalPoliclinicRelModel hospitalPoliclinicRelModel) {
-    this.hospitalPoliclinicRelModel = hospitalPoliclinicRelModel;
-  }
-
   public char getIsActive () {
     return isActive;
   }
 
   public void setIsActive (char isActive) {
     this.isActive = isActive;
+  }
+
+  public List<InspectionPlaceDoctorRelModel> getInspectionPlaceDoctorRelModels() {
+    return inspectionPlaceDoctorRelModels;
+  }
+
+  public void setInspectionPlaceDoctorRelModels(List<InspectionPlaceDoctorRelModel> inspectionPlaceDoctorRelModels) {
+    this.inspectionPlaceDoctorRelModels = inspectionPlaceDoctorRelModels;
+  }
+
+  public HospitalPoliclinicRelModel getHospitalPoliclinicRel() {
+    return hospitalPoliclinicRel;
+  }
+
+  public void setHospitalPoliclinicRel(HospitalPoliclinicRelModel hospitalPoliclinicRel) {
+    this.hospitalPoliclinicRel = hospitalPoliclinicRel;
   }
 }

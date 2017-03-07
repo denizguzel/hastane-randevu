@@ -16,10 +16,6 @@ public class AssayModel {
   @Column (name = "ASSAY_NAME")
   private String assayName;
 
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_ASSAY_TYPE")
-  private AssayTypeModel assayTypeModel;
-
   @Column (name = "CREATION_TIME")
   private Date creationTime;
 
@@ -29,7 +25,11 @@ public class AssayModel {
   @Column (name = "IS_ACTIVE")
   private char isActive;
 
-  @OneToMany (mappedBy = "assayModel")
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_ASSAY_TYPE")
+  private AssayTypeModel assayType;
+
+  @OneToMany (mappedBy = "assay")
   private List<PatientAssayRelModel> patientAssayRelModels;
 
   public long getPk () {
@@ -46,14 +46,6 @@ public class AssayModel {
 
   public void setAssayName (String assayName) {
     this.assayName = assayName;
-  }
-
-  public AssayTypeModel getAssayTypeModel () {
-    return assayTypeModel;
-  }
-
-  public void setAssayTypeModel (AssayTypeModel assayTypeModel) {
-    this.assayTypeModel = assayTypeModel;
   }
 
   public Date getCreationTime () {
@@ -78,5 +70,21 @@ public class AssayModel {
 
   public void setIsActive (char isActive) {
     this.isActive = isActive;
+  }
+
+  public AssayTypeModel getAssayType() {
+    return assayType;
+  }
+
+  public void setAssayType(AssayTypeModel assayType) {
+    this.assayType = assayType;
+  }
+
+  public List<PatientAssayRelModel> getPatientAssayRelModels() {
+    return patientAssayRelModels;
+  }
+
+  public void setPatientAssayRelModels(List<PatientAssayRelModel> patientAssayRelModels) {
+    this.patientAssayRelModels = patientAssayRelModels;
   }
 }

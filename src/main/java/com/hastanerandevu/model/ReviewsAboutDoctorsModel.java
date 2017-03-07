@@ -13,14 +13,6 @@ public class ReviewsAboutDoctorsModel {
   @GeneratedValue (strategy = GenerationType.AUTO)
   private long pk;
 
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_PATIENT")
-  private PatientModel patientModel;
-
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_DOCTOR")
-  private DoctorModel doctorModel;
-
   @Column (name = "CREATION_TIME")
   private Date creationTime;
 
@@ -33,28 +25,20 @@ public class ReviewsAboutDoctorsModel {
   @Column (name = "IS_APPROPRIATE")
   private char isAppropriate;
 
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_PATIENT")
+  private PatientModel patient;
+
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_DOCTOR")
+  private DoctorModel doctor;
+
   public long getPk () {
     return pk;
   }
 
   public void setPk (long pk) {
     this.pk = pk;
-  }
-
-  public PatientModel getPatientModel () {
-    return patientModel;
-  }
-
-  public void setPatientModel (PatientModel patientModel) {
-    this.patientModel = patientModel;
-  }
-
-  public DoctorModel getDoctorModel () {
-    return doctorModel;
-  }
-
-  public void setDoctorModel (DoctorModel doctorModel) {
-    this.doctorModel = doctorModel;
   }
 
   public Date getCreationTime () {
@@ -87,5 +71,21 @@ public class ReviewsAboutDoctorsModel {
 
   public void setIsAppropriate (char isAppropriate) {
     this.isAppropriate = isAppropriate;
+  }
+
+  public PatientModel getPatient() {
+    return patient;
+  }
+
+  public void setPatient(PatientModel patient) {
+    this.patient = patient;
+  }
+
+  public DoctorModel getDoctor() {
+    return doctor;
+  }
+
+  public void setDoctor(DoctorModel doctor) {
+    this.doctor = doctor;
   }
 }

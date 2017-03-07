@@ -14,14 +14,6 @@ public class PatientAssayRelModel {
   @GeneratedValue (strategy = GenerationType.AUTO)
   private long pk;
 
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_ASSAY")
-  private AssayModel assayModel;
-
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_PATIENT")
-  private PatientModel patientModel;
-
   @Column (name = "ASSAY_RESULT")
   private String assayResult;
 
@@ -38,28 +30,21 @@ public class PatientAssayRelModel {
   private char isActive;
 
 
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_ASSAY")
+  private AssayModel assay;
+
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_PATIENT")
+  private PatientModel patient;
+
+
   public long getPk () {
     return pk;
   }
 
   public void setPk (long pk) {
     this.pk = pk;
-  }
-
-  public AssayModel getAssayModel () {
-    return assayModel;
-  }
-
-  public void setAssayModel (AssayModel assayModel) {
-    this.assayModel = assayModel;
-  }
-
-  public PatientModel getPatientModel () {
-    return patientModel;
-  }
-
-  public void setPatientModel (PatientModel patientModel) {
-    this.patientModel = patientModel;
   }
 
   public String getAssayResult () {
@@ -100,5 +85,21 @@ public class PatientAssayRelModel {
 
   public void setIsActive (char isActive) {
     this.isActive = isActive;
+  }
+
+  public AssayModel getAssay() {
+    return assay;
+  }
+
+  public void setAssay(AssayModel assay) {
+    this.assay = assay;
+  }
+
+  public PatientModel getPatient() {
+    return patient;
+  }
+
+  public void setPatient(PatientModel patient) {
+    this.patient = patient;
   }
 }

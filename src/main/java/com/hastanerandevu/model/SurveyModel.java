@@ -28,7 +28,7 @@ public class SurveyModel {
   @Column (name = "IS_ACTIVE")
   private char isActive;
 
-  @OneToMany (mappedBy = "surveyModel")
+  @OneToMany (mappedBy = "survey")
   private List<QuestionModel> questionModels;
 
   public long getPk () {
@@ -77,5 +77,13 @@ public class SurveyModel {
 
   public void setIsActive (char isActive) {
     this.isActive = isActive;
+  }
+
+  public List<QuestionModel> getQuestionModels() {
+    return questionModels;
+  }
+
+  public void setQuestionModels(List<QuestionModel> questionModels) {
+    this.questionModels = questionModels;
   }
 }

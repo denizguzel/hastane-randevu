@@ -29,7 +29,7 @@ public class TreatmentModel {
   @Column (name = "IS_ACTIVE")
   private char isActive;
 
-  @OneToMany (mappedBy = "treatmentModel")
+  @OneToMany (mappedBy = "treatment")
   private List<PatientTreatmentRelModel> patientTreatmentRelModels;
 
   public long getPk () {
@@ -78,5 +78,13 @@ public class TreatmentModel {
 
   public void setIsActive (char isActive) {
     this.isActive = isActive;
+  }
+
+  public List<PatientTreatmentRelModel> getPatientTreatmentRelModels() {
+    return patientTreatmentRelModels;
+  }
+
+  public void setPatientTreatmentRelModels(List<PatientTreatmentRelModel> patientTreatmentRelModels) {
+    this.patientTreatmentRelModels = patientTreatmentRelModels;
   }
 }

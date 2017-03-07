@@ -16,10 +16,6 @@ public class DiseaseModel {
   @Column (name = "DISEASE_NAME")
   private String diseaseName;
 
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_DISEASE_TYPE")
-  private DiseaseTypeModel diseaseTypeModel;
-
   @Column (name = "CREATION_TIME")
   private Date creationTime;
 
@@ -29,8 +25,12 @@ public class DiseaseModel {
   @Column (name = "IS_ACTIVE")
   private char isActive;
 
-  @OneToMany (mappedBy = "diseaseModel")
+  @OneToMany (mappedBy = "disease")
   private List<PatientDiseaseRelModel> patientDiseaseRelModels;
+
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_DISEASE_TYPE")
+  private DiseaseTypeModel diseaseType;
 
   public long getPk () {
     return pk;
@@ -46,14 +46,6 @@ public class DiseaseModel {
 
   public void setDiseaseName (String diseaseName) {
     this.diseaseName = diseaseName;
-  }
-
-  public DiseaseTypeModel getDiseaseTypeModel () {
-    return diseaseTypeModel;
-  }
-
-  public void setDiseaseTypeModel (DiseaseTypeModel diseaseTypeModel) {
-    this.diseaseTypeModel = diseaseTypeModel;
   }
 
   public Date getCreationTime () {
@@ -78,5 +70,21 @@ public class DiseaseModel {
 
   public void setIsActive (char isActive) {
     this.isActive = isActive;
+  }
+
+  public List<PatientDiseaseRelModel> getPatientDiseaseRelModels() {
+    return patientDiseaseRelModels;
+  }
+
+  public void setPatientDiseaseRelModels(List<PatientDiseaseRelModel> patientDiseaseRelModels) {
+    this.patientDiseaseRelModels = patientDiseaseRelModels;
+  }
+
+  public DiseaseTypeModel getDiseaseType() {
+    return diseaseType;
+  }
+
+  public void setDiseaseType(DiseaseTypeModel diseaseType) {
+    this.diseaseType = diseaseType;
   }
 }
