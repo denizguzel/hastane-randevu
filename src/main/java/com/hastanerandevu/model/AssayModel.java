@@ -1,15 +1,36 @@
 package com.hastanerandevu.model;
 
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
-// TODO mapping gerekli
+@Entity
+@Table (name = "assay")
 public class AssayModel {
+
+  @Id
+  @Column (name = "PK")
+  @GeneratedValue (strategy = GenerationType.AUTO)
   private long pk;
-  private String assayname;
+
+  @Column (name = "ASSAY_NAME")
+  private String assayName;
+
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_ASSAY_TYPE")
   private AssayTypeModel assayTypeModel;
+
+  @Column (name = "CREATION_TIME")
   private Date creationTime;
+
+  @Column (name = "MODIFIED_TIME")
   private Date modifiedTime;
+
+  @Column (name = "IS_ACTIVE")
   private char isActive;
+
+  @OneToMany (mappedBy = "assayModel")
+  private List<PatientAssayRelModel> patientAssayRelModels;
 
   public long getPk () {
     return pk;
@@ -19,12 +40,12 @@ public class AssayModel {
     this.pk = pk;
   }
 
-  public String getAssayname () {
-    return assayname;
+  public String getAssayName () {
+    return assayName;
   }
 
-  public void setAssayname (String assayname) {
-    this.assayname = assayname;
+  public void setAssayName (String assayName) {
+    this.assayName = assayName;
   }
 
   public AssayTypeModel getAssayTypeModel () {

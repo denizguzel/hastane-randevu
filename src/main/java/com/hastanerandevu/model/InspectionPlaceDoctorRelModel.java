@@ -1,17 +1,44 @@
 package com.hastanerandevu.model;
 
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
-// TODO mapping gerekli
+// TODO service ve dao gerekli
+@Entity
+@Table (name = "inspection_place_doctor_rel")
 public class InspectionPlaceDoctorRelModel {
+
+  @Id
+  @Column (name = "PK")
+  @GeneratedValue (strategy = GenerationType.AUTO)
   private long pk;
+
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_INSPECTION_PLACE")
   private InspectionPlaceModel inspectionPlaceModel;
+
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_DOCTOR")
   private DoctorModel doctorModel;
+
+  @Column (name = "ACTIVE_FROM")
   private Date activeFrom;
+
+  @Column (name = "ACTIVE_TO")
   private Date activeTo;
+
+  @Column (name = "CREATION_TIME")
   private Date creationTime;
+
+  @Column (name = "MODIFIED_TIME")
   private Date modifiedTime;
+
+  @Column (name = "IS_ACTIVE")
   private char isActive;
+
+  @OneToMany (mappedBy = "inspectionPlaceDoctorRelModel")
+  private List<AppointmentChartModel> appointmentChartModels;
 
   public long getPk () {
     return pk;

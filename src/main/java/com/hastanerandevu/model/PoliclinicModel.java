@@ -1,14 +1,32 @@
 package com.hastanerandevu.model;
 
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
-// TODO mapping gerekli
+@Entity
+@Table (name = "policlinic")
 public class PoliclinicModel {
+
+  @Id
+  @Column (name = "PK")
+  @GeneratedValue (strategy = GenerationType.AUTO)
   private long pk;
+
+  @Column (name = "POLICLINIC_NAME")
   private String policlinicName;
+
+  @Column (name = "CREATION_TIME")
   private Date creationTime;
+
+  @Column (name = "MODIFIED_TIME")
   private Date modifiedTime;
+
+  @Column (name = "IS_ACTIVE")
   private char isActive;
+
+  @OneToMany (mappedBy = "policlinicModel")
+  private List<HospitalPoliclinicRelModel> hospitalPoliclinicRelModels;
 
   public long getPk () {
     return pk;

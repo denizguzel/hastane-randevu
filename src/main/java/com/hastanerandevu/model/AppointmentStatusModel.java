@@ -1,11 +1,11 @@
 package com.hastanerandevu.model;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
+@Entity
+@Table (name = "appointment_status")
 public class AppointmentStatusModel {
 
   @Id
@@ -24,6 +24,9 @@ public class AppointmentStatusModel {
 
   @Column (name = "IS_ACTIVE")
   private char isActive;
+
+  @OneToMany (mappedBy = "appointmentStatusModel")
+  private List<AppointmentModel> appointmentModels;
 
   public long getPk () {
     return pk;

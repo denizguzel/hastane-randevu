@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table (name = "hospitaltype")
+@Table (name = "hospital_type")
 public class HospitalTypeModel {
   @Id
   @Column (name = "PK")

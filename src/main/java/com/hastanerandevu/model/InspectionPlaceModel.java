@@ -1,11 +1,30 @@
 package com.hastanerandevu.model;
 
-// TODO mapping gerekli
+import javax.persistence.*;
+import java.util.List;
+
+// TODO service ve dao gerekli
+@Entity
+@Table (name = "inspection_place")
 public class InspectionPlaceModel {
+
+  @Id
+  @Column (name = "PK")
+  @GeneratedValue (strategy = GenerationType.AUTO)
   private long pk;
+
+  @Column (name = "PLACE_NAME")
   private String placeName;
+
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_HOSPITAL_POLICLINIC_REL")
   private HospitalPoliclinicRelModel hospitalPoliclinicRelModel;
+
+  @Column (name = "IS_ACTIVE")
   private char isActive;
+
+  @OneToMany (mappedBy = "inspectionPlaceModel")
+  private List<InspectionPlaceDoctorRelModel> ınspectionPlaceDoctorRelModels;
 
   public long getPk () {
     return pk;

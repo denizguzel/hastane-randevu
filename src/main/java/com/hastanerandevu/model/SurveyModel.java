@@ -1,15 +1,35 @@
 package com.hastanerandevu.model;
 
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
-// TODO mapping gerekli
+@Entity
+@Table (name = "survey")
 public class SurveyModel {
+
+  @Id
+  @Column (name = "PK")
+  @GeneratedValue (strategy = GenerationType.AUTO)
   private long pk;
+
+  @Column (name = "SURVEY_DESCRIPTION")
   private String surveyDescription;
+
+  @Column (name = "CREATION_TIME")
   private Date creationTime;
+
+  @Column (name = "MODIFIED_TIME")
   private Date modifiedTime;
+
+  @Column (name = "EXPIRATION_TIME")
   private Date expirationTime;
+
+  @Column (name = "IS_ACTIVE")
   private char isActive;
+
+  @OneToMany (mappedBy = "surveyModel")
+  private List<QuestionModel> questionModels;
 
   public long getPk () {
     return pk;

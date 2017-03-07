@@ -2,6 +2,7 @@ package com.hastanerandevu.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table (name = "hospital")
@@ -34,6 +35,9 @@ public class HospitalModel {
 
   @Column(name = "IS_ACTIVE")
   private char isActive;
+
+  @OneToMany (mappedBy = "hospitalModel")
+  private List<HospitalPoliclinicRelModel> hospitalPoliclinicRelModels;
 
 
   public long getPk() {

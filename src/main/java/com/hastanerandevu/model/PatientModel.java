@@ -2,6 +2,7 @@ package com.hastanerandevu.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "patient")
@@ -44,9 +45,8 @@ public class PatientModel {
   @Column(name = "MOTHER_NAME")
   private String motherName;
 
-  /*private String questionAnswer;
-    private GenderModel genderModel;
-    private BloodGroupModel bloodGroupModel;*/
+  @Column (name = "QUESTION_ANSWER")
+  private String questionAnswer;
 
   @Column(name = "CREATION_TIME")
   private Date creationTime;
@@ -68,6 +68,24 @@ public class PatientModel {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "FK_BLOOD_GROUP")
   private BloodGroupModel bloodGroup;
+
+  @OneToMany (mappedBy = "patientModel")
+  private List<AppointmentModel> appointmentModels;
+
+  @OneToMany (mappedBy = "patientModel")
+  private List<PatientAlergyRelModel> patientAlergyRelModels;
+
+  @OneToMany (mappedBy = "patientModel")
+  private List<PatientAssayRelModel> patientAssayRelModels;
+
+  @OneToMany (mappedBy = "patientModel")
+  private List<PatientDiseaseRelModel> patientDiseaseRelModels;
+
+  @OneToMany (mappedBy = "patientModel")
+  private List<PatientTreatmentRelModel> patientTreatmentRelModels;
+
+  @OneToMany (mappedBy = "patientModel")
+  private List<ReviewsAboutDoctorsModel> reviewsAboutDoctorsModels;
 
   public long getPk() {
     return pk;
@@ -211,5 +229,13 @@ public class PatientModel {
 
   public void setBloodGroup(BloodGroupModel bloodGroup) {
     this.bloodGroup = bloodGroup;
+  }
+
+  public String getQuestionAnswer () {
+    return questionAnswer;
+  }
+
+  public void setQuestionAnswer (String questionAnswer) {
+    this.questionAnswer = questionAnswer;
   }
 }

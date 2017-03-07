@@ -2,7 +2,10 @@ package com.hastanerandevu.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
+
+// TODO service ve dao gerekli
 @Entity
 @Table(name = "doctor")
 public class DoctorModel {
@@ -51,6 +54,12 @@ public class DoctorModel {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "FK_BRANCH")
   private BranchModel branch;
+
+  @OneToMany (mappedBy = "doctorModel")
+  private List<InspectionPlaceDoctorRelModel> ınspectionPlaceDoctorRelModels;
+
+  @OneToMany (mappedBy = "doctorModel")
+  private List<ReviewsAboutDoctorsModel> reviewsAboutDoctorsModels;
 
   public long getPk() {
     return pk;

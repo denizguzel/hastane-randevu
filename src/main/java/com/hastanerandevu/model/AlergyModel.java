@@ -2,6 +2,7 @@ package com.hastanerandevu.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table (name = "alergy")
@@ -27,6 +28,9 @@ public class AlergyModel {
   @ManyToOne (fetch = FetchType.LAZY)
   @JoinColumn (name = "FK_ALERGY_TYPE")
   private AlergyTypeModel alergyType;
+
+  @OneToMany (mappedBy = "alergyModel")
+  private List<PatientAlergyRelModel> patientAlergyRelModels;
 
   public long getPk () {
     return pk;
