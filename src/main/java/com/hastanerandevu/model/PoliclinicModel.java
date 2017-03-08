@@ -25,7 +25,7 @@ public class PoliclinicModel {
   @Column (name = "IS_ACTIVE")
   private char isActive;
 
-  @OneToMany (mappedBy = "policlinicModel")
+  @OneToMany (mappedBy = "policlinic")
   private List<HospitalPoliclinicRelModel> hospitalPoliclinicRelModels;
 
   public long getPk () {
@@ -66,5 +66,13 @@ public class PoliclinicModel {
 
   public void setIsActive (char isActive) {
     this.isActive = isActive;
+  }
+
+  public List<HospitalPoliclinicRelModel> getHospitalPoliclinicRelModels() {
+    return hospitalPoliclinicRelModels;
+  }
+
+  public void setHospitalPoliclinicRelModels(List<HospitalPoliclinicRelModel> hospitalPoliclinicRelModels) {
+    this.hospitalPoliclinicRelModels = hospitalPoliclinicRelModels;
   }
 }

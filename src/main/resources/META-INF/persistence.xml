@@ -18,8 +18,10 @@
     <class>com.hastanerandevu.model.ProfessionModel</class>
     <class>com.hastanerandevu.model.DoctorModel</class>
     <class>com.hastanerandevu.model.PatientModel</class>
-    <class>com.hastanerandevu.model.AlergyTypeModel</class>
     <class>com.hastanerandevu.model.AlergyModel</class>
+    <class>com.hastanerandevu.model.DiseaseModel</class>
+    <class>com.hastanerandevu.model.TreatmentModel</class>
+    <class>com.hastanerandevu.model.AssayModel</class>
 
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/test"/>

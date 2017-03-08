@@ -19,14 +19,6 @@ public class HospitalModel {
   @Column (name = "HOSPITAL_ADDRESS")
   private String hospitalAddress;
 
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_DISTRICT")
-  private DistrictModel district;
-
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_HOSPITAL_TYPE")
-  private HospitalTypeModel hospitalType;
-
   @Column (name = "CREATION_TIME")
   private Date creationTime;
 
@@ -36,8 +28,16 @@ public class HospitalModel {
   @Column (name = "IS_ACTIVE")
   private char isActive;
 
-  @OneToMany (mappedBy = "hospitalModel")
+  @OneToMany (mappedBy = "hospital")
   private List<HospitalPoliclinicRelModel> hospitalPoliclinicRelModels;
+
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_DISTRICT")
+  private DistrictModel district;
+
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_HOSPITAL_TYPE")
+  private HospitalTypeModel hospitalType;
 
 
   public long getPk () {
@@ -102,5 +102,13 @@ public class HospitalModel {
 
   public void setHospitalType (HospitalTypeModel hospitalType) {
     this.hospitalType = hospitalType;
+  }
+
+  public List<HospitalPoliclinicRelModel> getHospitalPoliclinicRelModels() {
+    return hospitalPoliclinicRelModels;
+  }
+
+  public void setHospitalPoliclinicRelModels(List<HospitalPoliclinicRelModel> hospitalPoliclinicRelModels) {
+    this.hospitalPoliclinicRelModels = hospitalPoliclinicRelModels;
   }
 }

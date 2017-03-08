@@ -14,8 +14,11 @@ public class AppointmentChartModel {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long pk;
 
-  @Column(name = "APPOINTMENT_DATE")
-  private Date appointmentDate;
+  @Column(name = "ACTIVE_FROM")
+  private Date activeFrom;
+
+  @Column(name = "ACTIVE_TO")
+  private Date activeTo;
 
   @Column(name = "CREATION_TIME")
   private Date creationTime;
@@ -25,9 +28,6 @@ public class AppointmentChartModel {
 
   @Column(name = "IS_ACTIVE")
   private char isActive;
-
-  @Column(name = "IS_RESERVED")
-  private char isReserved;
 
   @OneToMany(mappedBy = "appointmentChart")
   private List<AppointmentModel> appointmentModels;
@@ -42,14 +42,6 @@ public class AppointmentChartModel {
 
   public void setPk(long pk) {
     this.pk = pk;
-  }
-
-  public Date getAppointmentDate() {
-    return appointmentDate;
-  }
-
-  public void setAppointmentDate(Date appointmentDate) {
-    this.appointmentDate = appointmentDate;
   }
 
   public Date getCreationTime() {
@@ -76,14 +68,6 @@ public class AppointmentChartModel {
     this.isActive = isActive;
   }
 
-  public char getIsReserved() {
-    return isReserved;
-  }
-
-  public void setIsReserved(char isReserved) {
-    this.isReserved = isReserved;
-  }
-
   public List<AppointmentModel> getAppointmentModels() {
     return appointmentModels;
   }
@@ -98,5 +82,21 @@ public class AppointmentChartModel {
 
   public void setInspectionPlaceDoctorRel(InspectionPlaceDoctorRelModel inspectionPlaceDoctorRel) {
     this.inspectionPlaceDoctorRel = inspectionPlaceDoctorRel;
+  }
+
+  public Date getActiveFrom() {
+    return activeFrom;
+  }
+
+  public void setActiveFrom(Date activeFrom) {
+    this.activeFrom = activeFrom;
+  }
+
+  public Date getActiveTo() {
+    return activeTo;
+  }
+
+  public void setActiveTo(Date activeTo) {
+    this.activeTo = activeTo;
   }
 }

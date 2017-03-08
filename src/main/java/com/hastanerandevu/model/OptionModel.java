@@ -18,10 +18,6 @@ public class OptionModel {
   @Column (name = "COUNT")
   private int count;
 
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_QUESTION")
-  private QuestionModel question;
-
   @Column (name = "CREATION_TIME")
   private Date creationTime;
 
@@ -30,6 +26,10 @@ public class OptionModel {
 
   @Column (name = "IS_ACTIVE")
   private char isActive;
+
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_QUESTION")
+  private QuestionModel question;
 
   public long getPk () {
     return pk;

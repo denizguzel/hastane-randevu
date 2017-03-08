@@ -15,14 +15,6 @@ public class HospitalPoliclinicRelModel {
   @GeneratedValue (strategy = GenerationType.AUTO)
   private long pk;
 
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_HOSPITAL")
-  private HospitalModel hospitalModel;
-
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_POLICLINIC")
-  private PoliclinicModel policlinicModel;
-
   @Column (name = "CREATION_TIME")
   private Date creationTime;
 
@@ -32,8 +24,16 @@ public class HospitalPoliclinicRelModel {
   @Column (name = "IS_ACTIVE")
   private char isActive;
 
-  @OneToMany (mappedBy = "hospitalPoliclinicRelModel")
-  private List<InspectionPlaceModel> ınspectionPlaceModels;
+  @OneToMany (mappedBy = "hospitalPoliclinicRel")
+  private List<InspectionPlaceModel> inspectionPlaceModels;
+
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_HOSPITAL")
+  private HospitalModel hospital;
+
+  @ManyToOne (fetch = FetchType.LAZY)
+  @JoinColumn (name = "FK_POLICLINIC")
+  private PoliclinicModel policlinic;
 
   public long getPk () {
     return pk;
@@ -41,22 +41,6 @@ public class HospitalPoliclinicRelModel {
 
   public void setPk (long pk) {
     this.pk = pk;
-  }
-
-  public HospitalModel getHospitalModel () {
-    return hospitalModel;
-  }
-
-  public void setHospitalModel (HospitalModel hospitalModel) {
-    this.hospitalModel = hospitalModel;
-  }
-
-  public PoliclinicModel getPoliclinicModel () {
-    return policlinicModel;
-  }
-
-  public void setPoliclinicModel (PoliclinicModel policlinicModel) {
-    this.policlinicModel = policlinicModel;
   }
 
   public Date getCreationTime () {
@@ -81,5 +65,29 @@ public class HospitalPoliclinicRelModel {
 
   public void setIsActive (char isActive) {
     this.isActive = isActive;
+  }
+
+  public List<InspectionPlaceModel> getInspectionPlaceModels() {
+    return inspectionPlaceModels;
+  }
+
+  public void setInspectionPlaceModels(List<InspectionPlaceModel> inspectionPlaceModels) {
+    this.inspectionPlaceModels = inspectionPlaceModels;
+  }
+
+  public HospitalModel getHospital() {
+    return hospital;
+  }
+
+  public void setHospital(HospitalModel hospital) {
+    this.hospital = hospital;
+  }
+
+  public PoliclinicModel getPoliclinic() {
+    return policlinic;
+  }
+
+  public void setPoliclinic(PoliclinicModel policlinic) {
+    this.policlinic = policlinic;
   }
 }
