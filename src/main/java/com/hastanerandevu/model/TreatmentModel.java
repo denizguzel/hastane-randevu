@@ -16,10 +16,6 @@ public class TreatmentModel {
   @Column (name = "TREATMENT_NAME")
   private String treatmentName;
 
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_TREATMENT_TYPE")
-  private TreatmentTypeModel treatmentTypeModel;
-
   @Column (name = "CREATION_TIME")
   private Date creationTime;
 
@@ -46,14 +42,6 @@ public class TreatmentModel {
 
   public void setTreatmentName (String treatmentName) {
     this.treatmentName = treatmentName;
-  }
-
-  public TreatmentTypeModel getTreatmentTypeModel () {
-    return treatmentTypeModel;
-  }
-
-  public void setTreatmentTypeModel (TreatmentTypeModel treatmentTypeModel) {
-    this.treatmentTypeModel = treatmentTypeModel;
   }
 
   public Date getCreationTime () {

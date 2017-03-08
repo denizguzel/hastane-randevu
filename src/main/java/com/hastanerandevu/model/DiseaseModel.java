@@ -28,10 +28,6 @@ public class DiseaseModel {
   @OneToMany (mappedBy = "disease")
   private List<PatientDiseaseRelModel> patientDiseaseRelModels;
 
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_DISEASE_TYPE")
-  private DiseaseTypeModel diseaseType;
-
   public long getPk () {
     return pk;
   }
@@ -78,13 +74,5 @@ public class DiseaseModel {
 
   public void setPatientDiseaseRelModels(List<PatientDiseaseRelModel> patientDiseaseRelModels) {
     this.patientDiseaseRelModels = patientDiseaseRelModels;
-  }
-
-  public DiseaseTypeModel getDiseaseType() {
-    return diseaseType;
-  }
-
-  public void setDiseaseType(DiseaseTypeModel diseaseType) {
-    this.diseaseType = diseaseType;
   }
 }

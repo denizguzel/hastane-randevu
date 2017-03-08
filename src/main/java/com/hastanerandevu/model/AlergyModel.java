@@ -25,10 +25,6 @@ public class AlergyModel {
   @Column (name = "IS_ACTIVE")
   private char isActive;
 
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_ALERGY_TYPE")
-  private AlergyTypeModel alergyType;
-
   @OneToMany (mappedBy = "alergy")
   private List<PatientAlergyRelModel> patientAlergyRelModels;
 
@@ -70,14 +66,6 @@ public class AlergyModel {
 
   public void setIsActive (char isActive) {
     this.isActive = isActive;
-  }
-
-  public AlergyTypeModel getAlergyType () {
-    return alergyType;
-  }
-
-  public void setAlergyType (AlergyTypeModel alergyType) {
-    this.alergyType = alergyType;
   }
 
   public List<PatientAlergyRelModel> getPatientAlergyRelModels() {

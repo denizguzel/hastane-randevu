@@ -25,10 +25,6 @@ public class AssayModel {
   @Column (name = "IS_ACTIVE")
   private char isActive;
 
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_ASSAY_TYPE")
-  private AssayTypeModel assayType;
-
   @OneToMany (mappedBy = "assay")
   private List<PatientAssayRelModel> patientAssayRelModels;
 
@@ -70,14 +66,6 @@ public class AssayModel {
 
   public void setIsActive (char isActive) {
     this.isActive = isActive;
-  }
-
-  public AssayTypeModel getAssayType() {
-    return assayType;
-  }
-
-  public void setAssayType(AssayTypeModel assayType) {
-    this.assayType = assayType;
   }
 
   public List<PatientAssayRelModel> getPatientAssayRelModels() {
