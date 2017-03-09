@@ -1,5 +1,9 @@
 package com.hastanerandevu.model;
 
+import com.hastanerandevu.enums.BloodGroupEnum;
+import com.hastanerandevu.enums.GenderEnum;
+import com.hastanerandevu.enums.LevelEnum;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -39,13 +43,17 @@ public class DoctorModel {
   @Column (name = "IS_ACTIVE")
   private char isActive;
 
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_GENDER")
-  private GenderModel gender;
+  @Enumerated(EnumType.STRING)
+  @Column (name = "BLOOD_GROUP")
+  private BloodGroupEnum bloodGroup;
 
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_PROFESSION")
-  private ProfessionModel profession;
+  @Enumerated(EnumType.STRING)
+  @Column (name = "GENDER")
+  private GenderEnum gender;
+
+  @Enumerated(EnumType.STRING)
+  @Column (name = "LEVEL")
+  private LevelEnum level;
 
   @ManyToOne (fetch = FetchType.LAZY)
   @JoinColumn (name = "FK_SECRET_QUESTION")
@@ -133,22 +141,6 @@ public class DoctorModel {
     this.isActive = isActive;
   }
 
-  public GenderModel getGender () {
-    return gender;
-  }
-
-  public void setGender (GenderModel gender) {
-    this.gender = gender;
-  }
-
-  public ProfessionModel getProfession () {
-    return profession;
-  }
-
-  public void setProfession (ProfessionModel profession) {
-    this.profession = profession;
-  }
-
   public SecretQuestionModel getSecretQuestion () {
     return secretQuestion;
   }
@@ -179,5 +171,29 @@ public class DoctorModel {
 
   public void setReviewsAboutDoctorsModels(List<ReviewsAboutDoctorsModel> reviewsAboutDoctorsModels) {
     this.reviewsAboutDoctorsModels = reviewsAboutDoctorsModels;
+  }
+
+  public BloodGroupEnum getBloodGroup() {
+    return bloodGroup;
+  }
+
+  public void setBloodGroup(BloodGroupEnum bloodGroup) {
+    this.bloodGroup = bloodGroup;
+  }
+
+  public GenderEnum getGender() {
+    return gender;
+  }
+
+  public void setGender(GenderEnum gender) {
+    this.gender = gender;
+  }
+
+  public LevelEnum getLevel() {
+    return level;
+  }
+
+  public void setLevel(LevelEnum level) {
+    this.level = level;
   }
 }

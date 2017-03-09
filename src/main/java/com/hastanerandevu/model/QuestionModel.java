@@ -25,6 +25,9 @@ public class QuestionModel {
   @Column (name = "IS_ACTIVE")
   private char isActive;
 
+  @Column (name = "ORDER_NO")
+  private int orderNo;
+
   @OneToMany (mappedBy = "question")
   private List<OptionModel> optionModels;
 
@@ -86,5 +89,13 @@ public class QuestionModel {
 
   public void setSurvey(SurveyModel survey) {
     this.survey = survey;
+  }
+
+  public int getOrderNo() {
+    return orderNo;
+  }
+
+  public void setOrderNo(int orderNo) {
+    this.orderNo = orderNo;
   }
 }

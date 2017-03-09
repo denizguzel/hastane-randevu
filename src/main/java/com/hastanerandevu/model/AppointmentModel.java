@@ -1,5 +1,7 @@
 package com.hastanerandevu.model;
 
+import com.hastanerandevu.enums.AppointmentStatusEnum;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -24,9 +26,9 @@ public class AppointmentModel {
   @Column (name = "IS_ACTIVE")
   private char isActive;
 
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_APPOINTMENT_STATUS")
-  private AppointmentStatusModel appointmentStatus;
+  @Enumerated (EnumType.STRING)
+  @JoinColumn (name = "APPOINTMENT_STATUS")
+  private AppointmentStatusEnum appointmentStatus;
 
   @ManyToOne (fetch = FetchType.LAZY)
   @JoinColumn (name = "FK_APPOINTMENT_CHART")
@@ -76,14 +78,6 @@ public class AppointmentModel {
     this.isActive = isActive;
   }
 
-  public AppointmentStatusModel getAppointmentStatus() {
-    return appointmentStatus;
-  }
-
-  public void setAppointmentStatus(AppointmentStatusModel appointmentStatus) {
-    this.appointmentStatus = appointmentStatus;
-  }
-
   public AppointmentChartModel getAppointmentChart() {
     return appointmentChart;
   }
@@ -98,5 +92,13 @@ public class AppointmentModel {
 
   public void setPatient(PatientModel patient) {
     this.patient = patient;
+  }
+
+  public AppointmentStatusEnum getAppointmentStatus() {
+    return appointmentStatus;
+  }
+
+  public void setAppointmentStatus(AppointmentStatusEnum appointmentStatus) {
+    this.appointmentStatus = appointmentStatus;
   }
 }

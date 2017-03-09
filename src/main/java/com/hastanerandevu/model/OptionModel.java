@@ -27,6 +27,9 @@ public class OptionModel {
   @Column (name = "IS_ACTIVE")
   private char isActive;
 
+  @Column (name = "ORDER_NO")
+  private int orderNo;
+
   @ManyToOne (fetch = FetchType.LAZY)
   @JoinColumn (name = "FK_QUESTION")
   private QuestionModel question;
@@ -85,5 +88,13 @@ public class OptionModel {
 
   public void setQuestion(QuestionModel question) {
     this.question = question;
+  }
+
+  public int getOrderNo() {
+    return orderNo;
+  }
+
+  public void setOrderNo(int orderNo) {
+    this.orderNo = orderNo;
   }
 }

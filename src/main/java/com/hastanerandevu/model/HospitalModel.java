@@ -1,5 +1,7 @@
 package com.hastanerandevu.model;
 
+import com.hastanerandevu.enums.HospitalTypeEnum;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -28,17 +30,16 @@ public class HospitalModel {
   @Column (name = "IS_ACTIVE")
   private char isActive;
 
+  @Enumerated(EnumType.STRING)
+  @Column (name = "HOSPITAL_TYPE")
+  private HospitalTypeEnum hospitalType;
+
   @OneToMany (mappedBy = "hospital")
   private List<HospitalPoliclinicRelModel> hospitalPoliclinicRelModels;
 
   @ManyToOne (fetch = FetchType.LAZY)
   @JoinColumn (name = "FK_DISTRICT")
   private DistrictModel district;
-
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_HOSPITAL_TYPE")
-  private HospitalTypeModel hospitalType;
-
 
   public long getPk () {
     return pk;
@@ -96,19 +97,19 @@ public class HospitalModel {
     this.district = district;
   }
 
-  public HospitalTypeModel getHospitalType () {
-    return hospitalType;
-  }
-
-  public void setHospitalType (HospitalTypeModel hospitalType) {
-    this.hospitalType = hospitalType;
-  }
-
   public List<HospitalPoliclinicRelModel> getHospitalPoliclinicRelModels() {
     return hospitalPoliclinicRelModels;
   }
 
   public void setHospitalPoliclinicRelModels(List<HospitalPoliclinicRelModel> hospitalPoliclinicRelModels) {
     this.hospitalPoliclinicRelModels = hospitalPoliclinicRelModels;
+  }
+
+  public HospitalTypeEnum getHospitalType() {
+    return hospitalType;
+  }
+
+  public void setHospitalType(HospitalTypeEnum hospitalType) {
+    this.hospitalType = hospitalType;
   }
 }

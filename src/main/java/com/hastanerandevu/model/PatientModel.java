@@ -1,5 +1,8 @@
 package com.hastanerandevu.model;
 
+import com.hastanerandevu.enums.BloodGroupEnum;
+import com.hastanerandevu.enums.GenderEnum;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -57,17 +60,17 @@ public class PatientModel {
   @Column (name = "IS_ACTIVE")
   private char isActive;
 
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_GENDER")
-  private GenderModel gender;
+  @Enumerated (EnumType.STRING)
+  @JoinColumn (name = "GENDER")
+  private GenderEnum gender;
+
+  @Enumerated (EnumType.STRING)
+  @JoinColumn (name = "BLOOD_GROUP")
+  private BloodGroupEnum bloodGroup;
 
   @ManyToOne (fetch = FetchType.LAZY)
   @JoinColumn (name = "FK_SECRET_QUESTION")
   private SecretQuestionModel secretQuestion;
-
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_BLOOD_GROUP")
-  private BloodGroupModel bloodGroup;
 
   @OneToMany (mappedBy = "patient")
   private List<AppointmentModel> appointmentModels;
@@ -207,28 +210,12 @@ public class PatientModel {
     this.isActive = isActive;
   }
 
-  public GenderModel getGender () {
-    return gender;
-  }
-
-  public void setGender (GenderModel gender) {
-    this.gender = gender;
-  }
-
   public SecretQuestionModel getSecretQuestion () {
     return secretQuestion;
   }
 
   public void setSecretQuestion (SecretQuestionModel secretQuestion) {
     this.secretQuestion = secretQuestion;
-  }
-
-  public BloodGroupModel getBloodGroup () {
-    return bloodGroup;
-  }
-
-  public void setBloodGroup (BloodGroupModel bloodGroup) {
-    this.bloodGroup = bloodGroup;
   }
 
   public String getQuestionAnswer () {
@@ -285,5 +272,21 @@ public class PatientModel {
 
   public void setReviewsAboutDoctorsModels(List<ReviewsAboutDoctorsModel> reviewsAboutDoctorsModels) {
     this.reviewsAboutDoctorsModels = reviewsAboutDoctorsModels;
+  }
+
+  public GenderEnum getGender() {
+    return gender;
+  }
+
+  public void setGender(GenderEnum gender) {
+    this.gender = gender;
+  }
+
+  public BloodGroupEnum getBloodGroup() {
+    return bloodGroup;
+  }
+
+  public void setBloodGroup(BloodGroupEnum bloodGroup) {
+    this.bloodGroup = bloodGroup;
   }
 }
