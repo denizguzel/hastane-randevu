@@ -29,7 +29,7 @@ public class HospitalModel {
   @Column (name = "IS_ACTIVE")
   private char isActive;
 
-  @Enumerated(EnumType.STRING)
+  @Enumerated (EnumType.STRING)
   @Column (name = "HOSPITAL_TYPE")
   private HospitalTypeEnum hospitalType;
 
@@ -96,19 +96,19 @@ public class HospitalModel {
     this.district = district;
   }
 
-  public List<HospitalPoliclinicRelModel> getHospitalPoliclinicRelModels() {
+  public List<HospitalPoliclinicRelModel> getHospitalPoliclinicRelModels () {
     return hospitalPoliclinicRelModels;
   }
 
-  public void setHospitalPoliclinicRelModels(List<HospitalPoliclinicRelModel> hospitalPoliclinicRelModels) {
+  public void setHospitalPoliclinicRelModels (List<HospitalPoliclinicRelModel> hospitalPoliclinicRelModels) {
     this.hospitalPoliclinicRelModels = hospitalPoliclinicRelModels;
   }
 
-  public HospitalTypeEnum getHospitalType() {
+  public HospitalTypeEnum getHospitalType () {
     return hospitalType;
   }
 
-  public void setHospitalType(HospitalTypeEnum hospitalType) {
+  public void setHospitalType (HospitalTypeEnum hospitalType) {
     this.hospitalType = hospitalType;
   }
 }

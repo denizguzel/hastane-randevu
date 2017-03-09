@@ -73,19 +73,19 @@ public class PatientTreatmentRelModel {
     this.isActive = isActive;
   }
 
-  public PatientModel getPatient() {
+  public PatientModel getPatient () {
     return patient;
   }
 
-  public void setPatient(PatientModel patient) {
+  public void setPatient (PatientModel patient) {
     this.patient = patient;
   }
 
-  public TreatmentModel getTreatment() {
+  public TreatmentModel getTreatment () {
     return treatment;
   }
 
-  public void setTreatment(TreatmentModel treatment) {
+  public void setTreatment (TreatmentModel treatment) {
     this.treatment = treatment;
   }
 }

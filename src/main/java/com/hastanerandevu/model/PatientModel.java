@@ -226,67 +226,67 @@ public class PatientModel {
     this.questionAnswer = questionAnswer;
   }
 
-  public List<AppointmentModel> getAppointmentModels() {
+  public List<AppointmentModel> getAppointmentModels () {
     return appointmentModels;
   }
 
-  public void setAppointmentModels(List<AppointmentModel> appointmentModels) {
+  public void setAppointmentModels (List<AppointmentModel> appointmentModels) {
     this.appointmentModels = appointmentModels;
   }
 
-  public List<PatientAlergyRelModel> getPatientAlergyRelModels() {
+  public List<PatientAlergyRelModel> getPatientAlergyRelModels () {
     return patientAlergyRelModels;
   }
 
-  public void setPatientAlergyRelModels(List<PatientAlergyRelModel> patientAlergyRelModels) {
+  public void setPatientAlergyRelModels (List<PatientAlergyRelModel> patientAlergyRelModels) {
     this.patientAlergyRelModels = patientAlergyRelModels;
   }
 
-  public List<PatientAssayRelModel> getPatientAssayRelModels() {
+  public List<PatientAssayRelModel> getPatientAssayRelModels () {
     return patientAssayRelModels;
   }
 
-  public void setPatientAssayRelModels(List<PatientAssayRelModel> patientAssayRelModels) {
+  public void setPatientAssayRelModels (List<PatientAssayRelModel> patientAssayRelModels) {
     this.patientAssayRelModels = patientAssayRelModels;
   }
 
-  public List<PatientDiseaseRelModel> getPatientDiseaseRelModels() {
+  public List<PatientDiseaseRelModel> getPatientDiseaseRelModels () {
     return patientDiseaseRelModels;
   }
 
-  public void setPatientDiseaseRelModels(List<PatientDiseaseRelModel> patientDiseaseRelModels) {
+  public void setPatientDiseaseRelModels (List<PatientDiseaseRelModel> patientDiseaseRelModels) {
     this.patientDiseaseRelModels = patientDiseaseRelModels;
   }
 
-  public List<PatientTreatmentRelModel> getPatientTreatmentRelModels() {
+  public List<PatientTreatmentRelModel> getPatientTreatmentRelModels () {
     return patientTreatmentRelModels;
   }
 
-  public void setPatientTreatmentRelModels(List<PatientTreatmentRelModel> patientTreatmentRelModels) {
+  public void setPatientTreatmentRelModels (List<PatientTreatmentRelModel> patientTreatmentRelModels) {
     this.patientTreatmentRelModels = patientTreatmentRelModels;
   }
 
-  public List<ReviewsAboutDoctorsModel> getReviewsAboutDoctorsModels() {
+  public List<ReviewsAboutDoctorsModel> getReviewsAboutDoctorsModels () {
     return reviewsAboutDoctorsModels;
   }
 
-  public void setReviewsAboutDoctorsModels(List<ReviewsAboutDoctorsModel> reviewsAboutDoctorsModels) {
+  public void setReviewsAboutDoctorsModels (List<ReviewsAboutDoctorsModel> reviewsAboutDoctorsModels) {
     this.reviewsAboutDoctorsModels = reviewsAboutDoctorsModels;
   }
 
-  public GenderEnum getGender() {
+  public GenderEnum getGender () {
     return gender;
   }
 
-  public void setGender(GenderEnum gender) {
+  public void setGender (GenderEnum gender) {
     this.gender = gender;
   }
 
-  public BloodGroupEnum getBloodGroup() {
+  public BloodGroupEnum getBloodGroup () {
     return bloodGroup;
   }
 
-  public void setBloodGroup(BloodGroupEnum bloodGroup) {
+  public void setBloodGroup (BloodGroupEnum bloodGroup) {
     this.bloodGroup = bloodGroup;
   }
 }

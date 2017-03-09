@@ -68,11 +68,11 @@ public class AlergyModel {
     this.isActive = isActive;
   }
 
-  public List<PatientAlergyRelModel> getPatientAlergyRelModels() {
+  public List<PatientAlergyRelModel> getPatientAlergyRelModels () {
     return patientAlergyRelModels;
   }
 
-  public void setPatientAlergyRelModels(List<PatientAlergyRelModel> patientAlergyRelModels) {
+  public void setPatientAlergyRelModels (List<PatientAlergyRelModel> patientAlergyRelModels) {
     this.patientAlergyRelModels = patientAlergyRelModels;
   }
 }

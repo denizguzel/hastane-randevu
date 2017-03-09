@@ -87,19 +87,19 @@ public class PatientAssayRelModel {
     this.isActive = isActive;
   }
 
-  public AssayModel getAssay() {
+  public AssayModel getAssay () {
     return assay;
   }
 
-  public void setAssay(AssayModel assay) {
+  public void setAssay (AssayModel assay) {
     this.assay = assay;
   }
 
-  public PatientModel getPatient() {
+  public PatientModel getPatient () {
     return patient;
   }
 
-  public void setPatient(PatientModel patient) {
+  public void setPatient (PatientModel patient) {
     this.patient = patient;
   }
 }

@@ -6,24 +6,11 @@
   <servlet>
     <servlet-name>Faces Servlet</servlet-name>
     <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
-
-  <!-- Auto scan REST service -->
-  <context-param>
-    <param-name>resteasy.scan</param-name>
-    <param-value>true</param-value>
-  </context-param>
-
-  <!-- this need same with resteasy servlet url-pattern -->
-  <context-param>
-    <param-name>resteasy.servlet.mapping.prefix</param-name>
-    <param-value>/api</param-value>
-  </context-param>
 
   <listener>
     <listener-class>
@@ -32,14 +19,22 @@
   </listener>
 
   <servlet>
-    <servlet-name>resteasy-servlet</servlet-name>
+    <servlet-name>Resteasy</servlet-name>
     <servlet-class>
       org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
     </servlet-class>
   </servlet>
 
+  <context-param>
+    <param-name>resteasy.scan</param-name>
+    <param-value>true</param-value>
+  </context-param>
+  <context-param>
+    <param-name>resteasy.servlet.mapping.prefix</param-name>
+    <param-value>/api</param-value>
+  </context-param>
   <servlet-mapping>
-    <servlet-name>resteasy-servlet</servlet-name>
+    <servlet-name>Resteasy</servlet-name>
     <url-pattern>/api/*</url-pattern>
   </servlet-mapping>
 

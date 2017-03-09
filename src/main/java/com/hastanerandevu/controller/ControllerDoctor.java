@@ -1,6 +1,7 @@
 package com.hastanerandevu.controller;
 
 import com.hastanerandevu.model.DoctorModel;
+import com.hastanerandevu.model.PatientModel;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -12,17 +13,18 @@ public class ControllerDoctor {
   @GET
   @Path ("/get")
   @Produces ("application/json")
-  public DoctorModel getDoctorInJson () {
-    DoctorModel doctor = new DoctorModel();
-    doctor.setFirstName("deniz");
-    doctor.setLastName("güzel");
-    return doctor;
+  public PatientModel getMethod () {
+    PatientModel patientModel = new PatientModel();
+    patientModel.setFirstName("deniz");
+    patientModel.setLastName("güzel");
+
+    return patientModel;
   }
 
   @POST
   @Path ("/post")
   @Consumes ("application/json")
-  public Response createDoctorInJson (DoctorModel doctor) {
+  public Response postMethod (DoctorModel doctor) {
     String result = "Doktor oluşturuldu: " + doctor;
     return Response.status(200).entity(result).build();
   }

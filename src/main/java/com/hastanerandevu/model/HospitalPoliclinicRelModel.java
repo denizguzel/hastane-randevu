@@ -67,27 +67,27 @@ public class HospitalPoliclinicRelModel {
     this.isActive = isActive;
   }
 
-  public List<InspectionPlaceModel> getInspectionPlaceModels() {
+  public List<InspectionPlaceModel> getInspectionPlaceModels () {
     return inspectionPlaceModels;
   }
 
-  public void setInspectionPlaceModels(List<InspectionPlaceModel> inspectionPlaceModels) {
+  public void setInspectionPlaceModels (List<InspectionPlaceModel> inspectionPlaceModels) {
     this.inspectionPlaceModels = inspectionPlaceModels;
   }
 
-  public HospitalModel getHospital() {
+  public HospitalModel getHospital () {
     return hospital;
   }
 
-  public void setHospital(HospitalModel hospital) {
+  public void setHospital (HospitalModel hospital) {
     this.hospital = hospital;
   }
 
-  public PoliclinicModel getPoliclinic() {
+  public PoliclinicModel getPoliclinic () {
     return policlinic;
   }
 
-  public void setPoliclinic(PoliclinicModel policlinic) {
+  public void setPoliclinic (PoliclinicModel policlinic) {
     this.policlinic = policlinic;
   }
 }

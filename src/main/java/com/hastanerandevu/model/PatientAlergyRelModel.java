@@ -74,19 +74,19 @@ public class PatientAlergyRelModel {
     this.isActive = isActive;
   }
 
-  public PatientModel getPatient() {
+  public PatientModel getPatient () {
     return patient;
   }
 
-  public void setPatient(PatientModel patient) {
+  public void setPatient (PatientModel patient) {
     this.patient = patient;
   }
 
-  public AlergyModel getAlergy() {
+  public AlergyModel getAlergy () {
     return alergy;
   }
 
-  public void setAlergy(AlergyModel alergy) {
+  public void setAlergy (AlergyModel alergy) {
     this.alergy = alergy;
   }
 }

@@ -50,19 +50,19 @@ public class InspectionPlaceModel {
     this.isActive = isActive;
   }
 
-  public List<InspectionPlaceDoctorRelModel> getInspectionPlaceDoctorRelModels() {
+  public List<InspectionPlaceDoctorRelModel> getInspectionPlaceDoctorRelModels () {
     return inspectionPlaceDoctorRelModels;
   }
 
-  public void setInspectionPlaceDoctorRelModels(List<InspectionPlaceDoctorRelModel> inspectionPlaceDoctorRelModels) {
+  public void setInspectionPlaceDoctorRelModels (List<InspectionPlaceDoctorRelModel> inspectionPlaceDoctorRelModels) {
     this.inspectionPlaceDoctorRelModels = inspectionPlaceDoctorRelModels;
   }
 
-  public HospitalPoliclinicRelModel getHospitalPoliclinicRel() {
+  public HospitalPoliclinicRelModel getHospitalPoliclinicRel () {
     return hospitalPoliclinicRel;
   }
 
-  public void setHospitalPoliclinicRel(HospitalPoliclinicRelModel hospitalPoliclinicRel) {
+  public void setHospitalPoliclinicRel (HospitalPoliclinicRelModel hospitalPoliclinicRel) {
     this.hospitalPoliclinicRel = hospitalPoliclinicRel;
   }
 }

@@ -6,6 +6,7 @@
       <div class="card">
         <div class="card-header">Hoşgeldin ${session.getAttribute("firstName")}</div>
         <div class="card-block">
+          <p>Burası dashboard</p>
           <h:form prependId="false">
             <h:commandButton value="Çıkış" styleClass="btn btn-primary" action="#{patient.logout}"/>
           </h:form>

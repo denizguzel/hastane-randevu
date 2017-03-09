@@ -88,27 +88,27 @@ public class InspectionPlaceDoctorRelModel {
     this.isActive = isActive;
   }
 
-  public List<AppointmentChartModel> getAppointmentChartModels() {
+  public List<AppointmentChartModel> getAppointmentChartModels () {
     return appointmentChartModels;
   }
 
-  public void setAppointmentChartModels(List<AppointmentChartModel> appointmentChartModels) {
+  public void setAppointmentChartModels (List<AppointmentChartModel> appointmentChartModels) {
     this.appointmentChartModels = appointmentChartModels;
   }
 
-  public InspectionPlaceModel getInspectionPlace() {
+  public InspectionPlaceModel getInspectionPlace () {
     return inspectionPlace;
   }
 
-  public void setInspectionPlace(InspectionPlaceModel inspectionPlace) {
+  public void setInspectionPlace (InspectionPlaceModel inspectionPlace) {
     this.inspectionPlace = inspectionPlace;
   }
 
-  public DoctorModel getDoctor() {
+  public DoctorModel getDoctor () {
     return doctor;
   }
 
-  public void setDoctor(DoctorModel doctor) {
+  public void setDoctor (DoctorModel doctor) {
     this.doctor = doctor;
   }
 }

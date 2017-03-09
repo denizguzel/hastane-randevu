@@ -1,7 +1,7 @@
 package com.hastanerandevu.beans;
 
+import com.hastanerandevu.converter.PasswordEncryptor;
 import com.hastanerandevu.model.PatientModel;
-import com.hastanerandevu.service.PatientService;
 import com.hastanerandevu.service.impl.PatientServiceImpl;
 import com.hastanerandevu.utility.SessionUtils;
 import com.hastanerandevu.validation.CaptchaValidator;
@@ -16,11 +16,20 @@ import java.io.IOException;
 @ManagedBean (name = "patient")
 @SessionScoped
 public class PatientBean {
-  private PatientService patientService = new PatientServiceImpl();
+  private PatientServiceImpl patientService = new PatientServiceImpl();
   private PatientModel patientModel = new PatientModel();
   private int loginCounter = 0;
   private boolean showCaptcha = false;
   private boolean verifyCaptcha = false;
+  private boolean login = false;
+
+  public boolean isLogin () {
+    return login;
+  }
+
+  public void setLogin (boolean login) {
+    this.login = login;
+  }
 
   public boolean isShowCaptcha () {
     return showCaptcha;
@@ -45,9 +54,10 @@ public class PatientBean {
       verifyCaptcha = CaptchaValidator.validate(facesContext);
     }
 
-    boolean verifyLogin = patientService.loginPatient(patientModel.getTcNumber(), patientModel.getPassword());
+    boolean verifyLogin = patientService.getPatientDao().login(patientModel);
     if ( showCaptcha ) {
       if ( verifyCaptcha ) {
+        login = true;
         return "view/dashboard?faces-redirect=true";
       } else {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bilgileri kontrol ediniz", null));
@@ -55,6 +65,7 @@ public class PatientBean {
       }
     }
     if ( verifyLogin ) {
+      login = true;
       return "view/dashboard?faces-redirect=true";
     } else {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bilgileri kontrol ediniz", null));
@@ -63,14 +74,10 @@ public class PatientBean {
   }
 
   public String validateCreate () {
-    boolean valid = patientService.createPatient(patientModel.getFirstName(), patientModel.getLastName(), patientModel.getPassword(), patientModel.getTcNumber(), patientModel.getDateOfBirth(), patientModel.getPlaceOfBirth(), patientModel.getEmail(), patientModel.getPhoneNumber(), patientModel.getAddress(), patientModel.getFatherName(), patientModel.getMotherName());
-    if ( valid ) {
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Kayıt başarılı", null));
-      return "/";
-    } else {
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Kayıt başarısız", null));
-      return "/";
-    }
+    patientModel.setPassword(PasswordEncryptor.encryptPassword(patientModel.getPassword()));
+    patientService.getPatientDao().create(patientModel);
+    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Kayıt başarılı", null));
+    return "/";
   }
 
   public String logout () {

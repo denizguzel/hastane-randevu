@@ -79,11 +79,11 @@ public class SurveyModel {
     this.isActive = isActive;
   }
 
-  public List<QuestionModel> getQuestionModels() {
+  public List<QuestionModel> getQuestionModels () {
     return questionModels;
   }
 
-  public void setQuestionModels(List<QuestionModel> questionModels) {
+  public void setQuestionModels (List<QuestionModel> questionModels) {
     this.questionModels = questionModels;
   }
 }

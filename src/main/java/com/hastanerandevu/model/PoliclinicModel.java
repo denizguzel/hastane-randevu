@@ -68,11 +68,11 @@ public class PoliclinicModel {
     this.isActive = isActive;
   }
 
-  public List<HospitalPoliclinicRelModel> getHospitalPoliclinicRelModels() {
+  public List<HospitalPoliclinicRelModel> getHospitalPoliclinicRelModels () {
     return hospitalPoliclinicRelModels;
   }
 
-  public void setHospitalPoliclinicRelModels(List<HospitalPoliclinicRelModel> hospitalPoliclinicRelModels) {
+  public void setHospitalPoliclinicRelModels (List<HospitalPoliclinicRelModel> hospitalPoliclinicRelModels) {
     this.hospitalPoliclinicRelModels = hospitalPoliclinicRelModels;
   }
 }

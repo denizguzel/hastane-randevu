@@ -82,19 +82,19 @@ public class OptionModel {
     this.isActive = isActive;
   }
 
-  public QuestionModel getQuestion() {
+  public QuestionModel getQuestion () {
     return question;
   }
 
-  public void setQuestion(QuestionModel question) {
+  public void setQuestion (QuestionModel question) {
     this.question = question;
   }
 
-  public int getOrderNo() {
+  public int getOrderNo () {
     return orderNo;
   }
 
-  public void setOrderNo(int orderNo) {
+  public void setOrderNo (int orderNo) {
     this.orderNo = orderNo;
   }
 }

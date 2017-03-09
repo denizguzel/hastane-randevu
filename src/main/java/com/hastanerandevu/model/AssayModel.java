@@ -68,11 +68,11 @@ public class AssayModel {
     this.isActive = isActive;
   }
 
-  public List<PatientAssayRelModel> getPatientAssayRelModels() {
+  public List<PatientAssayRelModel> getPatientAssayRelModels () {
     return patientAssayRelModels;
   }
 
-  public void setPatientAssayRelModels(List<PatientAssayRelModel> patientAssayRelModels) {
+  public void setPatientAssayRelModels (List<PatientAssayRelModel> patientAssayRelModels) {
     this.patientAssayRelModels = patientAssayRelModels;
   }
 }

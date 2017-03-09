@@ -1,6 +1,5 @@
 package com.hastanerandevu.model;
 
-import com.hastanerandevu.enums.BloodGroupEnum;
 import com.hastanerandevu.enums.GenderEnum;
 import com.hastanerandevu.enums.LevelEnum;
 
@@ -43,11 +42,11 @@ public class DoctorModel {
   @Column (name = "IS_ACTIVE")
   private char isActive;
 
-  @Enumerated(EnumType.STRING)
+  @Enumerated (EnumType.STRING)
   @Column (name = "GENDER")
   private GenderEnum gender;
 
-  @Enumerated(EnumType.STRING)
+  @Enumerated (EnumType.STRING)
   @Column (name = "DOCTOR_LEVEL")
   private LevelEnum level;
 
@@ -153,35 +152,35 @@ public class DoctorModel {
     this.branch = branch;
   }
 
-  public List<InspectionPlaceDoctorRelModel> getInspectionPlaceDoctorRelModels() {
+  public List<InspectionPlaceDoctorRelModel> getInspectionPlaceDoctorRelModels () {
     return inspectionPlaceDoctorRelModels;
   }
 
-  public void setInspectionPlaceDoctorRelModels(List<InspectionPlaceDoctorRelModel> inspectionPlaceDoctorRelModels) {
+  public void setInspectionPlaceDoctorRelModels (List<InspectionPlaceDoctorRelModel> inspectionPlaceDoctorRelModels) {
     this.inspectionPlaceDoctorRelModels = inspectionPlaceDoctorRelModels;
   }
 
-  public List<ReviewsAboutDoctorsModel> getReviewsAboutDoctorsModels() {
+  public List<ReviewsAboutDoctorsModel> getReviewsAboutDoctorsModels () {
     return reviewsAboutDoctorsModels;
   }
 
-  public void setReviewsAboutDoctorsModels(List<ReviewsAboutDoctorsModel> reviewsAboutDoctorsModels) {
+  public void setReviewsAboutDoctorsModels (List<ReviewsAboutDoctorsModel> reviewsAboutDoctorsModels) {
     this.reviewsAboutDoctorsModels = reviewsAboutDoctorsModels;
   }
 
-  public GenderEnum getGender() {
+  public GenderEnum getGender () {
     return gender;
   }
 
-  public void setGender(GenderEnum gender) {
+  public void setGender (GenderEnum gender) {
     this.gender = gender;
   }
 
-  public LevelEnum getLevel() {
+  public LevelEnum getLevel () {
     return level;
   }
 
-  public void setLevel(LevelEnum level) {
+  public void setLevel (LevelEnum level) {
     this.level = level;
   }
 }

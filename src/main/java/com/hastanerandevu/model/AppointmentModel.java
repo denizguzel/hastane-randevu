@@ -78,27 +78,27 @@ public class AppointmentModel {
     this.isActive = isActive;
   }
 
-  public AppointmentChartModel getAppointmentChart() {
+  public AppointmentChartModel getAppointmentChart () {
     return appointmentChart;
   }
 
-  public void setAppointmentChart(AppointmentChartModel appointmentChart) {
+  public void setAppointmentChart (AppointmentChartModel appointmentChart) {
     this.appointmentChart = appointmentChart;
   }
 
-  public PatientModel getPatient() {
+  public PatientModel getPatient () {
     return patient;
   }
 
-  public void setPatient(PatientModel patient) {
+  public void setPatient (PatientModel patient) {
     this.patient = patient;
   }
 
-  public AppointmentStatusEnum getAppointmentStatus() {
+  public AppointmentStatusEnum getAppointmentStatus () {
     return appointmentStatus;
   }
 
-  public void setAppointmentStatus(AppointmentStatusEnum appointmentStatus) {
+  public void setAppointmentStatus (AppointmentStatusEnum appointmentStatus) {
     this.appointmentStatus = appointmentStatus;
   }
 }

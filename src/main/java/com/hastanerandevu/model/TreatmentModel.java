@@ -68,11 +68,11 @@ public class TreatmentModel {
     this.isActive = isActive;
   }
 
-  public List<PatientTreatmentRelModel> getPatientTreatmentRelModels() {
+  public List<PatientTreatmentRelModel> getPatientTreatmentRelModels () {
     return patientTreatmentRelModels;
   }
 
-  public void setPatientTreatmentRelModels(List<PatientTreatmentRelModel> patientTreatmentRelModels) {
+  public void setPatientTreatmentRelModels (List<PatientTreatmentRelModel> patientTreatmentRelModels) {
     this.patientTreatmentRelModels = patientTreatmentRelModels;
   }
 }

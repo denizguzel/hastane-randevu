@@ -75,27 +75,27 @@ public class QuestionModel {
     this.isActive = isActive;
   }
 
-  public List<OptionModel> getOptionModels() {
+  public List<OptionModel> getOptionModels () {
     return optionModels;
   }
 
-  public void setOptionModels(List<OptionModel> optionModels) {
+  public void setOptionModels (List<OptionModel> optionModels) {
     this.optionModels = optionModels;
   }
 
-  public SurveyModel getSurvey() {
+  public SurveyModel getSurvey () {
     return survey;
   }
 
-  public void setSurvey(SurveyModel survey) {
+  public void setSurvey (SurveyModel survey) {
     this.survey = survey;
   }
 
-  public int getOrderNo() {
+  public int getOrderNo () {
     return orderNo;
   }
 
-  public void setOrderNo(int orderNo) {
+  public void setOrderNo (int orderNo) {
     this.orderNo = orderNo;
   }
 }

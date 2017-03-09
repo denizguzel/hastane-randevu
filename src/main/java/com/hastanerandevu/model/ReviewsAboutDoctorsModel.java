@@ -73,19 +73,19 @@ public class ReviewsAboutDoctorsModel {
     this.isAppropriate = isAppropriate;
   }
 
-  public PatientModel getPatient() {
+  public PatientModel getPatient () {
     return patient;
   }
 
-  public void setPatient(PatientModel patient) {
+  public void setPatient (PatientModel patient) {
     this.patient = patient;
   }
 
-  public DoctorModel getDoctor() {
+  public DoctorModel getDoctor () {
     return doctor;
   }
 
-  public void setDoctor(DoctorModel doctor) {
+  public void setDoctor (DoctorModel doctor) {
     this.doctor = doctor;
   }
 }
