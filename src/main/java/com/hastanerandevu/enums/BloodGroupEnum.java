@@ -1,5 +1,6 @@
 package com.hastanerandevu.enums;
 
+import com.hastanerandevu.constants.ProjectConstants;
 import org.codehaus.jackson.annotate.JsonSubTypes;
 
 import java.util.ResourceBundle;
@@ -13,7 +14,7 @@ public enum BloodGroupEnum {
   AB,
   O;
 
-  private static final ResourceBundle res = ResourceBundle.getBundle("com.hastanerandevu.messages");
+  private static final ResourceBundle res = ResourceBundle.getBundle(ProjectConstants.localizationFilePath);
 
   public String getLocalizedString() {
     return res.getString(name() + ".string");

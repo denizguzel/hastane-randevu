@@ -7,12 +7,11 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table (name = "hospital")
+@Table (name = "T_HOSPITAL")
 public class HospitalModel {
 
   @Id
   @Column (name = "PK")
-  @GeneratedValue (strategy = GenerationType.AUTO)
   private long pk;
 
   @Column (name = "HOSPITAL_NAME")

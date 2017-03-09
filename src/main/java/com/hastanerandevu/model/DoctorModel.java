@@ -44,15 +44,11 @@ public class DoctorModel {
   private char isActive;
 
   @Enumerated(EnumType.STRING)
-  @Column (name = "BLOOD_GROUP")
-  private BloodGroupEnum bloodGroup;
-
-  @Enumerated(EnumType.STRING)
   @Column (name = "GENDER")
   private GenderEnum gender;
 
   @Enumerated(EnumType.STRING)
-  @Column (name = "LEVEL")
+  @Column (name = "DOCTOR_LEVEL")
   private LevelEnum level;
 
   @ManyToOne (fetch = FetchType.LAZY)
@@ -171,14 +167,6 @@ public class DoctorModel {
 
   public void setReviewsAboutDoctorsModels(List<ReviewsAboutDoctorsModel> reviewsAboutDoctorsModels) {
     this.reviewsAboutDoctorsModels = reviewsAboutDoctorsModels;
-  }
-
-  public BloodGroupEnum getBloodGroup() {
-    return bloodGroup;
-  }
-
-  public void setBloodGroup(BloodGroupEnum bloodGroup) {
-    this.bloodGroup = bloodGroup;
   }
 
   public GenderEnum getGender() {
