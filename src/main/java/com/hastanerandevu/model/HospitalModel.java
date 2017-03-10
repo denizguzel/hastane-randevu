@@ -11,6 +11,8 @@ import java.util.List;
 public class HospitalModel {
 
   @Id
+  @GeneratedValue(generator="hospital_pk")
+  @SequenceGenerator(name="hospital_pk",sequenceName="SEQ_HOSPITAL_PK", allocationSize=1)
   @Column (name = "PK")
   private long pk;
 
@@ -20,13 +22,13 @@ public class HospitalModel {
   @Column (name = "HOSPITAL_ADDRESS")
   private String hospitalAddress;
 
-  @Column (name = "CREATION_TIME")
+  @Column (name = "CREATION_TIME",insertable = false, updatable = false)
   private Date creationTime;
 
-  @Column (name = "MODIFIED_TIME")
+  @Column (name = "MODIFIED_TIME",insertable = false, updatable = false)
   private Date modifiedTime;
 
-  @Column (name = "IS_ACTIVE")
+  @Column (name = "IS_ACTIVE",insertable = false)
   private char isActive;
 
   @Enumerated (EnumType.STRING)

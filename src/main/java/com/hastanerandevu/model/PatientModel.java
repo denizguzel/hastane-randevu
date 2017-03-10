@@ -8,10 +8,11 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table (name = "patient")
+@Table (name = "T_PATIENT")
 public class PatientModel {
   @Id
-  @GeneratedValue (strategy = GenerationType.AUTO)
+  @GeneratedValue(generator="patient_pk")
+  @SequenceGenerator(name="patient_pk",sequenceName="SEQ_PATIENT_PK", allocationSize=1)
   @Column (name = "PK")
   private long pk;
   @Column (name = "FIRST_NAME")
@@ -38,11 +39,11 @@ public class PatientModel {
   private String motherName;
   @Column (name = "QUESTION_ANSWER")
   private String questionAnswer;
-  @Column (name = "CREATION_TIME")
+  @Column (name = "CREATION_TIME",insertable = false, updatable = false)
   private Date creationTime;
-  @Column (name = "MODIFIED_TIME")
+  @Column (name = "MODIFIED_TIME",insertable = false, updatable = false)
   private Date modifiedTime;
-  @Column (name = "IS_ACTIVE")
+  @Column (name = "IS_ACTIVE",insertable = false)
   private char isActive;
   @Enumerated (EnumType.STRING)
   @JoinColumn (name = "GENDER")

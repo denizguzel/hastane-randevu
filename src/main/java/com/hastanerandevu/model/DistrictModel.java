@@ -5,23 +5,24 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table (name = "district")
+@Table (name = "T_DISTRICT")
 public class DistrictModel {
   @Id
-  @GeneratedValue (strategy = GenerationType.AUTO)
+  @GeneratedValue(generator="district_pk")
+  @SequenceGenerator(name="district_pk",sequenceName="SEQ_DISTRICT_PK", allocationSize=1)
   @Column (name = "PK")
   private long pk;
 
   @Column (name = "DISTRICT_NAME")
   private String districtName;
 
-  @Column (name = "CREATION_TIME")
+  @Column (name = "CREATION_TIME",insertable = false, updatable = false)
   private Date creationTime;
 
-  @Column (name = "MODIFIED_TIME")
+  @Column (name = "MODIFIED_TIME",insertable = false, updatable = false)
   private Date modifiedTime;
 
-  @Column (name = "IS_ACTIVE")
+  @Column (name = "IS_ACTIVE",insertable = false)
   private char isActive;
 
   @ManyToOne (fetch = FetchType.LAZY)

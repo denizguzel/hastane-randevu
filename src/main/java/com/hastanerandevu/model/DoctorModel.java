@@ -10,12 +10,13 @@ import java.util.List;
 
 // TODO service ve dao gerekli
 @Entity
-@Table (name = "doctor")
+@Table (name = "T_DOCTOR")
 public class DoctorModel {
 
   @Id
-  @GeneratedValue (strategy = GenerationType.AUTO)
-  @Column (name = "PK")
+  @GeneratedValue(generator="doctor_pk")
+  @SequenceGenerator(name="doctor_pk",sequenceName="SEQ_DOCTOR_PK", allocationSize=1)
+  @Column(name="PK")
   private long pk;
 
   @Column (name = "FIRST_NAME")
@@ -33,13 +34,13 @@ public class DoctorModel {
   @Column (name = "QUESTION_ANSWER")
   private String questionAnswer;
 
-  @Column (name = "CREATION_TIME")
+  @Column (name = "CREATION_TIME",insertable = false, updatable = false)
   private Date creationTime;
 
-  @Column (name = "MODIFIED_TIME")
+  @Column (name = "MODIFIED_TIME",insertable = false, updatable = false)
   private Date modifiedTime;
 
-  @Column (name = "IS_ACTIVE")
+  @Column (name = "IS_ACTIVE",insertable = false)
   private char isActive;
 
   @Enumerated (EnumType.STRING)
