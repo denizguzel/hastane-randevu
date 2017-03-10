@@ -1,23 +1,30 @@
 package com.hastanerandevu.model;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 // TODO service ve dao gerekli
 @Entity
-@Table (name = "inspection_place")
+@Table (name = "T_INSPECTION_PLACE")
 public class InspectionPlaceModel {
 
   @Id
-  @Column (name = "PK")
-  @GeneratedValue (strategy = GenerationType.AUTO)
+  @GeneratedValue(generator="inspection_place_pk")
+  @SequenceGenerator(name="inspection_place_pk",sequenceName="SEQ_INSPECTION_PLACE_PK", allocationSize=1)
   private long pk;
 
   @Column (name = "PLACE_NAME")
   private String placeName;
 
-  @Column (name = "IS_ACTIVE")
+  @Column (name = "IS_ACTIVE",insertable = false)
   private char isActive;
+
+  @Column (name = "CREATION_TIME",insertable = false, updatable = false)
+  private Date creationTime;
+
+  @Column (name = "MODIFIED_TIME",insertable = false, updatable = false)
+  private Date modifiedTime;
 
   @OneToMany (mappedBy = "inspectionPlace")
   private List<InspectionPlaceDoctorRelModel> inspectionPlaceDoctorRelModels;
@@ -64,5 +71,21 @@ public class InspectionPlaceModel {
 
   public void setHospitalPoliclinicRel (HospitalPoliclinicRelModel hospitalPoliclinicRel) {
     this.hospitalPoliclinicRel = hospitalPoliclinicRel;
+  }
+
+  public Date getCreationTime() {
+    return creationTime;
+  }
+
+  public void setCreationTime(Date creationTime) {
+    this.creationTime = creationTime;
+  }
+
+  public Date getModifiedTime() {
+    return modifiedTime;
+  }
+
+  public void setModifiedTime(Date modifiedTime) {
+    this.modifiedTime = modifiedTime;
   }
 }
