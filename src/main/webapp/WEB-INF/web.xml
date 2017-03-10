@@ -6,6 +6,7 @@
   <servlet>
     <servlet-name>Faces Servlet</servlet-name>
     <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
     <servlet-name>Faces Servlet</servlet-name>
@@ -25,10 +26,6 @@
     </servlet-class>
   </servlet>
 
-  <context-param>
-    <param-name>resteasy.scan</param-name>
-    <param-value>true</param-value>
-  </context-param>
   <context-param>
     <param-name>resteasy.servlet.mapping.prefix</param-name>
     <param-value>/api</param-value>

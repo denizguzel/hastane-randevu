@@ -14,81 +14,60 @@ public class PatientModel {
   @GeneratedValue (strategy = GenerationType.AUTO)
   @Column (name = "PK")
   private long pk;
-
   @Column (name = "FIRST_NAME")
   private String firstName;
-
   @Column (name = "LAST_NAME")
   private String lastName;
-
   @Column (name = "PASSWORD")
   private String password;
-
   @Column (name = "TC_NUMBER")
   private String tcNumber;
-
   @Column (name = "DATE_OF_BIRTH")
   private Date dateOfBirth;
-
   @Column (name = "PLACE_OF_BIRTH")
   private String placeOfBirth;
-
   @Column (name = "EMAIL")
   private String email;
-
   @Column (name = "PHONE_NUMBER")
   private String phoneNumber;
-
   @Column (name = "ADDRESS")
   private String address;
-
   @Column (name = "FATHER_NAME")
   private String fatherName;
-
   @Column (name = "MOTHER_NAME")
   private String motherName;
-
   @Column (name = "QUESTION_ANSWER")
   private String questionAnswer;
-
   @Column (name = "CREATION_TIME")
   private Date creationTime;
-
   @Column (name = "MODIFIED_TIME")
   private Date modifiedTime;
-
   @Column (name = "IS_ACTIVE")
   private char isActive;
-
   @Enumerated (EnumType.STRING)
   @JoinColumn (name = "GENDER")
   private GenderEnum gender;
-
   @Enumerated (EnumType.STRING)
   @JoinColumn (name = "BLOOD_GROUP")
   private BloodGroupEnum bloodGroup;
-
   @ManyToOne (fetch = FetchType.LAZY)
   @JoinColumn (name = "FK_SECRET_QUESTION")
   private SecretQuestionModel secretQuestion;
-
   @OneToMany (mappedBy = "patient")
   private List<AppointmentModel> appointmentModels;
-
   @OneToMany (mappedBy = "patient")
   private List<PatientAlergyRelModel> patientAlergyRelModels;
-
   @OneToMany (mappedBy = "patient")
   private List<PatientAssayRelModel> patientAssayRelModels;
-
   @OneToMany (mappedBy = "patient")
   private List<PatientDiseaseRelModel> patientDiseaseRelModels;
-
   @OneToMany (mappedBy = "patient")
   private List<PatientTreatmentRelModel> patientTreatmentRelModels;
-
   @OneToMany (mappedBy = "patient")
   private List<ReviewsAboutDoctorsModel> reviewsAboutDoctorsModels;
+
+  public PatientModel () {
+  }
 
   public long getPk () {
     return pk;
