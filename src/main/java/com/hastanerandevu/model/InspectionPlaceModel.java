@@ -10,20 +10,20 @@ import java.util.List;
 public class InspectionPlaceModel {
 
   @Id
-  @GeneratedValue(generator="inspection_place_pk")
-  @SequenceGenerator(name="inspection_place_pk",sequenceName="SEQ_INSPECTION_PLACE_PK", allocationSize=1)
+  @GeneratedValue (generator = "inspection_place_pk")
+  @SequenceGenerator (name = "inspection_place_pk", sequenceName = "SEQ_INSPECTION_PLACE_PK", allocationSize = 1)
   private long pk;
 
   @Column (name = "PLACE_NAME")
   private String placeName;
 
-  @Column (name = "IS_ACTIVE",insertable = false)
+  @Column (name = "IS_ACTIVE", insertable = false)
   private char isActive;
 
-  @Column (name = "CREATION_TIME",insertable = false, updatable = false)
+  @Column (name = "CREATION_TIME", insertable = false, updatable = false)
   private Date creationTime;
 
-  @Column (name = "MODIFIED_TIME",insertable = false, updatable = false)
+  @Column (name = "MODIFIED_TIME", insertable = false, updatable = false)
   private Date modifiedTime;
 
   @OneToMany (mappedBy = "inspectionPlace")
@@ -73,19 +73,19 @@ public class InspectionPlaceModel {
     this.hospitalPoliclinicRel = hospitalPoliclinicRel;
   }
 
-  public Date getCreationTime() {
+  public Date getCreationTime () {
     return creationTime;
   }
 
-  public void setCreationTime(Date creationTime) {
+  public void setCreationTime (Date creationTime) {
     this.creationTime = creationTime;
   }
 
-  public Date getModifiedTime() {
+  public Date getModifiedTime () {
     return modifiedTime;
   }
 
-  public void setModifiedTime(Date modifiedTime) {
+  public void setModifiedTime (Date modifiedTime) {
     this.modifiedTime = modifiedTime;
   }
 }

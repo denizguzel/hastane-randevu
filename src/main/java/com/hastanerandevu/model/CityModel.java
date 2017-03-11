@@ -9,21 +9,21 @@ import java.util.List;
 public class CityModel {
 
   @Id
-  @GeneratedValue(generator="city_pk")
-  @SequenceGenerator(name="city_pk",sequenceName="SEQ_CITY_PK", allocationSize=1)
+  @GeneratedValue (generator = "city_pk")
+  @SequenceGenerator (name = "city_pk", sequenceName = "SEQ_CITY_PK", allocationSize = 1)
   @Column (name = "PK")
   private long pk;
 
   @Column (name = "CITY_NAME")
   private String cityName;
 
-  @Column (name = "CREATION_TIME",insertable = false, updatable = false)
+  @Column (name = "CREATION_TIME", insertable = false, updatable = false)
   private Date modifiedTime;
 
-  @Column (name = "MODIFIED_TIME",insertable = false, updatable = false)
+  @Column (name = "MODIFIED_TIME", insertable = false, updatable = false)
   private Date creationTime;
 
-  @Column (name = "IS_ACTIVE",insertable = false)
+  @Column (name = "IS_ACTIVE", insertable = false)
   private char isActive;
 
   @OneToMany (mappedBy = "city")

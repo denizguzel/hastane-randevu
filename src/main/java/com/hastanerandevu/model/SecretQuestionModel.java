@@ -9,21 +9,21 @@ import java.util.List;
 public class SecretQuestionModel {
 
   @Id
-  @GeneratedValue(generator="secret_question_pk")
-  @SequenceGenerator(name="secret_question_pk",sequenceName="SEQ_SECRET_QUESTION_PK", allocationSize=1)
+  @GeneratedValue (generator = "secret_question_pk")
+  @SequenceGenerator (name = "secret_question_pk", sequenceName = "SEQ_SECRET_QUESTION_PK", allocationSize = 1)
   @Column (name = "PK")
   private long pk;
 
   @Column (name = "QUESTION")
   private String question;
 
-  @Column (name = "CREATION_TIME",insertable = false, updatable = false)
+  @Column (name = "CREATION_TIME", insertable = false, updatable = false)
   private Date creationTime;
 
-  @Column (name = "MODIFIED_TIME",insertable = false, updatable = false)
+  @Column (name = "MODIFIED_TIME", insertable = false, updatable = false)
   private Date modifiedTime;
 
-  @Column (name = "IS_ACTIVE",insertable = false)
+  @Column (name = "IS_ACTIVE", insertable = false)
   private char isActive;
 
   @OneToMany (mappedBy = "secretQuestion")

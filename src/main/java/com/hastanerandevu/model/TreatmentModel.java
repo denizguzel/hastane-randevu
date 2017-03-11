@@ -10,20 +10,20 @@ public class TreatmentModel {
 
   @Id
   @Column (name = "PK")
-  @GeneratedValue(generator="treatment_pk")
-  @SequenceGenerator(name="treatment_pk",sequenceName="SEQ_TREATMENT_PK", allocationSize=1)
+  @GeneratedValue (generator = "treatment_pk")
+  @SequenceGenerator (name = "treatment_pk", sequenceName = "SEQ_TREATMENT_PK", allocationSize = 1)
   private long pk;
 
   @Column (name = "TREATMENT_NAME")
   private String treatmentName;
 
-  @Column (name = "CREATION_TIME",insertable = false, updatable = false)
+  @Column (name = "CREATION_TIME", insertable = false, updatable = false)
   private Date creationTime;
 
-  @Column (name = "MODIFIED_TIME",insertable = false, updatable = false)
+  @Column (name = "MODIFIED_TIME", insertable = false, updatable = false)
   private Date modifiedTime;
 
-  @Column (name = "IS_ACTIVE",insertable = false)
+  @Column (name = "IS_ACTIVE", insertable = false)
   private char isActive;
 
   @OneToMany (mappedBy = "treatment")

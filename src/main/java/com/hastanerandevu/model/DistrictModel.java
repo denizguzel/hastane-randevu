@@ -8,21 +8,21 @@ import java.util.List;
 @Table (name = "T_DISTRICT")
 public class DistrictModel {
   @Id
-  @GeneratedValue(generator="district_pk")
-  @SequenceGenerator(name="district_pk",sequenceName="SEQ_DISTRICT_PK", allocationSize=1)
+  @GeneratedValue (generator = "district_pk")
+  @SequenceGenerator (name = "district_pk", sequenceName = "SEQ_DISTRICT_PK", allocationSize = 1)
   @Column (name = "PK")
   private long pk;
 
   @Column (name = "DISTRICT_NAME")
   private String districtName;
 
-  @Column (name = "CREATION_TIME",insertable = false, updatable = false)
+  @Column (name = "CREATION_TIME", insertable = false, updatable = false)
   private Date creationTime;
 
-  @Column (name = "MODIFIED_TIME",insertable = false, updatable = false)
+  @Column (name = "MODIFIED_TIME", insertable = false, updatable = false)
   private Date modifiedTime;
 
-  @Column (name = "IS_ACTIVE",insertable = false)
+  @Column (name = "IS_ACTIVE", insertable = false)
   private char isActive;
 
   @ManyToOne (fetch = FetchType.LAZY)

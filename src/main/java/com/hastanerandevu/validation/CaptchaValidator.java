@@ -13,6 +13,8 @@ import java.net.URL;
 
 public class CaptchaValidator {
 
+  private boolean success;
+
   public static boolean validate (FacesContext context) throws IOException {
     HttpServletRequest request    = (HttpServletRequest) context.getExternalContext().getRequest();
     String             remoteAddr = request.getRemoteAddr();
@@ -28,7 +30,15 @@ public class CaptchaValidator {
     while ( (line = reader.readLine()) != null ) {
       output.append(line);
     }
-    CaptchaResponse capRes = new Gson().fromJson(output.toString(), CaptchaResponse.class);
-    return capRes.isSuccess();
+    CaptchaValidator valid = new Gson().fromJson(output.toString(), CaptchaValidator.class);
+    return valid.isSuccess();
+  }
+
+  private boolean isSuccess () {
+    return success;
+  }
+
+  public void setSuccess (boolean success) {
+    this.success = success;
   }
 }

@@ -9,20 +9,20 @@ import java.util.List;
 public class PoliclinicModel {
 
   @Id
-  @GeneratedValue(generator="policlinic_pk")
-  @SequenceGenerator(name="policlinic_pk",sequenceName="SEQ_POLICLINIC_PK", allocationSize=1)
+  @GeneratedValue (generator = "policlinic_pk")
+  @SequenceGenerator (name = "policlinic_pk", sequenceName = "SEQ_POLICLINIC_PK", allocationSize = 1)
   private long pk;
 
   @Column (name = "POLICLINIC_NAME")
   private String policlinicName;
 
-  @Column (name = "CREATION_TIME",insertable = false, updatable = false)
+  @Column (name = "CREATION_TIME", insertable = false, updatable = false)
   private Date creationTime;
 
-  @Column (name = "MODIFIED_TIME",insertable = false, updatable = false)
+  @Column (name = "MODIFIED_TIME", insertable = false, updatable = false)
   private Date modifiedTime;
 
-  @Column (name = "IS_ACTIVE",insertable = false)
+  @Column (name = "IS_ACTIVE", insertable = false)
   private char isActive;
 
   @OneToMany (mappedBy = "policlinic")

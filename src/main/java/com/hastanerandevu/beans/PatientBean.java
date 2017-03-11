@@ -1,6 +1,8 @@
 package com.hastanerandevu.beans;
 
 import com.hastanerandevu.converter.PasswordEncryptor;
+import com.hastanerandevu.enums.BloodGroupEnum;
+import com.hastanerandevu.enums.GenderEnum;
 import com.hastanerandevu.model.PatientModel;
 import com.hastanerandevu.service.impl.PatientServiceImpl;
 import com.hastanerandevu.utility.SessionUtils;
@@ -12,12 +14,17 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.Serializable;
 
 @ManagedBean (name = "patient")
 @SessionScoped
-public class PatientBean {
+public class PatientBean implements Serializable {
   private PatientServiceImpl patientService = new PatientServiceImpl();
   private PatientModel patientModel = new PatientModel();
+  private BloodGroupEnum[] bloodGroupEnums = BloodGroupEnum.values();
+  private GenderEnum[] genderEnums = GenderEnum.values();
+
+
   private int loginCounter = 0;
   private boolean showCaptcha = false;
   private boolean verifyCaptcha = false;
@@ -41,6 +48,14 @@ public class PatientBean {
 
   public void setPatientModel (PatientModel patientModel) {
     this.patientModel = patientModel;
+  }
+
+  public BloodGroupEnum[] getBloodGroupEnums () {
+    return bloodGroupEnums;
+  }
+
+  public GenderEnum[] getGenderEnums () {
+    return genderEnums;
   }
 
   public String validateLogin () throws IOException {

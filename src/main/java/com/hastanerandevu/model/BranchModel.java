@@ -9,20 +9,20 @@ import java.util.List;
 public class BranchModel {
 
   @Id
-  @GeneratedValue(generator="branch_pk")
-  @SequenceGenerator(name="branch_pk",sequenceName="SEQ_BRANCH_PK", allocationSize=1)
+  @GeneratedValue (generator = "branch_pk")
+  @SequenceGenerator (name = "branch_pk", sequenceName = "SEQ_BRANCH_PK", allocationSize = 1)
   private long pk;
 
   @Column (name = "BRANCH_NAME")
   private String branchName;
 
-  @Column (name = "CREATION_TIME",insertable = false, updatable = false)
+  @Column (name = "CREATION_TIME", insertable = false, updatable = false)
   private Date creationTime;
 
-  @Column (name = "MODIFIED_TIME",insertable = false, updatable = false)
+  @Column (name = "MODIFIED_TIME", insertable = false, updatable = false)
   private Date modifiedTime;
 
-  @Column (name = "IS_ACTIVE",insertable = false)
+  @Column (name = "IS_ACTIVE", insertable = false)
   private char isActive;
 
   @OneToMany (mappedBy = "branch")
