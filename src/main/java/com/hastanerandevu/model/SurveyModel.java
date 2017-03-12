@@ -5,27 +5,28 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table (name = "survey")
+@Table (name = "T_SURVEY")
 public class SurveyModel {
 
   @Id
   @Column (name = "PK")
-  @GeneratedValue (strategy = GenerationType.AUTO)
+  @GeneratedValue (generator = "survey_pk")
+  @SequenceGenerator (name = "survey_pk", sequenceName = "SEQ_SURVEY_PK", allocationSize = 1)
   private long pk;
 
   @Column (name = "SURVEY_DESCRIPTION")
   private String surveyDescription;
 
-  @Column (name = "CREATION_TIME")
+  @Column (name = "CREATION_TIME",insertable = false, updatable = false)
   private Date creationTime;
 
-  @Column (name = "MODIFIED_TIME")
+  @Column (name = "MODIFIED_TIME",insertable = false, updatable = false)
   private Date modifiedTime;
 
   @Column (name = "EXPIRATION_TIME")
   private Date expirationTime;
 
-  @Column (name = "IS_ACTIVE")
+  @Column (name = "IS_ACTIVE",insertable = false)
   private char isActive;
 
   @OneToMany (mappedBy = "survey")

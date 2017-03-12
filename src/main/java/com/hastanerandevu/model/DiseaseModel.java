@@ -5,24 +5,25 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table (name = "disease")
+@Table (name = "T_DISEASE")
 public class DiseaseModel {
 
   @Id
   @Column (name = "PK")
-  @GeneratedValue (strategy = GenerationType.AUTO)
+  @GeneratedValue (generator = "disease_pk")
+  @SequenceGenerator (name = "disease_pk", sequenceName = "SEQ_DISEASE_PK", allocationSize = 1)
   private long pk;
 
   @Column (name = "DISEASE_NAME")
   private String diseaseName;
 
-  @Column (name = "CREATION_TIME")
+  @Column (name = "CREATION_TIME",insertable = false, updatable = false)
   private Date creationTime;
 
-  @Column (name = "MODIFIED_TIME")
+  @Column (name = "MODIFIED_TIME",insertable = false, updatable = false)
   private Date modifiedTime;
 
-  @Column (name = "IS_ACTIVE")
+  @Column (name = "IS_ACTIVE",insertable = false)
   private char isActive;
 
   @OneToMany (mappedBy = "disease")

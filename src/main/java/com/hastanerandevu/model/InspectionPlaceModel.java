@@ -10,6 +10,7 @@ import java.util.List;
 public class InspectionPlaceModel {
 
   @Id
+  @Column(name = "PK")
   @GeneratedValue (generator = "inspection_place_pk")
   @SequenceGenerator (name = "inspection_place_pk", sequenceName = "SEQ_INSPECTION_PLACE_PK", allocationSize = 1)
   private long pk;

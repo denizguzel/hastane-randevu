@@ -9,6 +9,7 @@ import java.util.List;
 public class PoliclinicModel {
 
   @Id
+  @Column(name = "PK")
   @GeneratedValue (generator = "policlinic_pk")
   @SequenceGenerator (name = "policlinic_pk", sequenceName = "SEQ_POLICLINIC_PK", allocationSize = 1)
   private long pk;

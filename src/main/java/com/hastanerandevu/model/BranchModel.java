@@ -9,6 +9,7 @@ import java.util.List;
 public class BranchModel {
 
   @Id
+  @Column(name = "PK")
   @GeneratedValue (generator = "branch_pk")
   @SequenceGenerator (name = "branch_pk", sequenceName = "SEQ_BRANCH_PK", allocationSize = 1)
   private long pk;

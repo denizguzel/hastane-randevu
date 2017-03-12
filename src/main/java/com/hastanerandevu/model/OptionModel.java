@@ -4,31 +4,32 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table (name = "option")
+@Table (name = "T_OPTION")
 public class OptionModel {
 
   @Id
   @Column (name = "PK")
-  @GeneratedValue (strategy = GenerationType.AUTO)
+  @GeneratedValue (generator = "option_pk")
+  @SequenceGenerator (name = "option_pk", sequenceName = "SEQ_OPTION_PK", allocationSize = 1)
   private long pk;
 
   @Column (name = "OPTION_TEXT")
   private String optionText;
 
-  @Column (name = "COUNT")
+  @Column (name = "COUNT",insertable = false)
   private int count;
 
-  @Column (name = "CREATION_TIME")
+  @Column (name = "CREATION_TIME",insertable = false, updatable = false)
   private Date creationTime;
 
-  @Column (name = "MODIFIED_TIME")
+  @Column (name = "MODIFIED_TIME",insertable = false, updatable = false)
   private Date modifiedTime;
 
-  @Column (name = "IS_ACTIVE")
+  @Column (name = "IS_ACTIVE",insertable = false)
   private char isActive;
 
-  @Column (name = "ORDER_NO")
-  private int orderNo;
+  @Column (name = "SORT_ORDER_NO")
+  private int sortOrderNo = 999;
 
   @ManyToOne (fetch = FetchType.LAZY)
   @JoinColumn (name = "FK_QUESTION")
@@ -90,11 +91,11 @@ public class OptionModel {
     this.question = question;
   }
 
-  public int getOrderNo () {
-    return orderNo;
+  public int getSortOrderNo() {
+    return sortOrderNo;
   }
 
-  public void setOrderNo (int orderNo) {
-    this.orderNo = orderNo;
+  public void setSortOrderNo(int sortOrderNo) {
+    this.sortOrderNo = sortOrderNo;
   }
 }
