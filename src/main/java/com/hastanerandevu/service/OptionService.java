@@ -5,9 +5,9 @@ import com.hastanerandevu.model.OptionModel;
 import java.util.List;
 
 public interface OptionService {
-  void createOption (String optionText);
+  void createOption (OptionModel optionModel);
 
-  void updateOption (long id, String optionText);
+  void updateOption (long id, OptionModel optionModel);
 
   void deleteOption (long id);
 

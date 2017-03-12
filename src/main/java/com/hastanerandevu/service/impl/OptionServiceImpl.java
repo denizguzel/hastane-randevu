@@ -8,30 +8,25 @@ import com.hastanerandevu.service.OptionService;
 import java.util.List;
 
 public class OptionServiceImpl implements OptionService {
-  private OptionDao optionDao = new OptionDaoImpl();
+  private OptionDaoImpl optionDao = new OptionDaoImpl();
 
-  @Override
-  public void createOption (String optionText) {
-    optionDao.createOption(optionText);
+  public void createOption (OptionModel optionModel) {
+    optionDao.create(optionModel);
   }
 
-  @Override
-  public void updateOption (long id, String optionText) {
-    optionDao.updateOption(id, optionText);
+  public void updateOption (long id, OptionModel optionModel) {
+    optionDao.update(id, optionModel);
   }
 
-  @Override
   public void deleteOption (long id) {
-    optionDao.deleteOption(id);
+    optionDao.delete(id);
   }
 
-  @Override
   public OptionModel findOption (long id) {
-    return optionDao.findOption(id);
+    return optionDao.find(id);
   }
 
-  @Override
   public List<OptionModel> getAllOptions () {
-    return optionDao.getAllOptions();
+    return optionDao.findAll();
   }
 }
