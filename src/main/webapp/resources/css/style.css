@@ -1,14 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&subset=latin-ext');
-
 *:focus {
   outline: none !important;
 }
-
 body {
   font-family: 'Open Sans', sans-serif;
   background-color: #E6E6E6;
 }
-
 ul,
 ol,
 li,
@@ -22,44 +19,50 @@ h6 {
   padding: 0;
   margin: 0;
 }
-
 ul,
 ol,
 li {
   list-style-type: none;
 }
-
 a {
   color: #000;
 }
-
 a:hover {
   text-decoration: none;
   color: #000;
 }
-
 a:focus {
   text-decoration: none;
 }
-
 button,
 select,
 input.btn {
   cursor: pointer;
 }
-
 .card {
   margin-bottom: 30px;
 }
-
 .error {
   display: block;
   color: red;
   margin-top: 5px;
 }
-
 .info {
   display: block;
   color: green;
   margin: 5px 0;
+}
+.bootstrap-select .dropdown-toggle {
+  background-color: transparent;
+  border-color: #D9D9D9;
+}
+.bootstrap-select .dropdown-menu.inner li a {
+  display: block;
+  padding: 10px;
+}
+.bootstrap-select .dropdown-menu.inner li a:hover {
+  background-color: #ddd;
+}
+.bootstrap-select.show .dropdown-menu {
+  display: block;
 }

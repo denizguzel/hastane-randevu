@@ -109,14 +109,14 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <h:selectOneMenu styleClass="form-control" value="#{patient.patientModel.gender}">
+                <h:selectOneMenu styleClass="selectpicker form-control" value="#{patient.patientModel.gender}">
                   <f:selectItems value="#{patient.genderEnums}" var="genderGroup" itemValue="#{genderGroup}" itemLabel="#{messages['string.'.concat(genderGroup)]}"/>
                 </h:selectOneMenu>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <h:selectOneMenu styleClass="form-control" value="#{patient.patientModel.bloodGroup}">
+                <h:selectOneMenu styleClass="selectpicker form-control" value="#{patient.patientModel.bloodGroup}">
                   <f:selectItems value="#{patient.bloodGroupEnums}" var="bloodGroup" itemValue="#{bloodGroup}" itemLabel="#{messages['string.'.concat(bloodGroup)]}"/>
                 </h:selectOneMenu>
               </div>
@@ -124,7 +124,7 @@
             <div class="col-md-12">
               <h:messages globalOnly="true" errorClass="error" infoClass="info"/>
               <h:commandButton value="Gönder" styleClass="btn btn-primary" action="#{patient.validateCreate}">
-                <f:ajax execute="@form" render="@form"/>
+                <f:ajax execute="@form" render="@form" onevent="function(data){ if(data.status === 'success') $('.selectpicker').selectpicker();}"/>
               </h:commandButton>
             </div>
           </h:form>
