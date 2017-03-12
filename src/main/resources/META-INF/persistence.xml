@@ -19,6 +19,9 @@
     <class>com.hastanerandevu.model.DiseaseModel</class>
     <class>com.hastanerandevu.model.TreatmentModel</class>
     <class>com.hastanerandevu.model.AssayModel</class>
+    <class>com.hastanerandevu.model.SurveyModel</class>
+    <class>com.hastanerandevu.model.QuestionModel</class>
+    <class>com.hastanerandevu.model.OptionModel</class>
 
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@//localhost:1521/orcl"/>
@@ -27,7 +30,12 @@
       <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
       <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
 
-      <!--<property name="hibernate.hbm2ddl.auto" value="create-drop"/>-->
+      <!-- Alttaki dördü database auto create için eklendi yorum satırı yapılabilir -->
+      <!--
+      <property name="hibernate.archive.autodetection" value="class"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.format_sql" value="true"/>
+      <property name="hibernate.hbm2ddl.auto" value="update"/>-->
     </properties>
 
   </persistence-unit>
