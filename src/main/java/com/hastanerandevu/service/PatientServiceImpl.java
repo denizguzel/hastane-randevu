@@ -1,0 +1,40 @@
+package com.hastanerandevu.service;
+
+import com.hastanerandevu.dao.PatientDaoImpl;
+import com.hastanerandevu.model.PatientModel;
+
+import java.util.List;
+
+public class PatientServiceImpl implements BaseService<PatientModel> {
+
+  private PatientDaoImpl patientDao = new PatientDaoImpl();
+
+  public boolean loginPatient (PatientModel patientModel) {
+    return patientDao.loginPatient(patientModel);
+  }
+
+  @Override
+  public void create (PatientModel model) {
+    patientDao.create(model);
+  }
+
+  @Override
+  public void update (long id, PatientModel model) {
+    patientDao.update(id, model);
+  }
+
+  @Override
+  public void delete (long id) {
+    patientDao.delete(id);
+  }
+
+  @Override
+  public PatientModel find (long id) {
+    return patientDao.find(id);
+  }
+
+  @Override
+  public List<PatientModel> findAll () {
+    return patientDao.findAll();
+  }
+}

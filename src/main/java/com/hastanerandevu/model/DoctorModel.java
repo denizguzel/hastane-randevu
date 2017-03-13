@@ -178,11 +178,11 @@ public class DoctorModel {
     this.level = level;
   }
 
-  public SecretQuestionEnum getSecretQuestion() {
+  public SecretQuestionEnum getSecretQuestion () {
     return secretQuestion;
   }
 
-  public void setSecretQuestion(SecretQuestionEnum secretQuestion) {
+  public void setSecretQuestion (SecretQuestionEnum secretQuestion) {
     this.secretQuestion = secretQuestion;
   }
 }

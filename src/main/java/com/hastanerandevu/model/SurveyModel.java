@@ -17,16 +17,16 @@ public class SurveyModel {
   @Column (name = "SURVEY_DESCRIPTION")
   private String surveyDescription;
 
-  @Column (name = "CREATION_TIME",insertable = false, updatable = false)
+  @Column (name = "CREATION_TIME", insertable = false, updatable = false)
   private Date creationTime;
 
-  @Column (name = "MODIFIED_TIME",insertable = false, updatable = false)
+  @Column (name = "MODIFIED_TIME", insertable = false, updatable = false)
   private Date modifiedTime;
 
   @Column (name = "EXPIRATION_TIME")
   private Date expirationTime;
 
-  @Column (name = "IS_ACTIVE",insertable = false)
+  @Column (name = "IS_ACTIVE", insertable = false)
   private char isActive;
 
   @OneToMany (mappedBy = "survey")

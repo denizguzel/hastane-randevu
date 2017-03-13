@@ -17,13 +17,13 @@ public class AssayModel {
   @Column (name = "ASSAY_NAME")
   private String assayName;
 
-  @Column (name = "CREATION_TIME",insertable = false, updatable = false)
+  @Column (name = "CREATION_TIME", insertable = false, updatable = false)
   private Date creationTime;
 
-  @Column (name = "MODIFIED_TIME",insertable = false, updatable = false)
+  @Column (name = "MODIFIED_TIME", insertable = false, updatable = false)
   private Date modifiedTime;
 
-  @Column (name = "IS_ACTIVE",insertable = false)
+  @Column (name = "IS_ACTIVE", insertable = false)
   private char isActive;
 
   @OneToMany (mappedBy = "assay")

@@ -17,13 +17,13 @@ public class QuestionModel {
   @Column (name = "QUESTION_TEXT")
   private String questionText;
 
-  @Column (name = "CREATION_TIME",insertable = false, updatable = false)
+  @Column (name = "CREATION_TIME", insertable = false, updatable = false)
   private Date creationTime;
 
-  @Column (name = "MODIFIED_TIME",insertable = false, updatable = false)
+  @Column (name = "MODIFIED_TIME", insertable = false, updatable = false)
   private Date modifiedTime;
 
-  @Column (name = "IS_ACTIVE",insertable = false)
+  @Column (name = "IS_ACTIVE", insertable = false)
   private char isActive;
 
   @Column (name = "SORT_ORDER_NO")
@@ -92,11 +92,11 @@ public class QuestionModel {
     this.survey = survey;
   }
 
-  public int getSortOrderNo() {
+  public int getSortOrderNo () {
     return sortOrderNo;
   }
 
-  public void setSortOrderNo(int sortOrderNo) {
+  public void setSortOrderNo (int sortOrderNo) {
     this.sortOrderNo = sortOrderNo;
   }
 }

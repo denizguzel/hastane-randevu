@@ -16,16 +16,16 @@ public class OptionModel {
   @Column (name = "OPTION_TEXT")
   private String optionText;
 
-  @Column (name = "COUNT",insertable = false)
+  @Column (name = "COUNT", insertable = false)
   private int count;
 
-  @Column (name = "CREATION_TIME",insertable = false, updatable = false)
+  @Column (name = "CREATION_TIME", insertable = false, updatable = false)
   private Date creationTime;
 
-  @Column (name = "MODIFIED_TIME",insertable = false, updatable = false)
+  @Column (name = "MODIFIED_TIME", insertable = false, updatable = false)
   private Date modifiedTime;
 
-  @Column (name = "IS_ACTIVE",insertable = false)
+  @Column (name = "IS_ACTIVE", insertable = false)
   private char isActive;
 
   @Column (name = "SORT_ORDER_NO")
@@ -91,11 +91,11 @@ public class OptionModel {
     this.question = question;
   }
 
-  public int getSortOrderNo() {
+  public int getSortOrderNo () {
     return sortOrderNo;
   }
 
-  public void setSortOrderNo(int sortOrderNo) {
+  public void setSortOrderNo (int sortOrderNo) {
     this.sortOrderNo = sortOrderNo;
   }
 }

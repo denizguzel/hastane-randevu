@@ -1,6 +1,6 @@
 package com.hastanerandevu.controller;
 
-import com.hastanerandevu.dao.impl.PatientDaoImpl;
+import com.hastanerandevu.dao.PatientDaoImpl;
 import com.hastanerandevu.model.PatientModel;
 
 import javax.ws.rs.GET;

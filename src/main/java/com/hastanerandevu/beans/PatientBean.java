@@ -4,7 +4,7 @@ import com.hastanerandevu.converter.PasswordEncryptor;
 import com.hastanerandevu.enums.BloodGroupEnum;
 import com.hastanerandevu.enums.GenderEnum;
 import com.hastanerandevu.model.PatientModel;
-import com.hastanerandevu.service.impl.PatientServiceImpl;
+import com.hastanerandevu.service.PatientServiceImpl;
 import com.hastanerandevu.utility.SessionUtils;
 import com.hastanerandevu.validation.CaptchaValidator;
 
@@ -90,7 +90,7 @@ public class PatientBean implements Serializable {
 
   public String validateCreate () {
     patientModel.setPassword(PasswordEncryptor.encryptPassword(patientModel.getPassword()));
-    patientService.createPatient(patientModel);
+    patientService.create(patientModel);
     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Kayıt başarılı", null));
     return "/";
   }

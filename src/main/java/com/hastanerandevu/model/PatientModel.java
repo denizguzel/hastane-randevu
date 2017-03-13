@@ -287,11 +287,11 @@ public class PatientModel {
     this.bloodGroup = bloodGroup;
   }
 
-  public SecretQuestionEnum getSecretQuestion() {
+  public SecretQuestionEnum getSecretQuestion () {
     return secretQuestion;
   }
 
-  public void setSecretQuestion(SecretQuestionEnum secretQuestion) {
+  public void setSecretQuestion (SecretQuestionEnum secretQuestion) {
     this.secretQuestion = secretQuestion;
   }
 }
