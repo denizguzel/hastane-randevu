@@ -2,6 +2,7 @@ package com.hastanerandevu.dao.impl;
 
 import com.hastanerandevu.constants.ProjectConstants;
 import com.hastanerandevu.dao.HospitalDao;
+import com.hastanerandevu.enums.HospitalTypeEnum;
 import com.hastanerandevu.model.HospitalModel;
 
 import javax.persistence.EntityManager;
@@ -9,59 +10,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 
-public class HospitalDaoImpl implements HospitalDao {
-
-  private EntityManagerFactory emfactory = Persistence.createEntityManagerFactory(ProjectConstants.persistenceUnitName);
+public class HospitalDaoImpl extends BaseDaoImpl<HospitalModel> implements HospitalDao {
 
   @Override
-  public void createHospital (String hospitalName) {
-    EntityManager entitymanager = emfactory.createEntityManager();
-    entitymanager.getTransaction().begin();
-
-    HospitalModel hospitalModel = new HospitalModel();
-    hospitalModel.setHospitalName(hospitalName);
-
-    entitymanager.persist(hospitalModel);
-    entitymanager.getTransaction().commit();
-
-    entitymanager.close();
-    emfactory.close();
-  }
-
-  @Override
-  public void updateHospital (long id, String hospitalName) {
-    EntityManager entitymanager = emfactory.createEntityManager();
-    entitymanager.getTransaction().begin();
-    HospitalModel hospitalModel = entitymanager.find(HospitalModel.class, id);
-
-    hospitalModel.setHospitalName(hospitalName);
-    entitymanager.getTransaction().commit();
-
-    entitymanager.close();
-    emfactory.close();
-  }
-
-  @Override
-  public void deleteHospital (long id) {
-    EntityManager entitymanager = emfactory.createEntityManager();
-    entitymanager.getTransaction().begin();
-
-    HospitalModel hospitalModel = entitymanager.find(HospitalModel.class, id);
-    entitymanager.remove(hospitalModel);
-    entitymanager.getTransaction().commit();
-    entitymanager.close();
-    emfactory.close();
-  }
-
-  @Override
-  public HospitalModel findHospital (long id) {
-    EntityManager entitymanager = emfactory.createEntityManager();
-    return entitymanager.find(HospitalModel.class, id);
-  }
-
-  @Override
-  public List<HospitalModel> getAllHospitals () {
-    EntityManager entitymanager = emfactory.createEntityManager();
-    return entitymanager.createQuery("SELECT e FROM HospitalModel e", HospitalModel.class).getResultList();
+  public List<HospitalModel> getAllHospitalsByHospitalType(HospitalTypeEnum hospitalTypeEnum) {
+    return super.getEntitymanager().createQuery("SELECT e FROM HospitalModel e WHERE e.hospitalType =:param", HospitalModel.class).setParameter("param", hospitalTypeEnum).getResultList();
   }
 }

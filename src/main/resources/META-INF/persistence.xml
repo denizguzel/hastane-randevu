@@ -12,7 +12,6 @@
     <class>com.hastanerandevu.model.DistrictModel</class>
     <class>com.hastanerandevu.model.HospitalModel</class>
     <class>com.hastanerandevu.model.BranchModel</class>
-    <class>com.hastanerandevu.model.SecretQuestionModel</class>
     <class>com.hastanerandevu.model.DoctorModel</class>
     <class>com.hastanerandevu.model.PatientModel</class>
     <class>com.hastanerandevu.model.AlergyModel</class>

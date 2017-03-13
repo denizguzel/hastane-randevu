@@ -2,6 +2,7 @@ package com.hastanerandevu.model;
 
 import com.hastanerandevu.enums.BloodGroupEnum;
 import com.hastanerandevu.enums.GenderEnum;
+import com.hastanerandevu.enums.SecretQuestionEnum;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -69,9 +70,9 @@ public class PatientModel {
   @Column (name = "BLOOD_GROUP")
   private BloodGroupEnum bloodGroup;
 
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_SECRET_QUESTION")
-  private SecretQuestionModel secretQuestion;
+  @Enumerated (EnumType.STRING)
+  @Column (name = "SECRET_QUESTION")
+  private SecretQuestionEnum secretQuestion;
 
   @OneToMany (mappedBy = "patient")
   private List<AppointmentModel> appointmentModels;
@@ -214,14 +215,6 @@ public class PatientModel {
     this.isActive = isActive;
   }
 
-  public SecretQuestionModel getSecretQuestion () {
-    return secretQuestion;
-  }
-
-  public void setSecretQuestion (SecretQuestionModel secretQuestion) {
-    this.secretQuestion = secretQuestion;
-  }
-
   public String getQuestionAnswer () {
     return questionAnswer;
   }
@@ -292,5 +285,13 @@ public class PatientModel {
 
   public void setBloodGroup (BloodGroupEnum bloodGroup) {
     this.bloodGroup = bloodGroup;
+  }
+
+  public SecretQuestionEnum getSecretQuestion() {
+    return secretQuestion;
+  }
+
+  public void setSecretQuestion(SecretQuestionEnum secretQuestion) {
+    this.secretQuestion = secretQuestion;
   }
 }

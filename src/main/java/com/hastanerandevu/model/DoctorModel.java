@@ -2,6 +2,7 @@ package com.hastanerandevu.model;
 
 import com.hastanerandevu.enums.GenderEnum;
 import com.hastanerandevu.enums.LevelEnum;
+import com.hastanerandevu.enums.SecretQuestionEnum;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -51,9 +52,9 @@ public class DoctorModel {
   @Column (name = "DOCTOR_LEVEL")
   private LevelEnum level;
 
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_SECRET_QUESTION")
-  private SecretQuestionModel secretQuestion;
+  @Enumerated (EnumType.STRING)
+  @Column (name = "SECRET_QUESTION")
+  private SecretQuestionEnum secretQuestion;
 
   @ManyToOne (fetch = FetchType.LAZY)
   @JoinColumn (name = "FK_BRANCH")
@@ -137,14 +138,6 @@ public class DoctorModel {
     this.isActive = isActive;
   }
 
-  public SecretQuestionModel getSecretQuestion () {
-    return secretQuestion;
-  }
-
-  public void setSecretQuestion (SecretQuestionModel secretQuestion) {
-    this.secretQuestion = secretQuestion;
-  }
-
   public BranchModel getBranch () {
     return branch;
   }
@@ -183,5 +176,13 @@ public class DoctorModel {
 
   public void setLevel (LevelEnum level) {
     this.level = level;
+  }
+
+  public SecretQuestionEnum getSecretQuestion() {
+    return secretQuestion;
+  }
+
+  public void setSecretQuestion(SecretQuestionEnum secretQuestion) {
+    this.secretQuestion = secretQuestion;
   }
 }

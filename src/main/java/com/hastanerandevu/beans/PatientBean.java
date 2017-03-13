@@ -69,7 +69,7 @@ public class PatientBean implements Serializable {
       verifyCaptcha = CaptchaValidator.validate(facesContext);
     }
 
-    boolean verifyLogin = patientService.getPatientDao().login(patientModel);
+    boolean verifyLogin = patientService.loginPatient(patientModel);
     if ( showCaptcha ) {
       if ( verifyCaptcha ) {
         login = true;
@@ -90,7 +90,7 @@ public class PatientBean implements Serializable {
 
   public String validateCreate () {
     patientModel.setPassword(PasswordEncryptor.encryptPassword(patientModel.getPassword()));
-    patientService.getPatientDao().create(patientModel);
+    patientService.createPatient(patientModel);
     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Kayıt başarılı", null));
     return "/";
   }

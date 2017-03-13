@@ -2,6 +2,7 @@ package com.hastanerandevu.dao.impl;
 
 import com.hastanerandevu.constants.ProjectConstants;
 import com.hastanerandevu.converter.PasswordEncryptor;
+import com.hastanerandevu.dao.PatientDao;
 import com.hastanerandevu.model.PatientModel;
 import com.hastanerandevu.utility.SessionUtils;
 
@@ -12,14 +13,14 @@ import javax.persistence.Query;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-public class PatientDaoImpl extends BaseDaoImpl<PatientModel> {
+public class PatientDaoImpl extends BaseDaoImpl<PatientModel> implements PatientDao{
 
-  public boolean login (PatientModel patientModel) {
-    EntityManagerFactory emfactory     = Persistence.createEntityManagerFactory(ProjectConstants.persistenceUnitName);
+  public boolean loginPatient (PatientModel patientModel) {
+    /*EntityManagerFactory emfactory     = Persistence.createEntityManagerFactory(ProjectConstants.persistenceUnitName);
     EntityManager        entitymanager = emfactory.createEntityManager();
-    entitymanager.getTransaction().begin();
+    entitymanager.getTransaction().begin();*/
 
-    Query query = entitymanager.createQuery("SELECT e FROM PatientModel e WHERE e.tcNumber = :TC_NUMBER AND e.password = :PASSWORD");
+    Query query = super.getEntitymanager().createQuery("SELECT e FROM PatientModel e WHERE e.tcNumber = :TC_NUMBER AND e.password = :PASSWORD");
     query.setParameter("TC_NUMBER", patientModel.getTcNumber()).setParameter("PASSWORD", PasswordEncryptor.encryptPassword(patientModel.getPassword()));
 
     @SuppressWarnings ("unchecked") List<PatientModel> list = (List<PatientModel>) query.getResultList();
@@ -32,4 +33,5 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientModel> {
       return false;
     }
   }
+
 }

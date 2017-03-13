@@ -3,11 +3,18 @@ package com.hastanerandevu.service;
 import com.hastanerandevu.model.PatientModel;
 
 import java.util.Date;
+import java.util.List;
 
 public interface PatientService {
-  boolean createPatient (String firstName, String lastName, String password, String tcNumber, Date birthDate, String birthPlace, String email, String phoneNumber, String address, String fatherName, String motherName);
+  boolean loginPatient (PatientModel patientModel);
 
-  boolean loginPatient (String tcNumber, String password);
+  void createPatient(PatientModel patientModel);
+
+  void updatePatient (long id, PatientModel patientModel);
+
+  void deletePatient (long id);
 
   PatientModel findPatient (long id);
+
+  List<PatientModel> getAllPatients ();
 }
