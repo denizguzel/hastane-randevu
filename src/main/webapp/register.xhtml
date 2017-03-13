@@ -27,9 +27,18 @@
               <div class="form-group">
                 <h:inputSecret id="password" value="#{patient.patientModel.password}" p:placeholder="Şifrenizi giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen şifrenizi giriniz">
                   <f:validator validatorId="password"/>
-                  <f:ajax event="blur" execute="@this" render="passwordMessage"/>
+                  <f:attribute name="passwordConfirm" value="#{passwordConfirm}"/>
+                  <f:ajax event="blur" execute="password passwordConfirm" render="passwordMessage"/>
                 </h:inputSecret>
                 <h:message id="passwordMessage" for="password" errorClass="error"/>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <h:inputSecret id="passwordConfirm" value="#{patient.patientModel.password}" binding="#{passwordConfirm}" p:placeholder="Şifrenizi tekrar giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen şifrenizi tekrar giriniz">
+                  <f:ajax event="blur" execute="password passwordConfirm" render="passwordConfirmMessage"/>
+                </h:inputSecret>
+                <h:message id="passwordConfirmMessage" for="passwordConfirm" errorClass="error"/>
               </div>
             </div>
             <div class="col-md-6">
@@ -97,6 +106,13 @@
                   <f:ajax event="blur" execute="@this" render="mothernameMessage"/>
                 </h:inputText>
                 <h:message id="mothernameMessage" for="mothername" errorClass="error"/>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <h:selectOneMenu styleClass="selectpicker form-control" value="#{patient.patientModel.secretQuestion}">
+                  <f:selectItems value="#{patient.secretQuestionEnums}" var="secretQuestionGroup" itemValue="#{secretQuestionGroup}" itemLabel="#{messages['string.'.concat(secretQuestionGroup)]}"/>
+                </h:selectOneMenu>
               </div>
             </div>
             <div class="col-md-6">

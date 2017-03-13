@@ -3,6 +3,7 @@ package com.hastanerandevu.beans;
 import com.hastanerandevu.converter.PasswordEncryptor;
 import com.hastanerandevu.enums.BloodGroupEnum;
 import com.hastanerandevu.enums.GenderEnum;
+import com.hastanerandevu.enums.SecretQuestionEnum;
 import com.hastanerandevu.model.PatientModel;
 import com.hastanerandevu.service.PatientServiceImpl;
 import com.hastanerandevu.utility.SessionUtils;
@@ -21,9 +22,10 @@ import java.io.Serializable;
 public class PatientBean implements Serializable {
   private PatientServiceImpl patientService = new PatientServiceImpl();
   private PatientModel patientModel = new PatientModel();
+
   private BloodGroupEnum[] bloodGroupEnums = BloodGroupEnum.values();
   private GenderEnum[] genderEnums = GenderEnum.values();
-
+  private SecretQuestionEnum[] secretQuestionEnums = SecretQuestionEnum.values();
 
   private int loginCounter = 0;
   private boolean showCaptcha = false;
@@ -56,6 +58,10 @@ public class PatientBean implements Serializable {
 
   public GenderEnum[] getGenderEnums () {
     return genderEnums;
+  }
+
+  public SecretQuestionEnum[] getSecretQuestionEnums () {
+    return secretQuestionEnums;
   }
 
   public String validateLogin () throws IOException {
