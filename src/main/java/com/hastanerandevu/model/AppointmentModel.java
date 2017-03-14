@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table (name = "appointment")
+@Table (name = "T_APPOINTMENT")
 public class AppointmentModel {
 
   @Id
@@ -27,7 +27,7 @@ public class AppointmentModel {
   private char isActive;
 
   @Enumerated (EnumType.STRING)
-  @JoinColumn (name = "APPOINTMENT_STATUS")
+  @Column (name = "APPOINTMENT_STATUS")
   private AppointmentStatusEnum appointmentStatus;
 
   @ManyToOne (fetch = FetchType.LAZY)
