@@ -26,6 +26,10 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
     return entitymanager;
   }
 
+  public EntityManagerFactory getEmfactory () {
+    return emfactory;
+  }
+
   @Override
   public void create (T model) {
     try {

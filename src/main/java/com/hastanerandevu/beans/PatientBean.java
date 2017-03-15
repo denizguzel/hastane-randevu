@@ -11,14 +11,14 @@ import com.hastanerandevu.validation.CaptchaValidator;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.Serializable;
 
 @ManagedBean (name = "patient")
-@SessionScoped
+@ViewScoped
 public class PatientBean implements Serializable {
   private PatientServiceImpl patientService = new PatientServiceImpl();
   private PatientModel patientModel = new PatientModel();
@@ -97,7 +97,6 @@ public class PatientBean implements Serializable {
   public String validateCreate () {
     patientModel.setPassword(PasswordEncryptor.encryptPassword(patientModel.getPassword()));
     patientService.create(patientModel);
-    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Kayıt başarılı", null));
     return "/";
   }
 
