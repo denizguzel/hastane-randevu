@@ -2,6 +2,7 @@ package com.hastanerandevu.dao;
 
 import com.hastanerandevu.converter.PasswordEncryptor;
 import com.hastanerandevu.enums.AppointmentStatusEnum;
+import com.hastanerandevu.model.AppointmentModel;
 import com.hastanerandevu.model.PatientModel;
 import com.hastanerandevu.utility.SessionUtils;
 
@@ -14,9 +15,15 @@ import java.util.List;
 
 public class PatientDaoImpl extends BaseDaoImpl<PatientModel> {
 
-  @Override
-  public void create (PatientModel model) {
-    Query emailQuery = getEntitymanager().createQuery("SELECT e FROM PatientModel e WHERE e.email = :EMAIL");
+  public void createPatient(PatientModel patientModel) {
+    if (haveUserRegistration(patientModel)) {
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bu kullanıcı sistemde zaten kayıtlı", null));
+    } else {
+      create(patientModel);
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Kayıt Başarılı", null));
+    }
+
+    /*Query emailQuery = getEntitymanager().createQuery("SELECT e FROM PatientModel e WHERE e.email = :EMAIL");
     emailQuery.setParameter("EMAIL", model.getEmail());
     List emailList = emailQuery.getResultList();
     if ( !emailList.isEmpty() )
@@ -45,17 +52,17 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientModel> {
           }
         }
       }
-    }
+    }*/
   }
 
-  public boolean loginPatient (PatientModel model) {
+  public boolean loginPatient(PatientModel model) {
 
     Query query = getEntitymanager().createQuery("SELECT e FROM PatientModel e WHERE e.tcNumber = :TC_NUMBER AND e.password = :PASSWORD");
     query.setParameter("TC_NUMBER", model.getTcNumber()).setParameter("PASSWORD", PasswordEncryptor.encryptPassword(model.getPassword()));
 
-    @SuppressWarnings ("unchecked") List<PatientModel> list = (List<PatientModel>) query.getResultList();
+    @SuppressWarnings("unchecked") List<PatientModel> list = (List<PatientModel>) query.getResultList();
 
-    if ( list.size() > 0 ) {
+    if (list.size() > 0) {
       HttpSession session = SessionUtils.getSession();
       session.setAttribute("firstName", list.get(0).getFirstName());
       return true;
@@ -65,7 +72,7 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientModel> {
   }
 
   // HASTANIN HALI HAZIRDA OLAN RANDEVU SAYISI. ÜÇÜ GEÇİP GEÇMEDİĞİNİN KONTROLU BURDAN YAPILACAK.
-  public long getNumberOfPatientAppointments (PatientModel model) {
+  public long getNumberOfPatientAppointments(PatientModel model) {
     Query query = getEntitymanager().createQuery("SELECT COUNT(id) FROM AppointmentModel e WHERE e.appointmentStatus = :APPOINTMENT_STATUS" + " AND e.patient = :PATIENT AND e.isActive = :IS_ACTIVE");
 
     query.setParameter("APPOINTMENT_STATUS", AppointmentStatusEnum.RESERVED);
@@ -76,7 +83,7 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientModel> {
   }
 
   // HASTANIN O GUNE GECERLI RANDEVUSU OLUP OLMADIGI BILGISI.. AYNI GUNE RANDEVU ALINAMAMASI KONTROLU BURDAN YAPILACAK.
-  public boolean haveAnAppointmentForThatDay (PatientModel model, Date date) {
+  public boolean haveAnAppointmentForThatDay(PatientModel model, Date date) {
     Query query = getEntitymanager().createQuery("SELECT e FROM AppointmentModel e WHERE e.appointmentStatus =: APPOINTMENT_STATUS" + " AND e.patient =:PATIENT AND e.isActive =:IS_ACTIVE AND e.appointmentDate =: DATE");
 
     query.setParameter("APPOINTMENT_STATUS", AppointmentStatusEnum.RESERVED);
@@ -84,6 +91,24 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientModel> {
     query.setParameter("DATE", date);
     query.setParameter("IS_ACTIVE", '1');
 
-    return query.getResultList().size() > 0;
+    return query.getResultList().size() > 0 ? true : false;
+  }
+
+  //HASTANIN RANDEVU GECMISI
+  public List<AppointmentModel> getAppointmentHistory(PatientModel patientModel) {
+    Query query = getEntitymanager().createQuery("SELECT e FROM AppointmentModel e WHERE e.patient =: PATIENT  AND e.isActive =: IS_ACTIVE ORDER BY e.creationTime");
+    query.setParameter("IS_ACTIVE",'1');
+    return query.getResultList();
+  }
+
+  //GIRILEN BILGILERE DAIR SISTEMDE HASTA KAYDI VAR MI?
+  public boolean haveUserRegistration(PatientModel patientModel) {
+    Query emailQuery = getEntitymanager().createQuery("SELECT e FROM PatientModel e WHERE e.tcNumber =: TC_NUMBER").setParameter("TC_NUMBER", patientModel.getTcNumber());
+    Query tcQuery = getEntitymanager().createQuery("SELECT e FROM PatientModel e WHERE e.email =: E_MAIL").setParameter("E_MAIL", patientModel.getEmail());
+
+    if (emailQuery.getResultList().size() > 0 || tcQuery.getResultList().size() > 0) {
+      return true;
+    } else
+      return false;
   }
 }

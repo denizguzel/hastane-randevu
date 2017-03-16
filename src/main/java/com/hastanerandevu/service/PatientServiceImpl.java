@@ -1,6 +1,7 @@
 package com.hastanerandevu.service;
 
 import com.hastanerandevu.dao.PatientDaoImpl;
+import com.hastanerandevu.model.AppointmentModel;
 import com.hastanerandevu.model.PatientModel;
 
 import java.util.Date;
@@ -16,7 +17,7 @@ public class PatientServiceImpl implements BaseService<PatientModel> {
 
   @Override
   public void create (PatientModel model) {
-    patientDao.create(model);
+    patientDao.createPatient(model);
   }
 
   @Override
@@ -45,5 +46,9 @@ public class PatientServiceImpl implements BaseService<PatientModel> {
 
   public boolean haveAnAppointmentForThatDay (PatientModel patientModel, Date date) {
     return patientDao.haveAnAppointmentForThatDay(patientModel, date);
+  }
+
+  public List<AppointmentModel> getAppointmentHistory(PatientModel patientModel){
+    return patientDao.getAppointmentHistory(patientModel);
   }
 }
