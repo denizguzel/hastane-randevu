@@ -11,14 +11,14 @@ import com.hastanerandevu.validation.CaptchaValidator;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.Serializable;
 
 @ManagedBean (name = "patient")
-@ViewScoped
+@SessionScoped
 public class PatientBean implements Serializable {
   private PatientServiceImpl patientService = new PatientServiceImpl();
   private PatientModel patientModel = new PatientModel();
@@ -30,14 +30,14 @@ public class PatientBean implements Serializable {
   private int loginCounter = 0;
   private boolean showCaptcha = false;
   private boolean verifyCaptcha = false;
-  private boolean login = false;
+  private boolean verifyLogin = false;
 
-  public boolean isLogin () {
-    return login;
+  public boolean isVerifyLogin () {
+    return verifyLogin;
   }
 
-  public void setLogin (boolean login) {
-    this.login = login;
+  public void setVerifyLogin (boolean verifyLogin) {
+    this.verifyLogin = verifyLogin;
   }
 
   public boolean isShowCaptcha () {
@@ -65,7 +65,6 @@ public class PatientBean implements Serializable {
   }
 
   public String validateLogin () throws IOException {
-
     loginCounter += 1;
     if ( loginCounter > 2 ) {
       showCaptcha = true;
@@ -75,10 +74,9 @@ public class PatientBean implements Serializable {
       verifyCaptcha = CaptchaValidator.validate(facesContext);
     }
 
-    boolean verifyLogin = patientService.loginPatient(patientModel);
+    verifyLogin = patientService.loginPatient(patientModel);
     if ( showCaptcha ) {
       if ( verifyCaptcha ) {
-        login = true;
         return "view/dashboard?faces-redirect=true";
       } else {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bilgileri kontrol ediniz", null));
@@ -86,7 +84,6 @@ public class PatientBean implements Serializable {
       }
     }
     if ( verifyLogin ) {
-      login = true;
       return "view/dashboard?faces-redirect=true";
     } else {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bilgileri kontrol ediniz", null));

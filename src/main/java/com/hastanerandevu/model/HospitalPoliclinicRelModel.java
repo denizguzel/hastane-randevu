@@ -4,8 +4,6 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-// TODO service ve dao gerekli
-
 @Entity
 @Table (name = "hospital_policlinic_rel")
 public class HospitalPoliclinicRelModel {

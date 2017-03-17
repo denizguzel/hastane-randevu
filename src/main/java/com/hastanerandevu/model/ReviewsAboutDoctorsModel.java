@@ -3,7 +3,6 @@ package com.hastanerandevu.model;
 import javax.persistence.*;
 import java.util.Date;
 
-// TODO service ve dao yapısı gerekli
 @Entity
 @Table (name = "reviews_about_doctors")
 public class ReviewsAboutDoctorsModel {

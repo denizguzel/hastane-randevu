@@ -3,7 +3,6 @@ package com.hastanerandevu.model;
 import javax.persistence.*;
 import java.util.Date;
 
-// TODO service ve dao gerekli
 @Entity
 @Table (name = "patient_disease_rel")
 public class PatientDiseaseRelModel {

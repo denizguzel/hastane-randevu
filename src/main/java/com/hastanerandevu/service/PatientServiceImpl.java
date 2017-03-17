@@ -48,7 +48,7 @@ public class PatientServiceImpl implements BaseService<PatientModel> {
     return patientDao.haveAnAppointmentForThatDay(patientModel, date);
   }
 
-  public List<AppointmentModel> getAppointmentHistory(PatientModel patientModel){
+  public List<AppointmentModel> getAppointmentHistory (PatientModel patientModel) {
     return patientDao.getAppointmentHistory(patientModel);
   }
 }

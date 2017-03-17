@@ -3,7 +3,7 @@
 
   <ui:define name="content">
     <div class="container">
-      <h:panelGroup rendered="#{!patient.login}">
+      <h:panelGroup rendered="#{!patient.verifyLogin}">
         <div class="card">
           <div class="card-header">Giriş</div>
           <div class="card-block">
@@ -33,7 +33,7 @@
           </div>
         </div>
       </h:panelGroup>
-      <h:panelGroup rendered="#{patient.login}">
+      <h:panelGroup rendered="#{patient.verifyLogin}">
         <div class="card">
           <div class="card-header">Hoşgeldin ${session.getAttribute("firstName")}</div>
           <div class="card-block">
