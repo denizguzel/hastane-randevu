@@ -9,178 +9,178 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table (name = "T_DOCTOR")
+@Table(name = "T_DOCTOR")
 public class DoctorModel {
 
   @Id
-  @GeneratedValue (generator = "doctor_pk")
-  @SequenceGenerator (name = "doctor_pk", sequenceName = "SEQ_DOCTOR_PK", allocationSize = 1)
-  @Column (name = "PK")
+  @GeneratedValue(generator = "doctor_pk")
+  @SequenceGenerator(name = "doctor_pk", sequenceName = "SEQ_DOCTOR_PK", allocationSize = 1)
+  @Column(name = "PK")
   private long pk;
 
-  @Column (name = "FIRST_NAME")
+  @Column(name = "FIRST_NAME")
   private String firstName;
 
-  @Column (name = "LAST_NAME")
+  @Column(name = "LAST_NAME")
   private String lastName;
 
-  @Column (name = "DATE_OF_BIRTH")
+  @Column(name = "DATE_OF_BIRTH")
   private Date dateOfBirth;
 
-  @Column (name = "RECORD_NUMBER")
+  @Column(name = "RECORD_NUMBER")
   private String recordNumber;
 
-  @Column (name = "QUESTION_ANSWER")
+  @Column(name = "QUESTION_ANSWER")
   private String questionAnswer;
 
-  @Column (name = "CREATION_TIME", insertable = false, updatable = false)
+  @Column(name = "CREATION_TIME", insertable = false, updatable = false)
   private Date creationTime;
 
-  @Column (name = "MODIFIED_TIME", insertable = false, updatable = false)
+  @Column(name = "MODIFIED_TIME", insertable = false, updatable = false)
   private Date modifiedTime;
 
-  @Column (name = "IS_ACTIVE", insertable = false)
+  @Column(name = "IS_ACTIVE", insertable = false)
   private char isActive;
 
-  @Enumerated (EnumType.STRING)
-  @Column (name = "GENDER")
+  @Enumerated(EnumType.STRING)
+  @Column(name = "GENDER")
   private GenderEnum gender;
 
-  @Enumerated (EnumType.STRING)
-  @Column (name = "DOCTOR_LEVEL")
+  @Enumerated(EnumType.STRING)
+  @Column(name = "DOCTOR_LEVEL")
   private LevelEnum level;
 
-  @Enumerated (EnumType.STRING)
-  @Column (name = "SECRET_QUESTION")
+  @Enumerated(EnumType.STRING)
+  @Column(name = "SECRET_QUESTION")
   private SecretQuestionEnum secretQuestion;
 
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_BRANCH")
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "FK_BRANCH")
   private BranchModel branch;
 
-  @OneToMany (mappedBy = "doctor")
+  @OneToMany(mappedBy = "doctor")
   private List<InspectionPlaceDoctorRelModel> inspectionPlaceDoctorRelModels;
 
-  @OneToMany (mappedBy = "doctor")
+  @OneToMany(mappedBy = "doctor")
   private List<ReviewsAboutDoctorsModel> reviewsAboutDoctorsModels;
 
-  public long getPk () {
+  public long getPk() {
     return pk;
   }
 
-  public void setPk (long pk) {
+  public void setPk(long pk) {
     this.pk = pk;
   }
 
-  public String getFirstName () {
+  public String getFirstName() {
     return firstName;
   }
 
-  public void setFirstName (String firstName) {
+  public void setFirstName(String firstName) {
     this.firstName = firstName;
   }
 
-  public String getLastName () {
+  public String getLastName() {
     return lastName;
   }
 
-  public void setLastName (String lastName) {
+  public void setLastName(String lastName) {
     this.lastName = lastName;
   }
 
-  public Date getDateOfBirth () {
+  public Date getDateOfBirth() {
     return dateOfBirth;
   }
 
-  public void setDateOfBirth (Date dateOfBirth) {
+  public void setDateOfBirth(Date dateOfBirth) {
     this.dateOfBirth = dateOfBirth;
   }
 
-  public String getRecordNumber () {
+  public String getRecordNumber() {
     return recordNumber;
   }
 
-  public void setRecordNumber (String recordNumber) {
+  public void setRecordNumber(String recordNumber) {
     this.recordNumber = recordNumber;
   }
 
-  public String getQuestionAnswer () {
+  public String getQuestionAnswer() {
     return questionAnswer;
   }
 
-  public void setQuestionAnswer (String questionAnswer) {
+  public void setQuestionAnswer(String questionAnswer) {
     this.questionAnswer = questionAnswer;
   }
 
-  public Date getCreationTime () {
+  public Date getCreationTime() {
     return creationTime;
   }
 
-  public void setCreationTime (Date creationTime) {
+  public void setCreationTime(Date creationTime) {
     this.creationTime = creationTime;
   }
 
-  public Date getModifiedTime () {
+  public Date getModifiedTime() {
     return modifiedTime;
   }
 
-  public void setModifiedTime (Date modifiedTime) {
+  public void setModifiedTime(Date modifiedTime) {
     this.modifiedTime = modifiedTime;
   }
 
-  public char getIsActive () {
+  public char getIsActive() {
     return isActive;
   }
 
-  public void setIsActive (char isActive) {
+  public void setIsActive(char isActive) {
     this.isActive = isActive;
   }
 
-  public BranchModel getBranch () {
+  public BranchModel getBranch() {
     return branch;
   }
 
-  public void setBranch (BranchModel branch) {
+  public void setBranch(BranchModel branch) {
     this.branch = branch;
   }
 
-  public List<InspectionPlaceDoctorRelModel> getInspectionPlaceDoctorRelModels () {
+  public List<InspectionPlaceDoctorRelModel> getInspectionPlaceDoctorRelModels() {
     return inspectionPlaceDoctorRelModels;
   }
 
-  public void setInspectionPlaceDoctorRelModels (List<InspectionPlaceDoctorRelModel> inspectionPlaceDoctorRelModels) {
+  public void setInspectionPlaceDoctorRelModels(List<InspectionPlaceDoctorRelModel> inspectionPlaceDoctorRelModels) {
     this.inspectionPlaceDoctorRelModels = inspectionPlaceDoctorRelModels;
   }
 
-  public List<ReviewsAboutDoctorsModel> getReviewsAboutDoctorsModels () {
+  public List<ReviewsAboutDoctorsModel> getReviewsAboutDoctorsModels() {
     return reviewsAboutDoctorsModels;
   }
 
-  public void setReviewsAboutDoctorsModels (List<ReviewsAboutDoctorsModel> reviewsAboutDoctorsModels) {
+  public void setReviewsAboutDoctorsModels(List<ReviewsAboutDoctorsModel> reviewsAboutDoctorsModels) {
     this.reviewsAboutDoctorsModels = reviewsAboutDoctorsModels;
   }
 
-  public GenderEnum getGender () {
+  public GenderEnum getGender() {
     return gender;
   }
 
-  public void setGender (GenderEnum gender) {
+  public void setGender(GenderEnum gender) {
     this.gender = gender;
   }
 
-  public LevelEnum getLevel () {
+  public LevelEnum getLevel() {
     return level;
   }
 
-  public void setLevel (LevelEnum level) {
+  public void setLevel(LevelEnum level) {
     this.level = level;
   }
 
-  public SecretQuestionEnum getSecretQuestion () {
+  public SecretQuestionEnum getSecretQuestion() {
     return secretQuestion;
   }
 
-  public void setSecretQuestion (SecretQuestionEnum secretQuestion) {
+  public void setSecretQuestion(SecretQuestionEnum secretQuestion) {
     this.secretQuestion = secretQuestion;
   }
 }

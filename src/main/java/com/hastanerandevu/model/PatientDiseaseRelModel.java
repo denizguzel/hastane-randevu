@@ -4,88 +4,88 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table (name = "T_PATIENT_DISEASE_REL")
+@Table(name = "T_PATIENT_DISEASE_REL")
 public class PatientDiseaseRelModel {
 
   @Id
-  @Column (name = "PK")
-  @GeneratedValue (generator = "patient_disease_pk")
-  @SequenceGenerator (name = "patient_disease_pk", sequenceName = "SEQ_PATIENT_DISEASE_PK", allocationSize = 1)
+  @Column(name = "PK")
+  @GeneratedValue(generator = "patient_disease_pk")
+  @SequenceGenerator(name = "patient_disease_pk", sequenceName = "SEQ_PATIENT_DISEASE_PK", allocationSize = 1)
   private long pk;
 
-  @Column (name = "IS_STILL_PASS")
+  @Column(name = "IS_STILL_PASS")
   private char isStillPass;
 
-  @Column (name = "CREATION_TIME",insertable = false, updatable = false)
+  @Column(name = "CREATION_TIME", insertable = false, updatable = false)
   private Date creationTime;
 
-  @Column (name = "MODIFIED_TIME",insertable = false, updatable = false)
+  @Column(name = "MODIFIED_TIME", insertable = false, updatable = false)
   private Date modifiedTime;
 
-  @Column (name = "IS_ACTIVE",insertable = false)
+  @Column(name = "IS_ACTIVE", insertable = false)
   private char isActive;
 
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_PATIENT")
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "FK_PATIENT")
   private PatientModel patient;
 
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_DISEASE")
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "FK_DISEASE")
   private DiseaseModel disease;
 
-  public long getPk () {
+  public long getPk() {
     return pk;
   }
 
-  public void setPk (long pk) {
+  public void setPk(long pk) {
     this.pk = pk;
   }
 
-  public char getIsStillPass () {
+  public char getIsStillPass() {
     return isStillPass;
   }
 
-  public void setIsStillPass (char isStillPass) {
+  public void setIsStillPass(char isStillPass) {
     this.isStillPass = isStillPass;
   }
 
-  public Date getCreationTime () {
+  public Date getCreationTime() {
     return creationTime;
   }
 
-  public void setCreationTime (Date creationTime) {
+  public void setCreationTime(Date creationTime) {
     this.creationTime = creationTime;
   }
 
-  public Date getModifiedTime () {
+  public Date getModifiedTime() {
     return modifiedTime;
   }
 
-  public void setModifiedTime (Date modifiedTime) {
+  public void setModifiedTime(Date modifiedTime) {
     this.modifiedTime = modifiedTime;
   }
 
-  public char getIsActive () {
+  public char getIsActive() {
     return isActive;
   }
 
-  public void setIsActive (char isActive) {
+  public void setIsActive(char isActive) {
     this.isActive = isActive;
   }
 
-  public PatientModel getPatient () {
+  public PatientModel getPatient() {
     return patient;
   }
 
-  public void setPatient (PatientModel patient) {
+  public void setPatient(PatientModel patient) {
     this.patient = patient;
   }
 
-  public DiseaseModel getDisease () {
+  public DiseaseModel getDisease() {
     return disease;
   }
 
-  public void setDisease (DiseaseModel disease) {
+  public void setDisease(DiseaseModel disease) {
     this.disease = disease;
   }
 }

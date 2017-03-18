@@ -30,7 +30,6 @@
     <class>com.hastanerandevu.model.AppointmentModel</class>
     <class>com.hastanerandevu.model.InspectionPlaceDoctorRelModel</class>
     <class>com.hastanerandevu.model.FrequentlyAskedQuestionsModel</class>
-
     <class>com.hastanerandevu.model.ReviewsAboutDoctorsModel</class>
 
     <properties>
@@ -39,8 +38,6 @@
       <property name="javax.persistence.jdbc.password" value="hospital123"/>
       <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
       <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
-
-      <!--<property name="hibernate.hbm2ddl.auto" value="update"/>-->
     </properties>
 
   </persistence-unit>

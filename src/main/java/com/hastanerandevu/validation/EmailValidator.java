@@ -11,19 +11,19 @@ import javax.faces.validator.ValidatorException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@FacesValidator ("email")
+@FacesValidator("email")
 public class EmailValidator implements Validator {
 
   private Pattern pattern;
 
-  public EmailValidator () {
+  public EmailValidator() {
     pattern = Pattern.compile(ProjectConstants.EMAIL_PATTERN);
   }
 
-  public void validate (FacesContext context, UIComponent component, Object value) throws ValidatorException {
+  public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
 
     Matcher matcher = pattern.matcher(value.toString());
-    if ( !matcher.matches() ) {
+    if(!matcher.matches()) {
 
       FacesMessage msg = new FacesMessage("E-mail doğrulaması hatalı.", "Geçersiz e-mail adresi.");
       msg.setSeverity(FacesMessage.SEVERITY_ERROR);

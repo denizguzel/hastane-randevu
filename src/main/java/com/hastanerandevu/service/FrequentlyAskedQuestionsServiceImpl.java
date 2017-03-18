@@ -9,27 +9,27 @@ public class FrequentlyAskedQuestionsServiceImpl implements BaseService<Frequent
   private FrequentlyAskedQuestionsDaoImpl frequentlyAskedQuestionsDao = new FrequentlyAskedQuestionsDaoImpl();
 
   @Override
-  public void create (FrequentlyAskedQuestionsModel model) {
+  public void create(FrequentlyAskedQuestionsModel model) {
     frequentlyAskedQuestionsDao.create(model);
   }
 
   @Override
-  public void update (long id, FrequentlyAskedQuestionsModel model) {
+  public void update(long id, FrequentlyAskedQuestionsModel model) {
     frequentlyAskedQuestionsDao.update(id, model);
   }
 
   @Override
-  public void delete (long id) {
+  public void delete(long id) {
     frequentlyAskedQuestionsDao.delete(id);
   }
 
   @Override
-  public FrequentlyAskedQuestionsModel find (long id) {
+  public FrequentlyAskedQuestionsModel find(long id) {
     return frequentlyAskedQuestionsDao.find(id);
   }
 
   @Override
-  public List<FrequentlyAskedQuestionsModel> findAll () {
+  public List<FrequentlyAskedQuestionsModel> findAll() {
     return frequentlyAskedQuestionsDao.findAll();
   }
 }

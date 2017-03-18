@@ -6,6 +6,7 @@ import com.hastanerandevu.enums.GenderEnum;
 import com.hastanerandevu.enums.SecretQuestionEnum;
 import com.hastanerandevu.model.PatientModel;
 import com.hastanerandevu.service.PatientServiceImpl;
+import com.hastanerandevu.utility.Mailer;
 import com.hastanerandevu.utility.SessionUtils;
 import com.hastanerandevu.validation.CaptchaValidator;
 
@@ -22,6 +23,7 @@ import static org.hibernate.ejb.EntityManagerImpl.LOG;
 @ManagedBean(name = "patient")
 @SessionScoped
 public class PatientBean implements Serializable {
+  private Mailer mailer = new Mailer();
   private PatientServiceImpl patientService = new PatientServiceImpl();
   private PatientModel patientModel = new PatientModel();
 
@@ -68,16 +70,16 @@ public class PatientBean implements Serializable {
 
   public String validateLogin() throws IOException {
     loginCounter += 1;
-    if (loginCounter > 2) {
+    if(loginCounter > 2) {
       showCaptcha = true;
     }
-    if (showCaptcha) {
+    if(showCaptcha) {
       FacesContext facesContext = FacesContext.getCurrentInstance();
       verifyCaptcha = CaptchaValidator.validate(facesContext);
     }
 
     //GIRILEN BILGILERE GORE KULLANICI VARSA BU KULLANICI MODELINI BEAN MODELINE ATA
-    if (patientService.loginPatient(patientModel) != null) {
+    if(patientService.loginPatient(patientModel) != null) {
       patientModel = patientService.loginPatient(patientModel);
       HttpSession session = SessionUtils.getSession();
       session.setAttribute("firstName", patientModel.getFirstName());
@@ -85,15 +87,15 @@ public class PatientBean implements Serializable {
     } else
       verifyLogin = false;
 
-    if (showCaptcha) {
-      if (verifyCaptcha) {
+    if(showCaptcha) {
+      if(verifyCaptcha) {
         return "view/dashboard?faces-redirect=true";
       } else {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bilgileri kontrol ediniz", null));
         return "/";
       }
     }
-    if (verifyLogin) {
+    if(verifyLogin) {
       return "view/dashboard?faces-redirect=true";
     } else {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bilgileri kontrol ediniz", null));
@@ -102,14 +104,15 @@ public class PatientBean implements Serializable {
   }
 
   public String validateCreate() {
-    if (patientService.haveUserRegistration(patientModel)) {
+    if(patientService.haveUserRegistration(patientModel)) {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bu kullanıcı sistemde zaten kayıtlı", null));
     } else {
       patientModel.setPassword(PasswordEncryptor.encryptPassword(patientModel.getPassword()));
       try {
         patientService.create(patientModel);
+        mailer.sendMail(patientModel);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Kayıt Başarılı", null));
-      } catch (Exception e) {
+      } catch(Exception e) {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Kayıt Başarısız", null));
         LOG.info(e.getMessage());
       }
@@ -122,5 +125,4 @@ public class PatientBean implements Serializable {
     session.invalidate();
     return "/index?faces-redirect=true";
   }
-
 }

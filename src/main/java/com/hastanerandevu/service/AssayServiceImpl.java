@@ -9,27 +9,27 @@ public class AssayServiceImpl implements BaseService<AssayModel> {
   private AssayDaoImpl assayDao = new AssayDaoImpl();
 
   @Override
-  public void create (AssayModel model) {
+  public void create(AssayModel model) {
     assayDao.create(model);
   }
 
   @Override
-  public void update (long id, AssayModel model) {
+  public void update(long id, AssayModel model) {
     assayDao.update(id, model);
   }
 
   @Override
-  public void delete (long id) {
+  public void delete(long id) {
     assayDao.delete(id);
   }
 
   @Override
-  public AssayModel find (long id) {
+  public AssayModel find(long id) {
     return assayDao.find(id);
   }
 
   @Override
-  public List<AssayModel> findAll () {
+  public List<AssayModel> findAll() {
     return assayDao.findAll();
   }
 }

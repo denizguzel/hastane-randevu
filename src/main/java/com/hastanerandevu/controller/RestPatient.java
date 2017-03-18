@@ -9,13 +9,13 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 // TODO json işlemleri için
-@Path ("/patient")
+@Path("/patient")
 public class RestPatient {
 
   @GET
-  @Path ("/{id}")
-  @Produces ("application/json;charset=utf-8")
-  public PatientModel getPatientById (@PathParam ("id") long id) {
+  @Path("/{id}")
+  @Produces("application/json;charset=utf-8")
+  public PatientModel getPatientById(@PathParam("id") long id) {
     PatientServiceImpl patientService = new PatientServiceImpl();
     return patientService.find(id);
   }

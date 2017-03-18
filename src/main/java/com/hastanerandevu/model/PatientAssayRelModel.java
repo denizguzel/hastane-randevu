@@ -4,100 +4,100 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table (name = "T_PATIENT_ASSAY_REL")
+@Table(name = "T_PATIENT_ASSAY_REL")
 public class PatientAssayRelModel {
 
   @Id
-  @Column (name = "PK")
-  @GeneratedValue (generator = "patient_assay_pk")
-  @SequenceGenerator (name = "patient_assay_pk", sequenceName = "SEQ_PATIENT_ASSAY_PK", allocationSize = 1)
+  @Column(name = "PK")
+  @GeneratedValue(generator = "patient_assay_pk")
+  @SequenceGenerator(name = "patient_assay_pk", sequenceName = "SEQ_PATIENT_ASSAY_PK", allocationSize = 1)
   private long pk;
 
-  @Column (name = "ASSAY_RESULT")
+  @Column(name = "ASSAY_RESULT")
   private String assayResult;
 
-  @Column (name = "ASSAY_DETAIL")
+  @Column(name = "ASSAY_DETAIL")
   private String assayDetail;
 
-  @Column (name = "CREATION_TIME",insertable = false, updatable = false)
+  @Column(name = "CREATION_TIME", insertable = false, updatable = false)
   private Date creationTime;
 
-  @Column (name = "MODIFIED_TIME",insertable = false, updatable = false)
+  @Column(name = "MODIFIED_TIME", insertable = false, updatable = false)
   private Date modifiedTime;
 
-  @Column (name = "IS_ACTIVE",insertable = false)
+  @Column(name = "IS_ACTIVE", insertable = false)
   private char isActive;
 
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_ASSAY")
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "FK_ASSAY")
   private AssayModel assay;
 
-  @ManyToOne (fetch = FetchType.LAZY)
-  @JoinColumn (name = "FK_PATIENT")
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "FK_PATIENT")
   private PatientModel patient;
 
 
-  public long getPk () {
+  public long getPk() {
     return pk;
   }
 
-  public void setPk (long pk) {
+  public void setPk(long pk) {
     this.pk = pk;
   }
 
-  public String getAssayResult () {
+  public String getAssayResult() {
     return assayResult;
   }
 
-  public void setAssayResult (String assayResult) {
+  public void setAssayResult(String assayResult) {
     this.assayResult = assayResult;
   }
 
-  public String getAssayDetail () {
+  public String getAssayDetail() {
     return assayDetail;
   }
 
-  public void setAssayDetail (String assayDetail) {
+  public void setAssayDetail(String assayDetail) {
     this.assayDetail = assayDetail;
   }
 
-  public Date getCreationTime () {
+  public Date getCreationTime() {
     return creationTime;
   }
 
-  public void setCreationTime (Date creationTime) {
+  public void setCreationTime(Date creationTime) {
     this.creationTime = creationTime;
   }
 
-  public Date getModifiedTime () {
+  public Date getModifiedTime() {
     return modifiedTime;
   }
 
-  public void setModifiedTime (Date modifiedTime) {
+  public void setModifiedTime(Date modifiedTime) {
     this.modifiedTime = modifiedTime;
   }
 
-  public char getIsActive () {
+  public char getIsActive() {
     return isActive;
   }
 
-  public void setIsActive (char isActive) {
+  public void setIsActive(char isActive) {
     this.isActive = isActive;
   }
 
-  public AssayModel getAssay () {
+  public AssayModel getAssay() {
     return assay;
   }
 
-  public void setAssay (AssayModel assay) {
+  public void setAssay(AssayModel assay) {
     this.assay = assay;
   }
 
-  public PatientModel getPatient () {
+  public PatientModel getPatient() {
     return patient;
   }
 
-  public void setPatient (PatientModel patient) {
+  public void setPatient(PatientModel patient) {
     this.patient = patient;
   }
 }

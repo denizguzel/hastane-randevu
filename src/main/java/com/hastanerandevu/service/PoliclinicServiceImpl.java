@@ -9,27 +9,27 @@ public class PoliclinicServiceImpl implements BaseService<PoliclinicModel> {
   private PoliclinicDaoImpl policlinicDao = new PoliclinicDaoImpl();
 
   @Override
-  public void create (PoliclinicModel model) {
+  public void create(PoliclinicModel model) {
     policlinicDao.create(model);
   }
 
   @Override
-  public void update (long id, PoliclinicModel model) {
+  public void update(long id, PoliclinicModel model) {
     policlinicDao.update(id, model);
   }
 
   @Override
-  public void delete (long id) {
+  public void delete(long id) {
     policlinicDao.delete(id);
   }
 
   @Override
-  public PoliclinicModel find (long id) {
+  public PoliclinicModel find(long id) {
     return policlinicDao.find(id);
   }
 
   @Override
-  public List<PoliclinicModel> findAll () {
+  public List<PoliclinicModel> findAll() {
     return policlinicDao.findAll();
   }
 }

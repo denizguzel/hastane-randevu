@@ -11,16 +11,12 @@ import java.util.List;
 
 public class PatientDaoImpl extends BaseDaoImpl<PatientModel> {
 
-  public void createPatient(PatientModel patientModel) {
-    create(patientModel);
-  }
-
   public PatientModel loginPatient(PatientModel patientModel) {
 
     Query query = getEntitymanager().createQuery("SELECT e FROM PatientModel e WHERE e.tcNumber = :TC_NUMBER AND e.password = :PASSWORD");
     query.setParameter("TC_NUMBER", patientModel.getTcNumber()).setParameter("PASSWORD", PasswordEncryptor.encryptPassword(patientModel.getPassword()));
 
-    if (query.getResultList().size() > 0) {
+    if(query.getResultList().size() > 0) {
       return (PatientModel) query.getResultList().get(0);
     } else {
       return null;
@@ -61,7 +57,7 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientModel> {
   //GIRILEN BILGILERE DAIR SISTEMDE HASTA KAYDI VAR MI?
   public boolean haveUserRegistration(PatientModel patientModel) {
     Query emailQuery = getEntitymanager().createQuery("SELECT e FROM PatientModel e WHERE e.tcNumber = :TC_NUMBER").setParameter("TC_NUMBER", patientModel.getTcNumber());
-    Query tcQuery = getEntitymanager().createQuery("SELECT e FROM PatientModel e WHERE e.email = :E_MAIL").setParameter("E_MAIL", patientModel.getEmail());
+    Query tcQuery    = getEntitymanager().createQuery("SELECT e FROM PatientModel e WHERE e.email = :E_MAIL").setParameter("E_MAIL", patientModel.getEmail());
 
     return emailQuery.getResultList().size() > 0 || tcQuery.getResultList().size() > 0;
   }

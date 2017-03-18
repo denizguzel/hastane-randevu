@@ -13,7 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-@FacesValidator ("password")
+@FacesValidator("password")
 public class PasswordValidator implements Validator {
 
   private static Pattern pattern = Pattern.compile(ProjectConstants.PASSWORD_PATTERN);
@@ -27,7 +27,7 @@ public class PasswordValidator implements Validator {
   .{8,} at least 8 characters
   */
 
-  public void validate (FacesContext context, UIComponent component, Object value) throws ValidatorException {
+  public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
 
     String  password                 = (String) value;
     UIInput passwordConfirmComponent = (UIInput) component.getAttributes().get("passwordConfirm");
@@ -35,15 +35,15 @@ public class PasswordValidator implements Validator {
 
     Matcher matcher = pattern.matcher(password);
 
-    if ( password == null || password.isEmpty() || passwordConfirm == null || passwordConfirm.isEmpty() ) {
+    if(password == null || password.isEmpty() || passwordConfirm == null || passwordConfirm.isEmpty()) {
       return;
     }
 
-    if ( !matcher.matches() ) {
+    if(!matcher.matches()) {
       FacesMessage msg = new FacesMessage("Geçersiz şifre. Lütfen şifrenizi belirtilen formatta giriniz", "Şifreniz en az 1 rakam, 1 küçük harf, 1 büyük harf, 1 özel karakter ve en az 8 haneli olmalıdır.");
       msg.setSeverity(FacesMessage.SEVERITY_ERROR);
       throw new ValidatorException(msg);
-    } else if ( !password.equals(passwordConfirm) ) {
+    } else if(!password.equals(passwordConfirm)) {
       passwordConfirmComponent.setValid(false);
       FacesMessage msg = new FacesMessage("Şifreleriniz eşleşmiyor", null);
       msg.setSeverity(FacesMessage.SEVERITY_ERROR);

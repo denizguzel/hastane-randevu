@@ -13,34 +13,34 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
   private EntityManagerFactory emfactory = Persistence.createEntityManagerFactory(ProjectConstants.persistenceUnitName);
   private EntityManager entitymanager = emfactory.createEntityManager();
 
-  @SuppressWarnings ("unchecked")
-  public BaseDaoImpl () {
+  @SuppressWarnings("unchecked")
+  public BaseDaoImpl() {
     this.persistentClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
   }
 
-  private BaseDaoImpl (Class<T> persistentClass) {
+  private BaseDaoImpl(Class<T> persistentClass) {
     this.persistentClass = persistentClass;
   }
 
-  public EntityManager getEntitymanager () {
+  public EntityManager getEntitymanager() {
     return entitymanager;
   }
 
-  public EntityManagerFactory getEmfactory () {
+  public EntityManagerFactory getEmfactory() {
     return emfactory;
   }
 
   @Override
-  public void create (T model) {
+  public void create(T model) {
     try {
       entitymanager.getTransaction().begin();
       entitymanager.persist(model);
       entitymanager.getTransaction().commit();
-    } catch ( RuntimeException e ) {
+    } catch(RuntimeException e) {
       try {
         e.printStackTrace();
         entitymanager.getTransaction().rollback();
-      } catch ( RuntimeException ex ) {
+      } catch(RuntimeException ex) {
         ex.printStackTrace();
       } finally {
         entitymanager.close();
@@ -50,16 +50,16 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
   }
 
   @Override
-  public void update (long id, T model) {
+  public void update(long id, T model) {
     try {
       entitymanager.getTransaction().begin();
       entitymanager.merge(model);
       entitymanager.getTransaction().commit();
-    } catch ( RuntimeException e ) {
+    } catch(RuntimeException e) {
       try {
         e.printStackTrace();
         entitymanager.getTransaction().rollback();
-      } catch ( RuntimeException ex ) {
+      } catch(RuntimeException ex) {
         ex.printStackTrace();
       } finally {
         entitymanager.close();
@@ -69,16 +69,16 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
   }
 
   @Override
-  public void delete (long id) {
+  public void delete(long id) {
     try {
       entitymanager.getTransaction().begin();
       entitymanager.remove(id);
       entitymanager.getTransaction().commit();
-    } catch ( RuntimeException e ) {
+    } catch(RuntimeException e) {
       try {
         e.printStackTrace();
         entitymanager.getTransaction().rollback();
-      } catch ( RuntimeException ex ) {
+      } catch(RuntimeException ex) {
         ex.printStackTrace();
       } finally {
         entitymanager.close();
@@ -88,14 +88,14 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
   }
 
   @Override
-  public T find (long id) {
+  public T find(long id) {
     entitymanager.getTransaction().begin();
     return entitymanager.find(persistentClass, id);
   }
 
-  @SuppressWarnings ("unchecked")
+  @SuppressWarnings("unchecked")
   @Override
-  public List<T> findAll () {
+  public List<T> findAll() {
     entitymanager.getTransaction().begin();
     return entitymanager.createQuery("SELECT e FROM " + persistentClass.getName() + " e").getResultList();
   }

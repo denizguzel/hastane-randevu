@@ -112,7 +112,6 @@
       <version>5.0.1.Final</version>
     </dependency><!---->
 
-
     <dependency>
       <groupId>com.oracle</groupId>
       <artifactId>ojdbc7</artifactId>

@@ -9,27 +9,27 @@ public class AlergyServiceImpl implements BaseService<AlergyModel> {
   private AlergyDaoImpl alergyDao = new AlergyDaoImpl();
 
   @Override
-  public void create (AlergyModel model) {
+  public void create(AlergyModel model) {
     alergyDao.create(model);
   }
 
   @Override
-  public void update (long id, AlergyModel model) {
+  public void update(long id, AlergyModel model) {
     alergyDao.update(id, model);
   }
 
   @Override
-  public void delete (long id) {
+  public void delete(long id) {
     alergyDao.delete(id);
   }
 
   @Override
-  public AlergyModel find (long id) {
+  public AlergyModel find(long id) {
     return alergyDao.find(id);
   }
 
   @Override
-  public List<AlergyModel> findAll () {
+  public List<AlergyModel> findAll() {
     return alergyDao.findAll();
   }
 }

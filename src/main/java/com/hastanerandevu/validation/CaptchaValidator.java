@@ -15,7 +15,7 @@ public class CaptchaValidator {
 
   private boolean success;
 
-  public static boolean validate (FacesContext context) throws IOException {
+  public static boolean validate(FacesContext context) throws IOException {
     HttpServletRequest request    = (HttpServletRequest) context.getExternalContext().getRequest();
     String             remoteAddr = request.getRemoteAddr();
     String             recap      = request.getParameter("g-recaptcha-response");
@@ -27,18 +27,18 @@ public class CaptchaValidator {
     String         line;
     StringBuilder  output = new StringBuilder();
     BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-    while ( (line = reader.readLine()) != null ) {
+    while((line = reader.readLine()) != null) {
       output.append(line);
     }
     CaptchaValidator valid = new Gson().fromJson(output.toString(), CaptchaValidator.class);
     return valid.isSuccess();
   }
 
-  private boolean isSuccess () {
+  private boolean isSuccess() {
     return success;
   }
 
-  public void setSuccess (boolean success) {
+  public void setSuccess(boolean success) {
     this.success = success;
   }
 }
