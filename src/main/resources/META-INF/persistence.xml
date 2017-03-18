@@ -21,6 +21,17 @@
     <class>com.hastanerandevu.model.SurveyModel</class>
     <class>com.hastanerandevu.model.QuestionModel</class>
     <class>com.hastanerandevu.model.OptionModel</class>
+    <class>com.hastanerandevu.model.PatientAssayRelModel</class>
+    <class>com.hastanerandevu.model.PatientTreatmentRelModel</class>
+    <class>com.hastanerandevu.model.PatientDiseaseRelModel</class>
+    <class>com.hastanerandevu.model.PatientAlergyRelModel</class>
+    <class>com.hastanerandevu.model.HospitalPoliclinicRelModel</class>
+    <class>com.hastanerandevu.model.AppointmentChartModel</class>
+    <class>com.hastanerandevu.model.AppointmentModel</class>
+    <class>com.hastanerandevu.model.InspectionPlaceDoctorRelModel</class>
+    <class>com.hastanerandevu.model.FrequentlyAskedQuestionsModel</class>
+
+    <class>com.hastanerandevu.model.ReviewsAboutDoctorsModel</class>
 
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@//localhost:1521/orcl"/>

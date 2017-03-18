@@ -11,13 +11,13 @@ public class PatientServiceImpl implements BaseService<PatientModel> {
 
   private PatientDaoImpl patientDao = new PatientDaoImpl();
 
-  public boolean loginPatient (PatientModel patientModel) {
+  public PatientModel loginPatient (PatientModel patientModel) {
     return patientDao.loginPatient(patientModel);
   }
 
   @Override
-  public void create (PatientModel model) {
-    patientDao.createPatient(model);
+  public void create (PatientModel patientModel) {
+      patientDao.createPatient(patientModel);
   }
 
   @Override
@@ -50,5 +50,9 @@ public class PatientServiceImpl implements BaseService<PatientModel> {
 
   public List<AppointmentModel> getAppointmentHistory (PatientModel patientModel) {
     return patientDao.getAppointmentHistory(patientModel);
+  }
+
+  public boolean haveUserRegistration(PatientModel patientModel){
+    return patientDao.haveUserRegistration(patientModel);
   }
 }

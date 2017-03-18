@@ -17,7 +17,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.Serializable;
 
-@ManagedBean (name = "patient")
+import static org.hibernate.ejb.EntityManagerImpl.LOG;
+
+@ManagedBean(name = "patient")
 @SessionScoped
 public class PatientBean implements Serializable {
   private PatientServiceImpl patientService = new PatientServiceImpl();
@@ -32,58 +34,66 @@ public class PatientBean implements Serializable {
   private boolean verifyCaptcha = false;
   private boolean verifyLogin = false;
 
-  public boolean isVerifyLogin () {
+  public boolean isVerifyLogin() {
     return verifyLogin;
   }
 
-  public void setVerifyLogin (boolean verifyLogin) {
+  public void setVerifyLogin(boolean verifyLogin) {
     this.verifyLogin = verifyLogin;
   }
 
-  public boolean isShowCaptcha () {
+  public boolean isShowCaptcha() {
     return showCaptcha;
   }
 
-  public PatientModel getPatientModel () {
+  public PatientModel getPatientModel() {
     return patientModel;
   }
 
-  public void setPatientModel (PatientModel patientModel) {
+  public void setPatientModel(PatientModel patientModel) {
     this.patientModel = patientModel;
   }
 
-  public BloodGroupEnum[] getBloodGroupEnums () {
+  public BloodGroupEnum[] getBloodGroupEnums() {
     return bloodGroupEnums;
   }
 
-  public GenderEnum[] getGenderEnums () {
+  public GenderEnum[] getGenderEnums() {
     return genderEnums;
   }
 
-  public SecretQuestionEnum[] getSecretQuestionEnums () {
+  public SecretQuestionEnum[] getSecretQuestionEnums() {
     return secretQuestionEnums;
   }
 
-  public String validateLogin () throws IOException {
+  public String validateLogin() throws IOException {
     loginCounter += 1;
-    if ( loginCounter > 2 ) {
+    if (loginCounter > 2) {
       showCaptcha = true;
     }
-    if ( showCaptcha ) {
+    if (showCaptcha) {
       FacesContext facesContext = FacesContext.getCurrentInstance();
       verifyCaptcha = CaptchaValidator.validate(facesContext);
     }
 
-    verifyLogin = patientService.loginPatient(patientModel);
-    if ( showCaptcha ) {
-      if ( verifyCaptcha ) {
+    //GIRILEN BILGILERE GORE KULLANICI VARSA BU KULLANICI MODELINI BEAN MODELINE ATA
+    if (patientService.loginPatient(patientModel) != null) {
+      patientModel = patientService.loginPatient(patientModel);
+      HttpSession session = SessionUtils.getSession();
+      session.setAttribute("firstName", patientModel.getFirstName());
+      verifyLogin = true;
+    } else
+      verifyLogin = false;
+
+    if (showCaptcha) {
+      if (verifyCaptcha) {
         return "view/dashboard?faces-redirect=true";
       } else {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bilgileri kontrol ediniz", null));
         return "/";
       }
     }
-    if ( verifyLogin ) {
+    if (verifyLogin) {
       return "view/dashboard?faces-redirect=true";
     } else {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bilgileri kontrol ediniz", null));
@@ -91,13 +101,23 @@ public class PatientBean implements Serializable {
     }
   }
 
-  public String validateCreate () {
-    patientModel.setPassword(PasswordEncryptor.encryptPassword(patientModel.getPassword()));
-    patientService.create(patientModel);
+  public String validateCreate() {
+    if (patientService.haveUserRegistration(patientModel)) {
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bu kullanıcı sistemde zaten kayıtlı", null));
+    } else {
+      patientModel.setPassword(PasswordEncryptor.encryptPassword(patientModel.getPassword()));
+      try {
+        patientService.create(patientModel);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Kayıt Başarılı", null));
+      } catch (Exception e) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Kayıt Başarısız", null));
+        LOG.info(e.getMessage());
+      }
+    }
     return "/";
   }
 
-  public String logout () {
+  public String logout() {
     HttpSession session = SessionUtils.getSession();
     session.invalidate();
     return "/index?faces-redirect=true";

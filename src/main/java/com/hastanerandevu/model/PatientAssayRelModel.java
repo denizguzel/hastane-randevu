@@ -4,12 +4,13 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table (name = "patient_assay_rel")
+@Table (name = "T_PATIENT_ASSAY_REL")
 public class PatientAssayRelModel {
 
   @Id
   @Column (name = "PK")
-  @GeneratedValue (strategy = GenerationType.AUTO)
+  @GeneratedValue (generator = "patient_assay_pk")
+  @SequenceGenerator (name = "patient_assay_pk", sequenceName = "SEQ_PATIENT_ASSAY_PK", allocationSize = 1)
   private long pk;
 
   @Column (name = "ASSAY_RESULT")
@@ -18,15 +19,14 @@ public class PatientAssayRelModel {
   @Column (name = "ASSAY_DETAIL")
   private String assayDetail;
 
-  @Column (name = "CREATION_TIME")
+  @Column (name = "CREATION_TIME",insertable = false, updatable = false)
   private Date creationTime;
 
-  @Column (name = "MODIFIED_TIME")
+  @Column (name = "MODIFIED_TIME",insertable = false, updatable = false)
   private Date modifiedTime;
 
-  @Column (name = "IS_ACTIVE")
+  @Column (name = "IS_ACTIVE",insertable = false)
   private char isActive;
-
 
   @ManyToOne (fetch = FetchType.LAZY)
   @JoinColumn (name = "FK_ASSAY")

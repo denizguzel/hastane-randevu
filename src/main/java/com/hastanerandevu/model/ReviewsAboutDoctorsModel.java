@@ -4,21 +4,22 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table (name = "reviews_about_doctors")
+@Table (name = "T_REVIEWS_ABOUT_DOCTOR")
 public class ReviewsAboutDoctorsModel {
 
   @Id
   @Column (name = "PK")
-  @GeneratedValue (strategy = GenerationType.AUTO)
+  @GeneratedValue (generator = "review_about_doctor_pk")
+  @SequenceGenerator (name = "review_about_doctor_pk", sequenceName = "SEQ_REVIEW_ABOUT_DOCTOR_PK", allocationSize = 1)
   private long pk;
 
-  @Column (name = "CREATION_TIME")
+  @Column (name = "CREATION_TIME",insertable = false, updatable = false)
   private Date creationTime;
 
-  @Column (name = "MODIFIED_TIME")
+  @Column (name = "MODIFIED_TIME",insertable = false, updatable = false)
   private Date modifiedTime;
 
-  @Column (name = "IS_ACTIVE")
+  @Column (name = "IS_ACTIVE",insertable = false)
   private char isActive;
 
   @Column (name = "IS_APPROPRIATE")

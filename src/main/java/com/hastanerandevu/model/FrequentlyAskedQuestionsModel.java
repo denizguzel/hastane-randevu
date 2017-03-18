@@ -4,12 +4,13 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table (name = "frequently_asked_questions")
+@Table (name = "T_ASKED_QUESTIONS")
 public class FrequentlyAskedQuestionsModel {
 
   @Id
   @Column (name = "PK")
-  @GeneratedValue (strategy = GenerationType.AUTO)
+  @GeneratedValue (generator = "asked_question_pk")
+  @SequenceGenerator (name = "asked_question_pk", sequenceName = "SEQ_ASKEDQUESTION_PK", allocationSize = 1)
   private long pk;
 
   @Column (name = "QUESTION")
@@ -18,17 +19,14 @@ public class FrequentlyAskedQuestionsModel {
   @Column (name = "ANSWER")
   private String answer;
 
-  @Column (name = "CREATION_TIME")
+  @Column (name = "CREATION_TIME",insertable = false, updatable = false)
   private Date creationTime;
 
-  @Column (name = "MODIFIED_TIME")
+  @Column (name = "MODIFIED_TIME",insertable = false, updatable = false)
   private Date modifiedTime;
 
-  @Column (name = "IS_ACTIVE")
+  @Column (name = "IS_ACTIVE",insertable = false)
   private char isActive;
-
-  @Column (name = "IS_APPROPRIATE")
-  private char isAppropriate;
 
   public long getPk () {
     return pk;
@@ -76,13 +74,5 @@ public class FrequentlyAskedQuestionsModel {
 
   public void setIsActive (char isActive) {
     this.isActive = isActive;
-  }
-
-  public char getIsAppropriate () {
-    return isAppropriate;
-  }
-
-  public void setIsAppropriate (char isAppropriate) {
-    this.isAppropriate = isAppropriate;
   }
 }

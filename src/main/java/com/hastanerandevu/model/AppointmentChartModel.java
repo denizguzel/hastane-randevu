@@ -5,12 +5,13 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table (name = "appointment_chart")
+@Table (name = "T_APPOINTMENT_CHART")
 public class AppointmentChartModel {
 
   @Id
   @Column (name = "PK")
-  @GeneratedValue (strategy = GenerationType.AUTO)
+  @GeneratedValue (generator = "appointment_chart_pk")
+  @SequenceGenerator (name = "appointment_chart_pk", sequenceName = "SEQ_APPOINTMENT_CHART_PK", allocationSize = 1)
   private long pk;
 
   @Column (name = "ACTIVE_FROM")
@@ -19,13 +20,13 @@ public class AppointmentChartModel {
   @Column (name = "ACTIVE_TO")
   private Date activeTo;
 
-  @Column (name = "CREATION_TIME")
+  @Column (name = "CREATION_TIME",insertable = false, updatable = false)
   private Date creationTime;
 
-  @Column (name = "MODIFIED_TIME")
+  @Column (name = "MODIFIED_TIME",insertable = false, updatable = false)
   private Date modifiedTime;
 
-  @Column (name = "IS_ACTIVE")
+  @Column (name = "IS_ACTIVE",insertable = false)
   private char isActive;
 
   @OneToMany (mappedBy = "appointmentChart")

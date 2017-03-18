@@ -5,21 +5,22 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table (name = "hospital_policlinic_rel")
+@Table (name = "T_HOSPITAL_POLICLINIC_REL")
 public class HospitalPoliclinicRelModel {
 
   @Id
   @Column (name = "PK")
-  @GeneratedValue (strategy = GenerationType.AUTO)
+  @GeneratedValue (generator = "hospital_policlinic_pk")
+  @SequenceGenerator (name = "hospital_policlinic_pk", sequenceName = "SEQ_HOSPITAL_POLICLINIC_PK", allocationSize = 1)
   private long pk;
 
-  @Column (name = "CREATION_TIME")
+  @Column (name = "CREATION_TIME",insertable = false, updatable = false)
   private Date creationTime;
 
-  @Column (name = "MODIFIED_TIME")
+  @Column (name = "MODIFIED_TIME",insertable = false, updatable = false)
   private Date modifiedTime;
 
-  @Column (name = "IS_ACTIVE")
+  @Column (name = "IS_ACTIVE",insertable = false)
   private char isActive;
 
   @OneToMany (mappedBy = "hospitalPoliclinicRel")
