@@ -2,7 +2,10 @@ package com.hastanerandevu.utility;
 
 import com.hastanerandevu.model.PatientModel;
 
-import javax.mail.*;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Date;
@@ -24,19 +27,7 @@ public class Mailer implements Runnable {
     this.message = message;
   }
 
-  private void setRecipients(Message mailMessage, String to) throws Exception {
-    if(mailMessage != null) {
-      try {
-        if(to != null) {
-          mailMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-        }
-      } catch(Exception e) {
-        e.printStackTrace();
-      }
-    }
-  }
-
-  private Session getSession() {
+  private void mailSettings() {
     final String username = "hastanerandevu.iu";
     final String password = "hastanerandevu";
 
@@ -46,20 +37,17 @@ public class Mailer implements Runnable {
     props.put("mail.smtp.host", "smtp.gmail.com");
     props.put("mail.smtp.port", "587");
 
-    return Session.getInstance(props, new Authenticator() {
-      public PasswordAuthentication getPasswordAuthentication() {
+    Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+      protected PasswordAuthentication getPasswordAuthentication() {
         return new PasswordAuthentication(username, password);
       }
     });
-  }
 
-  private void mailSettings() {
     try {
-      Session session     = getSession();
       Message mailMessage = new MimeMessage(session);
 
       mailMessage.setFrom(new InternetAddress("hastanerandevu.iu@gmail.com"));
-      setRecipients(mailMessage, to);
+      mailMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
       mailMessage.setSubject(subject);
       mailMessage.setSentDate(new Date());
       mailMessage.setText(message);
