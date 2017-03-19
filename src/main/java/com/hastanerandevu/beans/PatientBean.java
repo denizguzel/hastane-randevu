@@ -83,6 +83,7 @@ public class PatientBean implements Serializable {
       patientModel = patientService.loginPatient(patientModel);
       HttpSession session = SessionUtils.getSession();
       session.setAttribute("firstName", patientModel.getFirstName());
+      session.setAttribute("id", patientModel.getPk());
       verifyLogin = true;
     } else
       verifyLogin = false;
@@ -111,6 +112,7 @@ public class PatientBean implements Serializable {
       try {
         patientService.create(patientModel);
         mailer.sendMail(patientModel);
+        patientModel = new PatientModel(); // form reset
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Kayıt Başarılı", null));
       } catch(Exception e) {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Kayıt Başarısız", null));
