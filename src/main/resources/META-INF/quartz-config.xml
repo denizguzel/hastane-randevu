@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <job-scheduling-data
-  xmlns="http://www.quartz-scheduler.org/xml/JobSchedulingData"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.quartz-scheduler.org/xml/JobSchedulingData
-	http://www.quartz-scheduler.org/xml/job_scheduling_data_1_8.xsd"
-  version="1.8">
+  xmlns="http://www.quartz-scheduler.org/xml/JobSchedulingData"
+  xsi:schemaLocation="http://www.quartz-scheduler.org/xml/JobSchedulingData http://www.quartz-scheduler.org/xml/job_scheduling_data_2_0.xsd"
+  version="2.0">
 
   <schedule>
     <job>
@@ -13,13 +12,6 @@
       <group>AGroup</group>
       <description>Send Appointment Reminder Mail to Patient</description>
       <job-class>com.hastanerandevu.jobs.SendAppointmentReminderMail</job-class>
-    </job>
-
-    <job>
-      <name>UpdateAppointmentStatusJob</name>
-      <group>AGroup</group>
-      <description>Update AppointmentStatus</description>
-      <job-class>com.hastanerandevu.jobs.UpdateAppointmentStatus</job-class>
     </job>
 
     <trigger>
@@ -31,6 +23,13 @@
         <cron-expression>0/5 * * * * ?</cron-expression>
       </cron>
     </trigger>
+
+    <job>
+      <name>UpdateAppointmentStatusJob</name>
+      <group>AGroup</group>
+      <description>Update AppointmentStatus</description>
+      <job-class>com.hastanerandevu.jobs.UpdateAppointmentStatus</job-class>
+    </job>
 
     <trigger>
       <cron>

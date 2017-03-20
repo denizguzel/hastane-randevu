@@ -16,13 +16,12 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.Serializable;
 
 import static org.hibernate.ejb.EntityManagerImpl.LOG;
 
 @ManagedBean(name = "patient")
 @SessionScoped
-public class PatientBean implements Serializable {
+public class PatientBean {
   private Mailer mailer = new Mailer();
   private PatientServiceImpl patientService = new PatientServiceImpl();
   private PatientModel patientModel = new PatientModel();
