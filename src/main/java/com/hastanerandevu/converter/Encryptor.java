@@ -5,8 +5,8 @@ import java.security.MessageDigest;
 public class Encryptor {
   public static String encryptPassword(String password) {
     try {
-      MessageDigest digest    = MessageDigest.getInstance("SHA-256");
-      byte[]        hash      = digest.digest(password.getBytes("UTF-8"));
+      MessageDigest digest = MessageDigest.getInstance("SHA-256");
+      byte[] hash = digest.digest(password.getBytes("UTF-8"));
       StringBuilder hexString = new StringBuilder();
 
       for(byte aHash : hash) {
@@ -24,8 +24,8 @@ public class Encryptor {
 
   public static String encryptEmail(String email) {
     try {
-      MessageDigest digest    = MessageDigest.getInstance("SHA-256");
-      byte[]        hash      = digest.digest(email.getBytes("UTF-8"));
+      MessageDigest digest = MessageDigest.getInstance("SHA-256");
+      byte[] hash = digest.digest(email.getBytes("UTF-8"));
       StringBuilder hexString = new StringBuilder();
 
       for(byte aHash : hash) {

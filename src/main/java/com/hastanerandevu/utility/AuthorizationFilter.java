@@ -19,17 +19,17 @@ public class AuthorizationFilter implements Filter {
 
   public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
     try {
-      HttpServletRequest  request  = (HttpServletRequest) servletRequest;
+      HttpServletRequest request = (HttpServletRequest) servletRequest;
       HttpServletResponse response = (HttpServletResponse) servletResponse;
-      HttpSession         session  = request.getSession(false);
+      HttpSession session = request.getSession(false);
 
       String loginURL = request.getContextPath() + "/";
 
-      boolean loggedIn        = (session != null) && (session.getAttribute("firstName") != null);
-      boolean passReset       = request.getParameter("q") != null;
-      boolean loginRequest    = request.getRequestURI().equals(loginURL);
+      boolean loggedIn = (session != null) && (session.getAttribute("firstName") != null);
+      boolean passReset = request.getParameter("q") != null;
+      boolean loginRequest = request.getRequestURI().equals(loginURL);
       boolean resourceRequest = request.getRequestURI().startsWith(request.getContextPath() + ResourceHandler.RESOURCE_IDENTIFIER + "/");
-      boolean ajaxRequest     = "partial/ajax".equals(request.getHeader("Faces-Request"));
+      boolean ajaxRequest = "partial/ajax".equals(request.getHeader("Faces-Request"));
 
       if(loggedIn || loginRequest || resourceRequest || passReset) {
         if(!resourceRequest) { // Prevent browser from caching restricted resources.

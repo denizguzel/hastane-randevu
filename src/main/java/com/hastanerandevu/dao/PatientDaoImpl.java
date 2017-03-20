@@ -55,7 +55,7 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientModel> {
 
   //GIRILEN BILGILERE DAIR SISTEMDE HASTA KAYDI VAR MI?
   public boolean haveUserRegistration(PatientModel patientModel) {
-    Query tcQuery    = getEntitymanager().createQuery("SELECT e FROM PatientModel e WHERE e.tcNumber = :TC_NUMBER").setParameter("TC_NUMBER", patientModel.getTcNumber());
+    Query tcQuery = getEntitymanager().createQuery("SELECT e FROM PatientModel e WHERE e.tcNumber = :TC_NUMBER").setParameter("TC_NUMBER", patientModel.getTcNumber());
     Query emailQuery = getEntitymanager().createQuery("SELECT e FROM PatientModel e WHERE e.email = :E_MAIL").setParameter("E_MAIL", patientModel.getEmail());
 
     return emailQuery.getResultList().size() > 0 || tcQuery.getResultList().size() > 0;

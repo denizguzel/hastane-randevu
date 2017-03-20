@@ -29,9 +29,9 @@ public class PasswordValidator implements Validator {
 
   public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
 
-    String  password                 = (String) value;
+    String password = (String) value;
     UIInput passwordConfirmComponent = (UIInput) component.getAttributes().get("passwordConfirm");
-    String  passwordConfirm          = passwordConfirmComponent.getSubmittedValue().toString();
+    String passwordConfirm = passwordConfirmComponent.getSubmittedValue().toString();
 
     Matcher matcher = pattern.matcher(password);
 

@@ -12,25 +12,33 @@
     <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
 
+  <!-- Quartz Scheduler -->
+  <context-param>
+    <param-name>quartz:shutdown-on-unload</param-name>
+    <param-value>true</param-value>
+  </context-param>
+  <context-param>
+    <param-name>quartz:wait-on-shutdown</param-name>
+    <param-value>true</param-value>
+  </context-param>
+  <context-param>
+    <param-name>quartz:start-on-load</param-name>
+    <param-value>true</param-value>
+  </context-param>
   <listener>
-    <listener-class>
-      org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap
-    </listener-class>
+    <listener-class>org.quartz.ee.servlet.QuartzInitializerListener</listener-class>
   </listener>
-
   <listener>
-    <listener-class>
-      org.quartz.ee.servlet.QuartzInitializerListener
-    </listener-class>
-  </listener>
+    <listener-class>com.hastanerandevu.jobs.ScheduleApp</listener-class>
+  </listener><!---->
 
+  <!-- Resteasy -->
   <servlet>
     <servlet-name>Resteasy</servlet-name>
     <servlet-class>
       org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
     </servlet-class>
   </servlet>
-
   <context-param>
     <param-name>resteasy.servlet.mapping.prefix</param-name>
     <param-value>/api</param-value>
@@ -39,6 +47,11 @@
     <servlet-name>Resteasy</servlet-name>
     <url-pattern>/api/*</url-pattern>
   </servlet-mapping>
+  <listener>
+    <listener-class>
+      org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap
+    </listener-class>
+  </listener><!---->
 
   <!-- Authentication Filter -->
   <filter>
@@ -49,12 +62,12 @@
     <filter-name>AuthFilter</filter-name>
     <url-pattern>/view/*</url-pattern>
     <url-pattern>/recovery/*</url-pattern>
-  </filter-mapping>
+  </filter-mapping><!---->
 
   <!-- Error Page -->
   <error-page>
     <error-code>404</error-code>
     <location>/view/error/404.xhtml</location>
-  </error-page>
+  </error-page><!---->
 
 </web-app>

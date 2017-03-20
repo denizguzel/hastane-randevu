@@ -16,16 +16,16 @@ public class CaptchaValidator {
   private boolean success;
 
   public static boolean validate(FacesContext context) throws IOException {
-    HttpServletRequest request    = (HttpServletRequest) context.getExternalContext().getRequest();
-    String             remoteAddr = request.getRemoteAddr();
-    String             recap      = request.getParameter("g-recaptcha-response");
-    URL                url;
+    HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+    String remoteAddr = request.getRemoteAddr();
+    String recap = request.getParameter("g-recaptcha-response");
+    URL url;
 
     url = new URL(String.format(ProjectConstants.CAPTCHA_VERIFY_URL, ProjectConstants.CAPTCHA_SECRET_KEY, recap, remoteAddr));
     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
     conn.setRequestMethod("GET");
-    String         line;
-    StringBuilder  output = new StringBuilder();
+    String line;
+    StringBuilder output = new StringBuilder();
     BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
     while((line = reader.readLine()) != null) {
       output.append(line);

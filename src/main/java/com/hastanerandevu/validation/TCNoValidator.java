@@ -14,7 +14,7 @@ public class TCNoValidator implements Validator {
   private static final Logger LOG = Logger.getLogger(TCNoValidator.class);
 
   private static boolean isValidTckn(String tckn) {
-    int totalOdd  = 0;
+    int totalOdd = 0;
     int totalEven = 0;
     int val, total, lastDigit, check;
     try {
