@@ -1,6 +1,7 @@
 package com.hastanerandevu.utility;
 
-import com.hastanerandevu.converter.PasswordEncryptor;
+import com.hastanerandevu.constants.ProjectConstants;
+import com.hastanerandevu.converter.Encryptor;
 import com.hastanerandevu.dao.PatientDaoImpl;
 import com.hastanerandevu.model.PatientModel;
 
@@ -73,8 +74,8 @@ public class Mailer implements Runnable {
 
   public void sendPasswordResetMail(PatientModel patientModel) {
     this.patientModel = patientDao.getUserByEmail(patientModel);
-    String salt          = "498#2D83B631%3800EBD!801600D*7E3CC13";
-    String encryptedSalt = PasswordEncryptor.encryptPassword(salt + this.patientModel.getEmail());
+
+    String encryptedSalt = Encryptor.encryptEmail(ProjectConstants.SALT + this.patientModel.getEmail());
 
     Mailer mailer = new Mailer();
     mailer.setParameters(this.patientModel.getEmail(), "Hastane Randevu Sistemi Şifre Sıfırlama", "<div>Merhaba <h1>" + this.patientModel.getFirstName() + ",</h1>\n\n<a href='http://localhost:8080/forgot?q=" + encryptedSalt + "'>Şifre sıfırlama bağlantınız</a></div>");

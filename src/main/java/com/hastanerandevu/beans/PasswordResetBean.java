@@ -1,6 +1,7 @@
 package com.hastanerandevu.beans;
 
-import com.hastanerandevu.converter.PasswordEncryptor;
+import com.hastanerandevu.constants.ProjectConstants;
+import com.hastanerandevu.converter.Encryptor;
 import com.hastanerandevu.model.PatientModel;
 import com.hastanerandevu.service.PatientServiceImpl;
 import com.hastanerandevu.utility.Mailer;
@@ -47,12 +48,11 @@ public class PasswordResetBean {
   }
 
   public String passwordUpdate() throws URISyntaxException {
-    String salt          = "498#2D83B631%3800EBD!801600D*7E3CC13";
-    String encryptedSalt = PasswordEncryptor.encryptPassword(salt + patientModel.getEmail());
+    String encryptedSalt = Encryptor.encryptEmail(ProjectConstants.SALT + patientModel.getEmail());
 
     if(urlParam.equals(encryptedSalt)) {
       patientModel = patientService.getUserByEmail(patientModel);
-      patientModel.setPassword(PasswordEncryptor.encryptPassword(patientModel.getPassword()));
+      patientModel.setPassword(Encryptor.encryptPassword(patientModel.getPassword()));
       patientService.update(patientService.getUserByEmail(patientModel).getPk(), patientModel);
 
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Şifreniz değiştirildi.", null));

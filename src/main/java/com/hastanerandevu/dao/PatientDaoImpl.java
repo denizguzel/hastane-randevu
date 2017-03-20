@@ -1,6 +1,6 @@
 package com.hastanerandevu.dao;
 
-import com.hastanerandevu.converter.PasswordEncryptor;
+import com.hastanerandevu.converter.Encryptor;
 import com.hastanerandevu.enums.AppointmentStatusEnum;
 import com.hastanerandevu.model.AppointmentModel;
 import com.hastanerandevu.model.PatientModel;
@@ -13,7 +13,7 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientModel> {
 
   public PatientModel loginPatient(PatientModel patientModel) {
     Query query = getEntitymanager().createQuery("SELECT e FROM PatientModel e WHERE e.tcNumber = :TC_NUMBER AND e.password = :PASSWORD");
-    query.setParameter("TC_NUMBER", patientModel.getTcNumber()).setParameter("PASSWORD", PasswordEncryptor.encryptPassword(patientModel.getPassword()));
+    query.setParameter("TC_NUMBER", patientModel.getTcNumber()).setParameter("PASSWORD", Encryptor.encryptPassword(patientModel.getPassword()));
 
     if(query.getResultList().size() > 0) {
       return (PatientModel) query.getResultList().get(0);

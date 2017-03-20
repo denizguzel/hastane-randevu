@@ -1,6 +1,6 @@
 package com.hastanerandevu.beans;
 
-import com.hastanerandevu.converter.PasswordEncryptor;
+import com.hastanerandevu.converter.Encryptor;
 import com.hastanerandevu.enums.BloodGroupEnum;
 import com.hastanerandevu.enums.GenderEnum;
 import com.hastanerandevu.enums.SecretQuestionEnum;
@@ -108,7 +108,7 @@ public class PatientBean implements Serializable {
     if(patientService.haveUserRegistration(patientModel)) {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bu kullanıcı sistemde zaten kayıtlı", null));
     } else {
-      patientModel.setPassword(PasswordEncryptor.encryptPassword(patientModel.getPassword()));
+      patientModel.setPassword(Encryptor.encryptPassword(patientModel.getPassword()));
       try {
         patientService.create(patientModel);
         mailer.sendRegisterMail(patientModel);
