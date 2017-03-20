@@ -21,8 +21,8 @@ public class PatientServiceImpl implements BaseService<PatientModel> {
   }
 
   @Override
-  public void update(long id, PatientModel model) {
-    patientDao.update(id, model);
+  public void update(long id, PatientModel patientModel) {
+    patientDao.update(id, patientModel);
   }
 
   @Override
@@ -54,5 +54,9 @@ public class PatientServiceImpl implements BaseService<PatientModel> {
 
   public boolean haveUserRegistration(PatientModel patientModel) {
     return patientDao.haveUserRegistration(patientModel);
+  }
+
+  public PatientModel getUserByEmail(PatientModel patientModel) {
+    return patientDao.getUserByEmail(patientModel);
   }
 }

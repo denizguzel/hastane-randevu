@@ -111,7 +111,7 @@ public class PatientBean implements Serializable {
       patientModel.setPassword(PasswordEncryptor.encryptPassword(patientModel.getPassword()));
       try {
         patientService.create(patientModel);
-        mailer.sendMail(patientModel);
+        mailer.sendRegisterMail(patientModel);
         patientModel = new PatientModel(); // form reset
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Kayıt Başarılı", null));
       } catch(Exception e) {

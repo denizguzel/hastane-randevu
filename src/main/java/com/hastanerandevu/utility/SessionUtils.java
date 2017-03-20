@@ -12,4 +12,5 @@ public class SessionUtils {
   public static HttpServletRequest getRequest() {
     return (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
   }
+
 }

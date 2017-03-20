@@ -26,11 +26,12 @@ public class AuthorizationFilter implements Filter {
       String loginURL = request.getContextPath() + "/";
 
       boolean loggedIn        = (session != null) && (session.getAttribute("firstName") != null);
+      boolean passReset       = request.getParameter("q") != null;
       boolean loginRequest    = request.getRequestURI().equals(loginURL);
       boolean resourceRequest = request.getRequestURI().startsWith(request.getContextPath() + ResourceHandler.RESOURCE_IDENTIFIER + "/");
       boolean ajaxRequest     = "partial/ajax".equals(request.getHeader("Faces-Request"));
 
-      if(loggedIn || loginRequest || resourceRequest) {
+      if(loggedIn || loginRequest || resourceRequest || passReset) {
         if(!resourceRequest) { // Prevent browser from caching restricted resources.
           response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
           response.setHeader("Pragma", "no-cache"); // HTTP 1.0.

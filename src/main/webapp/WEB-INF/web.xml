@@ -43,6 +43,7 @@
   <filter-mapping>
     <filter-name>AuthFilter</filter-name>
     <url-pattern>/view/*</url-pattern>
+    <url-pattern>/recovery/*</url-pattern>
   </filter-mapping>
 
   <!-- Error Page -->

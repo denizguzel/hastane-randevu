@@ -13,6 +13,16 @@
     <view-id value="/register.xhtml"/>
   </url-mapping>
 
+  <url-mapping id="reset">
+    <pattern value="/reset"/>
+    <view-id value="/password-reset.xhtml"/>
+  </url-mapping>
+
+  <url-mapping id="forgot">
+    <pattern value="/recovery/forgot"/>
+    <view-id value="/forgot.xhtml"/>
+  </url-mapping>
+
   <url-mapping id="view">
     <pattern value="/view/"/>
     <view-id value="/view/dashboard.xhtml"/>
