@@ -3,6 +3,14 @@
          xmlns="http://xmlns.jcp.org/xml/ns/javaee"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+  <context-param>
+    <param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
+    <param-value>0</param-value>
+  </context-param>
+  <context-param>
+    <param-name>javax.faces.PROJECT_STAGE</param-name>
+    <param-value>Development</param-value>
+  </context-param>
   <servlet>
     <servlet-name>Faces Servlet</servlet-name>
     <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -13,18 +21,6 @@
   </servlet-mapping>
 
   <!-- Quartz Scheduler -->
-  <!--<context-param>
-    <param-name>quartz:shutdown-on-unload</param-name>
-    <param-value>true</param-value>
-  </context-param>
-  <context-param>
-    <param-name>quartz:wait-on-shutdown</param-name>
-    <param-value>true</param-value>
-  </context-param>
-  <context-param>
-    <param-name>quartz:start-on-load</param-name>
-    <param-value>true</param-value>
-  </context-param>-->
   <listener>
     <listener-class>org.quartz.ee.servlet.QuartzInitializerListener</listener-class>
   </listener>

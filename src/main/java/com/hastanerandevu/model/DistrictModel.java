@@ -27,7 +27,7 @@ public class DistrictModel {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "FK_CITY")
-  private CityModel city;
+  private CityModel cityModel;
 
   @OneToMany(mappedBy = "district")
   private List<HospitalModel> hospitalModels;
@@ -73,11 +73,11 @@ public class DistrictModel {
   }
 
   public CityModel getCity() {
-    return city;
+    return cityModel;
   }
 
-  public void setCity(CityModel city) {
-    this.city = city;
+  public void setCity(CityModel cityModel) {
+    this.cityModel = cityModel;
   }
 
   public List<HospitalModel> getHospitalModels() {

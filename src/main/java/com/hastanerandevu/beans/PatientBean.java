@@ -92,14 +92,14 @@ public class PatientBean {
         return "view/dashboard?faces-redirect=true";
       } else {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bilgileri kontrol ediniz", null));
-        return "/";
+        return "/index";
       }
     }
     if(verifyLogin) {
       return "view/dashboard?faces-redirect=true";
     } else {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bilgileri kontrol ediniz", null));
-      return "/";
+      return "/index";
     }
   }
 
@@ -118,7 +118,7 @@ public class PatientBean {
         LOG.info(e.getMessage());
       }
     }
-    return "/";
+    return "/register";
   }
 
   public String logout() {

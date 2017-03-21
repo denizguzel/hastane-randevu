@@ -26,7 +26,7 @@ public class CityModel {
   @Column(name = "IS_ACTIVE", insertable = false)
   private char isActive;
 
-  @OneToMany(mappedBy = "city")
+  @OneToMany(mappedBy = "cityModel")
   private List<DistrictModel> districtModels;
 
   public long getPk() {

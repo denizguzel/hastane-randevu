@@ -5,18 +5,35 @@
     <div class="container">
       <div class="card">
         <span id="userId" class="d-none">${session.getAttribute("id")}</span>
-        <div class="card-header">Hoşgeldin ${session.getAttribute("firstName")}</div>
-        <div class="card-block">
-          <p>Burası dashboard</p>
+        <div class="card-header">
+          Hoşgeldin ${session.getAttribute("firstName")}
           <h:form prependId="false">
             <h:commandButton value="Çıkış" styleClass="btn btn-primary" action="#{patient.logout}"/>
           </h:form>
         </div>
-        <div class="card-footer">
-          <button type="button" id="all-data" class="btn btn-warning">Tüm Bilgileri Gör</button>
-          <button type="button" id="filtered-data" class="btn btn-warning">İstenilen Bilgileri Gör</button>
-          <div id="allData"></div>
-          <div id="filteredData"></div>
+        <div class="card-block">
+          <div class="card-block-header">Randevu Alma</div>
+          <h:form styleClass="row" prependId="false">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">İl Seçiniz</label>
+                <h:selectOneMenu id="city" styleClass="selectpicker form-control" value="#{appointment.cityModel.cityName}">
+                  <f:ajax event="change" update="district" listener="#{appointment.districtsByCity}"/>
+                  <f:selectItem itemLabel="-farketmez-" itemValue="#{null}"/>
+                  <f:selectItems value="#{appointment.cities}"/>
+                </h:selectOneMenu>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">İlçe Seçiniz</label>
+                <h:selectOneMenu id="district" styleClass="selectpicker form-control" value="#{appointment.districtModel.districtName}">
+                  <f:selectItem itemLabel="-farketmez-" itemValue="#{null}"/>
+                  <f:selectItems value="#{appointment.districtsByCity}"/>
+                </h:selectOneMenu>
+              </div>
+            </div>
+          </h:form>
         </div>
       </div>
     </div>

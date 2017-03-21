@@ -35,11 +35,15 @@ public class CityServiceImpl implements BaseService<CityModel> {
     return cityDao.findAll();
   }
 
-  public List<DistrictModel> getAllDistrictsByCity(CityModel model) {
-    return cityDao.getAllDistrictsByCity(model);
-  }
-
   public void createDistricts(List<DistrictModel> districtModel, CityModel model) {
     cityDao.createDistricts(districtModel, model);
+  }
+
+  public List<CityModel> getCities() {
+    return cityDao.getCities();
+  }
+
+  public List<DistrictModel> getAllDistrictsByCity(CityModel cityModel) {
+    return cityDao.getAllDistrictsByCity(cityModel);
   }
 }
