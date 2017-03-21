@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<job-scheduling-data
+  xmlns="http://www.quartz-scheduler.org/xml/JobSchedulingData"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.quartz-scheduler.org/xml/JobSchedulingData
+	http://www.quartz-scheduler.org/xml/job_scheduling_data_1_8.xsd"
+  version="1.8">
+
+  <schedule>
+    <job>
+      <name>SendAppointmentReminderMailJob</name>
+      <group>AGroup</group>
+      <description>Send Appointment Reminder Mail to Patient</description>
+      <job-class>com.hastanerandevu.jobs.SendAppointmentReminderMail</job-class>
+    </job>
+
+    <job>
+      <name>UpdateAppointmentStatusJob</name>
+      <group>AGroup</group>
+      <description>Update AppointmentStatus</description>
+      <job-class>com.hastanerandevu.jobs.UpdateAppointmentStatus</job-class>
+    </job>
+
+    <trigger>
+      <cron>
+        <name>SendAppointmentReminderMailTrigger</name>
+        <job-name>SendAppointmentReminderMailJob</job-name>
+        <job-group>AGroup</job-group>
+        <!-- It will run every 5 seconds -->
+        <cron-expression>0/5 * * * * ?</cron-expression>
+      </cron>
+    </trigger>
+
+    <trigger>
+      <cron>
+        <name>UpdateAppointmentStatus</name>
+        <job-name>UpdateAppointmentStatusJob</job-name>
+        <job-group>AGroup</job-group>
+        <!-- It will run every 2 seconds -->
+        <cron-expression>0/2 * * * * ?</cron-expression>
+      </cron>
+    </trigger>
+  </schedule>
+</job-scheduling-data>
