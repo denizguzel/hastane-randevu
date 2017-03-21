@@ -14,13 +14,13 @@ public class SurveyServiceImpl implements BaseService<SurveyModel> {
   }
 
   @Override
-  public void update(long id, SurveyModel model) {
-    surveyDao.update(id, model);
+  public void update(SurveyModel model) {
+    surveyDao.update(model);
   }
 
   @Override
-  public void delete(long id) {
-    surveyDao.delete(id);
+  public void delete(SurveyModel model) {
+    surveyDao.delete(model);
   }
 
   @Override

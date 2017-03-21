@@ -53,7 +53,7 @@ public class PasswordResetBean {
     if(urlParam.equals(encryptedSalt)) {
       patientModel = patientService.getUserByEmail(patientModel);
       patientModel.setPassword(Encryptor.encryptPassword(patientModel.getPassword()));
-      patientService.update(patientService.getUserByEmail(patientModel).getPk(), patientModel);
+      patientService.update(patientService.getUserByEmail(patientModel));
 
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Şifreniz değiştirildi.", null));
     } else {

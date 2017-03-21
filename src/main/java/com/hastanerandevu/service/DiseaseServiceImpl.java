@@ -14,13 +14,13 @@ public class DiseaseServiceImpl implements BaseService<DiseaseModel> {
   }
 
   @Override
-  public void update(long id, DiseaseModel model) {
-    diseaseDao.update(id, model);
+  public void update(DiseaseModel model) {
+    diseaseDao.update(model);
   }
 
   @Override
-  public void delete(long id) {
-    diseaseDao.delete(id);
+  public void delete(DiseaseModel model) {
+    diseaseDao.delete(model);
   }
 
   @Override

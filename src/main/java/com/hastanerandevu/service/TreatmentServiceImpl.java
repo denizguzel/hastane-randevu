@@ -14,13 +14,13 @@ public class TreatmentServiceImpl implements BaseService<TreatmentModel> {
   }
 
   @Override
-  public void update(long id, TreatmentModel model) {
-    treatmentDao.update(id, model);
+  public void update(TreatmentModel model) {
+    treatmentDao.update(model);
   }
 
   @Override
-  public void delete(long id) {
-    treatmentDao.delete(id);
+  public void delete(TreatmentModel model) {
+    treatmentDao.delete(model);
   }
 
   @Override

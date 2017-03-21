@@ -16,13 +16,13 @@ public class CityServiceImpl implements BaseService<CityModel> {
   }
 
   @Override
-  public void update(long id, CityModel model) {
-    cityDao.update(id, model);
+  public void update(CityModel model) {
+    cityDao.update(model);
   }
 
   @Override
-  public void delete(long id) {
-    cityDao.delete(id);
+  public void delete(CityModel model) {
+    cityDao.delete(model);
   }
 
   @Override

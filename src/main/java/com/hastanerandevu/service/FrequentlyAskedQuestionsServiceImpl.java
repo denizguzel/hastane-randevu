@@ -14,13 +14,13 @@ public class FrequentlyAskedQuestionsServiceImpl implements BaseService<Frequent
   }
 
   @Override
-  public void update(long id, FrequentlyAskedQuestionsModel model) {
-    frequentlyAskedQuestionsDao.update(id, model);
+  public void update(FrequentlyAskedQuestionsModel model) {
+    frequentlyAskedQuestionsDao.update(model);
   }
 
   @Override
-  public void delete(long id) {
-    frequentlyAskedQuestionsDao.delete(id);
+  public void delete(FrequentlyAskedQuestionsModel model) {
+    frequentlyAskedQuestionsDao.delete(model);
   }
 
   @Override

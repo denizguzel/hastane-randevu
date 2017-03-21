@@ -17,13 +17,13 @@ public class HospitalServiceImpl implements BaseService<HospitalModel> {
   }
 
   @Override
-  public void update(long id, HospitalModel model) {
-    hospitalDao.update(id, model);
+  public void update(HospitalModel model) {
+    hospitalDao.update(model);
   }
 
   @Override
-  public void delete(long id) {
-    hospitalDao.delete(id);
+  public void delete(HospitalModel model) {
+    hospitalDao.delete(model);
   }
 
   @Override
