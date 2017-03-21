@@ -14,13 +14,13 @@ public class BranchServiceImpl implements BaseService<BranchModel> {
   }
 
   @Override
-  public void update(long id, BranchModel model) {
-    branchDao.update(id, model);
+  public void update(BranchModel model) {
+    branchDao.update(model);
   }
 
   @Override
-  public void delete(long id) {
-    branchDao.delete(id);
+  public void delete(BranchModel model) {
+    branchDao.delete(model);
   }
 
   @Override

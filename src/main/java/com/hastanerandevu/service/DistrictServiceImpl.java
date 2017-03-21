@@ -15,13 +15,13 @@ public class DistrictServiceImpl implements BaseService<DistrictModel> {
   }
 
   @Override
-  public void update(long id, DistrictModel model) {
-    districtDao.update(id, model);
+  public void update(DistrictModel model) {
+    districtDao.update(model);
   }
 
   @Override
-  public void delete(long id) {
-    districtDao.delete(id);
+  public void delete(DistrictModel model) {
+    districtDao.delete(model);
   }
 
   @Override

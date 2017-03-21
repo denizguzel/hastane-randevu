@@ -14,13 +14,13 @@ public class AlergyServiceImpl implements BaseService<AlergyModel> {
   }
 
   @Override
-  public void update(long id, AlergyModel model) {
-    alergyDao.update(id, model);
+  public void update(AlergyModel model) {
+    alergyDao.update(model);
   }
 
   @Override
-  public void delete(long id) {
-    alergyDao.delete(id);
+  public void delete(AlergyModel model) {
+    alergyDao.delete(model);
   }
 
   @Override

@@ -14,13 +14,13 @@ public class AssayServiceImpl implements BaseService<AssayModel> {
   }
 
   @Override
-  public void update(long id, AssayModel model) {
-    assayDao.update(id, model);
+  public void update(AssayModel model) {
+    assayDao.update(model);
   }
 
   @Override
-  public void delete(long id) {
-    assayDao.delete(id);
+  public void delete(AssayModel model) {
+    assayDao.delete(model);
   }
 
   @Override

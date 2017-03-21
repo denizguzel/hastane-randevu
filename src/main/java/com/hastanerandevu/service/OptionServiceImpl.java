@@ -14,13 +14,13 @@ public class OptionServiceImpl implements BaseService<OptionModel> {
   }
 
   @Override
-  public void update(long id, OptionModel model) {
-    optionDao.update(id, model);
+  public void update(OptionModel model) {
+    optionDao.update(model);
   }
 
   @Override
-  public void delete(long id) {
-    optionDao.delete(id);
+  public void delete(OptionModel model) {
+    optionDao.delete(model);
   }
 
   @Override

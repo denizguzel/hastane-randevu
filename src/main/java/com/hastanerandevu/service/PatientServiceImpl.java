@@ -21,13 +21,13 @@ public class PatientServiceImpl implements BaseService<PatientModel> {
   }
 
   @Override
-  public void update(long id, PatientModel patientModel) {
-    patientDao.update(id, patientModel);
+  public void update(PatientModel patientModel) {
+    patientDao.update(patientModel);
   }
 
   @Override
-  public void delete(long id) {
-    patientDao.delete(id);
+  public void delete(PatientModel patientModel) {
+    patientDao.delete(patientModel);
   }
 
   @Override

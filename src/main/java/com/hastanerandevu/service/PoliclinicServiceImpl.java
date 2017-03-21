@@ -14,13 +14,13 @@ public class PoliclinicServiceImpl implements BaseService<PoliclinicModel> {
   }
 
   @Override
-  public void update(long id, PoliclinicModel model) {
-    policlinicDao.update(id, model);
+  public void update(PoliclinicModel model) {
+    policlinicDao.update(model);
   }
 
   @Override
-  public void delete(long id) {
-    policlinicDao.delete(id);
+  public void delete(PoliclinicModel model) {
+    policlinicDao.delete(model);
   }
 
   @Override

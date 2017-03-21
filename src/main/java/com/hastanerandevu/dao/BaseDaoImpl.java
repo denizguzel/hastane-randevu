@@ -33,7 +33,9 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
   @Override
   public void create(T model) {
     try {
-      entitymanager.getTransaction().begin();
+      if (!entitymanager.getTransaction().isActive()){
+        entitymanager.getTransaction().begin();
+      }
       entitymanager.persist(model);
       entitymanager.getTransaction().commit();
     } catch(RuntimeException e) {
@@ -50,9 +52,11 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
   }
 
   @Override
-  public void update(long id, T model) {
+  public void update(T model) {
     try {
-      entitymanager.getTransaction().begin();
+      if (!entitymanager.getTransaction().isActive()){
+        entitymanager.getTransaction().begin();
+      }
       entitymanager.merge(model);
       entitymanager.getTransaction().commit();
     } catch(RuntimeException e) {
@@ -69,10 +73,12 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
   }
 
   @Override
-  public void delete(long id) {
+  public void delete(T model) {
     try {
-      entitymanager.getTransaction().begin();
-      entitymanager.remove(id);
+      if (!entitymanager.getTransaction().isActive()){
+        entitymanager.getTransaction().begin();
+      }
+      entitymanager.remove(model);
       entitymanager.getTransaction().commit();
     } catch(RuntimeException e) {
       try {
@@ -89,14 +95,18 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
   @Override
   public T find(long id) {
-    entitymanager.getTransaction().begin();
+    if (!entitymanager.getTransaction().isActive()){
+      entitymanager.getTransaction().begin();
+    }
     return entitymanager.find(persistentClass, id);
   }
 
   @SuppressWarnings("unchecked")
   @Override
   public List<T> findAll() {
-    entitymanager.getTransaction().begin();
+    if (!entitymanager.getTransaction().isActive()){
+      entitymanager.getTransaction().begin();
+    }
     return entitymanager.createQuery("SELECT e FROM " + persistentClass.getName() + " e").getResultList();
   }
 }

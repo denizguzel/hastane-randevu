@@ -14,13 +14,13 @@ public class QuestionServiceImpl implements BaseService<QuestionModel> {
   }
 
   @Override
-  public void update(long id, QuestionModel model) {
-    questionDao.update(id, model);
+  public void update(QuestionModel model) {
+    questionDao.update(model);
   }
 
   @Override
-  public void delete(long id) {
-    questionDao.delete(id);
+  public void delete(QuestionModel model) {
+    questionDao.delete(model);
   }
 
   @Override
