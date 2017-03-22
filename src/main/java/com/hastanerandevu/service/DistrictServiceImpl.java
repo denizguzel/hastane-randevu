@@ -33,4 +33,8 @@ public class DistrictServiceImpl implements BaseService<DistrictModel> {
   public List<DistrictModel> findAll() {
     return districtDao.findAll();
   }
+
+  public List<String> getHospitalByDistrict(DistrictModel districtModel) {
+    return districtDao.getHospitalByDistrict(districtModel);
+  }
 }

@@ -25,7 +25,7 @@ public class AuthorizationFilter implements Filter {
 
       String loginURL = request.getContextPath() + "/";
 
-      boolean loggedIn = (session != null) && (session.getAttribute("firstName") != null);
+      boolean loggedIn = (session != null);
       boolean passReset = request.getParameter("q") != null;
       boolean loginRequest = request.getRequestURI().equals(loginURL);
       boolean resourceRequest = request.getRequestURI().startsWith(request.getContextPath() + ResourceHandler.RESOURCE_IDENTIFIER + "/");

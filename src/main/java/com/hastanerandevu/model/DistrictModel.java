@@ -26,10 +26,10 @@ public class DistrictModel {
   private char isActive;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "FK_CITY")
+  @JoinColumn(name = "FK_CITY", referencedColumnName = "PK")
   private CityModel cityModel;
 
-  @OneToMany(mappedBy = "district")
+  @OneToMany(mappedBy = "districtModel")
   private List<HospitalModel> hospitalModels;
 
   public long getPk() {

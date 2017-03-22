@@ -4,11 +4,11 @@
   <ui:define name="content">
     <div class="container">
       <div class="card">
-        <span id="userId" class="d-none">${session.getAttribute("id")}</span>
+        <span id="userId" class="d-none">${login.patientModel.pk}</span>
         <div class="card-header">
-          Hoşgeldin ${session.getAttribute("firstName")}
+          Hoşgeldin ${login.patientModel.firstName}
           <h:form prependId="false">
-            <h:commandButton value="Çıkış" styleClass="btn btn-primary" action="#{patient.logout}"/>
+            <h:commandButton value="Çıkış" styleClass="btn btn-primary" action="#{login.logout}"/>
           </h:form>
         </div>
         <div class="card-block">
@@ -18,8 +18,7 @@
               <div class="form-group">
                 <label class="form-control-label">İl Seçiniz</label>
                 <h:selectOneMenu id="city" styleClass="selectpicker form-control" value="#{appointment.cityModel.cityName}">
-                  <f:ajax event="change" update="district" listener="#{appointment.districtsByCity}"/>
-                  <f:selectItem itemLabel="-farketmez-" itemValue="#{null}"/>
+                  <f:ajax execute="@form" event="change" render="@form" actionListener="#{appointment.districtsByCity()}" onevent="selectPicker"/>
                   <f:selectItems value="#{appointment.cities}"/>
                 </h:selectOneMenu>
               </div>
@@ -28,8 +27,18 @@
               <div class="form-group">
                 <label class="form-control-label">İlçe Seçiniz</label>
                 <h:selectOneMenu id="district" styleClass="selectpicker form-control" value="#{appointment.districtModel.districtName}">
+                  <f:ajax execute="@form" event="change" render="@form" actionListener="#{appointment.hospitalByDistrict()}" onevent="selectPicker"/>
                   <f:selectItem itemLabel="-farketmez-" itemValue="#{null}"/>
                   <f:selectItems value="#{appointment.districtsByCity}"/>
+                </h:selectOneMenu>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">Hastane Seçiniz</label>
+                <h:selectOneMenu id="hospital" styleClass="selectpicker form-control" value="#{appointment.hospitalModel.hospitalName}">
+                  <f:selectItem itemLabel="-farketmez-" itemValue="#{null}"/>
+                  <f:selectItems value="#{appointment.hospitalByDistrict}"/>
                 </h:selectOneMenu>
               </div>
             </div>

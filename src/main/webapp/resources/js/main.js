@@ -1,5 +1,6 @@
 var userId = $("#userId").text();
 var restUrl = "http://localhost:8080/api/patient/" + userId;
+var cityUrl = "http://localhost:8080/api/city/cityname";
 
 
 $("#all-data").click(function () {
@@ -37,3 +38,7 @@ $("#filtered-data").click(function () {
   });
 
 });
+
+function selectPicker(data) {
+  if (data.status === 'success') $('.selectpicker').selectpicker("render");
+}

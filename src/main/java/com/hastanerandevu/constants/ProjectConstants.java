@@ -10,7 +10,7 @@ public class ProjectConstants {
   public final static String CAPTCHA_SECRET_KEY = "6LcjxBcUAAAAAP-NHMzhsDDRAck1fDX8vs_ZzC_3";
   public final static String CAPTCHA_VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify?secret=%s&response=%s&remoteip=%s";
 
-  //public final static String localizationFilePath = "com.hastanerandevu.messages";
+  public final static String localizationFilePath = "com.hastanerandevu.messages";
 
   public final static String SALT = "498#2D83B631%3800EBD!801600D*7E3CC13";
 }

@@ -19,9 +19,9 @@ import java.io.IOException;
 
 import static org.hibernate.ejb.EntityManagerImpl.LOG;
 
-@ManagedBean(name = "patient")
+@ManagedBean(name = "login")
 @SessionScoped
-public class PatientBean {
+public class LoginBean {
   private Mailer mailer = new Mailer();
   private PatientServiceImpl patientService = new PatientServiceImpl();
   private PatientModel patientModel = new PatientModel();
@@ -80,9 +80,6 @@ public class PatientBean {
     //GIRILEN BILGILERE GORE KULLANICI VARSA BU KULLANICI MODELINI BEAN MODELINE ATA
     if(patientService.loginPatient(patientModel) != null) {
       patientModel = patientService.loginPatient(patientModel);
-      HttpSession session = SessionUtils.getSession();
-      session.setAttribute("firstName", patientModel.getFirstName());
-      session.setAttribute("id", patientModel.getPk());
       verifyLogin = true;
     } else
       verifyLogin = false;

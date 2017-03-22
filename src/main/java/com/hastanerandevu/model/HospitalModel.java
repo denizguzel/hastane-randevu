@@ -39,8 +39,8 @@ public class HospitalModel {
   private List<HospitalPoliclinicRelModel> hospitalPoliclinicRelModels;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "FK_DISTRICT")
-  private DistrictModel district;
+  @JoinColumn(name = "FK_DISTRICT", referencedColumnName = "PK")
+  private DistrictModel districtModel;
 
   public long getPk() {
     return pk;
@@ -91,11 +91,11 @@ public class HospitalModel {
   }
 
   public DistrictModel getDistrict() {
-    return district;
+    return districtModel;
   }
 
-  public void setDistrict(DistrictModel district) {
-    this.district = district;
+  public void setDistrict(DistrictModel districtModel) {
+    this.districtModel = districtModel;
   }
 
   public List<HospitalPoliclinicRelModel> getHospitalPoliclinicRelModels() {
@@ -113,4 +113,6 @@ public class HospitalModel {
   public void setHospitalType(HospitalTypeEnum hospitalType) {
     this.hospitalType = hospitalType;
   }
+
+
 }
