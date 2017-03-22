@@ -37,8 +37,18 @@
               <div class="form-group">
                 <label class="form-control-label">Hastane Seçiniz</label>
                 <h:selectOneMenu id="hospital" styleClass="selectpicker form-control" value="#{appointment.hospitalModel.hospitalName}">
+                  <f:ajax execute="@form" event="change" render="@form" actionListener="#{appointment.policlinicByHospital()}" onevent="selectPicker"/>
                   <f:selectItem itemLabel="-farketmez-" itemValue="#{null}"/>
                   <f:selectItems value="#{appointment.hospitalByDistrict}"/>
+                </h:selectOneMenu>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">Poliklinik Seçiniz</label>
+                <h:selectOneMenu id="policlinic" styleClass="selectpicker form-control" value="#{appointment.policlinicModel.policlinicName}">
+                  <f:selectItem itemLabel="-farketmez-" itemValue="#{null}"/>
+                  <f:selectItems value="#{appointment.policlinicByHospital}"/>
                 </h:selectOneMenu>
               </div>
             </div>
