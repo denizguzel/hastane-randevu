@@ -27,11 +27,11 @@ public class HospitalPoliclinicRelModel {
   private List<InspectionPlaceModel> inspectionPlaceModels;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "FK_HOSPITAL", referencedColumnName = "PK")
+  @JoinColumn(name = "FK_HOSPITAL")
   private HospitalModel hospital;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "FK_POLICLINIC", referencedColumnName = "PK")
+  @JoinColumn(name = "FK_POLICLINIC")
   private PoliclinicModel policlinic;
 
   public long getPk() {

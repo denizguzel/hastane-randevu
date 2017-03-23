@@ -9,10 +9,9 @@ import java.util.List;
 public class CityDaoImpl extends BaseDaoImpl<CityModel> {
 
   public List<DistrictModel> getAllDistrictsByCity(CityModel cityModel) {
-    Query query1 = getEntitymanager().createQuery("SELECT e FROM CityModel e WHERE e.cityName = :CITY_NAME").setParameter("CITY_NAME", cityModel.getCityName());
-    cityModel = (CityModel) query1.getSingleResult();
 
-    Query query = getEntitymanager().createQuery("SELECT e.districtName FROM DistrictModel e WHERE e.cityModel = :cityModel").setParameter("cityModel", cityModel);
+    Query query = getEntitymanager().createQuery("SELECT e FROM DistrictModel e WHERE e.cityModel = :CITY_MODEL ORDER BY e.districtName");
+    query.setParameter("CITY_MODEL", cityModel);
 
     return (List<DistrictModel>) query.getResultList();
   }
@@ -30,7 +29,7 @@ public class CityDaoImpl extends BaseDaoImpl<CityModel> {
   @SuppressWarnings("unchecked")
   public List<CityModel> getCities() {
 
-    Query query = getEntitymanager().createQuery("SELECT e.cityName FROM CityModel e");
+    Query query = getEntitymanager().createQuery("SELECT e FROM CityModel e ORDER BY e.cityName");
 
     return (List<CityModel>) query.getResultList();
   }

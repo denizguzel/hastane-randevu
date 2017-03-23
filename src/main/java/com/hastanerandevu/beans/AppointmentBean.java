@@ -74,7 +74,7 @@ public class AppointmentBean implements Serializable {
     return hospitalService.getPoliclinicByHospital(hospitalModel);
   }
 
-  @PostConstruct
+  /*@PostConstruct
   public void formInit() {
     cityModel.setCityName("ISTANBUL");
     districtModel.setDistrictName("SISLI");
@@ -82,5 +82,5 @@ public class AppointmentBean implements Serializable {
     cityService.getAllDistrictsByCity(cityModel);
     districtService.getHospitalByDistrict(districtModel);
     hospitalService.getPoliclinicByHospital(hospitalModel);
-  }
+  }*/
 }

@@ -39,7 +39,7 @@ public class HospitalModel {
   private List<HospitalPoliclinicRelModel> hospitalPoliclinicRelModels;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "FK_DISTRICT", referencedColumnName = "PK")
+  @JoinColumn(name = "FK_DISTRICT")
   private DistrictModel districtModel;
 
   public long getPk() {

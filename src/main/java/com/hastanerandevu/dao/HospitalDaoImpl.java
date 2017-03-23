@@ -14,12 +14,13 @@ public class HospitalDaoImpl extends BaseDaoImpl<HospitalModel> {
   }
 
   public List<PoliclinicModel> getPoliclinicByHospital(HospitalModel hospitalModel) {
-    Query query1 = getEntitymanager().createQuery("SELECT e FROM HospitalModel e WHERE e.hospitalName = :HOSPITAL_NAME").setParameter("HOSPITAL_NAME", hospitalModel.getHospitalName());
+    /*Query query1 = getEntitymanager().createQuery("SELECT e FROM HospitalModel e WHERE e.hospitalName = :HOSPITAL_NAME").setParameter("HOSPITAL_NAME", hospitalModel.getHospitalName());
 
-    hospitalModel = (HospitalModel) query1.getSingleResult();
+    hospitalModel = (HospitalModel) query1.getSingleResult();*/
 
-    Query query2 = getEntitymanager().createQuery("SELECT e.policlinicName FROM PoliclinicModel e, HospitalPoliclinicRelModel f WHERE f.hospital = :hospital").setParameter("hospital", hospitalModel);
+    Query query = getEntitymanager().createQuery("SELECT e.policlinic FROM HospitalPoliclinicRelModel e WHERE e.hospital = :HOSPITAL ORDER BY e.policlinic.policlinicName");
+    query.setParameter("HOSPITAL", hospitalModel);
 
-    return (List<PoliclinicModel>) query2.getResultList();
+    return (List<PoliclinicModel>) query.getResultList();
   }
 }

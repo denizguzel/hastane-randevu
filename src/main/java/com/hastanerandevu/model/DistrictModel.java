@@ -26,7 +26,7 @@ public class DistrictModel {
   private char isActive;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "FK_CITY", referencedColumnName = "PK")
+  @JoinColumn(name = "FK_CITY")
   private CityModel cityModel;
 
   @OneToMany(mappedBy = "districtModel")

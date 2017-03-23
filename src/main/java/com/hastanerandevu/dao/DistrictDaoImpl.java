@@ -9,11 +9,8 @@ import java.util.List;
 public class DistrictDaoImpl extends BaseDaoImpl<DistrictModel> {
 
   public List<HospitalModel> getHospitalByDistrict(DistrictModel districtModel) {
-    Query query1 = getEntitymanager().createQuery("SELECT e FROM DistrictModel e WHERE e.districtName = :DISTRICT_NAME").setParameter("DISTRICT_NAME", districtModel.getDistrictName());
 
-    districtModel = (DistrictModel) query1.getSingleResult();
-
-    Query query = getEntitymanager().createQuery("SELECT e.hospitalName FROM HospitalModel e WHERE e.districtModel = :districtModel").setParameter("districtModel", districtModel);
+    Query query = getEntitymanager().createQuery("SELECT e FROM HospitalModel e WHERE e.districtModel = :DISTRICT_MODEL ORDER BY e.hospitalName").setParameter("DISTRICT_MODEL", districtModel);
 
     return (List<HospitalModel>) query.getResultList();
   }
