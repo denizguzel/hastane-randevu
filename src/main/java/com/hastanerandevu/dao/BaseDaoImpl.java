@@ -5,14 +5,12 @@ import com.hastanerandevu.constants.ProjectConstants;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 public abstract class BaseDaoImpl<T> implements BaseDao<T> {
   private Class<T> persistentClass;
 
-  @PersistenceContext
   private EntityManagerFactory emfactory = Persistence.createEntityManagerFactory(ProjectConstants.persistenceUnitName);
   private EntityManager entitymanager = emfactory.createEntityManager();
 

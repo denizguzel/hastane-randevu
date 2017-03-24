@@ -8,9 +8,9 @@ import com.hastanerandevu.service.CityServiceImpl;
 import com.hastanerandevu.service.DistrictServiceImpl;
 import com.hastanerandevu.service.HospitalServiceImpl;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ValueChangeEvent;
 import java.io.Serializable;
 import java.util.List;
 
@@ -58,12 +58,8 @@ public class AppointmentBean implements Serializable {
     this.policlinicModel = policlinicModel;
   }
 
-  public List<CityModel> getCities() {
+  public List<String> getCities() {
     return cityService.getCities();
-  }
-
-  public List<DistrictModel> getDistrictsByCity() {
-    return cityService.getAllDistrictsByCity(cityModel);
   }
 
   public List<HospitalModel> getHospitalByDistrict() {
@@ -74,13 +70,11 @@ public class AppointmentBean implements Serializable {
     return hospitalService.getPoliclinicByHospital(hospitalModel);
   }
 
-  /*@PostConstruct
-  public void formInit() {
-    cityModel.setCityName("ISTANBUL");
-    districtModel.setDistrictName("SISLI");
-    hospitalModel.setHospitalName("SISLI DEVLET HASTANESI");
-    cityService.getAllDistrictsByCity(cityModel);
-    districtService.getHospitalByDistrict(districtModel);
-    hospitalService.getPoliclinicByHospital(hospitalModel);
-  }*/
+  public void cityListener(ValueChangeEvent value) {
+    cityModel.setCityName(value.getNewValue().toString());
+  }
+
+  public List<String> getDistrictsByCity() {
+    return cityService.getAllDistrictsByCity(cityModel);
+  }
 }

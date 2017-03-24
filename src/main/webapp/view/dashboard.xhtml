@@ -17,8 +17,8 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label class="form-control-label">İl Seçiniz</label>
-                <h:selectOneMenu id="city" styleClass="selectpicker form-control" value="#{appointment.cityModel.cityName}">
-                  <f:ajax execute="@form" event="change" render="@form" actionListener="#{appointment.districtsByCity()}" onevent="selectPicker"/>
+                <h:selectOneMenu id="city" styleClass="selectpicker form-control" value="#{appointment.cityModel.cityName}" valueChangeListener="#{appointment.cityListener}">
+                  <f:ajax execute="@this" event="change" render="@form"/>
                   <f:selectItems value="#{appointment.cities}"/>
                 </h:selectOneMenu>
               </div>
@@ -27,28 +27,9 @@
               <div class="form-group">
                 <label class="form-control-label">İlçe Seçiniz</label>
                 <h:selectOneMenu id="district" styleClass="selectpicker form-control" value="#{appointment.districtModel.districtName}">
-                  <f:ajax execute="@form" event="change" render="@form" actionListener="#{appointment.hospitalByDistrict()}" onevent="selectPicker"/>
+                  <f:ajax execute="@this" event="change" render="@form"/>
                   <f:selectItem itemLabel="-farketmez-" itemValue="#{null}"/>
-                  <f:selectItems value="#{appointment.districtsByCity}"/>
-                </h:selectOneMenu>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label class="form-control-label">Hastane Seçiniz</label>
-                <h:selectOneMenu id="hospital" styleClass="selectpicker form-control" value="#{appointment.hospitalModel.hospitalName}">
-                  <f:ajax execute="@form" event="change" render="@form" actionListener="#{appointment.policlinicByHospital()}" onevent="selectPicker"/>
-                  <f:selectItem itemLabel="-farketmez-" itemValue="#{null}"/>
-                  <f:selectItems value="#{appointment.hospitalByDistrict}"/>
-                </h:selectOneMenu>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label class="form-control-label">Poliklinik Seçiniz</label>
-                <h:selectOneMenu id="policlinic" styleClass="selectpicker form-control" value="#{appointment.policlinicModel.policlinicName}">
-                  <f:selectItem itemLabel="-farketmez-" itemValue="#{null}"/>
-                  <f:selectItems value="#{appointment.policlinicByHospital}"/>
+                  <f:selectItems value="#{appointment.getDistrictsByCity}"/>
                 </h:selectOneMenu>
               </div>
             </div>
