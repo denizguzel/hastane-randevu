@@ -10,29 +10,29 @@ import java.util.Map;
 
 public class CityDaoImpl extends BaseDaoImpl<CityModel> {
 
-  public Map<String, String> getCities() {
+  public List<CityModel> getCities() {
 
     Query query = getEntitymanager().createQuery("SELECT e FROM CityModel e ORDER BY e.cityName");
 
-    List<CityModel> list = query.getResultList();
-    Map<String, String> results = new LinkedHashMap<>();
-    for(CityModel cityModel : list) {
+    return query.getResultList();
+    //Map<String, String> results = new LinkedHashMap<>();
+    /*for(CityModel cityModel : list) {
       results.put(cityModel.getCityName(), String.valueOf(cityModel.getPk())); //label, value
     }
-    return results;
+    return results;*/
   }
 
-  public Map<String, String> getAllDistrictsByCity(CityModel cityModel) {
+  public List<DistrictModel> getAllDistrictsByCity(CityModel cityModel) {
     Query query = getEntitymanager().createQuery("SELECT e FROM DistrictModel e WHERE e.cityModel = :cityModel ORDER BY e.districtName");
     query.setParameter("cityModel", cityModel);
 
-    List<DistrictModel> list = query.getResultList();
-    Map<String, String> results = new LinkedHashMap<>();
+    return query.getResultList();
+    /*Map<String, String> results = new LinkedHashMap<>();
     for(DistrictModel districtModel : list) {
       results.put(districtModel.getDistrictName(), String.valueOf(districtModel.getPk()));
     }
 
-    return results;
+    return results;*/
   }
 
   public void createDistricts(List<DistrictModel> districtModels, CityModel cityModel) {

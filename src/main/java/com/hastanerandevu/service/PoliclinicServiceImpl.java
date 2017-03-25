@@ -1,7 +1,9 @@
 package com.hastanerandevu.service;
 
 import com.hastanerandevu.dao.PoliclinicDaoImpl;
+import com.hastanerandevu.model.HospitalModel;
 import com.hastanerandevu.model.HospitalPoliclinicRelModel;
+import com.hastanerandevu.model.InspectionPlaceModel;
 import com.hastanerandevu.model.PoliclinicModel;
 
 import java.util.List;
@@ -35,7 +37,7 @@ public class PoliclinicServiceImpl implements BaseService<PoliclinicModel> {
     return policlinicDao.findAll();
   }
 
-  public Map<String, String> getInspectionPlaceByPoliclinic(HospitalPoliclinicRelModel hospitalPoliclinicRelModel) {
-    return policlinicDao.getInspectionPlaceByPoliclinic(hospitalPoliclinicRelModel);
+  public List<InspectionPlaceModel> getInspectionPlacesByHospitalPoliclinic(HospitalModel hospitalModel,PoliclinicModel policlinicModel) {
+    return policlinicDao.getInspectionPlacesByHospitalPoliclinic(policlinicModel,hospitalModel);
   }
 }

@@ -40,11 +40,11 @@ public class CityServiceImpl implements BaseService<CityModel> {
     cityDao.createDistricts(districtModel, model);
   }
 
-  public Map<String, String> getCities() {
+  public List<CityModel> getCities() {
     return cityDao.getCities();
   }
 
-  public Map<String, String> getAllDistrictsByCity(CityModel cityModel) {
+  public List<DistrictModel> getAllDistrictsByCity(CityModel cityModel) {
     return cityDao.getAllDistrictsByCity(cityModel);
   }
 }

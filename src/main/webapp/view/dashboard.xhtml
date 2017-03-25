@@ -17,49 +17,49 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label class="form-control-label">İl Seçiniz</label>
-                <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.cityModel.pk}">
+                <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedCity}">
                   <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeCity}" onevent="selectPicker"/>
                   <f:selectItem itemLabel="İl Seçiniz"/>
-                  <f:selectItems value="#{appointment.city}"/>
+                  <f:selectItems value="#{appointment.cities.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
                 </h:selectOneMenu>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label class="form-control-label">İlçe Seçiniz</label>
-                <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.districtModel.pk}">
+                <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedDistrict}">
                   <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeDistrict}" onevent="selectPicker"/>
                   <f:selectItem itemLabel="İlçe seçiniz"/>
-                  <f:selectItems value="#{appointment.district}"/>
+                  <f:selectItems value="#{appointment.districts.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
                 </h:selectOneMenu>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label class="form-control-label">Hastane Seçiniz</label>
-                <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.hospitalModel.pk}">
+                <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedHospital}">
                   <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeHospital}" onevent="selectPicker"/>
                   <f:selectItem itemLabel="Hastane seçiniz"/>
-                  <f:selectItems value="#{appointment.hospital}"/>
+                  <f:selectItems value="#{appointment.hospitals.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
                 </h:selectOneMenu>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label class="form-control-label">Poliklinik Seçiniz</label>
-                <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.hospitalPoliclinicRelModel.pk}">
+                <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedPoliclinic}">
                   <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changePoliclinic}" onevent="selectPicker"/>
                   <f:selectItem itemLabel="Poliklinik seçiniz"/>
-                  <f:selectItems value="#{appointment.policlinic}"/>
+                  <f:selectItems value="#{appointment.policlinics.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
                 </h:selectOneMenu>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label class="form-control-label">Muayene Yeri Seçiniz</label>
-                <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.inspectionPlaceModel.pk}">
+                <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedInspectionPlace}">
                   <f:selectItem itemLabel="Muayene yeri seçiniz"/>
-                  <f:selectItems value="#{appointment.inspectionPlace}"/>
+                  <f:selectItems value="#{appointment.inspectionPlaces.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
                 </h:selectOneMenu>
               </div>
             </div>

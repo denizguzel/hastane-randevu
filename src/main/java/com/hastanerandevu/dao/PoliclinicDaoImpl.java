@@ -1,28 +1,38 @@
 package com.hastanerandevu.dao;
 
+import com.hastanerandevu.comparators.InspectionPlaceComparator;
+import com.hastanerandevu.model.HospitalModel;
 import com.hastanerandevu.model.HospitalPoliclinicRelModel;
 import com.hastanerandevu.model.InspectionPlaceModel;
 import com.hastanerandevu.model.PoliclinicModel;
 
 import javax.persistence.Query;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class PoliclinicDaoImpl extends BaseDaoImpl<PoliclinicModel> {
 
-  public Map<String, String> getInspectionPlaceByPoliclinic(HospitalPoliclinicRelModel hospitalPoliclinicRelModel) {
+  public List<InspectionPlaceModel> getInspectionPlacesByHospitalPoliclinic(PoliclinicModel policlinicModel,HospitalModel hospitalModel) {
 
-    Query query = getEntitymanager().createQuery("SELECT e FROM InspectionPlaceModel e WHERE e.hospitalPoliclinicRel = :policlinicModel ORDER BY e.placeName");
-    query.setParameter("policlinicModel", hospitalPoliclinicRelModel);
+    Query query = getEntitymanager().createQuery("SELECT e FROM HospitalPoliclinicRelModel e WHERE e.policlinic = :policlinicModel AND e.hospital = :hospitalModel ");
+    query.setParameter("policlinicModel", policlinicModel);
+    query.setParameter("hospitalModel", hospitalModel);
 
-    List<InspectionPlaceModel> list = query.getResultList();
-    Map<String, String> results = new LinkedHashMap<>();
+    HospitalPoliclinicRelModel hospitalPoliclinicRelModel = (HospitalPoliclinicRelModel) query.getResultList().get(0);
+
+    List<InspectionPlaceModel> inspectionPlaceModels = hospitalPoliclinicRelModel.getInspectionPlaceModels();
+
+    Collections.sort(inspectionPlaceModels,new InspectionPlaceComparator());
+
+    return inspectionPlaceModels;
+    /*Map<String, String> results = new LinkedHashMap<>();
     for(InspectionPlaceModel inspectionPlace : list) {
       results.put(inspectionPlace.getPlaceName(), String.valueOf(inspectionPlace.getPk()));
     }
 
-    return results;
+    return results;*/
   }
 
 }

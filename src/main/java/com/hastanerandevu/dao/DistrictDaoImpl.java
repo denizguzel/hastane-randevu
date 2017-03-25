@@ -10,17 +10,17 @@ import java.util.Map;
 
 public class DistrictDaoImpl extends BaseDaoImpl<DistrictModel> {
 
-  public Map<String, String> getHospitalByDistrict(DistrictModel districtModel) {
+  public List<HospitalModel> getHospitalByDistrict(DistrictModel districtModel) {
 
     Query query = getEntitymanager().createQuery("SELECT e FROM HospitalModel e WHERE e.districtModel = :districtModel ORDER BY e.hospitalName");
     query.setParameter("districtModel", districtModel);
 
-    List<HospitalModel> list = query.getResultList();
-    Map<String, String> results = new LinkedHashMap<>();
+    return query.getResultList();
+    /*Map<String, String> results = new LinkedHashMap<>();
     for(HospitalModel hospitalModel : list) {
       results.put(hospitalModel.getHospitalName(), String.valueOf(hospitalModel.getPk()));
     }
 
-    return results;
+    return results;*/
   }
 }
