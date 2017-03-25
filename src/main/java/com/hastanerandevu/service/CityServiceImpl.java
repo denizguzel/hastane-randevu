@@ -5,6 +5,7 @@ import com.hastanerandevu.model.CityModel;
 import com.hastanerandevu.model.DistrictModel;
 
 import java.util.List;
+import java.util.Map;
 
 public class CityServiceImpl implements BaseService<CityModel> {
 
@@ -39,11 +40,11 @@ public class CityServiceImpl implements BaseService<CityModel> {
     cityDao.createDistricts(districtModel, model);
   }
 
-  public List<String> getCities() {
+  public Map<String, String> getCities() {
     return cityDao.getCities();
   }
 
-  public List<String> getAllDistrictsByCity(CityModel cityModel) {
+  public Map<String, String> getAllDistrictsByCity(CityModel cityModel) {
     return cityDao.getAllDistrictsByCity(cityModel);
   }
 }

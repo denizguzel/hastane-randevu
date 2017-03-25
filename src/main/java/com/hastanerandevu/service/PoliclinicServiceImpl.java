@@ -1,9 +1,11 @@
 package com.hastanerandevu.service;
 
 import com.hastanerandevu.dao.PoliclinicDaoImpl;
+import com.hastanerandevu.model.HospitalPoliclinicRelModel;
 import com.hastanerandevu.model.PoliclinicModel;
 
 import java.util.List;
+import java.util.Map;
 
 public class PoliclinicServiceImpl implements BaseService<PoliclinicModel> {
   private PoliclinicDaoImpl policlinicDao = new PoliclinicDaoImpl();
@@ -31,5 +33,9 @@ public class PoliclinicServiceImpl implements BaseService<PoliclinicModel> {
   @Override
   public List<PoliclinicModel> findAll() {
     return policlinicDao.findAll();
+  }
+
+  public Map<String, String> getInspectionPlaceByPoliclinic(HospitalPoliclinicRelModel hospitalPoliclinicRelModel) {
+    return policlinicDao.getInspectionPlaceByPoliclinic(hospitalPoliclinicRelModel);
   }
 }

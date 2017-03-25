@@ -113,6 +113,4 @@ public class HospitalModel {
   public void setHospitalType(HospitalTypeEnum hospitalType) {
     this.hospitalType = hospitalType;
   }
-
-
 }

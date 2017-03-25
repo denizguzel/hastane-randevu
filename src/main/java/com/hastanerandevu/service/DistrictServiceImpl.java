@@ -2,9 +2,9 @@ package com.hastanerandevu.service;
 
 import com.hastanerandevu.dao.DistrictDaoImpl;
 import com.hastanerandevu.model.DistrictModel;
-import com.hastanerandevu.model.HospitalModel;
 
 import java.util.List;
+import java.util.Map;
 
 public class DistrictServiceImpl implements BaseService<DistrictModel> {
 
@@ -35,7 +35,7 @@ public class DistrictServiceImpl implements BaseService<DistrictModel> {
     return districtDao.findAll();
   }
 
-  public List<HospitalModel> getHospitalByDistrict(DistrictModel districtModel) {
+  public Map<String, String> getHospitalByDistrict(DistrictModel districtModel) {
     return districtDao.getHospitalByDistrict(districtModel);
   }
 }

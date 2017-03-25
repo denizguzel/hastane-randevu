@@ -1,4 +1,4 @@
-<ui:composition template="/view/master/masterTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+<ui:composition template="/view/master/masterTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
   <ui:define name="title">Dashboard</ui:define>
 
   <ui:define name="content">
@@ -17,19 +17,49 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label class="form-control-label">İl Seçiniz</label>
-                <h:selectOneMenu id="city" styleClass="selectpicker form-control" value="#{appointment.cityModel.cityName}" valueChangeListener="#{appointment.cityListener}">
-                  <f:ajax execute="@this" event="change" render="@form"/>
-                  <f:selectItems value="#{appointment.cities}"/>
+                <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.cityModel.pk}">
+                  <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeCity}" onevent="selectPicker"/>
+                  <f:selectItem itemLabel="İl Seçiniz"/>
+                  <f:selectItems value="#{appointment.city}"/>
                 </h:selectOneMenu>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label class="form-control-label">İlçe Seçiniz</label>
-                <h:selectOneMenu id="district" styleClass="selectpicker form-control" value="#{appointment.districtModel.districtName}">
-                  <f:ajax execute="@this" event="change" render="@form"/>
-                  <f:selectItem itemLabel="-farketmez-" itemValue="#{null}"/>
-                  <f:selectItems value="#{appointment.getDistrictsByCity}"/>
+                <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.districtModel.pk}">
+                  <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeDistrict}" onevent="selectPicker"/>
+                  <f:selectItem itemLabel="İlçe seçiniz"/>
+                  <f:selectItems value="#{appointment.district}"/>
+                </h:selectOneMenu>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">Hastane Seçiniz</label>
+                <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.hospitalModel.pk}">
+                  <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeHospital}" onevent="selectPicker"/>
+                  <f:selectItem itemLabel="Hastane seçiniz"/>
+                  <f:selectItems value="#{appointment.hospital}"/>
+                </h:selectOneMenu>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">Poliklinik Seçiniz</label>
+                <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.hospitalPoliclinicRelModel.pk}">
+                  <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changePoliclinic}" onevent="selectPicker"/>
+                  <f:selectItem itemLabel="Poliklinik seçiniz"/>
+                  <f:selectItems value="#{appointment.policlinic}"/>
+                </h:selectOneMenu>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">Muayene Yeri Seçiniz</label>
+                <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.inspectionPlaceModel.pk}">
+                  <f:selectItem itemLabel="Muayene yeri seçiniz"/>
+                  <f:selectItems value="#{appointment.inspectionPlace}"/>
                 </h:selectOneMenu>
               </div>
             </div>
