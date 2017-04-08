@@ -2,8 +2,8 @@ package com.hastanerandevu.utility;
 
 import com.hastanerandevu.constants.ProjectConstants;
 import com.hastanerandevu.converter.Encryptor;
-import com.hastanerandevu.dao.PatientDaoImpl;
 import com.hastanerandevu.model.PatientModel;
+import com.hastanerandevu.service.PatientServiceImpl;
 
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.Properties;
 
 public class Mailer implements Runnable {
-  private PatientDaoImpl patientDao = new PatientDaoImpl();
+  private PatientServiceImpl patientService = new PatientServiceImpl();
   private PatientModel patientModel = new PatientModel();
   private String to;
   private String subject;
@@ -73,7 +73,7 @@ public class Mailer implements Runnable {
   }
 
   public void sendPasswordResetMail(PatientModel patientModel) {
-    this.patientModel = patientDao.getUserByEmail(patientModel);
+    this.patientModel = patientService.getUserByEmail(patientModel);
 
     String encryptedSalt = Encryptor.encryptEmail(ProjectConstants.SALT + this.patientModel.getEmail());
 
