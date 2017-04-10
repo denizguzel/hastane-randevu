@@ -32,8 +32,8 @@ public class AppointmentModel {
   private AppointmentStatusEnum appointmentStatus;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "FK_APPOINTMENT_CHART")
-  private AppointmentChartModel appointmentChart;
+  @JoinColumn(name = "FK_INSPECTION_PLACE")
+  private InspectionPlaceModel inspectionPlace;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "FK_PATIENT")
@@ -79,14 +79,6 @@ public class AppointmentModel {
     this.isActive = isActive;
   }
 
-  public AppointmentChartModel getAppointmentChart() {
-    return appointmentChart;
-  }
-
-  public void setAppointmentChart(AppointmentChartModel appointmentChart) {
-    this.appointmentChart = appointmentChart;
-  }
-
   public PatientModel getPatient() {
     return patient;
   }
@@ -101,5 +93,13 @@ public class AppointmentModel {
 
   public void setAppointmentStatus(AppointmentStatusEnum appointmentStatus) {
     this.appointmentStatus = appointmentStatus;
+  }
+
+  public InspectionPlaceModel getInspectionPlace() {
+    return inspectionPlace;
+  }
+
+  public void setInspectionPlace(InspectionPlaceModel inspectionPlace) {
+    this.inspectionPlace = inspectionPlace;
   }
 }

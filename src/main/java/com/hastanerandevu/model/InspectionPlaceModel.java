@@ -27,11 +27,14 @@ public class InspectionPlaceModel {
   private Date modifiedTime;
 
   @OneToMany(mappedBy = "inspectionPlace")
-  private List<InspectionPlaceDoctorRelModel> inspectionPlaceDoctorRelModels;
+  private List<AppointmentModel> appointmentModels;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "FK_HOSPITAL_POLICLINIC_REL")
   private HospitalPoliclinicRelModel hospitalPoliclinicRel;
+
+  @OneToOne(mappedBy = "inspectionPlace")
+  private DoctorModel doctor;
 
   public long getPk() {
     return pk;
@@ -57,14 +60,6 @@ public class InspectionPlaceModel {
     this.isActive = isActive;
   }
 
-  public List<InspectionPlaceDoctorRelModel> getInspectionPlaceDoctorRelModels() {
-    return inspectionPlaceDoctorRelModels;
-  }
-
-  public void setInspectionPlaceDoctorRelModels(List<InspectionPlaceDoctorRelModel> inspectionPlaceDoctorRelModels) {
-    this.inspectionPlaceDoctorRelModels = inspectionPlaceDoctorRelModels;
-  }
-
   public HospitalPoliclinicRelModel getHospitalPoliclinicRel() {
     return hospitalPoliclinicRel;
   }
@@ -87,5 +82,21 @@ public class InspectionPlaceModel {
 
   public void setModifiedTime(Date modifiedTime) {
     this.modifiedTime = modifiedTime;
+  }
+
+  public List<AppointmentModel> getAppointmentModels() {
+    return appointmentModels;
+  }
+
+  public void setAppointmentModels(List<AppointmentModel> appointmentModels) {
+    this.appointmentModels = appointmentModels;
+  }
+
+  public DoctorModel getDoctor() {
+    return doctor;
+  }
+
+  public void setDoctor(DoctorModel doctor) {
+    this.doctor = doctor;
   }
 }

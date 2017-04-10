@@ -58,8 +58,9 @@ public class DoctorModel {
   @JoinColumn(name = "FK_BRANCH")
   private BranchModel branch;
 
-  @OneToMany(mappedBy = "doctor")
-  private List<InspectionPlaceDoctorRelModel> inspectionPlaceDoctorRelModels;
+  @OneToOne(fetch=FetchType.LAZY)
+  @JoinColumn(name="FK_INSPECTION_PLACE")
+  private InspectionPlaceModel inspectionPlace;
 
   @OneToMany(mappedBy = "doctor")
   private List<ReviewsAboutDoctorsModel> reviewsAboutDoctorsModels;
@@ -144,14 +145,6 @@ public class DoctorModel {
     this.branch = branch;
   }
 
-  public List<InspectionPlaceDoctorRelModel> getInspectionPlaceDoctorRelModels() {
-    return inspectionPlaceDoctorRelModels;
-  }
-
-  public void setInspectionPlaceDoctorRelModels(List<InspectionPlaceDoctorRelModel> inspectionPlaceDoctorRelModels) {
-    this.inspectionPlaceDoctorRelModels = inspectionPlaceDoctorRelModels;
-  }
-
   public List<ReviewsAboutDoctorsModel> getReviewsAboutDoctorsModels() {
     return reviewsAboutDoctorsModels;
   }
@@ -182,5 +175,13 @@ public class DoctorModel {
 
   public void setSecretQuestion(SecretQuestionEnum secretQuestion) {
     this.secretQuestion = secretQuestion;
+  }
+
+  public InspectionPlaceModel getInspectionPlace() {
+    return inspectionPlace;
+  }
+
+  public void setInspectionPlace(InspectionPlaceModel inspectionPlace) {
+    this.inspectionPlace = inspectionPlace;
   }
 }

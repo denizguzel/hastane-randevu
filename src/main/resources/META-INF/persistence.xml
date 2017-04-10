@@ -26,9 +26,7 @@
     <class>com.hastanerandevu.model.PatientDiseaseRelModel</class>
     <class>com.hastanerandevu.model.PatientAlergyRelModel</class>
     <class>com.hastanerandevu.model.HospitalPoliclinicRelModel</class>
-    <class>com.hastanerandevu.model.AppointmentChartModel</class>
     <class>com.hastanerandevu.model.AppointmentModel</class>
-    <class>com.hastanerandevu.model.InspectionPlaceDoctorRelModel</class>
     <class>com.hastanerandevu.model.FrequentlyAskedQuestionsModel</class>
     <class>com.hastanerandevu.model.ReviewsAboutDoctorsModel</class>
 
