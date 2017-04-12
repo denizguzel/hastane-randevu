@@ -206,7 +206,7 @@ public class AppointmentBean implements Serializable {
     }
 
     //districtModel.setPk(Long.parseLong(value));
-    for (HospitalModel hospitalModel : districtService.getHospitalByDistrict(districtService.find(Long.parseLong(selectedDistrict)))){
+    for (HospitalModel hospitalModel : districtService.getHospitalsByDistrict(districtService.find(Long.parseLong(selectedDistrict)))){
       hospitals.put(hospitalModel.getPk(),hospitalModel.getHospitalName());
     }
   }
