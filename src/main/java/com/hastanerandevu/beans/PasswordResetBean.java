@@ -3,7 +3,7 @@ package com.hastanerandevu.beans;
 import com.hastanerandevu.constants.ProjectConstants;
 import com.hastanerandevu.converter.Encryptor;
 import com.hastanerandevu.model.PatientModel;
-import com.hastanerandevu.service.PatientServiceImpl;
+import com.hastanerandevu.service.impl.PatientServiceImpl;
 import com.hastanerandevu.utility.Mailer;
 
 import javax.faces.application.FacesMessage;

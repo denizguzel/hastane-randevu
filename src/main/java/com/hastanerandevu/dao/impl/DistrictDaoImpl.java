@@ -1,12 +1,11 @@
-package com.hastanerandevu.dao;
+package com.hastanerandevu.dao.impl;
 
 import com.hastanerandevu.model.DistrictModel;
 import com.hastanerandevu.model.HospitalModel;
+import com.hastanerandevu.model.HospitalPoliclinicRelModel;
 
 import javax.persistence.Query;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 public class DistrictDaoImpl extends BaseDaoImpl<DistrictModel> {
 
@@ -16,11 +15,14 @@ public class DistrictDaoImpl extends BaseDaoImpl<DistrictModel> {
     query.setParameter("districtModel", districtModel);
 
     return query.getResultList();
-    /*Map<String, String> results = new LinkedHashMap<>();
-    for(HospitalModel hospitalModel : list) {
-      results.put(hospitalModel.getHospitalName(), String.valueOf(hospitalModel.getPk()));
-    }
 
-    return results;*/
   }
+
+  public List<HospitalPoliclinicRelModel> getPoliclinicByDistrict(DistrictModel districtModel){
+    Query query = getEntitymanager().createQuery("SELECT e FROM HospitalPoliclinicRelModel e WHERE e.hospital.districtModel = :districtModel ORDER BY e.policlinic.policlinicName");
+    query.setParameter("districtModel",districtModel);
+
+    return query.getResultList();
+  }
+
 }

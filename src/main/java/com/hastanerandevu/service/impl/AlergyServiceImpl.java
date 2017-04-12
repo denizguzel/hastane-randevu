@@ -1,7 +1,8 @@
-package com.hastanerandevu.service;
+package com.hastanerandevu.service.impl;
 
-import com.hastanerandevu.dao.AlergyDaoImpl;
+import com.hastanerandevu.dao.impl.AlergyDaoImpl;
 import com.hastanerandevu.model.AlergyModel;
+import com.hastanerandevu.service.BaseService;
 
 import java.util.List;
 

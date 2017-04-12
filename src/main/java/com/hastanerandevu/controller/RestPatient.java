@@ -1,7 +1,7 @@
 package com.hastanerandevu.controller;
 
 import com.hastanerandevu.model.PatientModel;
-import com.hastanerandevu.service.PatientServiceImpl;
+import com.hastanerandevu.service.impl.PatientServiceImpl;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

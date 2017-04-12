@@ -1,7 +1,8 @@
-package com.hastanerandevu.service;
+package com.hastanerandevu.service.impl;
 
-import com.hastanerandevu.dao.SurveyDaoImpl;
+import com.hastanerandevu.dao.impl.SurveyDaoImpl;
 import com.hastanerandevu.model.SurveyModel;
+import com.hastanerandevu.service.BaseService;
 
 import java.util.List;
 

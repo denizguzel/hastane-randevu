@@ -1,13 +1,11 @@
-package com.hastanerandevu.dao;
+package com.hastanerandevu.dao.impl;
 
 import com.hastanerandevu.enums.HospitalTypeEnum;
 import com.hastanerandevu.model.HospitalModel;
 import com.hastanerandevu.model.PoliclinicModel;
 
 import javax.persistence.Query;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 public class HospitalDaoImpl extends BaseDaoImpl<HospitalModel> {
 

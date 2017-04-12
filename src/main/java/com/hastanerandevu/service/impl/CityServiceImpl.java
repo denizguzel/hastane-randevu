@@ -1,11 +1,13 @@
-package com.hastanerandevu.service;
+package com.hastanerandevu.service.impl;
 
-import com.hastanerandevu.dao.CityDaoImpl;
+import com.hastanerandevu.dao.impl.CityDaoImpl;
 import com.hastanerandevu.model.CityModel;
 import com.hastanerandevu.model.DistrictModel;
+import com.hastanerandevu.model.HospitalModel;
+import com.hastanerandevu.model.HospitalPoliclinicRelModel;
+import com.hastanerandevu.service.BaseService;
 
 import java.util.List;
-import java.util.Map;
 
 public class CityServiceImpl implements BaseService<CityModel> {
 
@@ -36,9 +38,9 @@ public class CityServiceImpl implements BaseService<CityModel> {
     return cityDao.findAll();
   }
 
-  public void createDistricts(List<DistrictModel> districtModel, CityModel model) {
+  /*public void createDistricts(List<DistrictModel> districtModel, CityModel model) {
     cityDao.createDistricts(districtModel, model);
-  }
+  }*/
 
   public List<CityModel> getCities() {
     return cityDao.getCities();
@@ -46,5 +48,13 @@ public class CityServiceImpl implements BaseService<CityModel> {
 
   public List<DistrictModel> getAllDistrictsByCity(CityModel cityModel) {
     return cityDao.getAllDistrictsByCity(cityModel);
+  }
+
+  public List<HospitalPoliclinicRelModel> getPoliclinicsByCity(CityModel cityModel){
+    return cityDao.getPoliclinicByCity(cityModel);
+  }
+
+  public List<HospitalModel> getHospitalsByCity(CityModel cityModel){
+    return cityDao.getHospitalByCity(cityModel);
   }
 }

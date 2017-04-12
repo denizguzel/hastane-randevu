@@ -1,13 +1,12 @@
-package com.hastanerandevu.service;
+package com.hastanerandevu.service.impl;
 
-import com.hastanerandevu.dao.PoliclinicDaoImpl;
+import com.hastanerandevu.dao.impl.PoliclinicDaoImpl;
 import com.hastanerandevu.model.HospitalModel;
-import com.hastanerandevu.model.HospitalPoliclinicRelModel;
 import com.hastanerandevu.model.InspectionPlaceModel;
 import com.hastanerandevu.model.PoliclinicModel;
+import com.hastanerandevu.service.BaseService;
 
 import java.util.List;
-import java.util.Map;
 
 public class PoliclinicServiceImpl implements BaseService<PoliclinicModel> {
   private PoliclinicDaoImpl policlinicDao = new PoliclinicDaoImpl();

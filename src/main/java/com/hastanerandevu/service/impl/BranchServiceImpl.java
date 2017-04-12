@@ -1,7 +1,8 @@
-package com.hastanerandevu.service;
+package com.hastanerandevu.service.impl;
 
-import com.hastanerandevu.dao.BranchDaoImpl;
+import com.hastanerandevu.dao.impl.BranchDaoImpl;
 import com.hastanerandevu.model.BranchModel;
+import com.hastanerandevu.service.BaseService;
 
 import java.util.List;
 

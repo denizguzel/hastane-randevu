@@ -1,7 +1,8 @@
-package com.hastanerandevu.service;
+package com.hastanerandevu.service.impl;
 
-import com.hastanerandevu.dao.OptionDaoImpl;
+import com.hastanerandevu.dao.impl.OptionDaoImpl;
 import com.hastanerandevu.model.OptionModel;
+import com.hastanerandevu.service.BaseService;
 
 import java.util.List;
 

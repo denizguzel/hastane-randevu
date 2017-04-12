@@ -5,7 +5,7 @@ import com.hastanerandevu.enums.BloodGroupEnum;
 import com.hastanerandevu.enums.GenderEnum;
 import com.hastanerandevu.enums.SecretQuestionEnum;
 import com.hastanerandevu.model.PatientModel;
-import com.hastanerandevu.service.PatientServiceImpl;
+import com.hastanerandevu.service.impl.PatientServiceImpl;
 import com.hastanerandevu.utility.Mailer;
 import com.hastanerandevu.utility.SessionUtils;
 import com.hastanerandevu.validation.CaptchaValidator;

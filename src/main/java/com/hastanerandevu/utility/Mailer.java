@@ -3,7 +3,7 @@ package com.hastanerandevu.utility;
 import com.hastanerandevu.constants.ProjectConstants;
 import com.hastanerandevu.converter.Encryptor;
 import com.hastanerandevu.model.PatientModel;
-import com.hastanerandevu.service.PatientServiceImpl;
+import com.hastanerandevu.service.impl.PatientServiceImpl;
 
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;

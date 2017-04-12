@@ -1,6 +1,7 @@
-package com.hastanerandevu.dao;
+package com.hastanerandevu.dao.impl;
 
 import com.hastanerandevu.constants.ProjectConstants;
+import com.hastanerandevu.dao.BaseDao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

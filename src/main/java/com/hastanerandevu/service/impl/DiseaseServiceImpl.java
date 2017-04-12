@@ -1,7 +1,8 @@
-package com.hastanerandevu.service;
+package com.hastanerandevu.service.impl;
 
-import com.hastanerandevu.dao.DiseaseDaoImpl;
+import com.hastanerandevu.dao.impl.DiseaseDaoImpl;
 import com.hastanerandevu.model.DiseaseModel;
+import com.hastanerandevu.service.BaseService;
 
 import java.util.List;
 

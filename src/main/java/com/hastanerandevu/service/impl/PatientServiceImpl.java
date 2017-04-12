@@ -1,8 +1,9 @@
-package com.hastanerandevu.service;
+package com.hastanerandevu.service.impl;
 
-import com.hastanerandevu.dao.PatientDaoImpl;
+import com.hastanerandevu.dao.impl.PatientDaoImpl;
 import com.hastanerandevu.model.AppointmentModel;
 import com.hastanerandevu.model.PatientModel;
+import com.hastanerandevu.service.BaseService;
 
 import java.util.Date;
 import java.util.List;

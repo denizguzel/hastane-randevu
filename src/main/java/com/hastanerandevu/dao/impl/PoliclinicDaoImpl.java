@@ -1,4 +1,4 @@
-package com.hastanerandevu.dao;
+package com.hastanerandevu.dao.impl;
 
 import com.hastanerandevu.comparators.InspectionPlaceComparator;
 import com.hastanerandevu.model.HospitalModel;
@@ -8,9 +8,7 @@ import com.hastanerandevu.model.PoliclinicModel;
 
 import javax.persistence.Query;
 import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 public class PoliclinicDaoImpl extends BaseDaoImpl<PoliclinicModel> {
 

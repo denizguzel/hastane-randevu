@@ -1,7 +1,8 @@
-package com.hastanerandevu.service;
+package com.hastanerandevu.service.impl;
 
-import com.hastanerandevu.dao.FrequentlyAskedQuestionsDaoImpl;
+import com.hastanerandevu.dao.impl.FrequentlyAskedQuestionsDaoImpl;
 import com.hastanerandevu.model.FrequentlyAskedQuestionsModel;
+import com.hastanerandevu.service.BaseService;
 
 import java.util.List;
 

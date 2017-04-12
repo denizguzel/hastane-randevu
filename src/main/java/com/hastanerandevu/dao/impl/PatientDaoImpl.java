@@ -1,4 +1,4 @@
-package com.hastanerandevu.dao;
+package com.hastanerandevu.dao.impl;
 
 import com.hastanerandevu.converter.Encryptor;
 import com.hastanerandevu.enums.AppointmentStatusEnum;

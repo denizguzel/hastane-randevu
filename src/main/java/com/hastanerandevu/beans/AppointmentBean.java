@@ -1,10 +1,10 @@
 package com.hastanerandevu.beans;
 
 import com.hastanerandevu.model.*;
-import com.hastanerandevu.service.CityServiceImpl;
-import com.hastanerandevu.service.DistrictServiceImpl;
-import com.hastanerandevu.service.HospitalServiceImpl;
-import com.hastanerandevu.service.PoliclinicServiceImpl;
+import com.hastanerandevu.service.impl.CityServiceImpl;
+import com.hastanerandevu.service.impl.DistrictServiceImpl;
+import com.hastanerandevu.service.impl.HospitalServiceImpl;
+import com.hastanerandevu.service.impl.PoliclinicServiceImpl;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;

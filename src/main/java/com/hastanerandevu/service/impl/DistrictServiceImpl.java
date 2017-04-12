@@ -1,11 +1,12 @@
-package com.hastanerandevu.service;
+package com.hastanerandevu.service.impl;
 
-import com.hastanerandevu.dao.DistrictDaoImpl;
+import com.hastanerandevu.dao.impl.DistrictDaoImpl;
 import com.hastanerandevu.model.DistrictModel;
 import com.hastanerandevu.model.HospitalModel;
+import com.hastanerandevu.model.HospitalPoliclinicRelModel;
+import com.hastanerandevu.service.BaseService;
 
 import java.util.List;
-import java.util.Map;
 
 public class DistrictServiceImpl implements BaseService<DistrictModel> {
 
@@ -38,5 +39,9 @@ public class DistrictServiceImpl implements BaseService<DistrictModel> {
 
   public List<HospitalModel> getHospitalByDistrict(DistrictModel districtModel) {
     return districtDao.getHospitalByDistrict(districtModel);
+  }
+
+  public List<HospitalPoliclinicRelModel> getPoliclinicsByDistrict(DistrictModel districtModel){
+    return districtDao.getPoliclinicByDistrict(districtModel);
   }
 }
