@@ -2,8 +2,7 @@ package com.hastanerandevu.dao.impl;
 
 import com.hastanerandevu.converter.Encryptor;
 import com.hastanerandevu.enums.AppointmentStatusEnum;
-import com.hastanerandevu.model.AppointmentModel;
-import com.hastanerandevu.model.PatientModel;
+import com.hastanerandevu.model.*;
 
 import javax.persistence.Query;
 import java.util.Date;
@@ -65,5 +64,33 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientModel> {
     Query query = getEntitymanager().createQuery("SELECT e FROM PatientModel e WHERE e.email = :E_MAIL").setParameter("E_MAIL", patientModel.getEmail());
 
     return (PatientModel) query.getResultList().get(0);
+  }
+
+  public List<PatientTreatmentRelModel> getPatientTreatments(PatientModel patientModel){
+    Query query = getEntitymanager().createQuery("SELECT e FROM PatientTreatmentRelModel e WHERE e.patient = :PATIENT ORDER BY e.treatment.treatmentName");
+    query.setParameter("PATIENT",patientModel);
+
+    return query.getResultList();
+  }
+
+  public List<PatientAlergyRelModel> getPatientAlergies(PatientModel patientModel){
+    Query query = getEntitymanager().createQuery("SELECT e FROM PatientAlergyRelModel e WHERE e.patient = :PATIENT ORDER BY e.alergy.alergyName");
+    query.setParameter("PATIENT",patientModel);
+
+    return query.getResultList();
+  }
+
+  public List<PatientAssayRelModel> getPatientAssays(PatientModel patientModel){
+    Query query = getEntitymanager().createQuery("SELECT e FROM PatientAssayRelModel e WHERE e.patient = :PATIENT ORDER BY e.assay.assayName");
+    query.setParameter("PATIENT",patientModel);
+
+    return query.getResultList();
+  }
+
+  public List<PatientDiseaseRelModel> getPatientDiseases(PatientModel patientModel){
+    Query query = getEntitymanager().createQuery("SELECT e FROM PatientDiseaseRelModel e WHERE e.patient = :PATIENT ORDER BY e.disease.diseaseName");
+    query.setParameter("PATIENT",patientModel);
+
+    return query.getResultList();
   }
 }

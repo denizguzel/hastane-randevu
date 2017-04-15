@@ -30,6 +30,9 @@ public class DoctorModel {
   @Column(name = "RECORD_NUMBER")
   private String recordNumber;
 
+  @Column(name = "PASSWORD")
+  private String password;
+
   @Column(name = "QUESTION_ANSWER")
   private String questionAnswer;
 
@@ -183,5 +186,13 @@ public class DoctorModel {
 
   public void setInspectionPlace(InspectionPlaceModel inspectionPlace) {
     this.inspectionPlace = inspectionPlace;
+  }
+
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
   }
 }

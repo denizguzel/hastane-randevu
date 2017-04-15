@@ -33,4 +33,8 @@ public class SurveyServiceImpl implements BaseService<SurveyModel> {
   public List<SurveyModel> findAll() {
     return surveyDao.findAll();
   }
+
+  public List<SurveyModel> getSurveys(){
+    return surveyDao.getSurveys();
+  }
 }

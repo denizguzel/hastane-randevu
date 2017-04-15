@@ -1,8 +1,7 @@
 package com.hastanerandevu.service.impl;
 
 import com.hastanerandevu.dao.impl.PatientDaoImpl;
-import com.hastanerandevu.model.AppointmentModel;
-import com.hastanerandevu.model.PatientModel;
+import com.hastanerandevu.model.*;
 import com.hastanerandevu.service.BaseService;
 
 import java.util.Date;
@@ -60,4 +59,22 @@ public class PatientServiceImpl implements BaseService<PatientModel> {
   public PatientModel getUserByEmail(PatientModel patientModel) {
     return patientDao.getUserByEmail(patientModel);
   }
+
+  public List<PatientTreatmentRelModel> getPatientTreatments(PatientModel patientModel){
+    return patientDao.getPatientTreatments(patientModel);
+  }
+
+  public List<PatientAlergyRelModel> getPatientAlergies(PatientModel patientModel){
+    return patientDao.getPatientAlergies(patientModel);
+  }
+
+  public List<PatientAssayRelModel> getPatientAssays(PatientModel patientModel){
+    return patientDao.getPatientAssays(patientModel);
+  }
+
+  public List<PatientDiseaseRelModel> getPatientDiseases(PatientModel patientModel){
+    return patientDao.getPatientDiseases(patientModel);
+  }
+
+
 }
