@@ -4,7 +4,9 @@ import com.hastanerandevu.converter.Encryptor;
 import com.hastanerandevu.enums.BloodGroupEnum;
 import com.hastanerandevu.enums.GenderEnum;
 import com.hastanerandevu.enums.SecretQuestionEnum;
+import com.hastanerandevu.model.DoctorModel;
 import com.hastanerandevu.model.PatientModel;
+import com.hastanerandevu.service.impl.DoctorServiceImpl;
 import com.hastanerandevu.service.impl.PatientServiceImpl;
 import com.hastanerandevu.utility.Mailer;
 import com.hastanerandevu.utility.SessionUtils;
@@ -24,16 +26,27 @@ import static org.hibernate.ejb.EntityManagerImpl.LOG;
 public class LoginBean {
   private Mailer mailer = new Mailer();
   private PatientServiceImpl patientService = new PatientServiceImpl();
+  private DoctorServiceImpl doctorService = new DoctorServiceImpl();
   private PatientModel patientModel = new PatientModel();
+  private DoctorModel doctorModel = new DoctorModel();
 
   private BloodGroupEnum[] bloodGroupEnums = BloodGroupEnum.values();
   private GenderEnum[] genderEnums = GenderEnum.values();
   private SecretQuestionEnum[] secretQuestionEnums = SecretQuestionEnum.values();
 
-  private int loginCounter = 0;
+  private byte loginCounter = 0;
   private boolean showCaptcha = false;
   private boolean verifyCaptcha = false;
   private boolean verifyLogin = false;
+  private String loggedUsername = "";
+
+  public String getLoggedUsername() {
+    return loggedUsername;
+  }
+
+  public void setLoggedUsername(String loggedUsername) {
+    this.loggedUsername = loggedUsername;
+  }
 
   public boolean isVerifyLogin() {
     return verifyLogin;
@@ -55,6 +68,14 @@ public class LoginBean {
     this.patientModel = patientModel;
   }
 
+  public DoctorModel getDoctorModel() {
+    return doctorModel;
+  }
+
+  public void setDoctorModel(DoctorModel doctorModel) {
+    this.doctorModel = doctorModel;
+  }
+
   public BloodGroupEnum[] getBloodGroupEnums() {
     return bloodGroupEnums;
   }
@@ -67,40 +88,7 @@ public class LoginBean {
     return secretQuestionEnums;
   }
 
-  public String validateLogin() throws IOException {
-    loginCounter += 1;
-    if(loginCounter > 2) {
-      showCaptcha = true;
-    }
-    if(showCaptcha) {
-      FacesContext facesContext = FacesContext.getCurrentInstance();
-      verifyCaptcha = CaptchaValidator.validate(facesContext);
-    }
-
-    //GIRILEN BILGILERE GORE KULLANICI VARSA BU KULLANICI MODELINI BEAN MODELINE ATA
-    if(patientService.loginPatient(patientModel) != null) {
-      patientModel = patientService.loginPatient(patientModel);
-      verifyLogin = true;
-    } else
-      verifyLogin = false;
-
-    if(showCaptcha) {
-      if(verifyCaptcha) {
-        return "view/dashboard?faces-redirect=true";
-      } else {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bilgileri kontrol ediniz", null));
-        return "/index";
-      }
-    }
-    if(verifyLogin) {
-      return "view/dashboard?faces-redirect=true";
-    } else {
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bilgileri kontrol ediniz", null));
-      return "/index";
-    }
-  }
-
-  public String validateCreate() {
+  public String patientCreate() {
     if(patientService.haveUserRegistration(patientModel)) {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bu kullanıcı sistemde zaten kayıtlı", null));
     } else {
@@ -116,6 +104,71 @@ public class LoginBean {
       }
     }
     return "/register";
+  }
+
+  private void checkCaptcha() throws IOException {
+    loginCounter += 1;
+    if(loginCounter > 2) {
+      showCaptcha = true;
+    }
+    if(showCaptcha) {
+      FacesContext facesContext = FacesContext.getCurrentInstance();
+      verifyCaptcha = CaptchaValidator.validate(facesContext);
+    }
+  }
+
+  public String login() throws IOException {
+    checkCaptcha();
+    String loginCheck = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("loginCheck");
+
+    if(loginCheck.equals("patient")) {
+      if(patientService.loginPatient(patientModel) != null) {
+        patientModel = patientService.loginPatient(patientModel);
+        loggedUsername = patientModel.getFirstName();
+        SessionUtils.getSession().setAttribute("loggedUsername", loggedUsername);
+        verifyLogin = true;
+      } else
+        verifyLogin = false;
+
+      if(showCaptcha) {
+        if(verifyCaptcha && verifyLogin) {
+          return "view/dashboard?faces-redirect=true";
+        } else {
+          FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bilgileri kontrol ediniz", null));
+          return "/login/patient";
+        }
+      }
+      if(verifyLogin) {
+        return "view/dashboard?faces-redirect=true";
+      } else {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bilgileri kontrol ediniz", null));
+        return "/login/patient";
+      }
+    } else if(loginCheck.equals("doctor")) {
+      if(doctorService.loginDoctor(doctorModel) != null) {
+        doctorModel = doctorService.loginDoctor(doctorModel);
+        loggedUsername = doctorModel.getFirstName();
+        SessionUtils.getSession().setAttribute("loggedUsername", loggedUsername);
+        verifyLogin = true;
+      } else
+        verifyLogin = false;
+
+      if(showCaptcha) {
+        if(verifyCaptcha) {
+          return "view/dashboard?faces-redirect=true";
+        } else {
+          FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bilgileri kontrol ediniz", null));
+          return "/login/doctor";
+        }
+      }
+      if(verifyLogin) {
+        return "view/dashboard?faces-redirect=true";
+      } else {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bilgileri kontrol ediniz", null));
+        return "/login/doctor";
+      }
+    }
+    return null;
   }
 
   public String logout() {

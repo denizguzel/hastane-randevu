@@ -1,12 +1,11 @@
-<ui:composition template="/view/master/masterTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
-  <ui:define name="title">Dashboard</ui:define>
+<ui:composition template="/view/master/afterLoginTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+  <ui:define name="title">Randevu Alma Ekranı</ui:define>
 
   <ui:define name="content">
     <div class="container">
       <div class="card">
-        <span id="userId" class="d-none">${login.patientModel.pk}</span>
         <div class="card-header">
-          Hoşgeldin ${login.patientModel.firstName}
+          Hoşgeldin ${login.loggedUsername}
           <h:form prependId="false">
             <h:commandButton value="Çıkış" styleClass="btn btn-primary" action="#{login.logout}"/>
           </h:form>
@@ -62,6 +61,9 @@
                   <f:selectItems value="#{appointment.inspectionPlaces.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
                 </h:selectOneMenu>
               </div>
+            </div>
+            <div class="col-md-12">
+              <h:commandButton value="Kaydet" styleClass="btn btn-primary" action="#{login}"/>
             </div>
           </h:form>
         </div>

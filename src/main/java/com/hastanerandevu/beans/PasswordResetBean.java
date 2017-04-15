@@ -8,12 +8,12 @@ import com.hastanerandevu.utility.Mailer;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.net.URISyntaxException;
 
 @ManagedBean(name = "passwordReset")
-@SessionScoped
+@ViewScoped
 public class PasswordResetBean {
   private Mailer mailer = new Mailer();
   private PatientServiceImpl patientService = new PatientServiceImpl();
@@ -42,14 +42,13 @@ public class PasswordResetBean {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Şifre sıfırlama maili gönderildi.", null));
     } else {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email sistemde kayıtlı değil.", null));
-      return "/";
     }
-    return "/";
+    return "/recovery/reset";
   }
 
   public String passwordUpdate() throws URISyntaxException {
     String encryptedSalt = Encryptor.encryptEmail(ProjectConstants.SALT + patientModel.getEmail());
-
+    System.out.println(urlParam);
     if(urlParam.equals(encryptedSalt)) {
       patientModel = patientService.getUserByEmail(patientModel);
       patientModel.setPassword(Encryptor.encryptPassword(patientModel.getPassword()));
@@ -59,6 +58,6 @@ public class PasswordResetBean {
     } else {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Şifreniz değiştirilemedi.", null));
     }
-    return "/";
+    return "/recovery/forgot";
   }
 }

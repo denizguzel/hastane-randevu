@@ -41,7 +41,7 @@ public class DistrictServiceImpl implements BaseService<DistrictModel> {
     return districtDao.getHospitalByDistrict(districtModel);
   }
 
-  public List<HospitalPoliclinicRelModel> getPoliclinicsByDistrict(DistrictModel districtModel){
+  public List<HospitalPoliclinicRelModel> getPoliclinicsByDistrict(DistrictModel districtModel) {
     return districtDao.getPoliclinicByDistrict(districtModel);
   }
 }

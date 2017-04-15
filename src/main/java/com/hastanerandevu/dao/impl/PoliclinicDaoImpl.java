@@ -10,7 +10,7 @@ import java.util.List;
 
 public class PoliclinicDaoImpl extends BaseDaoImpl<PoliclinicModel> {
 
-  public List<InspectionPlaceModel> getInspectionPlacesByHospitalPoliclinic(PoliclinicModel policlinicModel,HospitalModel hospitalModel) {
+  public List<InspectionPlaceModel> getInspectionPlacesByHospitalPoliclinic(PoliclinicModel policlinicModel, HospitalModel hospitalModel) {
 
     Query query = getEntitymanager().createQuery("SELECT e FROM HospitalPoliclinicRelModel e WHERE e.policlinic = :policlinicModel AND e.hospital = :hospitalModel ");
     query.setParameter("policlinicModel", policlinicModel);
@@ -20,19 +20,16 @@ public class PoliclinicDaoImpl extends BaseDaoImpl<PoliclinicModel> {
 
     List<InspectionPlaceModel> inspectionPlaceModels = hospitalPoliclinicRelModel.getInspectionPlaceModels();
 
-    Collections.sort(inspectionPlaceModels,new InspectionPlaceComparator());
+    Collections.sort(inspectionPlaceModels, new InspectionPlaceComparator());
 
     return inspectionPlaceModels;
   }
 
-  public List<AppointmentModel> getAppointmentsByPoliclinic(HospitalPoliclinicRelModel hospitalPoliclinicRelModel){
-    Query query = getEntitymanager().createQuery("SELECT e FROM AppointmentModel e WHERE " +
-      "e.inspectionPlace.hospitalPoliclinicRel = :HOSPITAL_POLICLINIC_REL_MODEL " +
-      "AND appointmentDate > :date " +
-      "ORDER BY e.inspectionPlace.placeName,e.creationTime");
+  public List<AppointmentModel> getAppointmentsByPoliclinic(HospitalPoliclinicRelModel hospitalPoliclinicRelModel) {
+    Query query = getEntitymanager().createQuery("SELECT e FROM AppointmentModel e WHERE " + "e.inspectionPlace.hospitalPoliclinicRel = :HOSPITAL_POLICLINIC_REL_MODEL " + "AND appointmentDate > :date " + "ORDER BY e.inspectionPlace.placeName,e.creationTime");
 
-    query.setParameter("HOSPITAL_POLICLINIC_REL_MODEL",hospitalPoliclinicRelModel);
-    query.setParameter("date",new Date());
+    query.setParameter("HOSPITAL_POLICLINIC_REL_MODEL", hospitalPoliclinicRelModel);
+    query.setParameter("date", new Date());
 
     return query.getResultList();
   }

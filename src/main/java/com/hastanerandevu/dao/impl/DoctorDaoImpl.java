@@ -13,8 +13,7 @@ import java.util.List;
  */
 public class DoctorDaoImpl extends BaseDaoImpl<DoctorModel> {
   public DoctorModel loginDoctor(DoctorModel doctorModel) {
-    Query query = getEntitymanager().createQuery("SELECT e FROM DoctorModel e " +
-      "WHERE e.recordNumber = :RECORD_NUMBER AND e.password = :PASSWORD");
+    Query query = getEntitymanager().createQuery("SELECT e FROM DoctorModel e " + "WHERE e.recordNumber = :RECORD_NUMBER AND e.password = :PASSWORD");
     query.setParameter("RECORD_NUMBER", doctorModel.getRecordNumber());
     query.setParameter("PASSWORD", Encryptor.encryptPassword(doctorModel.getPassword()));
 
@@ -25,17 +24,12 @@ public class DoctorDaoImpl extends BaseDaoImpl<DoctorModel> {
     }
   }
 
-  public List<AppointmentModel> getAppointmentHistoryByDoctor(DoctorModel doctorModel){
-    Query query = getEntitymanager().createQuery("SELECT e FROM AppointmentModel e " +
-      "WHERE e.inspectionPlace.doctor = :DOCTOR " +
-      "AND e.appointmentDate < :date " +
-      "ORDER BY e.appointmentDate DESC");
+  public List<AppointmentModel> getAppointmentHistoryByDoctor(DoctorModel doctorModel) {
+    Query query = getEntitymanager().createQuery("SELECT e FROM AppointmentModel e " + "WHERE e.inspectionPlace.doctor = :DOCTOR " + "AND e.appointmentDate < :date " + "ORDER BY e.appointmentDate DESC");
 
-    query.setParameter("DOCTOR",doctorModel);
-    query.setParameter("date",new Date());
+    query.setParameter("DOCTOR", doctorModel);
+    query.setParameter("date", new Date());
 
     return query.getResultList();
   }
-
-
 }

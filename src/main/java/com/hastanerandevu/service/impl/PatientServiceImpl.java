@@ -60,19 +60,19 @@ public class PatientServiceImpl implements BaseService<PatientModel> {
     return patientDao.getUserByEmail(patientModel);
   }
 
-  public List<PatientTreatmentRelModel> getPatientTreatments(PatientModel patientModel){
+  public List<PatientTreatmentRelModel> getPatientTreatments(PatientModel patientModel) {
     return patientDao.getPatientTreatments(patientModel);
   }
 
-  public List<PatientAlergyRelModel> getPatientAlergies(PatientModel patientModel){
+  public List<PatientAlergyRelModel> getPatientAlergies(PatientModel patientModel) {
     return patientDao.getPatientAlergies(patientModel);
   }
 
-  public List<PatientAssayRelModel> getPatientAssays(PatientModel patientModel){
+  public List<PatientAssayRelModel> getPatientAssays(PatientModel patientModel) {
     return patientDao.getPatientAssays(patientModel);
   }
 
-  public List<PatientDiseaseRelModel> getPatientDiseases(PatientModel patientModel){
+  public List<PatientDiseaseRelModel> getPatientDiseases(PatientModel patientModel) {
     return patientDao.getPatientDiseases(patientModel);
   }
 

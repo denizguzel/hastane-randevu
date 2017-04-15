@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&subset=latin-ext');
-
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&subset=latin-ext");
 *:focus {
   outline: none !important;
 }
@@ -9,23 +8,12 @@ body {
   background-color: #E6E6E6;
 }
 
-ul,
-ol,
-li,
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+ul, ol, li, p, h1, h2, h3, h4, h5, h6 {
   padding: 0;
   margin: 0;
 }
 
-ul,
-ol,
-li {
+ul, ol, li {
   list-style-type: none;
 }
 
@@ -42,9 +30,7 @@ a:focus {
   text-decoration: none;
 }
 
-button,
-select,
-input.btn {
+button, select, input.btn {
   cursor: pointer;
 }
 
@@ -93,4 +79,8 @@ input.btn {
 
 .bootstrap-select.show .dropdown-menu {
   display: block;
+}
+
+.navbar-nav {
+  width: 100%;
 }

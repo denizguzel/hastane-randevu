@@ -13,6 +13,7 @@ import java.util.List;
 public class InspectionPlaceServiceImpl implements BaseService<InspectionPlaceModel> {
 
   private InspectionPlaceDaoImpl inspectionPlaceDao = new InspectionPlaceDaoImpl();
+
   @Override
   public void create(InspectionPlaceModel model) {
     inspectionPlaceDao.create(model);
@@ -38,7 +39,7 @@ public class InspectionPlaceServiceImpl implements BaseService<InspectionPlaceMo
     return inspectionPlaceDao.findAll();
   }
 
-  List<AppointmentModel> getAllAppointmentsByInspectionPlace(InspectionPlaceModel inspectionPlaceModel){
+  List<AppointmentModel> getAllAppointmentsByInspectionPlace(InspectionPlaceModel inspectionPlaceModel) {
     return inspectionPlaceDao.getAllAppointmentsByInspectionPlace(inspectionPlaceModel);
   }
 }

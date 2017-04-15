@@ -8,13 +8,22 @@
     <view-id value="/index.xhtml"/>
   </url-mapping>
 
+  <url-mapping id="login-patient">
+    <pattern value="/login/patient"/>
+    <view-id value="/login-patient.xhtml"/>
+  </url-mapping>
+  <url-mapping id="login-doctor">
+    <pattern value="/login/doctor"/>
+    <view-id value="/login-doctor.xhtml"/>
+  </url-mapping>
+
   <url-mapping id="register">
     <pattern value="/register"/>
     <view-id value="/register.xhtml"/>
   </url-mapping>
 
   <url-mapping id="reset">
-    <pattern value="/reset"/>
+    <pattern value="/recovery/reset"/>
     <view-id value="/password-reset.xhtml"/>
   </url-mapping>
 
@@ -24,7 +33,7 @@
   </url-mapping>
 
   <url-mapping id="view">
-    <pattern value="/view/"/>
+    <pattern value="/view"/>
     <view-id value="/view/dashboard.xhtml"/>
   </url-mapping>
 

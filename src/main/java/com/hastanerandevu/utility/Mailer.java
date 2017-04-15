@@ -78,7 +78,7 @@ public class Mailer implements Runnable {
     String encryptedSalt = Encryptor.encryptEmail(ProjectConstants.SALT + this.patientModel.getEmail());
 
     Mailer mailer = new Mailer();
-    mailer.setParameters(this.patientModel.getEmail(), "Hastane Randevu Sistemi Şifre Sıfırlama", "<div>Merhaba <h1>" + this.patientModel.getFirstName() + ",</h1>\n\n<a href='http://localhost:8080/forgot?q=" + encryptedSalt + "'>Şifre sıfırlama bağlantınız</a></div>");
+    mailer.setParameters(this.patientModel.getEmail(), "Hastane Randevu Sistemi Şifre Sıfırlama", "<div>Merhaba <h1>" + this.patientModel.getFirstName() + ",</h1>\n\n<a href='http://localhost:8080/recovery/forgot?q=" + encryptedSalt + "'>Şifre sıfırlama bağlantınız</a></div>");
 
     Thread thread = new Thread(mailer);
     thread.start();

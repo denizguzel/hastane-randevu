@@ -3,17 +3,10 @@
          xmlns="http://xmlns.jcp.org/xml/ns/javaee"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
-  <context-param>
-    <param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
-    <param-value>0</param-value>
-  </context-param>
-  <context-param>
-    <param-name>javax.faces.PROJECT_STAGE</param-name>
-    <param-value>Development</param-value>
-  </context-param>
   <servlet>
     <servlet-name>Faces Servlet</servlet-name>
     <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
     <servlet-name>Faces Servlet</servlet-name>
@@ -54,7 +47,6 @@
   <filter-mapping>
     <filter-name>AuthFilter</filter-name>
     <url-pattern>/view/*</url-pattern>
-    <url-pattern>/recovery/*</url-pattern>
   </filter-mapping><!---->
 
   <!-- Error Page -->

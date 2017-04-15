@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition>
+  <ui:insert name="header">
+    <div class="container">
+      <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#{facesContext.externalContext.requestContextPath}/">Hastane</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <h:panelGroup rendered="#{!login.verifyLogin}">
+            <ul class="navbar-nav">
+              <li class="nav-item active">
+                <a class="nav-link" href="#{facesContext.externalContext.requestContextPath}/">Anasayfa</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#{facesContext.externalContext.requestContextPath}/login/patient">Hasta Giriş</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#{facesContext.externalContext.requestContextPath}/login/doctor">Doktor Giriş</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#{facesContext.externalContext.requestContextPath}/register">Kayıt</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#{facesContext.externalContext.requestContextPath}/recovery/reset">Şifre Sıfırlama</a>
+              </li>
+            </ul>
+          </h:panelGroup>
+          <h:panelGroup rendered="#{login.verifyLogin}">
+            <ul class="navbar-nav">
+              <li class="nav-item active">
+                <a class="nav-link" href="#{facesContext.externalContext.requestContextPath}/view">Anasayfa</a>
+              </li>
+              <li class="nav-item ml-auto">
+                <a class="nav-link" href="#{facesContext.externalContext.requestContextPath}/view">${login.loggedUsername}</a>
+              </li>
+              <h:form prependId="false">
+                <h:commandButton value="Çıkış" styleClass="btn btn-primary" action="#{login.logout}"/>
+              </h:form>
+            </ul>
+          </h:panelGroup>
+        </div>
+      </nav>
+    </div>
+  </ui:insert>
+</ui:composition>
+</html>

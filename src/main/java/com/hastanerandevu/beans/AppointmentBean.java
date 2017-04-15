@@ -7,7 +7,7 @@ import com.hastanerandevu.service.impl.HospitalServiceImpl;
 import com.hastanerandevu.service.impl.PoliclinicServiceImpl;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIInput;
 import javax.faces.event.AjaxBehaviorEvent;
 import java.io.Serializable;
@@ -15,7 +15,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @ManagedBean(name = "appointment")
-@ViewScoped
+@SessionScoped
 public class AppointmentBean implements Serializable {
   private CityServiceImpl cityService = new CityServiceImpl();
   private DistrictServiceImpl districtService = new DistrictServiceImpl();
@@ -36,11 +36,11 @@ public class AppointmentBean implements Serializable {
   private String selectedInspectionPlace = "";
 
 
-  private Map<Long,String> cities;
-  private Map<Long,String> districts;
-  private Map<Long,String> hospitals;
-  private Map<Long,String> policlinics;
-  private Map<Long,String> inspectionPlaces;
+  private Map<Long, String> cities;
+  private Map<Long, String> districts;
+  private Map<Long, String> hospitals;
+  private Map<Long, String> policlinics;
+  private Map<Long, String> inspectionPlaces;
 
   public AppointmentBean() {
     cities = new LinkedHashMap();
@@ -48,8 +48,8 @@ public class AppointmentBean implements Serializable {
     hospitals = new LinkedHashMap();
     policlinics = new LinkedHashMap();
     inspectionPlaces = new LinkedHashMap();
-    for (CityModel cityModel : cityService.getCities()){
-      cities.put(cityModel.getPk(),cityModel.getCityName());
+    for(CityModel cityModel : cityService.getCities()) {
+      cities.put(cityModel.getPk(), cityModel.getCityName());
     }
   }
 
@@ -189,8 +189,8 @@ public class AppointmentBean implements Serializable {
       selectedCity = input.getValue().toString();
     }
 
-    for (DistrictModel districtModel : cityService.getAllDistrictsByCity(cityService.find(Long.parseLong(selectedCity)))){
-      districts.put(districtModel.getPk(),districtModel.getDistrictName());
+    for(DistrictModel districtModel : cityService.getAllDistrictsByCity(cityService.find(Long.parseLong(selectedCity)))) {
+      districts.put(districtModel.getPk(), districtModel.getDistrictName());
     }
   }
 
@@ -206,8 +206,8 @@ public class AppointmentBean implements Serializable {
     }
 
     //districtModel.setPk(Long.parseLong(value));
-    for (HospitalModel hospitalModel : districtService.getHospitalsByDistrict(districtService.find(Long.parseLong(selectedDistrict)))){
-      hospitals.put(hospitalModel.getPk(),hospitalModel.getHospitalName());
+    for(HospitalModel hospitalModel : districtService.getHospitalsByDistrict(districtService.find(Long.parseLong(selectedDistrict)))) {
+      hospitals.put(hospitalModel.getPk(), hospitalModel.getHospitalName());
     }
   }
 
@@ -222,8 +222,8 @@ public class AppointmentBean implements Serializable {
     }
 
 
-    for (PoliclinicModel policlinicModel : hospitalService.getPoliclinicByHospital(hospitalService.find(Long.parseLong(selectedHospital)))){
-      policlinics.put(policlinicModel.getPk(),policlinicModel.getPoliclinicName());
+    for(PoliclinicModel policlinicModel : hospitalService.getPoliclinicByHospital(hospitalService.find(Long.parseLong(selectedHospital)))) {
+      policlinics.put(policlinicModel.getPk(), policlinicModel.getPoliclinicName());
     }
   }
 
@@ -239,8 +239,8 @@ public class AppointmentBean implements Serializable {
     hospitalModel = hospitalService.find(Long.parseLong(selectedHospital));
     policlinicModel = policlinicService.find(Long.parseLong(selectedPoliclinic));
 
-    for (InspectionPlaceModel inspectionPlaceModel : policlinicService.getInspectionPlacesByHospitalPoliclinic(hospitalModel,policlinicModel)){
-      inspectionPlaces.put(inspectionPlaceModel.getPk(),inspectionPlaceModel.getPlaceName());
+    for(InspectionPlaceModel inspectionPlaceModel : policlinicService.getInspectionPlacesByHospitalPoliclinic(hospitalModel, policlinicModel)) {
+      inspectionPlaces.put(inspectionPlaceModel.getPk(), inspectionPlaceModel.getPlaceName());
     }
   }
 }

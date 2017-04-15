@@ -50,11 +50,11 @@ public class CityServiceImpl implements BaseService<CityModel> {
     return cityDao.getAllDistrictsByCity(cityModel);
   }
 
-  public List<HospitalPoliclinicRelModel> getPoliclinicsByCity(CityModel cityModel){
+  public List<HospitalPoliclinicRelModel> getPoliclinicsByCity(CityModel cityModel) {
     return cityDao.getPoliclinicByCity(cityModel);
   }
 
-  public List<HospitalModel> getHospitalsByCity(CityModel cityModel){
+  public List<HospitalModel> getHospitalsByCity(CityModel cityModel) {
     return cityDao.getHospitalByCity(cityModel);
   }
 }

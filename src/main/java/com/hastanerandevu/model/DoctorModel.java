@@ -61,8 +61,8 @@ public class DoctorModel {
   @JoinColumn(name = "FK_BRANCH")
   private BranchModel branch;
 
-  @OneToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="FK_INSPECTION_PLACE")
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "FK_INSPECTION_PLACE")
   private InspectionPlaceModel inspectionPlace;
 
   @OneToMany(mappedBy = "doctor")
