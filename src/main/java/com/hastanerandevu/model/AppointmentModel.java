@@ -27,6 +27,9 @@ public class AppointmentModel {
   @Column(name = "IS_ACTIVE", insertable = false)
   private char isActive;
 
+  @Column(name = "MESSAGE_TO_DOCTOR")
+  private String messageToDoctor;
+
   @Enumerated(EnumType.STRING)
   @Column(name = "APPOINTMENT_STATUS")
   private AppointmentStatusEnum appointmentStatus;
@@ -101,5 +104,13 @@ public class AppointmentModel {
 
   public void setInspectionPlace(InspectionPlaceModel inspectionPlace) {
     this.inspectionPlace = inspectionPlace;
+  }
+
+  public String getMessageToDoctor() {
+    return messageToDoctor;
+  }
+
+  public void setMessageToDoctor(String messageToDoctor) {
+    this.messageToDoctor = messageToDoctor;
   }
 }
