@@ -1,0 +1,41 @@
+<ui:composition template="/view/master/beforeLoginTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+  <ui:define name="title">Hasta Giriş</ui:define>
+
+  <ui:define name="content">
+    <div class="container">
+      <h:panelGroup>
+        <div class="card">
+          <div class="card-block">
+            <h:form prependId="false">
+              <div class="form-group">
+                <h:inputText id="tcNumber" value="#{login.patientModel.tcNumber}" p:placeholder="TC no giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen TC no giriniz">
+                  <f:validator validatorId="tcNumber"/>
+                  <f:ajax event="blur" execute="@this" render="tcNumberMessage"/>
+                </h:inputText>
+                <h:message id="tcNumberMessage" for="tcNumber" errorClass="error"/>
+              </div>
+              <div class="form-group">
+                <h:inputSecret id="password" value="#{login.patientModel.password}" p:placeholder="Şifre giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen şifrenizi giriniz">
+                  <f:ajax event="blur" execute="@this" render="passwordMessage"/>
+                </h:inputSecret>
+                <h:message id="passwordMessage" for="password" errorClass="error"/>
+              </div>
+              <h:panelGroup rendered="#{login.showCaptcha}">
+                <div class="g-recaptcha" data-sitekey="6LcjxBcUAAAAAKrzn6mU3wRdUiqEdCsxkKojNKeJ"></div>
+                <h:outputScript>grecaptcha.render($('.g-recaptcha')[0], {sitekey: '6LcjxBcUAAAAAKrzn6mU3wRdUiqEdCsxkKojNKeJ'});</h:outputScript>
+              </h:panelGroup>
+              <input type="hidden" name="loginCheck" value="patient"/>
+              <h:messages globalOnly="true" errorClass="error"/>
+              <h:commandButton value="Gönder" styleClass="btn btn-primary" action="#{login.login}">
+                <f:ajax execute="@form" render="@form"/>
+              </h:commandButton>
+            </h:form>
+          </div>
+        </div>
+      </h:panelGroup>
+    </div>
+  </ui:define>
+  <ui:define name="js">
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+  </ui:define>
+</ui:composition>

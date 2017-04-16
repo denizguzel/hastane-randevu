@@ -73,12 +73,12 @@ public class Mailer implements Runnable {
   }
 
   public void sendPasswordResetMail(PatientModel patientModel) {
-    this.patientModel = patientService.getUserByEmail(patientModel);
+    patientModel = patientService.getUserByEmail(patientModel);
 
-    String encryptedSalt = Encryptor.encryptEmail(ProjectConstants.SALT + this.patientModel.getEmail());
+    String encryptedSalt = Encryptor.encryptEmail(ProjectConstants.SALT + patientModel.getEmail());
 
     Mailer mailer = new Mailer();
-    mailer.setParameters(this.patientModel.getEmail(), "Hastane Randevu Sistemi Şifre Sıfırlama", "<div>Merhaba <h1>" + this.patientModel.getFirstName() + ",</h1>\n\n<a href='http://localhost:8080/recovery/forgot?q=" + encryptedSalt + "'>Şifre sıfırlama bağlantınız</a></div>");
+    mailer.setParameters(patientModel.getEmail(), "Hastane Randevu Sistemi Şifre Sıfırlama", "<div>Merhaba <h1>" + patientModel.getFirstName() + ",</h1>\n\n<a href='http://localhost:8080/recovery/forgot?q=" + encryptedSalt + "'>Şifre sıfırlama bağlantınız</a></div>");
 
     Thread thread = new Thread(mailer);
     thread.start();

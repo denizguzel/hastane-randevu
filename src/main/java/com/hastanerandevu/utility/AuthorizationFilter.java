@@ -27,7 +27,6 @@ public class AuthorizationFilter implements Filter {
 
       String indexURL = request.getContextPath() + "/";
       boolean loggedIn = (session != null) && (session.getAttribute("loggedUsername")) != null;
-      boolean passReset = request.getParameter("q") != null;
       boolean loginRequest = request.getRequestURI().equals(indexURL);
       boolean resourceRequest = request.getRequestURI().startsWith(request.getContextPath() + ResourceHandler.RESOURCE_IDENTIFIER + "/");
       boolean ajaxRequest = "partial/ajax".equals(request.getHeader("Faces-Request"));
@@ -39,8 +38,6 @@ public class AuthorizationFilter implements Filter {
           response.setDateHeader("Expires", 0); // Proxies.
         }
         filterChain.doFilter(request, response);
-      } else if(passReset) {
-        response.sendRedirect(indexURL);
       } else if(ajaxRequest) {
         response.setContentType("text/xml");
         response.setCharacterEncoding("UTF-8");
@@ -49,7 +46,7 @@ public class AuthorizationFilter implements Filter {
         response.sendRedirect(indexURL); // So, just perform standard synchronous redirect.
       }
     } catch(Exception ex) {
-      System.out.println(ex.getMessage());
+      ex.printStackTrace();
     }
   }
 
