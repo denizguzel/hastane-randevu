@@ -1,0 +1,159 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,700&subset=latin-ext");
+*:focus {
+  outline: none !important; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff;
+  overflow-x: hidden;
+  font-size: 14px; }
+
+ul, ol, li, p, h1, h2, h3, h4, h5, h6 {
+  padding: 0;
+  margin: 0; }
+
+ul, ol {
+  list-style-type: none; }
+
+a {
+  color: #000; }
+  a:hover {
+    text-decoration: none;
+    color: #000; }
+  a:focus {
+    text-decoration: none; }
+
+button, select, input.btn {
+  cursor: pointer; }
+
+.btn {
+  border-radius: 0;
+  border: 0; }
+  .btn:focus {
+    box-shadow: none; }
+
+.error {
+  display: block;
+  color: red;
+  margin-top: 5px; }
+
+.info {
+  display: block;
+  color: green;
+  margin: 5px 0; }
+
+.bootstrap-select .dropdown-toggle {
+  background-color: transparent;
+  border-color: #D9D9D9; }
+
+.bootstrap-select .dropdown-menu.inner li a {
+  display: block;
+  padding: 10px; }
+  .bootstrap-select .dropdown-menu.inner li a:hover {
+    background-color: #ddd; }
+
+.bootstrap-select.show .dropdown-menu {
+  display: block; }
+
+.container-fluid {
+  padding: 0 30px 15px 30px; }
+
+.card {
+  border: 0;
+  border-bottom: 1px solid #ddd;
+  border-radius: 0;
+  margin-bottom: 15px; }
+  .card .card-header {
+    border: 0;
+    border-radius: 0;
+    background-color: #fff; }
+  .card .card-block .card-block-header {
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+    font-size: 18px; }
+
+nav.navbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  background-color: #01C0C8; }
+  nav.navbar .brand {
+    display: inherit;
+    justify-content: center;
+    align-items: center;
+    width: 220px;
+    height: 50px;
+    color: #fff;
+    background-color: #01a8af;
+    font-size: 20px;
+    font-weight: 700; }
+  nav.navbar .dropdown {
+    height: 50px;
+    line-height: 48px;
+    margin-right: 30px; }
+    nav.navbar .dropdown .dropdown-toggle {
+      background-color: transparent;
+      border: 0;
+      border-radius: 0;
+      padding: 0 10px;
+      color: #fff;
+      font-weight: 700;
+      height: 100%; }
+      nav.navbar .dropdown .dropdown-toggle i {
+        margin-right: 5px; }
+      nav.navbar .dropdown .dropdown-toggle:hover {
+        background-color: #01a8af; }
+      nav.navbar .dropdown .dropdown-toggle:focus {
+        box-shadow: none; }
+      nav.navbar .dropdown .dropdown-toggle:after {
+        content: none; }
+    nav.navbar .dropdown .dropdown-menu {
+      border-radius: 0; }
+      nav.navbar .dropdown .dropdown-menu .dropdown-item {
+        padding: 0 15px;
+        line-height: 20px; }
+        nav.navbar .dropdown .dropdown-menu .dropdown-item:hover {
+          background-color: #F8F8F8; }
+        nav.navbar .dropdown .dropdown-menu .dropdown-item a {
+          display: block;
+          padding: 10px 0; }
+          nav.navbar .dropdown .dropdown-menu .dropdown-item a i {
+            margin-right: 5px; }
+        nav.navbar .dropdown .dropdown-menu .dropdown-item .btn {
+          width: 100%;
+          background-color: transparent;
+          text-align: left;
+          padding: 10px 0; }
+        nav.navbar .dropdown .dropdown-menu .dropdown-item:active {
+          background-color: #F8F8F8; }
+
+nav.sidebar {
+  position: absolute;
+  top: 0;
+  width: 220px;
+  padding-top: 50px;
+  height: 100%;
+  overflow-y: auto;
+  z-index: 10;
+  box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08); }
+  nav.sidebar ul.nav-menu li {
+    border-left: 3px solid transparent; }
+    nav.sidebar ul.nav-menu li a {
+      display: block;
+      padding: 15px 30px 15px 15px; }
+      nav.sidebar ul.nav-menu li a i {
+        margin-right: 10px; }
+      nav.sidebar ul.nav-menu li a:hover {
+        background-color: #F8F8F8;
+        color: #01C0C8; }
+  nav.sidebar ul.nav-menu li.active {
+    border-color: #01C0C8; }
+    nav.sidebar ul.nav-menu li.active a i {
+      color: #01C0C8; }
+
+.page-wrapper {
+  margin-left: 220px;
+  background-color: #edf1f5; }

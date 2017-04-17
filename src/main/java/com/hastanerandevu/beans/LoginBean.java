@@ -124,7 +124,7 @@ public class LoginBean {
     if(loginCheck.equals("patient")) {
       if(patientService.loginPatient(patientModel) != null) {
         patientModel = patientService.loginPatient(patientModel);
-        loggedUsername = patientModel.getFirstName();
+        loggedUsername = patientModel.getFirstName() + " " + patientModel.getLastName();
         SessionUtils.getSession().setAttribute("loggedUsername", loggedUsername);
         verifyLogin = true;
       } else
@@ -147,7 +147,7 @@ public class LoginBean {
     } else if(loginCheck.equals("doctor")) {
       if(doctorService.loginDoctor(doctorModel) != null) {
         doctorModel = doctorService.loginDoctor(doctorModel);
-        loggedUsername = doctorModel.getFirstName();
+        loggedUsername = doctorModel.getFirstName() + " " + patientModel.getLastName();
         SessionUtils.getSession().setAttribute("loggedUsername", loggedUsername);
         verifyLogin = true;
       } else

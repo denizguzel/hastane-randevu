@@ -37,4 +37,9 @@
     <view-id value="/view/dashboard.xhtml"/>
   </url-mapping>
 
+  <url-mapping id="appointment">
+    <pattern value="/view/appointment"/>
+    <view-id value="/view/appointment.xhtml"/>
+  </url-mapping>
+
 </pretty-config>

@@ -1,0 +1,44 @@
+* {
+  &:focus {
+    outline: none !important;
+  }
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff;
+  overflow-x: hidden;
+  font-size: 14px;
+}
+
+ul, ol, li, p, h1, h2, h3, h4, h5, h6 {
+  padding: 0;
+  margin: 0;
+}
+
+ul, ol {
+  list-style-type: none;
+}
+
+a {
+  color: #000;
+  &:hover {
+    text-decoration: none;
+    color: #000;
+  }
+  &:focus {
+    text-decoration: none;
+  }
+}
+
+button, select, input.btn {
+  cursor: pointer;
+}
+
+.btn {
+  border-radius: 0;
+  border: 0;
+  &:focus {
+    box-shadow: none;
+  }
+}

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition>
+  <nav class="sidebar">
+    <ul class="nav-menu">
+      <ui:repeat value="#{pagebean.pageList}" var="page">
+        <li class="#{pagebean.viewId eq page.link ? 'active' : ''}">
+          <h:outputLink value="#{page.link}">
+            <i class="#{page.iconName}"/>
+            <h:outputText value="#{page.linkName}"/>
+          </h:outputLink>
+        </li>
+      </ui:repeat>
+    </ul>
+  </nav>
+</ui:composition>
+</html>

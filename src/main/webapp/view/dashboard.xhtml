@@ -2,70 +2,10 @@
   <ui:define name="title">Randevu Alma Ekranı</ui:define>
 
   <ui:define name="content">
-    <div class="container">
-      <div class="card">
-        <div class="card-header">
-          Hoşgeldin ${login.loggedUsername}
-          <h:form prependId="false">
-            <h:commandButton value="Çıkış" styleClass="btn btn-primary" action="#{login.logout}"/>
-          </h:form>
-        </div>
-        <div class="card-block">
-          <div class="card-block-header">Randevu Alma</div>
-          <h:form styleClass="row" prependId="false">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label class="form-control-label">İl Seçiniz</label>
-                <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedCity}">
-                  <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeCity}" onevent="selectPicker"/>
-                  <f:selectItem itemLabel="İl Seçiniz"/>
-                  <f:selectItems value="#{appointment.cities.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
-                </h:selectOneMenu>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label class="form-control-label">İlçe Seçiniz</label>
-                <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedDistrict}">
-                  <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeDistrict}" onevent="selectPicker"/>
-                  <f:selectItem itemLabel="İlçe seçiniz"/>
-                  <f:selectItems value="#{appointment.districts.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
-                </h:selectOneMenu>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label class="form-control-label">Hastane Seçiniz</label>
-                <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedHospital}">
-                  <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeHospital}" onevent="selectPicker"/>
-                  <f:selectItem itemLabel="Hastane seçiniz"/>
-                  <f:selectItems value="#{appointment.hospitals.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
-                </h:selectOneMenu>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label class="form-control-label">Poliklinik Seçiniz</label>
-                <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedPoliclinic}">
-                  <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changePoliclinic}" onevent="selectPicker"/>
-                  <f:selectItem itemLabel="Poliklinik seçiniz"/>
-                  <f:selectItems value="#{appointment.policlinics.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
-                </h:selectOneMenu>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label class="form-control-label">Muayene Yeri Seçiniz</label>
-                <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedInspectionPlace}">
-                  <f:selectItem itemLabel="Muayene yeri seçiniz"/>
-                  <f:selectItems value="#{appointment.inspectionPlaces.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
-                </h:selectOneMenu>
-              </div>
-            </div>
-            <div class="col-md-12">
-              <h:commandButton value="Kaydet" styleClass="btn btn-primary" action="#{login}"/>
-            </div>
-          </h:form>
+    <div class="page-wrapper">
+      <div class="container-fluid">
+        <div class="card">
+          <div class="card-header">Hoşgeldin</div>
         </div>
       </div>
     </div>
