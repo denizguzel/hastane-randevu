@@ -56,8 +56,8 @@ public class PatientServiceImpl implements BaseService<PatientModel> {
     return patientDao.haveUserRegistration(patientModel);
   }
 
-  public PatientModel getUserByEmail(PatientModel patientModel) {
-    return patientDao.getUserByEmail(patientModel);
+  public PatientModel getUserByEmail(String email) {
+    return patientDao.getUserByEmail(email);
   }
 
   public List<PatientTreatmentRelModel> getPatientTreatments(PatientModel patientModel) {

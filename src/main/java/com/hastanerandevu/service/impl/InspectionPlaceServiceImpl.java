@@ -39,7 +39,7 @@ public class InspectionPlaceServiceImpl implements BaseService<InspectionPlaceMo
     return inspectionPlaceDao.findAll();
   }
 
-  List<AppointmentModel> getAllAppointmentsByInspectionPlace(InspectionPlaceModel inspectionPlaceModel) {
+  public List<AppointmentModel> getAllAppointmentsByInspectionPlace(InspectionPlaceModel inspectionPlaceModel) {
     return inspectionPlaceDao.getAllAppointmentsByInspectionPlace(inspectionPlaceModel);
   }
 }

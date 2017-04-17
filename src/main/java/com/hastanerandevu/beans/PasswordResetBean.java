@@ -17,16 +17,18 @@ import java.net.URISyntaxException;
 public class PasswordResetBean {
   private Mailer mailer = new Mailer();
   private PatientServiceImpl patientService = new PatientServiceImpl();
-  private PatientModel patientModel = new PatientModel();
+  //private PatientModel patientModel = new PatientModel();
   private String urlParam;
+  private String password;
+  private String email;
 
-  public PatientModel getPatientModel() {
+  /*public PatientModel getPatientModel() {
     return patientModel;
   }
 
   public void setPatientModel(PatientModel patientModel) {
     this.patientModel = patientModel;
-  }
+  }*/
 
   public String getUrlParam() {
     return urlParam;
@@ -36,21 +38,39 @@ public class PasswordResetBean {
     this.urlParam = urlParam;
   }
 
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
   public String passwordReset() {
-    if(patientService.haveUserRegistration(patientModel)) {
-      mailer.sendPasswordResetMail(patientModel);
+    PatientModel patientModel = patientService.getUserByEmail(getEmail());
+    if (patientModel!= null){
+      mailer.sendPasswordResetMail(email);
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Şifre sıfırlama maili gönderildi.", null));
     } else {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email sistemde kayıtlı değil.", null));
     }
+
     return "/recovery/reset";
   }
 
   public String passwordUpdate() throws URISyntaxException {
-    String encryptedSalt = Encryptor.encryptEmail(ProjectConstants.SALT + patientModel.getEmail());
+    String encryptedSalt = Encryptor.encryptEmail(ProjectConstants.SALT + getEmail());
     if(urlParam.equals(encryptedSalt)) {
-      patientModel = patientService.getUserByEmail(patientModel);
-      patientModel.setPassword(Encryptor.encryptPassword(patientModel.getPassword()));
+      PatientModel patientModel = patientService.getUserByEmail(getEmail());
+      patientModel.setPassword(Encryptor.encryptPassword(getPassword()));
       patientService.update(patientModel);
 
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Şifreniz değiştirildi.", null));

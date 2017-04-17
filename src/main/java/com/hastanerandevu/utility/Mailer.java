@@ -72,8 +72,8 @@ public class Mailer implements Runnable {
     thread.start();
   }
 
-  public void sendPasswordResetMail(PatientModel patientModel) {
-    patientModel = patientService.getUserByEmail(patientModel);
+  public void sendPasswordResetMail(String email) {
+    patientModel = patientService.getUserByEmail(email);
 
     String encryptedSalt = Encryptor.encryptEmail(ProjectConstants.SALT + patientModel.getEmail());
 

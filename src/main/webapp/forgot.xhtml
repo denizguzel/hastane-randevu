@@ -9,7 +9,7 @@
           <h:form styleClass="row" prependId="false">
             <div class="col-md-6">
               <div class="form-group">
-                <h:inputText id="email" value="#{passwordReset.patientModel.email}" p:placeholder="Email giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen email giriniz">
+                <h:inputText id="email" value="#{passwordReset.email}" p:placeholder="Email giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen email giriniz">
                   <f:validator validatorId="email"/>
                   <f:ajax event="blur" execute="@this" render="emailMessage"/>
                 </h:inputText>
@@ -18,7 +18,7 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <h:inputSecret id="password" value="#{passwordReset.patientModel.password}" p:placeholder="Şifrenizi giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen şifrenizi giriniz">
+                <h:inputSecret id="password" value="#{passwordReset.password}" p:placeholder="Şifrenizi giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen şifrenizi giriniz">
                   <f:validator validatorId="password"/>
                   <f:attribute name="passwordConfirm" value="#{passwordConfirm}"/>
                   <f:ajax event="blur" execute="password passwordConfirm" render="passwordMessage"/>
@@ -28,7 +28,7 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <h:inputSecret id="passwordConfirm" value="#{passwordReset.patientModel.password}" binding="#{passwordConfirm}" p:placeholder="Şifrenizi tekrar giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen şifrenizi tekrar giriniz">
+                <h:inputSecret id="passwordConfirm" value="#{passwordReset.password}" binding="#{passwordConfirm}" p:placeholder="Şifrenizi tekrar giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen şifrenizi tekrar giriniz">
                   <f:ajax event="blur" execute="password passwordConfirm" render="passwordConfirmMessage"/>
                 </h:inputSecret>
                 <h:message id="passwordConfirmMessage" for="passwordConfirm" errorClass="error"/>
