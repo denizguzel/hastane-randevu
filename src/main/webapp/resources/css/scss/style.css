@@ -2,11 +2,15 @@
 *:focus {
   outline: none !important; }
 
+html {
+  font-size: 14px;
+}
+
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #fff;
+  background-color: #F8F8F8;
   overflow-x: hidden;
-  font-size: 14px; }
+}
 
 ul, ol, li, p, h1, h2, h3, h4, h5, h6 {
   padding: 0;
@@ -23,6 +27,10 @@ a {
   a:focus {
     text-decoration: none; }
 
+button, input, optgroup, select, textarea {
+  font-family: 'Poppins', sans-serif;
+}
+
 button, select, input.btn {
   cursor: pointer; }
 
@@ -34,21 +42,44 @@ button, select, input.btn {
 
 .error {
   display: block;
-  color: red;
+  color: #FFEB3B;
   margin-top: 5px; }
 
 .info {
   display: block;
-  color: green;
+  color: #FFEB3B;
   margin: 5px 0; }
+
+.btn-success {
+  background-color: #4CAF50;
+}
+
+.btn-primary {
+  background-color: #2196F3;
+}
+
+.btn-warning {
+  background-color: #FFEB3B;
+}
+
+.btn-danger {
+  background-color: #F44336;
+}
+
+.btn-info {
+  background-color: #00BCD4;
+}
 
 .bootstrap-select .dropdown-toggle {
   background-color: transparent;
-  border-color: #D9D9D9; }
+  border: 1px solid #ddd;
+}
 
 .bootstrap-select .dropdown-menu.inner li a {
   display: block;
-  padding: 10px; }
+  padding: 5px 10px;
+  font-size: 14px;
+}
   .bootstrap-select .dropdown-menu.inner li a:hover {
     background-color: #ddd; }
 
@@ -58,20 +89,73 @@ button, select, input.btn {
 .container-fluid {
   padding: 0 30px 15px 30px; }
 
+.g-recaptcha {
+  margin-bottom: 10px;
+}
+
+.form-group .form-control {
+  border-radius: 0;
+}
+
+.form-group .forgot {
+  color: #fff;
+}
+
+.form-group .forgot:hover {
+  text-decoration: underline;
+}
+
 .card {
   border: 0;
-  border-bottom: 1px solid #ddd;
   border-radius: 0;
-  margin-bottom: 15px; }
+}
   .card .card-header {
     border: 0;
     border-radius: 0;
-    background-color: #fff; }
-  .card .card-block .card-block-header {
-    margin-bottom: 15px;
-    padding-bottom: 5px;
-    border-bottom: 1px solid #ddd;
-    font-size: 18px; }
+    background-color: #fff;
+    font-size: 20px;
+  }
+
+.card-login {
+  margin-top: 50px;
+}
+
+.card-login .card-header {
+  background-color: #008fa1;
+  color: #fff;
+  text-align: center;
+}
+
+.card-login .card-header i {
+  margin-right: 10px;
+}
+
+.card-login .card-block {
+  background-color: #00BCD4;
+}
+
+.card-login .card-block .form-group .form-control {
+  border-color: #00BCD4;
+}
+
+.card-login .card-block .btn {
+  width: 100%;
+}
+
+.card-unknown {
+  margin-top: 50px;
+}
+
+.card-unknown .card-header {
+  background-color: #FFEB3B;
+  font-size: 24px;
+  text-align: center;
+}
+
+.card-unknown .card-header i {
+  margin-right: 10px;
+  font-size: 30px;
+}
 
 nav.navbar {
   display: flex;
@@ -79,7 +163,8 @@ nav.navbar {
   align-items: center;
   justify-content: space-between;
   padding: 0;
-  background-color: #01C0C8; }
+  background-color: #00BCD4;
+}
   nav.navbar .brand {
     display: inherit;
     justify-content: center;
@@ -87,7 +172,7 @@ nav.navbar {
     width: 220px;
     height: 50px;
     color: #fff;
-    background-color: #01a8af;
+    background-color: #00a5bb;
     font-size: 20px;
     font-weight: 700; }
   nav.navbar .dropdown {
@@ -100,12 +185,12 @@ nav.navbar {
       border-radius: 0;
       padding: 0 10px;
       color: #fff;
-      font-weight: 700;
       height: 100%; }
       nav.navbar .dropdown .dropdown-toggle i {
         margin-right: 5px; }
       nav.navbar .dropdown .dropdown-toggle:hover {
-        background-color: #01a8af; }
+        background-color: #00a5bb;
+      }
       nav.navbar .dropdown .dropdown-toggle:focus {
         box-shadow: none; }
       nav.navbar .dropdown .dropdown-toggle:after {
@@ -130,6 +215,20 @@ nav.navbar {
         nav.navbar .dropdown .dropdown-menu .dropdown-item:active {
           background-color: #F8F8F8; }
 
+nav.navbar .navbar-collapse .navbar-nav {
+  height: 50px;
+}
+
+nav.navbar .navbar-collapse .navbar-nav .nav-item .nav-link {
+  color: #fff;
+  padding: 0 10px;
+  line-height: 50px;
+}
+
+nav.navbar .navbar-collapse .navbar-nav .nav-item .nav-link:hover {
+  background-color: #00b3ca;
+}
+
 nav.sidebar {
   position: absolute;
   top: 0;
@@ -148,11 +247,14 @@ nav.sidebar {
         margin-right: 10px; }
       nav.sidebar ul.nav-menu li a:hover {
         background-color: #F8F8F8;
-        color: #01C0C8; }
+        color: #00BCD4;
+      }
   nav.sidebar ul.nav-menu li.active {
-    border-color: #01C0C8; }
+    border-color: #00BCD4;
+  }
     nav.sidebar ul.nav-menu li.active a i {
-      color: #01C0C8; }
+      color: #00BCD4;
+    }
 
 .page-wrapper {
   margin-left: 220px;

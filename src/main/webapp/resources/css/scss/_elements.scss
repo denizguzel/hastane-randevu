@@ -1,27 +1,53 @@
-$main-color: #01C0C8;
+$main-color: #00BCD4;
+$red: #F44336;
+$green: #4CAF50;
+$yellow: #FFEB3B;
+$blue: #2196F3;
+$cyan: #00BCD4;
 
 .error {
   display: block;
-  color: red;
+  color: $yellow;
   margin-top: 5px;
 }
 
 .info {
   display: block;
-  color: green;
+  color: $yellow;
   margin: 5px 0;
+}
+
+.btn-success {
+  background-color: $green;
+}
+
+.btn-primary {
+  background-color: $blue;
+}
+
+.btn-warning {
+  background-color: $yellow;
+}
+
+.btn-danger {
+  background-color: $red;
+}
+
+.btn-info {
+  background-color: $cyan;
 }
 
 .bootstrap-select {
   .dropdown-toggle {
     background-color: transparent;
-    border-color: #D9D9D9;
+    border: 1px solid #ddd;
   }
   .dropdown-menu.inner {
     li {
       a {
         display: block;
-        padding: 10px;
+        padding: 5px 10px;
+        font-size: 14px;
         &:hover {
           background-color: #ddd;
         }
@@ -40,22 +66,65 @@ $main-color: #01C0C8;
   padding: 0 30px 15px 30px;
 }
 
+.g-recaptcha {
+  margin-bottom: 10px;
+}
+
+.form-group {
+  .form-control {
+    border-radius: 0;
+  }
+  .forgot {
+    color: #fff;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
 .card {
   border: 0;
-  border-bottom: 1px solid #ddd;
   border-radius: 0;
-  margin-bottom: 15px;
   .card-header {
     border: 0;
     border-radius: 0;
     background-color: #fff;
+    font-size: 20px;
+  }
+}
+
+.card-login {
+  margin-top: 50px;
+  .card-header {
+    background-color: darken($main-color, 10%);
+    color: #fff;
+    text-align: center;
+    i {
+      margin-right: 10px;
+    }
   }
   .card-block {
-    .card-block-header {
-      margin-bottom: 15px;
-      padding-bottom: 5px;
-      border-bottom: 1px solid #ddd;
-      font-size: 18px;
+    background-color: $main-color;
+    .form-group {
+      .form-control {
+        border-color: $main-color;
+      }
+    }
+    .btn {
+      width: 100%;
+    }
+  }
+}
+
+.card-unknown {
+  margin-top: 50px;
+  .card-header {
+    background-color: $yellow;
+    font-size: 24px;
+    text-align: center;
+    i {
+      margin-right: 10px;
+      font-size: 30px;
     }
   }
 }

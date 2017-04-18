@@ -4,11 +4,14 @@
   }
 }
 
+html {
+  font-size: 14px;
+}
+
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #fff;
+  background-color: #F8F8F8;
   overflow-x: hidden;
-  font-size: 14px;
 }
 
 ul, ol, li, p, h1, h2, h3, h4, h5, h6 {
@@ -29,6 +32,10 @@ a {
   &:focus {
     text-decoration: none;
   }
+}
+
+button, input, optgroup, select, textarea {
+  font-family: 'Poppins', sans-serif;
 }
 
 button, select, input.btn {

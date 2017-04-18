@@ -4,6 +4,7 @@ import com.hastanerandevu.converter.Encryptor;
 import com.hastanerandevu.enums.AppointmentStatusEnum;
 import com.hastanerandevu.model.*;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.util.Date;
 import java.util.List;
@@ -63,7 +64,11 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientModel> {
   public PatientModel getUserByEmail(String email) {
     Query query = getEntitymanager().createQuery("SELECT e FROM PatientModel e WHERE e.email = :E_MAIL").setParameter("E_MAIL", email);
 
-    return (PatientModel) query.getResultList().get(0);
+    try {
+      return (PatientModel) query.getSingleResult();
+    } catch(NoResultException ex) {
+      return null;
+    }
   }
 
   public List<PatientTreatmentRelModel> getPatientTreatments(PatientModel patientModel) {

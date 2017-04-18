@@ -137,9 +137,9 @@
                 </h:selectOneMenu>
               </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 d-flex">
               <h:messages globalOnly="true" errorClass="error" infoClass="info"/>
-              <h:commandButton value="Gönder" styleClass="btn btn-primary" action="#{login.patientCreate}">
+              <h:commandButton value="Kayıt Ol" styleClass="btn btn-success ml-auto" action="#{login.patientCreate}">
                 <f:ajax execute="@form" render="@form" onevent="selectPicker"/>
               </h:commandButton>
             </div>

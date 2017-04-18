@@ -3,11 +3,11 @@
 <ui:composition>
   <ui:insert name="header">
     <div class="container">
-      <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <nav class="navbar navbar-toggleable-sm">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="#{facesContext.externalContext.requestContextPath}/">Hastane</a>
+        <a class="brand" href="#{facesContext.externalContext.requestContextPath}/">e-Randevu</a>
         <div class="collapse navbar-collapse" id="navbarNav">
           <h:panelGroup rendered="#{!login.verifyLogin}">
             <ul class="navbar-nav">
@@ -23,9 +23,6 @@
               <li class="nav-item">
                 <a class="nav-link" href="#{facesContext.externalContext.requestContextPath}/register">Kayıt</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#{facesContext.externalContext.requestContextPath}/recovery/reset">Şifre Sıfırlama</a>
-              </li>
             </ul>
           </h:panelGroup>
           <h:panelGroup rendered="#{login.verifyLogin}">
@@ -33,15 +30,28 @@
               <li class="nav-item active">
                 <a class="nav-link" href="#{facesContext.externalContext.requestContextPath}/view">Anasayfa</a>
               </li>
-              <li class="nav-item ml-auto">
-                <a class="nav-link" href="#{facesContext.externalContext.requestContextPath}/view">${login.loggedUsername}</a>
-              </li>
-              <h:form prependId="false">
-                <h:commandButton value="Çıkış" styleClass="btn btn-primary" action="#{login.logout}"/>
-              </h:form>
             </ul>
           </h:panelGroup>
         </div>
+        <h:panelGroup rendered="#{login.verifyLogin}">
+          <div class="dropdown">
+            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+              <i class="fa fa-user-circle-o"></i>${login.loggedUsername}
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+              <div class="dropdown-item">
+                <a href="#{facesContext.externalContext.requestContextPath}/view"><i class="fa fa-user-o"></i>Profil</a>
+              </div>
+              <div class="dropdown-item">
+                <h:form prependId="false">
+                  <h:commandLink action="#{login.logout}">
+                    <i class="fa fa-sign-out"></i>Çıkış Yap
+                  </h:commandLink>
+                </h:form>
+              </div>
+            </div>
+          </div>
+        </h:panelGroup>
       </nav>
     </div>
   </ui:insert>

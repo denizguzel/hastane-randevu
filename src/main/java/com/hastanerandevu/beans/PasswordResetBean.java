@@ -15,20 +15,10 @@ import java.net.URISyntaxException;
 @ManagedBean(name = "passwordReset")
 @ViewScoped
 public class PasswordResetBean {
-  private Mailer mailer = new Mailer();
   private PatientServiceImpl patientService = new PatientServiceImpl();
-  //private PatientModel patientModel = new PatientModel();
   private String urlParam;
   private String password;
   private String email;
-
-  /*public PatientModel getPatientModel() {
-    return patientModel;
-  }
-
-  public void setPatientModel(PatientModel patientModel) {
-    this.patientModel = patientModel;
-  }*/
 
   public String getUrlParam() {
     return urlParam;
@@ -54,19 +44,16 @@ public class PasswordResetBean {
     this.email = email;
   }
 
-  public String passwordReset() {
-    PatientModel patientModel = patientService.getUserByEmail(getEmail());
-    if (patientModel!= null){
-      mailer.sendPasswordResetMail(email);
+  public void passwordReset() {
+    if(patientService.getUserByEmail(getEmail()) != null) {
+      new Mailer().sendPasswordResetMail(getEmail());
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Şifre sıfırlama maili gönderildi.", null));
     } else {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email sistemde kayıtlı değil.", null));
     }
-
-    return "/recovery/reset";
   }
 
-  public String passwordUpdate() throws URISyntaxException {
+  public void passwordUpdate() throws URISyntaxException {
     String encryptedSalt = Encryptor.encryptEmail(ProjectConstants.SALT + getEmail());
     if(urlParam.equals(encryptedSalt)) {
       PatientModel patientModel = patientService.getUserByEmail(getEmail());
@@ -77,6 +64,5 @@ public class PasswordResetBean {
     } else {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Şifreniz değiştirilemedi.", null));
     }
-    return "/recovery/forgot";
   }
 }

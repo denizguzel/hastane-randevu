@@ -26,7 +26,6 @@ nav.navbar {
       border-radius: 0;
       padding: 0 10px;
       color: #fff;
-      font-weight: 700;
       height: 100%;
       i {
         margin-right: 5px;
@@ -64,6 +63,21 @@ nav.navbar {
         }
         &:active {
           background-color: #F8F8F8;
+        }
+      }
+    }
+  }
+  .navbar-collapse {
+    .navbar-nav {
+      height: 50px;
+      .nav-item {
+        .nav-link {
+          color: #fff;
+          padding: 0 10px;
+          line-height: 50px;
+          &:hover {
+            background-color: darken($main-color, 2%);
+          }
         }
       }
     }

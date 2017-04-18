@@ -1,14 +1,31 @@
-<ui:composition template="/view/master/beforeLoginTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
-  <ui:define name="title">Aradığınız sayfa bulunamadı</ui:define>
+<!DOCTYPE html>
+<html lang="tr" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Aradığınız içerik bulunamadı</title>
+  <h:outputStylesheet name="css/bootstrap.min.css"/>
+  <h:outputStylesheet name="css/bootstrap-select.min.css"/>
+  <h:outputStylesheet name="css/font-awesome.min.css"/>
+  <h:outputStylesheet name="css/scss/style.css"/>
+</h:head>
 
-  <ui:define name="content">
-    <div class="container">
-      <div class="card">
-        <div class="card-header">Aradığınız içerik bulunamadı <i class="fa fa-exclamation-triangle"></i></div>
-        <div class="card-block">
-          <a class="btn btn-primary" href="#{facesContext.externalContext.requestContextPath}/">Ana Sayfaya Dön</a>
+<h:body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="card card-unknown">
+          <div class="card-header"><i class="fa fa-exclamation-triangle"></i>Aradığınız içerik bulunamadı</div>
+          <div class="card-block d-flex">
+            <a class="btn btn-primary" href="#{facesContext.externalContext.requestContextPath}/">Ana Sayfaya Dön</a>
+            <h:outputLink rendered="#{login.verifyLogin}" styleClass="btn btn-primary ml-auto" value="#{facesContext.externalContext.requestContextPath}/view">Profil Sayfasına Dön</h:outputLink>
+          </div>
         </div>
       </div>
     </div>
-  </ui:define>
-</ui:composition>
+  </div>
+</h:body>
+
+<ui:include src="/view/common/footer.xhtml"/>
+</html>
