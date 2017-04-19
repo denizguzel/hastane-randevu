@@ -191,6 +191,7 @@ button, select, input.btn {
 
 .card-login .card-block .bootstrap-select .btn {
   border: 0;
+  color: #fff;
 }
 
 .card-unknown {

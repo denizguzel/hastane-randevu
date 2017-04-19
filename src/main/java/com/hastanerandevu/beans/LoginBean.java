@@ -88,7 +88,7 @@ public class LoginBean {
     return secretQuestionEnums;
   }
 
-  public String patientCreate() {
+  public void patientCreate() {
     if(patientService.haveUserRegistration(patientModel)) {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bu kullanıcı sistemde zaten kayıtlı", null));
     } else {
@@ -103,7 +103,6 @@ public class LoginBean {
         LOG.info(e.getMessage());
       }
     }
-    return "/register";
   }
 
   private void checkCaptcha() throws IOException {
