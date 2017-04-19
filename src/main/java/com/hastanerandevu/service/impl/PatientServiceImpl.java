@@ -60,6 +60,10 @@ public class PatientServiceImpl implements BaseService<PatientModel> {
     return patientDao.getUserByEmail(email);
   }
 
+  public boolean changingPasswordIsAvailable(PatientModel patientModel) {
+    return patientDao.changingPasswordIsAvailable(patientModel);
+  }
+
   public List<PatientTreatmentRelModel> getPatientTreatments(PatientModel patientModel) {
     return patientDao.getPatientTreatments(patientModel);
   }
