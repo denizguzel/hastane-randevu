@@ -1,41 +1,25 @@
 <ui:composition template="/view/master/beforeLoginTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
-  <ui:define name="title">Şifre Sıfırlama</ui:define>
+  <ui:define name="title">Şifremi Unuttum</ui:define>
 
   <ui:define name="content">
     <div class="container">
       <div class="row">
         <div class="col-md-4 offset-md-4">
           <div class="card card-login">
-            <div class="card-header">Şifre Sıfırlama</div>
+            <div class="card-header">Şifremi Unuttum</div>
             <div class="card-block">
               <h:form prependId="false">
-                <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                   <h:inputText id="email" value="#{passwordReset.email}" p:placeholder="Email giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen email giriniz">
                     <f:validator validatorId="email"/>
                     <f:ajax event="blur" execute="@this" render="emailMessage"/>
                   </h:inputText>
-                  <h:message id="emailMessage" for="email" errorClass="error"/>
                 </div>
-                <div class="form-group">
-                  <h:inputSecret id="password" value="#{passwordReset.password}" p:placeholder="Şifrenizi giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen şifrenizi giriniz">
-                    <f:validator validatorId="password"/>
-                    <f:attribute name="passwordConfirm" value="#{passwordConfirm}"/>
-                    <f:ajax event="blur" execute="password passwordConfirm" render="passwordMessage"/>
-                  </h:inputSecret>
-                  <h:message id="passwordMessage" for="password" errorClass="error"/>
-                </div>
-                <div class="form-group">
-                  <h:inputSecret id="passwordConfirm" value="#{passwordReset.password}" binding="#{passwordConfirm}" p:placeholder="Şifrenizi tekrar giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen şifrenizi tekrar giriniz">
-                    <f:ajax event="blur" execute="password passwordConfirm" render="passwordConfirmMessage"/>
-                  </h:inputSecret>
-                  <h:message id="passwordConfirmMessage" for="passwordConfirm" errorClass="error"/>
-                </div>
-                <h:messages globalOnly="true" errorClass="error"/>
-                <h:commandButton value="Şifre Sıfırla" styleClass="btn btn-primary" action="#{passwordReset.passwordUpdate}">
+                <h:message id="emailMessage" for="email" errorClass="error"/>
+                <h:messages globalOnly="true" errorClass="error" infoClass="info"/>
+                <h:commandButton value="Gönder" styleClass="btn btn-success" action="#{passwordReset.passwordReset}">
                   <f:ajax execute="@form" render="@form"/>
-                  <f:metadata>
-                    <f:viewParam name="q" value="#{passwordReset.urlParam}"/>
-                  </f:metadata>
                 </h:commandButton>
               </h:form>
             </div>

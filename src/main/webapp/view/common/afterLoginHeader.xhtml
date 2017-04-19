@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="tr" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
 <ui:composition>
-  <nav class="navbar">
-    <a class="brand" href="#{facesContext.externalContext.requestContextPath}/">e-Randevu</a>
+  <nav class="navbar navbar-login">
+    <a class="brand" href="#{facesContext.externalContext.requestContextPath}/">
+      <img src="#{facesContext.externalContext.requestContextPath}/resources/img/logo.png"/>
+    </a>
     <div class="dropdown">
       <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
         <i class="fa fa-user-circle-o"></i>${login.loggedUsername}

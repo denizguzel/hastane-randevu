@@ -8,20 +8,22 @@
           <div class="card-header"><i class="fa fa-user-md"></i>Doktor Giriş</div>
           <div class="card-block">
             <h:form prependId="false">
-              <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                 <h:inputText id="recordNumber" value="#{login.doctorModel.recordNumber}" p:placeholder="Sicil no giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen sicil no giriniz">
                   <f:ajax event="blur" execute="@this" render="recordNumberMessage"/>
                 </h:inputText>
-                <h:message id="recordNumberMessage" for="recordNumber" errorClass="error"/>
               </div>
-              <div class="form-group">
+              <h:message id="recordNumberMessage" for="recordNumber" errorClass="error"/>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
                 <h:inputSecret id="password" value="#{login.doctorModel.password}" p:placeholder="Şifre giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen şifrenizi giriniz">
                   <f:ajax event="blur" execute="@this" render="passwordMessage"/>
                 </h:inputSecret>
-                <h:message id="passwordMessage" for="password" errorClass="error"/>
               </div>
+              <h:message id="passwordMessage" for="password" errorClass="error"/>
               <div class="form-group d-flex">
-                <a href="#{facesContext.externalContext.requestContextPath}/recovery/reset" class="forgot ml-auto">Şifremi Unuttum</a>
+                <a href="#{facesContext.externalContext.requestContextPath}/recovery/forgot" class="forgot ml-auto">Şifremi Unuttum</a>
               </div>
               <h:panelGroup rendered="#{login.showCaptcha}">
                 <div class="g-recaptcha" data-sitekey="6LcjxBcUAAAAAKrzn6mU3wRdUiqEdCsxkKojNKeJ"></div>

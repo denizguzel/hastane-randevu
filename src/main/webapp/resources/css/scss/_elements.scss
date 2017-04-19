@@ -1,4 +1,4 @@
-$main-color: #00BCD4;
+$main-color: #18E2BA;
 $red: #F44336;
 $green: #4CAF50;
 $yellow: #FFEB3B;
@@ -8,13 +8,13 @@ $cyan: #00BCD4;
 .error {
   display: block;
   color: $yellow;
-  margin-top: 5px;
+  margin: 3px 0;
 }
 
 .info {
   display: block;
   color: $yellow;
-  margin: 5px 0;
+  margin: 3px 0;
 }
 
 .btn-success {
@@ -38,18 +38,28 @@ $cyan: #00BCD4;
 }
 
 .bootstrap-select {
-  .dropdown-toggle {
+  .btn {
     background-color: transparent;
-    border: 1px solid #ddd;
+    border: 0;
+    color: #fff;
+    padding: 11.5px 25px 11.5px 12px !important;
+    &:focus {
+      outline: 0 !important;
+    }
   }
-  .dropdown-menu.inner {
-    li {
-      a {
-        display: block;
-        padding: 5px 10px;
-        font-size: 14px;
-        &:hover {
-          background-color: #ddd;
+  .dropdown-menu {
+    background-color: #fff;
+  }
+  .dropdown-menu.open {
+    .dropdown-menu.inner {
+      li {
+        a {
+          display: block;
+          padding: 5px 10px;
+          font-size: 14px;
+          &:hover {
+            background-color: #ddd;
+          }
         }
       }
     }
@@ -70,18 +80,6 @@ $cyan: #00BCD4;
   margin-bottom: 10px;
 }
 
-.form-group {
-  .form-control {
-    border-radius: 0;
-  }
-  .forgot {
-    color: #fff;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-}
-
 .card {
   border: 0;
   border-radius: 0;
@@ -90,6 +88,15 @@ $cyan: #00BCD4;
     border-radius: 0;
     background-color: #fff;
     font-size: 20px;
+  }
+  .card-block {
+    .bootstrap-select {
+      .btn {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        color: #999;
+      }
+    }
   }
 }
 
@@ -105,13 +112,50 @@ $cyan: #00BCD4;
   }
   .card-block {
     background-color: $main-color;
+    .input-group {
+      margin-bottom: 10px;
+      .input-group-addon {
+        border: 0;
+        background-color: darken($main-color, 5%);
+        i {
+          color: #fff;
+        }
+      }
+      .form-control {
+        border: 0;
+        background-color: darken($main-color, 5%);
+        height: 40px;
+        color: #fff;
+      }
+      ::placeholder {
+        color: #fff;
+      }
+    }
     .form-group {
       .form-control {
-        border-color: $main-color;
+        border: 0;
+        background-color: darken($main-color, 5%);
+        height: 40px;
+        color: #fff;
+      }
+      ::placeholder {
+        color: #fff;
+      }
+      .forgot {
+        color: #fff;
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
     .btn {
       width: 100%;
+      padding: 11.5px 0;
+    }
+    .bootstrap-select {
+      .btn {
+        border: 0;
+      }
     }
   }
 }
