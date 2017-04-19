@@ -62,6 +62,9 @@ public class PatientModel {
   @Column(name = "IS_ACTIVE", insertable = false)
   private char isActive;
 
+  @Column(name = "FORGOTTEN_EXPIRATION_DATE")
+  private Date forgottenExpirationDate;
+
   @Enumerated(EnumType.STRING)
   @Column(name = "GENDER")
   private GenderEnum gender;
@@ -293,5 +296,13 @@ public class PatientModel {
 
   public void setSecretQuestion(SecretQuestionEnum secretQuestion) {
     this.secretQuestion = secretQuestion;
+  }
+
+  public Date getForgottenExpirationDate() {
+    return forgottenExpirationDate;
+  }
+
+  public void setForgottenExpirationDate(Date forgottenExpirationDate) {
+    this.forgottenExpirationDate = forgottenExpirationDate;
   }
 }

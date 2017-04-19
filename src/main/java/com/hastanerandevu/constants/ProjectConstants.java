@@ -13,4 +13,6 @@ public class ProjectConstants {
   public final static String localizationFilePath = "com.hastanerandevu.messages";
 
   public final static String SALT = "498#2D83B631%3800EBD!801600D*7E3CC13";
+
+  public static final long ONE_MINUTE_IN_MILLIS = 60000;
 }

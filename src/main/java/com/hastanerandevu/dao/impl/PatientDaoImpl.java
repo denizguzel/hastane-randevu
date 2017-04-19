@@ -4,7 +4,6 @@ import com.hastanerandevu.converter.Encryptor;
 import com.hastanerandevu.enums.AppointmentStatusEnum;
 import com.hastanerandevu.model.*;
 
-import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.util.Date;
 import java.util.List;
@@ -20,6 +19,15 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientModel> {
     } else {
       return null;
     }
+  }
+
+  public boolean changingPasswordIsAvailable(PatientModel patientModel) {
+    Query query = getEntitymanager().createQuery("SELECT e FROM PatientModel e WHERE e.pk = :PK" + " AND e.forgottenExpirationDate > :date");
+
+    query.setParameter("date", new Date());
+    query.setParameter("PK", patientModel.getPk());
+
+    return query.getResultList().size() > 0;
   }
 
   // HASTANIN HALI HAZIRDA OLAN RANDEVU SAYISI. ÜÇÜ GEÇİP GEÇMEDİĞİNİN KONTROLU BURDAN YAPILACAK.
@@ -64,11 +72,7 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientModel> {
   public PatientModel getUserByEmail(String email) {
     Query query = getEntitymanager().createQuery("SELECT e FROM PatientModel e WHERE e.email = :E_MAIL").setParameter("E_MAIL", email);
 
-    try {
-      return (PatientModel) query.getSingleResult();
-    } catch(NoResultException ex) {
-      return null;
-    }
+    return (PatientModel) query.getSingleResult();
   }
 
   public List<PatientTreatmentRelModel> getPatientTreatments(PatientModel patientModel) {
