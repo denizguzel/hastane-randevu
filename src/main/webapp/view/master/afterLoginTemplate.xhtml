@@ -5,10 +5,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title><ui:insert name="title">Some title</ui:insert></title>
-  <h:outputStylesheet name="css/bootstrap.min.css"/>
-  <h:outputStylesheet name="css/bootstrap-select.min.css"/>
-  <h:outputStylesheet name="css/font-awesome.min.css"/>
-  <h:outputStylesheet name="css/scss/style.css"/>
+
+  <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/resources/img/favicons/favicon.ico"/>
+  <link rel="apple-touch-icon" href="#{facesContext.externalContext.requestContextPath}/resources/img/favicons/apple-touch-icon.png"/>
+  <link rel="apple-touch-icon" sizes="72x72" href="#{facesContext.externalContext.requestContextPath}/resources/img/favicons/apple-touch-icon-72x72.png"/>
+  <link rel="apple-touch-icon" sizes="114x114" href="#{facesContext.externalContext.requestContextPath}/resources/img/favicons/apple-touch-icon-114x114.png"/>
+
+  <link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/css/bootstrap-select.min.css"/>
+  <link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/css/scss/style.css"/>
 </h:head>
 
 <ui:include src="/view/common/afterLoginHeader.xhtml"/>

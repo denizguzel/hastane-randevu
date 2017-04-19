@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="tr" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html">
+<html lang="tr" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
 <ui:composition>
-  <h:outputScript name="js/jquery.min.js"/>
-  <h:outputScript name="js/tether.min.js"/>
-  <h:outputScript name="js/bootstrap.min.js"/>
-  <h:outputScript name="js/bootstrap-select.min.js"/>
-  <h:outputScript name="js/main.js"/>
+  <script src="#{facesContext.externalContext.requestContextPath}/resources/js/jquery.min.js"></script>
+  <script src="#{facesContext.externalContext.requestContextPath}/resources/js/tether.min.js"></script>
+  <script src="#{facesContext.externalContext.requestContextPath}/resources/js/bootstrap.min.js"></script>
+  <script src="#{facesContext.externalContext.requestContextPath}/resources/js/bootstrap-select.min.js"></script>
+  <script src="#{facesContext.externalContext.requestContextPath}/resources/js/main.js"></script>
 </ui:composition>
 </html>
