@@ -1,28 +1,24 @@
 package com.hastanerandevu.dao.impl;
 
-import com.hastanerandevu.comparators.InspectionPlaceComparator;
-import com.hastanerandevu.model.*;
+import com.hastanerandevu.model.AppointmentModel;
+import com.hastanerandevu.model.HospitalPoliclinicRelModel;
+import com.hastanerandevu.model.InspectionPlaceModel;
+import com.hastanerandevu.model.PoliclinicModel;
 
 import javax.persistence.Query;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 public class PoliclinicDaoImpl extends BaseDaoImpl<PoliclinicModel> {
 
-  public List<InspectionPlaceModel> getInspectionPlacesByHospitalPoliclinic(PoliclinicModel policlinicModel, HospitalModel hospitalModel) {
+  public List<InspectionPlaceModel> getInspectionPlacesByHospitalPoliclinicRel(HospitalPoliclinicRelModel hospitalPoliclinicRelModel) {
 
-    Query query = getEntitymanager().createQuery("SELECT e FROM HospitalPoliclinicRelModel e WHERE e.policlinic = :policlinicModel AND e.hospital = :hospitalModel ");
-    query.setParameter("policlinicModel", policlinicModel);
-    query.setParameter("hospitalModel", hospitalModel);
+    Query query = getEntitymanager().createQuery("SELECT e FROM InspectionPlaceModel e WHERE e.hospitalPoliclinicRel = :HOSPITAL_POLICLINIC_REL ORDER BY e.placeName");
 
-    HospitalPoliclinicRelModel hospitalPoliclinicRelModel = (HospitalPoliclinicRelModel) query.getResultList().get(0);
+    query.setParameter("HOSPITAL_POLICLINIC_REL",hospitalPoliclinicRelModel);
 
-    List<InspectionPlaceModel> inspectionPlaceModels = hospitalPoliclinicRelModel.getInspectionPlaceModels();
+    return query.getResultList();
 
-    Collections.sort(inspectionPlaceModels, new InspectionPlaceComparator());
-
-    return inspectionPlaceModels;
   }
 
   public List<AppointmentModel> getAppointmentsByPoliclinic(HospitalPoliclinicRelModel hospitalPoliclinicRelModel) {

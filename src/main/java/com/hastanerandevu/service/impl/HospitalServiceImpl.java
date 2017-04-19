@@ -3,6 +3,7 @@ package com.hastanerandevu.service.impl;
 import com.hastanerandevu.dao.impl.HospitalDaoImpl;
 import com.hastanerandevu.enums.HospitalTypeEnum;
 import com.hastanerandevu.model.HospitalModel;
+import com.hastanerandevu.model.HospitalPoliclinicRelModel;
 import com.hastanerandevu.model.PoliclinicModel;
 import com.hastanerandevu.service.BaseService;
 
@@ -42,7 +43,7 @@ public class HospitalServiceImpl implements BaseService<HospitalModel> {
     return hospitalDao.getAllHospitalsByHospitalType(typeEnum);
   }
 
-  public List<PoliclinicModel> getPoliclinicByHospital(HospitalModel hospitalModel) {
+  public List<HospitalPoliclinicRelModel> getPoliclinicByHospital(HospitalModel hospitalModel) {
     return hospitalDao.getPoliclinicByHospital(hospitalModel);
   }
 }

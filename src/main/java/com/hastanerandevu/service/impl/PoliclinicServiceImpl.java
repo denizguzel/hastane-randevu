@@ -34,8 +34,8 @@ public class PoliclinicServiceImpl implements BaseService<PoliclinicModel> {
     return policlinicDao.findAll();
   }
 
-  public List<InspectionPlaceModel> getInspectionPlacesByHospitalPoliclinic(HospitalModel hospitalModel, PoliclinicModel policlinicModel) {
-    return policlinicDao.getInspectionPlacesByHospitalPoliclinic(policlinicModel, hospitalModel);
+  public List<InspectionPlaceModel> getInspectionPlacesByHospitalPoliclinicRel(HospitalPoliclinicRelModel hospitalPoliclinicRelModel) {
+    return policlinicDao.getInspectionPlacesByHospitalPoliclinicRel(hospitalPoliclinicRelModel);
   }
 
   public List<AppointmentModel> getAppointmentsByPoliclinic(HospitalPoliclinicRelModel hospitalPoliclinicRelModel) {

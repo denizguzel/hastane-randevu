@@ -1,10 +1,7 @@
 package com.hastanerandevu.beans;
 
 import com.hastanerandevu.model.*;
-import com.hastanerandevu.service.impl.CityServiceImpl;
-import com.hastanerandevu.service.impl.DistrictServiceImpl;
-import com.hastanerandevu.service.impl.HospitalServiceImpl;
-import com.hastanerandevu.service.impl.PoliclinicServiceImpl;
+import com.hastanerandevu.service.impl.*;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -21,11 +18,12 @@ public class AppointmentBean implements Serializable {
   private DistrictServiceImpl districtService = new DistrictServiceImpl();
   private HospitalServiceImpl hospitalService = new HospitalServiceImpl();
   private PoliclinicServiceImpl policlinicService = new PoliclinicServiceImpl();
+  HospitalPoliclinicRelServiceImpl hospitalPoliclinicRelService = new HospitalPoliclinicRelServiceImpl();
 
   private CityModel cityModel = new CityModel();
   private DistrictModel districtModel = new DistrictModel();
   private HospitalModel hospitalModel = new HospitalModel();
-  private PoliclinicModel policlinicModel = new PoliclinicModel();
+  //private PoliclinicModel policlinicModel = new PoliclinicModel();
   private HospitalPoliclinicRelModel hospitalPoliclinicRelModel = new HospitalPoliclinicRelModel();
   private InspectionPlaceModel inspectionPlaceModel = new InspectionPlaceModel();
 
@@ -181,6 +179,7 @@ public class AppointmentBean implements Serializable {
     districts.clear();
     hospitals.clear();
     policlinics.clear();
+    inspectionPlaces.clear();
 
     if(event == null) {
       System.out.println("Ajax event is null");
@@ -197,6 +196,7 @@ public class AppointmentBean implements Serializable {
   public void changeDistrict(AjaxBehaviorEvent event) {
     hospitals.clear();
     policlinics.clear();
+    inspectionPlaces.clear();
 
     if(event == null) {
       System.out.println("Ajax event is null");
@@ -213,6 +213,7 @@ public class AppointmentBean implements Serializable {
 
   public void changeHospital(AjaxBehaviorEvent event) {
     policlinics.clear();
+    inspectionPlaces.clear();
 
     if(event == null) {
       System.out.println("Ajax event is null");
@@ -222,8 +223,8 @@ public class AppointmentBean implements Serializable {
     }
 
 
-    for(PoliclinicModel policlinicModel : hospitalService.getPoliclinicByHospital(hospitalService.find(Long.parseLong(selectedHospital)))) {
-      policlinics.put(policlinicModel.getPk(), policlinicModel.getPoliclinicName());
+    for(HospitalPoliclinicRelModel hospitalPoliclinicRelModel : hospitalService.getPoliclinicByHospital(hospitalService.find(Long.parseLong(selectedHospital)))) {
+      policlinics.put(hospitalPoliclinicRelModel.getPk(), hospitalPoliclinicRelModel.getPoliclinic().getPoliclinicName());
     }
   }
 
@@ -236,10 +237,11 @@ public class AppointmentBean implements Serializable {
       UIInput input = (UIInput) event.getSource();
       selectedPoliclinic = input.getValue().toString();
     }
-    hospitalModel = hospitalService.find(Long.parseLong(selectedHospital));
-    policlinicModel = policlinicService.find(Long.parseLong(selectedPoliclinic));
+    //hospitalModel = hospitalService.find(Long.parseLong(selectedHospital));
+    //policlinicModel = policlinicService.find(Long.parseLong(selectedPoliclinic));
 
-    for(InspectionPlaceModel inspectionPlaceModel : policlinicService.getInspectionPlacesByHospitalPoliclinic(hospitalModel, policlinicModel)) {
+
+    for(InspectionPlaceModel inspectionPlaceModel : policlinicService.getInspectionPlacesByHospitalPoliclinicRel(hospitalPoliclinicRelService.find(Long.parseLong(selectedPoliclinic)))) {
       inspectionPlaces.put(inspectionPlaceModel.getPk(), inspectionPlaceModel.getPlaceName());
     }
   }
