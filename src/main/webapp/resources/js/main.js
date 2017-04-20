@@ -4,7 +4,6 @@ var cityUrl = "http://localhost:8080/api/city/cityname";
 
 
 $("#all-data").click(function () {
-
   jQuery.ajax({
     type: "GET",
     url: restUrl,
@@ -20,9 +19,7 @@ $("#all-data").click(function () {
 
 });
 
-
 $("#filtered-data").click(function () {
-
   jQuery.ajax({
     type: "GET",
     url: restUrl,
@@ -42,3 +39,38 @@ $("#filtered-data").click(function () {
 function selectPicker(data) {
   if (data.status === 'success') $('.selectpicker').selectpicker("render");
 }
+
+$(".datepicker").datetimepicker({
+  useCurrent: false,
+  locale: "tr",
+  format: 'DD-MM-YYYY',
+  showTodayButton: true,
+  showClear: true,
+  icons: {
+    time: 'fa fa-timer',
+    date: 'fa fa-calendar',
+    up: 'fa fa-arrow-up',
+    down: 'fa fa-arrow-down',
+    previous: 'fa fa-arrow-left',
+    next: 'fa fa-arrow-right',
+    today: 'fa fa-calendar',
+    clear: 'fa fa-trash-o',
+    close: 'fa fa-close'
+  },
+  tooltips: {
+    today: 'Bugünü Seç',
+    clear: 'Temizle',
+    close: 'Kapat',
+    selectMonth: 'Ay Seç',
+    prevMonth: 'Önceki Ay',
+    nextMonth: 'Sonraki Ay',
+    selectYear: 'Yıl Seç',
+    prevYear: 'Önceki Yıl',
+    nextYear: 'Sonraki Yıl',
+    selectDecade: 'Onyıl Seç',
+    prevDecade: 'Önceki Onyıl',
+    nextDecade: 'Sonraki Onyıl',
+    prevCentury: 'Önceki Yüzyıl',
+    nextCentury: 'Sonraki Yüzyıl'
+  }
+});

@@ -5,7 +5,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-4 offset-md-4">
-          <div class="card card-login">
+          <div class="card card-form">
             <div class="card-header">Şifremi Unuttum</div>
             <div class="card-block">
               <h:form prependId="false">
@@ -18,7 +18,7 @@
                 </div>
                 <h:message id="emailMessage" for="email" errorClass="error"/>
                 <h:messages globalOnly="true" errorClass="error" infoClass="info"/>
-                <h:commandButton value="Gönder" styleClass="btn btn-success" action="#{passwordReset.passwordReset}">
+                <h:commandButton value="Gönder" styleClass="btn btn-success d-block m-auto" action="#{passwordReset.passwordReset}">
                   <f:ajax execute="@form" render="@form"/>
                 </h:commandButton>
               </h:form>

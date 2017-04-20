@@ -4,7 +4,7 @@
   <ui:define name="content">
     <div class="container">
       <div class="col-md-4 offset-md-4">
-        <div class="card card-login">
+        <div class="card card-form">
           <div class="card-header"><i class="fa fa-user-md"></i>Doktor Giriş</div>
           <div class="card-block">
             <h:form prependId="false">
@@ -31,7 +31,7 @@
               </h:panelGroup>
               <input type="hidden" name="loginCheck" value="doctor"/>
               <h:messages globalOnly="true" errorClass="error"/>
-              <h:commandButton value="Giriş Yap" styleClass="btn btn-success" action="#{login.login}">
+              <h:commandButton value="Giriş Yap" styleClass="btn btn-success d-block m-auto" action="#{login.login}">
                 <f:ajax execute="@form" render="@form"/>
               </h:commandButton>
             </h:form>

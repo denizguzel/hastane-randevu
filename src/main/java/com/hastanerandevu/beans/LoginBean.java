@@ -38,7 +38,7 @@ public class LoginBean {
   private boolean showCaptcha = false;
   private boolean verifyCaptcha = false;
   private boolean verifyLogin = false;
-  private String loggedUsername = "";
+  private String loggedUsername;
 
   public String getLoggedUsername() {
     return loggedUsername;
