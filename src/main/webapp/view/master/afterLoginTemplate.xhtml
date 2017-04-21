@@ -18,13 +18,11 @@
   <link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/css/scss/style.css"/>
 </h:head>
 
-<ui:include src="/view/common/afterLoginHeader.xhtml"/>
-
 <h:body>
+  <ui:include src="/view/common/afterLoginHeader.xhtml"/>
   <ui:include src="/view/common/sidebar.xhtml"/>
   <ui:insert name="content"/>
+  <ui:include src="/view/common/footer.xhtml"/>
+  <ui:insert name="js"/>
 </h:body>
-
-<ui:include src="/view/common/footer.xhtml"/>
-<ui:insert name="js"/>
 </html>
