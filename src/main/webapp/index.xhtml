@@ -1,9 +1,95 @@
 <ui:composition template="/view/master/beforeLoginTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
-  <ui:define name="title">Ana Sayfa</ui:define>
+  <ui:define name="title">e-Randevu - Ana Sayfa</ui:define>
 
   <ui:define name="content">
-    <div class="container">
-      asd
-    </div>
+    <!-- Swiper Slider -->
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="resources/img/slider1.jpg" class="img-fluid"/>
+          <div class="container">
+            <div class="caption">
+              <h2>e-Randevu Nedir?</h2>
+              <p>e-Randevu, kişisel sağlık bilgilerinizi yönetebileceğiniz, Türkiye'nin güvenilir kişisel sağlık kaydı sistemidir.</p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <img src="resources/img/slider2.jpg" class="img-fluid"/>
+          <div class="container">
+            <div class="caption">
+              <h2>e-Randevu ile Her Zaman Öndesiniz</h2>
+              <p>e-Randevu sisteminin hem sağlığınıza hem de vaktinize kattığı değerler ile her zaman öndesiniz.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Slider Pagination -->
+      <div class="swiper-pagination"></div>
+    </div><!-- #Swiper Slider -->
+
+    <section class="features">
+      <div class="container text-center">
+        <h3>e-Randevu Sistemi</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci commodi cum debitis dolore, exercitationem iusto laudantium pariatur, perspiciatis quae rerum, saepe sint temporibus! Dolor molestias porro repellendus unde vitae! Libero?</p>
+        <div class="row mt-5">
+          <div class="col-xl-4">
+            <i class="fa fa-stethoscope"></i>
+            <h4>Sağlığınız Hakkında Bilgiler</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, alias culpa cupiditate dolorem eius excepturi ipsum modi nam nisi nostrum nulla possimus quia quisquam velit veritatis? Amet atque eos fugiat.</p>
+          </div>
+          <div class="col-xl-4">
+            <i class="fa fa-heartbeat"></i>
+            <h4>Dünya Standartlarında Sağlık Servisi</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, alias culpa cupiditate dolorem eius excepturi ipsum modi nam nisi nostrum nulla possimus quia quisquam velit veritatis? Amet atque eos fugiat.</p>
+          </div>
+          <div class="col-xl-4">
+            <i class="fa fa-ambulance"></i>
+            <h4>7/24 Randevu Alabilme</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, alias culpa cupiditate dolorem eius excepturi ipsum modi nam nisi nostrum nulla possimus quia quisquam velit veritatis? Amet atque eos fugiat.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-4">
+            <a href="#{facesContext.externalContext.requestContextPath}/"><img src="resources/img/white-logo.png"/></a>
+          </div>
+          <div class="col-xl-4">
+            <h4>YARARLI LİNKLER</h4>
+            <ul class="footer-widget">
+              <li><a href="#">e-Devlet</a></li>
+              <li><a href="#">e-Devlet</a></li>
+              <li><a href="#">e-Devlet</a></li>
+            </ul>
+          </div>
+          <div class="col-xl-4">
+            <h4>İLETİŞİM</h4>
+            <ul class="footer-widget footer-widget-map">
+              <li>
+                <i class="fa fa-map-marker fa-fw"></i>
+                <span>T.C. Sağlık Bakanlığı</span>
+              </li>
+              <li>
+                <i class="fa fa-envelope fa-fw"></i>
+                <span>info@e-randevu.com</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="container">
+          <div class="copyright">Copyright © 2017 Tüm Hakları Saklıdır. e-Randevu Sistemi.</div>
+          <ul class="social-links">
+            <li><a href="javascript:void(0)"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="javascript:void(0)"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="javascript:void(0)"><i class="fa fa-youtube"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
   </ui:define>
 </ui:composition>

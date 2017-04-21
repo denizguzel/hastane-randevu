@@ -2,3 +2,72 @@
   background-color: #EDF1F5;
   margin-left: 230px;
 }
+
+.swiper-container {
+  .swiper-wrapper {
+    .swiper-slide {
+      .container {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+      .caption {
+        max-width: 650px;
+        h2 {
+          font-size: 60px;
+        }
+        p {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+  .swiper-pagination {
+    .swiper-pagination-bullet {
+      width: 10px;
+      height: 10px;
+    }
+    .swiper-pagination-bullet-active {
+      background-color: $main-color;
+    }
+  }
+}
+
+section.features {
+  padding: 50px 0;
+  h3 {
+    font-size: 36px;
+    font-weight: 700;
+    text-transform: uppercase;
+    &:after {
+      content: '';
+      display: block;
+      margin: 15px auto;
+      height: 4px;
+      width: 70px;
+      background-color: $main-color;
+      border-radius: 5px;
+    }
+  }
+  h4 {
+    font-size: 18px;
+    text-transform: uppercase;
+    margin: 20px 0;
+    height: 40px;
+  }
+  i {
+    color: $main-color;
+    font-size: 70px;
+  }
+  p {
+    color: #999;
+    margin: 10px 0;
+    line-height: 1.5;
+    font-size: 13px;
+  }
+}

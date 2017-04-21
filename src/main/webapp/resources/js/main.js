@@ -74,3 +74,8 @@ $(".datepicker").datetimepicker({
     nextCentury: 'Sonraki Yüzyıl'
   }
 });
+
+new Swiper('.swiper-container', {
+  pagination: '.swiper-pagination',
+  paginationClickable: true
+});
