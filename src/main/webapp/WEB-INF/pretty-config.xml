@@ -32,6 +32,11 @@
     <view-id value="/forgot.xhtml"/>
   </url-mapping>
 
+  <url-mapping id="suggestion">
+    <pattern value="/suggestion"/>
+    <view-id value="/suggestion.xhtml"/>
+  </url-mapping>
+
   <url-mapping id="view">
     <pattern value="/view"/>
     <view-id value="/view/dashboard.xhtml"/>
@@ -40,6 +45,11 @@
   <url-mapping id="appointment">
     <pattern value="/view/appointment"/>
     <view-id value="/view/appointment.xhtml"/>
+  </url-mapping>
+
+  <url-mapping id="profile">
+    <pattern value="/view/profile"/>
+    <view-id value="/view/profile.xhtml"/>
   </url-mapping>
 
 </pretty-config>

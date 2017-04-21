@@ -31,7 +31,7 @@
     <!-- Features -->
     <section class="features">
       <div class="container text-center">
-        <h3>e-Randevu Sistemi</h3>
+        <h3 class="border">e-Randevu Sistemi</h3>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci commodi cum debitis dolore, exercitationem iusto laudantium pariatur, perspiciatis quae rerum, saepe sint temporibus! Dolor molestias porro repellendus unde vitae! Libero?</p>
         <div class="row mt-5">
           <div class="col-xl-4">
@@ -54,11 +54,46 @@
     </section><!-- #Features -->
 
     <!-- Survey -->
-    <section class="news">
+    <section class="questions">
       <div class="container">
         <div class="row">
-          <div class="col-xl-8">asd</div>
+          <div class="col-xl-8">
+            <h3 class="border">Sıkça Sorulan Sorular</h3>
+            <div id="accordion">
+              <div class="card">
+                <div class="card-header">
+                  <h5><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Soru Başlığı 1</a></h5>
+                </div>
+                <div id="collapseOne" class="collapse show">
+                  <div class="card-block">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header">
+                  <h5><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Soru Başlığı 2</a></h5>
+                </div>
+                <div id="collapseTwo" class="collapse">
+                  <div class="card-block">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header">
+                  <h5><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Soru Başlığı 3</a></h5>
+                </div>
+                <div id="collapseThree" class="collapse">
+                  <div class="card-block">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="col-xl-4">
+            <h3 class="border">Anket</h3>
             <div class="survey">
               <div class="survey-header">Anket Başlığı</div>
               <div class="survey-block">
@@ -99,15 +134,15 @@
             <a href="#{facesContext.externalContext.requestContextPath}/"><img src="resources/img/white-logo.png"/></a>
           </div>
           <div class="col-xl-4">
-            <h4>YARARLI LİNKLER</h4>
+            <h4 class="border">YARARLI LİNKLER</h4>
             <ul class="footer-widget">
               <li><a href="#">e-Devlet</a></li>
               <li><a href="#">e-Devlet</a></li>
-              <li><a href="#">e-Devlet</a></li>
+              <li><a href="#{facesContext.externalContext.requestContextPath}/suggestion">Görüş ve Önerileriniz</a></li>
             </ul>
           </div>
           <div class="col-xl-4">
-            <h4>İLETİŞİM</h4>
+            <h4 class="border">İLETİŞİM</h4>
             <ul class="footer-widget footer-widget-map">
               <li>
                 <i class="fa fa-map-marker fa-fw"></i>

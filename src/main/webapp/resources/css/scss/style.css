@@ -1750,7 +1750,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   vertical-align: middle;
   user-select: none;
   border: 1px solid transparent;
-  padding: 0.3125rem 1rem;
+  padding: 0.5rem 1rem;
   font-size: 14px;
   border-radius: 0.25rem;
   transition: all 0.2s ease-in-out; }
@@ -2029,7 +2029,7 @@ fieldset[disabled] a.btn {
       text-decoration: none; }
 
 .btn-lg, .btn-group-lg > .btn {
-  padding: 0.5rem 1.5rem;
+  padding: 0.75rem 1.5rem;
   font-size: 14px;
   border-radius: 0.3rem; }
 
@@ -6063,6 +6063,16 @@ button, select, input.btn {
 .g-recaptcha {
   margin-bottom: 10px; }
 
+.border:after {
+  content: '';
+  display: block;
+  height: 4px;
+  width: 50px;
+  border-radius: 5px;
+  background-color: #19E2BA;
+  margin-top: 10px;
+}
+
 .custom-radio {
   align-items: center;
   margin: 0;
@@ -6089,8 +6099,23 @@ button, select, input.btn {
   color: #2D2D2D;
 }
 
+.input-disabled {
+  display: flex;
+  align-items: center;
+  padding-left: 10.5px;
+  height: 40px;
+  background-color: #ddd;
+  color: #000;
+  border-radius: 4px;
+}
+
 .card .card-header {
-  font-size: 20px; }
+  font-size: 24px;
+}
+
+.card .card-block .form-group .form-control {
+  height: 40px;
+}
 
 .card .card-block .bootstrap-select .btn {
   border: 1px solid #ddd;
@@ -6126,6 +6151,10 @@ button, select, input.btn {
       background-color: #fff;
       height: 40px;
       color: #aaa; }
+
+.card-form .card-block .form-group textarea.form-control {
+  height: initial;
+}
     .card-form .card-block .form-group ::placeholder {
       color: #aaa;
       font-weight: 300; }
@@ -6138,19 +6167,8 @@ button, select, input.btn {
     .card-form .card-block .bootstrap-select .btn {
       color: #aaa; }
     .card-form .card-block .card-block-header {
-      position: relative;
-      padding-bottom: 10px;
       margin-bottom: 10px;
-      border-bottom: 1px solid #ddd; }
-      .card-form .card-block .card-block-header:before {
-        content: '';
-        position: absolute;
-        bottom: -1px;
-        left: 0;
-        width: 50px;
-        height: 2px;
-        background-color: #19E2BA;
-      }
+    }
 
 .card-unknown {
   margin-top: 50px; }
@@ -6283,8 +6301,13 @@ nav.sidebar {
     }
 
 .page-wrapper {
+  height: 100vh;
   background-color: #EDF1F5;
   margin-left: 230px; }
+
+.page-wrapper .card .card-block .card-block-header {
+  margin-bottom: 15px;
+}
 
 .swiper-container .swiper-wrapper .swiper-slide .container {
   position: absolute;
@@ -6329,13 +6352,7 @@ section.features h3 {
 }
 
 section.features h3:after {
-  content: '';
-  display: block;
   margin: 15px auto;
-  height: 4px;
-  width: 70px;
-  background-color: #19E2BA;
-  border-radius: 5px;
 }
 
 section.features h4 {
@@ -6357,9 +6374,36 @@ section.features p {
   font-size: 13px;
 }
 
-section.news {
+section.questions {
   background-color: #f5f5f5;
   padding: 30px 0;
+}
+
+section.questions h3 {
+  margin-bottom: 15px;
+}
+
+section.questions #accordion {
+  border-bottom: 4px solid #ddd;
+}
+
+section.questions #accordion .card .card-header {
+  border-bottom: 1px solid #ddd;
+}
+
+section.questions #accordion .card .card-header h5 a {
+  display: flex;
+}
+
+section.questions #accordion .card .card-header h5 a:after {
+  content: '\f0d8';
+  font-family: 'FontAwesome';
+  color: #c0c9cf;
+  margin-left: auto;
+}
+
+section.questions #accordion .card .card-header h5 a.collapsed:after {
+  content: '\f0d7';
 }
 
 footer {
@@ -6371,16 +6415,6 @@ footer h4 {
   font-size: 24px;
   color: #fff;
   margin-bottom: 40px;
-}
-
-footer h4:after {
-  content: '';
-  display: block;
-  height: 4px;
-  width: 40px;
-  border-radius: 5px;
-  background-color: #19E2BA;
-  margin-top: 10px;
 }
 
 footer .footer-widget li {

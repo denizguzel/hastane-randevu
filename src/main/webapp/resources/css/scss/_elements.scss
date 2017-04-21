@@ -76,6 +76,18 @@
   margin-bottom: 10px;
 }
 
+.border {
+  &:after {
+    content: '';
+    display: block;
+    height: 4px;
+    width: 50px;
+    border-radius: 5px;
+    background-color: #19E2BA;
+    margin-top: 10px;
+  }
+}
+
 .custom-radio {
   align-items: center;
   margin: 0;
@@ -99,11 +111,26 @@
   }
 }
 
+.input-disabled {
+  display: flex;
+  align-items: center;
+  padding-left: 10.5px;
+  height: 40px;
+  background-color: #ddd;
+  color: #000;
+  border-radius: 4px;
+}
+
 .card {
   .card-header {
-    font-size: 20px;
+    font-size: 24px;
   }
   .card-block {
+    .form-group {
+      .form-control {
+        height: 40px;
+      }
+    }
     .bootstrap-select {
       .btn {
         border: 1px solid #ddd;
@@ -152,6 +179,9 @@
         height: 40px;
         color: $grey;
       }
+      textarea.form-control {
+        height: initial;
+      }
       ::placeholder {
         color: $grey;
         font-weight: 300;
@@ -172,19 +202,7 @@
       }
     }
     .card-block-header {
-      position: relative;
-      padding-bottom: 10px;
       margin-bottom: 10px;
-      border-bottom: 1px solid #ddd;
-      &:before {
-        content: '';
-        position: absolute;
-        bottom: -1px;
-        left: 0;
-        width: 50px;
-        height: 2px;
-        background-color: $main-color;
-      }
     }
   }
 }

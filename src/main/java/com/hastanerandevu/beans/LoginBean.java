@@ -44,10 +44,6 @@ public class LoginBean {
     return loggedUsername;
   }
 
-  public void setLoggedUsername(String loggedUsername) {
-    this.loggedUsername = loggedUsername;
-  }
-
   public boolean isVerifyLogin() {
     return verifyLogin;
   }
@@ -102,6 +98,17 @@ public class LoginBean {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Kayıt Başarısız", null));
         LOG.info(e.getMessage());
       }
+    }
+  }
+
+  public void patientUpdate() {
+    try {
+      patientService.update(patientModel);
+      loggedUsername = patientModel.getFirstName() + " " + patientModel.getLastName();
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Güncelleme Başarılı", null));
+    } catch(Exception e) {
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Güncelleme Başarısız", null));
+      LOG.info(e.getMessage());
     }
   }
 
