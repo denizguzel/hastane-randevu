@@ -3,7 +3,7 @@
 // Copy variables from `_variables.scss` to this file to override default values
 // without modifying source files.
 
-// Colors (_variables.scss)
+// Colors
 $main-color: #19E2BA;
 $white: #fff;
 $black: #000;
@@ -14,7 +14,7 @@ $blue: #2196F3;
 $cyan: #00BCD4;
 $grey: #aaa;
 
-// Body (_variables.scss)
+// Body
 $body-color: $black;
 $font-family-sans-serif: 'Poppins', sans-serif;
 $font-family-base: $font-family-sans-serif;
@@ -22,14 +22,14 @@ $font-size-base: 14px;
 $font-size-lg: $font-size-base;
 $font-size-sm: 12px;
 
-// Reassign color vars to semantic color scheme (_variables.scss)
+// Reassign color vars to semantic color scheme
 $brand-primary: $blue;
 $brand-success: $green;
 $brand-info: $cyan;
 $brand-warning: $orange;
 $brand-danger: $red;
 
-// Buttons (_buttons.scss)
+// Buttons
 $btn-line-height: 1.25;
 $btn-font-weight: $font-weight-normal;
 $btn-box-shadow: none;
@@ -54,13 +54,13 @@ $btn-warning-border: $btn-warning-bg;
 $btn-danger-bg: $brand-danger;
 $btn-danger-border: $btn-danger-bg;
 
-// Links (_reboot.scss)
+// Links
 $link-color: #c0c9cf;
 $link-decoration: none;
 $link-hover-color: darken($link-color, 15%);
 $link-hover-decoration: none;
 
-// Forms (_forms.scss)
+// Forms
 $input-bg: $white;
 $input-color: #444;
 $input-border-color: darken(#ddd, 10%);
@@ -72,10 +72,10 @@ $input-color-placeholder: $white;
 $input-color-focus: $input-color;
 $input-line-height: 2;
 
-// Navbar (_navbar.scss)
+// Navbar
 $navbar-border-radius: 0;
 
-// Cards (_cards.scss)
+// Cards
 $card-bg: $input-bg;
 $card-border-color: $input-border-color;
 $card-cap-bg: $input-bg;
@@ -84,6 +84,16 @@ $card-border-radius: 0;
 $card-spacer-x: 15px;
 $card-spacer-y: 15px;
 
-// Input Group (_input-group.scss)
+// Input Group
 $input-group-addon-bg: $input-bg;
 $input-group-addon-border-color: $input-border-color;
+
+// Custom Controls
+$custom-control-indicator-box-shadow: none;
+$custom-control-focus-indicator-box-shadow: none;
+$custom-checkbox-radius: 0;
+$custom-control-indicator-size: 1.25rem;
+$custom-checkbox-checked-icon: none;
+$custom-radio-checked-icon: none;
+$custom-control-gutter: 2rem;
+$custom-control-active-indicator-bg: #ddd;

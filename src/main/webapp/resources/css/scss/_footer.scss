@@ -23,6 +23,12 @@ footer {
       &:last-child {
         margin-bottom: 0;
       }
+      &:before {
+        content: '\f101';
+        font-family: 'FontAwesome';
+        color: $main-color;
+        margin-right: 10px;
+      }
       a {
         color: #fff;
         &:hover {
@@ -43,6 +49,11 @@ footer {
     background: url(/resources/img/map.png) center center no-repeat;
     height: 188px;
     background-size: contain;
+    li {
+      &:before {
+        content: none;
+      }
+    }
   }
   .footer-bottom {
     margin-top: 30px;

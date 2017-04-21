@@ -76,6 +76,29 @@
   margin-bottom: 10px;
 }
 
+.custom-radio {
+  align-items: center;
+  margin: 0;
+  .custom-control-indicator {
+    background-color: #ddd;
+  }
+  .custom-control-description {
+    font-size: 12px;
+  }
+}
+
+.custom-control-input:checked ~ .custom-control-indicator {
+  background-color: #ddd;
+  &:before {
+    content: '\f111';
+    position: absolute;
+    top: 0;
+    left: 4.5px;
+    font-family: 'FontAwesome';
+    color: #2D2D2D;
+  }
+}
+
 .card {
   .card-header {
     font-size: 20px;
@@ -176,5 +199,20 @@
       margin-right: 10px;
       font-size: 30px;
     }
+  }
+}
+
+.survey {
+  background-color: #fff;
+  border-radius: 4px;
+  border-bottom: 4px solid #ccc;
+  .survey-header {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    font-size: 18px;
+  }
+  .survey-block {
+    padding: 10px;
   }
 }
