@@ -598,3 +598,135 @@ Insert into HOSPITAL.T_DOCTOR
     12, 'EXPERT', 0);
 COMMIT;
 
+
+
+Insert into HOSPITAL.T_ASKED_QUESTIONS
+   (PK, QUESTION, ANSWER, CREATION_TIME, MODIFIED_TIME,
+    IS_ACTIVE)
+ Values
+   (100, 'Randevu almak ücretli midir?', 'Hayır, randevu almak ücretsiz bir işlemdir.', TO_TIMESTAMP('4/22/2017 1:03:28 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'), TO_TIMESTAMP('4/22/2017 1:03:28 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'),
+    '1');
+Insert into HOSPITAL.T_ASKED_QUESTIONS
+   (PK, QUESTION, ANSWER, CREATION_TIME, MODIFIED_TIME,
+    IS_ACTIVE)
+ Values
+   (101, 'Alınan randevu nasıl iptal edilir?', 'Giriş yaptıktan sonra randevularım sayfasından yada 400 numaralı çağrı merkezimi arayarak iptal edebilirsiniz.', TO_TIMESTAMP('4/22/2017 1:05:33 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'), TO_TIMESTAMP('4/22/2017 1:05:33 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'),
+    '1');
+Insert into HOSPITAL.T_ASKED_QUESTIONS
+   (PK, QUESTION, ANSWER, CREATION_TIME, MODIFIED_TIME,
+    IS_ACTIVE)
+ Values
+   (102, 'Randevu nasıl alınır?', 'Kayıt olup, giriş yaptıktan sonra randevu al sekmesinden randevunuzu alabilirsiniz.', TO_TIMESTAMP('4/22/2017 1:07:24 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'), TO_TIMESTAMP('4/22/2017 1:07:24 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'),
+    '1');
+COMMIT;
+
+
+
+Insert into HOSPITAL.T_SURVEY
+   (PK, SURVEY_DESCRIPTION, CREATION_TIME, MODIFIED_TIME, IS_ACTIVE,
+    EXPIRATION_TIME)
+ Values
+   (100, 'Randevu Sistemi Hakkında Genel Anket', TO_TIMESTAMP('4/22/2017 1:09:35 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'), TO_TIMESTAMP('4/22/2017 1:09:35 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'), '1',
+    TO_TIMESTAMP('6/25/2017 1:09:35 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'));
+COMMIT;
+
+
+
+Insert into HOSPITAL.T_QUESTION
+   (PK, QUESTION_TEXT, FK_SURVEY, CREATION_TIME, MODIFIED_TIME,
+    IS_ACTIVE, SORT_ORDER_NO)
+ Values
+   (100, 'Randevu sistemini beğeniyor musunuz?', 100, TO_TIMESTAMP('4/22/2017 1:12:24 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'), TO_TIMESTAMP('4/22/2017 1:12:24 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'),
+    '1', 1);
+Insert into HOSPITAL.T_QUESTION
+   (PK, QUESTION_TEXT, FK_SURVEY, CREATION_TIME, MODIFIED_TIME,
+    IS_ACTIVE, SORT_ORDER_NO)
+ Values
+   (101, 'Rahat bir şekilde randevunuzu alabiliyor musunuz?', 100, TO_TIMESTAMP('4/22/2017 1:13:06 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'), TO_TIMESTAMP('4/22/2017 1:13:06 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'),
+    '1', 2);
+Insert into HOSPITAL.T_QUESTION
+   (PK, QUESTION_TEXT, FK_SURVEY, CREATION_TIME, MODIFIED_TIME,
+    IS_ACTIVE, SORT_ORDER_NO)
+ Values
+   (102, 'Randevu sistemini içerik bakımından yeterli buluyor musunuz?', 100, TO_TIMESTAMP('4/22/2017 1:13:48 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'), TO_TIMESTAMP('4/22/2017 1:13:48 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'),
+    '1', 3);
+COMMIT;
+
+
+
+Insert into HOSPITAL.T_OPTION
+   (PK, OPTION_TEXT, COUNT, CREATION_TIME, MODIFIED_TIME,
+    IS_ACTIVE, SORT_ORDER_NO, FK_QUESTION)
+ Values
+   (101, 'Kesinlikle hayır', 0, TO_TIMESTAMP('4/22/2017 1:15:12 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'), TO_TIMESTAMP('4/22/2017 1:15:12 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'),
+    '1', 4, 100);
+Insert into HOSPITAL.T_OPTION
+   (PK, OPTION_TEXT, COUNT, CREATION_TIME, MODIFIED_TIME,
+    IS_ACTIVE, SORT_ORDER_NO, FK_QUESTION)
+ Values
+   (102, 'Hayır', 0, TO_TIMESTAMP('4/22/2017 1:15:18 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'), TO_TIMESTAMP('4/22/2017 1:15:18 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'),
+    '1', 3, 100);
+Insert into HOSPITAL.T_OPTION
+   (PK, OPTION_TEXT, COUNT, CREATION_TIME, MODIFIED_TIME,
+    IS_ACTIVE, SORT_ORDER_NO, FK_QUESTION)
+ Values
+   (103, 'Evet', 0, TO_TIMESTAMP('4/22/2017 1:15:21 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'), TO_TIMESTAMP('4/22/2017 1:15:21 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'),
+    '1', 2, 100);
+Insert into HOSPITAL.T_OPTION
+   (PK, OPTION_TEXT, COUNT, CREATION_TIME, MODIFIED_TIME,
+    IS_ACTIVE, SORT_ORDER_NO, FK_QUESTION)
+ Values
+   (104, 'Kesinlikle evet', 0, TO_TIMESTAMP('4/22/2017 1:15:24 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'), TO_TIMESTAMP('4/22/2017 1:15:24 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'),
+    '1', 1, 100);
+Insert into HOSPITAL.T_OPTION
+   (PK, OPTION_TEXT, COUNT, CREATION_TIME, MODIFIED_TIME,
+    IS_ACTIVE, SORT_ORDER_NO, FK_QUESTION)
+ Values
+   (105, 'Kesinlikle hayır', 0, TO_TIMESTAMP('4/22/2017 1:15:28 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'), TO_TIMESTAMP('4/22/2017 1:15:28 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'),
+    '1', 4, 101);
+Insert into HOSPITAL.T_OPTION
+   (PK, OPTION_TEXT, COUNT, CREATION_TIME, MODIFIED_TIME,
+    IS_ACTIVE, SORT_ORDER_NO, FK_QUESTION)
+ Values
+   (106, 'Hayır', 0, TO_TIMESTAMP('4/22/2017 1:15:32 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'), TO_TIMESTAMP('4/22/2017 1:15:32 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'),
+    '1', 3, 101);
+Insert into HOSPITAL.T_OPTION
+   (PK, OPTION_TEXT, COUNT, CREATION_TIME, MODIFIED_TIME,
+    IS_ACTIVE, SORT_ORDER_NO, FK_QUESTION)
+ Values
+   (107, 'Evet', 0, TO_TIMESTAMP('4/22/2017 1:15:35 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'), TO_TIMESTAMP('4/22/2017 1:15:35 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'),
+    '1', 2, 101);
+Insert into HOSPITAL.T_OPTION
+   (PK, OPTION_TEXT, COUNT, CREATION_TIME, MODIFIED_TIME,
+    IS_ACTIVE, SORT_ORDER_NO, FK_QUESTION)
+ Values
+   (108, 'Kesinlikle evet', 0, TO_TIMESTAMP('4/22/2017 1:15:38 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'), TO_TIMESTAMP('4/22/2017 1:15:38 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'),
+    '1', 1, 101);
+Insert into HOSPITAL.T_OPTION
+   (PK, OPTION_TEXT, COUNT, CREATION_TIME, MODIFIED_TIME,
+    IS_ACTIVE, SORT_ORDER_NO, FK_QUESTION)
+ Values
+   (109, 'Kesinlikle hayır', 0, TO_TIMESTAMP('4/22/2017 1:15:41 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'), TO_TIMESTAMP('4/22/2017 1:15:41 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'),
+    '1', 4, 102);
+Insert into HOSPITAL.T_OPTION
+   (PK, OPTION_TEXT, COUNT, CREATION_TIME, MODIFIED_TIME,
+    IS_ACTIVE, SORT_ORDER_NO, FK_QUESTION)
+ Values
+   (110, 'Hayır', 0, TO_TIMESTAMP('4/22/2017 1:15:44 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'), TO_TIMESTAMP('4/22/2017 1:15:44 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'),
+    '1', 3, 102);
+Insert into HOSPITAL.T_OPTION
+   (PK, OPTION_TEXT, COUNT, CREATION_TIME, MODIFIED_TIME,
+    IS_ACTIVE, SORT_ORDER_NO, FK_QUESTION)
+ Values
+   (111, 'Evet', 0, TO_TIMESTAMP('4/22/2017 1:15:46 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'), TO_TIMESTAMP('4/22/2017 1:15:46 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'),
+    '1', 2, 102);
+Insert into HOSPITAL.T_OPTION
+   (PK, OPTION_TEXT, COUNT, CREATION_TIME, MODIFIED_TIME,
+    IS_ACTIVE, SORT_ORDER_NO, FK_QUESTION)
+ Values
+   (112, 'Kesinlikle evet', 0, TO_TIMESTAMP('4/22/2017 1:15:49 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'), TO_TIMESTAMP('4/22/2017 1:15:49 PM','fmMMfm/fmDDfm/YYYY fmHH12fm:MI:SS AM'),
+    '1', 1, 102);
+COMMIT;
+
+
+

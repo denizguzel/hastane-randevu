@@ -1,5 +1,6 @@
 package com.hastanerandevu.service.impl;
 
+import com.hastanerandevu.converter.Encryptor;
 import com.hastanerandevu.dao.impl.PatientDaoImpl;
 import com.hastanerandevu.model.*;
 import com.hastanerandevu.service.BaseService;

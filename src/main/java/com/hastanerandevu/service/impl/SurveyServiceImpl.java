@@ -1,6 +1,7 @@
 package com.hastanerandevu.service.impl;
 
 import com.hastanerandevu.dao.impl.SurveyDaoImpl;
+import com.hastanerandevu.model.QuestionModel;
 import com.hastanerandevu.model.SurveyModel;
 import com.hastanerandevu.service.BaseService;
 
@@ -36,5 +37,9 @@ public class SurveyServiceImpl implements BaseService<SurveyModel> {
 
   public List<SurveyModel> getSurveys() {
     return surveyDao.getSurveys();
+  }
+
+  public List<QuestionModel> getQuestionsBySurvey(SurveyModel surveyModel){
+    return surveyDao.getQuestionsBySurvey(surveyModel);
   }
 }

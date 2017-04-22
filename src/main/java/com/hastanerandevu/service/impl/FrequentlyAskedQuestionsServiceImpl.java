@@ -33,4 +33,8 @@ public class FrequentlyAskedQuestionsServiceImpl implements BaseService<Frequent
   public List<FrequentlyAskedQuestionsModel> findAll() {
     return frequentlyAskedQuestionsDao.findAll();
   }
+
+  public List<FrequentlyAskedQuestionsModel> getAllAskedQuestions(){
+    return frequentlyAskedQuestionsDao.getAllAskedQuestions();
+  }
 }
