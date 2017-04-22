@@ -32,11 +32,6 @@
     <view-id value="/forgot.xhtml"/>
   </url-mapping>
 
-  <url-mapping id="suggestion">
-    <pattern value="/suggestion"/>
-    <view-id value="/suggestion.xhtml"/>
-  </url-mapping>
-
   <url-mapping id="view">
     <pattern value="/view"/>
     <view-id value="/view/dashboard.xhtml"/>
