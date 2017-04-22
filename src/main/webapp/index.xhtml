@@ -60,36 +60,18 @@
           <div class="col-xl-8">
             <h3 class="border">Sıkça Sorulan Sorular</h3>
             <div id="accordion">
-              <div class="card">
-                <div class="card-header">
-                  <h5><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Soru Başlığı 1</a></h5>
-                </div>
-                <div id="collapseOne" class="collapse show">
-                  <div class="card-block">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+              <ui:repeat value="#{home.askedQuestions}" var="askedQuestion" varStatus="myVarStatus">
+                <div class="card">
+                  <div class="card-header">
+                    <h5><a data-toggle="collapse" data-parent="#accordion" href="#collapse#{myVarStatus.index}">#{askedQuestion.question}</a></h5>
+                  </div>
+                  <div id="collapse#{myVarStatus.index}" class="collapse show">
+                    <div class="card-block">
+                      #{askedQuestion.answer}
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="card">
-                <div class="card-header">
-                  <h5><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Soru Başlığı 2</a></h5>
-                </div>
-                <div id="collapseTwo" class="collapse">
-                  <div class="card-block">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header">
-                  <h5><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Soru Başlığı 3</a></h5>
-                </div>
-                <div id="collapseThree" class="collapse">
-                  <div class="card-block">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                  </div>
-                </div>
-              </div>
+              </ui:repeat>
             </div>
           </div>
           <div class="col-xl-4">
