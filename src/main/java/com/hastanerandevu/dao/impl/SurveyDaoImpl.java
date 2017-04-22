@@ -19,6 +19,8 @@ public class SurveyDaoImpl extends BaseDaoImpl<SurveyModel> {
     Query query = getEntitymanager().createQuery("SELECT e FROM QuestionModel e WHERE e.survey = :SURVEY_MODEL " +
       "ORDER BY e.creationTime DESC");
 
+    query.setParameter("SURVEY_MODEL",surveyModel);
+
     return query.getResultList();
   }
 }
