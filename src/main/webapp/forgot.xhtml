@@ -17,9 +17,9 @@
                   </h:inputText>
                 </div>
                 <h:message id="emailMessage" for="email" errorClass="error"/>
-                <h:messages globalOnly="true" errorClass="error" infoClass="info"/>
+                <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
                 <h:commandButton value="Gönder" styleClass="btn btn-success d-block m-auto" action="#{passwordReset.passwordReset}">
-                  <f:ajax execute="@form" render="@form"/>
+                  <f:ajax execute="@form" render="@form" onevent="ajaxFunction"/>
                 </h:commandButton>
               </h:form>
             </div>

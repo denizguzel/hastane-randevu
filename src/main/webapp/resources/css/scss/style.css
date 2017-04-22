@@ -6010,14 +6010,12 @@ button, select, input.btn {
   cursor: pointer; }
 
 .error {
-  display: block;
   color: #F44336;
-  margin: 3px 0; }
+}
 
 .info {
-  display: block;
   color: #009688;
-  margin: 3px 0; }
+}
 
 .btn-success {
   background-color: #009688; }
@@ -6063,6 +6061,10 @@ button, select, input.btn {
 .g-recaptcha {
   margin-bottom: 10px; }
 
+.global-message {
+  display: none;
+}
+
 .border:after {
   content: '';
   display: block;
@@ -6107,6 +6109,29 @@ button, select, input.btn {
   background-color: #ddd;
   color: #000;
   border-radius: 4px;
+}
+
+.toast {
+  padding: 15px 20px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: inline-block;
+  position: fixed;
+  top: -300px;
+  right: 15px;
+  opacity: 0;
+  transition: all 0.4s ease-out;
+  z-index: 5;
+}
+
+.toast.error {
+  background-color: rgba(244, 67, 54, 0.6);
+  color: #fff;
+}
+
+.toast.info {
+  background-color: rgba(139, 195, 74, 0.6);
+  color: #fff;
 }
 
 .card .card-header {

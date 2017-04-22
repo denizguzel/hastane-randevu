@@ -143,8 +143,10 @@
                   </div>
                 </div>
               </div>
-              <h:commandButton value="Güncelle" styleClass="btn btn-success" action="#{login.patientUpdate}"/>
-              <h:messages globalOnly="true" errorClass="error" infoClass="info"/>
+              <h:commandButton value="Güncelle" styleClass="btn btn-success" action="#{login.patientUpdate}">
+                <f:ajax execute="@form" render="@form" onevent="ajaxFunction"/>
+              </h:commandButton>
+              <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
             </h:form>
           </div>
         </div>

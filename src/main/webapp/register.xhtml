@@ -147,9 +147,9 @@
               </div>
             </div>
             <h:commandButton value="Kayıt Ol" styleClass="btn btn-success" action="#{login.patientCreate}">
-              <f:ajax execute="@form" render="@form" onevent="selectPicker"/>
+              <f:ajax execute="@form" render="@form" onevent="ajaxFunction"/>
             </h:commandButton>
-            <h:messages globalOnly="true" errorClass="error" infoClass="info"/>
+            <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
           </h:form>
         </div>
       </div>
