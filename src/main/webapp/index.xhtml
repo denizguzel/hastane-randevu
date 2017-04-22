@@ -60,14 +60,14 @@
           <div class="col-xl-8">
             <h3 class="border">Sıkça Sorulan Sorular</h3>
             <div id="accordion">
-              <ui:repeat value="#{home.askedQuestions}" var="askedQuestion" varStatus="myVarStatus">
+              <ui:repeat value="#{home.askedQuestions}" var="askedQuestion" varStatus="askedQuestionStatus">
                 <div class="card">
                   <div class="card-header">
-                    <h5><a data-toggle="collapse" data-parent="#accordion" href="#collapse#{myVarStatus.index}">#{askedQuestion.question}</a></h5>
+                    <h5><a data-toggle="collapse" data-parent="#accordion" href="#collapse#{askedQuestionStatus.index}">#{askedQuestion.question}</a></h5>
                   </div>
-                  <div id="collapse#{myVarStatus.index}" class="collapse #{myVarStatus.index == 0 ? 'show' : ''}">
+                  <div id="collapse#{askedQuestionStatus.index}" class="collapse #{askedQuestionStatus.index == 0 ? 'show' : ''}">
                     <div class="card-block">
-                      #{askedQuestion.answer}
+                      ${askedQuestion.answer}
                     </div>
                   </div>
                 </div>
@@ -76,21 +76,23 @@
           </div>
           <div class="col-xl-4">
             <h3 class="border">Anket</h3>
-            <div class="survey">
-              <div class="survey-header">Anket Başlığı</div>
-              <div class="survey-block">
-                <ui:repeat id="items" value="#{pagebean.pageList}" var="item">
-                  <div class="form-group">
-                    <label class="custom-control custom-radio">
-                      <input id="#{item.link}" name="radio" value="#{item.link}" type="radio" class="custom-control-input"/>
-                      <span class="custom-control-indicator"></span>
-                      <span class="custom-control-description">${item.linkName}</span>
-                    </label>
-                  </div>
-                </ui:repeat>
-                <h:commandButton styleClass="btn btn-success d-block m-auto" value="Gönder"/>
+            <ui:repeat value="#{home.surveys}" var="surveys" varStatus="surveyStatus">
+              <div class="survey">
+                <div class="survey-header">${surveys.surveyDescription}</div>
+                <div class="survey-block">
+                  <ui:repeat value="#{home.surveyQuestions}" var="surveyQuestions" varStatus="surveyQuestionsStatus">
+                    <div class="form-group">
+                      <label class="custom-control custom-radio">
+                        <input id="#{surveyQuestionsStatus.index}" name="#{surveys.pk}" value="#{surveyQuestions.pk}" type="radio" class="custom-control-input" checked="#{surveyQuestionsStatus.index == 0 ? 'checked' : ''}"/>
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">${surveyQuestions.questionText}</span>
+                      </label>
+                    </div>
+                  </ui:repeat>
+                  <h:commandButton styleClass="btn btn-success d-block m-auto" value="Gönder"/>
+                </div>
               </div>
-            </div>
+            </ui:repeat>
           </div>
         </div>
       </div>
