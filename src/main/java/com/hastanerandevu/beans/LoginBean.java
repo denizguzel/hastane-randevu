@@ -101,14 +101,18 @@ public class LoginBean {
     }
   }
 
-  public void patientUpdate() {
+  public String patientUpdate() {
     try {
       patientService.update(patientModel);
       loggedUsername = patientModel.getFirstName() + " " + patientModel.getLastName();
+
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Güncelleme Başarılı", null));
+      FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+      return "profile.xhtml?faces-redirect=true";
     } catch(Exception e) {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Güncelleme Başarısız", null));
       LOG.info(e.getMessage());
+      return "profile.xhtml?faces-redirect=true";
     }
   }
 

@@ -6117,6 +6117,10 @@ button, select, input.btn {
   height: 40px;
 }
 
+.card .card-block .form-group ::placeholder {
+  color: #aaa;
+}
+
 .card .card-block .bootstrap-select .btn {
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -6247,7 +6251,8 @@ button, select, input.btn {
     margin-left: auto;
     align-items: center; }
     .navbar .navbar-collapse .navbar-nav .nav-item {
-      margin-right: 10px; }
+      margin-left: 10px;
+    }
       .navbar .navbar-collapse .navbar-nav .nav-item .nav-link {
         display: inherit;
         align-items: center;

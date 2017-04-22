@@ -130,6 +130,9 @@
       .form-control {
         height: 40px;
       }
+      ::placeholder {
+        color: $grey;
+      }
     }
     .bootstrap-select {
       .btn {
