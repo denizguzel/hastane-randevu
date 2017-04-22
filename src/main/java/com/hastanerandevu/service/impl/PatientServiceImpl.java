@@ -23,12 +23,6 @@ public class PatientServiceImpl implements BaseService<PatientModel> {
 
   @Override
   public void update(PatientModel patientModel) {
-    if (patientModel.getPassword().equals("") || patientModel.getPassword().equals(null)){
-      patientModel.setPassword(this.find(patientModel.getPk()).getPassword());
-    }
-    else{
-      patientModel.setPassword(Encryptor.encryptPassword(patientModel.getPassword()));
-    }
     patientDao.update(patientModel);
   }
 

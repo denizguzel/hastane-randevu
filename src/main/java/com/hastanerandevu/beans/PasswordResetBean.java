@@ -65,7 +65,7 @@ public class PasswordResetBean {
     PatientModel patientModel = patientService.getUserByEmail(getEmail());
     if(urlParam.equals(encryptedSalt) && patientService.changingPasswordIsAvailable(patientModel)) {
 
-      patientModel.setPassword(getPassword());
+      patientModel.setPassword(Encryptor.encryptPassword(getPassword()));
       patientService.update(patientModel);
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Şifreniz değiştirildi.", null));
 
