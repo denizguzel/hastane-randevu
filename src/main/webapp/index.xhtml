@@ -3,7 +3,7 @@
 
   <ui:define name="content">
     <!-- Swiper Slider -->
-    <div class="swiper-container">
+    <div id="swiper-main" class="swiper-container">
       <div class="swiper-wrapper">
         <div class="swiper-slide">
           <img src="resources/img/slider1.jpg" class="img-fluid"/>
@@ -76,23 +76,30 @@
           </div>
           <div class="col-xl-4">
             <h3 class="border">Anket</h3>
-            <ui:repeat value="#{home.surveys}" var="surveys" varStatus="surveyStatus">
-              <div class="survey">
-                <div class="survey-header">${surveys.surveyQuestion}</div>
-                <div class="survey-block">
-                  <ui:repeat value="#{home.options}" var="options" varStatus="optionsStatus">
-                    <div class="form-group">
-                      <label class="custom-control custom-radio">
-                        <input id="#{optionsStatus.index}" name="#{surveys.pk}" value="#{options.pk}" type="radio" class="custom-control-input" checked="#{optionsStatus.index == 0 ? 'checked' : ''}"/>
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">${options.optionText}</span>
-                      </label>
+            <!-- Swiper Slider -->
+            <div id="swiper-survey" class="swiper-container">
+              <div class="swiper-wrapper">
+                <ui:repeat value="#{home.surveys}" var="surveys" varStatus="surveyStatus">
+                  <div class="swiper-slide">
+                    <div class="survey">
+                      <div class="survey-header">${surveys.surveyQuestion}</div>
+                      <div class="survey-block">
+                        <ui:repeat value="#{home.options}" var="options" varStatus="optionsStatus">
+                          <div class="form-group">
+                            <label class="custom-control custom-radio">
+                              <input id="#{optionsStatus.index}" name="#{surveys.pk}" value="#{options.pk}" type="radio" class="custom-control-input" checked="#{optionsStatus.index == 0 ? 'checked' : ''}"/>
+                              <span class="custom-control-indicator"></span>
+                              <span class="custom-control-description">${options.optionText}</span>
+                            </label>
+                          </div>
+                        </ui:repeat>
+                        <h:commandButton styleClass="btn btn-success d-block m-auto" value="Gönder"/>
+                      </div>
                     </div>
-                  </ui:repeat>
-                  <h:commandButton styleClass="btn btn-success d-block m-auto" value="Gönder"/>
-                </div>
+                  </div>
+                </ui:repeat>
               </div>
-            </ui:repeat>
+            </div><!-- #Swiper Slider -->
           </div>
         </div>
       </div>

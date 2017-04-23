@@ -1,41 +1,4 @@
-var userId = $("#userId").text();
-var restUrl = "http://localhost:8080/api/patient/" + userId;
-var cityUrl = "http://localhost:8080/api/city/cityname";
-
-
-$("#all-data").click(function () {
-  jQuery.ajax({
-    type: "GET",
-    url: restUrl,
-    dataType: "json",
-    success: function (data) {
-      var all = "";
-      $.each(data, function (index, value) {
-        all += '<li><span class="text-success">' + index + ': </span>' + value + '</li>';
-      });
-      $('#allData').append('<ul>' + all + '</ul>');
-    }
-  });
-
-});
-
-$("#filtered-data").click(function () {
-  jQuery.ajax({
-    type: "GET",
-    url: restUrl,
-    dataType: "json",
-    success: function (data) {
-      var filter = "";
-      $.each(data, function () {
-        filter = '<li><span class="text-success">PK: </span>' + data.pk + '</li>' +
-          '<li><span class="text-success">İsim: </span>' + data.firstName + '</li>';
-      });
-      $('#filteredData').append('<ul>' + filter + '</ul>');
-    }
-  });
-
-});
-
+// Datepicker
 $(".datepicker").datetimepicker({
   useCurrent: false,
   locale: "tr",
@@ -71,10 +34,23 @@ $(".datepicker").datetimepicker({
   }
 });
 
-new Swiper('.swiper-container', {
+// Swiper
+new Swiper('#swiper-main', {
   pagination: '.swiper-pagination',
   paginationClickable: true
 });
+
+new Swiper('#swiper-survey', {
+  autoplay: 2500,
+  autoplayDisableOnInteraction: false
+});
+
+$(".swiper-container").hover(function () {
+  this.swiper.stopAutoplay();
+}, function () {
+  this.swiper.startAutoplay();
+});
+
 
 // Toast Notification
 function ToastBuilder(options) {
@@ -117,6 +93,7 @@ function ToastBuilder(options) {
 }
 var showtoast = new ToastBuilder();
 
+// Custom
 function ajaxFunction(data) {
   if (data.status === 'success') {
     $('.selectpicker').selectpicker("render");

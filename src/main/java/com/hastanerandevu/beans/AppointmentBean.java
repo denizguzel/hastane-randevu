@@ -14,24 +14,17 @@ import java.util.Map;
 @ManagedBean(name = "appointment")
 @SessionScoped
 public class AppointmentBean implements Serializable {
-  HospitalPoliclinicRelServiceImpl hospitalPoliclinicRelService = new HospitalPoliclinicRelServiceImpl();
+  private HospitalPoliclinicRelServiceImpl hospitalPoliclinicRelService = new HospitalPoliclinicRelServiceImpl();
   private CityServiceImpl cityService = new CityServiceImpl();
   private DistrictServiceImpl districtService = new DistrictServiceImpl();
   private HospitalServiceImpl hospitalService = new HospitalServiceImpl();
   private PoliclinicServiceImpl policlinicService = new PoliclinicServiceImpl();
-  private CityModel cityModel = new CityModel();
-  private DistrictModel districtModel = new DistrictModel();
-  private HospitalModel hospitalModel = new HospitalModel();
-  //private PoliclinicModel policlinicModel = new PoliclinicModel();
-  private HospitalPoliclinicRelModel hospitalPoliclinicRelModel = new HospitalPoliclinicRelModel();
-  private InspectionPlaceModel inspectionPlaceModel = new InspectionPlaceModel();
 
   private String selectedCity = "";
   private String selectedDistrict = "";
   private String selectedHospital = "";
   private String selectedPoliclinic = "";
   private String selectedInspectionPlace = "";
-
 
   private Map<Long, String> cities;
   private Map<Long, String> districts;
@@ -134,46 +127,6 @@ public class AppointmentBean implements Serializable {
     this.inspectionPlaces = inspectionPlaces;
   }
 
-  public CityModel getCityModel() {
-    return cityModel;
-  }
-
-  public void setCityModel(CityModel cityModel) {
-    this.cityModel = cityModel;
-  }
-
-  public DistrictModel getDistrictModel() {
-    return districtModel;
-  }
-
-  public void setDistrictModel(DistrictModel districtModel) {
-    this.districtModel = districtModel;
-  }
-
-  public HospitalModel getHospitalModel() {
-    return hospitalModel;
-  }
-
-  public void setHospitalModel(HospitalModel hospitalModel) {
-    this.hospitalModel = hospitalModel;
-  }
-
-  public HospitalPoliclinicRelModel getHospitalPoliclinicRelModel() {
-    return hospitalPoliclinicRelModel;
-  }
-
-  public void setHospitalPoliclinicRelModel(HospitalPoliclinicRelModel hospitalPoliclinicRelModel) {
-    this.hospitalPoliclinicRelModel = hospitalPoliclinicRelModel;
-  }
-
-  public InspectionPlaceModel getInspectionPlaceModel() {
-    return inspectionPlaceModel;
-  }
-
-  public void setInspectionPlaceModel(InspectionPlaceModel inspectionPlaceModel) {
-    this.inspectionPlaceModel = inspectionPlaceModel;
-  }
-
   public void changeCity(AjaxBehaviorEvent event) {
     districts.clear();
     hospitals.clear();
@@ -204,7 +157,6 @@ public class AppointmentBean implements Serializable {
       selectedDistrict = input.getValue().toString();
     }
 
-    //districtModel.setPk(Long.parseLong(value));
     for(HospitalModel hospitalModel : districtService.getHospitalsByDistrict(districtService.find(Long.parseLong(selectedDistrict)))) {
       hospitals.put(hospitalModel.getPk(), hospitalModel.getHospitalName());
     }
@@ -236,9 +188,6 @@ public class AppointmentBean implements Serializable {
       UIInput input = (UIInput) event.getSource();
       selectedPoliclinic = input.getValue().toString();
     }
-    //hospitalModel = hospitalService.find(Long.parseLong(selectedHospital));
-    //policlinicModel = policlinicService.find(Long.parseLong(selectedPoliclinic));
-
 
     for(InspectionPlaceModel inspectionPlaceModel : policlinicService.getInspectionPlacesByHospitalPoliclinicRel(hospitalPoliclinicRelService.find(Long.parseLong(selectedPoliclinic)))) {
       inspectionPlaces.put(inspectionPlaceModel.getPk(), inspectionPlaceModel.getPlaceName());
