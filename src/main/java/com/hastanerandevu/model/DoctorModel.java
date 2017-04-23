@@ -195,4 +195,8 @@ public class DoctorModel {
   public void setPassword(String password) {
     this.password = password;
   }
+
+  public String getName() {
+    return this.firstName + " " + this.lastName;
+  }
 }

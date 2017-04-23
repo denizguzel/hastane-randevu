@@ -79,17 +79,17 @@
             <!-- Swiper Slider -->
             <div id="swiper-survey" class="swiper-container">
               <div class="swiper-wrapper">
-                <ui:repeat value="#{home.surveys}" var="surveys" varStatus="surveyStatus">
+                <ui:repeat value="#{home.surveys}" var="survey" varStatus="surveyStatus">
                   <div class="swiper-slide">
                     <div class="survey">
-                      <div class="survey-header">${surveys.surveyQuestion}</div>
+                      <div class="survey-header">${survey.surveyQuestion}</div>
                       <div class="survey-block">
-                        <ui:repeat value="#{home.options}" var="options" varStatus="optionsStatus">
+                        <ui:repeat value="#{home.surveyService.getOptionsBySurvey(survey)}" var="option" varStatus="optionStatus">
                           <div class="form-group">
                             <label class="custom-control custom-radio">
-                              <input id="#{optionsStatus.index}" name="#{surveys.pk}" value="#{options.pk}" type="radio" class="custom-control-input" checked="#{optionsStatus.index == 0 ? 'checked' : ''}"/>
+                              <input id="#{optionStatus.index}" name="#{survey.pk}" value="#{option.pk}" type="radio" class="custom-control-input" checked="#{optionStatus.index == 0 ? 'checked' : ''}"/>
                               <span class="custom-control-indicator"></span>
-                              <span class="custom-control-description">${options.optionText}</span>
+                              <span class="custom-control-description">${option.optionText}</span>
                             </label>
                           </div>
                         </ui:repeat>
