@@ -39,6 +39,15 @@ public class LoginBean {
   private boolean verifyCaptcha = false;
   private boolean verifyLogin = false;
   private String loggedUsername;
+  private String password;
+
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
 
   public String getLoggedUsername() {
     return loggedUsername;
@@ -103,14 +112,24 @@ public class LoginBean {
 
   public void patientUpdate() {
     try {
-      patientModel.setPassword(Encryptor.encryptPassword(patientModel.getPassword()));
       patientService.update(patientModel);
       loggedUsername = patientModel.getFirstName() + " " + patientModel.getLastName();
 
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Güncelleme Başarılı", null));
-      //FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
     } catch(Exception e) {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Güncelleme Başarısız", null));
+      LOG.info(e.getMessage());
+    }
+  }
+
+  public void patientPasswordUpdate() {
+    try {
+      patientModel.setPassword(Encryptor.encryptPassword(getPassword()));
+      patientService.update(patientModel);
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Şifre Değiştirildi", null));
+      FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+    } catch(Exception e) {
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Şifre Değiştirilemedi", null));
       LOG.info(e.getMessage());
     }
   }

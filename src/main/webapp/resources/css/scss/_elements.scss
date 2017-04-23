@@ -125,13 +125,12 @@
   padding: 15px 20px;
   color: #fff;
   background-color: rgba(0, 0, 0, 0.6);
-  display: inline-block;
   position: fixed;
   top: -300px;
-  right: 15px;
+  right: 30px;
   opacity: 0;
   transition: all 0.4s ease-out;
-  z-index: 5;
+  z-index: 1051;
 }
 
 .toast.error {
@@ -152,9 +151,6 @@
     .form-group {
       .form-control {
         height: 40px;
-      }
-      ::placeholder {
-        color: $grey;
       }
     }
     .bootstrap-select {
@@ -194,9 +190,6 @@
         height: 40px;
         color: #444;
       }
-      ::placeholder {
-        color: $grey;
-      }
     }
     .form-group {
       .form-control {
@@ -207,10 +200,6 @@
       }
       textarea.form-control {
         height: initial;
-      }
-      ::placeholder {
-        color: $grey;
-        font-weight: 300;
       }
       .forgot {
         color: #444;

@@ -41,7 +41,7 @@ new Swiper('#swiper-main', {
 });
 
 new Swiper('#swiper-survey', {
-  autoplay: 2500,
+  autoplay: 3000,
   autoplayDisableOnInteraction: false
 });
 
@@ -67,7 +67,7 @@ function ToastBuilder(options) {
       $(this).css({
         'opacity': 1
       });
-      var topOffset = 15;
+      var topOffset = 50;
       $('.toast').each(function () {
         var $this = $(this);
         var height = $this.outerHeight();
@@ -93,11 +93,10 @@ function ToastBuilder(options) {
 }
 var showtoast = new ToastBuilder();
 
-// Custom
-function ajaxFunction(data) {
-  if (data.status === 'success') {
-    $('.selectpicker').selectpicker("render");
 
+// Custom
+function toast(data) {
+  if (data.status === "success") {
     var systemMessageElement = $(".global-message li");
     var message = systemMessageElement.text();
     showtoast(message);
@@ -107,5 +106,27 @@ function ajaxFunction(data) {
     else if (systemMessageElement.hasClass("info")) {
       $(".toast").addClass("info");
     }
+    systemMessageElement.text("");
+  }
+}
+
+function selectPicker(data) {
+  if (data.status === "success")
+    $('.selectpicker').selectpicker("render");
+}
+
+function selectPickerToast(data) {
+  if (data.status === "success") {
+    $('.selectpicker').selectpicker("render");
+    var systemMessageElement = $(".global-message li");
+    var message = systemMessageElement.text();
+    showtoast(message);
+    if (systemMessageElement.hasClass("error")) {
+      $(".toast").addClass("error");
+    }
+    else if (systemMessageElement.hasClass("info")) {
+      $(".toast").addClass("info");
+    }
+    systemMessageElement.text("");
   }
 }
