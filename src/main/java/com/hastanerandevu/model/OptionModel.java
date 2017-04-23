@@ -32,8 +32,8 @@ public class OptionModel {
   private int sortOrderNo = 999;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "FK_QUESTION")
-  private QuestionModel question;
+  @JoinColumn(name = "FK_SURVEY")
+  private SurveyModel survey;
 
   public long getPk() {
     return pk;
@@ -83,19 +83,19 @@ public class OptionModel {
     this.isActive = isActive;
   }
 
-  public QuestionModel getQuestion() {
-    return question;
-  }
-
-  public void setQuestion(QuestionModel question) {
-    this.question = question;
-  }
-
   public int getSortOrderNo() {
     return sortOrderNo;
   }
 
   public void setSortOrderNo(int sortOrderNo) {
     this.sortOrderNo = sortOrderNo;
+  }
+
+  public SurveyModel getSurvey() {
+    return survey;
+  }
+
+  public void setSurvey(SurveyModel survey) {
+    this.survey = survey;
   }
 }

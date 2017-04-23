@@ -1,6 +1,6 @@
 package com.hastanerandevu.dao.impl;
 
-import com.hastanerandevu.model.QuestionModel;
+import com.hastanerandevu.model.OptionModel;
 import com.hastanerandevu.model.SurveyModel;
 
 import javax.persistence.Query;
@@ -15,9 +15,11 @@ public class SurveyDaoImpl extends BaseDaoImpl<SurveyModel> {
     return query.getResultList();
   }
 
-  public List<QuestionModel> getQuestionsBySurvey(SurveyModel surveyModel) {
-    Query query = getEntitymanager().createQuery("SELECT e FROM QuestionModel e WHERE e.survey = :SURVEY_MODEL " + "ORDER BY e.creationTime DESC");
-    query.setParameter("SURVEY_MODEL", surveyModel);
+  public List<OptionModel> getOptionsBySurvey(SurveyModel surveyModel){
+    Query query = getEntitymanager().createQuery("SELECT e FROM OptionModel e WHERE e.survey = :SURVEY_MODEL " +
+      "ORDER BY e.creationTime DESC");
+
+    query.setParameter("SURVEY_MODEL",surveyModel);
 
     return query.getResultList();
   }

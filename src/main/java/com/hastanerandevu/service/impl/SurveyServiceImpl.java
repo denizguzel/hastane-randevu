@@ -1,7 +1,7 @@
 package com.hastanerandevu.service.impl;
 
 import com.hastanerandevu.dao.impl.SurveyDaoImpl;
-import com.hastanerandevu.model.QuestionModel;
+import com.hastanerandevu.model.OptionModel;
 import com.hastanerandevu.model.SurveyModel;
 import com.hastanerandevu.service.BaseService;
 
@@ -9,6 +9,7 @@ import java.util.List;
 
 public class SurveyServiceImpl implements BaseService<SurveyModel> {
   private SurveyDaoImpl surveyDao = new SurveyDaoImpl();
+  private OptionServiceImpl optionService = new OptionServiceImpl();
 
   @Override
   public void create(SurveyModel model) {
@@ -39,7 +40,12 @@ public class SurveyServiceImpl implements BaseService<SurveyModel> {
     return surveyDao.getSurveys();
   }
 
-  public List<QuestionModel> getQuestionsBySurvey(SurveyModel surveyModel){
-    return surveyDao.getQuestionsBySurvey(surveyModel);
+  public List<OptionModel> getOptionsBySurvey(SurveyModel surveyModel){
+    return surveyDao.getOptionsBySurvey(surveyModel);
+  }
+
+  public void answerSurvey(OptionModel optionModel){
+    optionModel.setCount(optionModel.getCount() + 1);
+    optionService.update(optionModel);
   }
 }

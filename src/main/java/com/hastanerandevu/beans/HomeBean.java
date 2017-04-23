@@ -1,7 +1,6 @@
 package com.hastanerandevu.beans;
 
 import com.hastanerandevu.model.FrequentlyAskedQuestionsModel;
-import com.hastanerandevu.model.QuestionModel;
 import com.hastanerandevu.model.SurveyModel;
 import com.hastanerandevu.service.impl.FrequentlyAskedQuestionsServiceImpl;
 import com.hastanerandevu.service.impl.SurveyServiceImpl;
@@ -16,19 +15,25 @@ import java.util.List;
 @ViewScoped
 public class HomeBean implements Serializable {
 
-  private List<FrequentlyAskedQuestionsModel> askedQuestions = new ArrayList<>();
-  private List<SurveyModel> surveys = new ArrayList<>();
-  private List<QuestionModel> surveyQuestions = new ArrayList<>();
+  SurveyServiceImpl surveyService;
+  FrequentlyAskedQuestionsServiceImpl frequentlyAskedQuestionsService;
+
+  private List<FrequentlyAskedQuestionsModel> askedQuestions;
+  private List<SurveyModel> surveys;
 
   public HomeBean(){
-    FrequentlyAskedQuestionsServiceImpl frequentlyAskedQuestionsService = new FrequentlyAskedQuestionsServiceImpl();
+    surveyService = new SurveyServiceImpl();
+    frequentlyAskedQuestionsService = new FrequentlyAskedQuestionsServiceImpl();
+
+    askedQuestions = new ArrayList<>();
+    surveys = new ArrayList<>();
+
     askedQuestions.addAll(frequentlyAskedQuestionsService.getAllAskedQuestions());
+    surveys.addAll(surveyService.getSurveys());
 
     SurveyModel surveyModel = new SurveyModel();
     surveyModel.setPk(100);
-    SurveyServiceImpl surveyService = new SurveyServiceImpl();
-    surveys.addAll(surveyService.getSurveys());
-    surveyQuestions.addAll(surveyService.getQuestionsBySurvey(surveyModel));
+
   }
 
   public List<FrequentlyAskedQuestionsModel> getAskedQuestions() {
@@ -39,7 +44,4 @@ public class HomeBean implements Serializable {
     return surveys;
   }
 
-  public List<QuestionModel> getSurveyQuestions() {
-    return surveyQuestions;
-  }
 }

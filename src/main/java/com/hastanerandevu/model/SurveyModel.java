@@ -14,8 +14,8 @@ public class SurveyModel {
   @SequenceGenerator(name = "survey_pk", sequenceName = "SEQ_SURVEY_PK", allocationSize = 1)
   private long pk;
 
-  @Column(name = "SURVEY_DESCRIPTION")
-  private String surveyDescription;
+  @Column(name = "SURVEY_QUESTION")
+  private String surveyQuestion;
 
   @Column(name = "CREATION_TIME", insertable = false, updatable = false)
   private Date creationTime;
@@ -30,7 +30,7 @@ public class SurveyModel {
   private char isActive;
 
   @OneToMany(mappedBy = "survey")
-  private List<QuestionModel> questionModels;
+  private List<OptionModel> optionModels;
 
   public long getPk() {
     return pk;
@@ -38,14 +38,6 @@ public class SurveyModel {
 
   public void setPk(long pk) {
     this.pk = pk;
-  }
-
-  public String getSurveyDescription() {
-    return surveyDescription;
-  }
-
-  public void setSurveyDescription(String surveyDescription) {
-    this.surveyDescription = surveyDescription;
   }
 
   public Date getCreationTime() {
@@ -80,11 +72,19 @@ public class SurveyModel {
     this.isActive = isActive;
   }
 
-  public List<QuestionModel> getQuestionModels() {
-    return questionModels;
+  public String getSurveyQuestion() {
+    return surveyQuestion;
   }
 
-  public void setQuestionModels(List<QuestionModel> questionModels) {
-    this.questionModels = questionModels;
+  public void setSurveyQuestion(String surveyQuestion) {
+    this.surveyQuestion = surveyQuestion;
+  }
+
+  public List<OptionModel> getOptionModels() {
+    return optionModels;
+  }
+
+  public void setOptionModels(List<OptionModel> optionModels) {
+    this.optionModels = optionModels;
   }
 }
