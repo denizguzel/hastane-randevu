@@ -78,14 +78,14 @@
             <h3 class="border">Anket</h3>
             <ui:repeat value="#{home.surveys}" var="surveys" varStatus="surveyStatus">
               <div class="survey">
-                <div class="survey-header">${surveys.surveyDescription}</div>
+                <div class="survey-header">${surveys.surveyQuestion}</div>
                 <div class="survey-block">
-                  <ui:repeat value="#{home.surveyQuestions}" var="surveyQuestions" varStatus="surveyQuestionsStatus">
+                  <ui:repeat value="#{home.options}" var="options" varStatus="optionsStatus">
                     <div class="form-group">
                       <label class="custom-control custom-radio">
-                        <input id="#{surveyQuestionsStatus.index}" name="#{surveys.pk}" value="#{surveyQuestions.pk}" type="radio" class="custom-control-input" checked="#{surveyQuestionsStatus.index == 0 ? 'checked' : ''}"/>
+                        <input id="#{optionsStatus.index}" name="#{surveys.pk}" value="#{options.pk}" type="radio" class="custom-control-input" checked="#{optionsStatus.index == 0 ? 'checked' : ''}"/>
                         <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">${surveyQuestions.questionText}</span>
+                        <span class="custom-control-description">${options.optionText}</span>
                       </label>
                     </div>
                   </ui:repeat>

@@ -14,12 +14,11 @@ import java.util.Map;
 @ManagedBean(name = "appointment")
 @SessionScoped
 public class AppointmentBean implements Serializable {
+  HospitalPoliclinicRelServiceImpl hospitalPoliclinicRelService = new HospitalPoliclinicRelServiceImpl();
   private CityServiceImpl cityService = new CityServiceImpl();
   private DistrictServiceImpl districtService = new DistrictServiceImpl();
   private HospitalServiceImpl hospitalService = new HospitalServiceImpl();
   private PoliclinicServiceImpl policlinicService = new PoliclinicServiceImpl();
-  HospitalPoliclinicRelServiceImpl hospitalPoliclinicRelService = new HospitalPoliclinicRelServiceImpl();
-
   private CityModel cityModel = new CityModel();
   private DistrictModel districtModel = new DistrictModel();
   private HospitalModel hospitalModel = new HospitalModel();

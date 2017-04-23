@@ -1,10 +1,6 @@
 package com.hastanerandevu;
 
-import com.hastanerandevu.constants.ProjectConstants;
 import com.hastanerandevu.converter.Encryptor;
-import com.hastanerandevu.model.*;
-import com.hastanerandevu.service.impl.DistrictServiceImpl;
-import com.hastanerandevu.service.impl.HospitalServiceImpl;
 
 /**
  * Created by Okan on 14.3.2017.

@@ -15,11 +15,10 @@ public class SurveyDaoImpl extends BaseDaoImpl<SurveyModel> {
     return query.getResultList();
   }
 
-  public List<OptionModel> getOptionsBySurvey(SurveyModel surveyModel){
-    Query query = getEntitymanager().createQuery("SELECT e FROM OptionModel e WHERE e.survey = :SURVEY_MODEL " +
-      "ORDER BY e.creationTime DESC");
+  public List<OptionModel> getOptionsBySurvey(SurveyModel surveyModel) {
+    Query query = getEntitymanager().createQuery("SELECT e FROM OptionModel e WHERE e.survey = :SURVEY_MODEL " + "ORDER BY e.creationTime DESC");
 
-    query.setParameter("SURVEY_MODEL",surveyModel);
+    query.setParameter("SURVEY_MODEL", surveyModel);
 
     return query.getResultList();
   }

@@ -4,7 +4,6 @@ import com.hastanerandevu.dao.impl.HospitalDaoImpl;
 import com.hastanerandevu.enums.HospitalTypeEnum;
 import com.hastanerandevu.model.HospitalModel;
 import com.hastanerandevu.model.HospitalPoliclinicRelModel;
-import com.hastanerandevu.model.PoliclinicModel;
 import com.hastanerandevu.service.BaseService;
 
 import java.util.List;

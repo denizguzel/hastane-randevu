@@ -1,6 +1,7 @@
 package com.hastanerandevu.beans;
 
 import com.hastanerandevu.model.FrequentlyAskedQuestionsModel;
+import com.hastanerandevu.model.OptionModel;
 import com.hastanerandevu.model.SurveyModel;
 import com.hastanerandevu.service.impl.FrequentlyAskedQuestionsServiceImpl;
 import com.hastanerandevu.service.impl.SurveyServiceImpl;
@@ -15,24 +16,27 @@ import java.util.List;
 @ViewScoped
 public class HomeBean implements Serializable {
 
-  SurveyServiceImpl surveyService;
-  FrequentlyAskedQuestionsServiceImpl frequentlyAskedQuestionsService;
+  private SurveyServiceImpl surveyService;
+  private FrequentlyAskedQuestionsServiceImpl frequentlyAskedQuestionsService;
 
   private List<FrequentlyAskedQuestionsModel> askedQuestions;
   private List<SurveyModel> surveys;
+  private List<OptionModel> options;
 
-  public HomeBean(){
+  public HomeBean() {
     surveyService = new SurveyServiceImpl();
     frequentlyAskedQuestionsService = new FrequentlyAskedQuestionsServiceImpl();
 
     askedQuestions = new ArrayList<>();
     surveys = new ArrayList<>();
+    options = new ArrayList<>();
 
     askedQuestions.addAll(frequentlyAskedQuestionsService.getAllAskedQuestions());
     surveys.addAll(surveyService.getSurveys());
 
     SurveyModel surveyModel = new SurveyModel();
     surveyModel.setPk(100);
+    options.addAll(surveyService.getOptionsBySurvey(surveyModel));
 
   }
 
@@ -44,4 +48,7 @@ public class HomeBean implements Serializable {
     return surveys;
   }
 
+  public List<OptionModel> getOptions() {
+    return options;
+  }
 }

@@ -15,7 +15,7 @@ public class PoliclinicDaoImpl extends BaseDaoImpl<PoliclinicModel> {
 
     Query query = getEntitymanager().createQuery("SELECT e FROM InspectionPlaceModel e WHERE e.hospitalPoliclinicRel = :HOSPITAL_POLICLINIC_REL ORDER BY e.placeName");
 
-    query.setParameter("HOSPITAL_POLICLINIC_REL",hospitalPoliclinicRelModel);
+    query.setParameter("HOSPITAL_POLICLINIC_REL", hospitalPoliclinicRelModel);
 
     return query.getResultList();
 

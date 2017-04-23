@@ -40,25 +40,25 @@ public class AppointmentServiceImpl implements BaseService<AppointmentModel> {
     return appointmentDao.findAll();
   }
 
-  public void holdAppointmentForPatient(AppointmentModel appointmentModel,PatientModel patientModel){
+  public void holdAppointmentForPatient(AppointmentModel appointmentModel, PatientModel patientModel) {
     appointmentModel.setPatient(patientModel);
     appointmentModel.setAppointmentStatus(AppointmentStatusEnum.SUSPENDED);
     this.update(appointmentModel);
   }
 
-  public void confirmAppointment(AppointmentModel appointmentModel,PatientModel patientModel,String noteToDoctor){
+  public void confirmAppointment(AppointmentModel appointmentModel, PatientModel patientModel, String noteToDoctor) {
     appointmentModel.setPatient(patientModel);
     appointmentModel.setAppointmentStatus(AppointmentStatusEnum.RESERVED);
     appointmentModel.setMessageToDoctor(noteToDoctor);
     this.update(appointmentModel);
   }
 
-  public void completeAppointment(AppointmentModel appointmentModel){
+  public void completeAppointment(AppointmentModel appointmentModel) {
     appointmentModel.setAppointmentStatus(AppointmentStatusEnum.COMPLETED);
     this.update(appointmentModel);
   }
 
-  public void clearAppointment(AppointmentModel appointmentModel){
+  public void clearAppointment(AppointmentModel appointmentModel) {
     appointmentModel.setPatient(null);
     appointmentModel.setMessageToDoctor(null);
     appointmentModel.setAppointmentStatus(AppointmentStatusEnum.NOT_RESERVED);

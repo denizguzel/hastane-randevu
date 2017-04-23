@@ -40,11 +40,11 @@ public class SurveyServiceImpl implements BaseService<SurveyModel> {
     return surveyDao.getSurveys();
   }
 
-  public List<OptionModel> getOptionsBySurvey(SurveyModel surveyModel){
+  public List<OptionModel> getOptionsBySurvey(SurveyModel surveyModel) {
     return surveyDao.getOptionsBySurvey(surveyModel);
   }
 
-  public void answerSurvey(OptionModel optionModel){
+  public void answerSurvey(OptionModel optionModel) {
     optionModel.setCount(optionModel.getCount() + 1);
     optionService.update(optionModel);
   }
