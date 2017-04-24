@@ -289,3 +289,18 @@
     }
   }
 }
+
+.survey-done {
+  text-align: center;
+  background-color: #fff;
+  border-bottom: 5px solid #DDDDDD;
+  padding: 15px;
+  i {
+    font-size: 60px;
+    color: $green;
+    margin-bottom: 15px;
+  }
+  p {
+    font-size: 18px;
+  }
+}

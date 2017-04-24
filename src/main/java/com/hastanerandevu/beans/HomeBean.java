@@ -4,11 +4,14 @@ import com.hastanerandevu.model.FrequentlyAskedQuestionsModel;
 import com.hastanerandevu.model.OptionModel;
 import com.hastanerandevu.model.SurveyModel;
 import com.hastanerandevu.service.impl.FrequentlyAskedQuestionsServiceImpl;
-import com.hastanerandevu.service.impl.OptionServiceImpl;
 import com.hastanerandevu.service.impl.SurveyServiceImpl;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -22,12 +25,13 @@ public class HomeBean implements Serializable {
   private FrequentlyAskedQuestionsServiceImpl frequentlyAskedQuestionsService;
 
   private Long optionPk;
+  private boolean cookieCheck = false;
 
   private List<FrequentlyAskedQuestionsModel> askedQuestions;
   private List<SurveyModel> surveys;
   private List<OptionModel> options;
 
-  public HomeBean() {
+  public HomeBean() throws UnsupportedEncodingException {
     surveyService = new SurveyServiceImpl();
     frequentlyAskedQuestionsService = new FrequentlyAskedQuestionsServiceImpl();
 
@@ -37,7 +41,14 @@ public class HomeBean implements Serializable {
 
     askedQuestions.addAll(frequentlyAskedQuestionsService.getAllAskedQuestions());
     surveys.addAll(surveyService.getSurveys());
+  }
 
+  public boolean isCookieCheck() {
+    return cookieCheck;
+  }
+
+  public void setCookieCheck(boolean cookieCheck) {
+    this.cookieCheck = cookieCheck;
   }
 
   public Long getOptionPk() {
@@ -48,8 +59,18 @@ public class HomeBean implements Serializable {
     this.optionPk = optionPk;
   }
 
-  public void answerSurvey() throws UnsupportedEncodingException {
-    surveyService.answerSurvey(new OptionServiceImpl().find(getOptionPk()));
+  @PostConstruct
+  public void init() {
+    HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+    String cookieName = "surveysDone";
+    Cookie[] userCookies = request.getCookies();
+    if(userCookies.length > 0) {
+      for(Cookie userCookie : userCookies) {
+        if(userCookie.getName().equals(cookieName) && userCookie.getValue().equals("yes")) {
+          setCookieCheck(true);
+        }
+      }
+    }
   }
 
   public List<FrequentlyAskedQuestionsModel> getAskedQuestions() {
@@ -70,5 +91,11 @@ public class HomeBean implements Serializable {
 
   public void setSurveyService(SurveyServiceImpl surveyService) {
     this.surveyService = surveyService;
+  }
+
+  public String answerSurvey() throws UnsupportedEncodingException {
+    //surveyService.answerSurvey(new OptionServiceImpl().find(getOptionPk()));
+    System.out.println(getOptionPk());
+    return "/index?faces-redirect=true";
   }
 }

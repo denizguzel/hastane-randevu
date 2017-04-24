@@ -130,17 +130,35 @@ function selectPickerToast(data) {
   }
 }
 
+
 // Cookie check for survey
-$(document).ready(function () {
-  $("#swiper-survey").find(".btn").click(function () {
-    var surveyPk = $(this).closest(".swiper-slide").attr("id");
-    surveySwiper.removeSlide(surveySwiper.activeIndex);
-    Cookies.set("surveyPk" + surveyPk, surveyPk);
+$("#swiper-survey").find(".btn").click(function () {
+  var surveyPk = $(this).closest(".swiper-slide").attr("id");
+  Cookies.set("surveysDone", "no", {
+    expires: 7,
+    path: "/"
+  });
+  Cookies.set("surveyPk" + surveyPk, surveyPk, {
+    expires: 7,
+    path: "/"
   });
 
-  $(".swiper-slide").each(function () {
-    if (Cookies.get('surveyPk' + $(this).attr("id"))) {
-      $(this).remove();
-    }
-  });
+  if (!$("#swiper-survey .swiper-slide").length) {
+    Cookies.set("surveysDone", "yes", {
+      expires: 7,
+      path: "/"
+    });
+  }
+});
+
+$("#swiper-survey .swiper-slide").each(function () {
+  if (Cookies.get('surveyPk' + $(this).attr("id"))) {
+    $(this).remove();
+  }
+  if (!$("#swiper-survey .swiper-slide").length) {
+    Cookies.set("surveysDone", "yes", {
+      expires: 7,
+      path: "/"
+    });
+  }
 });

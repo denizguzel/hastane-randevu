@@ -76,28 +76,34 @@
           </div>
           <div class="col-xl-4">
             <h3 class="border">Anket</h3>
-            <!-- Swiper Slider -->
-            <div id="swiper-survey" class="swiper-container">
-              <div class="swiper-wrapper">
-                <ui:repeat value="#{home.surveys}" var="survey" varStatus="surveyStatus">
-                  <div class="swiper-slide" id="#{survey.pk}">
-                    <h:form prependId="false">
-                      <div class="survey">
-                        <div class="survey-header">${survey.surveyQuestion}</div>
-                        <div class="survey-block">
-                          <h:selectOneRadio value="#{home.optionPk}" layout="pageDirection" required="true">
-                            <f:selectItems value="#{home.surveyService.getOptionsBySurvey(survey)}" var="option" itemLabel="#{option.optionText}" itemValue="#{option.pk}"/>
-                          </h:selectOneRadio>
-                          <h:commandButton styleClass="btn btn-success d-block m-auto" value="Gönder" action="#{home.answerSurvey}">
-                            <f:ajax execute="@form" render="@form"/>
-                          </h:commandButton>
+            <h:panelGroup rendered="#{!home.cookieCheck}">
+              <!-- Swiper Slider -->
+              <div id="swiper-survey" class="swiper-container">
+                <div class="swiper-wrapper">
+                  <ui:repeat value="#{home.surveys}" var="survey" varStatus="surveyStatus">
+                    <div class="swiper-slide" id="#{survey.pk}">
+                      <h:form prependId="false">
+                        <div class="survey">
+                          <div class="survey-header">${survey.surveyQuestion}</div>
+                          <div class="survey-block">
+                            <h:selectOneRadio value="#{home.optionPk}" layout="pageDirection">
+                              <f:selectItems value="#{home.surveyService.getOptionsBySurvey(survey)}" var="option" itemLabel="#{option.optionText}" itemValue="#{option.pk}"/>
+                            </h:selectOneRadio>
+                            <h:commandButton styleClass="btn btn-success d-block m-auto" value="Gönder" action="#{home.answerSurvey}"/>
+                          </div>
                         </div>
-                      </div>
-                    </h:form>
-                  </div>
-                </ui:repeat>
+                      </h:form>
+                    </div>
+                  </ui:repeat>
+                </div>
+              </div><!-- #Swiper Slider -->
+            </h:panelGroup>
+            <h:panelGroup rendered="#{home.cookieCheck}">
+              <div class="survey-done">
+                <i class="fa fa-smile-o"></i>
+                <p>Tüm anketleri tamamladınız.<br/>Katılımınız için teşekkürler!</p>
               </div>
-            </div><!-- #Swiper Slider -->
+            </h:panelGroup>
           </div>
         </div>
       </div>

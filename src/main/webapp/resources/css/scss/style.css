@@ -8509,6 +8509,23 @@ button, select, input.btn {
   background-color: #555;
 }
 
+.survey-done {
+  text-align: center;
+  background-color: #fff;
+  border-bottom: 5px solid #DDDDDD;
+  padding: 15px;
+}
+
+.survey-done i {
+  font-size: 60px;
+  color: #009688;
+  margin-bottom: 15px;
+}
+
+.survey-done p {
+  font-size: 18px;
+}
+
 .navbar {
   display: flex;
   flex-direction: row;
