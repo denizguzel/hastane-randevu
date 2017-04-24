@@ -247,5 +247,45 @@
   }
   .survey-block {
     padding: 10px;
+    table {
+      tbody {
+        tr {
+          td {
+            label {
+              position: relative;
+              cursor: pointer;
+              padding-left: 40px;
+              &:before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background-color: lighten($grey, 10%)
+              }
+            }
+            input {
+              position: absolute;
+              z-index: -1;
+              opacity: 0;
+            }
+            input:checked ~ label {
+              &:after {
+                content: '';
+                position: absolute;
+                top: 5px;
+                left: 5px;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background-color: #555;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

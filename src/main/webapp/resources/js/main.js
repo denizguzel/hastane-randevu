@@ -40,9 +40,10 @@ new Swiper('#swiper-main', {
   paginationClickable: true
 });
 
-new Swiper('#swiper-survey', {
+var surveySwiper = new Swiper('#swiper-survey', {
   autoplay: 3000,
-  autoplayDisableOnInteraction: false
+  autoplayDisableOnInteraction: false,
+  observer: true
 });
 
 $(".swiper-container").hover(function () {
@@ -50,7 +51,6 @@ $(".swiper-container").hover(function () {
 }, function () {
   this.swiper.startAutoplay();
 });
-
 
 // Toast Notification
 function ToastBuilder(options) {
@@ -93,7 +93,6 @@ function ToastBuilder(options) {
 }
 var showtoast = new ToastBuilder();
 
-
 // Custom
 function toast(data) {
   if (data.status === "success") {
@@ -130,3 +129,18 @@ function selectPickerToast(data) {
     systemMessageElement.text("");
   }
 }
+
+// Cookie check for survey
+$(document).ready(function () {
+  $("#swiper-survey").find(".btn").click(function () {
+    var surveyPk = $(this).closest(".swiper-slide").attr("id");
+    surveySwiper.removeSlide(surveySwiper.activeIndex);
+    Cookies.set("surveyPk" + surveyPk, surveyPk);
+  });
+
+  $(".swiper-slide").each(function () {
+    if (Cookies.get('surveyPk' + $(this).attr("id"))) {
+      $(this).remove();
+    }
+  });
+});

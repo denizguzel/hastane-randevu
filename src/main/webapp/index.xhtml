@@ -1,4 +1,4 @@
-<ui:composition template="/view/master/beforeLoginTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://xmlns.jcp.org/jsf/passthrough" xmlns:jsf="http://xmlns.jcp.org/jsf">
+<ui:composition template="/view/master/beforeLoginTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://xmlns.jcp.org/jsf/passthrough" xmlns:jsf="http://xmlns.jcp.org/jsf" xmlns:composite="http://java.sun.com/jsf/composite">
   <ui:define name="title">e-Randevu - Ana Sayfa</ui:define>
 
   <ui:define name="content">
@@ -80,22 +80,20 @@
             <div id="swiper-survey" class="swiper-container">
               <div class="swiper-wrapper">
                 <ui:repeat value="#{home.surveys}" var="survey" varStatus="surveyStatus">
-                  <div class="swiper-slide">
-                    <div class="survey">
-                      <div class="survey-header">${survey.surveyQuestion}</div>
-                      <div class="survey-block">
-                        <ui:repeat value="#{home.surveyService.getOptionsBySurvey(survey)}" var="option" varStatus="optionStatus">
-                          <div class="form-group">
-                            <label class="custom-control custom-radio">
-                              <input id="#{optionStatus.index}" name="#{survey.pk}" value="#{option.pk}" type="radio" class="custom-control-input" checked="#{optionStatus.index == 0 ? 'checked' : ''}"/>
-                              <span class="custom-control-indicator"></span>
-                              <span class="custom-control-description">${option.optionText}</span>
-                            </label>
-                          </div>
-                        </ui:repeat>
-                        <h:commandButton styleClass="btn btn-success d-block m-auto" value="Gönder"/>
+                  <div class="swiper-slide" id="#{survey.pk}">
+                    <h:form prependId="false">
+                      <div class="survey">
+                        <div class="survey-header">${survey.surveyQuestion}</div>
+                        <div class="survey-block">
+                          <h:selectOneRadio value="#{home.optionPk}" layout="pageDirection" required="true">
+                            <f:selectItems value="#{home.surveyService.getOptionsBySurvey(survey)}" var="option" itemLabel="#{option.optionText}" itemValue="#{option.pk}"/>
+                          </h:selectOneRadio>
+                          <h:commandButton styleClass="btn btn-success d-block m-auto" value="Gönder" action="#{home.answerSurvey}">
+                            <f:ajax execute="@form" render="@form"/>
+                          </h:commandButton>
+                        </div>
                       </div>
-                    </div>
+                    </h:form>
                   </div>
                 </ui:repeat>
               </div>

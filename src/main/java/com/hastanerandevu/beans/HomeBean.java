@@ -10,6 +10,7 @@ import com.hastanerandevu.service.impl.SurveyServiceImpl;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,15 +38,18 @@ public class HomeBean implements Serializable {
     askedQuestions.addAll(frequentlyAskedQuestionsService.getAllAskedQuestions());
     surveys.addAll(surveyService.getSurveys());
 
-    //SurveyModel surveyModel = new SurveyModel();
-    //surveyModel.setPk(100);
-    //options.addAll(surveyService.getOptionsBySurvey(surveyModel));
-
   }
 
-  public void answerSurvey(){
-    surveyService.answerSurvey(new OptionServiceImpl().find(optionPk));
-    System.out.println("wqeqwe");
+  public Long getOptionPk() {
+    return optionPk;
+  }
+
+  public void setOptionPk(Long optionPk) {
+    this.optionPk = optionPk;
+  }
+
+  public void answerSurvey() throws UnsupportedEncodingException {
+    surveyService.answerSurvey(new OptionServiceImpl().find(getOptionPk()));
   }
 
   public List<FrequentlyAskedQuestionsModel> getAskedQuestions() {
@@ -66,13 +70,5 @@ public class HomeBean implements Serializable {
 
   public void setSurveyService(SurveyServiceImpl surveyService) {
     this.surveyService = surveyService;
-  }
-
-  public Long getOptionPk() {
-    return optionPk;
-  }
-
-  public void setOptionPk(Long optionPk) {
-    this.optionPk = optionPk;
   }
 }
