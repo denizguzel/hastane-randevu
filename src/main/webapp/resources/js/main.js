@@ -144,10 +144,7 @@ $("#swiper-survey").find(".btn").click(function () {
   });
 
   if (!$("#swiper-survey .swiper-slide").length) {
-    Cookies.set("surveysDone", "yes", {
-      expires: 7,
-      path: "/"
-    });
+    Cookies.set("surveysDone", "yes");
   }
 });
 
@@ -156,9 +153,6 @@ $("#swiper-survey .swiper-slide").each(function () {
     $(this).remove();
   }
   if (!$("#swiper-survey .swiper-slide").length) {
-    Cookies.set("surveysDone", "yes", {
-      expires: 7,
-      path: "/"
-    });
+    Cookies.set("surveysDone", "yes");
   }
 });
