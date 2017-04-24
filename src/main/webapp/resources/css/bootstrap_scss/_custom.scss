@@ -4,12 +4,12 @@
 // without modifying source files.
 
 // Colors
-$main-color: #19E2BA;
+$main-color: #18E2BA;
 $white: #fff;
 $black: #000;
 $red: #F44336;
 $orange: #FFEB3B;
-$green: #009688;
+$green: darken($main-color, 5%);
 $blue: #2196F3;
 $cyan: #00BCD4;
 $grey: #aaa;

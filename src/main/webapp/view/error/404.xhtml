@@ -4,26 +4,27 @@
   <meta charset="UTF-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Aradığınız içerik bulunamadı</title>
+  <title>404... Sayfa Bulunamadı</title>
+
+  <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/resources/img/favicons/favicon.ico"/>
+  <link rel="apple-touch-icon" href="#{facesContext.externalContext.requestContextPath}/resources/img/favicons/apple-touch-icon.png"/>
+  <link rel="apple-touch-icon" sizes="72x72" href="#{facesContext.externalContext.requestContextPath}/resources/img/favicons/apple-touch-icon-72x72.png"/>
+  <link rel="apple-touch-icon" sizes="114x114" href="#{facesContext.externalContext.requestContextPath}/resources/img/favicons/apple-touch-icon-114x114.png"/>
+
   <link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/css/font-awesome.min.css"/>
   <link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/css/scss/style.css"/>
 </h:head>
 
-<h:body>
+<h:body styleClass="page-404 gradient">
   <div class="container">
-    <div class="row">
-      <div class="col-md-6 offset-md-3">
-        <div class="card card-unknown">
-          <div class="card-header"><i class="fa fa-exclamation-triangle"></i>Aradığınız içerik bulunamadı</div>
-          <div class="card-block d-flex">
-            <a class="btn btn-primary" href="#{facesContext.externalContext.requestContextPath}/">Ana Sayfaya Dön</a>
-            <h:outputLink rendered="#{login.verifyLogin}" styleClass="btn btn-primary ml-auto" value="#{facesContext.externalContext.requestContextPath}/view">Profil Sayfasına Dön</h:outputLink>
-          </div>
-        </div>
-      </div>
+    <h1>404</h1>
+    <h2>Oops, aradığınız sayfa bulunamadı.</h2>
+    <p>Belki ana sayfaya geri dönmek isteyebilirsiniz.</p>
+    <div class="buttons">
+      <a class="btn btn-transparent" href="#{facesContext.externalContext.requestContextPath}/">Ana Sayfaya Dön</a>
+      <h:outputLink rendered="#{login.verifyLogin}" styleClass="btn btn-transparent" value="#{facesContext.externalContext.requestContextPath}/view">Profil Sayfasına Dön</h:outputLink>
     </div>
   </div>
+  <ui:include src="/view/common/footer.xhtml"/>
 </h:body>
-
-<ui:include src="/view/common/footer.xhtml"/>
 </html>
