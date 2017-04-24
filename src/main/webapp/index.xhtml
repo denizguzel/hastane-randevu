@@ -86,7 +86,7 @@
                         <div class="survey">
                           <div class="survey-header">${survey.surveyQuestion}</div>
                           <div class="survey-block">
-                            <h:selectOneRadio value="#{home.optionPk}" layout="pageDirection">
+                            <h:selectOneRadio value="#{home.selectedOption}" layout="pageDirection">
                               <f:selectItems value="#{home.surveyService.getOptionsBySurvey(survey)}" var="option" itemLabel="#{option.optionText}" itemValue="#{option.pk}"/>
                             </h:selectOneRadio>
                             <h:commandButton styleClass="btn btn-success d-block m-auto" value="Gönder" action="#{home.answerSurvey}"/>
