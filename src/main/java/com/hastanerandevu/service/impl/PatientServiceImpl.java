@@ -61,9 +61,8 @@ public class PatientServiceImpl implements BaseService<PatientModel> {
     if (patientDao.getUserByEmail(email) == null){
       throw new NoUserException("User not found by this email : "+email);
     }
-
-    return patientDao.getUserByEmail(email);
-
+    else
+      return patientDao.getUserByEmail(email);
   }
 
   public boolean changingPasswordIsAvailable(PatientModel patientModel) {

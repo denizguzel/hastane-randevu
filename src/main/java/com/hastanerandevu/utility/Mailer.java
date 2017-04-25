@@ -63,7 +63,7 @@ public class Mailer implements Runnable {
       message.setContent(content, "text/html;charset=utf-8");
       Transport.send(message);
 
-      System.out.println("Mail sent.");
+      LOG.info("Mail sent");
     } catch(Exception e) {
       e.printStackTrace();
     }
@@ -90,7 +90,7 @@ public class Mailer implements Runnable {
       thread.start();
     }
     catch (NoUserException e){
-      LOG.error(e.getMessage());
+      LOG.warn(e.getMessage());
     }
   }
 }

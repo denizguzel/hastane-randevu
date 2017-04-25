@@ -72,7 +72,12 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientModel> {
   public PatientModel getUserByEmail(String email){
     Query query = getEntitymanager().createQuery("SELECT e FROM PatientModel e WHERE e.email = :E_MAIL").setParameter("E_MAIL", email);
 
-    return (PatientModel) query.getSingleResult();
+    if (query.getResultList().isEmpty()){
+      return null;
+    }
+    else{
+      return (PatientModel) query.getResultList().get(0);
+    }
   }
 
   public List<PatientTreatmentRelModel> getPatientTreatments(PatientModel patientModel) {

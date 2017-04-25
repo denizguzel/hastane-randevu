@@ -11,6 +11,7 @@ import com.hastanerandevu.service.impl.PatientServiceImpl;
 import com.hastanerandevu.utility.Mailer;
 import com.hastanerandevu.utility.SessionUtils;
 import com.hastanerandevu.validation.CaptchaValidator;
+import org.apache.log4j.Logger;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -24,6 +25,9 @@ import static org.hibernate.ejb.EntityManagerImpl.LOG;
 @ManagedBean(name = "login")
 @SessionScoped
 public class LoginBean {
+
+  private static final Logger LOG = Logger.getLogger(LoginBean.class);
+
   private Mailer mailer = new Mailer();
   private PatientServiceImpl patientService = new PatientServiceImpl();
   private DoctorServiceImpl doctorService = new DoctorServiceImpl();
@@ -130,7 +134,7 @@ public class LoginBean {
       //FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
     } catch(Exception e) {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Şifre Değiştirilemedi", null));
-      LOG.info(e.getMessage());
+      LOG.error(e.getMessage());
     }
   }
 

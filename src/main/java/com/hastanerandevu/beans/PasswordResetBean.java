@@ -6,6 +6,7 @@ import com.hastanerandevu.exceptions.NoUserException;
 import com.hastanerandevu.model.PatientModel;
 import com.hastanerandevu.service.impl.PatientServiceImpl;
 import com.hastanerandevu.utility.Mailer;
+import org.apache.log4j.Logger;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -18,6 +19,7 @@ import java.util.Date;
 @ManagedBean(name = "passwordReset")
 @ViewScoped
 public class PasswordResetBean {
+  private static final Logger LOG = Logger.getLogger(PasswordResetBean.class);
   private PatientServiceImpl patientService = new PatientServiceImpl();
   private String urlParam;
   private String password;
@@ -59,7 +61,7 @@ public class PasswordResetBean {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Şifre sıfırlama maili gönderildi.", null));
 
     } catch (NoUserException e) {
-      System.out.println(e.getMessage());
+      LOG.warn(e.getMessage());
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email sistemde kayıtlı değil.", null));
     }
   }
@@ -79,7 +81,7 @@ public class PasswordResetBean {
       }
     }
     catch(NoUserException e){
-      System.out.println(e.getMessage());
+      LOG.warn(e.getMessage());
     }
 
   }
