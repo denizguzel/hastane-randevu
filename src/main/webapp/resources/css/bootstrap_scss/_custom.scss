@@ -7,10 +7,10 @@
 $main-color: #18E2BA;
 $white: #fff;
 $black: #000;
-$red: #F44336;
-$orange: #FFEB3B;
-$green: darken($main-color, 5%);
-$blue: #2196F3;
+$red: #D9534F;
+$orange: #F0AD4E;
+$green: #00C292;
+$blue: #03A9F3;
 $cyan: #00BCD4;
 $grey: #aaa;
 
@@ -38,6 +38,7 @@ $btn-active-box-shadow: none;
 $btn-padding-y: .5rem;
 $btn-padding-y-sm: .25rem;
 $btn-padding-y-lg: .75rem;
+$btn-border-radius: 0;
 
 $btn-primary-bg: $brand-primary;
 $btn-primary-border: $btn-primary-bg;
@@ -55,22 +56,23 @@ $btn-danger-bg: $brand-danger;
 $btn-danger-border: $btn-danger-bg;
 
 // Links
-$link-color: #c0c9cf;
+$link-color: #54667A;
 $link-decoration: none;
 $link-hover-color: darken($link-color, 15%);
 $link-hover-decoration: none;
 
 // Forms
 $input-bg: $white;
-$input-color: #444;
-$input-border-color: darken(#ddd, 10%);
+$input-color: #565656;
+$input-border-color: #e4e7ea;
 $input-bg-focus: $input-bg;
-$input-border-focus: $input-border-color;
+$input-border-focus: $input-color;
 $input-box-shadow: none;
 $input-box-shadow-focus: none;
-$input-color-placeholder: $grey;
+$input-color-placeholder: $input-color;
 $input-color-focus: $input-color;
 $input-line-height: 2;
+$input-border-radius: 0;
 
 // Navbar
 $navbar-border-radius: 0;

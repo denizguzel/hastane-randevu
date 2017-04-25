@@ -37,6 +37,14 @@ body.page-404 {
   color: $green;
 }
 
+.form-control.error {
+  border-color: $red;
+}
+
+.form-control.success {
+  border-color: $green;
+}
+
 .btn-success {
   background-color: $green;
   &:hover {
@@ -72,22 +80,27 @@ body.page-404 {
 
 .bootstrap-select {
   .btn {
-    background-color: transparent;
-    border: 0;
-    color: #fff;
+    color: $input-color !important;
     padding: 11.5px 25px 11.5px 12px !important;
+    border-color: $input-border-color;
+    background-color: $input-bg;
+    border-radius: 0;
     &:focus {
       outline: 0 !important;
     }
   }
   .dropdown-menu.open {
-    border: 0;
+    border-color: $input-border-color;
+    background-color: $input-bg;
+    border-radius: 0;
     .dropdown-menu.inner {
+      background-color: $input-bg;
       li {
         a {
           display: block;
           padding: 5px 10px;
           font-size: 14px;
+          color: $input-color;
           &:hover {
             background-color: #ddd;
           }
@@ -158,9 +171,10 @@ body.page-404 {
   align-items: center;
   padding-left: 10.5px;
   height: 40px;
-  background-color: #f5f5f5;
-  color: #000;
-  border-radius: 4px;
+  background-color: #ECEEEF;
+  color: $input-color;
+  border: 1px solid $input-border-color;
+  cursor: not-allowed;
 }
 
 .toast {
@@ -191,6 +205,7 @@ body.page-404 {
     background-color: darken($main-color, 10%);
     color: #fff;
     text-align: center;
+    font-size: 20px;
     i {
       margin-right: 10px;
     }
@@ -200,26 +215,14 @@ body.page-404 {
     .input-group {
       margin-bottom: 10px;
       .input-group-addon {
-        border-color: #ccc;
-        background-color: #fff;
+        border-color: $input-border-color;
+        background-color: #ECEEEF;
         i {
-          color: #444;
+          color: #464A4C;
         }
-      }
-      .form-control {
-        border-color: #ccc;
-        background-color: #fff;
-        height: 40px;
-        color: #444;
       }
     }
     .form-group {
-      .form-control {
-        border-color: #ccc;
-        background-color: #fff;
-        height: 40px;
-        color: $grey;
-      }
       textarea.form-control {
         height: initial;
       }
@@ -230,29 +233,8 @@ body.page-404 {
         }
       }
     }
-    .btn {
-      padding: 11.5px 15px;
-    }
-    .bootstrap-select {
-      .btn {
-        color: $grey;
-      }
-    }
     .card-block-header {
       margin-bottom: 10px;
-    }
-  }
-}
-
-.card-unknown {
-  margin-top: 50px;
-  .card-header {
-    background-color: $yellow;
-    font-size: 24px;
-    text-align: center;
-    i {
-      margin-right: 10px;
-      font-size: 30px;
     }
   }
 }

@@ -83,7 +83,13 @@
   background-color: $main-color;
   padding: 0 30px 0 0;
   height: 50px;
-  z-index: 1;
+  z-index: 2;
+  .brand {
+    width: 230px;
+    img {
+      max-width: 100%;
+    }
+  }
   .dropdown {
     align-items: stretch;
     .dropdown-toggle {

@@ -10,15 +10,15 @@
             <h:form prependId="false">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                <h:inputText id="recordNumber" value="#{login.doctorModel.recordNumber}" p:placeholder="Sicil no giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen sicil no giriniz">
-                  <f:ajax event="blur" execute="@this" render="recordNumberMessage"/>
+                <h:inputText id="recordNumber" value="#{login.doctorModel.recordNumber}" p:placeholder="Sicil no giriniz" required="true" requiredMessage="Lütfen sicil no giriniz" binding="#{form.recordNumber}" styleClass="form-control#{form.recordNumber.valid ? '' : ' error'}">
+                  <f:ajax event="blur" execute="@this" render="@this recordNumberMessage"/>
                 </h:inputText>
               </div>
               <h:message id="recordNumberMessage" for="recordNumber" errorClass="error"/>
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
-                <h:inputSecret id="password" value="#{login.doctorModel.password}" p:placeholder="Şifre giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen şifrenizi giriniz">
-                  <f:ajax event="blur" execute="@this" render="passwordMessage"/>
+                <h:inputSecret id="password" value="#{login.doctorModel.password}" p:placeholder="Şifre giriniz" required="true" requiredMessage="Lütfen şifrenizi giriniz" binding="#{form.password}" styleClass="form-control#{form.password.valid ? '' : ' error'}">
+                  <f:ajax event="blur" execute="@this" render="@this passwordMessage"/>
                 </h:inputSecret>
               </div>
               <h:message id="passwordMessage" for="password" errorClass="error"/>

@@ -11,9 +11,9 @@
               <h:form prependId="false">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                  <h:inputText id="email" value="#{passwordReset.email}" p:placeholder="Email giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen email giriniz">
+                  <h:inputText id="email" value="#{passwordReset.email}" p:placeholder="Email giriniz" required="true" requiredMessage="Lütfen email giriniz" binding="#{form.email}" styleClass="form-control#{form.email.valid ? '' : ' error'}">
                     <f:validator validatorId="email"/>
-                    <f:ajax event="blur" execute="@this" render="emailMessage"/>
+                    <f:ajax event="blur" execute="@this" render="@this emailMessage"/>
                   </h:inputText>
                 </div>
                 <h:message id="emailMessage" for="email" errorClass="error"/>

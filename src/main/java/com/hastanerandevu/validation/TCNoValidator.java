@@ -44,7 +44,7 @@ public class TCNoValidator implements Validator {
 
   public void validate(FacesContext facesContext, UIComponent uiComponent, Object value) throws ValidatorException {
     if(!isValidTckn(value.toString())) {
-      FacesMessage msg = new FacesMessage("TC No doğrulaması hatalı.", "TC No geçerli değil.");
+      FacesMessage msg = new FacesMessage(null, "TC No geçerli değil");
       msg.setSeverity(FacesMessage.SEVERITY_ERROR);
       throw new ValidatorException(msg);
     }

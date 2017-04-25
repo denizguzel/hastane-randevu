@@ -261,10 +261,10 @@ blockquote {
   margin: 0 0 1rem; }
 
 a {
-  color: #c0c9cf;
+  color: #54667A;
   text-decoration: none; }
   a:focus, a:hover {
-    color: #95a4ae;
+    color: #35404d;
     text-decoration: none; }
 
 a:not([href]):not([tabindex]) {

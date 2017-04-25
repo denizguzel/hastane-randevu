@@ -6,7 +6,7 @@ import com.hastanerandevu.service.impl.*;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIInput;
 import javax.faces.event.AjaxBehaviorEvent;
 import java.io.Serializable;
@@ -14,7 +14,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @ManagedBean(name = "appointment")
-@SessionScoped
+@ViewScoped
 public class AppointmentBean implements Serializable {
   private HospitalPoliclinicRelServiceImpl hospitalPoliclinicRelService;
   private CityServiceImpl cityService;
@@ -37,6 +37,10 @@ public class AppointmentBean implements Serializable {
   @PostConstruct
   public void init() {
     cities = new LinkedHashMap();
+    districts = new LinkedHashMap();
+    hospitals = new LinkedHashMap();
+    policlinics = new LinkedHashMap();
+    inspectionPlaces = new LinkedHashMap();
     cityService = new CityServiceImpl();
     for (CityModel cityModel : cityService.getCities()) {
       cities.put(cityModel.getPk(), cityModel.getCityName());
@@ -119,11 +123,11 @@ public class AppointmentBean implements Serializable {
     return inspectionPlaces;
   }
 
-  public void setInspectionPlaces(Map<Long, String> inspectionPlaces) {
+  public void setInspectionPlaces(LinkedHashMap inspectionPlaces) {
     this.inspectionPlaces = inspectionPlaces;
   }
 
-  public void setInspectionPlaces(LinkedHashMap inspectionPlaces) {
+  public void setInspectionPlaces(Map<Long, String> inspectionPlaces) {
     this.inspectionPlaces = inspectionPlaces;
   }
 
@@ -140,7 +144,6 @@ public class AppointmentBean implements Serializable {
       selectedCity = input.getValue().toString();
     }
 
-    districts = new LinkedHashMap();
 
     for (DistrictModel districtModel : cityService.getAllDistrictsByCity(cityService.find(Long.parseLong(selectedCity)))) {
       districts.put(districtModel.getPk(), districtModel.getDistrictName());
@@ -160,7 +163,6 @@ public class AppointmentBean implements Serializable {
     }
 
     districtService = new DistrictServiceImpl();
-    hospitals = new LinkedHashMap();
 
     for (HospitalModel hospitalModel : districtService.getHospitalsByDistrict(districtService.find(Long.parseLong(selectedDistrict)))) {
       hospitals.put(hospitalModel.getPk(), hospitalModel.getHospitalName());
@@ -179,7 +181,6 @@ public class AppointmentBean implements Serializable {
     }
 
     hospitalService = new HospitalServiceImpl();
-    policlinics = new LinkedHashMap();
 
     for (HospitalPoliclinicRelModel hospitalPoliclinicRelModel : hospitalService.getPoliclinicByHospital(hospitalService.find(Long.parseLong(selectedHospital)))) {
       policlinics.put(hospitalPoliclinicRelModel.getPk(), hospitalPoliclinicRelModel.getPoliclinic().getPoliclinicName());
@@ -198,7 +199,6 @@ public class AppointmentBean implements Serializable {
 
     policlinicService = new PoliclinicServiceImpl();
     hospitalPoliclinicRelService = new HospitalPoliclinicRelServiceImpl();
-    inspectionPlaces = new LinkedHashMap();
 
     for (InspectionPlaceModel inspectionPlaceModel : policlinicService.getInspectionPlacesByHospitalPoliclinicRel(hospitalPoliclinicRelService.find(Long.parseLong(selectedPoliclinic)))) {
       inspectionPlaces.put(inspectionPlaceModel.getPk(), inspectionPlaceModel.getPlaceName() + " " + NameConverter.getName(inspectionPlaceModel.getDoctor().getFirstName(),inspectionPlaceModel.getDoctor().getLastName()));

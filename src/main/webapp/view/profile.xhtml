@@ -4,8 +4,10 @@
   <ui:define name="content">
     <div class="page-wrapper">
       <div class="container-fluid">
+        <div class="page-title">
+          <h4>Profil</h4>
+        </div>
         <div class="card">
-          <div class="card-header">Profil</div>
           <div class="card-block">
             <h:form prependId="false">
               <div class="card-block-header border">Kullanıcı Bilgileri</div>
@@ -25,49 +27,49 @@
               <div class="row">
                 <div class="col-md-3">
                   <div class="form-group">
-                    <h:inputText id="firstname" value="#{login.patientModel.firstName}" p:placeholder="Adınızı giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen adınızı giriniz">
-                      <f:ajax event="blur" execute="@this" render="firstnameMessage"/>
+                    <h:inputText id="firstname" value="#{login.patientModel.firstName}" p:placeholder="Adınızı giriniz" required="true" requiredMessage="Lütfen adınızı giriniz" binding="#{form.firstName}" styleClass="form-control#{form.firstName.valid ? '' : ' error'}">
+                      <f:ajax event="blur" execute="@this" render="@this firstnameMessage"/>
                     </h:inputText>
                     <h:message id="firstnameMessage" for="firstname" errorClass="error"/>
                   </div>
                 </div>
                 <div class="col-md-3">
                   <div class="form-group">
-                    <h:inputText id="lastname" value="#{login.patientModel.lastName}" p:placeholder="Soyadınızı giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen soyadınızı giriniz">
-                      <f:ajax event="blur" execute="@this" render="lastnameMessage"/>
+                    <h:inputText id="lastname" value="#{login.patientModel.lastName}" p:placeholder="Soyadınızı giriniz" required="true" requiredMessage="Lütfen soyadınızı giriniz" binding="#{form.lastName}" styleClass="form-control#{form.lastName.valid ? '' : ' error'}">
+                      <f:ajax event="blur" execute="@this" render="@this lastnameMessage"/>
                     </h:inputText>
                     <h:message id="lastnameMessage" for="lastname" errorClass="error"/>
                   </div>
                 </div>
                 <div class="col-md-3">
                   <div class="form-group">
-                    <h:inputText id="birthdate" value="#{login.patientModel.dateOfBirth}" p:placeholder="Doğum tarihinizi giriniz" styleClass="form-control datepicker" required="true" requiredMessage="Lütfen doğum tarihinizi giriniz">
+                    <h:inputText id="birthdate" value="#{login.patientModel.dateOfBirth}" p:placeholder="Doğum tarihinizi giriniz" required="true" requiredMessage="Lütfen doğum tarihinizi giriniz" binding="#{form.birthdate}" styleClass="form-control datepicker#{form.birthdate.valid ? '' : ' error'}">
                       <f:convertDateTime pattern="dd-MM-yyyy"/>
-                      <f:ajax event="blur" execute="@this" render="birthdateMessage"/>
+                      <f:ajax event="blur" execute="@this" render="@this birthdateMessage"/>
                     </h:inputText>
                     <h:message id="birthdateMessage" for="birthdate" errorClass="error"/>
                   </div>
                 </div>
                 <div class="col-md-3">
                   <div class="form-group">
-                    <h:inputText id="birthplace" value="#{login.patientModel.placeOfBirth}" p:placeholder="Doğum yerinizi giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen doğum yerinizi giriniz">
-                      <f:ajax event="blur" execute="@this" render="birthplaceMessage"/>
+                    <h:inputText id="birthplace" value="#{login.patientModel.placeOfBirth}" p:placeholder="Doğum yerinizi giriniz" required="true" requiredMessage="Lütfen doğum yerinizi giriniz" binding="#{form.birthplace}" styleClass="form-control#{form.birthplace.valid ? '' : ' error'}">
+                      <f:ajax event="blur" execute="@this" render="@this birthplaceMessage"/>
                     </h:inputText>
                     <h:message id="birthplaceMessage" for="birthplace" errorClass="error"/>
                   </div>
                 </div>
                 <div class="col-md-3">
                   <div class="form-group">
-                    <h:inputText id="fathername" value="#{login.patientModel.fatherName}" p:placeholder="Baba adı giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen baba adınızı giriniz">
-                      <f:ajax event="blur" execute="@this" render="fathernameMessage"/>
+                    <h:inputText id="fathername" value="#{login.patientModel.fatherName}" p:placeholder="Baba adı giriniz" required="true" requiredMessage="Lütfen baba adınızı giriniz" binding="#{form.fatherName}" styleClass="form-control#{form.fatherName.valid ? '' : ' error'}">
+                      <f:ajax event="blur" execute="@this" render="@this fathernameMessage"/>
                     </h:inputText>
                     <h:message id="fathernameMessage" for="fathername" errorClass="error"/>
                   </div>
                 </div>
                 <div class="col-md-3">
                   <div class="form-group">
-                    <h:inputText id="mothername" value="#{login.patientModel.motherName}" p:placeholder="Anne adı giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen anne adınızı giriniz">
-                      <f:ajax event="blur" execute="@this" render="mothernameMessage"/>
+                    <h:inputText id="mothername" value="#{login.patientModel.motherName}" p:placeholder="Anne adı giriniz" required="true" requiredMessage="Lütfen anne adınızı giriniz" binding="#{form.motherName}" styleClass="form-control#{form.motherName.valid ? '' : ' error'}">
+                      <f:ajax event="blur" execute="@this" render="@this mothernameMessage"/>
                     </h:inputText>
                     <h:message id="mothernameMessage" for="mothername" errorClass="error"/>
                   </div>
@@ -81,8 +83,8 @@
                 </div>
                 <div class="col-md-3">
                   <div class="form-group">
-                    <h:inputText id="questionanswer" value="#{login.patientModel.questionAnswer}" p:placeholder="Gizli soru cevabı giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen gizli soru cevabı giriniz">
-                      <f:ajax event="blur" execute="@this" render="questionanswerMessage"/>
+                    <h:inputText id="questionanswer" value="#{login.patientModel.questionAnswer}" p:placeholder="Gizli soru cevabı giriniz" required="true" requiredMessage="Lütfen gizli soru cevabı giriniz" binding="#{form.secretAnswer}" styleClass="form-control#{form.secretAnswer.valid ? '' : ' error'}">
+                      <f:ajax event="blur" execute="@this" render="@this questionanswerMessage"/>
                     </h:inputText>
                     <h:message id="questionanswerMessage" for="questionanswer" errorClass="error"/>
                   </div>
@@ -106,25 +108,25 @@
               <div class="row">
                 <div class="col-md-3">
                   <div class="form-group">
-                    <h:inputText id="email" value="#{login.patientModel.email}" p:placeholder="Email giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen email giriniz">
+                    <h:inputText id="email" value="#{login.patientModel.email}" p:placeholder="Email giriniz" required="true" requiredMessage="Lütfen email giriniz" binding="#{form.email}" styleClass="form-control#{form.email.valid ? '' : ' error'}">
                       <f:validator validatorId="email"/>
-                      <f:ajax event="blur" execute="@this" render="emailMessage"/>
+                      <f:ajax event="blur" execute="@this" render="@this emailMessage"/>
                     </h:inputText>
                     <h:message id="emailMessage" for="email" errorClass="error"/>
                   </div>
                 </div>
                 <div class="col-md-3">
                   <div class="form-group">
-                    <h:inputText id="phone" value="#{login.patientModel.phoneNumber}" p:placeholder="Telefon no giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen telefon no giriniz">
-                      <f:ajax event="blur" execute="@this" render="phoneMessage"/>
+                    <h:inputText id="phone" value="#{login.patientModel.phoneNumber}" p:placeholder="Telefon no giriniz" required="true" requiredMessage="Lütfen telefon no giriniz" binding="#{form.phone}" styleClass="form-control#{form.phone.valid ? '' : ' error'}">
+                      <f:ajax event="blur" execute="@this" render="@this phoneMessage"/>
                     </h:inputText>
                     <h:message id="phoneMessage" for="phone" errorClass="error"/>
                   </div>
                 </div>
                 <div class="col-md-3">
                   <div class="form-group">
-                    <h:inputText id="address" value="#{login.patientModel.address}" p:placeholder="Adres giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen adres giriniz">
-                      <f:ajax event="blur" execute="@this" render="addressMessage"/>
+                    <h:inputText id="address" value="#{login.patientModel.address}" p:placeholder="Adres giriniz" required="true" requiredMessage="Lütfen adres giriniz" binding="#{form.address}" styleClass="form-control#{form.address.valid ? '' : ' error'}">
+                      <f:ajax event="blur" execute="@this" render="@this addressMessage"/>
                     </h:inputText>
                     <h:message id="addressMessage" for="address" errorClass="error"/>
                   </div>
@@ -152,23 +154,24 @@
           <h:form prependId="false">
             <div class="modal-body">
               <div class="form-group">
-                <h:inputSecret id="password" value="#{login.password}" p:placeholder="Yeni şifrenizi giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen yeni şifrenizi giriniz">
-                  <f:validator validatorId="password"/>
-                  <f:attribute name="passwordConfirm" value="#{passwordConfirm}"/>
-                  <f:ajax event="blur" execute="password passwordConfirm" render="passwordMessage"/>
+                <h:inputSecret id="password" value="#{login.password}" p:placeholder="Yeni şifrenizi giriniz" required="true" requiredMessage="Lütfen yeni şifrenizi giriniz" binding="#{form.password}" styleClass="form-control">
+                  <f:ajax event="blur" execute="@this passwordConfirm" render="passwordMessage passwordConfirmMessage"/>
                 </h:inputSecret>
                 <h:message id="passwordMessage" for="password" errorClass="error"/>
               </div>
               <div class="form-group">
-                <h:inputSecret id="passwordConfirm" value="#{login.password}" binding="#{passwordConfirm}" p:placeholder="Yeni şifrenizi tekrar giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen yeni şifrenizi tekrar giriniz">
-                  <f:ajax event="blur" execute="password passwordConfirm" render="passwordConfirmMessage"/>
+                <h:inputSecret id="passwordConfirm" p:placeholder="Yeni şifrenizi tekrar giriniz" required="#{not empty form.password.value}" requiredMessage="Lütfen yeni şifrenizi tekrar giriniz" binding="#{form.passwordAgain}" styleClass="form-control">
+                  <f:validator validatorId="password"/>
+                  <f:attribute name="otherValue" value="#{form.password.value}"/>
+                  <f:ajax event="blur" execute="@this password" render="passwordMessage passwordConfirmMessage"/>
                 </h:inputSecret>
                 <h:message id="passwordConfirmMessage" for="passwordConfirm" errorClass="error"/>
               </div>
-              <div class="form-group">
-                <h:commandButton styleClass="btn btn-success d-block m-auto" value="Değiştir" action="#{login.patientPasswordUpdate}">
+              <div class="form-group d-flex">
+                <h:commandButton styleClass="btn btn-success ml-auto" value="Değiştir" action="#{login.patientPasswordUpdate}">
                   <f:ajax execute="@form" render="@form" onevent="toast"/>
                 </h:commandButton>
+                <button type="button" class="btn btn-secondary ml-2" data-dismiss="modal">Kapat</button>
               </div>
             </div>
             <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>

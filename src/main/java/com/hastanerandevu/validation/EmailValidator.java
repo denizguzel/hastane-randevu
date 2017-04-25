@@ -21,11 +21,9 @@ public class EmailValidator implements Validator {
   }
 
   public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-
     Matcher matcher = pattern.matcher(value.toString());
     if(!matcher.matches()) {
-
-      FacesMessage msg = new FacesMessage("E-mail doğrulaması hatalı.", "Geçersiz e-mail adresi.");
+      FacesMessage msg = new FacesMessage(null, "Geçersiz e-mail adresi");
       msg.setSeverity(FacesMessage.SEVERITY_ERROR);
       throw new ValidatorException(msg);
     }

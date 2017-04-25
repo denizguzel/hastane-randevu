@@ -93,44 +93,6 @@ function ToastBuilder(options) {
 }
 var showtoast = new ToastBuilder();
 
-// Custom
-function toast(data) {
-  if (data.status === "success") {
-    var systemMessageElement = $(".global-message li");
-    var message = systemMessageElement.text();
-    showtoast(message);
-    if (systemMessageElement.hasClass("error")) {
-      $(".toast").addClass("error");
-    }
-    else if (systemMessageElement.hasClass("info")) {
-      $(".toast").addClass("info");
-    }
-    systemMessageElement.text("");
-  }
-}
-
-function selectPicker(data) {
-  if (data.status === "success")
-    $('.selectpicker').selectpicker("render");
-}
-
-function selectPickerToast(data) {
-  if (data.status === "success") {
-    $('.selectpicker').selectpicker("render");
-    var systemMessageElement = $(".global-message li");
-    var message = systemMessageElement.text();
-    showtoast(message);
-    if (systemMessageElement.hasClass("error")) {
-      $(".toast").addClass("error");
-    }
-    else if (systemMessageElement.hasClass("info")) {
-      $(".toast").addClass("info");
-    }
-    systemMessageElement.text("");
-  }
-}
-
-
 // Cookie check for survey
 $("#swiper-survey").find(".btn").click(function () {
   var surveyPk = $(this).closest(".swiper-slide").attr("id");
@@ -155,4 +117,56 @@ $("#swiper-survey .swiper-slide").each(function () {
   if (!$("#swiper-survey .swiper-slide").length) {
     Cookies.set("surveysDone", "yes");
   }
+});
+
+// Custom
+function toast(data) {
+  if (data.status === "success") {
+    var systemMessageElement = $(".global-message li");
+    if (systemMessageElement.length) {
+      var message = systemMessageElement.text();
+      showtoast(message);
+      if (systemMessageElement.hasClass("error")) {
+        $(".toast").addClass("error");
+      }
+      else if (systemMessageElement.hasClass("info")) {
+        $(".toast").addClass("info");
+      }
+      systemMessageElement.text("");
+    }
+    else {
+      showtoast("Bilgileri Kontrol Ediniz");
+    }
+  }
+}
+
+function selectPicker(data) {
+  if (data.status === "success")
+    $('.selectpicker').selectpicker("render");
+}
+
+function selectPickerToast(data) {
+  if (data.status === "success") {
+    $('.selectpicker').selectpicker("render");
+    var systemMessageElement = $(".global-message li");
+    if (systemMessageElement.length) {
+      var message = systemMessageElement.text();
+      showtoast(message);
+      if (systemMessageElement.hasClass("error")) {
+        $(".toast").addClass("error");
+      }
+      else if (systemMessageElement.hasClass("info")) {
+        $(".toast").addClass("info");
+      }
+      systemMessageElement.text("");
+    }
+    else {
+      showtoast("Bilgileri Kontrol Ediniz");
+    }
+  }
+}
+
+// Empty error/info messages when modal closed
+$(".modal").on('hidden.bs.modal', function () {
+  $(this).find(".error,.info").text("");
 });

@@ -11,16 +11,16 @@
               <h:form prependId="false">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                  <h:inputText id="tcNumber" value="#{login.patientModel.tcNumber}" p:placeholder="TC no giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen TC no giriniz">
+                  <h:inputText id="tcNumber" value="#{login.patientModel.tcNumber}" p:placeholder="TC no giriniz" required="true" requiredMessage="Lütfen TC no giriniz" binding="#{form.tcNumber}" styleClass="form-control#{form.tcNumber.valid ? '' : ' error'}">
                     <f:validator validatorId="tcNumber"/>
-                    <f:ajax event="blur" execute="@this" render="tcNumberMessage"/>
+                    <f:ajax event="blur" execute="@this" render="@this tcNumberMessage"/>
                   </h:inputText>
                 </div>
                 <h:message id="tcNumberMessage" for="tcNumber" errorClass="error"/>
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
-                  <h:inputSecret id="password" value="#{login.patientModel.password}" p:placeholder="Şifre giriniz" styleClass="form-control" required="true" requiredMessage="Lütfen şifrenizi giriniz">
-                    <f:ajax event="blur" execute="@this" render="passwordMessage"/>
+                  <h:inputSecret id="password" value="#{login.patientModel.password}" p:placeholder="Şifre giriniz" required="true" requiredMessage="Lütfen şifrenizi giriniz" binding="#{form.password}" styleClass="form-control#{form.password.valid ? '' : ' error'}">
+                    <f:ajax event="blur" execute="@this" render="@this passwordMessage"/>
                   </h:inputSecret>
                 </div>
                 <h:message id="passwordMessage" for="password" errorClass="error"/>

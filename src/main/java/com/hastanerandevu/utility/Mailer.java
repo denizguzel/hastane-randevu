@@ -92,6 +92,5 @@ public class Mailer implements Runnable {
     catch (NoUserException e){
       LOG.error(e.getMessage());
     }
-
   }
 }
