@@ -2,6 +2,7 @@ package com.hastanerandevu.beans;
 
 import com.hastanerandevu.constants.ProjectConstants;
 import com.hastanerandevu.converter.Encryptor;
+import com.hastanerandevu.exceptions.NoUserException;
 import com.hastanerandevu.model.PatientModel;
 import com.hastanerandevu.service.impl.PatientServiceImpl;
 import com.hastanerandevu.utility.Mailer;
@@ -47,30 +48,39 @@ public class PasswordResetBean {
   }
 
   public void passwordReset() {
-    PatientModel patientModel = patientService.getUserByEmail(getEmail());
-    if(patientModel != null) {
+    try {
+      PatientModel patientModel = patientService.getUserByEmail(getEmail());
+
       new Mailer().sendPasswordResetMail(email);
       Calendar date = Calendar.getInstance();
       long t = date.getTimeInMillis();
       patientModel.setForgottenExpirationDate(new Date(t + (15 * ProjectConstants.ONE_MINUTE_IN_MILLIS)));
       patientService.update(patientModel);
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Şifre sıfırlama maili gönderildi.", null));
-    } else {
+
+    } catch (NoUserException e) {
+      System.out.println(e.getMessage());
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email sistemde kayıtlı değil.", null));
     }
   }
 
   public void passwordUpdate() throws URISyntaxException {
     String encryptedSalt = Encryptor.encryptEmail(ProjectConstants.SALT + getEmail());
-    PatientModel patientModel = patientService.getUserByEmail(getEmail());
-    if(urlParam.equals(encryptedSalt) && patientService.changingPasswordIsAvailable(patientModel)) {
+    try{
+      PatientModel patientModel = patientService.getUserByEmail(getEmail());
+      if (urlParam.equals(encryptedSalt) && patientService.changingPasswordIsAvailable(patientModel)) {
 
-      patientModel.setPassword(Encryptor.encryptPassword(getPassword()));
-      patientService.update(patientModel);
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Şifreniz değiştirildi.", null));
+        patientModel.setPassword(Encryptor.encryptPassword(getPassword()));
+        patientService.update(patientModel);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Şifreniz değiştirildi.", null));
 
-    } else {
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Şifreniz değiştirilemedi.", null));
+      } else {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Şifreniz değiştirilemedi.", null));
+      }
     }
+    catch(NoUserException e){
+      System.out.println(e.getMessage());
+    }
+
   }
 }

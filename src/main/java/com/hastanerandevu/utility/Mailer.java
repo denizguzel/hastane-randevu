@@ -2,8 +2,10 @@ package com.hastanerandevu.utility;
 
 import com.hastanerandevu.constants.ProjectConstants;
 import com.hastanerandevu.converter.Encryptor;
+import com.hastanerandevu.exceptions.NoUserException;
 import com.hastanerandevu.model.PatientModel;
 import com.hastanerandevu.service.impl.PatientServiceImpl;
+import org.apache.log4j.Logger;
 
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
@@ -15,6 +17,9 @@ import java.util.Date;
 import java.util.Properties;
 
 public class Mailer implements Runnable {
+
+  private static final Logger LOG = Logger.getLogger(Mailer.class);
+
   private PatientServiceImpl patientService = new PatientServiceImpl();
   private PatientModel patientModel = new PatientModel();
   private String to;
@@ -73,14 +78,20 @@ public class Mailer implements Runnable {
   }
 
   public void sendPasswordResetMail(String email) {
-    patientModel = patientService.getUserByEmail(email);
+    try{
+      patientModel = patientService.getUserByEmail(email);
 
-    String encryptedSalt = Encryptor.encryptEmail(ProjectConstants.SALT + patientModel.getEmail());
+      String encryptedSalt = Encryptor.encryptEmail(ProjectConstants.SALT + patientModel.getEmail());
 
-    Mailer mailer = new Mailer();
-    mailer.setParameters(patientModel.getEmail(), "Hastane Randevu Sistemi Şifre Sıfırlama", "<div>Merhaba <h1>" + patientModel.getFirstName() + ",</h1>\n\n<a href='http://localhost:8080/recovery/reset?q=" + encryptedSalt + "'>Şifre sıfırlama bağlantınız</a></div>");
+      Mailer mailer = new Mailer();
+      mailer.setParameters(patientModel.getEmail(), "Hastane Randevu Sistemi Şifre Sıfırlama", "<div>Merhaba <h1>" + patientModel.getFirstName() + ",</h1>\n\n<a href='http://localhost:8080/recovery/reset?q=" + encryptedSalt + "'>Şifre sıfırlama bağlantınız</a></div>");
 
-    Thread thread = new Thread(mailer);
-    thread.start();
+      Thread thread = new Thread(mailer);
+      thread.start();
+    }
+    catch (NoUserException e){
+      LOG.error(e.getMessage());
+    }
+
   }
 }

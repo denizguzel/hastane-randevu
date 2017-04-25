@@ -1,5 +1,6 @@
 package com.hastanerandevu.beans;
 
+import com.hastanerandevu.converter.NameConverter;
 import com.hastanerandevu.model.*;
 import com.hastanerandevu.service.impl.*;
 
@@ -200,7 +201,7 @@ public class AppointmentBean implements Serializable {
     inspectionPlaces = new LinkedHashMap();
 
     for (InspectionPlaceModel inspectionPlaceModel : policlinicService.getInspectionPlacesByHospitalPoliclinicRel(hospitalPoliclinicRelService.find(Long.parseLong(selectedPoliclinic)))) {
-      inspectionPlaces.put(inspectionPlaceModel.getPk(), inspectionPlaceModel.getPlaceName() + " " + inspectionPlaceModel.getDoctor().getName());
+      inspectionPlaces.put(inspectionPlaceModel.getPk(), inspectionPlaceModel.getPlaceName() + " " + NameConverter.getName(inspectionPlaceModel.getDoctor().getFirstName(),inspectionPlaceModel.getDoctor().getLastName()));
     }
   }
 }

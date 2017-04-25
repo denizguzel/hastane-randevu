@@ -1,6 +1,7 @@
 package com.hastanerandevu.service.impl;
 
 import com.hastanerandevu.dao.impl.PatientDaoImpl;
+import com.hastanerandevu.exceptions.NoUserException;
 import com.hastanerandevu.model.*;
 import com.hastanerandevu.service.BaseService;
 
@@ -56,8 +57,13 @@ public class PatientServiceImpl implements BaseService<PatientModel> {
     return patientDao.haveUserRegistration(patientModel);
   }
 
-  public PatientModel getUserByEmail(String email) {
+  public PatientModel getUserByEmail(String email) throws NoUserException{
+    if (patientDao.getUserByEmail(email) == null){
+      throw new NoUserException("User not found by this email : "+email);
+    }
+
     return patientDao.getUserByEmail(email);
+
   }
 
   public boolean changingPasswordIsAvailable(PatientModel patientModel) {
