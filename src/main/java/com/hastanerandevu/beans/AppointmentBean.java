@@ -200,8 +200,13 @@ public class AppointmentBean implements Serializable {
     policlinicService = new PoliclinicServiceImpl();
     hospitalPoliclinicRelService = new HospitalPoliclinicRelServiceImpl();
 
+
     for (InspectionPlaceModel inspectionPlaceModel : policlinicService.getInspectionPlacesByHospitalPoliclinicRel(hospitalPoliclinicRelService.find(Long.parseLong(selectedPoliclinic)))) {
-      inspectionPlaces.put(inspectionPlaceModel.getPk(), inspectionPlaceModel.getPlaceName() + " " + NameConverter.getName(inspectionPlaceModel.getDoctor().getFirstName(),inspectionPlaceModel.getDoctor().getLastName()));
+      StringBuilder str = new StringBuilder(inspectionPlaceModel.getPlaceName());
+      if (inspectionPlaceModel.getDoctor() != null) {
+        str.append(" " + NameConverter.getName(inspectionPlaceModel.getDoctor().getFirstName(), inspectionPlaceModel.getDoctor().getLastName()));
+      }
+      inspectionPlaces.put(inspectionPlaceModel.getPk(), String.valueOf(str));
     }
   }
 }
