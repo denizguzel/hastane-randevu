@@ -1,0 +1,172 @@
+<ui:composition template="/view/master/beforeLoginTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+  <ui:define name="title">Sisteme Giriş</ui:define>
+
+  <ui:define name="content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 offset-md-4">
+          <div class="shadow mt-5 mb-5">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#login">Giriş</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#register">Kayıt</a>
+              </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div class="tab-pane fade show active" id="login">
+                <h:form prependId="false">
+                  <div class="form-group" data-message="">
+                    <h:inputText id="tcNumberLogin" value="#{login.patientModel.tcNumber}" p:placeholder="TC no giriniz" required="true" requiredMessage="TC no giriniz" styleClass="form-control">
+                      <f:validator validatorId="tcNumber"/>
+                      <f:ajax event="blur" execute="@this" render="tcNumberLoginMessage" onevent="ajaxCall"/>
+                    </h:inputText>
+                    <h:message id="tcNumberLoginMessage" for="tcNumberLogin" errorClass="error"/>
+                  </div>
+                  <div class="form-group" data-message="">
+                    <h:inputSecret id="passwordLogin" value="#{login.patientModel.password}" p:placeholder="Şifre giriniz" required="true" requiredMessage="Şifrenizi giriniz" styleClass="form-control">
+                      <f:ajax event="blur" execute="@this" render="passwordLoginMessage" onevent="ajaxCall"/>
+                    </h:inputSecret>
+                    <h:message id="passwordLoginMessage" for="passwordLogin" errorClass="error"/>
+                  </div>
+                  <div class="form-group d-flex">
+                    <a href="#{facesContext.externalContext.requestContextPath}/recovery/forgot" class="forgot ml-auto">Şifremi Unuttum</a>
+                  </div>
+                  <input type="hidden" name="loginCheck" value="patient"/>
+                  <h:messages globalOnly="true" errorClass="error"/>
+                  <h:panelGroup rendered="#{login.showCaptcha}">
+                    <div class="g-recaptcha" data-sitekey="6LcjxBcUAAAAAKrzn6mU3wRdUiqEdCsxkKojNKeJ"></div>
+                    <h:outputScript>grecaptcha.render($('.g-recaptcha')[0], {sitekey: '6LcjxBcUAAAAAKrzn6mU3wRdUiqEdCsxkKojNKeJ'});</h:outputScript>
+                  </h:panelGroup>
+                  <h:commandButton value="Giriş Yap" styleClass="btn btn-success" action="#{login.login}">
+                    <f:ajax execute="@form" render="@form"/>
+                  </h:commandButton>
+                </h:form>
+              </div>
+              <div class="tab-pane fade" id="register">
+                <h:form prependId="false">
+                  <div class="form-group-header border">Kullanıcı Bilgileri</div>
+                  <div class="form-group" data-message="">
+                    <h:inputText id="tcNumber" value="#{login.patientModel.tcNumber}" p:placeholder="TC No giriniz" required="true" requiredMessage="TC No giriniz" styleClass="form-control">
+                      <f:validator validatorId="tcNumber"/>
+                      <f:ajax event="blur" execute="@this" render="tcNumberMessage" onevent="ajaxCall"/>
+                    </h:inputText>
+                    <h:message id="tcNumberMessage" for="tcNumber" errorClass="error"/>
+                  </div>
+                  <div class="form-group">
+                    <h:inputSecret id="password" value="#{login.patientModel.password}" p:placeholder="Şifrenizi giriniz" required="true" requiredMessage="Şifrenizi giriniz" styleClass="form-control" binding="#{passwordConfirm}">
+                      <f:ajax event="blur" execute="@this passwordConfirm" render="passwordMessage passwordConfirmMessage"/>
+                    </h:inputSecret>
+                    <i class="fa fa-question-circle-o" data-toggle="tooltip" data-placement="top" title="Şifreniz en az 1 rakam, 1 küçük harf, 1 büyük harf, 1 özel karakter ve en az 8 haneli olmalıdır"></i>
+                    <h:message id="passwordMessage" for="password" errorClass="error"/>
+                  </div>
+                  <div class="form-group" data-message="">
+                    <h:inputSecret id="passwordConfirm" p:placeholder="Şifrenizi tekrar giriniz" required="#{not empty passwordConfirm}" requiredMessage="Şifrenizi tekrar giriniz" styleClass="form-control">
+                      <f:validator validatorId="password"/>
+                      <f:attribute name="otherValue" value="#{passwordConfirm}"/>
+                      <f:ajax event="blur" execute="@this password" render="passwordMessage passwordConfirmMessage" onevent="ajaxCall"/>
+                    </h:inputSecret>
+                    <h:message id="passwordConfirmMessage" for="passwordConfirm" errorClass="error"/>
+                  </div>
+                  <div class="form-group-header border">Kişisel Bilgiler</div>
+                  <div class="form-group" data-message="">
+                    <h:inputText id="firstname" value="#{login.patientModel.firstName}" p:placeholder="Adınızı giriniz" required="true" requiredMessage="Adınızı giriniz" styleClass="form-control">
+                      <f:ajax event="blur" execute="@this" render="firstnameMessage" onevent="ajaxCall"/>
+                    </h:inputText>
+                    <h:message id="firstnameMessage" for="firstname" errorClass="error"/>
+                  </div>
+                  <div class="form-group" data-message="">
+                    <h:inputText id="lastname" value="#{login.patientModel.lastName}" p:placeholder="Soyadınızı giriniz" required="true" requiredMessage="Soyadınızı giriniz" styleClass="form-control">
+                      <f:ajax event="blur" execute="@this" render="lastnameMessage" onevent="ajaxCall"/>
+                    </h:inputText>
+                    <h:message id="lastnameMessage" for="lastname" errorClass="error"/>
+                  </div>
+                  <div class="form-group" data-message="">
+                    <h:inputText id="birthdate" value="#{login.patientModel.dateOfBirth}" p:placeholder="Doğum tarihinizi giriniz" required="true" requiredMessage="Doğum tarihinizi giriniz" styleClass="form-control datepicker">
+                      <f:convertDateTime pattern="dd-MM-yyyy"/>
+                      <f:ajax event="blur" execute="@this" render="birthdateMessage" onevent="ajaxCall"/>
+                    </h:inputText>
+                    <h:message id="birthdateMessage" for="birthdate" errorClass="error"/>
+                  </div>
+                  <div class="form-group" data-message="">
+                    <h:inputText id="birthplace" value="#{login.patientModel.placeOfBirth}" p:placeholder="Doğum yerinizi giriniz" required="true" requiredMessage="Doğum yerinizi giriniz" styleClass="form-control">
+                      <f:ajax event="blur" execute="@this" render="birthplaceMessage" onevent="ajaxCall"/>
+                    </h:inputText>
+                    <h:message id="birthplaceMessage" for="birthplace" errorClass="error"/>
+                  </div>
+                  <div class="form-group" data-message="">
+                    <h:inputText id="fathername" value="#{login.patientModel.fatherName}" p:placeholder="Baba adı giriniz" required="true" requiredMessage="Baba adınızı giriniz" styleClass="form-control">
+                      <f:ajax event="blur" execute="@this" render="fathernameMessage" onevent="ajaxCall"/>
+                    </h:inputText>
+                    <h:message id="fathernameMessage" for="fathername" errorClass="error"/>
+                  </div>
+                  <div class="form-group" data-message="">
+                    <h:inputText id="mothername" value="#{login.patientModel.motherName}" p:placeholder="Anne adı giriniz" required="true" requiredMessage="Anne adınızı giriniz" styleClass="form-control">
+                      <f:ajax event="blur" execute="@this" render="mothernameMessage" onevent="ajaxCall"/>
+                    </h:inputText>
+                    <h:message id="mothernameMessage" for="mothername" errorClass="error"/>
+                  </div>
+                  <div class="form-group" data-message="">
+                    <h:selectOneMenu id="secretquestion" styleClass="selectpicker form-control" value="#{login.patientModel.secretQuestion}" required="true" requiredMessage="Gizli soru seçiniz">
+                      <f:selectItems value="#{login.secretQuestionEnums}" var="secretQuestionGroup" itemValue="#{secretQuestionGroup}" itemLabel="#{messages['string.'.concat(secretQuestionGroup)]}"/>
+                    </h:selectOneMenu>
+                    <h:message id="secretquestionMessage" for="secretquestion" errorClass="error"/>
+                  </div>
+                  <div class="form-group" data-message="">
+                    <h:inputText id="questionanswer" value="#{login.patientModel.questionAnswer}" p:placeholder="Gizli soru cevabı giriniz" required="true" requiredMessage="Gizli soru cevabı giriniz" styleClass="form-control">
+                      <f:ajax event="blur" execute="@this" render="questionanswerMessage" onevent="ajaxCall"/>
+                    </h:inputText>
+                    <h:message id="questionanswerMessage" for="questionanswer" errorClass="error"/>
+                  </div>
+                  <div class="form-group" data-message="">
+                    <h:selectOneMenu id="gender" styleClass="selectpicker form-control" value="#{login.patientModel.gender}" required="true" requiredMessage="Cinsiyet seçiniz">
+                      <f:selectItems value="#{login.genderEnums}" var="genderGroup" itemValue="#{genderGroup}" itemLabel="#{messages['string.'.concat(genderGroup)]}"/>
+                    </h:selectOneMenu>
+                    <h:message id="genderMessage" for="gender" errorClass="error"/>
+                  </div>
+                  <div class="form-group" data-message="">
+                    <h:selectOneMenu id="bloodgroup" styleClass="selectpicker form-control" value="#{login.patientModel.bloodGroup}" required="true" requiredMessage="Kan grubu seçiniz">
+                      <f:selectItems value="#{login.bloodGroupEnums}" var="bloodGroup" itemValue="#{bloodGroup}" itemLabel="#{messages['string.'.concat(bloodGroup)]}"/>
+                    </h:selectOneMenu>
+                    <h:message id="bloodgroupMessage" for="bloodgroup" errorClass="error"/>
+                  </div>
+                  <div class="form-group-header border">İletişim Bilgileri</div>
+                  <div class="form-group" data-message="">
+                    <h:inputText id="email" name="email" value="#{login.patientModel.email}" p:placeholder="Email giriniz" required="true" requiredMessage="Email giriniz" styleClass="form-control">
+                      <f:validator validatorId="email"/>
+                      <f:ajax event="blur" execute="@this" render="emailMessage" onevent="ajaxCall"/>
+                    </h:inputText>
+                    <h:message id="emailMessage" for="email" errorClass="error"/>
+                  </div>
+                  <div class="form-group" data-message="">
+                    <h:inputText id="phone" value="#{login.patientModel.phoneNumber}" p:placeholder="Telefon no giriniz" required="true" requiredMessage="Telefon no giriniz" styleClass="form-control">
+                      <f:ajax event="blur" execute="@this" render="phoneMessage" onevent="ajaxCall"/>
+                    </h:inputText>
+                    <h:message id="phoneMessage" for="phone" errorClass="error"/>
+                  </div>
+                  <div class="form-group" data-message="">
+                    <h:inputTextarea rows="3" id="address" value="#{login.patientModel.address}" p:placeholder="Adres giriniz" required="true" requiredMessage="Adres giriniz" styleClass="form-control">
+                      <f:ajax event="blur" execute="@this" render="addressMessage" onevent="ajaxCall"/>
+                    </h:inputTextarea>
+                    <h:message id="addressMessage" for="address" errorClass="error"/>
+                  </div>
+                  <h:commandButton value="Kayıt Ol" styleClass="btn btn-success" action="#{login.patientCreate}">
+                    <f:ajax execute="@form" render="@form" onevent="selectPickerToast"/>
+                  </h:commandButton>
+                  <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
+                </h:form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ui:define>
+  <ui:define name="js">
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+  </ui:define>
+</ui:composition>

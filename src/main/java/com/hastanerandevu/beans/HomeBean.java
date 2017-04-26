@@ -102,7 +102,7 @@ public class HomeBean implements Serializable {
     this.optionService = optionService;
   }
 
-  public String answerSurvey(){
+  public String answerSurvey() {
     optionService = new OptionServiceImpl();
     surveyService.answerSurvey(optionService.find(Long.parseLong(getSelectedOption())));
     return "/index?faces-redirect=true";

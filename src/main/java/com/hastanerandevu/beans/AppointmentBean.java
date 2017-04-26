@@ -42,7 +42,7 @@ public class AppointmentBean implements Serializable {
     policlinics = new LinkedHashMap();
     inspectionPlaces = new LinkedHashMap();
     cityService = new CityServiceImpl();
-    for (CityModel cityModel : cityService.getCities()) {
+    for(CityModel cityModel : cityService.getCities()) {
       cities.put(cityModel.getPk(), cityModel.getCityName());
     }
   }
@@ -137,7 +137,7 @@ public class AppointmentBean implements Serializable {
     policlinics.clear();
     inspectionPlaces.clear();
 
-    if (event == null) {
+    if(event == null) {
       System.out.println("Ajax event is null");
     } else {
       UIInput input = (UIInput) event.getSource();
@@ -145,7 +145,7 @@ public class AppointmentBean implements Serializable {
     }
 
 
-    for (DistrictModel districtModel : cityService.getAllDistrictsByCity(cityService.find(Long.parseLong(selectedCity)))) {
+    for(DistrictModel districtModel : cityService.getAllDistrictsByCity(cityService.find(Long.parseLong(selectedCity)))) {
       districts.put(districtModel.getPk(), districtModel.getDistrictName());
     }
   }
@@ -155,7 +155,7 @@ public class AppointmentBean implements Serializable {
     policlinics.clear();
     inspectionPlaces.clear();
 
-    if (event == null) {
+    if(event == null) {
       System.out.println("Ajax event is null");
     } else {
       UIInput input = (UIInput) event.getSource();
@@ -164,7 +164,7 @@ public class AppointmentBean implements Serializable {
 
     districtService = new DistrictServiceImpl();
 
-    for (HospitalModel hospitalModel : districtService.getHospitalsByDistrict(districtService.find(Long.parseLong(selectedDistrict)))) {
+    for(HospitalModel hospitalModel : districtService.getHospitalsByDistrict(districtService.find(Long.parseLong(selectedDistrict)))) {
       hospitals.put(hospitalModel.getPk(), hospitalModel.getHospitalName());
     }
   }
@@ -173,7 +173,7 @@ public class AppointmentBean implements Serializable {
     policlinics.clear();
     inspectionPlaces.clear();
 
-    if (event == null) {
+    if(event == null) {
       System.out.println("Ajax event is null");
     } else {
       UIInput input = (UIInput) event.getSource();
@@ -182,7 +182,7 @@ public class AppointmentBean implements Serializable {
 
     hospitalService = new HospitalServiceImpl();
 
-    for (HospitalPoliclinicRelModel hospitalPoliclinicRelModel : hospitalService.getPoliclinicByHospital(hospitalService.find(Long.parseLong(selectedHospital)))) {
+    for(HospitalPoliclinicRelModel hospitalPoliclinicRelModel : hospitalService.getPoliclinicByHospital(hospitalService.find(Long.parseLong(selectedHospital)))) {
       policlinics.put(hospitalPoliclinicRelModel.getPk(), hospitalPoliclinicRelModel.getPoliclinic().getPoliclinicName());
     }
   }
@@ -190,7 +190,7 @@ public class AppointmentBean implements Serializable {
   public void changePoliclinic(AjaxBehaviorEvent event) {
     inspectionPlaces.clear();
 
-    if (event == null) {
+    if(event == null) {
       System.out.println("Ajax event is null");
     } else {
       UIInput input = (UIInput) event.getSource();
@@ -201,9 +201,9 @@ public class AppointmentBean implements Serializable {
     hospitalPoliclinicRelService = new HospitalPoliclinicRelServiceImpl();
 
 
-    for (InspectionPlaceModel inspectionPlaceModel : policlinicService.getInspectionPlacesByHospitalPoliclinicRel(hospitalPoliclinicRelService.find(Long.parseLong(selectedPoliclinic)))) {
+    for(InspectionPlaceModel inspectionPlaceModel : policlinicService.getInspectionPlacesByHospitalPoliclinicRel(hospitalPoliclinicRelService.find(Long.parseLong(selectedPoliclinic)))) {
       StringBuilder str = new StringBuilder(inspectionPlaceModel.getPlaceName());
-      if (inspectionPlaceModel.getDoctor() != null) {
+      if(inspectionPlaceModel.getDoctor() != null) {
         str.append(" " + NameConverter.getName(inspectionPlaceModel.getDoctor().getFirstName(), inspectionPlaceModel.getDoctor().getLastName()));
       }
       inspectionPlaces.put(inspectionPlaceModel.getPk(), String.valueOf(str));

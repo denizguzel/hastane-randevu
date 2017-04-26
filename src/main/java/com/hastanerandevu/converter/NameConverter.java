@@ -6,7 +6,7 @@ package com.hastanerandevu.converter;
 public class NameConverter {
   public static final String BLANK = " ";
 
-  public static String getName(String firstName,String lastName){
-    return firstName+BLANK+lastName;
+  public static String getName(String firstName, String lastName) {
+    return firstName + BLANK + lastName;
   }
 }

@@ -20,8 +20,6 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-import static org.hibernate.ejb.EntityManagerImpl.LOG;
-
 @ManagedBean(name = "login")
 @SessionScoped
 public class LoginBean {

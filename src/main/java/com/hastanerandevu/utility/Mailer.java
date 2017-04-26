@@ -78,7 +78,7 @@ public class Mailer implements Runnable {
   }
 
   public void sendPasswordResetMail(String email) {
-    try{
+    try {
       patientModel = patientService.getUserByEmail(email);
 
       String encryptedSalt = Encryptor.encryptEmail(ProjectConstants.SALT + patientModel.getEmail());
@@ -88,8 +88,7 @@ public class Mailer implements Runnable {
 
       Thread thread = new Thread(mailer);
       thread.start();
-    }
-    catch (NoUserException e){
+    } catch(NoUserException e) {
       LOG.warn(e.getMessage());
     }
   }

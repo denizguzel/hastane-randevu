@@ -24,3 +24,11 @@ button, select, input.btn {
 .form-control {
   height: 40px;
 }
+
+::placeholder {
+  font-family: 'Montserrat', sans-serif;
+}
+
+button, input, optgroup, select, textarea {
+  font-family: 'Montserrat', sans-serif;
+}

@@ -1,7 +1,12 @@
 $gradient: radial-gradient(ellipse at center, $main-color 0%, #008080 100%);
+$shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 
 .gradient {
   background: $gradient;
+}
+
+.shadow {
+  box-shadow: $shadow;
 }
 
 body.page-404 {
@@ -82,11 +87,17 @@ body.page-404 {
   .btn {
     color: $input-color !important;
     padding: 11.5px 25px 11.5px 12px !important;
-    border-color: $input-border-color;
+    border: 0;
+    border-bottom: 2px solid lighten($main-color, 20%);
     background-color: $input-bg;
     border-radius: 0;
+    font-size: 13px;
     &:focus {
       outline: 0 !important;
+      border-bottom-color: $main-color;
+    }
+    .filter-option {
+      text-transform: capitalize;
     }
   }
   .dropdown-menu.open {
@@ -99,7 +110,7 @@ body.page-404 {
         a {
           display: block;
           padding: 5px 10px;
-          font-size: 14px;
+          font-size: 13px;
           color: $input-color;
           &:hover {
             background-color: #ddd;
@@ -116,6 +127,56 @@ body.page-404 {
 .bootstrap-select.show {
   .dropdown-menu {
     display: block;
+  }
+}
+
+.form-group {
+  position: relative;
+  span.error {
+    display: none;
+  }
+  .form-control {
+    border-bottom: 2px solid lighten($main-color, 20%);
+    font-size: 13px;
+    &:focus {
+      border-bottom-color: $main-color;
+    }
+    ::placeholder {
+      font-size: 13px;
+    }
+  }
+  i {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+    color: $main-color;
+  }
+  input[type="password"] {
+    padding-right: 35px;
+  }
+  textarea.form-control {
+    height: initial;
+  }
+  .forgot {
+    color: #444;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.form-group[data-message]:not([data-message=""]) {
+  &:before {
+    content: attr(data-message);
+    position: absolute;
+    top: 5px;
+    right: 0;
+    background-color: #000;
+    color: #fff;
+    border-radius: 25px;
+    padding: 5px 10px;
+    font-size: 8px;
   }
 }
 
@@ -205,36 +266,52 @@ body.page-404 {
     background-color: darken($main-color, 10%);
     color: #fff;
     text-align: center;
-    font-size: 20px;
+    padding: 20px 10px;
+    text-transform: uppercase;
+    font-weight: 500;
     i {
       margin-right: 10px;
     }
   }
   .card-block {
-    background-color: #F8F7F7;
-    .input-group {
-      margin-bottom: 10px;
-      .input-group-addon {
-        border-color: $input-border-color;
-        background-color: #ECEEEF;
-        i {
-          color: #464A4C;
-        }
-      }
+    .btn {
+      width: 100%;
+      text-transform: uppercase;
+      padding: 15px 0;
     }
-    .form-group {
-      textarea.form-control {
-        height: initial;
-      }
-      .forgot {
-        color: #444;
-        &:hover {
-          text-decoration: underline;
-        }
-      }
+  }
+}
+
+.nav-tabs {
+  border: 0;
+  .nav-item {
+    flex-grow: 1;
+    .nav-link {
+      border: 0;
+      border-radius: 0;
+      text-align: center;
+      background-color: $main-color;
+      color: #fff;
+      padding: 20px 10px;
+      text-transform: uppercase;
+      font-weight: 500;
     }
-    .card-block-header {
+    .nav-link.active {
+      background-color: darken($main-color, 10%);
+    }
+  }
+}
+
+.tab-content {
+  .tab-pane {
+    padding: 10px;
+    .form-group-header {
       margin-bottom: 10px;
+    }
+    .btn {
+      width: 100%;
+      text-transform: uppercase;
+      padding: 15px 0;
     }
   }
 }
@@ -267,7 +344,7 @@ body.page-404 {
                 width: 20px;
                 height: 20px;
                 border-radius: 50%;
-                background-color: lighten($grey, 10%)
+                background-color: darken(#F5F5F5, 10%);
               }
             }
             input {

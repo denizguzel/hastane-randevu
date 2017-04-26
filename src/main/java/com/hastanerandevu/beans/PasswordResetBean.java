@@ -60,7 +60,7 @@ public class PasswordResetBean {
       patientService.update(patientModel);
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Şifre sıfırlama maili gönderildi.", null));
 
-    } catch (NoUserException e) {
+    } catch(NoUserException e) {
       LOG.warn(e.getMessage());
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email sistemde kayıtlı değil.", null));
     }
@@ -68,9 +68,9 @@ public class PasswordResetBean {
 
   public void passwordUpdate() throws URISyntaxException {
     String encryptedSalt = Encryptor.encryptEmail(ProjectConstants.SALT + getEmail());
-    try{
+    try {
       PatientModel patientModel = patientService.getUserByEmail(getEmail());
-      if (urlParam.equals(encryptedSalt) && patientService.changingPasswordIsAvailable(patientModel)) {
+      if(urlParam.equals(encryptedSalt) && patientService.changingPasswordIsAvailable(patientModel)) {
 
         patientModel.setPassword(Encryptor.encryptPassword(getPassword()));
         patientService.update(patientModel);
@@ -79,8 +79,7 @@ public class PasswordResetBean {
       } else {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Şifreniz değiştirilemedi.", null));
       }
-    }
-    catch(NoUserException e){
+    } catch(NoUserException e) {
       LOG.warn(e.getMessage());
     }
 

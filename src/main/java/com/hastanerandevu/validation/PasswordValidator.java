@@ -37,7 +37,7 @@ public class PasswordValidator implements Validator {
     }
 
     if(!matcher.matches()) {
-      FacesMessage msg = new FacesMessage(null, "Şifreniz en az 1 rakam, 1 küçük harf, 1 büyük harf, 1 özel karakter ve en az 8 haneli olmalıdır");
+      FacesMessage msg = new FacesMessage(null, "Şifrenizi kontrol ediniz");
       msg.setSeverity(FacesMessage.SEVERITY_ERROR);
       throw new ValidatorException(msg);
     } else if(!passwordText.equals(passwordConfirmText)) {

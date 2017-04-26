@@ -57,11 +57,10 @@ public class PatientServiceImpl implements BaseService<PatientModel> {
     return patientDao.haveUserRegistration(patientModel);
   }
 
-  public PatientModel getUserByEmail(String email) throws NoUserException{
-    if (patientDao.getUserByEmail(email) == null){
-      throw new NoUserException("User not found by this email : "+email);
-    }
-    else
+  public PatientModel getUserByEmail(String email) throws NoUserException {
+    if(patientDao.getUserByEmail(email) == null) {
+      throw new NoUserException("User not found by this email : " + email);
+    } else
       return patientDao.getUserByEmail(email);
   }
 

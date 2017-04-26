@@ -170,3 +170,18 @@ function selectPickerToast(data) {
 $(".modal").on('hidden.bs.modal', function () {
   $(this).find(".error,.info").text("");
 });
+
+// Tooltip
+$('[data-toggle="tooltip"]').tooltip();
+
+function ajaxCall(data) {
+  if (data.status === "success") {
+    var ajaxElement = document.getElementById(data.source.id);
+    var errorElement = $(ajaxElement).parent().find("span.error");
+    var errorContent = errorElement.text();
+
+    if ($(ajaxElement).parent().attr("data-message") !== undefined) {
+      $(ajaxElement).parent().attr("data-message", errorContent);
+    }
+  }
+}
