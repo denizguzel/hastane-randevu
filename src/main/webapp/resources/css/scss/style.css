@@ -6234,7 +6234,7 @@ body.page-404 .container {
 .form-group i {
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: -30px;
   font-size: 18px;
   color: #18E2BA;
 }
@@ -6345,6 +6345,10 @@ body.page-404 .container {
   }
     .card-form .card-header i {
       margin-right: 10px; }
+
+.card-form .card-block {
+  padding: 10px;
+}
 
 .card-form .card-block .btn {
   width: 100%;

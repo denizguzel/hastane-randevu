@@ -25,14 +25,14 @@ public class PasswordValidator implements Validator {
   .{8,} at least 8 characters
   */
 
+  @Override
   public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
 
-    String passwordText = value.toString();
-    String passwordConfirmText = component.getAttributes().get("otherValue").toString();
+    Object otherValue = component.getAttributes().get("otherValue");
 
-    Matcher matcher = pattern.matcher(passwordText);
+    Matcher matcher = pattern.matcher(value.toString());
 
-    if(passwordConfirmText == null) {
+    if(value == null || otherValue == null) {
       return;
     }
 
@@ -40,7 +40,7 @@ public class PasswordValidator implements Validator {
       FacesMessage msg = new FacesMessage(null, "Şifrenizi kontrol ediniz");
       msg.setSeverity(FacesMessage.SEVERITY_ERROR);
       throw new ValidatorException(msg);
-    } else if(!passwordText.equals(passwordConfirmText)) {
+    } else if(!value.equals(otherValue)) {
       FacesMessage msg = new FacesMessage(null, "Şifreleriniz eşleşmiyor");
       msg.setSeverity(FacesMessage.SEVERITY_ERROR);
       throw new ValidatorException(msg);
