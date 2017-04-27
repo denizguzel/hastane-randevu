@@ -10,7 +10,9 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIInput;
 import javax.faces.event.AjaxBehaviorEvent;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 @ManagedBean(name = "appointment")
@@ -21,19 +23,25 @@ public class AppointmentBean implements Serializable {
   private DistrictServiceImpl districtService;
   private HospitalServiceImpl hospitalService;
   private PoliclinicServiceImpl policlinicService;
+  private InspectionPlaceServiceImpl inspectionPlaceService;
 
-  private String selectedCity = "";
-  private String selectedDistrict = "";
-  private String selectedHospital = "";
-  private String selectedPoliclinic = "";
-  private String selectedInspectionPlace = "";
+  private boolean appointmentTable = false;
+  private String hospitalName;
+  private String policlinicName;
+  private Long selectedCity;
+  private Long selectedDistrict;
+  private Long selectedHospital;
+  private Long selectedPoliclinic;
+  private Long selectedInspectionPlace;
 
   private Map<Long, String> cities;
   private Map<Long, String> districts;
   private Map<Long, String> hospitals;
   private Map<Long, String> policlinics;
   private Map<Long, String> inspectionPlaces;
+  private List<AppointmentModel> appointments;
 
+  @SuppressWarnings("unchecked")
   @PostConstruct
   public void init() {
     cities = new LinkedHashMap();
@@ -41,49 +49,51 @@ public class AppointmentBean implements Serializable {
     hospitals = new LinkedHashMap();
     policlinics = new LinkedHashMap();
     inspectionPlaces = new LinkedHashMap();
+    appointments = new ArrayList<>();
+
     cityService = new CityServiceImpl();
     for(CityModel cityModel : cityService.getCities()) {
       cities.put(cityModel.getPk(), cityModel.getCityName());
     }
   }
 
-  public String getSelectedCity() {
+  public Long getSelectedCity() {
     return selectedCity;
   }
 
-  public void setSelectedCity(String selectedCity) {
+  public void setSelectedCity(Long selectedCity) {
     this.selectedCity = selectedCity;
   }
 
-  public String getSelectedDistrict() {
+  public Long getSelectedDistrict() {
     return selectedDistrict;
   }
 
-  public void setSelectedDistrict(String selectedDistrict) {
+  public void setSelectedDistrict(Long selectedDistrict) {
     this.selectedDistrict = selectedDistrict;
   }
 
-  public String getSelectedHospital() {
+  public Long getSelectedHospital() {
     return selectedHospital;
   }
 
-  public void setSelectedHospital(String selectedHospital) {
+  public void setSelectedHospital(Long selectedHospital) {
     this.selectedHospital = selectedHospital;
   }
 
-  public String getSelectedPoliclinic() {
+  public Long getSelectedPoliclinic() {
     return selectedPoliclinic;
   }
 
-  public void setSelectedPoliclinic(String selectedPoliclinic) {
+  public void setSelectedPoliclinic(Long selectedPoliclinic) {
     this.selectedPoliclinic = selectedPoliclinic;
   }
 
-  public String getSelectedInspectionPlace() {
+  public Long getSelectedInspectionPlace() {
     return selectedInspectionPlace;
   }
 
-  public void setSelectedInspectionPlace(String selectedInspectionPlace) {
+  public void setSelectedInspectionPlace(Long selectedInspectionPlace) {
     this.selectedInspectionPlace = selectedInspectionPlace;
   }
 
@@ -123,12 +133,32 @@ public class AppointmentBean implements Serializable {
     return inspectionPlaces;
   }
 
-  public void setInspectionPlaces(LinkedHashMap inspectionPlaces) {
+  public void setInspectionPlaces(Map<Long, String> inspectionPlaces) {
     this.inspectionPlaces = inspectionPlaces;
   }
 
-  public void setInspectionPlaces(Map<Long, String> inspectionPlaces) {
-    this.inspectionPlaces = inspectionPlaces;
+  public List<AppointmentModel> getAppointments() {
+    return appointments;
+  }
+
+  public void setAppointments(List<AppointmentModel> appointments) {
+    this.appointments = appointments;
+  }
+
+  public boolean isAppointmentTable() {
+    return appointmentTable;
+  }
+
+  public void setAppointmentTable(boolean appointmentTable) {
+    this.appointmentTable = appointmentTable;
+  }
+
+  public String getHospitalName() {
+    return hospitalName;
+  }
+
+  public String getPoliclinicName() {
+    return policlinicName;
   }
 
   public void changeCity(AjaxBehaviorEvent event) {
@@ -141,11 +171,10 @@ public class AppointmentBean implements Serializable {
       System.out.println("Ajax event is null");
     } else {
       UIInput input = (UIInput) event.getSource();
-      selectedCity = input.getValue().toString();
+      selectedCity = (Long) input.getValue();
     }
 
-
-    for(DistrictModel districtModel : cityService.getAllDistrictsByCity(cityService.find(Long.parseLong(selectedCity)))) {
+    for(DistrictModel districtModel : cityService.getAllDistrictsByCity(cityService.find(selectedCity))) {
       districts.put(districtModel.getPk(), districtModel.getDistrictName());
     }
   }
@@ -159,12 +188,12 @@ public class AppointmentBean implements Serializable {
       System.out.println("Ajax event is null");
     } else {
       UIInput input = (UIInput) event.getSource();
-      selectedDistrict = input.getValue().toString();
+      selectedDistrict = (Long) input.getValue();
     }
 
     districtService = new DistrictServiceImpl();
 
-    for(HospitalModel hospitalModel : districtService.getHospitalsByDistrict(districtService.find(Long.parseLong(selectedDistrict)))) {
+    for(HospitalModel hospitalModel : districtService.getHospitalsByDistrict(districtService.find(selectedDistrict))) {
       hospitals.put(hospitalModel.getPk(), hospitalModel.getHospitalName());
     }
   }
@@ -177,12 +206,12 @@ public class AppointmentBean implements Serializable {
       System.out.println("Ajax event is null");
     } else {
       UIInput input = (UIInput) event.getSource();
-      selectedHospital = input.getValue().toString();
+      selectedHospital = (Long) input.getValue();
     }
 
     hospitalService = new HospitalServiceImpl();
 
-    for(HospitalPoliclinicRelModel hospitalPoliclinicRelModel : hospitalService.getPoliclinicByHospital(hospitalService.find(Long.parseLong(selectedHospital)))) {
+    for(HospitalPoliclinicRelModel hospitalPoliclinicRelModel : hospitalService.getPoliclinicByHospital(hospitalService.find(selectedHospital))) {
       policlinics.put(hospitalPoliclinicRelModel.getPk(), hospitalPoliclinicRelModel.getPoliclinic().getPoliclinicName());
     }
   }
@@ -194,19 +223,41 @@ public class AppointmentBean implements Serializable {
       System.out.println("Ajax event is null");
     } else {
       UIInput input = (UIInput) event.getSource();
-      selectedPoliclinic = input.getValue().toString();
+      selectedPoliclinic = (Long) input.getValue();
     }
 
     policlinicService = new PoliclinicServiceImpl();
     hospitalPoliclinicRelService = new HospitalPoliclinicRelServiceImpl();
 
-
-    for(InspectionPlaceModel inspectionPlaceModel : policlinicService.getInspectionPlacesByHospitalPoliclinicRel(hospitalPoliclinicRelService.find(Long.parseLong(selectedPoliclinic)))) {
+    for(InspectionPlaceModel inspectionPlaceModel : policlinicService.getInspectionPlacesByHospitalPoliclinicRel(hospitalPoliclinicRelService.find(selectedPoliclinic))) {
       StringBuilder str = new StringBuilder(inspectionPlaceModel.getPlaceName());
       if(inspectionPlaceModel.getDoctor() != null) {
-        str.append(" " + NameConverter.getName(inspectionPlaceModel.getDoctor().getFirstName(), inspectionPlaceModel.getDoctor().getLastName()));
+        str.append(" ").append(NameConverter.getName(inspectionPlaceModel.getDoctor().getFirstName(), inspectionPlaceModel.getDoctor().getLastName()));
       }
       inspectionPlaces.put(inspectionPlaceModel.getPk(), String.valueOf(str));
     }
+  }
+
+  public void changeInspectionPlace(AjaxBehaviorEvent event) {
+    appointments.clear();
+
+    if(event == null) {
+      System.out.println("Ajax event is null");
+    } else {
+      UIInput input = (UIInput) event.getSource();
+      selectedInspectionPlace = (Long) input.getValue();
+    }
+
+    inspectionPlaceService = new InspectionPlaceServiceImpl();
+
+    for(AppointmentModel appointmentModel : inspectionPlaceService.getAllAppointmentsByInspectionPlace(inspectionPlaceService.find(selectedInspectionPlace))) {
+      appointments.add(new AppointmentModel(appointmentModel.getAppointmentDate(), appointmentModel.getAppointmentStatus(), appointmentModel.getInspectionPlace()));
+    }
+  }
+
+  public void listAppointments() {
+    appointmentTable = true;
+    hospitalName = hospitalService.find(selectedHospital).getHospitalName();
+    policlinicName = hospitalPoliclinicRelService.find(selectedPoliclinic).getPoliclinic().getPoliclinicName();
   }
 }

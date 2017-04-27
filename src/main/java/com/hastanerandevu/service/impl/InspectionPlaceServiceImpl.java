@@ -7,9 +7,6 @@ import com.hastanerandevu.service.BaseService;
 
 import java.util.List;
 
-/**
- * Created by Okan on 15.4.2017.
- */
 public class InspectionPlaceServiceImpl implements BaseService<InspectionPlaceModel> {
 
   private InspectionPlaceDaoImpl inspectionPlaceDao = new InspectionPlaceDaoImpl();

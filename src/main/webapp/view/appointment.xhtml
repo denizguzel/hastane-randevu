@@ -54,14 +54,36 @@
                 <div class="form-group">
                   <label class="form-control-label">Muayene Yeri Seçiniz</label>
                   <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedInspectionPlace}">
+                    <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeInspectionPlace}" onevent="selectPicker"/>
                     <f:selectItem itemLabel="Muayene yeri seçiniz"/>
                     <f:selectItems value="#{appointment.inspectionPlaces.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
                   </h:selectOneMenu>
                 </div>
               </div>
               <div class="col-md-12">
-                <h:commandButton value="Randevu Al" styleClass="btn btn-success" action="#{login}"/>
+                <h:commandButton value="Randevu Al" styleClass="btn btn-success" action="#{appointment.listAppointments}">
+                  <f:ajax execute="@this" render="appointments" onevent="selectPicker"/>
+                </h:commandButton>
               </div>
+
+              <h:dataTable id="appointments" styleClass="table" value="#{appointment.appointments}" var="row" rendered="#{appointment.appointmentTable}">
+                <h:column>
+                  <f:facet name="header">Doktor</f:facet>
+                  ${row.inspectionPlace.doctor.firstName} ${row.inspectionPlace.doctor.lastName}
+                </h:column>
+                <h:column>
+                  <f:facet name="header">Kurum Adı</f:facet>
+                  ${appointment.hospitalName}
+                </h:column>
+                <h:column>
+                  <f:facet name="header">Klinik Adı</f:facet>
+                  ${appointment.policlinicName}
+                </h:column>
+                <h:column>
+                  <f:facet name="header">Muayene Yeri</f:facet>
+                  ${row.inspectionPlace.placeName}
+                </h:column>
+              </h:dataTable>
             </h:form>
           </div>
         </div>
