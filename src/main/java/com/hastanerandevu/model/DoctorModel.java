@@ -1,5 +1,6 @@
 package com.hastanerandevu.model;
 
+import com.hastanerandevu.converter.NameConverter;
 import com.hastanerandevu.enums.GenderEnum;
 import com.hastanerandevu.enums.LevelEnum;
 import com.hastanerandevu.enums.SecretQuestionEnum;

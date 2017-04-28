@@ -1,6 +1,13 @@
 package com.hastanerandevu;
 
+import com.hastanerandevu.constants.ProjectConstants;
 import com.hastanerandevu.converter.Encryptor;
+import com.hastanerandevu.converter.NameConverter;
+import com.hastanerandevu.model.*;
+import com.hastanerandevu.service.impl.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Okan on 14.3.2017.
@@ -46,6 +53,15 @@ public class test {
       System.out.println(policlinicModel.getPoliclinicName());
     }*/
 
-    System.out.println(Encryptor.encryptPassword("123456"));
+    PoliclinicServiceImpl policlinicService = new PoliclinicServiceImpl();
+    HospitalPoliclinicRelServiceImpl hospitalPoliclinicRelService = new HospitalPoliclinicRelServiceImpl();
+
+    for (InspectionPlaceModel inspectionPlaceModel : policlinicService.getInspectionPlacesByHospitalPoliclinicRel(hospitalPoliclinicRelService.find(100))) {
+      StringBuilder str = new StringBuilder(inspectionPlaceModel.getPlaceName());
+      if (inspectionPlaceModel.getDoctor() != null){
+        str.append(" "+NameConverter.getName(inspectionPlaceModel.getDoctor().getFirstName(),inspectionPlaceModel.getDoctor().getLastName()));
+      }
+      System.out.println(str);
+    }
   }
 }

@@ -251,7 +251,7 @@ public class AppointmentBean implements Serializable {
     inspectionPlaceService = new InspectionPlaceServiceImpl();
 
     for(AppointmentModel appointmentModel : inspectionPlaceService.getAllAppointmentsByInspectionPlace(inspectionPlaceService.find(selectedInspectionPlace))) {
-      appointments.add(new AppointmentModel(appointmentModel.getAppointmentDate(), appointmentModel.getAppointmentStatus(), appointmentModel.getInspectionPlace()));
+      appointments.add(appointmentModel);
     }
   }
 
