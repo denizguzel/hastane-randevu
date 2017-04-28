@@ -16,4 +16,12 @@ public class InspectionPlaceDaoImpl extends BaseDaoImpl<InspectionPlaceModel> {
 
     return query.getResultList();
   }
+
+  public List<InspectionPlaceModel> getAppointments(InspectionPlaceModel inspectionPlaceModel) {
+    Query query = getEntitymanager().createQuery("SELECT e FROM InspectionPlaceModel e WHERE e.pk = :inspectionPlace");
+
+    query.setParameter("inspectionPlace", inspectionPlaceModel.getPk());
+
+    return query.getResultList();
+  }
 }

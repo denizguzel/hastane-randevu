@@ -19,19 +19,5 @@ public class HospitalDaoImpl extends BaseDaoImpl<HospitalModel> {
     query.setParameter("hospitalModel", hospitalModel);
 
     return query.getResultList();
-
-    /*Query query1 = getEntitymanager().createQuery("SELECT e.pk FROM HospitalPoliclinicRelModel e WHERE e.hospital = :hospitalModel ORDER BY e.policlinic.policlinicName");
-    query1.setParameter("hospitalModel", hospitalModel);
-
-    List<String> values = query.getResultList();
-    List<String> keys = query1.getResultList();*/
-
-
-    /*Map<String, String> results = new LinkedHashMap<>();
-    for(int i = 0; i < keys.size(); i++) {
-      results.put(values.get(i), keys.get(i));
-    }
-
-    return results;*/
   }
 }

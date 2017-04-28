@@ -34,12 +34,6 @@ public class AppointmentModel {
   @JoinColumn(name = "FK_PATIENT")
   private PatientModel patient;
 
-  /*public AppointmentModel(Date appointmentDate, AppointmentStatusEnum appointmentStatus, InspectionPlaceModel inspectionPlace) {
-    this.appointmentDate = appointmentDate;
-    this.appointmentStatus = appointmentStatus;
-    this.inspectionPlace = inspectionPlace;
-  }*/
-
   public long getPk() {
     return pk;
   }

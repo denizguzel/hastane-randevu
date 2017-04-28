@@ -1,4 +1,4 @@
-<ui:composition template="/view/master/afterLoginTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+<ui:composition template="/view/master/afterLoginTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://xmlns.jcp.org/jsf/passthrough" xmlns:c="http://java.sun.com/jsp/jstl/core">
   <ui:define name="title">Randevu Alma</ui:define>
 
   <ui:define name="content">
@@ -10,80 +10,129 @@
         <div class="card">
           <div class="card-block">
             <h:form styleClass="row" prependId="false">
-              <div class="col-xl-3">
-                <div class="form-group">
-                  <label class="form-control-label">İl Seçiniz</label>
-                  <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedCity}">
-                    <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeCity}" onevent="selectPicker"/>
-                    <f:selectItem itemLabel="İl Seçiniz"/>
-                    <f:selectItems value="#{appointment.cities.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
-                  </h:selectOneMenu>
+              <div class="col-xl-6">
+                <div class="row">
+                  <div class="col-xl-6">
+                    <div class="form-group">
+                      <label class="form-control-label">İl Seçiniz</label>
+                      <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedCity}">
+                        <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeCity}" onevent="selectPicker"/>
+                        <f:selectItem itemLabel="İl Seçiniz"/>
+                        <f:selectItems value="#{appointment.cities.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
+                      </h:selectOneMenu>
+                    </div>
+                  </div>
+                  <div class="col-xl-6">
+                    <div class="form-group">
+                      <label class="form-control-label">İlçe Seçiniz</label>
+                      <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedDistrict}">
+                        <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeDistrict}" onevent="selectPicker"/>
+                        <f:selectItem itemLabel="İlçe seçiniz"/>
+                        <f:selectItems value="#{appointment.districts.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
+                      </h:selectOneMenu>
+                    </div>
+                  </div>
+                  <div class="col-xl-6">
+                    <div class="form-group">
+                      <label class="form-control-label">Hastane Seçiniz</label>
+                      <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedHospital}">
+                        <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeHospital}" onevent="selectPicker"/>
+                        <f:selectItem itemLabel="Hastane seçiniz"/>
+                        <f:selectItems value="#{appointment.hospitals.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
+                      </h:selectOneMenu>
+                    </div>
+                  </div>
+                  <div class="col-xl-6">
+                    <div class="form-group">
+                      <label class="form-control-label">Poliklinik Seçiniz</label>
+                      <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedPoliclinic}">
+                        <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changePoliclinic}" onevent="selectPicker"/>
+                        <f:selectItem itemLabel="Poliklinik seçiniz"/>
+                        <f:selectItems value="#{appointment.policlinics.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
+                      </h:selectOneMenu>
+                    </div>
+                  </div>
+                  <div class="col-xl-6">
+                    <div class="form-group">
+                      <label class="form-control-label">Muayene Yeri Seçiniz</label>
+                      <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedInspectionPlace}">
+                        <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeInspectionPlace}" onevent="selectPicker"/>
+                        <f:selectItem itemLabel="Muayene yeri seçiniz"/>
+                        <f:selectItems value="#{appointment.inspectionPlaces.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
+                      </h:selectOneMenu>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="col-xl-3">
-                <div class="form-group">
-                  <label class="form-control-label">İlçe Seçiniz</label>
-                  <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedDistrict}">
-                    <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeDistrict}" onevent="selectPicker"/>
-                    <f:selectItem itemLabel="İlçe seçiniz"/>
-                    <f:selectItems value="#{appointment.districts.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
-                  </h:selectOneMenu>
-                </div>
-              </div>
-              <div class="col-xl-3">
-                <div class="form-group">
-                  <label class="form-control-label">Hastane Seçiniz</label>
-                  <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedHospital}">
-                    <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeHospital}" onevent="selectPicker"/>
-                    <f:selectItem itemLabel="Hastane seçiniz"/>
-                    <f:selectItems value="#{appointment.hospitals.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
-                  </h:selectOneMenu>
-                </div>
-              </div>
-              <div class="col-xl-3">
-                <div class="form-group">
-                  <label class="form-control-label">Poliklinik Seçiniz</label>
-                  <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedPoliclinic}">
-                    <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changePoliclinic}" onevent="selectPicker"/>
-                    <f:selectItem itemLabel="Poliklinik seçiniz"/>
-                    <f:selectItems value="#{appointment.policlinics.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
-                  </h:selectOneMenu>
-                </div>
-              </div>
-              <div class="col-xl-3">
-                <div class="form-group">
-                  <label class="form-control-label">Muayene Yeri Seçiniz</label>
-                  <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedInspectionPlace}">
-                    <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeInspectionPlace}" onevent="selectPicker"/>
-                    <f:selectItem itemLabel="Muayene yeri seçiniz"/>
-                    <f:selectItems value="#{appointment.inspectionPlaces.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
-                  </h:selectOneMenu>
-                </div>
-              </div>
-              <div class="col-md-12">
-                <h:commandButton value="Randevu Al" styleClass="btn btn-success" action="#{appointment.listAppointments}">
-                  <f:ajax execute="@this" render="appointments" onevent="selectPicker"/>
+                <h:commandButton id="appointment-search" value="Randevu Ara" styleClass="btn btn-success" action="#{appointment.searchAppointment}">
+                  <f:ajax execute="@this" render="appointmentTable" onevent="selectPicker"/>
                 </h:commandButton>
               </div>
-
-              <h:dataTable id="appointments" styleClass="table" value="#{appointment.appointments}" var="row" rendered="#{appointment.appointmentTable}">
-                <h:column>
-                  <f:facet name="header">Doktor</f:facet>
-                  ${row.inspectionPlace.doctor.firstName} ${row.inspectionPlace.doctor.lastName}
-                </h:column>
-                <h:column>
-                  <f:facet name="header">Kurum Adı</f:facet>
-                  ${appointment.hospitalName}
-                </h:column>
-                <h:column>
-                  <f:facet name="header">Klinik Adı</f:facet>
-                  ${appointment.policlinicName}
-                </h:column>
-                <h:column>
-                  <f:facet name="header">Muayene Yeri</f:facet>
-                  ${row.inspectionPlace.placeName}
-                </h:column>
-              </h:dataTable>
+              <div class="col-xl-6">
+                <h:panelGroup layout="block" id="appointmentClocks" class="appointment-clocks#{appointment.appointmentClockPanel ? ' active' : ''}">
+                  <p class="lead">Randevu alabilmek için lütfen arama yapınız</p>
+                  <h4>Randevu Saatleri</h4>
+                  <ul>
+                    <c:forEach items="#{appointment.appointmentClocks}" var="appointmentClocklist">
+                      <li>
+                        <h:panelGroup layout="block" styleClass="tooltip-wrapper" rendered="#{appointmentClocklist.appointmentStatus == 'RESERVED'}" p:data-toggle="tooltip" p:data-placement="top" p:title="Randevu Alınmış">
+                          <h:outputText styleClass="btn btn-primary disabled" value="#{appointmentClocklist.appointmentDate}">
+                            <f:convertDateTime pattern="HH:mm"/>
+                          </h:outputText>
+                        </h:panelGroup>
+                        <h:outputLink rendered="#{appointmentClocklist.appointmentStatus != 'RESERVED'}" styleClass="btn btn-primary btn-popover" value="javascript:void(0)">
+                          <h:outputText value="#{appointmentClocklist.appointmentDate}">
+                            <f:convertDateTime pattern="HH:mm"/>
+                          </h:outputText>
+                        </h:outputLink>
+                      </li>
+                    </c:forEach>
+                  </ul>
+                  <div class="popover-title d-none">Alınabilecek Randevu</div>
+                  <div class="popover-content d-none">
+                    <div class="popover-row">
+                      <label>Hastane</label>
+                      <span class="popover-hospital"></span>
+                    </div>
+                    <div class="popover-row">
+                      <label>Poliklinik</label>
+                      <span class="popover-policlinic"></span>
+                    </div>
+                    <div class="popover-row">
+                      <label>Muayene Yeri</label>
+                      <span class="popover-place"></span>
+                    </div>
+                    <div class="popover-row">
+                      <label>Doktor</label>
+                      <span class="popover-doctor"></span>
+                    </div>
+                    <div class="popover-row">
+                      <label>Başlangıç-Bitiş</label>
+                      <span class="d-block">10.05.2017 08:45</span>
+                      <span class="d-block">10.05.2017 09:00</span>
+                    </div>
+                    <button class="btn btn-sm btn-success">Randevu Almak İçin Tıklayınız</button>
+                  </div>
+                </h:panelGroup>
+              </div>
+              <h:panelGroup layout="block" id="appointmentTable" styleClass="appointment-table#{appointment.appointmentPanel ? '' : ' d-none'}">
+                <div class="col-xl-12 mt-4">
+                  <h3 class="text-center#{appointment.appointmentSearchNull ? '' : ' d-none'}">Aradığınız kriterlere ait randevu bulunamadı.</h3>
+                  <div class="table-responsive#{appointment.appointmentSearchNull ? ' d-none' : ''}">
+                    <h:dataTable styleClass="table" rowClasses="table-row" value="#{appointment.appointments}" var="appointmentList">
+                      <h:column><f:facet name="header">Doktor</f:facet>${appointmentList.doctor.firstName} ${appointmentList.doctor.lastName}</h:column>
+                      <h:column><f:facet name="header">Kurum Adı</f:facet>${appointmentList.hospitalPoliclinicRel.hospital.hospitalName}</h:column>
+                      <h:column><f:facet name="header">Klinik Adı</f:facet>${appointmentList.hospitalPoliclinicRel.policlinic.policlinicName}</h:column>
+                      <h:column><f:facet name="header">Muayene Yeri</f:facet>${appointmentList.placeName}</h:column>
+                      <h:column>
+                        <f:facet name="header"></f:facet>
+                        <h:commandButton value="SEÇ" styleClass="btn btn-sm btn-success" action="#{appointment.selectAppointment}">
+                          <f:ajax execute="@this" render="appointmentClocks" onevent="tableData"/>
+                        </h:commandButton>
+                      </h:column>
+                    </h:dataTable>
+                  </div>
+                </div>
+              </h:panelGroup>
             </h:form>
           </div>
         </div>

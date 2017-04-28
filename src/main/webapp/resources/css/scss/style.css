@@ -2080,7 +2080,7 @@ fieldset[disabled] a.btn {
 }
 
 .btn-sm, .btn-group-sm > .btn {
-  padding: 5px 0.5rem;
+  padding: 7.5px 0.5rem;
   font-size: 12px;
   border-radius: 0;
 }
@@ -6077,7 +6077,9 @@ ul, ol {
   list-style-type: none; }
 
 a:hover, a:focus {
-  text-decoration: none; }
+  text-decoration: none;
+  color: #fff;
+}
 
 button, select, input.btn {
   cursor: pointer; }
@@ -6092,6 +6094,16 @@ button, select, input.btn {
 
 button, input, optgroup, select, textarea {
   font-family: 'Montserrat', sans-serif;
+}
+
+.table th, .table td {
+  border-top: 0;
+  border-bottom: 1px solid #eceeef;
+  vertical-align: middle;
+}
+
+.table thead th {
+  font-weight: 300;
 }
 
 .gradient {
@@ -6177,10 +6189,6 @@ body.page-404 .container {
     outline: 0 !important;
     border-bottom-color: #18E2BA;
   }
-
-.bootstrap-select .btn .filter-option {
-  text-transform: capitalize;
-}
 
 .bootstrap-select .dropdown-menu.open {
   border-color: #e4e7ea;
@@ -6275,6 +6283,28 @@ body.page-404 .container {
 
 .global-message {
   display: none; }
+
+.popover {
+  max-width: 300px;
+}
+
+.popover .popover-content .popover-row {
+  margin-bottom: 10px;
+}
+
+.popover .popover-content .popover-row label {
+  display: block;
+  font-weight: 600;
+  margin: 0;
+}
+
+.popover .popover-content .popover-row span {
+  font-size: 11px;
+}
+
+.popover .popover-content .btn {
+  width: 100%;
+}
 
 .border:after {
   content: '';
@@ -6548,6 +6578,60 @@ body.page-404 .container {
     margin-bottom: 15px; }
   .page-wrapper .card .card-block .btn-transparent {
     border-radius: 25px; }
+
+.page-wrapper .card .card-block .appointment-clocks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.page-wrapper .card .card-block .appointment-clocks h4 {
+  display: none;
+  margin-bottom: 15px;
+}
+
+.page-wrapper .card .card-block .appointment-clocks ul {
+  display: none;
+  max-width: 50%;
+}
+
+.page-wrapper .card .card-block .appointment-clocks ul li {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.page-wrapper .card .card-block .appointment-clocks ul li .btn {
+  width: 65px;
+  padding: 10px;
+}
+
+.page-wrapper .card .card-block .appointment-clocks.active {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.page-wrapper .card .card-block .appointment-clocks.active p.lead {
+  display: none;
+}
+
+.page-wrapper .card .card-block .appointment-clocks.active h4 {
+  display: block;
+}
+
+.page-wrapper .card .card-block .appointment-clocks.active ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.page-wrapper .card .card-block .appointment-table {
+  width: 100%;
+}
+
+.page-wrapper .card .card-block .appointment-table .table tbody tr td .btn {
+  width: 100%;
+}
 
 .swiper-container .swiper-wrapper .swiper-slide .container {
   position: absolute;

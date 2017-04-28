@@ -119,6 +119,14 @@ $("#swiper-survey .swiper-slide").each(function () {
   }
 });
 
+// Empty error/info messages when modal closed
+$(".modal").on('hidden.bs.modal', function () {
+  $(this).find(".error,.info").text("");
+});
+
+// Tooltip
+$('[data-toggle="tooltip"]').tooltip();
+
 // Custom
 function toast(data) {
   if (data.status === "success") {
@@ -141,8 +149,10 @@ function toast(data) {
 }
 
 function selectPicker(data) {
-  if (data.status === "success")
+  if (data.status === "success") {
+    data.source.disabled = true;
     $('.selectpicker').selectpicker("render");
+  }
 }
 
 function selectPickerToast(data) {
@@ -166,14 +176,6 @@ function selectPickerToast(data) {
   }
 }
 
-// Empty error/info messages when modal closed
-$(".modal").on('hidden.bs.modal', function () {
-  $(this).find(".error,.info").text("");
-});
-
-// Tooltip
-$('[data-toggle="tooltip"]').tooltip();
-
 function ajaxCall(data) {
   if (data.status === "success") {
     var ajaxElement = document.getElementById(data.source.id);
@@ -183,5 +185,31 @@ function ajaxCall(data) {
     if ($(ajaxElement).parent().attr("data-message") !== undefined) {
       $(ajaxElement).parent().attr("data-message", errorContent);
     }
+  }
+}
+
+function tableData(data) {
+  if (data.status === "success") {
+    var ajaxElement = document.getElementById(data.source.id);
+    var columnData = [];
+    data.source.disabled = true;
+    $('[data-toggle="tooltip"]').tooltip();
+    $(".btn-popover").popover({
+      html: true,
+      trigger: "focus",
+      content: function () {
+        return $(".popover-content").html();
+      },
+      title: function () {
+        return $(".popover-title").html();
+      }
+    });
+    $(ajaxElement).closest(".table-row").find("td:not(:last-child)").each(function () {
+      columnData.push($.trim($(this).text()));
+    });
+    $(".popover-hospital").text(columnData[0]);
+    $(".popover-policlinic").text(columnData[1]);
+    $(".popover-place").text(columnData[2]);
+    $(".popover-doctor").text(columnData[3]);
   }
 }

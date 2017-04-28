@@ -25,9 +25,9 @@ public class AppointmentBean implements Serializable {
   private PoliclinicServiceImpl policlinicService;
   private InspectionPlaceServiceImpl inspectionPlaceService;
 
-  private boolean appointmentTable = false;
-  private String hospitalName;
-  private String policlinicName;
+  private boolean appointmentClockPanel = false;
+  private boolean appointmentPanel = false;
+  private boolean appointmentSearchNull = false;
   private Long selectedCity;
   private Long selectedDistrict;
   private Long selectedHospital;
@@ -39,7 +39,8 @@ public class AppointmentBean implements Serializable {
   private Map<Long, String> hospitals;
   private Map<Long, String> policlinics;
   private Map<Long, String> inspectionPlaces;
-  private List<AppointmentModel> appointments;
+  private List<InspectionPlaceModel> appointments;
+  private List<AppointmentModel> appointmentClocks;
 
   @SuppressWarnings("unchecked")
   @PostConstruct
@@ -50,6 +51,7 @@ public class AppointmentBean implements Serializable {
     policlinics = new LinkedHashMap();
     inspectionPlaces = new LinkedHashMap();
     appointments = new ArrayList<>();
+    appointmentClocks = new ArrayList<>();
 
     cityService = new CityServiceImpl();
     for(CityModel cityModel : cityService.getCities()) {
@@ -137,30 +139,47 @@ public class AppointmentBean implements Serializable {
     this.inspectionPlaces = inspectionPlaces;
   }
 
-  public List<AppointmentModel> getAppointments() {
+  public List<InspectionPlaceModel> getAppointments() {
     return appointments;
   }
 
-  public void setAppointments(List<AppointmentModel> appointments) {
+  public void setAppointments(List<InspectionPlaceModel> appointments) {
     this.appointments = appointments;
   }
 
-  public boolean isAppointmentTable() {
-    return appointmentTable;
+  public List<AppointmentModel> getAppointmentClocks() {
+    return appointmentClocks;
   }
 
-  public void setAppointmentTable(boolean appointmentTable) {
-    this.appointmentTable = appointmentTable;
+  public void setAppointmentClocks(List<AppointmentModel> appointmentClocks) {
+    this.appointmentClocks = appointmentClocks;
   }
 
-  public String getHospitalName() {
-    return hospitalName;
+  public boolean isAppointmentPanel() {
+    return appointmentPanel;
   }
 
-  public String getPoliclinicName() {
-    return policlinicName;
+  public void setAppointmentPanel(boolean appointmentPanel) {
+    this.appointmentPanel = appointmentPanel;
   }
 
+  public boolean isAppointmentClockPanel() {
+    return appointmentClockPanel;
+  }
+
+  public void setAppointmentClockPanel(boolean appointmentClockPanel) {
+    this.appointmentClockPanel = appointmentClockPanel;
+  }
+
+  public boolean isAppointmentSearchNull() {
+    return appointmentSearchNull;
+  }
+
+  public void setAppointmentSearchNull(boolean appointmentSearchNull) {
+    this.appointmentSearchNull = appointmentSearchNull;
+  }
+
+  // Functions
   public void changeCity(AjaxBehaviorEvent event) {
     districts.clear();
     hospitals.clear();
@@ -177,6 +196,9 @@ public class AppointmentBean implements Serializable {
     for(DistrictModel districtModel : cityService.getAllDistrictsByCity(cityService.find(selectedCity))) {
       districts.put(districtModel.getPk(), districtModel.getDistrictName());
     }
+    setAppointmentPanel(false);
+    setAppointmentClockPanel(false);
+    setAppointmentSearchNull(false);
   }
 
   public void changeDistrict(AjaxBehaviorEvent event) {
@@ -196,6 +218,9 @@ public class AppointmentBean implements Serializable {
     for(HospitalModel hospitalModel : districtService.getHospitalsByDistrict(districtService.find(selectedDistrict))) {
       hospitals.put(hospitalModel.getPk(), hospitalModel.getHospitalName());
     }
+    setAppointmentPanel(false);
+    setAppointmentClockPanel(false);
+    setAppointmentSearchNull(false);
   }
 
   public void changeHospital(AjaxBehaviorEvent event) {
@@ -214,6 +239,9 @@ public class AppointmentBean implements Serializable {
     for(HospitalPoliclinicRelModel hospitalPoliclinicRelModel : hospitalService.getPoliclinicByHospital(hospitalService.find(selectedHospital))) {
       policlinics.put(hospitalPoliclinicRelModel.getPk(), hospitalPoliclinicRelModel.getPoliclinic().getPoliclinicName());
     }
+    setAppointmentPanel(false);
+    setAppointmentClockPanel(false);
+    setAppointmentSearchNull(false);
   }
 
   public void changePoliclinic(AjaxBehaviorEvent event) {
@@ -236,6 +264,9 @@ public class AppointmentBean implements Serializable {
       }
       inspectionPlaces.put(inspectionPlaceModel.getPk(), String.valueOf(str));
     }
+    setAppointmentPanel(false);
+    setAppointmentClockPanel(false);
+    setAppointmentSearchNull(false);
   }
 
   public void changeInspectionPlace(AjaxBehaviorEvent event) {
@@ -247,17 +278,28 @@ public class AppointmentBean implements Serializable {
       UIInput input = (UIInput) event.getSource();
       selectedInspectionPlace = (Long) input.getValue();
     }
+    setAppointmentPanel(false);
+    setAppointmentClockPanel(false);
+    setAppointmentSearchNull(false);
+  }
+
+  public void searchAppointment() {
+    appointmentClocks.clear();
 
     inspectionPlaceService = new InspectionPlaceServiceImpl();
 
-    for(AppointmentModel appointmentModel : inspectionPlaceService.getAllAppointmentsByInspectionPlace(inspectionPlaceService.find(selectedInspectionPlace))) {
-      appointments.add(appointmentModel);
+    for(InspectionPlaceModel inspectionPlaceModel : inspectionPlaceService.getAppointments(inspectionPlaceService.find(selectedInspectionPlace))) {
+      if(inspectionPlaceModel.getDoctor() != null) {
+        appointments.add(inspectionPlaceModel);
+      } else {
+        setAppointmentSearchNull(true);
+      }
     }
+    setAppointmentPanel(true);
   }
 
-  public void listAppointments() {
-    appointmentTable = true;
-    hospitalName = hospitalService.find(selectedHospital).getHospitalName();
-    policlinicName = hospitalPoliclinicRelService.find(selectedPoliclinic).getPoliclinic().getPoliclinicName();
+  public void selectAppointment() {
+    appointmentClocks.addAll(inspectionPlaceService.getAllAppointmentsByInspectionPlace(inspectionPlaceService.find(selectedInspectionPlace)));
+    setAppointmentClockPanel(true);
   }
 }

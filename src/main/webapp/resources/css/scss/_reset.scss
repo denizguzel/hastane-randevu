@@ -14,6 +14,7 @@ ul, ol {
 a {
   &:hover, &:focus {
     text-decoration: none;
+    color: #fff;
   }
 }
 
@@ -31,4 +32,17 @@ button, select, input.btn {
 
 button, input, optgroup, select, textarea {
   font-family: 'Montserrat', sans-serif;
+}
+
+.table {
+  th, td {
+    border-top: 0;
+    border-bottom: 1px solid #eceeef;
+    vertical-align: middle;
+  }
+  thead {
+    th {
+      font-weight: 300;
+    }
+  }
 }

@@ -23,7 +23,7 @@
               <div class="form-group d-flex">
                 <a href="#{facesContext.externalContext.requestContextPath}/recovery/forgot" class="forgot ml-auto">Şifremi Unuttum</a>
               </div>
-              <h:panelGroup rendered="#{login.showCaptcha}">
+              <h:panelGroup layout="block" rendered="#{login.showCaptcha}">
                 <div class="g-recaptcha" data-sitekey="6LcjxBcUAAAAAKrzn6mU3wRdUiqEdCsxkKojNKeJ"></div>
                 <h:outputScript>grecaptcha.render($('.g-recaptcha')[0], {sitekey: '6LcjxBcUAAAAAKrzn6mU3wRdUiqEdCsxkKojNKeJ'});</h:outputScript>
               </h:panelGroup>

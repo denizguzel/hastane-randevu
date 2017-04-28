@@ -10,7 +10,7 @@
         <a class="brand" href="#{facesContext.externalContext.requestContextPath}/">
           <img src="#{facesContext.externalContext.requestContextPath}/resources/img/logo.png"/>
         </a>
-        <h:panelGroup rendered="#{!login.verifyLogin}">
+        <h:panelGroup layout="block" rendered="#{!login.verifyLogin}">
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
@@ -22,7 +22,7 @@
             </ul>
           </div>
         </h:panelGroup>
-        <h:panelGroup rendered="#{login.verifyLogin}">
+        <h:panelGroup layout="block" rendered="#{login.verifyLogin}">
           <div class="dropdown">
             <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
               <i class="fa fa-user-circle-o"></i>${login.loggedUsername}

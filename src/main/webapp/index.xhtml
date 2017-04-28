@@ -76,7 +76,7 @@
           </div>
           <div class="col-xl-4">
             <h3 class="border">Anket</h3>
-            <h:panelGroup rendered="#{!home.cookieCheck}">
+            <h:panelGroup layout="block" rendered="#{!home.cookieCheck}">
               <!-- Swiper Slider -->
               <div id="swiper-survey" class="swiper-container">
                 <div class="swiper-wrapper">
@@ -98,7 +98,7 @@
                 </div>
               </div><!-- #Swiper Slider -->
             </h:panelGroup>
-            <h:panelGroup rendered="#{home.cookieCheck}">
+            <h:panelGroup layout="block" rendered="#{home.cookieCheck}">
               <div class="survey-done">
                 <i class="fa fa-smile-o"></i>
                 <p>Tüm anketleri tamamladınız.<br/>Katılımınız için teşekkürler!</p>

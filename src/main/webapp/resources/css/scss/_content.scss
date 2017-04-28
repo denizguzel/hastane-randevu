@@ -22,6 +22,57 @@
       .btn-transparent {
         border-radius: 25px;
       }
+      .appointment-clocks {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        h4 {
+          display: none;
+          margin-bottom: 15px;
+        }
+        ul {
+          display: none;
+          max-width: 50%;
+          li {
+            margin-right: 10px;
+            margin-bottom: 10px;
+            .btn {
+              width: 65px;
+              padding: 10px;
+            }
+          }
+        }
+      }
+      .appointment-clocks.active {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        p.lead {
+          display: none;
+        }
+        h4 {
+          display: block;
+        }
+        ul {
+          display: flex;
+          flex-wrap: wrap;
+        }
+      }
+      .appointment-table {
+        width: 100%;
+        .table {
+          tbody {
+            tr {
+              td {
+                .btn {
+                  width: 100%;
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

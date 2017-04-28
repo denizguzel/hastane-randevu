@@ -1,13 +1,9 @@
 package com.hastanerandevu;
 
-import com.hastanerandevu.constants.ProjectConstants;
-import com.hastanerandevu.converter.Encryptor;
 import com.hastanerandevu.converter.NameConverter;
-import com.hastanerandevu.model.*;
-import com.hastanerandevu.service.impl.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.hastanerandevu.model.InspectionPlaceModel;
+import com.hastanerandevu.service.impl.HospitalPoliclinicRelServiceImpl;
+import com.hastanerandevu.service.impl.PoliclinicServiceImpl;
 
 /**
  * Created by Okan on 14.3.2017.
@@ -56,10 +52,10 @@ public class test {
     PoliclinicServiceImpl policlinicService = new PoliclinicServiceImpl();
     HospitalPoliclinicRelServiceImpl hospitalPoliclinicRelService = new HospitalPoliclinicRelServiceImpl();
 
-    for (InspectionPlaceModel inspectionPlaceModel : policlinicService.getInspectionPlacesByHospitalPoliclinicRel(hospitalPoliclinicRelService.find(100))) {
+    for(InspectionPlaceModel inspectionPlaceModel : policlinicService.getInspectionPlacesByHospitalPoliclinicRel(hospitalPoliclinicRelService.find(100))) {
       StringBuilder str = new StringBuilder(inspectionPlaceModel.getPlaceName());
-      if (inspectionPlaceModel.getDoctor() != null){
-        str.append(" "+NameConverter.getName(inspectionPlaceModel.getDoctor().getFirstName(),inspectionPlaceModel.getDoctor().getLastName()));
+      if(inspectionPlaceModel.getDoctor() != null) {
+        str.append(" " + NameConverter.getName(inspectionPlaceModel.getDoctor().getFirstName(), inspectionPlaceModel.getDoctor().getLastName()));
       }
       System.out.println(str);
     }
