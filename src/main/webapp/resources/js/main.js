@@ -207,9 +207,20 @@ function tableData(data) {
     $(ajaxElement).closest(".table-row").find("td:not(:last-child)").each(function () {
       columnData.push($.trim($(this).text()));
     });
-    $(".popover-hospital").text(columnData[0]);
-    $(".popover-policlinic").text(columnData[1]);
-    $(".popover-place").text(columnData[2]);
-    $(".popover-doctor").text(columnData[3]);
+    $(".popover-hospital").text(columnData[1]);
+    $(".popover-policlinic").text(columnData[2]);
+    $(".popover-place").text(columnData[3]);
+    $(".popover-doctor").text(columnData[0]);
+
+    $(".btn-popover").click(function (e) {
+      e.preventDefault();
+      var clock = $(this).find("span:first-child").text();
+      var date = $(this).find("span:last-child").text();
+      var clockFinish = moment(date, "DD-MM-YYYY HH:mm").add(20, "m").format("HH:mm");
+      date = moment(date, "DD-MM-YYYY").format("DD-MM-YYYY");
+
+      $(".popover-date-start").text(date + ' ' + clock);
+      $(".popover-date-finish").text(date + ' ' + clockFinish);
+    });
   }
 }

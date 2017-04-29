@@ -79,9 +79,12 @@
                             <f:convertDateTime pattern="HH:mm"/>
                           </h:outputText>
                         </h:panelGroup>
-                        <h:outputLink rendered="#{appointmentClocklist.appointmentStatus != 'RESERVED'}" styleClass="btn btn-primary btn-popover" value="javascript:void(0)">
-                          <h:outputText value="#{appointmentClocklist.appointmentDate}">
+                        <h:outputLink rendered="#{appointmentClocklist.appointmentStatus != 'RESERVED'}" styleClass="btn btn-primary btn-popover" value="#">
+                          <h:outputText styleClass="d-inline-block" value="#{appointmentClocklist.appointmentDate}">
                             <f:convertDateTime pattern="HH:mm"/>
+                          </h:outputText>
+                          <h:outputText styleClass="d-none" value="#{appointmentClocklist.appointmentDate}">
+                            <f:convertDateTime pattern="dd-MM-yyyy HH:mm"/>
                           </h:outputText>
                         </h:outputLink>
                       </li>
@@ -107,8 +110,8 @@
                     </div>
                     <div class="popover-row">
                       <label>Başlangıç-Bitiş</label>
-                      <span class="d-block">10.05.2017 08:45</span>
-                      <span class="d-block">10.05.2017 09:00</span>
+                      <span class="d-block popover-date-start"></span>
+                      <span class="d-block popover-date-finish"></span>
                     </div>
                     <button class="btn btn-sm btn-success">Randevu Almak İçin Tıklayınız</button>
                   </div>

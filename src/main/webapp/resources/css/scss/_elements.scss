@@ -34,43 +34,40 @@ body.page-404 {
   }
 }
 
-.error {
-  color: $red;
-}
-
-.info {
-  color: $green;
-}
-
-.form-control.error {
-  border-color: $red;
-}
-
-.form-control.success {
-  border-color: $green;
-}
-
 .btn-success {
   background-color: $green;
   &:hover {
     background-color: darken($green, 10%);
+    color: #fff;
   }
 }
 
 .btn-primary {
   background-color: $blue;
+  &:focus {
+    color: #fff;
+  }
 }
 
 .btn-warning {
   background-color: $yellow;
+  &:focus {
+    color: #fff;
+  }
 }
 
 .btn-danger {
   background-color: $red;
+  &:focus {
+    color: #fff;
+  }
 }
 
 .btn-info {
   background-color: $cyan;
+  &:focus {
+    color: #fff;
+  }
 }
 
 .btn-transparent {

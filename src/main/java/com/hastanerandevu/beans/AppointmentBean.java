@@ -285,7 +285,6 @@ public class AppointmentBean implements Serializable {
 
   public void searchAppointment() {
     appointmentClocks.clear();
-
     inspectionPlaceService = new InspectionPlaceServiceImpl();
 
     for(InspectionPlaceModel inspectionPlaceModel : inspectionPlaceService.getAppointments(inspectionPlaceService.find(selectedInspectionPlace))) {
@@ -299,6 +298,8 @@ public class AppointmentBean implements Serializable {
   }
 
   public void selectAppointment() {
+    appointmentClocks.clear();
+
     appointmentClocks.addAll(inspectionPlaceService.getAllAppointmentsByInspectionPlace(inspectionPlaceService.find(selectedInspectionPlace)));
     setAppointmentClockPanel(true);
   }

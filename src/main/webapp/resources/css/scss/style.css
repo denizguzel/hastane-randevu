@@ -6130,42 +6130,43 @@ body.page-404 .container {
     padding: 15px 30px;
     margin-right: 15px; }
 
-.error {
-  color: #D9534F;
-}
-
-.info {
-  color: #00C292;
-}
-
-.form-control.error {
-  border-color: #D9534F;
-}
-
-.form-control.success {
-  border-color: #00C292;
-}
-
 .btn-success {
   background-color: #00C292;
 }
   .btn-success:hover {
     background-color: #008f6c;
+    color: #fff;
   }
 
 .btn-primary {
   background-color: #03A9F3;
 }
 
+.btn-primary:focus {
+  color: #fff;
+}
+
 .btn-warning {
   background-color: #ffd500; }
+
+.btn-warning:focus {
+  color: #fff;
+}
 
 .btn-danger {
   background-color: #D9534F;
 }
 
+.btn-danger:focus {
+  color: #fff;
+}
+
 .btn-info {
   background-color: #00BCD4; }
+
+.btn-info:focus {
+  color: #fff;
+}
 
 .btn-transparent {
   background-color: transparent;
