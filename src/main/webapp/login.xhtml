@@ -43,7 +43,7 @@
                     <h:outputScript>grecaptcha.render($('.g-recaptcha')[0], {sitekey: '6LcjxBcUAAAAAKrzn6mU3wRdUiqEdCsxkKojNKeJ'});</h:outputScript>
                   </h:panelGroup>
                   <h:commandButton value="Giriş Yap" styleClass="btn btn-success" action="#{login.login}">
-                    <f:ajax execute="@form" render="@form"/>
+                    <f:ajax execute="@form" render="@form" onevent="toast"/>
                   </h:commandButton>
                 </h:form>
               </div>

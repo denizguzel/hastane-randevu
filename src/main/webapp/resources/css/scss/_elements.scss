@@ -92,6 +92,8 @@ body.page-404 {
     background-color: $input-bg;
     border-radius: 0;
     font-size: 13px;
+    text-transform: initial !important;
+    font-weight: 400 !important;
     &:focus {
       outline: 0 !important;
       border-bottom-color: $main-color;
@@ -157,6 +159,7 @@ body.page-404 {
   }
   .forgot {
     color: #444;
+    font-size: 12px;
     &:hover {
       text-decoration: underline;
     }
@@ -296,6 +299,7 @@ body.page-404 {
       width: 100%;
       text-transform: uppercase;
       padding: 15px 0;
+      font-weight: 500;
     }
   }
 }
@@ -330,6 +334,7 @@ body.page-404 {
       width: 100%;
       text-transform: uppercase;
       padding: 15px 0;
+      font-weight: 500;
     }
   }
 }

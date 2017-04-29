@@ -6078,7 +6078,6 @@ ul, ol {
 
 a:hover, a:focus {
   text-decoration: none;
-  color: #fff;
 }
 
 button, select, input.btn {
@@ -6184,6 +6183,8 @@ body.page-404 .container {
   background-color: #fff;
   border-radius: 0;
   font-size: 13px;
+  text-transform: initial !important;
+  font-weight: 400 !important;
 }
   .bootstrap-select .btn:focus {
     outline: 0 !important;
@@ -6257,6 +6258,7 @@ body.page-404 .container {
 
 .form-group .forgot {
   color: #444;
+  font-size: 12px;
 }
 
 .form-group .forgot:hover {
@@ -6384,6 +6386,7 @@ body.page-404 .container {
   width: 100%;
   text-transform: uppercase;
   padding: 15px 0;
+  font-weight: 500;
 }
 
 .nav-tabs {
@@ -6421,6 +6424,7 @@ body.page-404 .container {
   width: 100%;
   text-transform: uppercase;
   padding: 15px 0;
+  font-weight: 500;
 }
 
 .survey {
