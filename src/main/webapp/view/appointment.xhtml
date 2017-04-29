@@ -182,7 +182,9 @@
               </div>
               <div class="form-group">
                 <label>Hasta Cinsiyeti</label>
-                <div class="detail">${login.patientModel.gender}</div>
+                <div class="detail">
+                  <h:outputText value="#{messages['string.'.concat(login.patientModel.gender)]}"/>
+                </div>
               </div>
               <div class="form-group">
                 <label>Hasta Doğum Tarihi</label>
