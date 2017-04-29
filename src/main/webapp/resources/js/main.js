@@ -207,10 +207,10 @@ function tableData(data) {
     $(ajaxElement).closest(".table-row").find("td:not(:last-child)").each(function () {
       columnData.push($.trim($(this).text()));
     });
-    $(".popover-hospital").text(columnData[1]);
-    $(".popover-policlinic").text(columnData[2]);
-    $(".popover-place").text(columnData[3]);
-    $(".popover-doctor").text(columnData[0]);
+    $(".popover-hospital, #appointment-modal .detail-hospital").text(columnData[1]);
+    $(".popover-policlinic, #appointment-modal .detail-policlinic").text(columnData[2]);
+    $(".popover-place, #appointment-modal .detail-place").text(columnData[3]);
+    $(".popover-doctor, #appointment-modal .detail-doctor").text(columnData[0]);
 
     $(".btn-popover").click(function (e) {
       e.preventDefault();
@@ -219,7 +219,7 @@ function tableData(data) {
       var clockFinish = moment(date, "DD-MM-YYYY HH:mm").add(20, "m").format("HH:mm");
       date = moment(date, "DD-MM-YYYY").format("DD-MM-YYYY");
 
-      $(".popover-date-start").text(date + ' ' + clock);
+      $(".popover-date-start, #appointment-modal .detail-date").text(date + ' ' + clock);
       $(".popover-date-finish").text(date + ' ' + clockFinish);
     });
   }

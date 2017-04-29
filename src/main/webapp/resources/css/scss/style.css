@@ -6780,6 +6780,30 @@ footer {
     .modal .modal-dialog .modal-content .modal-body .form-group:last-child {
       margin-bottom: 0; }
 
+.modal .modal-dialog .modal-content .modal-body .form-group label {
+  font-weight: 500;
+}
+
+.modal .modal-dialog .modal-content .modal-body .form-group label small {
+  margin-left: 10px;
+}
+
+.modal .modal-dialog .modal-content .modal-body .form-group .detail {
+  color: #565656;
+}
+
+.modal .modal-dialog .modal-content .modal-body .buttons {
+  display: flex;
+}
+
+.modal .modal-dialog .modal-content .modal-body .buttons .btn {
+  flex-grow: 1;
+}
+
+.modal .modal-dialog .modal-content .modal-body .buttons .btn:first-child {
+  margin-right: 5px;
+}
+
 nav.sidebar {
   position: absolute;
   top: 0;

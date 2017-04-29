@@ -113,7 +113,7 @@
                       <span class="d-block popover-date-start"></span>
                       <span class="d-block popover-date-finish"></span>
                     </div>
-                    <button class="btn btn-sm btn-success">Randevu Almak İçin Tıklayınız</button>
+                    <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#appointment-modal">Randevu Almak İçin Tıklayınız</button>
                   </div>
                 </h:panelGroup>
               </div>
@@ -138,6 +138,80 @@
               </h:panelGroup>
             </h:form>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="appointment-modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Randevu Onay</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></button>
+          </div>
+          <h:form prependId="false">
+            <div class="modal-body">
+              <div class="form-group">
+                <label>Hastane</label>
+                <div class="detail detail-hospital"></div>
+              </div>
+              <div class="form-group">
+                <label>Poliklinik</label>
+                <div class="detail detail-policlinic"></div>
+              </div>
+              <div class="form-group">
+                <label>Muayene Yeri</label>
+                <div class="detail detail-place"></div>
+              </div>
+              <div class="form-group">
+                <label>Doktor</label>
+                <div class="detail detail-doctor"></div>
+              </div>
+              <div class="form-group">
+                <label>Randevu Zamanı</label>
+                <div class="detail detail-date"></div>
+              </div>
+              <div class="form-group">
+                <label>Hasta T.C. Kimlik No</label>
+                <div class="detail">${login.patientModel.tcNumber}</div>
+              </div>
+              <div class="form-group">
+                <label>Hasta Adı ve Soyadı</label>
+                <div class="detail">${login.patientModel.firstName} ${login.patientModel.lastName}</div>
+              </div>
+              <div class="form-group">
+                <label>Hasta Cinsiyeti</label>
+                <div class="detail">${login.patientModel.gender}</div>
+              </div>
+              <div class="form-group">
+                <label>Hasta Doğum Tarihi</label>
+                <div class="detail">
+                  <h:outputText value="#{login.patientModel.dateOfBirth}">
+                    <f:convertDateTime pattern="dd-MM-yyyy"/>
+                  </h:outputText>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Telefon</label>
+                <div class="detail">${login.patientModel.phoneNumber}</div>
+              </div>
+              <div class="form-group">
+                <label>E-Posta Adresi</label>
+                <div class="detail">${login.patientModel.email}</div>
+              </div>
+              <div class="form-group">
+                <label>Doktorunuza Not
+                  <small>(İsteğe Bağlı)</small>
+                </label>
+                <textarea rows="2" class="form-control"></textarea>
+              </div>
+              <div class="form-group buttons">
+                <button type="submit" class="btn btn-success">Randevuyu Kaydet</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Randevuyu İptal Et</button>
+              </div>
+            </div>
+          </h:form>
         </div>
       </div>
     </div>

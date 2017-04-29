@@ -16,6 +16,24 @@
           &:last-child {
             margin-bottom: 0;
           }
+          label {
+            font-weight: 500;
+            small {
+              margin-left: 10px;
+            }
+          }
+          .detail {
+            color: $input-color;
+          }
+        }
+        .buttons {
+          display: flex;
+          .btn {
+            flex-grow: 1;
+            &:first-child {
+              margin-right: 5px;
+            }
+          }
         }
       }
     }
