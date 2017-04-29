@@ -7,7 +7,7 @@
         <div class="col-md-4 offset-md-4">
           <div class="shadow mt-5 mb-5">
             <!-- Nav tabs -->
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-tabs" id="login-tabs">
               <li class="nav-item">
                 <a class="nav-link active" data-toggle="tab" href="#login">Giriş</a>
               </li>
@@ -37,7 +37,7 @@
                     <a href="#{facesContext.externalContext.requestContextPath}/recovery/forgot" class="forgot ml-auto">Şifremi Unuttum</a>
                   </div>
                   <input type="hidden" name="loginCheck" value="patient"/>
-                  <h:messages globalOnly="true" errorClass="error"/>
+                  <h:messages globalOnly="true" styleClass="global-message" errorClass="error"/>
                   <h:panelGroup layout="block" rendered="#{login.showCaptcha}">
                     <div class="g-recaptcha" data-sitekey="6LcjxBcUAAAAAKrzn6mU3wRdUiqEdCsxkKojNKeJ"></div>
                     <h:outputScript>grecaptcha.render($('.g-recaptcha')[0], {sitekey: '6LcjxBcUAAAAAKrzn6mU3wRdUiqEdCsxkKojNKeJ'});</h:outputScript>
@@ -155,7 +155,7 @@
                     <h:message id="addressMessage" for="address" errorClass="error"/>
                   </div>
                   <h:commandButton value="Kayıt Ol" styleClass="btn btn-success" action="#{login.patientCreate}">
-                    <f:ajax execute="@form" render="@form" onevent="selectPickerToast"/>
+                    <f:ajax execute="@form" render="@form" onevent="changeActiveTab"/>
                   </h:commandButton>
                   <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
                 </h:form>

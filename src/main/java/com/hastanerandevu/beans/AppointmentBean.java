@@ -6,6 +6,7 @@ import com.hastanerandevu.service.impl.*;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIInput;
 import javax.faces.event.AjaxBehaviorEvent;
@@ -18,12 +19,17 @@ import java.util.Map;
 @ManagedBean(name = "appointment")
 @ViewScoped
 public class AppointmentBean implements Serializable {
+  @ManagedProperty(value = "#{login}")
+  private LoginBean loginBean;
+
   private HospitalPoliclinicRelServiceImpl hospitalPoliclinicRelService;
   private CityServiceImpl cityService;
   private DistrictServiceImpl districtService;
   private HospitalServiceImpl hospitalService;
   private PoliclinicServiceImpl policlinicService;
   private InspectionPlaceServiceImpl inspectionPlaceService;
+  private AppointmentServiceImpl appointmentService;
+  private AppointmentModel appointmentModel;
 
   private boolean appointmentClockPanel = false;
   private boolean appointmentPanel = false;
@@ -40,7 +46,7 @@ public class AppointmentBean implements Serializable {
   private Map<Long, String> policlinics;
   private Map<Long, String> inspectionPlaces;
   private List<InspectionPlaceModel> appointments;
-  private List<AppointmentModel> appointmentClocks;
+  private List<AppointmentModel> appointmentTime;
 
   @SuppressWarnings("unchecked")
   @PostConstruct
@@ -51,12 +57,25 @@ public class AppointmentBean implements Serializable {
     policlinics = new LinkedHashMap();
     inspectionPlaces = new LinkedHashMap();
     appointments = new ArrayList<>();
-    appointmentClocks = new ArrayList<>();
+    appointmentTime = new ArrayList<>();
+    appointmentModel = new AppointmentModel();
 
     cityService = new CityServiceImpl();
     for(CityModel cityModel : cityService.getCities()) {
       cities.put(cityModel.getPk(), cityModel.getCityName());
     }
+  }
+
+  public void setLoginBean(LoginBean loginBean) {
+    this.loginBean = loginBean;
+  }
+
+  public AppointmentModel getAppointmentModel() {
+    return appointmentModel;
+  }
+
+  public void setAppointmentModel(AppointmentModel appointmentModel) {
+    this.appointmentModel = appointmentModel;
   }
 
   public Long getSelectedCity() {
@@ -147,12 +166,12 @@ public class AppointmentBean implements Serializable {
     this.appointments = appointments;
   }
 
-  public List<AppointmentModel> getAppointmentClocks() {
-    return appointmentClocks;
+  public List<AppointmentModel> getAppointmentTime() {
+    return appointmentTime;
   }
 
-  public void setAppointmentClocks(List<AppointmentModel> appointmentClocks) {
-    this.appointmentClocks = appointmentClocks;
+  public void setAppointmentTime(List<AppointmentModel> appointmentTime) {
+    this.appointmentTime = appointmentTime;
   }
 
   public boolean isAppointmentPanel() {
@@ -284,7 +303,7 @@ public class AppointmentBean implements Serializable {
   }
 
   public void searchAppointment() {
-    appointmentClocks.clear();
+    appointmentTime.clear();
     inspectionPlaceService = new InspectionPlaceServiceImpl();
 
     for(InspectionPlaceModel inspectionPlaceModel : inspectionPlaceService.getAppointments(inspectionPlaceService.find(selectedInspectionPlace))) {
@@ -298,9 +317,24 @@ public class AppointmentBean implements Serializable {
   }
 
   public void selectAppointment() {
-    appointmentClocks.clear();
+    appointmentTime.clear();
+    appointmentService = new AppointmentServiceImpl();
 
-    appointmentClocks.addAll(inspectionPlaceService.getAllAppointmentsByInspectionPlace(inspectionPlaceService.find(selectedInspectionPlace)));
+    appointmentTime.addAll(appointmentService.getAllAppointmentsByInspectionPlace(inspectionPlaceService.find(selectedInspectionPlace)));
+
     setAppointmentClockPanel(true);
+  }
+
+  public void holdAppointment() {
+    appointmentService.holdAppointmentForPatient(appointmentModel, loginBean.getPatientModel());
+  }
+
+  public void clearAppointment() {
+    appointmentService.clearAppointment(appointmentModel);
+  }
+
+  public String confirmAppointment() {
+    appointmentService.confirmAppointment(appointmentModel, loginBean.getPatientModel());
+    return "/view/appointment?faces-redirect=true";
   }
 }

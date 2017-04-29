@@ -196,7 +196,7 @@ function tableData(data) {
     $('[data-toggle="tooltip"]').tooltip();
     $(".btn-popover").popover({
       html: true,
-      trigger: "focus",
+      //trigger: "focus",
       content: function () {
         return $(".popover-content").html();
       },
@@ -216,11 +216,31 @@ function tableData(data) {
       e.preventDefault();
       var clock = $(this).find("span:first-child").text();
       var date = $(this).find("span:last-child").text();
-      var clockFinish = moment(date, "DD-MM-YYYY HH:mm").add(20, "m").format("HH:mm");
       date = moment(date, "DD-MM-YYYY").format("DD-MM-YYYY");
 
-      $(".popover-date-start, #appointment-modal .detail-date").text(date + ' ' + clock);
-      $(".popover-date-finish").text(date + ' ' + clockFinish);
+      $(".popover-date, #appointment-modal .detail-date").text(date + ' ' + clock);
     });
+  }
+}
+
+function changeActiveTab(data) {
+  if (data.status === "success") {
+    $('.selectpicker').selectpicker("render");
+    var systemMessageElement = $(".global-message li");
+    if (systemMessageElement.length) {
+      var message = systemMessageElement.text();
+      showtoast(message);
+      if (systemMessageElement.hasClass("error")) {
+        $(".toast").addClass("error");
+      }
+      else if (systemMessageElement.hasClass("info")) {
+        $(".toast").addClass("info");
+      }
+      systemMessageElement.text("");
+      $("#login-tabs a:first").tab("show");
+    }
+    else {
+      showtoast("Bilgileri Kontrol Ediniz");
+    }
   }
 }

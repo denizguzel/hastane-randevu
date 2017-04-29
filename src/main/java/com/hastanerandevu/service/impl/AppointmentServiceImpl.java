@@ -3,17 +3,15 @@ package com.hastanerandevu.service.impl;
 import com.hastanerandevu.dao.impl.AppointmentDaoImpl;
 import com.hastanerandevu.enums.AppointmentStatusEnum;
 import com.hastanerandevu.model.AppointmentModel;
+import com.hastanerandevu.model.InspectionPlaceModel;
 import com.hastanerandevu.model.PatientModel;
 import com.hastanerandevu.service.BaseService;
 
 import java.util.List;
 
-/**
- * Created by Okan on 16.4.2017.
- */
 public class AppointmentServiceImpl implements BaseService<AppointmentModel> {
 
-  AppointmentDaoImpl appointmentDao = new AppointmentDaoImpl();
+  private AppointmentDaoImpl appointmentDao = new AppointmentDaoImpl();
 
   @Override
   public void create(AppointmentModel model) {
@@ -46,10 +44,10 @@ public class AppointmentServiceImpl implements BaseService<AppointmentModel> {
     this.update(appointmentModel);
   }
 
-  public void confirmAppointment(AppointmentModel appointmentModel, PatientModel patientModel, String noteToDoctor) {
+  public void confirmAppointment(AppointmentModel appointmentModel, PatientModel patientModel) {
     appointmentModel.setPatient(patientModel);
     appointmentModel.setAppointmentStatus(AppointmentStatusEnum.RESERVED);
-    appointmentModel.setMessageToDoctor(noteToDoctor);
+    appointmentModel.setMessageToDoctor(appointmentModel.getMessageToDoctor());
     this.update(appointmentModel);
   }
 
@@ -63,5 +61,9 @@ public class AppointmentServiceImpl implements BaseService<AppointmentModel> {
     appointmentModel.setMessageToDoctor(null);
     appointmentModel.setAppointmentStatus(AppointmentStatusEnum.NOT_RESERVED);
     this.update(appointmentModel);
+  }
+
+  public List<AppointmentModel> getAllAppointmentsByInspectionPlace(InspectionPlaceModel inspectionPlaceModel) {
+    return appointmentDao.getAllAppointmentsByInspectionPlace(inspectionPlaceModel);
   }
 }

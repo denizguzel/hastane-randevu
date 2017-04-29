@@ -72,21 +72,23 @@
                   <p class="lead">Randevu alabilmek için lütfen arama yapınız</p>
                   <h4>Randevu Saatleri</h4>
                   <ul>
-                    <c:forEach items="#{appointment.appointmentClocks}" var="appointmentClocklist">
+                    <c:forEach items="#{appointment.appointmentTime}" var="appointmentTimelist">
                       <li>
-                        <h:panelGroup layout="block" styleClass="tooltip-wrapper" rendered="#{appointmentClocklist.appointmentStatus == 'RESERVED'}" p:data-toggle="tooltip" p:data-placement="top" p:title="Randevu Alınmış">
-                          <h:outputText styleClass="btn btn-primary disabled" value="#{appointmentClocklist.appointmentDate}">
-                            <f:convertDateTime pattern="HH:mm"/>
+                        <h:panelGroup layout="block" styleClass="tooltip-wrapper" rendered="#{appointmentTimelist.appointmentStatus == 'RESERVED'}" p:data-toggle="tooltip" p:data-placement="top" p:title="Randevu Alınmış">
+                          <h:outputText styleClass="btn btn-primary disabled" value="#{appointmentTimelist.appointmentDate}">
+                            <f:convertDateTime timeZone="GMT+3" pattern="HH:mm"/>
                           </h:outputText>
                         </h:panelGroup>
-                        <h:outputLink rendered="#{appointmentClocklist.appointmentStatus != 'RESERVED'}" styleClass="btn btn-primary btn-popover" value="#">
-                          <h:outputText styleClass="d-inline-block" value="#{appointmentClocklist.appointmentDate}">
-                            <f:convertDateTime pattern="HH:mm"/>
+                        <h:commandLink rendered="#{appointmentTimelist.appointmentStatus != 'RESERVED'}" styleClass="btn btn-primary btn-popover">
+                          <f:ajax execute="@this"/>
+                          <f:setPropertyActionListener value="#{appointmentTimelist}" target="#{appointment.appointmentModel}"/>
+                          <h:outputText styleClass="d-inline-block" value="#{appointmentTimelist.appointmentDate}">
+                            <f:convertDateTime timeZone="GMT+3" pattern="HH:mm"/>
                           </h:outputText>
-                          <h:outputText styleClass="d-none" value="#{appointmentClocklist.appointmentDate}">
-                            <f:convertDateTime pattern="dd-MM-yyyy HH:mm"/>
+                          <h:outputText styleClass="d-none" value="#{appointmentTimelist.appointmentDate}">
+                            <f:convertDateTime timeZone="GMT+3" pattern="dd-MM-yyyy HH:mm"/>
                           </h:outputText>
-                        </h:outputLink>
+                        </h:commandLink>
                       </li>
                     </c:forEach>
                   </ul>
@@ -109,11 +111,12 @@
                       <span class="popover-doctor"></span>
                     </div>
                     <div class="popover-row">
-                      <label>Başlangıç-Bitiş</label>
-                      <span class="d-block popover-date-start"></span>
-                      <span class="d-block popover-date-finish"></span>
+                      <label>Randevu Tarihi</label>
+                      <span class="d-block popover-date"></span>
                     </div>
-                    <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#appointment-modal">Randevu Almak İçin Tıklayınız</button>
+                    <h:commandLink value="Randevu Almak İçin Tıklayınız" styleClass="btn btn-sm btn-success" p:data-toggle="modal" p:data-target="#appointment-modal" action="#{appointment.holdAppointment}">
+                      <f:ajax execute="@this"/>
+                    </h:commandLink>
                   </div>
                 </h:panelGroup>
               </div>
@@ -122,7 +125,11 @@
                   <h3 class="text-center#{appointment.appointmentSearchNull ? '' : ' d-none'}">Aradığınız kriterlere ait randevu bulunamadı.</h3>
                   <div class="table-responsive#{appointment.appointmentSearchNull ? ' d-none' : ''}">
                     <h:dataTable styleClass="table" rowClasses="table-row" value="#{appointment.appointments}" var="appointmentList">
-                      <h:column><f:facet name="header">Doktor</f:facet>${appointmentList.doctor.firstName} ${appointmentList.doctor.lastName}</h:column>
+                      <h:column>
+                        <f:facet name="header">Doktor</f:facet>
+                        <h:outputText styleClass="d-inline-block" value="#{appointmentList.doctor.firstName} #{appointmentList.doctor.lastName}"/>
+                        <small><h:outputText value="(#{messages['string.'.concat(appointmentList.doctor.level)]})"/></small>
+                      </h:column>
                       <h:column><f:facet name="header">Kurum Adı</f:facet>${appointmentList.hospitalPoliclinicRel.hospital.hospitalName}</h:column>
                       <h:column><f:facet name="header">Klinik Adı</f:facet>${appointmentList.hospitalPoliclinicRel.policlinic.policlinicName}</h:column>
                       <h:column><f:facet name="header">Muayene Yeri</f:facet>${appointmentList.placeName}</h:column>
@@ -206,11 +213,13 @@
                 <label>Doktorunuza Not
                   <small>(İsteğe Bağlı)</small>
                 </label>
-                <textarea rows="2" class="form-control"></textarea>
+                <h:inputTextarea styleClass="form-control" rows="2" value="#{appointment.appointmentModel.messageToDoctor}"/>
               </div>
               <div class="form-group buttons">
-                <button type="submit" class="btn btn-success">Randevuyu Kaydet</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Randevuyu İptal Et</button>
+                <h:commandButton value="Randevuyu Kaydet" styleClass="btn btn-success" action="#{appointment.confirmAppointment}"/>
+                <h:commandButton value="Randevuyu İptal Et" styleClass="btn btn-danger" action="#{appointment.clearAppointment}" p:data-dismiss="modal">
+                  <f:ajax execute="@this"/>
+                </h:commandButton>
               </div>
             </div>
           </h:form>

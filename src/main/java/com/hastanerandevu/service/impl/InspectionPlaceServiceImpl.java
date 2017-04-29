@@ -1,7 +1,6 @@
 package com.hastanerandevu.service.impl;
 
 import com.hastanerandevu.dao.impl.InspectionPlaceDaoImpl;
-import com.hastanerandevu.model.AppointmentModel;
 import com.hastanerandevu.model.InspectionPlaceModel;
 import com.hastanerandevu.service.BaseService;
 
@@ -34,10 +33,6 @@ public class InspectionPlaceServiceImpl implements BaseService<InspectionPlaceMo
   @Override
   public List<InspectionPlaceModel> findAll() {
     return inspectionPlaceDao.findAll();
-  }
-
-  public List<AppointmentModel> getAllAppointmentsByInspectionPlace(InspectionPlaceModel inspectionPlaceModel) {
-    return inspectionPlaceDao.getAllAppointmentsByInspectionPlace(inspectionPlaceModel);
   }
 
   public List<InspectionPlaceModel> getAppointments(InspectionPlaceModel inspectionPlaceModel) {
