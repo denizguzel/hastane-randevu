@@ -196,7 +196,7 @@ function tableData(data) {
     $('[data-toggle="tooltip"]').tooltip();
     $(".btn-popover").popover({
       html: true,
-      //trigger: "focus",
+      trigger: "focus",
       content: function () {
         return $(".popover-content").html();
       },
