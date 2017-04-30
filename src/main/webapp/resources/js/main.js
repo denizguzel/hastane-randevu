@@ -3,8 +3,6 @@ $(".datepicker").datetimepicker({
   useCurrent: false,
   locale: "tr",
   format: 'DD-MM-YYYY',
-  showTodayButton: true,
-  showClear: true,
   icons: {
     time: 'fa fa-timer',
     date: 'fa fa-calendar',
@@ -37,10 +35,12 @@ $(".datepicker").datetimepicker({
 // Swiper
 new Swiper('#swiper-main', {
   pagination: '.swiper-pagination',
-  paginationClickable: true
+  paginationClickable: true,
+  autoplay: 3000,
+  autoplayDisableOnInteraction: false
 });
 
-var surveySwiper = new Swiper('#swiper-survey', {
+new Swiper('#swiper-survey', {
   autoplay: 3000,
   autoplayDisableOnInteraction: false,
   observer: true
@@ -122,6 +122,7 @@ $("#swiper-survey .swiper-slide").each(function () {
 // Empty error/info messages when modal closed
 $(".modal").on('hidden.bs.modal', function () {
   $(this).find(".error,.info").text("");
+  $(this).find(".form-group").attr("data-message", "");
 });
 
 // Tooltip

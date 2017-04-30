@@ -339,7 +339,7 @@ public class AppointmentBean implements Serializable {
 
   public void selectAppointment(InspectionPlaceModel inspectionPlaceModel) {
 
-    clearListComponentsWithChange(appointmentTimes,appointmentDays);
+    clearListComponentsWithChange(appointmentTimes, appointmentDays);
 
     byte partitionSize = 17;
     int totalSize = appointmentService.getAllAppointmentsByInspectionPlace(inspectionPlaceModel).size();
@@ -361,6 +361,19 @@ public class AppointmentBean implements Serializable {
   public String confirmAppointment() {
     appointmentService.confirmAppointment(appointmentModel, loginBean.getPatientModel());
     return "/view/appointment?faces-redirect=true";
+  }
+
+  public void clearSearch() {
+    clearMapComponentsWithChange(cities, districts, hospitals, policlinics, inspectionPlaces);
+    clearListComponentsWithChange(appointmentsHeaders, appointmentTimes, appointmentDays);
+    appointmentPanel = false;
+    appointmentClockPanel = false;
+    appointmentSearchNull = false;
+
+    for(CityModel cityModel : cityService.getCities()) {
+      cities.put(cityModel.getPk(), cityModel.getCityName());
+    }
+    selectedCity = "İl Seçiniz";
   }
 
   private void clearMapComponentsWithChange(Map... maps) {

@@ -147,11 +147,10 @@
           </div>
           <h:form prependId="false">
             <div class="modal-body">
-              <div class="form-group">
+              <div class="form-group" data-message="">
                 <h:inputSecret id="password" value="#{login.password}" p:placeholder="Yeni şifrenizi giriniz" required="true" requiredMessage="Yeni şifrenizi giriniz" styleClass="form-control" binding="#{passwordConfirm}">
-                  <f:ajax event="blur" execute="@this passwordConfirm" render="passwordMessage passwordConfirmMessage"/>
+                  <f:ajax event="blur" execute="@this passwordConfirm" render="passwordMessage passwordConfirmMessage" onevent="ajaxCall"/>
                 </h:inputSecret>
-                <i class="fa fa-question-circle-o" data-toggle="tooltip" data-placement="top" title="Şifreniz en az 1 rakam, 1 küçük harf, 1 büyük harf, 1 özel karakter ve en az 8 haneli olmalıdır"></i>
                 <h:message id="passwordMessage" for="password" errorClass="error"/>
               </div>
               <div class="form-group" data-message="">

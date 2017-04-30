@@ -37,6 +37,7 @@ public class HomeBean implements Serializable {
   public void init() {
     surveyService = new SurveyServiceImpl();
     frequentlyAskedQuestionsService = new FrequentlyAskedQuestionsServiceImpl();
+    optionService = new OptionServiceImpl();
 
     askedQuestions = new ArrayList<>();
     surveys = new ArrayList<>();
@@ -52,7 +53,7 @@ public class HomeBean implements Serializable {
     if(userCookies.size() > 0) {
       for(Cookie userCookie : userCookies) {
         if(userCookie.getName().equals(cookieName) && userCookie.getValue().equals("yes")) {
-          setCookieCheck(true);
+          cookieCheck = true;
         }
       }
     }
@@ -74,6 +75,10 @@ public class HomeBean implements Serializable {
     this.selectedOption = selectedOption;
   }
 
+  public SurveyServiceImpl getSurveyService() {
+    return surveyService;
+  }
+
   public List<FrequentlyAskedQuestionsModel> getAskedQuestions() {
     return askedQuestions;
   }
@@ -86,25 +91,9 @@ public class HomeBean implements Serializable {
     return options;
   }
 
-  public SurveyServiceImpl getSurveyService() {
-    return surveyService;
-  }
-
-  public void setSurveyService(SurveyServiceImpl surveyService) {
-    this.surveyService = surveyService;
-  }
-
-  public OptionServiceImpl getOptionService() {
-    return optionService;
-  }
-
-  public void setOptionService(OptionServiceImpl optionService) {
-    this.optionService = optionService;
-  }
-
   public String answerSurvey() {
     optionService = new OptionServiceImpl();
-    surveyService.answerSurvey(optionService.find(Long.parseLong(getSelectedOption())));
+    surveyService.answerSurvey(optionService.find(Long.parseLong(selectedOption)));
     return "/index?faces-redirect=true";
   }
 }

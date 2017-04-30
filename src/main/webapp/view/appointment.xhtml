@@ -63,8 +63,11 @@
                     </div>
                   </div>
                 </div>
-                <h:commandButton id="appointment-search" value="Randevu Ara" styleClass="btn btn-success" action="#{appointment.searchAppointment}">
+                <h:commandButton id="appointment-search" value="Randevu Ara" styleClass="btn btn-success mr-3" action="#{appointment.searchAppointment}">
                   <f:ajax execute="@this" render="appointmentTable" onevent="selectPicker"/>
+                </h:commandButton>
+                <h:commandButton value="Temizle" styleClass="btn btn-success" action="#{appointment.clearSearch}">
+                  <f:ajax execute="@form" render="@form" onevent="selectPicker"/>
                 </h:commandButton>
               </div>
               <div class="col-xl-6">
@@ -89,11 +92,11 @@
                           <c:forEach items="#{row}" var="col" varStatus="colIndex">
                             <li class="nav-item">
                               <h:panelGroup layout="block" styleClass="tooltip-wrapper" rendered="#{col.appointmentStatus == 'RESERVED'}" p:data-toggle="tooltip" p:data-placement="top" p:title="Randevu Alınmış">
-                                <h:outputText styleClass="btn disabled" value="#{col.appointmentDate}">
+                                <h:outputText styleClass="btn btn-secondary disabled" value="#{col.appointmentDate}">
                                   <f:convertDateTime timeZone="GMT+3" pattern="HH:mm"/>
                                 </h:outputText>
                               </h:panelGroup>
-                              <h:commandLink rendered="#{col.appointmentStatus != 'RESERVED'}" styleClass="btn btn-primary btn-popover">
+                              <h:commandLink rendered="#{col.appointmentStatus != 'RESERVED'}" styleClass="btn btn-success btn-popover">
                                 <f:ajax execute="@this"/>
                                 <f:setPropertyActionListener value="#{col}" target="#{appointment.appointmentModel}"/>
                                 <h:outputText styleClass="d-inline-block" value="#{col.appointmentDate}">
@@ -131,7 +134,7 @@
                       <label>Randevu Tarihi</label>
                       <span class="d-block popover-date"></span>
                     </div>
-                    <h:commandLink value="Randevu Almak İçin Tıklayınız" styleClass="btn btn-sm btn-success" p:data-toggle="modal" p:data-target="#appointment-modal" action="#{appointment.holdAppointment}">
+                    <h:commandLink value="Randevu Almak İçin Tıklayınız" styleClass="btn btn-sm btn-success" p:data-toggle="modal" p:data-target="#appointment-modal" p:data-backdrop="static" p:data-keyboard="false" action="#{appointment.holdAppointment}">
                       <f:ajax execute="@this"/>
                     </h:commandLink>
                   </div>

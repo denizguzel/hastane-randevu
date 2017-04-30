@@ -42,31 +42,29 @@ $btn-border-radius: 0;
 $btn-border-radius-lg: 0;
 $btn-border-radius-sm: 0;
 
-$btn-primary-color: $brand-primary;
-$btn-primary-bg: transparent;
+$btn-primary-color: $white;
+$btn-primary-bg: $brand-primary;
 $btn-primary-border: $brand-primary;
 
 $btn-secondary-color: $grey;
 $btn-secondary-bg: transparent;
 $btn-secondary-border: $grey;
 
-$btn-info-color: $brand-info;
-$btn-info-bg: transparent;
+$btn-info-color: $white;
+$btn-info-bg: $brand-info;
 $btn-info-border: $brand-info;
 
-$btn-success-color: $brand-success;
-$btn-success-bg: transparent;
+$btn-success-color: $white;
+$btn-success-bg: $brand-success;
 $btn-success-border: $brand-success;
 
-$btn-warning-color: $brand-warning;
-$btn-warning-bg: transparent;
+$btn-warning-color: $white;
+$btn-warning-bg: $brand-warning;
 $btn-warning-border: $brand-warning;
 
-$btn-danger-color: $brand-danger;
-$btn-danger-bg: transparent;
+$btn-danger-color: $white;
+$btn-danger-bg: $brand-danger;
 $btn-danger-border: $brand-danger;
-
-$btn-link-disabled-color: $grey;
 
 // Links
 $link-color: #54667A;

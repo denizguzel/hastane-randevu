@@ -53,3 +53,29 @@ button, input, optgroup, select, textarea {
     box-shadow: none !important;
   }
 }
+
+.bootstrap-datetimepicker-widget.dropdown-menu {
+  padding: 5px;
+  table {
+    th {
+      height: 30px;
+      line-height: 30px;
+      font-weight: 500;
+    }
+    td.day {
+      height: 30px;
+      line-height: 30px;
+      padding: 0;
+    }
+    td.day.today {
+      background-color: $green;
+      color: #fff;
+      &:before {
+        content: none;
+      }
+    }
+    td.day.active {
+      background-color: $blue;
+    }
+  }
+}

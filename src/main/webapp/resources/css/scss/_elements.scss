@@ -34,48 +34,44 @@ body.page-404 {
   }
 }
 
+.btn-inverse {
+  background-color: #333;
+  border-color: #333;
+  color: #fff;
+}
+
 .btn-success {
-  &:hover {
-    background-color: $brand-success;
-    border-color: $brand-success;
+  &:focus {
     color: #fff;
   }
 }
 
 .btn-primary {
-  &:hover {
-    background-color: $brand-primary;
-    border-color: $brand-primary;
-    color: #fff;
-  }
-}
-
-.btn-warning {
-  &:hover {
-    background-color: $brand-warning;
-    border-color: $brand-warning;
-    color: #fff;
-  }
-}
-
-.btn-danger {
-  &:hover {
-    background-color: $brand-danger;
-    border-color: $brand-danger;
+  &:focus {
     color: #fff;
   }
 }
 
 .btn-info {
-  &:hover {
-    background-color: $brand-info;
-    border-color: $brand-info;
+  &:focus {
+    color: #fff;
+  }
+}
+
+.btn-warning {
+  &:focus {
+    color: #fff;
+  }
+}
+
+.btn-danger {
+  &:focus {
     color: #fff;
   }
 }
 
 .btn.disabled {
-  border: 1px solid $grey;
+  border: 1px solid #ccc;
 }
 
 .btn-transparent {
@@ -372,7 +368,7 @@ body.page-404 {
                 width: 20px;
                 height: 20px;
                 border-radius: 50%;
-                background-color: darken(#F5F5F5, 10%);
+                border: 1px solid $green;
               }
             }
             input {
@@ -384,12 +380,12 @@ body.page-404 {
               &:after {
                 content: '';
                 position: absolute;
-                top: 5px;
-                left: 5px;
+                top: 6px;
+                left: 6px;
                 width: 10px;
                 height: 10px;
                 border-radius: 50%;
-                background-color: #555;
+                background-color: $green;
               }
             }
           }
