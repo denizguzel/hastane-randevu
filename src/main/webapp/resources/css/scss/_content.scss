@@ -38,9 +38,40 @@
             margin-right: 10px;
             margin-bottom: 10px;
             .btn {
-              width: 65px;
+              width: 55px;
+              padding: 5px;
+            }
+            .btn-primary {
+              &:focus {
+                color: #fff;
+                background-color: $brand-primary;
+              }
+            }
+          }
+        }
+        .nav-tabs {
+          margin-bottom: 10px;
+          .nav-item {
+            position: relative;
+            margin-bottom: 0;
+            .nav-link {
               padding: 10px;
             }
+            .nav-link.active {
+              &:before {
+                content: '\f0d7';
+                font-family: 'FontAwesome';
+                position: absolute;
+                bottom: -13px;
+                left: 50%;
+                color: darken($main-color, 10%);
+              }
+            }
+          }
+        }
+        .tab-content {
+          .tab-pane {
+            padding: 0;
           }
         }
       }

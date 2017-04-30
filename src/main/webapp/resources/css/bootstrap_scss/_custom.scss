@@ -16,7 +16,7 @@ $grey: #797C94;
 
 // Body
 $body-color: $black;
-$font-family-sans-serif: 'Montserrat', sans-serif;
+$font-family-sans-serif: 'Poppins', sans-serif;
 $font-family-base: $font-family-sans-serif;
 $font-size-base: 14px;
 $font-size-lg: $font-size-base;
@@ -42,16 +42,31 @@ $btn-border-radius: 0;
 $btn-border-radius-lg: 0;
 $btn-border-radius-sm: 0;
 
-$btn-primary-bg: $brand-primary;
-$btn-primary-border: $btn-primary-bg;
-$btn-info-bg: $brand-info;
-$btn-info-border: $btn-info-bg;
-$btn-success-bg: $brand-success;
-$btn-success-border: $btn-success-bg;
-$btn-warning-bg: $brand-warning;
-$btn-warning-border: $btn-warning-bg;
-$btn-danger-bg: $brand-danger;
-$btn-danger-border: $btn-danger-bg;
+$btn-primary-color: $brand-primary;
+$btn-primary-bg: transparent;
+$btn-primary-border: $brand-primary;
+
+$btn-secondary-color: $grey;
+$btn-secondary-bg: transparent;
+$btn-secondary-border: $grey;
+
+$btn-info-color: $brand-info;
+$btn-info-bg: transparent;
+$btn-info-border: $brand-info;
+
+$btn-success-color: $brand-success;
+$btn-success-bg: transparent;
+$btn-success-border: $brand-success;
+
+$btn-warning-color: $brand-warning;
+$btn-warning-bg: transparent;
+$btn-warning-border: $brand-warning;
+
+$btn-danger-color: $brand-danger;
+$btn-danger-bg: transparent;
+$btn-danger-border: $brand-danger;
+
+$btn-link-disabled-color: $grey;
 
 // Links
 $link-color: #54667A;
@@ -71,7 +86,7 @@ $input-color-placeholder: $grey;
 $input-color-focus: $input-color;
 $input-line-height: 2;
 $input-border-radius: 0;
-$input-btn-border-width: 0;
+$input-btn-border-width: 1px; // For form controls and buttons
 
 // Navbar
 $navbar-border-radius: 0;

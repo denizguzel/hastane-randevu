@@ -35,39 +35,47 @@ body.page-404 {
 }
 
 .btn-success {
-  background-color: $green;
   &:hover {
-    background-color: darken($green, 10%);
+    background-color: $brand-success;
+    border-color: $brand-success;
     color: #fff;
   }
 }
 
 .btn-primary {
-  background-color: $blue;
-  &:focus {
+  &:hover {
+    background-color: $brand-primary;
+    border-color: $brand-primary;
     color: #fff;
   }
 }
 
 .btn-warning {
-  background-color: $yellow;
-  &:focus {
+  &:hover {
+    background-color: $brand-warning;
+    border-color: $brand-warning;
     color: #fff;
   }
 }
 
 .btn-danger {
-  background-color: $red;
-  &:focus {
+  &:hover {
+    background-color: $brand-danger;
+    border-color: $brand-danger;
     color: #fff;
   }
 }
 
 .btn-info {
-  background-color: $cyan;
-  &:focus {
+  &:hover {
+    background-color: $brand-info;
+    border-color: $brand-info;
     color: #fff;
   }
+}
+
+.btn.disabled {
+  border: 1px solid $grey;
 }
 
 .btn-transparent {
@@ -295,7 +303,7 @@ body.page-404 {
     .btn {
       width: 100%;
       text-transform: uppercase;
-      padding: 15px 0;
+      padding: 12px 0;
       font-weight: 500;
     }
   }
@@ -330,7 +338,7 @@ body.page-404 {
     .btn {
       width: 100%;
       text-transform: uppercase;
-      padding: 15px 0;
+      padding: 12px 0;
       font-weight: 500;
     }
   }

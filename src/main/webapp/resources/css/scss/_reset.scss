@@ -23,14 +23,16 @@ button, select, input.btn {
 
 .form-control {
   height: 40px;
+  border: 0;
 }
 
 ::placeholder {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
 }
 
 button, input, optgroup, select, textarea {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .table {
@@ -43,5 +45,11 @@ button, input, optgroup, select, textarea {
     th {
       font-weight: 300;
     }
+  }
+}
+
+.btn {
+  &:focus {
+    box-shadow: none !important;
   }
 }

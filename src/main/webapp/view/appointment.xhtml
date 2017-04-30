@@ -68,30 +68,47 @@
                 </h:commandButton>
               </div>
               <div class="col-xl-6">
-                <h:panelGroup layout="block" id="appointmentClocks" class="appointment-clocks#{appointment.appointmentClockPanel ? ' active' : ''}">
+                <h:panelGroup layout="block" id="appointmentTimes" class="appointment-clocks#{appointment.appointmentClockPanel ? ' active' : ''}">
                   <p class="lead">Randevu alabilmek için lütfen arama yapınız</p>
                   <h4>Randevu Saatleri</h4>
-                  <ul>
-                    <c:forEach items="#{appointment.appointmentTimes}" var="appointmentTime">
-                      <li>
-                        <h:panelGroup layout="block" styleClass="tooltip-wrapper" rendered="#{appointmentTime.appointmentStatus == 'RESERVED'}" p:data-toggle="tooltip" p:data-placement="top" p:title="Randevu Alınmış">
-                          <h:outputText styleClass="btn btn-primary disabled" value="#{appointmentTime.appointmentDate}">
-                            <f:convertDateTime timeZone="GMT+3" pattern="HH:mm"/>
+                  <ul class="nav nav-tabs" id="week-tabs">
+                    <c:forEach items="#{appointment.appointmentDays}" var="day" varStatus="dayIndex">
+                      <li class="nav-item">
+                        <h:outputLink styleClass="nav-link#{dayIndex.index == 0 ? ' active' : ''}" p:data-toggle="tab" value="#day#{dayIndex.index}">
+                          <h:outputText value="#{day.appointmentDate}">
+                            <f:convertDateTime timeZone="GMT+3" pattern="dd-MM-yyyy"/>
                           </h:outputText>
-                        </h:panelGroup>
-                        <h:commandLink rendered="#{appointmentTime.appointmentStatus != 'RESERVED'}" styleClass="btn btn-primary btn-popover">
-                          <f:ajax execute="@this"/>
-                          <f:setPropertyActionListener value="#{appointmentTime}" target="#{appointment.appointmentModel}"/>
-                          <h:outputText styleClass="d-inline-block" value="#{appointmentTime.appointmentDate}">
-                            <f:convertDateTime timeZone="GMT+3" pattern="HH:mm"/>
-                          </h:outputText>
-                          <h:outputText styleClass="d-none" value="#{appointmentTime.appointmentDate}">
-                            <f:convertDateTime timeZone="GMT+3" pattern="dd-MM-yyyy HH:mm"/>
-                          </h:outputText>
-                        </h:commandLink>
+                        </h:outputLink>
                       </li>
                     </c:forEach>
                   </ul>
+                  <div class="tab-content">
+                    <c:forEach items="#{appointment.appointmentTimes}" var="row" varStatus="rowIndex">
+                      <div class="tab-pane fade#{rowIndex.index == 0 ? ' show active' : ''}" id="day#{rowIndex.index}">
+                        <ul>
+                          <c:forEach items="#{row}" var="col" varStatus="colIndex">
+                            <li class="nav-item">
+                              <h:panelGroup layout="block" styleClass="tooltip-wrapper" rendered="#{col.appointmentStatus == 'RESERVED'}" p:data-toggle="tooltip" p:data-placement="top" p:title="Randevu Alınmış">
+                                <h:outputText styleClass="btn disabled" value="#{col.appointmentDate}">
+                                  <f:convertDateTime timeZone="GMT+3" pattern="HH:mm"/>
+                                </h:outputText>
+                              </h:panelGroup>
+                              <h:commandLink rendered="#{col.appointmentStatus != 'RESERVED'}" styleClass="btn btn-primary btn-popover">
+                                <f:ajax execute="@this"/>
+                                <f:setPropertyActionListener value="#{col}" target="#{appointment.appointmentModel}"/>
+                                <h:outputText styleClass="d-inline-block" value="#{col.appointmentDate}">
+                                  <f:convertDateTime timeZone="GMT+3" pattern="HH:mm"/>
+                                </h:outputText>
+                                <h:outputText styleClass="d-none" value="#{col.appointmentDate}">
+                                  <f:convertDateTime timeZone="GMT+3" pattern="dd-MM-yyyy HH:mm"/>
+                                </h:outputText>
+                              </h:commandLink>
+                            </li>
+                          </c:forEach>
+                        </ul>
+                      </div>
+                    </c:forEach>
+                  </div>
                   <div class="popover-title d-none">Alınabilecek Randevu</div>
                   <div class="popover-content d-none">
                     <div class="popover-row">
@@ -136,7 +153,7 @@
                       <h:column>
                         <f:facet name="header"></f:facet>
                         <h:commandLink value="SEÇ" styleClass="btn btn-sm btn-success" action="#{appointment.selectAppointment(appointmentsHeader)}">
-                          <f:ajax execute="@this" render="appointmentClocks" onevent="tableData"/>
+                          <f:ajax execute="@this" render="appointmentTimes" onevent="tableData"/>
                         </h:commandLink>
                       </h:column>
                     </h:dataTable>
@@ -153,11 +170,14 @@
     <div class="modal fade" id="appointment-modal">
       <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Randevu Onay</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></button>
-          </div>
           <h:form prependId="false">
+            <div class="modal-header">
+              <h5 class="modal-title">Randevu Onay</h5>
+              <h:commandLink styleClass="close" action="#{appointment.clearAppointment}" p:data-dismiss="modal">
+                <i class="fa fa-close"></i>
+                <f:ajax execute="@this"/>
+              </h:commandLink>
+            </div>
             <div class="modal-body">
               <div class="form-group">
                 <label>Hastane</label>
@@ -226,5 +246,4 @@
         </div>
       </div>
     </div>
-  </ui:define>
-</ui:composition>
+  </ui:define></ui:composition>
