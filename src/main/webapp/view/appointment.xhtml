@@ -72,20 +72,20 @@
                   <p class="lead">Randevu alabilmek için lütfen arama yapınız</p>
                   <h4>Randevu Saatleri</h4>
                   <ul>
-                    <c:forEach items="#{appointment.appointmentTime}" var="appointmentTimelist">
+                    <c:forEach items="#{appointment.appointmentTimes}" var="appointmentTime">
                       <li>
-                        <h:panelGroup layout="block" styleClass="tooltip-wrapper" rendered="#{appointmentTimelist.appointmentStatus == 'RESERVED'}" p:data-toggle="tooltip" p:data-placement="top" p:title="Randevu Alınmış">
-                          <h:outputText styleClass="btn btn-primary disabled" value="#{appointmentTimelist.appointmentDate}">
+                        <h:panelGroup layout="block" styleClass="tooltip-wrapper" rendered="#{appointmentTime.appointmentStatus == 'RESERVED'}" p:data-toggle="tooltip" p:data-placement="top" p:title="Randevu Alınmış">
+                          <h:outputText styleClass="btn btn-primary disabled" value="#{appointmentTime.appointmentDate}">
                             <f:convertDateTime timeZone="GMT+3" pattern="HH:mm"/>
                           </h:outputText>
                         </h:panelGroup>
-                        <h:commandLink rendered="#{appointmentTimelist.appointmentStatus != 'RESERVED'}" styleClass="btn btn-primary btn-popover">
+                        <h:commandLink rendered="#{appointmentTime.appointmentStatus != 'RESERVED'}" styleClass="btn btn-primary btn-popover">
                           <f:ajax execute="@this"/>
-                          <f:setPropertyActionListener value="#{appointmentTimelist}" target="#{appointment.appointmentModel}"/>
-                          <h:outputText styleClass="d-inline-block" value="#{appointmentTimelist.appointmentDate}">
+                          <f:setPropertyActionListener value="#{appointmentTime}" target="#{appointment.appointmentModel}"/>
+                          <h:outputText styleClass="d-inline-block" value="#{appointmentTime.appointmentDate}">
                             <f:convertDateTime timeZone="GMT+3" pattern="HH:mm"/>
                           </h:outputText>
-                          <h:outputText styleClass="d-none" value="#{appointmentTimelist.appointmentDate}">
+                          <h:outputText styleClass="d-none" value="#{appointmentTime.appointmentDate}">
                             <f:convertDateTime timeZone="GMT+3" pattern="dd-MM-yyyy HH:mm"/>
                           </h:outputText>
                         </h:commandLink>
@@ -124,20 +124,20 @@
                 <div class="col-xl-12 mt-4">
                   <h3 class="text-center#{appointment.appointmentSearchNull ? '' : ' d-none'}">Aradığınız kriterlere ait randevu bulunamadı.</h3>
                   <div class="table-responsive#{appointment.appointmentSearchNull ? ' d-none' : ''}">
-                    <h:dataTable styleClass="table" rowClasses="table-row" value="#{appointment.appointments}" var="appointmentList">
+                    <h:dataTable styleClass="table" rowClasses="table-row" value="#{appointment.appointmentsHeaders}" var="appointmentsHeader">
                       <h:column>
                         <f:facet name="header">Doktor</f:facet>
-                        <h:outputText styleClass="d-inline-block" value="#{appointmentList.doctor.firstName} #{appointmentList.doctor.lastName}"/>
-                        <small><h:outputText value="(#{messages['string.'.concat(appointmentList.doctor.level)]})"/></small>
+                        <h:outputText styleClass="d-inline-block" value="#{appointmentsHeader.doctor.firstName} #{appointmentsHeader.doctor.lastName}"/>
+                        <small><h:outputText value="(#{messages['string.'.concat(appointmentsHeader.doctor.level)]})"/></small>
                       </h:column>
-                      <h:column><f:facet name="header">Kurum Adı</f:facet>${appointmentList.hospitalPoliclinicRel.hospital.hospitalName}</h:column>
-                      <h:column><f:facet name="header">Klinik Adı</f:facet>${appointmentList.hospitalPoliclinicRel.policlinic.policlinicName}</h:column>
-                      <h:column><f:facet name="header">Muayene Yeri</f:facet>${appointmentList.placeName}</h:column>
+                      <h:column><f:facet name="header">Kurum Adı</f:facet>${appointmentsHeader.hospitalPoliclinicRel.hospital.hospitalName}</h:column>
+                      <h:column><f:facet name="header">Klinik Adı</f:facet>${appointmentsHeader.hospitalPoliclinicRel.policlinic.policlinicName}</h:column>
+                      <h:column><f:facet name="header">Muayene Yeri</f:facet>${appointmentsHeader.placeName}</h:column>
                       <h:column>
                         <f:facet name="header"></f:facet>
-                        <h:commandButton value="SEÇ" styleClass="btn btn-sm btn-success" action="#{appointment.selectAppointment}">
+                        <h:commandLink value="SEÇ" styleClass="btn btn-sm btn-success" action="#{appointment.selectAppointment(appointmentsHeader)}">
                           <f:ajax execute="@this" render="appointmentClocks" onevent="tableData"/>
-                        </h:commandButton>
+                        </h:commandLink>
                       </h:column>
                     </h:dataTable>
                   </div>
