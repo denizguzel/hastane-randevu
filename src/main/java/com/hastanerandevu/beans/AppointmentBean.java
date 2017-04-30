@@ -339,6 +339,8 @@ public class AppointmentBean implements Serializable {
 
   public void selectAppointment(InspectionPlaceModel inspectionPlaceModel) {
 
+    clearListComponentsWithChange(appointmentTimes,appointmentDays);
+
     byte partitionSize = 17;
     int totalSize = appointmentService.getAllAppointmentsByInspectionPlace(inspectionPlaceModel).size();
     for(int i = 0; i < totalSize; i += partitionSize) {
