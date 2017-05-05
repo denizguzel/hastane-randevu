@@ -2,10 +2,14 @@ package com.hastanerandevu.utility;
 
 import com.hastanerandevu.constants.ProjectConstants;
 import com.hastanerandevu.converter.Encryptor;
+import com.hastanerandevu.converter.NameConverter;
 import com.hastanerandevu.exceptions.NoUserException;
 import com.hastanerandevu.model.PatientModel;
 import com.hastanerandevu.service.impl.PatientServiceImpl;
 import org.apache.log4j.Logger;
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.VelocityEngine;
 
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
@@ -13,6 +17,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.StringWriter;
 import java.util.Date;
 import java.util.Properties;
 
@@ -70,30 +75,24 @@ public class Mailer implements Runnable {
   }
 
   public void sendRegisterMail(PatientModel patientModel) {
+    VelocityEngine ve = new VelocityEngine();
+    VelocityContext context = new VelocityContext();
+
+    ve.setProperty("resource.loader", "file");
+    ve.setProperty("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+
+    ve.init();
+
+    context.put("userName", NameConverter.getName(patientModel.getFirstName(),patientModel.getLastName()));
+
+    Template t = ve.getTemplate("com/hastanerandevu/template/registrationMail.vm","UTF-8");
+
+    StringWriter stringWriter = new StringWriter();
+
+    t.merge(context,stringWriter);
+
     Mailer mailer = new Mailer();
-    String MAIL_TEMPLATE = "<div width=\"100%\" style=\"background: #f8f8f8; padding: 0px 0px; font-family:arial; line-height:28px; height:100%;  width: 100%; color: #514d6a;\">\n" +
-      "  <div style=\"max-width: 700px; padding:50px 0;  margin: 0px auto; font-size: 14px\">\n" +
-      "    <div style=\"padding: 40px; background: #fff;\">\n" +
-      "      <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"width: 100%;\">\n" +
-      "        <tbody>\n" +
-      "          <tr>\n" +
-      "            <td style=\"border-bottom:1px solid #f6f6f6;\"><h1 style=\"font-size:14px; font-family:arial; margin:0px; font-weight:bold;\">Sayın " + patientModel.getFirstName() + " " + patientModel.getLastName() + ",</h1></td>\n" +
-      "          </tr>\n" +
-      "          <tr>\n" +
-      "            <td style=\"padding:10px 0 30px 0;\"><p>e-Randevu Sistemi'ndeki kullanıcı hesabın oluşturulmuştur. Aşağıdaki linkten hesabına giriş yapabilirsin.</p>\n" +
-      "              <center>\n" +
-      "                <a href='http://localhost:8080/login/patient' style=\"display: inline-block; padding: 11px 30px; margin: 20px 0px 30px; font-size: 15px; color: #fff; background: #00c0c8; border-radius: 60px; text-decoration:none;\">Hesabına Git</a>\n" +
-      "              </center>\n" +
-      "              <b>- Teşekkürler (e-Randevu Sistemi)</b> </td>\n" +
-      "          </tr>\n" +
-      "          <tr>\n" +
-      "            <td  style=\"border-top:1px solid #f6f6f6; padding-top:20px; color:#777\">Eğer bu e-mail'in yanlışlıkla gelmiş olabileceğini düşünüyorsan görmezden gelebilir ya da bize bildirebilirsin.</td>\n" +
-      "          </tr>\n" +
-      "        </tbody>\n" +
-      "      </table>\n" +
-      "    </div>\n" +
-      "  </div>";
-    mailer.setParameters(patientModel.getEmail(), "e-Randevu Sistemi", MAIL_TEMPLATE);
+    mailer.setParameters(patientModel.getEmail(), "e-Randevu Sistemi", stringWriter.toString());
 
     Thread thread = new Thread(mailer);
     thread.start();
@@ -104,32 +103,27 @@ public class Mailer implements Runnable {
       patientModel = patientService.getUserByEmail(email);
 
       String encryptedSalt = Encryptor.encryptEmail(ProjectConstants.SALT + patientModel.getEmail());
-      String MAIL_TEMPLATE = "<div width=\"100%\" style=\"background: #f8f8f8; padding: 0px 0px; font-family:arial; line-height:28px; height:100%;  width: 100%; color: #514d6a;\">\n" +
-        "  <div style=\"max-width: 700px; padding:50px 0;  margin: 0px auto; font-size: 14px\">\n" +
-        "    <div style=\"padding: 40px; background: #fff;\">\n" +
-        "      <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"width: 100%;\">\n" +
-        "        <tbody>\n" +
-        "          <tr>\n" +
-        "            <td style=\"border-bottom:1px solid #f6f6f6;\"><h1 style=\"font-size:14px; font-family:arial; margin:0px; font-weight:bold;\">Sayın " + patientModel.getFirstName() + " " + patientModel.getLastName() + ",</h1>\n" +
-        "              <p style=\"margin-top:0px; color:#bbbbbb;\">Şifre sıfırlamada kullanacağınız link aşağıdadır.</p></td>\n" +
-        "          </tr>\n" +
-        "          <tr>\n" +
-        "            <td style=\"padding:10px 0 30px 0;\"><p>Talebin üzerine gönderilen şifre sıfırlama linkine tıklayarak yeni şifreni oluşturabilirsin.</p>\n" +
-        "              <center>\n" +
-        "                <a href='http://localhost:8080/recovery/reset?q=" + encryptedSalt + "' style=\"display: inline-block; padding: 11px 30px; margin: 20px 0px 30px; font-size: 15px; color: #fff; background: #00c0c8; border-radius: 60px; text-decoration:none;\">Şifre Sıfırlama Bağlantısı</a>\n" +
-        "              </center>\n" +
-        "              <b>- Teşekkürler (e-Randevu Sistemi)</b> </td>\n" +
-        "          </tr>\n" +
-        "          <tr>\n" +
-        "            <td  style=\"border-top:1px solid #f6f6f6; padding-top:20px; color:#777\">Eğer bu e-mail'in yanlışlıkla gelmiş olabileceğini düşünüyorsan görmezden gelebilir ya da bize bildirebilirsin.</td>\n" +
-        "          </tr>\n" +
-        "        </tbody>\n" +
-        "      </table>\n" +
-        "    </div>\n" +
-        "  </div>";
+
+      VelocityEngine ve = new VelocityEngine();
+      VelocityContext context = new VelocityContext();
+
+      ve.setProperty("resource.loader", "file");
+      ve.setProperty("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+
+      ve.init();
+
+      context.put("userName", NameConverter.getName(patientModel.getFirstName(),patientModel.getLastName()));
+      context.put("encryptedSalt",encryptedSalt);
+
+      Template t = ve.getTemplate("com/hastanerandevu/template/passwordResetMail.vm","UTF-8");
+
+      StringWriter stringWriter = new StringWriter();
+
+      t.merge(context,stringWriter);
+
 
       Mailer mailer = new Mailer();
-      mailer.setParameters(patientModel.getEmail(), "e-Randevu Şifre Sıfırlama", MAIL_TEMPLATE);
+      mailer.setParameters(patientModel.getEmail(), "e-Randevu Şifre Sıfırlama", stringWriter.toString());
 
       Thread thread = new Thread(mailer);
       thread.start();
