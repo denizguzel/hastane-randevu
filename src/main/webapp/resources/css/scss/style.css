@@ -6731,6 +6731,49 @@ body.page-404 .container {
   width: 100%;
 }
 
+.page-wrapper .card-user {
+  text-align: center;
+}
+
+.page-wrapper .card-user .card-block .row {
+  margin: 0 0 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #EEEFF0;
+}
+
+.page-wrapper .card-user .card-block .row div[class^="col-"] {
+  padding: 10px 15px;
+}
+
+.page-wrapper .card-user .card-block .row div[class^="col-"]:first-child {
+  border-right: 1px solid #EEEFF0;
+}
+
+.page-wrapper .card-user .card-block .row:last-of-type {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.page-wrapper .card-user .card-block .row:last-of-type div[class^="col-"] {
+  border-right: 0;
+}
+
+.page-wrapper .card-user .card-block strong {
+  color: #686868;
+}
+
+.page-wrapper .card-user .card-block p {
+  font-weight: 300;
+  color: #686868;
+}
+
+.page-wrapper .card-user .card-block hr {
+  margin: 20px 0;
+  border: 0;
+  border-top: 1px solid #EEEFF0;
+}
+
 .swiper-container .swiper-wrapper .swiper-slide .container {
   position: absolute;
   top: 0;

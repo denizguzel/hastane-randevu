@@ -119,6 +119,42 @@
       }
     }
   }
+  .card-user {
+    text-align: center;
+    .card-block {
+      .row {
+        margin: 0 0 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #EEEFF0;
+        div[class^="col-"] {
+          padding: 10px 15px;
+          &:first-child {
+            border-right: 1px solid #EEEFF0;
+          }
+        }
+        &:last-of-type {
+          margin-bottom: 0;
+          padding-bottom: 0;
+          border-bottom: 0;
+          div[class^="col-"] {
+            border-right: 0;
+          }
+        }
+      }
+      strong {
+        color: #686868;
+      }
+      p {
+        font-weight: 300;
+        color: #686868;
+      }
+      hr {
+        margin: 20px 0;
+        border: 0;
+        border-top: 1px solid #EEEFF0;
+      }
+    }
+  }
 }
 
 .swiper-container {

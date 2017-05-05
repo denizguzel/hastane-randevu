@@ -7,6 +7,47 @@
         <div class="page-title">
           <h4>Hoşgeldin</h4>
         </div>
+        <div class="row">
+          <div class="col-xl-4">
+            <div class="card card-user">
+              <div class="card-block">
+                <div class="row">
+                  <div class="col-xl-6">
+                    <strong>T.C. No</strong>
+                    <p>${login.patientModel.tcNumber}</p>
+                  </div>
+                  <div class="col-xl-6">
+                    <strong>İsim</strong>
+                    <p>${login.patientModel.firstName} ${login.patientModel.lastName}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xl-6">
+                    <strong>E-Posta</strong>
+                    <p>${login.patientModel.email}</p>
+                  </div>
+                  <div class="col-xl-6">
+                    <strong>Telefon</strong>
+                    <p>${login.patientModel.phoneNumber}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xl-12">
+                    <strong>Adres</strong>
+                    <p>${login.patientModel.address}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-8">
+            <div class="card">
+              <div class="card-block">
+                asd
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </ui:define>
