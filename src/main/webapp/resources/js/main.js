@@ -245,3 +245,18 @@ function changeActiveTab(data) {
     }
   }
 }
+
+window.onload = function () {
+  var systemMessageElement = $(".global-message li");
+  if (systemMessageElement.length) {
+    var message = systemMessageElement.text();
+    showtoast(message);
+    if (systemMessageElement.hasClass("error")) {
+      $(".toast").addClass("error");
+    }
+    else if (systemMessageElement.hasClass("info")) {
+      $(".toast").addClass("info");
+    }
+    systemMessageElement.text("");
+  }
+};

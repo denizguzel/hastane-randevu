@@ -33,4 +33,5 @@ public class AlergyServiceImpl implements BaseService<AlergyModel> {
   public List<AlergyModel> findAll() {
     return alergyDao.findAll();
   }
+
 }

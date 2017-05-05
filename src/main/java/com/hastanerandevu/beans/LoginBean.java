@@ -129,7 +129,6 @@ public class LoginBean {
       patientModel.setPassword(Encryptor.encryptPassword(getPassword()));
       patientService.update(patientModel);
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Şifre Değiştirildi", null));
-      //FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
     } catch(Exception e) {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Şifre Değiştirilemedi", null));
       LOG.error(e.getMessage());

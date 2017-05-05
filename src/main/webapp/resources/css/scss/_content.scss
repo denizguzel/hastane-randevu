@@ -117,6 +117,25 @@
           }
         }
       }
+      .alergy-list {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 30px 0;
+        .list-group {
+          display: none;
+        }
+      }
+      .alergy-list.active {
+        display: block;
+        padding: 0;
+        h3 {
+          display: none;
+        }
+        .list-group {
+          display: flex;
+        }
+      }
     }
   }
   .card-user {
