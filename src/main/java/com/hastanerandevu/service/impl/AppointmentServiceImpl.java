@@ -72,11 +72,11 @@ public class AppointmentServiceImpl implements BaseService<AppointmentModel> {
     return appointmentDao.getAllAppointmentsByInspectionPlace(inspectionPlaceModel);
   }
 
-  public List<AppointmentModel> getAllCompletableAppointments(){
+  public List<AppointmentModel> getAllCompletableAppointments() {
     return appointmentDao.getAllCompletableAppointments();
   }
 
-  public List<AppointmentModel> getAllSuspendedAppointments(){
+  public List<AppointmentModel> getAllSuspendedAppointments() {
     return appointmentDao.getAllSuspendedAppointments();
   }
 }

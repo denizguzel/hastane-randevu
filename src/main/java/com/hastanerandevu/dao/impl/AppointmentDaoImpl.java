@@ -20,22 +20,22 @@ public class AppointmentDaoImpl extends BaseDaoImpl<AppointmentModel> {
     return query.getResultList();
   }
 
-  public List<AppointmentModel> getAllCompletableAppointments(){
+  public List<AppointmentModel> getAllCompletableAppointments() {
 
     Calendar date = Calendar.getInstance();
     long t = date.getTimeInMillis();
 
     Query query = getEntitymanager().createQuery("SELECT e FROM AppointmentModel e WHERE e.appointmentDate < :date");
 
-    query.setParameter("date",new Date(t - (ProjectConstants.APPOINTMENT_COMPLETION_TIME * ProjectConstants.ONE_MINUTE_IN_MILLIS)));
+    query.setParameter("date", new Date(t - (ProjectConstants.APPOINTMENT_COMPLETION_TIME * ProjectConstants.ONE_MINUTE_IN_MILLIS)));
 
     return query.getResultList();
   }
 
-  public List<AppointmentModel> getAllSuspendedAppointments(){
+  public List<AppointmentModel> getAllSuspendedAppointments() {
     Query query = getEntitymanager().createQuery("SELECT e FROM AppointmentModel e WHERE e.appointmentStatus = :APPOINTMENT_STATUS AND e.expirationTimeForSuspend < :date");
     query.setParameter("APPOINTMENT_STATUS", AppointmentStatusEnum.SUSPENDED);
-    query.setParameter("date",new Date());
+    query.setParameter("date", new Date());
 
     return query.getResultList();
   }

@@ -378,7 +378,7 @@ public class AppointmentBean implements Serializable {
     if(patientService.haveAnAppointmentForThatDay(loginBean.getPatientModel(), appointmentModel.getAppointmentDate())) {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aynı güne birden fazla randevu alamazsınız.", null));
       appointmentService.clearAppointment(appointmentModel);
-    } else if(patientService.getNumberOfPatientAppointments(loginBean.getPatientModel()) >= 3) {
+    } else if(patientService.getNumberOfPatientAppointments(loginBean.getPatientModel()) > 3) {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "En fazla 3 randevu alabilirsiniz.", null));
       appointmentService.clearAppointment(appointmentModel);
     } else {
@@ -414,7 +414,22 @@ public class AppointmentBean implements Serializable {
     }
   }
 
-  private void cancelAppointment() {
+  public String cancelAppointment() {
+    Calendar today = Calendar.getInstance();
+    today.setTime(new Date());
 
+    Calendar appointmentDate = Calendar.getInstance();
+    appointmentDate.setTime(appointmentService.find(appointmentModel.getPk()).getAppointmentDate());
+    appointmentDate.add(Calendar.HOUR_OF_DAY, -1);
+
+    if(today.equals(appointmentDate)) {
+      appointmentService.clearAppointment(appointmentModel);
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Randevu İptal Edildi", null));
+    } else {
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Randevu İptal Edilemedi", null));
+    }
+
+    FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+    return "/view/appointments?faces-redirect=true";
   }
 }

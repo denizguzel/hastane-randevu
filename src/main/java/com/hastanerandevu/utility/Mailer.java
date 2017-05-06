@@ -83,13 +83,13 @@ public class Mailer implements Runnable {
 
     ve.init();
 
-    context.put("userName", NameConverter.getName(patientModel.getFirstName(),patientModel.getLastName()));
+    context.put("userName", NameConverter.getName(patientModel.getFirstName(), patientModel.getLastName()));
 
-    Template t = ve.getTemplate("com/hastanerandevu/template/registrationMail.vm","UTF-8");
+    Template t = ve.getTemplate("com/hastanerandevu/template/registrationMail.vm", "UTF-8");
 
     StringWriter stringWriter = new StringWriter();
 
-    t.merge(context,stringWriter);
+    t.merge(context, stringWriter);
 
     Mailer mailer = new Mailer();
     mailer.setParameters(patientModel.getEmail(), "e-Randevu Sistemi", stringWriter.toString());
@@ -112,14 +112,14 @@ public class Mailer implements Runnable {
 
       ve.init();
 
-      context.put("userName", NameConverter.getName(patientModel.getFirstName(),patientModel.getLastName()));
-      context.put("encryptedSalt",encryptedSalt);
+      context.put("userName", NameConverter.getName(patientModel.getFirstName(), patientModel.getLastName()));
+      context.put("encryptedSalt", encryptedSalt);
 
-      Template t = ve.getTemplate("com/hastanerandevu/template/passwordResetMail.vm","UTF-8");
+      Template t = ve.getTemplate("com/hastanerandevu/template/passwordResetMail.vm", "UTF-8");
 
       StringWriter stringWriter = new StringWriter();
 
-      t.merge(context,stringWriter);
+      t.merge(context, stringWriter);
 
 
       Mailer mailer = new Mailer();

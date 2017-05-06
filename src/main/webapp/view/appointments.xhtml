@@ -10,6 +10,7 @@
         <div class="card">
           <div class="card-block">
             <h:form prependId="false">
+              <h:messages styleClass="global-message" errorClass="error" infoClass="info"/>
               <div class="table-responsive">
                 <h:dataTable styleClass="table" value="#{appointment.appointmentHistory}" var="history">
                   <h:column>
@@ -38,6 +39,12 @@
                   <h:column>
                     <f:facet name="header">Doktora Not</f:facet>
                     <h:outputText value="#{history.messageToDoctor == null ? '-Not yok-' : history.messageToDoctor}"/>
+                  </h:column>
+                  <h:column>
+                    <f:facet name="header">Randevu İptal</f:facet>
+                    <h:commandButton styleClass="btn btn-sm btn-danger" value="İptal Et" action="#{appointment.cancelAppointment}" p:data-toggle="tooltip" p:title="Randevu 1 Gün Öncesine Kadar İptal Edilebilir">
+                      <f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>
+                    </h:commandButton>
                   </h:column>
                 </h:dataTable>
               </div>

@@ -36,7 +36,7 @@ public class PatientAlergyRelServiceImpl implements BaseService<PatientAlergyRel
     return patientAlergyRelDao.findAll();
   }
 
-  public boolean patientHaveAlergy(PatientModel patientModel, AlergyModel alergyModel){
-    return patientAlergyRelDao.patientHaveAlergy(patientModel,alergyModel);
+  public boolean patientHaveAlergy(PatientModel patientModel, AlergyModel alergyModel) {
+    return patientAlergyRelDao.patientHaveAlergy(patientModel, alergyModel);
   }
 }

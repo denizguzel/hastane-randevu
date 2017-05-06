@@ -22,17 +22,16 @@ public class UpdateAppointmentStatusToNotReserved implements Job {
 
     LOG.info("Started Update Appoinment Status To Not Reserved Job!");
 
-    try{
-      for (AppointmentModel appointmentModel : appointmentService.getAllSuspendedAppointments()){
+    try {
+      for(AppointmentModel appointmentModel : appointmentService.getAllSuspendedAppointments()) {
         appointmentModel.setExpirationTimeForSuspend(null);
         appointmentModel.setAppointmentStatus(AppointmentStatusEnum.NOT_RESERVED);
         appointmentModel.setPatient(null);
 
         appointmentService.update(appointmentModel);
       }
-    }
-    catch(Exception e){
-      LOG.error("Finished Update Appoinment Status To Not Reserved Job With Failure! : "+e.getMessage());
+    } catch(Exception e) {
+      LOG.error("Finished Update Appoinment Status To Not Reserved Job With Failure! : " + e.getMessage());
     }
 
     LOG.info("Finished Update Appoinment Status To NotReserved Job With Success!");

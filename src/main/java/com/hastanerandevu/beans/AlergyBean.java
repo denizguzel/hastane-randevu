@@ -25,19 +25,14 @@ import java.util.Map;
 public class AlergyBean implements Serializable {
 
   private static final Logger LOG = Logger.getLogger(AlergyBean.class);
-
+  List<PatientAlergyRelModel> patientAlergies;
+  PatientAlergyRelModel patientAlergyRelModel;
+  PatientModel patientModel;
   @ManagedProperty(value = "#{login}")
   private LoginBean loginBean;
-
   private PatientAlergyRelServiceImpl patientAlergyRelService;
   private PatientServiceImpl patientService;
   private AlergyServiceImpl alergyService;
-
-  List<PatientAlergyRelModel> patientAlergies;
-
-  PatientAlergyRelModel patientAlergyRelModel;
-  PatientModel patientModel;
-
   private String selectedAlergy;
 
   private char alergyStillPass;
@@ -62,7 +57,7 @@ public class AlergyBean implements Serializable {
       alergies.put(alergyModel.getPk(), alergyModel.getAlergyName());
     }
 
-    if (patientService.getPatientAlergies(patientModel).size() > 0){
+    if(patientService.getPatientAlergies(patientModel).size() > 0) {
       alergyPanel = true;
     }
   }
@@ -125,10 +120,9 @@ public class AlergyBean implements Serializable {
 
   public String saveAlergy() {
 
-    if (patientAlergyRelService.patientHaveAlergy(patientModel,alergyService.find(Long.parseLong(selectedAlergy)))){
+    if(patientAlergyRelService.patientHaveAlergy(patientModel, alergyService.find(Long.parseLong(selectedAlergy)))) {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerji zaten kayıtlı", null));
-    }
-    else{
+    } else {
       patientAlergyRelModel = new PatientAlergyRelModel();
       patientAlergyRelModel.setAlergy(alergyService.find(Long.parseLong(selectedAlergy)));
       patientAlergyRelModel.setPatient(patientModel);

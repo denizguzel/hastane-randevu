@@ -20,15 +20,15 @@ public class UpdateAppointmentStatusToComplete implements Job {
     LOG.info("Started Update Appointment Status To COMPLETE Job !");
 
     try {
-      for (AppointmentModel appointmentModel : appointmentService.getAllCompletableAppointments()) {
-        if (appointmentModel.getAppointmentStatus() == AppointmentStatusEnum.SUSPENDED){
+      for(AppointmentModel appointmentModel : appointmentService.getAllCompletableAppointments()) {
+        if(appointmentModel.getAppointmentStatus() == AppointmentStatusEnum.SUSPENDED) {
           appointmentModel.setPatient(null);
           appointmentModel.setExpirationTimeForSuspend(null);
         }
         appointmentModel.setAppointmentStatus(AppointmentStatusEnum.COMPLETED);
         appointmentService.update(appointmentModel);
       }
-    } catch (Exception e) {
+    } catch(Exception e) {
       LOG.error("Finished Update Appointment Status To COMPLETE Job With Failure : " + e.getMessage());
     }
     LOG.info("Finished Update Appointment Status To COMPLETE Job With Success!");
