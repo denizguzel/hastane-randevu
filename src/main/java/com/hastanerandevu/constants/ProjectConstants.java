@@ -15,4 +15,8 @@ public class ProjectConstants {
   public final static String SALT = "498#2D83B631%3800EBD!801600D*7E3CC13";
 
   public final static long ONE_MINUTE_IN_MILLIS = 60000;
+
+  public final static int APPOINTMENT_COMPLETION_TIME = 20; //20 minutes
+
+  public final static int PASSWORD_RESET_DURATION = 5; //5 minutes for changing password
 }

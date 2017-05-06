@@ -56,7 +56,7 @@ public class PasswordResetBean {
       new Mailer().sendPasswordResetMail(email);
       Calendar date = Calendar.getInstance();
       long t = date.getTimeInMillis();
-      patientModel.setForgottenExpirationDate(new Date(t + (15 * ProjectConstants.ONE_MINUTE_IN_MILLIS)));
+      patientModel.setForgottenExpirationDate(new Date(t + (ProjectConstants.PASSWORD_RESET_DURATION * ProjectConstants.ONE_MINUTE_IN_MILLIS)));
       patientService.update(patientModel);
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Şifre sıfırlama maili gönderildi.", null));
 

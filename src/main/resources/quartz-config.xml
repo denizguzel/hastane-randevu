@@ -8,38 +8,40 @@
   version="1.8">
 
   <schedule>
+
     <job>
-      <name>SendAppointmentReminderMailJob</name>
+      <name>UpdateAppointmentStatusToComplete</name>
       <group>AGroup</group>
-      <description>Send Appointment Reminder Mail to Patient</description>
-      <job-class>com.hastanerandevu.jobs.SendAppointmentReminderMail</job-class>
+      <description>Update AppointmentStatus To Complete</description>
+      <job-class>com.hastanerandevu.jobs.UpdateAppointmentStatusToComplete</job-class>
     </job>
 
     <job>
-      <name>UpdateAppointmentStatusJob</name>
+      <name>UpdateAppointmentStatusToNotReserved</name>
       <group>AGroup</group>
-      <description>Update AppointmentStatus</description>
-      <job-class>com.hastanerandevu.jobs.UpdateAppointmentStatus</job-class>
+      <description>Update AppointmentStatus To Not Reserved</description>
+      <job-class>com.hastanerandevu.jobs.UpdateAppointmentStatusToNotReserved</job-class>
     </job>
 
     <trigger>
       <cron>
-        <name>SendAppointmentReminderMailTrigger</name>
-        <job-name>SendAppointmentReminderMailJob</job-name>
+        <name>UpdateAppointmentStatusToCompleteTrigger</name>
+        <job-name>UpdateAppointmentStatusToComplete</job-name>
         <job-group>AGroup</job-group>
-        <!-- It will run every 5 seconds -->
-        <cron-expression>0/5 * * * * ?</cron-expression>
+        <!-- It will run every 5 minutes -->
+        <cron-expression>0 0/5 * * * ?</cron-expression>
       </cron>
     </trigger>
 
     <trigger>
       <cron>
-        <name>UpdateAppointmentStatus</name>
-        <job-name>UpdateAppointmentStatusJob</job-name>
+        <name>UpdateAppointmentStatusToNotReservedTrigger</name>
+        <job-name>UpdateAppointmentStatusToNotReserved</job-name>
         <job-group>AGroup</job-group>
-        <!-- It will run every 2 seconds -->
-        <cron-expression>0/2 * * * * ?</cron-expression>
+        <!-- It will run every 5 minutes -->
+        <cron-expression>0 0/5 * * * ?</cron-expression>
       </cron>
     </trigger>
+
   </schedule>
 </job-scheduling-data>

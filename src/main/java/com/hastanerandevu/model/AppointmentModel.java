@@ -27,6 +27,8 @@ public class AppointmentModel {
   @Enumerated(EnumType.STRING)
   @Column(name = "APPOINTMENT_STATUS")
   private AppointmentStatusEnum appointmentStatus;
+  @Column(name = "EXPIRATION_TIME_FOR_SUSPEND")
+  private Date expirationTimeForSuspend;
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "FK_INSPECTION_PLACE")
   private InspectionPlaceModel inspectionPlace;
@@ -104,5 +106,13 @@ public class AppointmentModel {
 
   public void setMessageToDoctor(String messageToDoctor) {
     this.messageToDoctor = messageToDoctor;
+  }
+
+  public Date getExpirationTimeForSuspend() {
+    return expirationTimeForSuspend;
+  }
+
+  public void setExpirationTimeForSuspend(Date expirationTimeForSuspend) {
+    this.expirationTimeForSuspend = expirationTimeForSuspend;
   }
 }
