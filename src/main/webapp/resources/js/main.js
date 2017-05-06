@@ -205,7 +205,7 @@ function tableData(data) {
         return $(".popover-title").html();
       }
     });
-    $(ajaxElement).closest(".table-row").find("td:not(:last-child)").each(function () {
+    $(ajaxElement).closest(".table-row").find("td:not(:last-child,:first-child)").each(function (i) {
       columnData.push($.trim($(this).text()));
     });
     $(".popover-hospital, #appointment-modal .detail-hospital").text(columnData[1]);

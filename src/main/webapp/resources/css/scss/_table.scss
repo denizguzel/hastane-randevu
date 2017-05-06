@@ -1,11 +1,27 @@
-.table-vaccine {
+.table {
+  margin-bottom: 0;
   thead {
     tr {
       th {
-        font-weight: 300;
+        font-weight: 500;
+        color: #666;
+        border-top: 0;
+        border-bottom-width: 1px;
+        vertical-align: middle;
       }
     }
   }
+  tbody {
+    tr {
+      td {
+        color: #797979;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+.table-vaccine {
   tbody {
     tr {
       cursor: pointer;
@@ -13,7 +29,13 @@
         background-color: #F2F2F2;
       }
       td {
-
+        border-right: 1px solid #ECEEEF;
+        &:first-child {
+          border-right: 0;
+        }
+        &:last-child {
+          border-right: 0;
+        }
       }
     }
     tr[aria-expanded="true"] {
@@ -26,6 +48,7 @@
       }
       td {
         padding: 0;
+        border: 0;
         .wrapper {
           padding: 10px;
           p {
@@ -45,6 +68,19 @@
               font-weight: 300;
             }
           }
+        }
+      }
+    }
+  }
+}
+
+.table-appointment {
+  width: 100%;
+  tbody {
+    tr {
+      td {
+        &:last-child {
+          text-align: center;
         }
       }
     }

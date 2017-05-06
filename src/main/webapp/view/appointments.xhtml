@@ -12,7 +12,11 @@
             <h:form prependId="false">
               <h:messages styleClass="global-message" errorClass="error" infoClass="info"/>
               <div class="table-responsive">
-                <h:dataTable styleClass="table" value="#{appointment.appointmentHistory}" var="history">
+                <h:dataTable styleClass="table table-appointment" binding="#{table}" value="#{appointment.appointmentHistory}" var="history">
+                  <h:column>
+                    <f:facet name="header">#</f:facet>
+                    <h:outputText value="#{table.rowIndex + 1}"/>
+                  </h:column>
                   <h:column>
                     <f:facet name="header">Doktor</f:facet>
                     <h:outputText value="#{history.inspectionPlace.doctor.firstName} #{history.inspectionPlace.doctor.lastName}"/>
@@ -40,7 +44,7 @@
                     <f:facet name="header">Doktora Not</f:facet>
                     <h:outputText value="#{history.messageToDoctor == null ? '-Not yok-' : history.messageToDoctor}"/>
                   </h:column>
-                  <h:column>
+                  <h:column headerClass="text-center">
                     <f:facet name="header">Randevu İptal</f:facet>
                     <h:commandButton styleClass="btn btn-sm btn-danger" value="İptal Et" action="#{appointment.cancelAppointment}" p:data-toggle="tooltip" p:title="Randevu 1 Gün Öncesine Kadar İptal Edilebilir">
                       <f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>

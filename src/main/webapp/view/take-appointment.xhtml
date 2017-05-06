@@ -140,27 +140,29 @@
                   </div>
                 </h:panelGroup>
               </div>
-              <h:panelGroup layout="block" id="appointmentTable" styleClass="appointment-table#{appointment.appointmentPanel ? '' : ' d-none'}">
-                <div class="col-xl-12 mt-4">
-                  <h3 class="text-center#{appointment.appointmentSearchNull ? '' : ' d-none'}">Aradığınız kriterlere ait randevu bulunamadı.</h3>
-                  <div class="table-responsive#{appointment.appointmentSearchNull ? ' d-none' : ''}">
-                    <h:dataTable styleClass="table" rowClasses="table-row" value="#{appointment.appointmentsHeaders}" var="appointmentsHeader">
-                      <h:column>
-                        <f:facet name="header">Doktor</f:facet>
-                        <h:outputText styleClass="d-inline-block" value="#{appointmentsHeader.doctor.firstName} #{appointmentsHeader.doctor.lastName}"/>
-                        <small><h:outputText value="(#{messages['string.'.concat(appointmentsHeader.doctor.level)]})"/></small>
-                      </h:column>
-                      <h:column><f:facet name="header">Kurum Adı</f:facet>${appointmentsHeader.hospitalPoliclinicRel.hospital.hospitalName}</h:column>
-                      <h:column><f:facet name="header">Klinik Adı</f:facet>${appointmentsHeader.hospitalPoliclinicRel.policlinic.policlinicName}</h:column>
-                      <h:column><f:facet name="header">Muayene Yeri</f:facet>${appointmentsHeader.placeName}</h:column>
-                      <h:column>
-                        <f:facet name="header"></f:facet>
-                        <h:commandLink value="SEÇ" styleClass="btn btn-sm btn-success" action="#{appointment.selectAppointment(appointmentsHeader)}">
-                          <f:ajax execute="@this" render="appointmentTimes" onevent="tableData"/>
-                        </h:commandLink>
-                      </h:column>
-                    </h:dataTable>
-                  </div>
+              <h:panelGroup layout="block" id="appointmentTable" styleClass="col-12 mt-4#{appointment.appointmentPanel ? '' : ' d-none'}">
+                <h3 class="text-center#{appointment.appointmentSearchNull ? '' : ' d-none'}">Aradığınız kriterlere ait randevu bulunamadı.</h3>
+                <div class="table-responsive#{appointment.appointmentSearchNull ? ' d-none' : ''}">
+                  <h:dataTable styleClass="table" rowClasses="table-row" binding="#{table}" value="#{appointment.appointmentsHeaders}" var="appointmentsHeader">
+                    <h:column>
+                      <f:facet name="header">#</f:facet>
+                      <h:outputText value="${table.rowIndex + 1}"/>
+                    </h:column>
+                    <h:column>
+                      <f:facet name="header">Doktor</f:facet>
+                      <h:outputText styleClass="d-inline-block" value="#{appointmentsHeader.doctor.firstName} #{appointmentsHeader.doctor.lastName}"/>
+                      <small><h:outputText value="(#{messages['string.'.concat(appointmentsHeader.doctor.level)]})"/></small>
+                    </h:column>
+                    <h:column><f:facet name="header">Kurum Adı</f:facet>${appointmentsHeader.hospitalPoliclinicRel.hospital.hospitalName}</h:column>
+                    <h:column><f:facet name="header">Klinik Adı</f:facet>${appointmentsHeader.hospitalPoliclinicRel.policlinic.policlinicName}</h:column>
+                    <h:column><f:facet name="header">Muayene Yeri</f:facet>${appointmentsHeader.placeName}</h:column>
+                    <h:column>
+                      <f:facet name="header"></f:facet>
+                      <h:commandLink value="Seç" styleClass="btn btn-success" action="#{appointment.selectAppointment(appointmentsHeader)}">
+                        <f:ajax execute="@this" render="appointmentTimes" onevent="tableData"/>
+                      </h:commandLink>
+                    </h:column>
+                  </h:dataTable>
                 </div>
               </h:panelGroup>
             </h:form>

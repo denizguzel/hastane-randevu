@@ -7,11 +7,12 @@
 $main-color: #18E2BA;
 $white: #fff;
 $black: #000;
-$red: #D9534F;
-$orange: #F0AD4E;
+$red: #FB9678;
+$orange: #FEC107;
+$yellow: #FDD835;
 $green: #00C292;
 $blue: #03A9F3;
-$cyan: #00BCD4;
+$cyan: #13DAFE;
 $grey: #797C94;
 
 // Body
@@ -26,7 +27,7 @@ $font-size-sm: 12px;
 $brand-primary: $blue;
 $brand-success: $green;
 $brand-info: $cyan;
-$brand-warning: $orange;
+$brand-warning: $yellow;
 $brand-danger: $red;
 
 // Buttons
@@ -35,12 +36,12 @@ $btn-font-weight: $font-weight-normal;
 $btn-box-shadow: none;
 $btn-focus-box-shadow: none;
 $btn-active-box-shadow: none;
-$btn-padding-y: 11.5px;
-$btn-padding-y-sm: 7.5px;
-$btn-padding-y-lg: 16.5px;
-$btn-border-radius: 0;
-$btn-border-radius-lg: 0;
-$btn-border-radius-sm: 0;
+$btn-padding-y: 10.5px;
+$btn-padding-y-sm: 6.5px;
+$btn-padding-y-lg: 15.5px;
+$btn-border-radius: 2px;
+$btn-border-radius-lg: 2px;
+$btn-border-radius-sm: 2px;
 
 $btn-primary-color: $white;
 $btn-primary-bg: $brand-primary;
@@ -111,3 +112,35 @@ $custom-checkbox-checked-icon: none;
 $custom-radio-checked-icon: none;
 $custom-control-gutter: 2rem;
 $custom-control-active-indicator-bg: #ddd;
+
+// Badges
+$badge-default-bg: $grey;
+$badge-primary-bg: $brand-primary;
+$badge-success-bg: $brand-success;
+$badge-info-bg: $brand-info;
+$badge-warning-bg: $brand-warning;
+$badge-danger-bg: $brand-danger;
+
+$badge-padding-x: 8px;
+$badge-padding-y: 5px;
+
+// List Group
+$list-group-active-bg: $brand-primary;
+$list-group-active-border: $list-group-active-bg;
+
+// Alerts
+$alert-success-bg: $brand-success;
+$alert-success-text: $white;
+$alert-success-border: $brand-success;
+
+$alert-info-bg: $brand-info;
+$alert-info-text: $white;
+$alert-info-border: $brand-info;
+
+$alert-warning-bg: $brand-warning;
+$alert-warning-text: $white;
+$alert-warning-border: $brand-warning;
+
+$alert-danger-bg: $brand-danger;
+$alert-danger-text: $white;
+$alert-danger-border: $brand-danger;

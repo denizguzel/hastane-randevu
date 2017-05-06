@@ -13,20 +13,27 @@
           </div>
           <div class="card-block">
             <h:form prependId="false" styleClass="alergy-list#{alergy.alergyPanel ? ' active' : ''}">
-              <h3>Henüz kayıtlı alerjiniz bulunmamaktadır.</h3>
-              <ul class="list-group">
-                <li class="list-group-item active justify-content-between">
-                  Alerji İsmi
-                  <span class="badge badge-default badge-pill">Hala devam Ediyor mu?</span>
-                </li>
-                <c:forEach items="#{alergy.patientAlergies}" var="patientAlergy" varStatus="patientAlergyIndex">
-                  <li class="list-group-item">
-                    ${patientAlergy.alergy.alergyName}
-                    <span class="badge badge-default badge-pill ml-auto">${patientAlergy.isStillPass eq 49 ? "Evet" : "Hayır"}</span>
-                    <h:commandButton styleClass="btn btn-sm btn-danger ml-1" value="Kaldır" action="#{alergy.deleteAlergy(patientAlergy)}"/>
-                  </li>
-                </c:forEach>
-              </ul>
+              <div class="alert"><i class="fa fa-thermometer-empty"></i>Henüz kayıtlı alerjiniz bulunmamaktadır.</div>
+              <div class="table-responsive">
+                <h:dataTable styleClass="table" binding="#{table}" value="#{alergy.patientAlergies}" var="patientAlergy">
+                  <h:column>
+                    <f:facet name="header">#</f:facet>
+                    <h:outputText value="#{table.rowIndex + 1}"/>
+                  </h:column>
+                  <h:column>
+                    <f:facet name="header">Alerji İsmi</f:facet>
+                    <h:outputText value="#{patientAlergy.alergy.alergyName}"/>
+                  </h:column>
+                  <h:column>
+                    <f:facet name="header">Hala Devam Ediyor mu?</f:facet>
+                    <span class="badge #{patientAlergy.isStillPass eq 49 ? 'badge-danger' : 'badge-success'}">#{patientAlergy.isStillPass eq 49 ? "Evet" : "Hayır"}</span>
+                  </h:column>
+                  <h:column>
+                    <f:facet name="header">Kaldır</f:facet>
+                    <h:commandButton styleClass="btn btn-sm btn-danger" value="Kaldır" action="#{alergy.deleteAlergy(patientAlergy)}"/>
+                  </h:column>
+                </h:dataTable>
+              </div>
             </h:form>
           </div>
         </div>
@@ -46,7 +53,6 @@
               <div class="form-group">
                 <label class="form-control-label">Alerji Seçiniz</label>
                 <h:selectOneMenu styleClass="selectpicker form-control" value="#{alergy.selectedAlergy}">
-                  <f:selectItem itemLabel="Alerji Seçiniz"/>
                   <f:selectItems value="#{alergy.alergies.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
                 </h:selectOneMenu>
               </div>
