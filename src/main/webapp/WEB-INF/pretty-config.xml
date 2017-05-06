@@ -47,4 +47,9 @@
     <view-id value="/view/alergy.xhtml"/>
   </url-mapping>
 
+  <url-mapping id="vaccine">
+    <pattern value="/view/vaccine"/>
+    <view-id value="/view/vaccine.xhtml"/>
+  </url-mapping>
+
 </pretty-config>

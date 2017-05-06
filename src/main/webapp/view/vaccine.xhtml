@@ -1,0 +1,278 @@
+<ui:composition template="/view/master/afterLoginTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+  <ui:define name="title">Aşı Takvimi</ui:define>
+
+  <ui:define name="content">
+    <div class="page-wrapper">
+      <div class="container-fluid">
+        <div class="page-title">
+          <h4>Aşı Takvimi</h4>
+        </div>
+        <div class="card">
+          <div class="card-block">
+            <div class="table-responsive">
+              <table class="table table-bordered table-vaccine">
+                <thead>
+                  <tr>
+                    <th>Aşı İsmi</th>
+                    <th>Doğumda</th>
+                    <th>1.Ayın Sonu</th>
+                    <th>2.Ayın Sonu</th>
+                    <th>4.Ayın Sonu</th>
+                    <th>6.Ayın Sonu</th>
+                    <th>12.Ayın Sonu</th>
+                    <th>18.Ayın Sonu</th>
+                    <th>24.Ayın Sonu</th>
+                    <th>İlköğretim 1. Sınıf</th>
+                    <th>İlköğretim 8. Sınıf</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr data-toggle="collapse" data-target="#hep-b">
+                    <td>HEP-B</td>
+                    <td>I</td>
+                    <td>II</td>
+                    <td></td>
+                    <td></td>
+                    <td>III</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr class="collapse-row">
+                    <td colspan="11">
+                      <div class="collapse" id="hep-b">
+                        <div class="wrapper">
+                          <p>Hepatit B aşısı doğumdan sonra en geç ilk 72 saat (tercihen ilk 24 saat) içinde uygulanmalıdır.</p>
+                          <p>Taşıyıcı olduğu bilinen anneden doğan bebeklere doğumdan sonraki ilk 12 saat içinde Hepatit B aşısı uygulanmalı, ayrıca doğumda aşı ile birlikte Hepatit B immun globulini de yapılmalıdır.</p>
+                          <p>Doğum ağırlığı 2000 gr’ın üzerindeki bebeklerde Hepatit B aşılama şeması aynen uygulanmalıdır. 2000 gr’ın altında doğum ağırlığı olan bebeklerde ise aşağıdaki şekilde uygulanmalıdır:</p>
+                          <ul>
+                            <li>Anne Hepatit B taşıyıcısı ise veya taşıyıcılık durumu bilinmiyorsa doğumdan sonraki ilk 12 saat içinde ilk doz yapılır, daha sonra 1., 2. ve 12. aylarda aşı tekrarlanır (toplam 4 doz uygulanır).</li>
+                            <li>Anne Hepatit B taşıyıcısı değilse, bebek 2000 gr’a ulaştığında veya 1. ayın sonunda ilk doz yapılır, ilk dozdan 1 ay ve 6 ay sonra aşı tekrarlanır (toplam 3 doz uygulanır).</li>
+                          </ul>
+                          <h3>Yan Etkiler</h3>
+                          <p>%5 oranında aşı yeri ve çevresinde ağrı, şişlik, kızarıklık görülebilir. Aşı yerine soğuk uygulama ve ağrı kesici, ateş düşürücü ilaç verilmesi önerilir.</p>
+                          <p>%1-6 oranında huzursuzluk, kırgınlık ve ishal, baş ağrısı ve/veya kas ağrısı, uyku hali, iştahsızlık gibi sistemik belirtiler görülebilir. Bu durumda ekstra sıvı verilmesi ve ağrı kesici, ateş düşürücü ilaç verilmesi önerilir.</p>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-toggle="collapse" data-target="#sucicegi">
+                    <td>Suçiçeği</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>I</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr class="collapse-row">
+                    <td colspan="11">
+                      <div class="collapse" id="sucicegi">
+                        <div class="wrapper">
+                          <p>Suçiçeği aşısı 12 ayını dolduran bebeklere 1. dozu 12-15 ay arasında, 2. dozu 4-6 yaş arasında önerilir.</p>
+                          <h3>Yan Etkiler</h3>
+                          <p>%10 oranında aşı yeri ve çevresinde ağrı, şişlik, kızarıklık görülebilir. Aşı yerine soğuk uygulama ve ağrı kesici, ateş düşürücü ilaç verilmesi önerilir.</p>
+                          <p>Çok nadir olarak huzursuzluk, kırgınlık ve ishal, baş ağrısı ve/veya kas ağrısı, uyku hali, iştahsızlık, bulantı ve kusma gibi sistemik belirtiler görülebilir. Bu durumda ekstra sıvı verilmesi ve ağrı kesici, ateş düşürücü ilaç verilmesi önerilir.</p>
+                          <p>%5 oranında aşılamayı takiben 1-3 hafta arasında ciltte döküntü görülebilir. Bu döküntü geçici olup, bir kaç gün içinde kaybolur.</p>
+                          <p>Allerjik reaksiyon gelişmesi (kol veya bacakta, göz etrafında, yüzde, dilde veya boğazda şişme, solunum ve yutma güçlüğü, deride kaşıntılı döküntüler) durumunda hemen doktorunuza başvurunuz.</p>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-toggle="collapse" data-target="#hep-a">
+                    <td>HEP-A</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>I</td>
+                    <td>II</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr class="collapse-row">
+                    <td colspan="11">
+                      <div class="collapse" id="hep-a">
+                        <div class="wrapper">
+                          <p>Hepatit A aşısı 12 aydan sonra iki doz olarak önerilir. İkinci doz ilk dozdan en az altı ay sonra uygulanmalıdır.</p>
+                          <h3>Yan Etkiler</h3>
+                          <p>En sık yan etki enjeksiyon yerinde ağrıdır. Hafif kızarıklık ve enjeksiyon bölgesinde şişlik görülebilir. Aşı yerine soğuk uygulama ve ağrı kesici, ateş düşürücü ilaç verilmesi önerilir.</p>
+                          <p>Nadir olarak huzursuzluk, kırgınlık ve ishal, baş ağrısı ve/veya kas ağrısı, uyku hali, iştahsızlık, bulantı ve kusma gibi sistemik belirtiler görülebilir. Bu durumda ekstra sıvı verilmesi ve ağrı kesici, ateş düşürücü ilaç verilmesi önerilir.</p>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-toggle="collapse" data-target="#bcg">
+                    <td>BCG</td>
+                    <td></td>
+                    <td></td>
+                    <td>I</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr class="collapse-row">
+                    <td colspan="11">
+                      <div class="collapse" id="bcg">
+                        <div class="wrapper">
+                          <p>BCG (Verem) aşısı bebek 2. ayı doldurduğunda yapılmalıdır.</p>
+                          <h3>Yan Etkiler</h3>
+                          <p>%90-95 oranında aşı yeri ve çevresinde ağrı, şişlik, kızarıklık görülebilir. Aşı yerine soğuk uygulama ve ağrı kesici, ateş düşürücü ilaç verilmesi önerilir.</p>
+                          <p>Nadiren 2 hafta- 6 ay sonrasında lenf bezlerinde şişlik ve iltihap, 1-12 ay sonrasında kemikte BCG enfeksiyonu, yaygın BCG enfeksiyonu görülebilir.</p>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-toggle="collapse" data-target="#dabt">
+                    <td>DABT-İPA-HİB</td>
+                    <td></td>
+                    <td></td>
+                    <td>I</td>
+                    <td>II</td>
+                    <td>III</td>
+                    <td></td>
+                    <td>R</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr class="collapse-row">
+                    <td colspan="11">
+                      <div class="collapse" id="dabt">
+                        <div class="wrapper">
+                          <p>Difteri, Aselüler Boğmaca, Tetanoz, İnaktif Polio, Hemofilus influenza tip B aşısıdır.</p>
+                          <p>Ülkemizde Difteri, aselüler Boğmaca, Tetanoz, İnaktif Polio, Hemofilus influenza tip B aşısı 5’li karma aşı olarak 2., 4., ve 6. aylarda ve 18-24 ayda rapel (pekiştirme) dozu olacak şekilde uygulanmaktadır.</p>
+                          <h3>Yan Etkiler</h3>
+                          <p>%20-40 oranında aşı yeri ve çevresinde ağrı, şişlik, kızarıklık görülebilir. Aşı yerine soğuk uygulama ve ağrı kesici, ateş düşürücü ilaç verilmesi önerilir.</p>
+                          <p>%3-5 oranında 38°C’yi geçen ateş görülebilir. Bu durumda ekstra sıvı verilmesi, ılık pansuman uygulaması ve ağrı kesici, ateş düşürücü ilaç verilmesi önerilir.</p>
+                          <p>%20-40 oranında huzursuzluk, kırgınlık ve ishal, baş ağrısı ve/veya kas ağrısı, uyku hali, iştahsızlık gibi sistemik belirtiler görülebilir. Bu durumda ekstra sıvı verilmesi, ılık pansuman uygulaması ve ağrı kesici, ateş düşürücü ilaç verilmesi önerilir.</p>
+                          <p>Aşı sonrasında 3 saatten fazla süren çığlık tarzında durdurulamayan ağlama, nöbet geçirme, aşırı duyarlılık reaksiyonu, nefes alıp vermede düzensizlik gibi etkiler görülürse hemen doktorunuza başvurun.</p>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-toggle="collapse" data-target="#kpa">
+                    <td>KPA</td>
+                    <td></td>
+                    <td></td>
+                    <td>I</td>
+                    <td>II</td>
+                    <td>III</td>
+                    <td>R</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr class="collapse-row">
+                    <td colspan="11">
+                      <div class="collapse" id="kpa">
+                        <div class="wrapper">
+                          <p>Zatürre, menenjit ve orta kulak iltihabı şeklinde enfeksiyonlara karşı geliştirilen pnömokok aşısı 2. , 4., 6. ve 12. aylarda uygulanır.</p>
+                          <h3>Yan Etkiler</h3>
+                          <p>%10-20 oranında aşı yeri ve çevresinde ağrı, şişlik, kızarıklık görülebilir. Aşı yerine soğuk uygulama ve ağrı kesici, ateş düşürücü ilaç verilmesi önerilir.</p>
+                          <p>%10-20 oranında 38°C’yi geçen ateş yüksekliği görülebilir. Bu durumda ekstra sıvı verme, ılık pansuman uygulaması ve ağrı kesici, ateş düşürücü ilaç verilmesi önerilir. Ateş sıklığı, preterm ve düşük doğum ağırlıklı bebeklerde, zamanında doğan bebeklere göre daha fazla olup çoğu zaman 39ºC üzerindedir.</p>
+                          <p>%10-20 oranında huzursuzluk, kırgınlık ve ishal, baş ağrısı ve/veya kas ağrısı, uyku hali, iştahsızlık gibi sistemik belirtiler görülebilir. Bu durumda ekstra sıvı verilmesi ve ağrı kesici, ateş düşürücü ilaç verilmesi önerilir.</p>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-toggle="collapse" data-target="#kkk">
+                    <td>KKK</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>I</td>
+                    <td></td>
+                    <td></td>
+                    <td>R</td>
+                    <td></td>
+                  </tr>
+                  <tr class="collapse-row">
+                    <td colspan="11">
+                      <div class="collapse" id="kkk">
+                        <div class="wrapper">
+                          <p>Kızamık, kızamıkçık, kabakulak (KKK) aşısı üçlü aşı şeklinde bulunmaktadır. İlk doz KKK aşısının bebeğiniz ilk yaşını doldurduğunda (12 aylık) , ikinci dozun 4-6 yaş arasında, okul veya kreşe başlama öncesinde uygulanması önerilmektedir.</p>
+                          <h3>Yan Etkiler</h3>
+                          <p>%10 oranında aşı yeri ve çevresinde ağrı, şişlik, kızarıklık görülebilir. Aşı yerine soğuk uygulama ve ağrı kesici, ateş düşürücü ilaç verilmesi önerilir.</p>
+                          <p>%5-15 oranında 38°C’yi geçen ateş yüksekliği görülebilir. Bu durumda ekstra sıvı verme, ılık pansuman uygulaması ve ağrı kesici, ateş düşürücü ilaç verilmesi önerilir.</p>
+                          <p>Nadir görülen yan etkiler döküntü, eklem ağrısı, lenf bezlerinde şişlik, tükrük bezinde şişme olarak sayılabilir. Bu durumda ekstra sıvı verilmesi ve ağrı kesici, ateş düşürücü ilaç verilmesi önerilir.</p>
+                          <p>Ateş yüksekliği ile birlikte nöbet geçirme, şiddetli eklem ağrısı, şuur bozukluğu gibi etkiler görülmesi durumunda hemen doktorunuza başvurunuz.</p>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-toggle="collapse" data-target="#opa">
+                    <td>OPA</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>I</td>
+                    <td></td>
+                    <td>II</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr class="collapse-row">
+                    <td colspan="11">
+                      <div class="collapse" id="opa">
+                        <div class="wrapper">
+                          <p>Oral Polio Aşısı (OPA) ve İnaktif Polio Aşısı (İPA) şeklinde 2 formu bulunur. İPA aşısı 5’li karma ve 4’lü karma aşıları içinde yapılmaktadır. OPA ağızdan damla şeklinde, 6. ay ve 18-24. aylarda uygulanır.</p>
+                          <h3>Yan Etkiler</h3>
+                          <p>Nadiren 38°C’yi geçen ateş yüksekliği görülebilir. Bu durumda ekstra sıvı verme, ılık pansuman uygulaması ve ağrı kesici, ateş düşürücü ilaç verilmesi önerilir.</p>
+                          <p>Çok nadir olarak huzursuzluk, kırgınlık ve ishal, baş ağrısı ve/veya kas ağrısı, uyku hali, iştahsızlık gibi sistemik belirtiler görülebilir. Bu durumda ekstra sıvı verilmesi ve ağrı kesici, ateş düşürücü ilaç verilmesi önerilir.</p>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-toggle="collapse" data-target="#td">
+                    <td>TD</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>I</td>
+                  </tr>
+                  <tr class="collapse-row">
+                    <td colspan="11">
+                      <div class="collapse" id="td">
+                        <div class="wrapper">
+                          <p>İlköğretim 8. sınıfta erişkin tipi Difteri-Tetanoz (Td) aşısı uygulanır.</p>
+                          <h3>Yan Etkiler</h3>
+                          <p>%10 oranında aşı yeri ve çevresinde ağrı, şişlik, kızarıklık görülebilir. Aşı yerine soğuk uygulama ve ağrı kesici, ateş düşürücü ilaç verilmesi önerilir.</p>
+                          <p>Nadiren 38°C’yi geçen ateş yüksekliği görülebilir. Bu durumda ekstra sıvı verme, ılık pansuman uygulaması ve ağrı kesici, ateş düşürücü ilaç verilmesi önerilir.</p>
+                          <p>Çok nadir olarak huzursuzluk, kırgınlık ve ishal, baş ağrısı ve/veya kas ağrısı, uyku hali, iştahsızlık gibi sistemik belirtiler görülebilir. Bu durumda ekstra sıvı verilmesi ve ağrı kesici, ateş düşürücü ilaç verilmesi önerilir.</p>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ui:define>
+</ui:composition>

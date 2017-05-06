@@ -36,16 +36,7 @@ button, input, optgroup, select, textarea {
 }
 
 .table {
-  th, td {
-    border-top: 0;
-    border-bottom: 1px solid #eceeef;
-    vertical-align: middle;
-  }
-  thead {
-    th {
-      font-weight: 300;
-    }
-  }
+  margin-bottom: 0;
 }
 
 .btn {
