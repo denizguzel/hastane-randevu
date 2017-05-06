@@ -43,7 +43,7 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientModel> {
 
   // HASTANIN O GUNE GECERLI RANDEVUSU OLUP OLMADIGI BILGISI.. AYNI GUNE RANDEVU ALINAMAMASI KONTROLU BURDAN YAPILACAK.
   public boolean haveAnAppointmentForThatDay(PatientModel patientModel, Date date) {
-    Query query = getEntitymanager().createQuery("SELECT e FROM AppointmentModel e WHERE e.appointmentStatus = :APPOINTMENT_STATUS" + " AND e.patient = :PATIENT AND e.isActive = :IS_ACTIVE AND e.appointmentDate =: DATE");
+    Query query = getEntitymanager().createQuery("SELECT e FROM AppointmentModel e WHERE e.appointmentStatus = :APPOINTMENT_STATUS" + " AND e.patient = :PATIENT AND e.isActive = :IS_ACTIVE AND e.appointmentDate =:DATE");
 
     query.setParameter("APPOINTMENT_STATUS", AppointmentStatusEnum.RESERVED);
     query.setParameter("PATIENT", patientModel);
@@ -53,15 +53,16 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientModel> {
     return query.getResultList().size() > 0;
   }
 
-  //HASTANIN RANDEVU GECMISI
+  // HASTANIN RANDEVU GECMISI
   public List<AppointmentModel> getAppointmentHistory(PatientModel patientModel) {
     Query query = getEntitymanager().createQuery("SELECT e FROM AppointmentModel e WHERE e.patient = :PATIENT  AND e.isActive = :IS_ACTIVE ORDER BY e.creationTime");
+    query.setParameter("PATIENT", patientModel);
     query.setParameter("IS_ACTIVE", '1');
 
     return query.getResultList();
   }
 
-  //GIRILEN BILGILERE DAIR SISTEMDE HASTA KAYDI VAR MI?
+  // GIRILEN BILGILERE DAIR SISTEMDE HASTA KAYDI VAR MI?
   public boolean haveUserRegistration(PatientModel patientModel) {
     Query tcQuery = getEntitymanager().createQuery("SELECT e FROM PatientModel e WHERE e.tcNumber = :TC_NUMBER").setParameter("TC_NUMBER", patientModel.getTcNumber());
     Query emailQuery = getEntitymanager().createQuery("SELECT e FROM PatientModel e WHERE e.email = :E_MAIL").setParameter("E_MAIL", patientModel.getEmail());

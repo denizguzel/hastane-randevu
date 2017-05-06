@@ -32,9 +32,14 @@
     <view-id value="/view/dashboard.xhtml"/>
   </url-mapping>
 
-  <url-mapping id="appointment">
-    <pattern value="/view/appointment"/>
-    <view-id value="/view/appointment.xhtml"/>
+  <url-mapping id="take-appointment">
+    <pattern value="/view/take-appointment"/>
+    <view-id value="/view/take-appointment.xhtml"/>
+  </url-mapping>
+
+  <url-mapping id="appointments">
+    <pattern value="/view/appointments"/>
+    <view-id value="/view/appointments.xhtml"/>
   </url-mapping>
 
   <url-mapping id="profile">

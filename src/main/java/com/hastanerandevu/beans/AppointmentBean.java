@@ -6,10 +6,12 @@ import com.hastanerandevu.service.impl.*;
 import org.apache.log4j.Logger;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIInput;
+import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import java.io.Serializable;
 import java.util.*;
@@ -30,6 +32,7 @@ public class AppointmentBean implements Serializable {
   private PoliclinicServiceImpl policlinicService;
   private InspectionPlaceServiceImpl inspectionPlaceService;
   private AppointmentServiceImpl appointmentService;
+  private PatientServiceImpl patientService;
   private AppointmentModel appointmentModel;
 
   private boolean appointmentClockPanel = false;
@@ -49,6 +52,7 @@ public class AppointmentBean implements Serializable {
   private List<InspectionPlaceModel> appointmentsHeaders;
   private List<List<AppointmentModel>> appointmentTimes;
   private List<AppointmentModel> appointmentDays;
+  private List<AppointmentModel> appointmentHistory;
 
   @SuppressWarnings("unchecked")
   @PostConstruct
@@ -66,15 +70,19 @@ public class AppointmentBean implements Serializable {
     inspectionPlaceService = new InspectionPlaceServiceImpl();
     policlinicService = new PoliclinicServiceImpl();
     appointmentService = new AppointmentServiceImpl();
+    patientService = new PatientServiceImpl();
     appointmentModel = new AppointmentModel();
 
     appointmentsHeaders = new ArrayList<>();
     appointmentDays = new ArrayList<>();
     appointmentTimes = new LinkedList<>();
+    appointmentHistory = new LinkedList<>();
 
     for(CityModel cityModel : cityService.getCities()) {
       cities.put(cityModel.getPk(), cityModel.getCityName());
     }
+
+    appointmentHistory.addAll(patientService.getAppointmentHistory(loginBean.getPatientModel()));
   }
 
   public void setLoginBean(LoginBean loginBean) {
@@ -215,6 +223,14 @@ public class AppointmentBean implements Serializable {
 
   public void setAppointmentDays(List<AppointmentModel> appointmentDays) {
     this.appointmentDays = appointmentDays;
+  }
+
+  public List<AppointmentModel> getAppointmentHistory() {
+    return appointmentHistory;
+  }
+
+  public void setAppointmentHistory(List<AppointmentModel> appointmentHistory) {
+    this.appointmentHistory = appointmentHistory;
   }
 
   // Functions
@@ -359,8 +375,18 @@ public class AppointmentBean implements Serializable {
   }
 
   public String confirmAppointment() {
-    appointmentService.confirmAppointment(appointmentModel, loginBean.getPatientModel());
-    return "/view/appointment?faces-redirect=true";
+    if(patientService.haveAnAppointmentForThatDay(loginBean.getPatientModel(), appointmentModel.getAppointmentDate())) {
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aynı güne birden fazla randevu alamazsınız.", null));
+      appointmentService.clearAppointment(appointmentModel);
+    } else if(patientService.getNumberOfPatientAppointments(loginBean.getPatientModel()) >= 3) {
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "En fazla 3 randevu alabilirsiniz.", null));
+      appointmentService.clearAppointment(appointmentModel);
+    } else {
+      appointmentService.confirmAppointment(appointmentModel, loginBean.getPatientModel());
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Randevu Alımı Başarılı", null));
+    }
+    FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+    return "/view/take-appointment?faces-redirect=true";
   }
 
   public void clearSearch() {
@@ -388,4 +414,7 @@ public class AppointmentBean implements Serializable {
     }
   }
 
+  private void cancelAppointment() {
+
+  }
 }

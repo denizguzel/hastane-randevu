@@ -26,6 +26,7 @@ public class UpdateAppointmentStatusToNotReserved implements Job {
       for (AppointmentModel appointmentModel : appointmentService.getAllSuspendedAppointments()){
         appointmentModel.setExpirationTimeForSuspend(null);
         appointmentModel.setAppointmentStatus(AppointmentStatusEnum.NOT_RESERVED);
+        appointmentModel.setPatient(null);
 
         appointmentService.update(appointmentModel);
       }

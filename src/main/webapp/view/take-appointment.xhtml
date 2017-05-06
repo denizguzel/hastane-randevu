@@ -239,6 +239,7 @@
                 <h:inputTextarea styleClass="form-control" rows="2" value="#{appointment.appointmentModel.messageToDoctor}"/>
               </div>
               <div class="form-group buttons">
+                <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
                 <h:commandButton value="Randevuyu Kaydet" styleClass="btn btn-success" action="#{appointment.confirmAppointment}"/>
                 <h:commandButton value="Randevuyu İptal Et" styleClass="btn btn-danger" action="#{appointment.clearAppointment}" p:data-dismiss="modal">
                   <f:ajax execute="@this"/>
