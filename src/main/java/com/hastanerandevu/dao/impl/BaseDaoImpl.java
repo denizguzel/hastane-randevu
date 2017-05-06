@@ -80,7 +80,7 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
       if(!entitymanager.getTransaction().isActive()) {
         entitymanager.getTransaction().begin();
       }
-      entitymanager.remove(model);
+      entitymanager.remove(entitymanager.contains(model) ? model : entitymanager.merge(model));
       entitymanager.getTransaction().commit();
     } catch(RuntimeException e) {
       try {

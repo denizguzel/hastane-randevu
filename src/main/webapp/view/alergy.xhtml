@@ -19,11 +19,11 @@
                   Alerji İsmi
                   <span class="badge badge-default badge-pill">Hala devam Ediyor mu?</span>
                 </li>
-                <c:forEach items="#{alergy.patientAlergyList}" var="alergyList" varStatus="alergyListIndex">
+                <c:forEach items="#{alergy.patientAlergies}" var="patientAlergy" varStatus="patientAlergyIndex">
                   <li class="list-group-item">
-                    ${alergyList.alergy.alergyName}
-                    <span class="badge badge-default badge-pill ml-auto">${alergyList.isStillPass eq 49 ? "Evet" : "Hayır"}</span>
-                    <h:commandButton styleClass="btn btn-sm btn-danger ml-1" value="Sil" action="#{alergy.deleteAlergy(alergyList)}"/>
+                    ${patientAlergy.alergy.alergyName}
+                    <span class="badge badge-default badge-pill ml-auto">${patientAlergy.isStillPass eq 49 ? "Evet" : "Hayır"}</span>
+                    <h:commandButton styleClass="btn btn-sm btn-danger ml-1" value="Kaldır" action="#{alergy.deleteAlergy(patientAlergy)}"/>
                   </li>
                 </c:forEach>
               </ul>
@@ -45,7 +45,7 @@
             <div class="modal-body">
               <div class="form-group">
                 <label class="form-control-label">Alerji Seçiniz</label>
-                <h:selectOneMenu styleClass="selectpicker form-control" value="#{alergy.alergyModel.pk}">
+                <h:selectOneMenu styleClass="selectpicker form-control" value="#{alergy.selectedAlergy}">
                   <f:selectItem itemLabel="Alerji Seçiniz"/>
                   <f:selectItems value="#{alergy.alergies.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
                 </h:selectOneMenu>

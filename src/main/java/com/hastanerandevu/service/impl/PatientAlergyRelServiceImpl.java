@@ -1,7 +1,9 @@
 package com.hastanerandevu.service.impl;
 
 import com.hastanerandevu.dao.impl.PatientAlergyRelDaoImpl;
+import com.hastanerandevu.model.AlergyModel;
 import com.hastanerandevu.model.PatientAlergyRelModel;
+import com.hastanerandevu.model.PatientModel;
 import com.hastanerandevu.service.BaseService;
 
 import java.util.List;
@@ -32,5 +34,9 @@ public class PatientAlergyRelServiceImpl implements BaseService<PatientAlergyRel
   @Override
   public List<PatientAlergyRelModel> findAll() {
     return patientAlergyRelDao.findAll();
+  }
+
+  public boolean patientHaveAlergy(PatientModel patientModel, AlergyModel alergyModel){
+    return patientAlergyRelDao.patientHaveAlergy(patientModel,alergyModel);
   }
 }

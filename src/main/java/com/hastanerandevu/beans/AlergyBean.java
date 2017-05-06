@@ -2,6 +2,7 @@ package com.hastanerandevu.beans;
 
 import com.hastanerandevu.model.AlergyModel;
 import com.hastanerandevu.model.PatientAlergyRelModel;
+import com.hastanerandevu.model.PatientModel;
 import com.hastanerandevu.service.impl.AlergyServiceImpl;
 import com.hastanerandevu.service.impl.PatientAlergyRelServiceImpl;
 import com.hastanerandevu.service.impl.PatientServiceImpl;
@@ -31,14 +32,18 @@ public class AlergyBean implements Serializable {
   private PatientAlergyRelServiceImpl patientAlergyRelService;
   private PatientServiceImpl patientService;
   private AlergyServiceImpl alergyService;
-  private AlergyModel alergyModel;
-  private PatientAlergyRelModel patientAlergyRelModel;
+
+  List<PatientAlergyRelModel> patientAlergies;
+
+  PatientAlergyRelModel patientAlergyRelModel;
+  PatientModel patientModel;
+
+  private String selectedAlergy;
 
   private char alergyStillPass;
   private boolean alergyPanel = false;
 
   private Map<Long, String> alergies;
-  private List<PatientAlergyRelModel> patientAlergyList;
 
   @PostConstruct
   public void init() {
@@ -46,34 +51,28 @@ public class AlergyBean implements Serializable {
     patientService = new PatientServiceImpl();
     alergyService = new AlergyServiceImpl();
 
-    alergyModel = new AlergyModel();
-    patientAlergyRelModel = new PatientAlergyRelModel();
+    patientModel = loginBean.getPatientModel();
+
+    patientAlergies = new ArrayList<>();
+    patientAlergies.addAll(patientService.getPatientAlergies(patientModel));
 
     alergies = new LinkedHashMap<>();
-    patientAlergyList = new ArrayList<>();
-
-    patientAlergyRelModel.setPatient(loginBean.getPatientModel());
 
     for(AlergyModel alergyModel : alergyService.findAll()) {
       alergies.put(alergyModel.getPk(), alergyModel.getAlergyName());
     }
 
-    patientAlergyList.addAll(patientService.getPatientAlergies(loginBean.getPatientModel()));
-    if (patientAlergyList.size() > 0) {
+    if (patientService.getPatientAlergies(patientModel).size() > 0){
       alergyPanel = true;
     }
   }
 
+  public LoginBean getLoginBean() {
+    return loginBean;
+  }
+
   public void setLoginBean(LoginBean loginBean) {
     this.loginBean = loginBean;
-  }
-
-  public AlergyModel getAlergyModel() {
-    return alergyModel;
-  }
-
-  public void setAlergyModel(AlergyModel alergyModel) {
-    this.alergyModel = alergyModel;
   }
 
   public Map<Long, String> getAlergies() {
@@ -92,14 +91,6 @@ public class AlergyBean implements Serializable {
     this.alergyStillPass = alergyStillPass;
   }
 
-  public List<PatientAlergyRelModel> getPatientAlergyList() {
-    return patientAlergyList;
-  }
-
-  public void setPatientAlergyList(List<PatientAlergyRelModel> patientAlergyList) {
-    this.patientAlergyList = patientAlergyList;
-  }
-
   public boolean isAlergyPanel() {
     return alergyPanel;
   }
@@ -108,22 +99,51 @@ public class AlergyBean implements Serializable {
     this.alergyPanel = alergyPanel;
   }
 
-  public String saveAlergy() {
-    patientAlergyRelModel.setAlergy(alergyModel);
-    patientAlergyRelModel.setIsStillPass(alergyStillPass);
+  public String getSelectedAlergy() {
+    return selectedAlergy;
+  }
 
-    if(patientAlergyRelService.find(patientAlergyRelModel.getPk()) != null) {
+  public void setSelectedAlergy(String selectedAlergy) {
+    this.selectedAlergy = selectedAlergy;
+  }
+
+  public PatientModel getPatientModel() {
+    return patientModel;
+  }
+
+  public void setPatientModel(PatientModel patientModel) {
+    this.patientModel = patientModel;
+  }
+
+  public List<PatientAlergyRelModel> getPatientAlergies() {
+    return patientAlergies;
+  }
+
+  public void setPatientAlergies(List<PatientAlergyRelModel> patientAlergies) {
+    this.patientAlergies = patientAlergies;
+  }
+
+  public String saveAlergy() {
+
+    if (patientAlergyRelService.patientHaveAlergy(patientModel,alergyService.find(Long.parseLong(selectedAlergy)))){
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerji zaten kayıtlı", null));
-    } else {
+    }
+    else{
+      patientAlergyRelModel = new PatientAlergyRelModel();
+      patientAlergyRelModel.setAlergy(alergyService.find(Long.parseLong(selectedAlergy)));
+      patientAlergyRelModel.setPatient(patientModel);
+      patientAlergyRelModel.setIsStillPass(alergyStillPass);
       patientAlergyRelService.create(patientAlergyRelModel);
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerji kaydı başarılı", null));
     }
+
     FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
     return "/view/alergy?faces-redirect=true";
+
   }
 
   public String deleteAlergy(PatientAlergyRelModel patientAlergyRelModel) {
-    patientAlergyRelService.delete(patientAlergyRelService.find(patientAlergyRelModel.getPk()));
+    patientAlergyRelService.delete(patientAlergyRelModel);
     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerji silindi", null));
     FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
     return "/view/alergy?faces-redirect=true";
