@@ -6015,13 +6015,9 @@ button, select, input.btn {
 button, input, optgroup, select, textarea {
   font-family: 'Poppins', sans-serif; }
 
-.table th, .table td {
-  border-top: 0;
-  border-bottom: 1px solid #eceeef;
-  vertical-align: middle; }
-
-.table thead th {
-  font-weight: 300; }
+.table {
+  margin-bottom: 0;
+}
 
 .btn:focus {
   box-shadow: none !important; }
@@ -6499,6 +6495,16 @@ body.page-404 .container {
       flex-wrap: wrap; }
   .page-wrapper .card .card-block .appointment-table {
     width: 100%; }
+
+.page-wrapper .card .card-block .appointment-table .table th, .page-wrapper .card .card-block .appointment-table .table td {
+  border-top: 0;
+  border-bottom: 1px solid #eceeef;
+  vertical-align: middle;
+}
+
+.page-wrapper .card .card-block .appointment-table .table thead th {
+  font-weight: 300;
+}
     .page-wrapper .card .card-block .appointment-table .table tbody tr td .btn {
       width: 100%; }
   .page-wrapper .card .card-block .alergy-list {
@@ -6718,3 +6724,56 @@ nav.sidebar {
     border-color: #18E2BA; }
     nav.sidebar ul.nav-menu li.active a i {
       color: #18E2BA; }
+
+.table-vaccine thead tr th {
+  font-weight: 300;
+}
+
+.table-vaccine tbody tr {
+  cursor: pointer;
+}
+
+.table-vaccine tbody tr:hover {
+  background-color: #F2F2F2;
+}
+
+.table-vaccine tbody tr[aria-expanded="true"] {
+  background-color: #F2F2F2;
+}
+
+.table-vaccine tbody tr.collapse-row {
+  cursor: auto;
+}
+
+.table-vaccine tbody tr.collapse-row:hover {
+  background-color: transparent;
+}
+
+.table-vaccine tbody tr.collapse-row td {
+  padding: 0;
+}
+
+.table-vaccine tbody tr.collapse-row td .wrapper {
+  padding: 10px;
+}
+
+.table-vaccine tbody tr.collapse-row td .wrapper p {
+  font-weight: 300;
+  margin-bottom: 10px;
+}
+
+.table-vaccine tbody tr.collapse-row td .wrapper h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.table-vaccine tbody tr.collapse-row td .wrapper ul {
+  list-style-type: disc;
+  padding-left: 40px;
+  margin: 15px 0;
+}
+
+.table-vaccine tbody tr.collapse-row td .wrapper ul li {
+  font-weight: 300;
+}

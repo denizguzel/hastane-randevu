@@ -1,0 +1,52 @@
+.table-vaccine {
+  thead {
+    tr {
+      th {
+        font-weight: 300;
+      }
+    }
+  }
+  tbody {
+    tr {
+      cursor: pointer;
+      &:hover {
+        background-color: #F2F2F2;
+      }
+      td {
+
+      }
+    }
+    tr[aria-expanded="true"] {
+      background-color: #F2F2F2;
+    }
+    tr.collapse-row {
+      cursor: auto;
+      &:hover {
+        background-color: transparent;
+      }
+      td {
+        padding: 0;
+        .wrapper {
+          padding: 10px;
+          p {
+            font-weight: 300;
+            margin-bottom: 10px;
+          }
+          h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            font-weight: 600;
+          }
+          ul {
+            list-style-type: disc;
+            padding-left: 40px;
+            margin: 15px 0;
+            li {
+              font-weight: 300;
+            }
+          }
+        }
+      }
+    }
+  }
+}
