@@ -420,9 +420,11 @@ public class AppointmentBean implements Serializable {
 
     Calendar appointmentDate = Calendar.getInstance();
     appointmentDate.setTime(appointmentService.find(appointmentModel.getPk()).getAppointmentDate());
-    appointmentDate.add(Calendar.HOUR_OF_DAY, -1);
+    appointmentDate.add(Calendar.DAY_OF_MONTH, -1);
 
-    if(today.equals(appointmentDate)) {
+    boolean sameDay = today.get(Calendar.YEAR) == appointmentDate.get(Calendar.YEAR) && today.get(Calendar.DAY_OF_YEAR) == appointmentDate.get(Calendar.DAY_OF_YEAR);
+
+    if(!sameDay) {
       appointmentService.clearAppointment(appointmentModel);
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Randevu İptal Edildi", null));
     } else {
