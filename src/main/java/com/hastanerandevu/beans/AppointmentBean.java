@@ -416,21 +416,21 @@ public class AppointmentBean implements Serializable {
     }
   }
 
-  public String cancelAppointment() {
+  public String cancelAppointment(AppointmentModel appointmentModel) {
     Calendar today = Calendar.getInstance();
     today.setTime(new Date());
 
     Calendar appointmentDate = Calendar.getInstance();
-    appointmentDate.setTime(appointmentService.find(appointmentModel.getPk()).getAppointmentDate());
+    appointmentDate.setTime(appointmentModel.getAppointmentDate());
 
     boolean sameDay = today.get(Calendar.YEAR) == appointmentDate.get(Calendar.YEAR) && today.get(Calendar.DAY_OF_YEAR) == appointmentDate.get(Calendar.DAY_OF_YEAR);
     appointmentDate.add(Calendar.DAY_OF_MONTH, -1);
 
-    if(sameDay || today.equals(appointmentDate)) {
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Randevu İptal Edilemedi", null));
+    if(sameDay /*|| today.equals(appointmentDate)*/) {
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Randevunuz bugün olduğu için iptal edilemedi", null));
     } else {
       appointmentService.clearAppointment(appointmentModel);
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Randevu İptal Edildi", null));
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Randevunuz iptal edildi", null));
     }
 
     FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);

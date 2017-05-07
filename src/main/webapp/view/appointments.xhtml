@@ -46,8 +46,8 @@
                   </h:column>
                   <h:column headerClass="text-center">
                     <f:facet name="header">Randevu İptal</f:facet>
-                    <h:commandButton styleClass="btn btn-sm btn-danger" value="İptal Et" action="#{appointment.cancelAppointment}" p:data-toggle="tooltip" p:title="Randevu 1 Gün Öncesine Kadar İptal Edilebilir">
-                      <f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>
+                    <h:commandButton styleClass="btn btn-sm btn-danger" value="İptal Et" action="#{appointment.cancelAppointment(history)}" p:data-toggle="tooltip" p:title="Randevu 1 Gün Öncesine Kadar İptal Edilebilir">
+                      <!--<f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>-->
                     </h:commandButton>
                   </h:column>
                 </h:dataTable>
