@@ -11,7 +11,7 @@
             <td style="padding:10px 0 30px 0;"><p>e-Randevu Sistemi'ndeki kullanıcı hesabın oluşturulmuştur. Aşağıdaki
               linkten hesabına giriş yapabilirsin.</p>
               <center>
-                <a href='http://localhost:8080/login/patient' style="display: inline-block; padding: 11px 30px; margin: 20px 0px 30px; font-size: 15px; color: #fff; background: #00c0c8; border-radius: 60px; text-decoration:none;">Hesabına
+                <a href='http://127.0.0.1:$port/login/patient' style="display: inline-block; padding: 11px 30px; margin: 20px 0px 30px; font-size: 15px; color: #fff; background: #00c0c8; border-radius: 60px; text-decoration:none;">Hesabına
                   Git</a>
               </center>
               <b>- Teşekkürler (e-Randevu Sistemi)</b></td>

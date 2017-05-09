@@ -11,12 +11,15 @@ import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
+
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import java.io.StringWriter;
 import java.util.Date;
 import java.util.Properties;
@@ -30,6 +33,8 @@ public class Mailer implements Runnable {
   private String to;
   private String subject;
   private String content;
+
+  final static int port = SessionUtils.getRequest().getLocalPort();
 
   @Override
   public void run() {
@@ -84,6 +89,7 @@ public class Mailer implements Runnable {
     ve.init();
 
     context.put("userName", NameConverter.getName(patientModel.getFirstName(), patientModel.getLastName()));
+    context.put("port",port);
 
     Template t = ve.getTemplate("com/hastanerandevu/template/registrationMail.vm", "UTF-8");
 
@@ -114,6 +120,7 @@ public class Mailer implements Runnable {
 
       context.put("userName", NameConverter.getName(patientModel.getFirstName(), patientModel.getLastName()));
       context.put("encryptedSalt", encryptedSalt);
+      context.put("port",port);
 
       Template t = ve.getTemplate("com/hastanerandevu/template/passwordResetMail.vm", "UTF-8");
 
