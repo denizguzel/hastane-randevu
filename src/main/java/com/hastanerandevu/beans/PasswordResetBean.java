@@ -60,9 +60,15 @@ public class PasswordResetBean {
       patientService.update(patientModel);
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Şifre sıfırlama maili gönderildi.", null));
 
-    } catch(NoUserException e) {
-      LOG.warn(e.getMessage());
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email sistemde kayıtlı değil.", null));
+    } catch(Exception e) {
+      if (e instanceof NoUserException){
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email sistemde kayıtlı değil.", null));
+        LOG.warn(e.getMessage());
+      }
+      else{
+        LOG.error(e.getMessage());
+      }
+
     }
   }
 
@@ -79,8 +85,13 @@ public class PasswordResetBean {
       } else {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Şifreniz değiştirilemedi.", null));
       }
-    } catch(NoUserException e) {
-      LOG.warn(e.getMessage());
+    } catch(Exception e) {
+      if (e instanceof NoUserException){
+        LOG.warn(e.getMessage());
+      }
+      else{
+        LOG.error(e.getMessage());
+      }
     }
 
   }

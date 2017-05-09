@@ -70,7 +70,7 @@ public class Mailer implements Runnable {
 
       LOG.info("Mail sent");
     } catch(Exception e) {
-      e.printStackTrace();
+      LOG.error(e.getMessage());
     }
   }
 

@@ -120,7 +120,7 @@ public class LoginBean {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Güncelleme Başarılı", null));
     } catch(Exception e) {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Güncelleme Başarısız", null));
-      LOG.info(e.getMessage());
+      LOG.error(e.getMessage());
     }
   }
 

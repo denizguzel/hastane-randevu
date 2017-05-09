@@ -6,6 +6,7 @@ import com.hastanerandevu.model.SurveyModel;
 import com.hastanerandevu.service.impl.FrequentlyAskedQuestionsServiceImpl;
 import com.hastanerandevu.service.impl.OptionServiceImpl;
 import com.hastanerandevu.service.impl.SurveyServiceImpl;
+import org.apache.log4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -21,6 +22,8 @@ import java.util.List;
 @ManagedBean(name = "home")
 @ViewScoped
 public class HomeBean implements Serializable {
+
+  private static final Logger LOG = Logger.getLogger(HomeBean.class);
 
   private SurveyServiceImpl surveyService;
   private FrequentlyAskedQuestionsServiceImpl frequentlyAskedQuestionsService;
@@ -46,17 +49,23 @@ public class HomeBean implements Serializable {
     askedQuestions.addAll(frequentlyAskedQuestionsService.getAllAskedQuestions());
     surveys.addAll(surveyService.getSurveys());
 
-    HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-    String cookieName = "surveysDone";
-    List<Cookie> userCookies = new ArrayList<>();
-    Collections.addAll(userCookies, request.getCookies());
-    if(userCookies.size() > 0) {
-      for(Cookie userCookie : userCookies) {
-        if(userCookie.getName().equals(cookieName) && userCookie.getValue().equals("yes")) {
-          cookieCheck = true;
+    try{
+      HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+      String cookieName = "surveysDone";
+      List<Cookie> userCookies = new ArrayList<>();
+      Collections.addAll(userCookies, request.getCookies());
+      if(userCookies.size() > 0) {
+        for(Cookie userCookie : userCookies) {
+          if(userCookie.getName().equals(cookieName) && userCookie.getValue().equals("yes")) {
+            cookieCheck = true;
+          }
         }
       }
     }
+    catch(Exception e){
+      LOG.warn(e.getMessage());
+    }
+
   }
 
   public boolean isCookieCheck() {
