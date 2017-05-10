@@ -150,12 +150,12 @@ public class LoginBean {
   public String login() throws IOException {
     checkCaptcha();
     String loginCheck = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("loginCheck");
-    SessionUtils.getSession().setAttribute("userType",loginCheck);
+    SessionUtils.getSession().setAttribute("userType", loginCheck);
 
     if(loginCheck.equals("patient")) {
       if(patientService.loginPatient(patientModel) != null) {
         patientModel = patientService.loginPatient(patientModel);
-        loggedUsername = NameConverter.getName(patientModel.getFirstName(),patientModel.getLastName());
+        loggedUsername = NameConverter.getName(patientModel.getFirstName(), patientModel.getLastName());
         SessionUtils.getSession().setAttribute("loggedUsername", loggedUsername);
         verifyLogin = true;
       } else

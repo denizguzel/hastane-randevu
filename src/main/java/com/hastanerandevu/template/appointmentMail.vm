@@ -1,0 +1,50 @@
+<div width="100%" style="background: #f8f8f8; padding: 0px 0px; font-family:arial; line-height:28px; height:100%;  width: 100%; color: #514d6a;">
+  <div style="max-width: 700px; padding:50px 0;  margin: 0px auto; font-size: 14px">
+    <div style="padding: 40px; background: #fff;">
+      <table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+        <tbody>
+          <tr>
+            <td colspan="2" style="border-bottom:1px solid #f6f6f6;"><h1 style="font-size:14px; font-family:arial; margin:0px; font-weight:bold;">Sayın $userName,</h1></td>
+          </tr>
+          <tr>
+            <td colspan="2"><p>e-Randevu Sistemi'den almış olduğunuz randevu bilgileriniz aşağıdadır.</p></td>
+          </tr>
+          <tr>
+            <td style="padding: 5px; border-bottom: 1px solid #f6f6f6;">Kurum Adı</td>
+            <td style="padding: 5px; border-bottom: 1px solid #f6f6f6;">$hospital</td>
+          </tr>
+          <tr>
+            <td style="padding: 5px; border-bottom: 1px solid #f6f6f6;">Klinik Adı</td>
+            <td style="padding: 5px; border-bottom: 1px solid #f6f6f6;">$policlinic</td>
+          </tr>
+          <tr>
+            <td style="padding: 5px; border-bottom: 1px solid #f6f6f6;">Muayene Yeri</td>
+            <td style="padding: 5px; border-bottom: 1px solid #f6f6f6;">$inspectionPlace</td>
+          </tr>
+          <tr>
+            <td style="padding: 5px; border-bottom: 1px solid #f6f6f6;">Doktor</td>
+            <td style="padding: 5px; border-bottom: 1px solid #f6f6f6;">$doctor
+              <small>$doctorLevel</small>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 5px; border-bottom: 1px solid #f6f6f6;">Randevu Tarihi</td>
+            <td style="padding: 5px; border-bottom: 1px solid #f6f6f6;">$appointmentDate</td>
+          </tr>
+          #if(!$message)
+            <tr>
+              <td style="padding: 5px; border-bottom: 1px solid #f6f6f6;">Doktora Not</td>
+              <td style="padding: 5px; border-bottom: 1px solid #f6f6f6;">$message</td>
+            </tr>
+          #end
+          <tr>
+            <td colspan="2" style="padding-top: 30px;"><b>- Teşekkürler (e-Randevu Sistemi)</b></td>
+          </tr>
+          <tr>
+            <td colspan="2" style="border-top:1px solid #f6f6f6; padding-top:20px; color:#777">Eğer bu e-mail'in yanlışlıkla gelmiş olabileceğini düşünüyorsan görmezden gelebilir ya da bize bildirebilirsin.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

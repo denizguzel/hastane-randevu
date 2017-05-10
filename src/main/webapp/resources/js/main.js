@@ -126,7 +126,7 @@ $(".modal").on('hidden.bs.modal', function () {
 });
 
 // Tooltip
-$('[data-toggle="tooltip"]').tooltip();
+$('[data-toggle="tooltip"], [data-tooltip="tooltip"]').tooltip();
 
 // Custom
 function toast(data) {
@@ -205,7 +205,7 @@ function tableData(data) {
         return $(".popover-title").html();
       }
     });
-    $(ajaxElement).closest(".table-row").find("td:not(:last-child,:first-child)").each(function (i) {
+    $(ajaxElement).closest(".table-row").find("td:not(:last-child,:first-child)").each(function () {
       columnData.push($.trim($(this).text()));
     });
     $(".popover-hospital, #appointment-modal .detail-hospital").text(columnData[1]);

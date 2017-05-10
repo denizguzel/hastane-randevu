@@ -23,13 +23,13 @@ import java.util.Map;
 @ManagedBean(name = "alergy")
 @ViewScoped
 public class AlergyBean implements Serializable {
-
   private static final Logger LOG = Logger.getLogger(AlergyBean.class);
-  List<PatientAlergyRelModel> patientAlergies;
-  PatientAlergyRelModel patientAlergyRelModel;
-  PatientModel patientModel;
   @ManagedProperty(value = "#{login}")
   private LoginBean loginBean;
+  private List<PatientAlergyRelModel> patientAlergies;
+  private PatientAlergyRelModel patientAlergyRelModel;
+  private PatientModel patientModel;
+
   private PatientAlergyRelServiceImpl patientAlergyRelService;
   private PatientServiceImpl patientService;
   private AlergyServiceImpl alergyService;
@@ -47,6 +47,7 @@ public class AlergyBean implements Serializable {
     alergyService = new AlergyServiceImpl();
 
     patientModel = loginBean.getPatientModel();
+    patientAlergyRelModel = new PatientAlergyRelModel();
 
     patientAlergies = new ArrayList<>();
     patientAlergies.addAll(patientService.getPatientAlergies(patientModel));
@@ -110,6 +111,14 @@ public class AlergyBean implements Serializable {
     this.patientModel = patientModel;
   }
 
+  public PatientAlergyRelModel getPatientAlergyRelModel() {
+    return patientAlergyRelModel;
+  }
+
+  public void setPatientAlergyRelModel(PatientAlergyRelModel patientAlergyRelModel) {
+    this.patientAlergyRelModel = patientAlergyRelModel;
+  }
+
   public List<PatientAlergyRelModel> getPatientAlergies() {
     return patientAlergies;
   }
@@ -136,7 +145,7 @@ public class AlergyBean implements Serializable {
 
   }
 
-  public String deleteAlergy(PatientAlergyRelModel patientAlergyRelModel) {
+  public String deleteAlergy() {
     patientAlergyRelService.delete(patientAlergyRelModel);
     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerji silindi", null));
     FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);

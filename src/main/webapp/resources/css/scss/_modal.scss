@@ -12,6 +12,9 @@
         border-top-right-radius: 5px;
       }
       .modal-body {
+        p {
+          margin-bottom: 20px;
+        }
         .form-group {
           &:last-child {
             margin-bottom: 0;
@@ -30,7 +33,7 @@
           display: flex;
           .btn {
             flex-grow: 1;
-            &:first-child {
+            &:first-of-type {
               margin-right: 5px;
             }
           }

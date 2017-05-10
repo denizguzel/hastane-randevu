@@ -49,7 +49,7 @@ public class HomeBean implements Serializable {
     askedQuestions.addAll(frequentlyAskedQuestionsService.getAllAskedQuestions());
     surveys.addAll(surveyService.getSurveys());
 
-    try{
+    try {
       HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
       String cookieName = "surveysDone";
       List<Cookie> userCookies = new ArrayList<>();
@@ -61,11 +61,9 @@ public class HomeBean implements Serializable {
           }
         }
       }
-    }
-    catch(Exception e){
+    } catch(Exception e) {
       LOG.warn(e.getMessage());
     }
-
   }
 
   public boolean isCookieCheck() {

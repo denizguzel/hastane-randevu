@@ -30,7 +30,10 @@
                   </h:column>
                   <h:column>
                     <f:facet name="header">Kaldır</f:facet>
-                    <h:commandButton styleClass="btn btn-sm btn-danger" value="Kaldır" action="#{alergy.deleteAlergy(patientAlergy)}"/>
+                    <h:commandButton value="Kaldır" styleClass="btn btn-sm btn-danger" p:data-toggle="modal" p:data-target="#cancel-modal">
+                      <f:setPropertyActionListener value="#{patientAlergy}" target="#{alergy.patientAlergyRelModel}"/>
+                      <f:ajax execute="@this"/>
+                    </h:commandButton>
                   </h:column>
                 </h:dataTable>
               </div>
@@ -70,6 +73,27 @@
               <button type="button" class="btn btn-danger" data-dismiss="modal">Kapat</button>
             </div>
           </h:form>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="cancel-modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Alerji Kaldır</h5>
+            <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
+          </div>
+          <div class="modal-body">
+            <h:form prependId="false" id="modal-form">
+              <p>Alerjiyi kaldırmak istediğinize emin misiniz?</p>
+              <div class="buttons">
+                <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
+                <h:commandButton value="Evet" styleClass="btn btn-success" action="#{alergy.deleteAlergy}"/>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Hayır</button>
+              </div>
+            </h:form>
+          </div>
         </div>
       </div>
     </div>

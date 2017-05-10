@@ -3,6 +3,7 @@ package com.hastanerandevu.beans;
 import com.hastanerandevu.converter.NameConverter;
 import com.hastanerandevu.model.*;
 import com.hastanerandevu.service.impl.*;
+import com.hastanerandevu.utility.Mailer;
 import org.apache.log4j.Logger;
 
 import javax.annotation.PostConstruct;
@@ -234,6 +235,18 @@ public class AppointmentBean implements Serializable {
   }
 
   // Functions
+  private void clearMapComponentsWithChange(Map... maps) {
+    for(Map map : maps) {
+      map.clear();
+    }
+  }
+
+  private void clearListComponentsWithChange(List... lists) {
+    for(List list : lists) {
+      list.clear();
+    }
+  }
+
   public void changeCity(AjaxBehaviorEvent event) {
 
     clearMapComponentsWithChange(districts, hospitals, policlinics, inspectionPlaces);
@@ -380,11 +393,12 @@ public class AppointmentBean implements Serializable {
     if(patientService.haveAnAppointmentForThatDay(loginBean.getPatientModel(), appointmentModel.getAppointmentDate())) {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aynı güne birden fazla randevu alamazsınız.", null));
       appointmentService.clearAppointment(appointmentModel);
-    } else if(patientService.getNumberOfPatientAppointments(loginBean.getPatientModel()) > 3) {
+    } else if(patientService.getNumberOfPatientAppointments(loginBean.getPatientModel()) >= 3) {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "En fazla 3 randevu alabilirsiniz.", null));
       appointmentService.clearAppointment(appointmentModel);
     } else {
       appointmentService.confirmAppointment(appointmentModel, loginBean.getPatientModel());
+      new Mailer().sendAppointmentMail(appointmentModel);
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Randevu Alımı Başarılı", null));
     }
     FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
@@ -404,19 +418,7 @@ public class AppointmentBean implements Serializable {
     selectedCity = "İl Seçiniz";
   }
 
-  private void clearMapComponentsWithChange(Map... maps) {
-    for(Map map : maps) {
-      map.clear();
-    }
-  }
-
-  private void clearListComponentsWithChange(List... lists) {
-    for(List list : lists) {
-      list.clear();
-    }
-  }
-
-  public String cancelAppointment(AppointmentModel appointmentModel) {
+  public String cancelAppointment() {
     Calendar today = Calendar.getInstance();
     today.setTime(new Date());
 
@@ -424,9 +426,8 @@ public class AppointmentBean implements Serializable {
     appointmentDate.setTime(appointmentModel.getAppointmentDate());
 
     boolean sameDay = today.get(Calendar.YEAR) == appointmentDate.get(Calendar.YEAR) && today.get(Calendar.DAY_OF_YEAR) == appointmentDate.get(Calendar.DAY_OF_YEAR);
-    appointmentDate.add(Calendar.DAY_OF_MONTH, -1);
 
-    if(sameDay /*|| today.equals(appointmentDate)*/) {
+    if(sameDay) {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Randevunuz bugün olduğu için iptal edilemedi", null));
     } else {
       appointmentService.clearAppointment(appointmentModel);

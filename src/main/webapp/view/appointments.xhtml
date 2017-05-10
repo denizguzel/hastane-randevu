@@ -42,15 +42,41 @@
                   </h:column>
                   <h:column>
                     <f:facet name="header">Doktora Not</f:facet>
-                    <h:outputText value="#{history.messageToDoctor == null ? '-Not yok-' : history.messageToDoctor}"/>
+                    <h:outputText styleClass="doctor-message" p:data-toggle="tooltip" p:title="#{history.messageToDoctor == null ? '-Not yok-' : history.messageToDoctor}" value="#{history.messageToDoctor == null ? '-Not yok-' : history.messageToDoctor}"/>
                   </h:column>
                   <h:column headerClass="text-center">
-                    <f:facet name="header">Randevu İptal</f:facet>
-                    <h:commandButton styleClass="btn btn-sm btn-danger" value="İptal Et" action="#{appointment.cancelAppointment(history)}" p:data-toggle="tooltip" p:title="Randevu 1 Gün Öncesine Kadar İptal Edilebilir">
-                      <!--<f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>-->
+                    <f:facet name="header">Durum</f:facet>
+                    <h:commandButton rendered="#{history.appointmentStatus != 'COMPLETED'}" value="İptal Et" styleClass="btn btn-sm btn-danger" p:data-tooltip="tooltip" p:title="Randevu 1 Gün Öncesine Kadar İptal Edilebilir" p:data-toggle="modal" p:data-target="#cancel-modal">
+                      <f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>
+                      <f:ajax execute="@this"/>
                     </h:commandButton>
+                    <h:panelGroup rendered="#{history.appointmentStatus == 'COMPLETED'}" styleClass="badge badge-success">
+                      <h:outputText value="Randevunuz Tamamlandı"/>
+                    </h:panelGroup>
                   </h:column>
                 </h:dataTable>
+              </div>
+            </h:form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="cancel-modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Randevu İptal</h5>
+            <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
+          </div>
+          <div class="modal-body">
+            <h:form prependId="false" id="modal-form">
+              <p>Randevuyu iptal etmek istediğinize emin misiniz?</p>
+              <div class="buttons">
+                <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
+                <h:commandButton value="Evet" styleClass="btn btn-success" action="#{appointment.cancelAppointment}"/>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Hayır</button>
               </div>
             </h:form>
           </div>

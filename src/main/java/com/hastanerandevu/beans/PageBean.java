@@ -19,7 +19,6 @@ public class PageBean {
 
   private List<PageModel> pageList = new ArrayList<>();
 
-
   public PageBean() {
     pageList.add(new PageModel("/view/dashboard.xhtml", "Ana Sayfa", "fa fa-home fa-fw"));
     if(SessionUtils.getSession().getAttribute("userType").equals("patient")) {
@@ -27,14 +26,10 @@ public class PageBean {
       pageList.add(new PageModel("/view/appointments.xhtml", "Randevularım", "fa fa-calendar fa-fw"));
       pageList.add(new PageModel("/view/alergy.xhtml", "Alerjilerim", "fa fa-thermometer-2 fa-fw"));
       pageList.add(new PageModel("/view/vaccine.xhtml", "Aşı Takvimi", "fa fa-calendar-check-o fa-fw"));
-    }
-    else if(SessionUtils.getSession().getAttribute("userType").equals("doctor")) {
+    } else if(SessionUtils.getSession().getAttribute("userType").equals("doctor")) {
 
     }
-
-
   }
-
 
   public List<PageModel> getPageList() {
     return pageList;
@@ -44,11 +39,11 @@ public class PageBean {
     return FacesContext.getCurrentInstance().getViewRoot().getViewId();
   }
 
-  public void setLoginBean(LoginBean loginBean) {
-    this.loginBean = loginBean;
-  }
-
   public LoginBean getLoginBean() {
     return loginBean;
+  }
+
+  public void setLoginBean(LoginBean loginBean) {
+    this.loginBean = loginBean;
   }
 }

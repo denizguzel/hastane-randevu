@@ -40,10 +40,11 @@ public class DoctorReviewsServiceImpl implements BaseService<ReviewsAboutDoctors
     return doctorReviewsDao.findAll();
   }
 
-  public List<ReviewsAboutDoctorsModel> getReviewsAboutDoctor(DoctorModel doctorModel){
+  public List<ReviewsAboutDoctorsModel> getReviewsAboutDoctor(DoctorModel doctorModel) {
     return doctorReviewsDao.getReviewsAboutDoctor(doctorModel);
   }
-  public List<ReviewsAboutDoctorsModel> getReviewsOfPatient(PatientModel patientModel){
+
+  public List<ReviewsAboutDoctorsModel> getReviewsOfPatient(PatientModel patientModel) {
     return doctorReviewsDao.getReviewsOfPatient(patientModel);
   }
 }

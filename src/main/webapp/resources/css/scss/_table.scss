@@ -79,6 +79,14 @@
   tbody {
     tr {
       td {
+        .doctor-message {
+          display: inline-flex;
+          width: 150px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          cursor: default;
+        }
         &:last-child {
           text-align: center;
         }

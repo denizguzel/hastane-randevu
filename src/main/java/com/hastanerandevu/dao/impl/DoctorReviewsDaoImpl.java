@@ -11,21 +11,21 @@ import java.util.List;
  * Created by ouzun on 5/10/2017.
  */
 public class DoctorReviewsDaoImpl extends BaseDaoImpl<ReviewsAboutDoctorsModel> {
-  public List<ReviewsAboutDoctorsModel> getReviewsAboutDoctor(DoctorModel doctorModel){
+  public List<ReviewsAboutDoctorsModel> getReviewsAboutDoctor(DoctorModel doctorModel) {
     Query query = getEntitymanager().createQuery("SELECT e FROM ReviewsAboutDoctorsModel e " +
       "WHERE e.doctor = :DOCTOR_MODEL AND e.isAppropriate = :IS_APPROPRIATE ORDER BY e.creationTime DESC");
 
-    query.setParameter("DOCTOR_MODEL",doctorModel);
-    query.setParameter("IS_APPROPRIATE",'1');
+    query.setParameter("DOCTOR_MODEL", doctorModel);
+    query.setParameter("IS_APPROPRIATE", '1');
 
     return query.getResultList();
   }
 
-  public List<ReviewsAboutDoctorsModel> getReviewsOfPatient(PatientModel patientModel){
+  public List<ReviewsAboutDoctorsModel> getReviewsOfPatient(PatientModel patientModel) {
     Query query = getEntitymanager().createQuery("SELECT e FROM ReviewsAboutDoctorsModel e " +
       "WHERE e.patient = :PATIENT_MODEL ORDER BY e.creationTime DESC");
 
-    query.setParameter("PATIENT_MODEL",patientModel);
+    query.setParameter("PATIENT_MODEL", patientModel);
 
     return query.getResultList();
   }
