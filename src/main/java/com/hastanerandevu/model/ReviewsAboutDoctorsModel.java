@@ -22,7 +22,7 @@ public class ReviewsAboutDoctorsModel {
   @Column(name = "IS_ACTIVE", insertable = false)
   private char isActive;
 
-  @Column(name = "IS_APPROPRIATE")
+  @Column(name = "IS_APPROPRIATE", insertable = false)
   private char isAppropriate;
 
   @Column(name = "REVIEW")
