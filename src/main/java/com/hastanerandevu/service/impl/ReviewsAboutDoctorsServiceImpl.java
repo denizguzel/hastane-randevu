@@ -1,6 +1,6 @@
 package com.hastanerandevu.service.impl;
 
-import com.hastanerandevu.dao.impl.DoctorReviewsDaoImpl;
+import com.hastanerandevu.dao.impl.ReviewsAboutDoctorsDaoImpl;
 import com.hastanerandevu.model.DoctorModel;
 import com.hastanerandevu.model.PatientModel;
 import com.hastanerandevu.model.ReviewsAboutDoctorsModel;
@@ -11,44 +11,44 @@ import java.util.List;
 /**
  * Created by ouzun on 5/10/2017.
  */
-public class DoctorReviewsServiceImpl implements BaseService<ReviewsAboutDoctorsModel> {
+public class ReviewsAboutDoctorsServiceImpl implements BaseService<ReviewsAboutDoctorsModel> {
 
-  DoctorReviewsDaoImpl doctorReviewsDao = new DoctorReviewsDaoImpl();
+  private ReviewsAboutDoctorsDaoImpl reviewsAboutDoctorsDao = new ReviewsAboutDoctorsDaoImpl();
 
   @Override
   public void create(ReviewsAboutDoctorsModel model) {
-    doctorReviewsDao.create(model);
+    reviewsAboutDoctorsDao.create(model);
   }
 
   @Override
   public void update(ReviewsAboutDoctorsModel model) {
-    doctorReviewsDao.update(model);
+    reviewsAboutDoctorsDao.update(model);
   }
 
   @Override
   public void delete(ReviewsAboutDoctorsModel model) {
-    doctorReviewsDao.delete(model);
+    reviewsAboutDoctorsDao.delete(model);
   }
 
   @Override
   public ReviewsAboutDoctorsModel find(long id) {
-    return doctorReviewsDao.find(id);
+    return reviewsAboutDoctorsDao.find(id);
   }
 
   @Override
   public List<ReviewsAboutDoctorsModel> findAll() {
-    return doctorReviewsDao.findAll();
+    return reviewsAboutDoctorsDao.findAll();
   }
 
   public List<ReviewsAboutDoctorsModel> getReviewsAboutDoctor(DoctorModel doctorModel) {
-    return doctorReviewsDao.getReviewsAboutDoctor(doctorModel);
+    return reviewsAboutDoctorsDao.getReviewsAboutDoctor(doctorModel);
   }
 
   public List<ReviewsAboutDoctorsModel> getReviewsOfPatient(PatientModel patientModel) {
-    return doctorReviewsDao.getReviewsOfPatient(patientModel);
+    return reviewsAboutDoctorsDao.getReviewsOfPatient(patientModel);
   }
 
-  public boolean patientHaveReviewAboutDoctor(PatientModel patientModel, DoctorModel doctorModel){
-    return doctorReviewsDao.patientHaveReviewAboutDoctor(patientModel,doctorModel);
+  public boolean patientHaveReviewAboutDoctor(PatientModel patientModel, DoctorModel doctorModel) {
+    return reviewsAboutDoctorsDao.patientHaveReviewAboutDoctor(patientModel, doctorModel);
   }
 }

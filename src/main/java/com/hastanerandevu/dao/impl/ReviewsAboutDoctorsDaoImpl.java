@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by ouzun on 5/10/2017.
  */
-public class DoctorReviewsDaoImpl extends BaseDaoImpl<ReviewsAboutDoctorsModel> {
+public class ReviewsAboutDoctorsDaoImpl extends BaseDaoImpl<ReviewsAboutDoctorsModel> {
   public List<ReviewsAboutDoctorsModel> getReviewsAboutDoctor(DoctorModel doctorModel) {
     Query query = getEntitymanager().createQuery("SELECT e FROM ReviewsAboutDoctorsModel e " + "WHERE e.doctor = :DOCTOR_MODEL AND e.isAppropriate = :IS_APPROPRIATE ORDER BY e.creationTime DESC");
 
@@ -33,6 +33,6 @@ public class DoctorReviewsDaoImpl extends BaseDaoImpl<ReviewsAboutDoctorsModel> 
     query.setParameter("PATIENT", patientModel);
     query.setParameter("DOCTOR", doctorModel);
 
-    return query.getResultList().get(0) != null ? true : false;
+    return query.getResultList().size() > 0;
   }
 }

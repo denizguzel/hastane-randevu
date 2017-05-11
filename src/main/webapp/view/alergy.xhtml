@@ -37,6 +37,7 @@
                   </h:column>
                 </h:dataTable>
               </div>
+              <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
             </h:form>
           </div>
         </div>
@@ -68,7 +69,6 @@
               </div>
             </div>
             <div class="modal-footer">
-              <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
               <h:commandButton styleClass="btn btn-success" value="Kaydet" action="#{alergy.saveAlergy}"/>
               <button type="button" class="btn btn-danger" data-dismiss="modal">Kapat</button>
             </div>
@@ -88,7 +88,6 @@
             <h:form prependId="false" id="modal-form">
               <p>Alerjiyi kaldırmak istediğinize emin misiniz?</p>
               <div class="buttons">
-                <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
                 <h:commandButton value="Evet" styleClass="btn btn-success" action="#{alergy.deleteAlergy}"/>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Hayır</button>
               </div>

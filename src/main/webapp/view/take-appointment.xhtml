@@ -146,7 +146,7 @@
                   <h:dataTable styleClass="table" rowClasses="table-row" binding="#{table}" value="#{appointment.appointmentsHeaders}" var="appointmentsHeader">
                     <h:column>
                       <f:facet name="header">#</f:facet>
-                      <h:outputText value="${table.rowIndex + 1}"/>
+                      <h:outputText value="#{table.rowIndex + 1}"/>
                     </h:column>
                     <h:column>
                       <f:facet name="header">Doktor</f:facet>
@@ -158,6 +158,9 @@
                     <h:column><f:facet name="header">Muayene Yeri</f:facet>${appointmentsHeader.placeName}</h:column>
                     <h:column>
                       <f:facet name="header"></f:facet>
+                      <h:commandLink value="Yorumlar" styleClass="btn btn-warning mr-1" action="#{appointment.doctorReviews(appointmentsHeader.doctor)}" p:data-toggle="modal" p:data-target="#comment-modal">
+                        <f:ajax execute="@this" render="doctor-comment"/>
+                      </h:commandLink>
                       <h:commandLink value="Seç" styleClass="btn btn-success" action="#{appointment.selectAppointment(appointmentsHeader)}">
                         <f:ajax execute="@this" render="appointmentTimes" onevent="tableData"/>
                       </h:commandLink>
@@ -165,6 +168,7 @@
                   </h:dataTable>
                 </div>
               </h:panelGroup>
+              <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
             </h:form>
           </div>
         </div>
@@ -241,7 +245,6 @@
                 <h:inputTextarea styleClass="form-control" rows="2" value="#{appointment.appointmentModel.messageToDoctor}"/>
               </div>
               <div class="form-group buttons">
-                <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
                 <h:commandButton value="Randevuyu Kaydet" styleClass="btn btn-success" action="#{appointment.confirmAppointment}"/>
                 <h:commandButton value="Randevuyu İptal Et" styleClass="btn btn-danger" action="#{appointment.clearAppointment}" p:data-dismiss="modal">
                   <f:ajax execute="@this"/>
@@ -249,6 +252,36 @@
               </div>
             </div>
           </h:form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="comment-modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Doktor Hakkında Yorumlar</h5>
+            <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
+          </div>
+          <div class="modal-body">
+            <h:panelGroup layout="block" id="doctor-comment" class="comments#{appointment.doctorReviewList.size() > 0 ? '' : ' empty'}">
+              <div class="alert"><i class="fa fa-question-circle-o"></i>Doktor hakkında yorum yapılmamış</div>
+              <h:dataTable styleClass="table" value="#{appointment.doctorReviewList}" var="review" binding="#{commentTable}">
+                <h:column>
+                  <f:facet name="header">#</f:facet>
+                  <h:outputText value="#{commentTable.rowIndex + 1}"/>
+                </h:column>
+                <h:column>
+                  <f:facet name="header">Yorum</f:facet>
+                  <h:outputText value="#{review.review}"/>
+                </h:column>
+              </h:dataTable>
+            </h:panelGroup>
+            <div class="form-group d-flex">
+              <button type="button" class="btn btn-danger ml-auto" data-dismiss="modal">Kapat</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

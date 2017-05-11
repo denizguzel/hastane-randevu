@@ -12,6 +12,25 @@
         border-top-right-radius: 5px;
       }
       .modal-body {
+        .comments {
+          .alert {
+            display: none;
+          }
+        }
+        .comments.empty {
+          .alert {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            i {
+              font-size: 34px;
+              margin-bottom: 10px;
+            }
+          }
+          .table {
+            display: none;
+          }
+        }
         p {
           margin-bottom: 20px;
         }

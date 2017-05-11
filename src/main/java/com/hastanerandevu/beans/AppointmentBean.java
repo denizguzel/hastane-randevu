@@ -34,7 +34,9 @@ public class AppointmentBean implements Serializable {
   private InspectionPlaceServiceImpl inspectionPlaceService;
   private AppointmentServiceImpl appointmentService;
   private PatientServiceImpl patientService;
+  private ReviewsAboutDoctorsServiceImpl reviewsAboutDoctorsService;
   private AppointmentModel appointmentModel;
+  private ReviewsAboutDoctorsModel reviewsAboutDoctorsModel;
 
   private boolean appointmentClockPanel = false;
   private boolean appointmentPanel = false;
@@ -54,6 +56,7 @@ public class AppointmentBean implements Serializable {
   private List<List<AppointmentModel>> appointmentTimes;
   private List<AppointmentModel> appointmentDays;
   private List<AppointmentModel> appointmentHistory;
+  private List<ReviewsAboutDoctorsModel> doctorReviewList;
 
   @SuppressWarnings("unchecked")
   @PostConstruct
@@ -72,10 +75,13 @@ public class AppointmentBean implements Serializable {
     policlinicService = new PoliclinicServiceImpl();
     appointmentService = new AppointmentServiceImpl();
     patientService = new PatientServiceImpl();
+    reviewsAboutDoctorsService = new ReviewsAboutDoctorsServiceImpl();
     appointmentModel = new AppointmentModel();
+    reviewsAboutDoctorsModel = new ReviewsAboutDoctorsModel();
 
     appointmentsHeaders = new ArrayList<>();
     appointmentDays = new ArrayList<>();
+    doctorReviewList = new ArrayList<>();
     appointmentTimes = new LinkedList<>();
     appointmentHistory = new LinkedList<>();
 
@@ -234,6 +240,22 @@ public class AppointmentBean implements Serializable {
     this.appointmentHistory = appointmentHistory;
   }
 
+  public ReviewsAboutDoctorsModel getReviewsAboutDoctorsModel() {
+    return reviewsAboutDoctorsModel;
+  }
+
+  public void setReviewsAboutDoctorsModel(ReviewsAboutDoctorsModel reviewsAboutDoctorsModel) {
+    this.reviewsAboutDoctorsModel = reviewsAboutDoctorsModel;
+  }
+
+  public List<ReviewsAboutDoctorsModel> getDoctorReviewList() {
+    return doctorReviewList;
+  }
+
+  public void setDoctorReviewList(List<ReviewsAboutDoctorsModel> doctorReviewList) {
+    this.doctorReviewList = doctorReviewList;
+  }
+
   // Functions
   private void clearMapComponentsWithChange(Map... maps) {
     for(Map map : maps) {
@@ -347,7 +369,7 @@ public class AppointmentBean implements Serializable {
 
   public void searchAppointment() {
 
-    clearListComponentsWithChange(appointmentTimes, appointmentsHeaders, appointmentDays);
+    clearListComponentsWithChange(appointmentTimes, appointmentsHeaders, appointmentDays, doctorReviewList);
 
     if(selectedInspectionPlace != null && !selectedInspectionPlace.isEmpty()) {
       InspectionPlaceModel inspectionPlaceModel = inspectionPlaceService.find(Long.parseLong(selectedInspectionPlace));
@@ -407,7 +429,7 @@ public class AppointmentBean implements Serializable {
 
   public void clearSearch() {
     clearMapComponentsWithChange(cities, districts, hospitals, policlinics, inspectionPlaces);
-    clearListComponentsWithChange(appointmentsHeaders, appointmentTimes, appointmentDays);
+    clearListComponentsWithChange(appointmentsHeaders, appointmentTimes, appointmentDays, doctorReviewList);
     appointmentPanel = false;
     appointmentClockPanel = false;
     appointmentSearchNull = false;
@@ -436,5 +458,22 @@ public class AppointmentBean implements Serializable {
 
     FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
     return "/view/appointments?faces-redirect=true";
+  }
+
+  public String sendDoctorComment() {
+    reviewsAboutDoctorsModel.setPatient(loginBean.getPatientModel());
+    reviewsAboutDoctorsModel.setDoctor(appointmentModel.getInspectionPlace().getDoctor());
+    reviewsAboutDoctorsService.create(reviewsAboutDoctorsModel);
+
+    return "/view/appointments?faces-redirect=true";
+  }
+
+  public boolean patientHaveReviewAboutDoctor(PatientModel patientModel, DoctorModel doctorModel) {
+    return reviewsAboutDoctorsService.patientHaveReviewAboutDoctor(patientModel, doctorModel);
+  }
+
+  public void doctorReviews(DoctorModel doctorModel) {
+    clearListComponentsWithChange(doctorReviewList);
+    doctorReviewList.addAll(reviewsAboutDoctorsService.getReviewsAboutDoctor(doctorModel));
   }
 }
