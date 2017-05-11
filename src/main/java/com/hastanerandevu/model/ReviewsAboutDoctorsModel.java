@@ -25,6 +25,9 @@ public class ReviewsAboutDoctorsModel {
   @Column(name = "IS_APPROPRIATE")
   private char isAppropriate;
 
+  @Column(name = "REVIEW")
+  private String review;
+
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "FK_PATIENT")
   private PatientModel patient;
@@ -87,5 +90,13 @@ public class ReviewsAboutDoctorsModel {
 
   public void setDoctor(DoctorModel doctor) {
     this.doctor = doctor;
+  }
+
+  public String getReview() {
+    return review;
+  }
+
+  public void setReview(String review) {
+    this.review = review;
   }
 }
