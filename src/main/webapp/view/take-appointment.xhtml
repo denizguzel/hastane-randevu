@@ -91,12 +91,12 @@
                         <ul>
                           <c:forEach items="#{row}" var="col" varStatus="colIndex">
                             <li class="nav-item">
-                              <h:panelGroup layout="block" styleClass="tooltip-wrapper" rendered="#{col.appointmentStatus == 'RESERVED'}" p:data-toggle="tooltip" p:data-placement="top" p:title="Randevu Alınmış">
+                              <h:panelGroup layout="block" styleClass="tooltip-wrapper" rendered="#{col.appointmentStatus != 'NOT_RESERVED'}" p:data-toggle="tooltip" p:data-placement="top" p:title="Randevu Alınmış">
                                 <h:outputText styleClass="btn btn-secondary disabled" value="#{col.appointmentDate}">
                                   <f:convertDateTime timeZone="GMT+3" pattern="HH:mm"/>
                                 </h:outputText>
                               </h:panelGroup>
-                              <h:commandLink rendered="#{col.appointmentStatus != 'RESERVED'}" styleClass="btn btn-success btn-popover">
+                              <h:commandLink rendered="#{col.appointmentStatus == 'NOT_RESERVED'}" styleClass="btn btn-success btn-popover">
                                 <f:ajax execute="@this"/>
                                 <f:setPropertyActionListener value="#{col}" target="#{appointment.appointmentModel}"/>
                                 <h:outputText styleClass="d-inline-block" value="#{col.appointmentDate}">
