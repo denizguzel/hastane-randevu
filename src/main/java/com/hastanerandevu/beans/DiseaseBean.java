@@ -1,7 +1,10 @@
 package com.hastanerandevu.beans;
 
-import com.hastanerandevu.model.*;
-import com.hastanerandevu.service.impl.*;
+import com.hastanerandevu.model.DiseaseModel;
+import com.hastanerandevu.model.PatientDiseaseRelModel;
+import com.hastanerandevu.service.impl.DiseaseServiceImpl;
+import com.hastanerandevu.service.impl.PatientDiseaseRelServiceImpl;
+import com.hastanerandevu.service.impl.PatientServiceImpl;
 import org.apache.log4j.Logger;
 
 import javax.annotation.PostConstruct;
@@ -22,18 +25,17 @@ public class DiseaseBean implements Serializable {
   private static final Logger LOG = Logger.getLogger(DiseaseBean.class);
   @ManagedProperty(value = "#{login}")
   private LoginBean loginBean;
-  private List<PatientDiseaseRelModel> patientDiseases;
-  private PatientDiseaseRelModel patientDiseaseRelModel;
-  private PatientModel patientModel;
 
   private PatientDiseaseRelServiceImpl patientDiseaseRelService;
   private PatientServiceImpl patientService;
   private DiseaseServiceImpl diseaseService;
-  private String selectedDisease;
+  private PatientDiseaseRelModel patientDiseaseRelModel;
 
+  private String selectedDisease;
   private char diseaseStillPass;
   private boolean diseasePanel = false;
 
+  private List<PatientDiseaseRelModel> patientDiseases;
   private Map<Long, String> diseases;
 
   @PostConstruct
@@ -41,34 +43,24 @@ public class DiseaseBean implements Serializable {
     patientDiseaseRelService = new PatientDiseaseRelServiceImpl();
     patientService = new PatientServiceImpl();
     diseaseService = new DiseaseServiceImpl();
-
-    patientModel = loginBean.getPatientModel();
     patientDiseaseRelModel = new PatientDiseaseRelModel();
 
     patientDiseases = new ArrayList<>();
-    patientDiseases.addAll(patientService.getPatientDiseases(patientModel));
-
     diseases = new LinkedHashMap<>();
+
+    patientDiseases.addAll(patientService.getPatientDiseases(loginBean.getPatientModel()));
 
     for(DiseaseModel diseaseModel : diseaseService.findAll()) {
       diseases.put(diseaseModel.getPk(), diseaseModel.getDiseaseName());
     }
 
-    if(patientService.getPatientDiseases(patientModel).size() > 0) {
+    if(patientService.getPatientDiseases(loginBean.getPatientModel()).size() > 0) {
       diseasePanel = true;
     }
   }
 
   public void setLoginBean(LoginBean loginBean) {
     this.loginBean = loginBean;
-  }
-
-  public List<PatientDiseaseRelModel> getPatientDiseases() {
-    return patientDiseases;
-  }
-
-  public void setPatientDiseases(List<PatientDiseaseRelModel> patientDiseases) {
-    this.patientDiseases = patientDiseases;
   }
 
   public PatientDiseaseRelModel getPatientDiseaseRelModel() {
@@ -79,36 +71,12 @@ public class DiseaseBean implements Serializable {
     this.patientDiseaseRelModel = patientDiseaseRelModel;
   }
 
-  public PatientModel getPatientModel() {
-    return patientModel;
-  }
-
-  public void setPatientModel(PatientModel patientModel) {
-    this.patientModel = patientModel;
-  }
-
   public String getSelectedDisease() {
     return selectedDisease;
   }
 
   public void setSelectedDisease(String selectedDisease) {
     this.selectedDisease = selectedDisease;
-  }
-
-  public boolean isDiseasePanel() {
-    return diseasePanel;
-  }
-
-  public void setDiseasePanel(boolean diseasePanel) {
-    this.diseasePanel = diseasePanel;
-  }
-
-  public Map<Long, String> getDiseases() {
-    return diseases;
-  }
-
-  public void setDiseases(Map<Long, String> diseases) {
-    this.diseases = diseases;
   }
 
   public char getDiseaseStillPass() {
@@ -119,8 +87,31 @@ public class DiseaseBean implements Serializable {
     this.diseaseStillPass = diseaseStillPass;
   }
 
-  public String saveDisease() {
+  public boolean isDiseasePanel() {
+    return diseasePanel;
+  }
 
+  public void setDiseasePanel(boolean diseasePanel) {
+    this.diseasePanel = diseasePanel;
+  }
+
+  public List<PatientDiseaseRelModel> getPatientDiseases() {
+    return patientDiseases;
+  }
+
+  public void setPatientDiseases(List<PatientDiseaseRelModel> patientDiseases) {
+    this.patientDiseases = patientDiseases;
+  }
+
+  public Map<Long, String> getDiseases() {
+    return diseases;
+  }
+
+  public void setDiseases(Map<Long, String> diseases) {
+    this.diseases = diseases;
+  }
+
+  public String saveDisease() {
     if(patientDiseaseRelService.patientHaveDisease(loginBean.getPatientModel(), diseaseService.find(Long.parseLong(selectedDisease)))) {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hastalık zaten kayıtlı", null));
     } else {
@@ -131,10 +122,8 @@ public class DiseaseBean implements Serializable {
       patientDiseaseRelService.create(patientDiseaseRelModel);
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Hastalık kaydı başarılı", null));
     }
-
     FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
     return "/view/disease?faces-redirect=true";
-
   }
 
   public String deleteDisease() {

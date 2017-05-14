@@ -2,7 +2,6 @@ package com.hastanerandevu.beans;
 
 import com.hastanerandevu.model.AlergyModel;
 import com.hastanerandevu.model.PatientAlergyRelModel;
-import com.hastanerandevu.model.PatientModel;
 import com.hastanerandevu.service.impl.AlergyServiceImpl;
 import com.hastanerandevu.service.impl.PatientAlergyRelServiceImpl;
 import com.hastanerandevu.service.impl.PatientServiceImpl;
@@ -26,18 +25,17 @@ public class AlergyBean implements Serializable {
   private static final Logger LOG = Logger.getLogger(AlergyBean.class);
   @ManagedProperty(value = "#{login}")
   private LoginBean loginBean;
-  private List<PatientAlergyRelModel> patientAlergies;
-  private PatientAlergyRelModel patientAlergyRelModel;
-  private PatientModel patientModel;
 
   private PatientAlergyRelServiceImpl patientAlergyRelService;
   private PatientServiceImpl patientService;
   private AlergyServiceImpl alergyService;
-  private String selectedAlergy;
+  private PatientAlergyRelModel patientAlergyRelModel;
 
+  private String selectedAlergy;
   private char alergyStillPass;
   private boolean alergyPanel = false;
 
+  private List<PatientAlergyRelModel> patientAlergies;
   private Map<Long, String> alergies;
 
   @PostConstruct
@@ -45,20 +43,18 @@ public class AlergyBean implements Serializable {
     patientAlergyRelService = new PatientAlergyRelServiceImpl();
     patientService = new PatientServiceImpl();
     alergyService = new AlergyServiceImpl();
-
-    patientModel = loginBean.getPatientModel();
     patientAlergyRelModel = new PatientAlergyRelModel();
 
     patientAlergies = new ArrayList<>();
-    patientAlergies.addAll(patientService.getPatientAlergies(patientModel));
-
     alergies = new LinkedHashMap<>();
+
+    patientAlergies.addAll(patientService.getPatientAlergies(loginBean.getPatientModel()));
 
     for(AlergyModel alergyModel : alergyService.findAll()) {
       alergies.put(alergyModel.getPk(), alergyModel.getAlergyName());
     }
 
-    if(patientService.getPatientAlergies(patientModel).size() > 0) {
+    if(patientService.getPatientAlergies(loginBean.getPatientModel()).size() > 0) {
       alergyPanel = true;
     }
   }
@@ -67,12 +63,20 @@ public class AlergyBean implements Serializable {
     this.loginBean = loginBean;
   }
 
-  public Map<Long, String> getAlergies() {
-    return alergies;
+  public PatientAlergyRelModel getPatientAlergyRelModel() {
+    return patientAlergyRelModel;
   }
 
-  public void setAlergies(Map<Long, String> alergies) {
-    this.alergies = alergies;
+  public void setPatientAlergyRelModel(PatientAlergyRelModel patientAlergyRelModel) {
+    this.patientAlergyRelModel = patientAlergyRelModel;
+  }
+
+  public String getSelectedAlergy() {
+    return selectedAlergy;
+  }
+
+  public void setSelectedAlergy(String selectedAlergy) {
+    this.selectedAlergy = selectedAlergy;
   }
 
   public char getAlergyStillPass() {
@@ -91,22 +95,6 @@ public class AlergyBean implements Serializable {
     this.alergyPanel = alergyPanel;
   }
 
-  public String getSelectedAlergy() {
-    return selectedAlergy;
-  }
-
-  public void setSelectedAlergy(String selectedAlergy) {
-    this.selectedAlergy = selectedAlergy;
-  }
-
-  public PatientAlergyRelModel getPatientAlergyRelModel() {
-    return patientAlergyRelModel;
-  }
-
-  public void setPatientAlergyRelModel(PatientAlergyRelModel patientAlergyRelModel) {
-    this.patientAlergyRelModel = patientAlergyRelModel;
-  }
-
   public List<PatientAlergyRelModel> getPatientAlergies() {
     return patientAlergies;
   }
@@ -115,8 +103,15 @@ public class AlergyBean implements Serializable {
     this.patientAlergies = patientAlergies;
   }
 
-  public String saveAlergy() {
+  public Map<Long, String> getAlergies() {
+    return alergies;
+  }
 
+  public void setAlergies(Map<Long, String> alergies) {
+    this.alergies = alergies;
+  }
+
+  public String saveAlergy() {
     if(patientAlergyRelService.patientHaveAlergy(loginBean.getPatientModel(), alergyService.find(Long.parseLong(selectedAlergy)))) {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerji zaten kayıtlı", null));
     } else {
@@ -127,10 +122,8 @@ public class AlergyBean implements Serializable {
       patientAlergyRelService.create(patientAlergyRelModel);
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerji kaydı başarılı", null));
     }
-
     FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
     return "/view/alergy?faces-redirect=true";
-
   }
 
   public String deleteAlergy() {
