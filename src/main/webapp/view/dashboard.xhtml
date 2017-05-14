@@ -19,7 +19,7 @@
                   <h:panelGroup rendered="#{appointment.appointmentHistory.size() gt 0}">
                     <span class="count">${appointment.appointmentCounter}<small> gün sonra</small></span>
                   </h:panelGroup>
-                  <h:outputText rendered="#{not empty appointment.appointmentHistory.size()}" value="Randevu Yok"/>
+                  <h:outputText rendered="#{empty appointment.appointmentHistory}" value="Randevu Yok"/>
                   <h:outputText styleClass="date" value="#{appointment.appointmentHistory.get(0).appointmentDate}" rendered="#{appointment.appointmentHistory.size() gt 0}">
                     <f:convertDateTime timeZone="GMT+3" pattern="dd-MM-yyyy HH:mm"/>
                   </h:outputText>
