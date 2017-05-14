@@ -9716,6 +9716,49 @@ body.page-404 .container .btn-transparent {
   display: block;
 }
 
+.page-wrapper .card .small-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 4px solid;
+  padding: 0 30px 15px 30px;
+  width: 100%;
+}
+
+.page-wrapper .card .small-card .left i {
+  font-size: 24px;
+  color: #686868;
+  margin-bottom: 15px;
+}
+
+.page-wrapper .card .small-card .left h4 {
+  font-size: 14px;
+  color: #8D9EA7;
+  font-weight: 100;
+}
+
+.page-wrapper .card .small-card .right {
+  display: inherit;
+  flex-direction: column;
+}
+
+.page-wrapper .card .small-card .right .count {
+  display: inherit;
+  flex-direction: inherit;
+  text-align: right;
+  font-size: 48px;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.page-wrapper .card .small-card .right .count small {
+  font-size: 16px;
+}
+
+.page-wrapper .card .small-card .right .date {
+  font-weight: 100;
+}
+
 .page-wrapper .card-user {
   text-align: center;
 }

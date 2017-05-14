@@ -4,7 +4,6 @@ import com.hastanerandevu.model.PageModel;
 import com.hastanerandevu.utility.SessionUtils;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.util.ArrayList;
@@ -13,9 +12,6 @@ import java.util.List;
 @ManagedBean(name = "pagebean")
 @ViewScoped
 public class PageBean {
-
-  @ManagedProperty(value = "#{login}")
-  private LoginBean loginBean;
 
   private List<PageModel> pageList = new ArrayList<>();
 
@@ -26,6 +22,7 @@ public class PageBean {
       pageList.add(new PageModel("/view/appointments.xhtml", "Randevularım", "fa fa-calendar fa-fw"));
       pageList.add(new PageModel("/view/alergy.xhtml", "Alerjilerim", "fa fa-thermometer-2 fa-fw"));
       pageList.add(new PageModel("/view/disease.xhtml", "Hastalıklarım", "fa fa-thermometer-3 fa-fw"));
+      pageList.add(new PageModel("/view/assay.xhtml", "Tahlillerim", "fa fa-thermometer-4 fa-fw"));
       pageList.add(new PageModel("/view/vaccine.xhtml", "Aşı Takvimi", "fa fa-calendar-check-o fa-fw"));
     } else if(SessionUtils.getSession().getAttribute("userType").equals("doctor")) {
 
@@ -38,13 +35,5 @@ public class PageBean {
 
   public String getViewId() {
     return FacesContext.getCurrentInstance().getViewRoot().getViewId();
-  }
-
-  public LoginBean getLoginBean() {
-    return loginBean;
-  }
-
-  public void setLoginBean(LoginBean loginBean) {
-    this.loginBean = loginBean;
   }
 }

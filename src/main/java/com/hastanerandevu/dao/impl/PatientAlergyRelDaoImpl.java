@@ -10,10 +10,10 @@ public class PatientAlergyRelDaoImpl extends BaseDaoImpl<PatientAlergyRelModel> 
 
   public boolean patientHaveAlergy(PatientModel patientModel, AlergyModel alergyModel) {
     Query query = getEntitymanager().createQuery("SELECT e FROM PatientAlergyRelModel e " +
-      "WHERE e.patient = :PATIENT_MODEL and e.alergy = :ALERGY_MODEL");
+      "WHERE e.patient = :patient and e.alergy = :alergy");
 
-    query.setParameter("PATIENT_MODEL", patientModel);
-    query.setParameter("ALERGY_MODEL", alergyModel);
+    query.setParameter("patient", patientModel);
+    query.setParameter("alergy", alergyModel);
 
     return query.getResultList().size() > 0;
   }

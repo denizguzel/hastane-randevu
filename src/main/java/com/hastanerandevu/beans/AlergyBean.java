@@ -2,6 +2,7 @@ package com.hastanerandevu.beans;
 
 import com.hastanerandevu.model.AlergyModel;
 import com.hastanerandevu.model.PatientAlergyRelModel;
+import com.hastanerandevu.model.PatientModel;
 import com.hastanerandevu.service.impl.AlergyServiceImpl;
 import com.hastanerandevu.service.impl.PatientAlergyRelServiceImpl;
 import com.hastanerandevu.service.impl.PatientServiceImpl;
@@ -30,8 +31,10 @@ public class AlergyBean implements Serializable {
   private PatientServiceImpl patientService;
   private AlergyServiceImpl alergyService;
   private PatientAlergyRelModel patientAlergyRelModel;
+  private PatientModel patientModel;
 
   private String selectedAlergy;
+  private int alergyCount;
   private char alergyStillPass;
   private boolean alergyPanel = false;
 
@@ -44,17 +47,21 @@ public class AlergyBean implements Serializable {
     patientService = new PatientServiceImpl();
     alergyService = new AlergyServiceImpl();
     patientAlergyRelModel = new PatientAlergyRelModel();
+    patientModel = loginBean.getPatientModel();
 
     patientAlergies = new ArrayList<>();
     alergies = new LinkedHashMap<>();
 
-    patientAlergies.addAll(patientService.getPatientAlergies(loginBean.getPatientModel()));
+    for(PatientAlergyRelModel patientAlergyRelModel : patientService.getPatientAlergies(patientModel)) {
+      patientAlergies.add(patientAlergyRelModel);
+      alergyCount++;
+    }
 
     for(AlergyModel alergyModel : alergyService.findAll()) {
       alergies.put(alergyModel.getPk(), alergyModel.getAlergyName());
     }
 
-    if(patientService.getPatientAlergies(loginBean.getPatientModel()).size() > 0) {
+    if(patientService.getPatientAlergies(patientModel).size() > 0) {
       alergyPanel = true;
     }
   }
@@ -111,13 +118,16 @@ public class AlergyBean implements Serializable {
     this.alergies = alergies;
   }
 
+  public int getAlergyCount() {
+    return alergyCount;
+  }
+
   public String saveAlergy() {
-    if(patientAlergyRelService.patientHaveAlergy(loginBean.getPatientModel(), alergyService.find(Long.parseLong(selectedAlergy)))) {
+    if(patientAlergyRelService.patientHaveAlergy(patientModel, alergyService.find(Long.parseLong(selectedAlergy)))) {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerji zaten kayıtlı", null));
     } else {
-      patientAlergyRelModel = new PatientAlergyRelModel();
       patientAlergyRelModel.setAlergy(alergyService.find(Long.parseLong(selectedAlergy)));
-      patientAlergyRelModel.setPatient(loginBean.getPatientModel());
+      patientAlergyRelModel.setPatient(patientModel);
       patientAlergyRelModel.setIsStillPass(alergyStillPass);
       patientAlergyRelService.create(patientAlergyRelModel);
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerji kaydı başarılı", null));

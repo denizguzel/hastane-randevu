@@ -62,4 +62,9 @@
     <view-id value="/view/disease.xhtml"/>
   </url-mapping>
 
+  <url-mapping id="assay">
+    <pattern value="/view/assay"/>
+    <view-id value="/view/assay.xhtml"/>
+  </url-mapping>
+
 </pretty-config>

@@ -2,6 +2,7 @@ package com.hastanerandevu.beans;
 
 import com.hastanerandevu.model.DiseaseModel;
 import com.hastanerandevu.model.PatientDiseaseRelModel;
+import com.hastanerandevu.model.PatientModel;
 import com.hastanerandevu.service.impl.DiseaseServiceImpl;
 import com.hastanerandevu.service.impl.PatientDiseaseRelServiceImpl;
 import com.hastanerandevu.service.impl.PatientServiceImpl;
@@ -30,8 +31,10 @@ public class DiseaseBean implements Serializable {
   private PatientServiceImpl patientService;
   private DiseaseServiceImpl diseaseService;
   private PatientDiseaseRelModel patientDiseaseRelModel;
+  private PatientModel patientModel;
 
   private String selectedDisease;
+  private int diseaseCount;
   private char diseaseStillPass;
   private boolean diseasePanel = false;
 
@@ -44,17 +47,21 @@ public class DiseaseBean implements Serializable {
     patientService = new PatientServiceImpl();
     diseaseService = new DiseaseServiceImpl();
     patientDiseaseRelModel = new PatientDiseaseRelModel();
+    patientModel = loginBean.getPatientModel();
 
     patientDiseases = new ArrayList<>();
     diseases = new LinkedHashMap<>();
 
-    patientDiseases.addAll(patientService.getPatientDiseases(loginBean.getPatientModel()));
+    for(PatientDiseaseRelModel patientDiseaseRelModel : patientService.getPatientDiseases(patientModel)) {
+      patientDiseases.add(patientDiseaseRelModel);
+      diseaseCount++;
+    }
 
     for(DiseaseModel diseaseModel : diseaseService.findAll()) {
       diseases.put(diseaseModel.getPk(), diseaseModel.getDiseaseName());
     }
 
-    if(patientService.getPatientDiseases(loginBean.getPatientModel()).size() > 0) {
+    if(patientService.getPatientDiseases(patientModel).size() > 0) {
       diseasePanel = true;
     }
   }
@@ -111,13 +118,16 @@ public class DiseaseBean implements Serializable {
     this.diseases = diseases;
   }
 
+  public int getDiseaseCount() {
+    return diseaseCount;
+  }
+
   public String saveDisease() {
-    if(patientDiseaseRelService.patientHaveDisease(loginBean.getPatientModel(), diseaseService.find(Long.parseLong(selectedDisease)))) {
+    if(patientDiseaseRelService.patientHaveDisease(patientModel, diseaseService.find(Long.parseLong(selectedDisease)))) {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hastalık zaten kayıtlı", null));
     } else {
-      patientDiseaseRelModel = new PatientDiseaseRelModel();
       patientDiseaseRelModel.setDisease(diseaseService.find(Long.parseLong(selectedDisease)));
-      patientDiseaseRelModel.setPatient(loginBean.getPatientModel());
+      patientDiseaseRelModel.setPatient(patientModel);
       patientDiseaseRelModel.setIsStillPass(diseaseStillPass);
       patientDiseaseRelService.create(patientDiseaseRelModel);
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Hastalık kaydı başarılı", null));

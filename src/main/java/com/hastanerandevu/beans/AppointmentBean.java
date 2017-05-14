@@ -16,6 +16,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import java.io.Serializable;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 @ManagedBean(name = "appointment")
 @ViewScoped
@@ -46,6 +47,7 @@ public class AppointmentBean implements Serializable {
   private String selectedHospital;
   private String selectedPoliclinic;
   private String selectedInspectionPlace;
+  private String appointmentCounter;
 
   private Map<Long, String> cities;
   private Map<Long, String> districts;
@@ -89,7 +91,15 @@ public class AppointmentBean implements Serializable {
       cities.put(cityModel.getPk(), cityModel.getCityName());
     }
 
-    appointmentHistory.addAll(patientService.getAppointmentHistory(loginBean.getPatientModel()));
+    if(patientService.getAppointmentHistory(loginBean.getPatientModel()).size() > 0) {
+      appointmentHistory.addAll(patientService.getAppointmentHistory(loginBean.getPatientModel()));
+
+      Date closestDate = appointmentHistory.get(0).getAppointmentDate();
+      Date today = new Date();
+
+      long diff = closestDate.getTime() - today.getTime();
+      appointmentCounter = String.valueOf(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+    }
   }
 
   public void setLoginBean(LoginBean loginBean) {
@@ -254,6 +264,14 @@ public class AppointmentBean implements Serializable {
 
   public void setDoctorReviewList(List<ReviewsAboutDoctorsModel> doctorReviewList) {
     this.doctorReviewList = doctorReviewList;
+  }
+
+  public String getAppointmentCounter() {
+    return appointmentCounter;
+  }
+
+  public void setAppointmentCounter(String appointmentCounter) {
+    this.appointmentCounter = appointmentCounter;
   }
 
   // Functions
