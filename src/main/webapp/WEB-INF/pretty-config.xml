@@ -47,14 +47,19 @@
     <view-id value="/view/profile.xhtml"/>
   </url-mapping>
 
+  <url-mapping id="vaccine">
+    <pattern value="/view/vaccine"/>
+    <view-id value="/view/vaccine.xhtml"/>
+  </url-mapping>
+
   <url-mapping id="alergy">
     <pattern value="/view/alergy"/>
     <view-id value="/view/alergy.xhtml"/>
   </url-mapping>
 
-  <url-mapping id="vaccine">
-    <pattern value="/view/vaccine"/>
-    <view-id value="/view/vaccine.xhtml"/>
+  <url-mapping id="disease">
+    <pattern value="/view/disease"/>
+    <view-id value="/view/disease.xhtml"/>
   </url-mapping>
 
 </pretty-config>

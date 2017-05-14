@@ -63,10 +63,6 @@ public class AlergyBean implements Serializable {
     }
   }
 
-  public LoginBean getLoginBean() {
-    return loginBean;
-  }
-
   public void setLoginBean(LoginBean loginBean) {
     this.loginBean = loginBean;
   }
@@ -103,14 +99,6 @@ public class AlergyBean implements Serializable {
     this.selectedAlergy = selectedAlergy;
   }
 
-  public PatientModel getPatientModel() {
-    return patientModel;
-  }
-
-  public void setPatientModel(PatientModel patientModel) {
-    this.patientModel = patientModel;
-  }
-
   public PatientAlergyRelModel getPatientAlergyRelModel() {
     return patientAlergyRelModel;
   }
@@ -129,12 +117,12 @@ public class AlergyBean implements Serializable {
 
   public String saveAlergy() {
 
-    if(patientAlergyRelService.patientHaveAlergy(patientModel, alergyService.find(Long.parseLong(selectedAlergy)))) {
+    if(patientAlergyRelService.patientHaveAlergy(loginBean.getPatientModel(), alergyService.find(Long.parseLong(selectedAlergy)))) {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerji zaten kayıtlı", null));
     } else {
       patientAlergyRelModel = new PatientAlergyRelModel();
       patientAlergyRelModel.setAlergy(alergyService.find(Long.parseLong(selectedAlergy)));
-      patientAlergyRelModel.setPatient(patientModel);
+      patientAlergyRelModel.setPatient(loginBean.getPatientModel());
       patientAlergyRelModel.setIsStillPass(alergyStillPass);
       patientAlergyRelService.create(patientAlergyRelModel);
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerji kaydı başarılı", null));
