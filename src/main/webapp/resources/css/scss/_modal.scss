@@ -46,6 +46,10 @@
           }
           .detail {
             color: $input-color;
+            word-wrap: break-word;
+            .badge {
+              border: 0;
+            }
           }
         }
         .buttons {

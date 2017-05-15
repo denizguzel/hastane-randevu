@@ -246,6 +246,10 @@ function changeActiveTab(data) {
   }
 }
 
+function popoverCall() {
+  $('[data-toggle="popover"]').popover();
+}
+
 window.onload = function () {
   var systemMessageElement = $(".global-message li");
   if (systemMessageElement.length) {

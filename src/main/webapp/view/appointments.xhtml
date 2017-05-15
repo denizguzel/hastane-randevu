@@ -74,7 +74,7 @@
                     <h:outputText value="#{history.patient.firstName} #{history.patient.lastName}"/>
                   </h:column>
                   <h:column>
-                    <f:facet name="header">T.C. No</f:facet>
+                    <f:facet name="header">Hasta T.C. No</f:facet>
                     <h:outputText value="#{history.patient.tcNumber}"/>
                   </h:column>
                   <h:column>
@@ -97,6 +97,13 @@
                   <h:column>
                     <f:facet name="header">Doktora Not</f:facet>
                     <h:outputText styleClass="doctor-message" p:data-toggle="tooltip" p:title="#{history.messageToDoctor == null ? '-Not yok-' : history.messageToDoctor}" value="#{history.messageToDoctor == null ? '-Not yok-' : history.messageToDoctor}"/>
+                  </h:column>
+                  <h:column>
+                    <f:facet name="header">Hasta Bilgileri</f:facet>
+                    <h:commandLink value="Hasta Bilgileri" styleClass="btn btn-sm btn-primary" p:data-toggle="modal" p:data-target="#info-modal" action="#{doctor.patientInfo}">
+                      <f:setPropertyActionListener value="#{history}" target="#{doctor.appointmentModel}"/>
+                      <f:ajax execute="@this" render="patient-info" onevent="popoverCall"/>
+                    </h:commandLink>
                   </h:column>
                   <h:column headerClass="text-center">
                     <f:facet name="header">Durum</f:facet>
@@ -126,7 +133,7 @@
               <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
             </div>
             <div class="modal-body">
-              <h:form prependId="false" rendered="#{session.getAttribute('userType') == 'patient'}">
+              <h:form prependId="false">
                 <p>Randevuyu iptal etmek istediğinize emin misiniz?</p>
                 <div class="buttons">
                   <h:commandButton value="Evet" styleClass="btn btn-success" action="#{appointment.cancelAppointment}"/>
@@ -156,6 +163,80 @@
                   <button type="button" class="btn btn-danger" data-dismiss="modal">Kapat</button>
                 </div>
               </h:form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </h:panelGroup>
+
+    <h:panelGroup rendered="#{session.getAttribute('userType') == 'doctor'}">
+      <!-- Modal -->
+      <div class="modal fade" id="info-modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Hasta Bilgileri</h5>
+              <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
+            </div>
+            <div class="modal-body">
+              <h:panelGroup id="patient-info">
+                <div class="form-group">
+                  <label>Hasta İsmi</label>
+                  <div class="detail">${doctor.appointmentModel.patient.firstName} ${doctor.appointmentModel.patient.lastName}</div>
+                </div>
+                <div class="form-group">
+                  <label>T.C No</label>
+                  <div class="detail">${doctor.appointmentModel.patient.tcNumber}</div>
+                </div>
+                <div class="form-group">
+                  <label>Doğum Yeri ve Tarihi</label>
+                  <div class="detail">
+                    ${doctor.appointmentModel.patient.placeOfBirth}/
+                    <h:outputText value="#{doctor.appointmentModel.patient.dateOfBirth}">
+                      <f:convertDateTime timeZone="GMT+3" pattern="dd-MM-yyyy"/>
+                    </h:outputText>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Alerjileri</label>
+                  <div class="detail">
+                    <c:forEach items="#{doctor.patientAlergies}" var="patientAlergy">
+                      <span class="badge badge-info">${patientAlergy.alergy.alergyName}</span>
+                    </c:forEach>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Hastalıkları</label>
+                  <div class="detail">
+                    <c:forEach items="#{doctor.patientDiseases}" var="patientDisease">
+                      <span class="badge badge-info">${patientDisease.disease.diseaseName}</span>
+                    </c:forEach>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Tahlilleri</label>
+                  <div class="detail">
+                    <c:forEach items="#{doctor.patientAssays}" var="patientAssay">
+                      <button type="button" class="badge badge-info" data-toggle="popover" data-trigger="focus" title="#{patientAssay.assay.assayName}" data-content="#{patientAssay.assayDetail}">${patientAssay.assay.assayName}</button>
+                    </c:forEach>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Doktora Not</label>
+                  <div class="detail">
+                    <h:outputText value="#{doctor.appointmentModel.messageToDoctor == null ? '-Not Yok-' : doctor.appointmentModel.messageToDoctor}"/>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Randevu Tarihi ve Yeri</label>
+                  <div class="detail">
+                    <h:outputText value="#{doctor.appointmentModel.appointmentDate}">
+                      <f:convertDateTime timeZone="GMT+3" pattern="dd-MM-yyyy HH:mm"/>
+                    </h:outputText>
+                    <h:outputText value=" - #{doctor.appointmentModel.inspectionPlace.placeName}"/>
+                  </div>
+                </div>
+              </h:panelGroup>
             </div>
           </div>
         </div>
