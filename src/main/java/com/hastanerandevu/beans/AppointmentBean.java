@@ -38,6 +38,7 @@ public class AppointmentBean implements Serializable {
   private ReviewsAboutDoctorsServiceImpl reviewsAboutDoctorsService;
   private AppointmentModel appointmentModel;
   private ReviewsAboutDoctorsModel reviewsAboutDoctorsModel;
+  private PatientModel patientModel;
 
   private boolean appointmentClockPanel = false;
   private boolean appointmentPanel = false;
@@ -80,6 +81,7 @@ public class AppointmentBean implements Serializable {
     reviewsAboutDoctorsService = new ReviewsAboutDoctorsServiceImpl();
     appointmentModel = new AppointmentModel();
     reviewsAboutDoctorsModel = new ReviewsAboutDoctorsModel();
+    patientModel = loginBean.getPatientModel();
 
     appointmentsHeaders = new ArrayList<>();
     appointmentDays = new ArrayList<>();
@@ -91,8 +93,8 @@ public class AppointmentBean implements Serializable {
       cities.put(cityModel.getPk(), cityModel.getCityName());
     }
 
-    if(patientService.getAppointmentHistory(loginBean.getPatientModel()).size() > 0) {
-      appointmentHistory.addAll(patientService.getAppointmentHistory(loginBean.getPatientModel()));
+    if(patientService.getAppointmentHistory(patientModel).size() > 0) {
+      appointmentHistory.addAll(patientService.getAppointmentHistory(patientModel));
 
       Date closestDate = appointmentHistory.get(0).getAppointmentDate();
       Date today = new Date();
@@ -422,7 +424,7 @@ public class AppointmentBean implements Serializable {
   }
 
   public void holdAppointment() {
-    appointmentService.holdAppointmentForPatient(appointmentModel, loginBean.getPatientModel());
+    appointmentService.holdAppointmentForPatient(appointmentModel, patientModel);
   }
 
   public void clearAppointment() {
@@ -430,14 +432,14 @@ public class AppointmentBean implements Serializable {
   }
 
   public String confirmAppointment() {
-    if(patientService.haveAnAppointmentForThatDay(loginBean.getPatientModel(), appointmentModel.getAppointmentDate())) {
+    if(patientService.haveAnAppointmentForThatDay(patientModel, appointmentModel.getAppointmentDate())) {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aynı güne birden fazla randevu alamazsınız.", null));
       appointmentService.clearAppointment(appointmentModel);
-    } else if(patientService.getNumberOfPatientAppointments(loginBean.getPatientModel()) >= 3) {
+    } else if(patientService.getNumberOfPatientAppointments(patientModel) >= 3) {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "En fazla 3 randevu alabilirsiniz.", null));
       appointmentService.clearAppointment(appointmentModel);
     } else {
-      appointmentService.confirmAppointment(appointmentModel, loginBean.getPatientModel());
+      appointmentService.confirmAppointment(appointmentModel, patientModel);
       new Mailer().sendAppointmentMail(appointmentModel);
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Randevu Alımı Başarılı", null));
     }
@@ -479,7 +481,7 @@ public class AppointmentBean implements Serializable {
   }
 
   public String sendDoctorComment() {
-    reviewsAboutDoctorsModel.setPatient(loginBean.getPatientModel());
+    reviewsAboutDoctorsModel.setPatient(patientModel);
     reviewsAboutDoctorsModel.setDoctor(appointmentModel.getInspectionPlace().getDoctor());
     reviewsAboutDoctorsService.create(reviewsAboutDoctorsModel);
 

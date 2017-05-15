@@ -8,58 +8,109 @@
           <h4>Hoşgeldin</h4>
         </div>
         <div class="card p-4">
-          <div class="row">
-            <div class="col-xl-3">
-              <div class="small-card text-danger">
-                <div class="left">
-                  <i class="fa fa-calendar-check-o"></i>
-                  <h4>En Yakın Randevunuz</h4>
+          <h:panelGroup rendered="#{session.getAttribute('userType') == 'patient'}">
+            <div class="row">
+              <div class="col-xl-3">
+                <div class="small-card text-danger">
+                  <div class="left">
+                    <i class="fa fa-calendar-check-o"></i>
+                    <h4>En Yakın Randevunuz</h4>
+                  </div>
+                  <div class="right">
+                    <h:panelGroup rendered="#{not empty appointment.appointmentHistory}">
+                    <span class="count">${appointment.appointmentCounter}
+                      <small> gün sonra</small></span>
+                    </h:panelGroup>
+                    <h:outputText rendered="#{empty appointment.appointmentHistory}" value="Randevu Yok"/>
+                    <h:outputText styleClass="date" value="#{appointment.appointmentHistory.get(0).appointmentDate}" rendered="#{not empty appointment.appointmentHistory}">
+                      <f:convertDateTime timeZone="GMT+3" pattern="dd-MM-yyyy HH:mm"/>
+                    </h:outputText>
+                  </div>
                 </div>
-                <div class="right">
-                  <h:panelGroup rendered="#{appointment.appointmentHistory.size() gt 0}">
-                    <span class="count">${appointment.appointmentCounter}<small> gün sonra</small></span>
-                  </h:panelGroup>
-                  <h:outputText rendered="#{empty appointment.appointmentHistory}" value="Randevu Yok"/>
-                  <h:outputText styleClass="date" value="#{appointment.appointmentHistory.get(0).appointmentDate}" rendered="#{appointment.appointmentHistory.size() gt 0}">
-                    <f:convertDateTime timeZone="GMT+3" pattern="dd-MM-yyyy HH:mm"/>
-                  </h:outputText>
+              </div>
+              <div class="col-xl-3 d-flex align-content-stretch">
+                <div class="small-card text-info">
+                  <div class="left">
+                    <i class="fa fa-thermometer-half"></i>
+                    <h4>Alerjileriniz</h4>
+                  </div>
+                  <div class="right">
+                    <span class="count">${alergy.alergyCount}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 d-flex align-content-stretch">
+                <div class="small-card text-muted">
+                  <div class="left">
+                    <i class="fa fa-thermometer-three-quarters"></i>
+                    <h4>Hastalıklarınız</h4>
+                  </div>
+                  <div class="right">
+                    <span class="count">${disease.diseaseCount}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 d-flex align-content-stretch">
+                <div class="small-card text-primary">
+                  <div class="left">
+                    <i class="fa fa-thermometer-full"></i>
+                    <h4>Tahlilleriniz</h4>
+                  </div>
+                  <div class="right">
+                    <span class="count">${assay.assayCount}</span>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-xl-3 d-flex align-content-stretch">
-              <div class="small-card text-info">
-                <div class="left">
-                  <i class="fa fa-thermometer-half"></i>
-                  <h4>Alerjileriniz</h4>
+          </h:panelGroup>
+          <h:panelGroup rendered="#{session.getAttribute('userType') == 'doctor'}">
+            <div class="row">
+              <div class="col-xl-3">
+                <div class="small-card text-danger">
+                  <div class="left">
+                    <i class="fa fa-calendar-check-o"></i>
+                    <h4>Randevu Sayınız</h4>
+                  </div>
+                  <div class="right">
+                    <span class="count">${doctor.appointmentCount}</span>
+                  </div>
                 </div>
-                <div class="right">
-                  <span class="count">${alergy.alergyCount}</span>
+              </div>
+              <div class="col-xl-3 d-flex align-content-stretch">
+                <div class="small-card text-info">
+                  <div class="left">
+                    <i class="fa fa-thermometer-half"></i>
+                    <h4>Alerjileriniz</h4>
+                  </div>
+                  <div class="right">
+                    <span class="count"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 d-flex align-content-stretch">
+                <div class="small-card text-muted">
+                  <div class="left">
+                    <i class="fa fa-thermometer-three-quarters"></i>
+                    <h4>Hastalıklarınız</h4>
+                  </div>
+                  <div class="right">
+                    <span class="count"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 d-flex align-content-stretch">
+                <div class="small-card text-primary">
+                  <div class="left">
+                    <i class="fa fa-thermometer-full"></i>
+                    <h4>Tahlilleriniz</h4>
+                  </div>
+                  <div class="right">
+                    <span class="count"></span>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-xl-3 d-flex align-content-stretch">
-              <div class="small-card text-muted">
-                <div class="left">
-                  <i class="fa fa-thermometer-three-quarters"></i>
-                  <h4>Hastalıklarınız</h4>
-                </div>
-                <div class="right">
-                  <span class="count">${disease.diseaseCount}</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 d-flex align-content-stretch">
-              <div class="small-card text-primary">
-                <div class="left">
-                  <i class="fa fa-thermometer-full"></i>
-                  <h4>Tahlilleriniz</h4>
-                </div>
-                <div class="right">
-                  <span class="count">${assay.assayCount}</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          </h:panelGroup>
         </div>
       </div>
     </div>

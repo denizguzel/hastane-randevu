@@ -265,7 +265,7 @@
             <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
           </div>
           <div class="modal-body">
-            <h:panelGroup layout="block" id="doctor-comment" class="comments#{appointment.doctorReviewList.size() gt 0 ? '' : ' empty'}">
+            <h:panelGroup layout="block" id="doctor-comment" class="comments#{not empty appointment.doctorReviewList ? '' : ' empty'}">
               <div class="alert"><i class="fa fa-question-circle-o"></i>Doktor hakkında yorum yapılmamış</div>
               <h:dataTable styleClass="table" value="#{appointment.doctorReviewList}" var="review" binding="#{commentTable}">
                 <h:column>
