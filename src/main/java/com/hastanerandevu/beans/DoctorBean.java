@@ -56,7 +56,7 @@ public class DoctorBean implements Serializable {
     patientAssays = new LinkedList<>();
     patientDiseases = new LinkedList<>();
 
-    for(AppointmentModel appointmentModel : doctorService.getAppointmentHistoryByDoctor(doctorModel.getInspectionPlace())) {
+    for(AppointmentModel appointmentModel : doctorService.getAppointmentHistoryByDoctor(doctorModel)) {
       appointmentHistory.add(appointmentModel);
       appointmentCount++;
     }

@@ -26,15 +26,16 @@ public class InspectionPlaceModel {
   @Column(name = "MODIFIED_TIME", insertable = false, updatable = false)
   private Date modifiedTime;
 
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "FK_DOCTOR")
+  private DoctorModel doctor;
+
   @OneToMany(mappedBy = "inspectionPlace")
   private List<AppointmentModel> appointmentModels;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "FK_HOSPITAL_POLICLINIC_REL")
   private HospitalPoliclinicRelModel hospitalPoliclinicRel;
-
-  @OneToOne(mappedBy = "inspectionPlace")
-  private DoctorModel doctor;
 
   public long getPk() {
     return pk;
