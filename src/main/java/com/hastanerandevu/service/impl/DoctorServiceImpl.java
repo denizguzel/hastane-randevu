@@ -3,13 +3,11 @@ package com.hastanerandevu.service.impl;
 import com.hastanerandevu.dao.impl.DoctorDaoImpl;
 import com.hastanerandevu.model.AppointmentModel;
 import com.hastanerandevu.model.DoctorModel;
+import com.hastanerandevu.model.InspectionPlaceModel;
 import com.hastanerandevu.service.BaseService;
 
 import java.util.List;
 
-/**
- * Created by Okan on 15.4.2017.
- */
 public class DoctorServiceImpl implements BaseService<DoctorModel> {
 
   private DoctorDaoImpl doctorDao = new DoctorDaoImpl();
@@ -43,7 +41,7 @@ public class DoctorServiceImpl implements BaseService<DoctorModel> {
     return doctorDao.loginDoctor(doctorModel);
   }
 
-  public List<AppointmentModel> getAppointmentHistoryByDoctor(DoctorModel doctorModel) {
-    return doctorDao.getAppointmentHistoryByDoctor(doctorModel);
+  public List<AppointmentModel> getAppointmentHistoryByDoctor(InspectionPlaceModel inspectionPlaceModel) {
+    return doctorDao.getAppointmentHistoryByDoctor(inspectionPlaceModel);
   }
 }

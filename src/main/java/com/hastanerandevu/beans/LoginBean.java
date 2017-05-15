@@ -56,6 +56,10 @@ public class LoginBean {
     return loggedUsername;
   }
 
+  public void setLoggedUsername(String loggedUsername) {
+    this.loggedUsername = loggedUsername;
+  }
+
   public boolean isVerifyLogin() {
     return verifyLogin;
   }
@@ -96,6 +100,7 @@ public class LoginBean {
     return secretQuestionEnums;
   }
 
+  // Functions
   public void patientCreate() {
     if(patientService.haveUserRegistration(patientModel)) {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bu kullanıcı sistemde zaten kayıtlı", null));
@@ -116,7 +121,7 @@ public class LoginBean {
   public void patientUpdate() {
     try {
       patientService.update(patientModel);
-      loggedUsername = patientModel.getFirstName() + " " + patientModel.getLastName();
+      loggedUsername = NameConverter.getName(patientModel.getFirstName(),patientModel.getLastName());
 
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Güncelleme Başarılı", null));
     } catch(Exception e) {

@@ -3,14 +3,11 @@ package com.hastanerandevu.dao.impl;
 import com.hastanerandevu.converter.Encryptor;
 import com.hastanerandevu.model.AppointmentModel;
 import com.hastanerandevu.model.DoctorModel;
+import com.hastanerandevu.model.InspectionPlaceModel;
 
 import javax.persistence.Query;
-import java.util.Date;
 import java.util.List;
 
-/**
- * Created by Okan on 15.4.2017.
- */
 public class DoctorDaoImpl extends BaseDaoImpl<DoctorModel> {
   public DoctorModel loginDoctor(DoctorModel doctorModel) {
     Query query = getEntitymanager().createQuery("SELECT e FROM DoctorModel e " + "WHERE e.recordNumber = :RECORD_NUMBER AND e.password = :PASSWORD");
@@ -24,11 +21,10 @@ public class DoctorDaoImpl extends BaseDaoImpl<DoctorModel> {
     }
   }
 
-  public List<AppointmentModel> getAppointmentHistoryByDoctor(DoctorModel doctorModel) {
-    Query query = getEntitymanager().createQuery("SELECT e FROM AppointmentModel e " + "WHERE e.inspectionPlace.doctor = :DOCTOR " + "AND e.appointmentDate < :date " + "ORDER BY e.appointmentDate DESC");
+  public List<AppointmentModel> getAppointmentHistoryByDoctor(InspectionPlaceModel inspectionPlaceModel) {
+    Query query = getEntitymanager().createQuery("SELECT e FROM AppointmentModel e " + "WHERE e.inspectionPlace = :inspectionPlace " + "AND e.appointmentStatus = 'RESERVED'");
 
-    query.setParameter("DOCTOR", doctorModel);
-    query.setParameter("date", new Date());
+    query.setParameter("inspectionPlace", inspectionPlaceModel);
 
     return query.getResultList();
   }

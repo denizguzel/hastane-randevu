@@ -1,5 +1,6 @@
 package com.hastanerandevu.beans;
 
+import com.hastanerandevu.enums.AssayResultEnum;
 import com.hastanerandevu.model.AssayModel;
 import com.hastanerandevu.model.PatientAssayRelModel;
 import com.hastanerandevu.model.PatientModel;
@@ -36,6 +37,7 @@ public class AssayBean implements Serializable {
   private String selectedAssay;
   private int assayCount;
   private boolean assayPanel = false;
+  private AssayResultEnum[] assayResultEnums = AssayResultEnum.values();
 
   private List<PatientAssayRelModel> patientAssays;
   private Map<Long, String> assays;
@@ -111,6 +113,14 @@ public class AssayBean implements Serializable {
 
   public int getAssayCount() {
     return assayCount;
+  }
+
+  public AssayResultEnum[] getAssayResultEnums() {
+    return assayResultEnums;
+  }
+
+  public void setAssayResultEnums(AssayResultEnum[] assayResultEnums) {
+    this.assayResultEnums = assayResultEnums;
   }
 
   public String saveAssay() {

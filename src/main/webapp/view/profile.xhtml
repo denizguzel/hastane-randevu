@@ -9,7 +9,7 @@
         </div>
         <div class="card">
           <div class="card-block">
-            <h:form prependId="false">
+            <h:form prependId="false" rendered="#{session.getAttribute('userType') == 'patient'}">
               <div class="card-block-header border">Kullanıcı Bilgileri</div>
               <div class="row mb-3">
                 <div class="col-md-3">
@@ -133,45 +133,123 @@
               </h:commandButton>
               <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
             </h:form>
+
+            <h:form prependId="false" rendered="#{session.getAttribute('userType') == 'doctor'}">
+              <div class="card-block-header border">Kişisel Bilgiler</div>
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group" data-message="">
+                    <h:inputText id="doctorfirstname" value="#{login.doctorModel.firstName}" p:placeholder="Adınızı giriniz" required="true" requiredMessage="Adınızı giriniz" styleClass="form-control">
+                      <f:ajax event="blur" execute="@this" render="doctorfirstnameMessage" onevent="ajaxCall"/>
+                    </h:inputText>
+                    <h:message id="doctorfirstnameMessage" for="doctorfirstname" errorClass="error"/>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group" data-message="">
+                    <h:inputText id="doctorlastname" value="#{login.doctorModel.lastName}" p:placeholder="Soyadınızı giriniz" required="true" requiredMessage="Soyadınızı giriniz" styleClass="form-control">
+                      <f:ajax event="blur" execute="@this" render="doctorlastnameMessage" onevent="ajaxCall"/>
+                    </h:inputText>
+                    <h:message id="doctorlastnameMessage" for="doctorlastname" errorClass="error"/>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group" data-message="">
+                    <h:inputText id="doctorbirthdate" value="#{login.doctorModel.dateOfBirth}" p:placeholder="Doğum tarihinizi giriniz" required="true" requiredMessage="Doğum tarihinizi giriniz" styleClass="form-control datepicker">
+                      <f:convertDateTime pattern="dd-MM-yyyy"/>
+                      <f:ajax event="blur" execute="@this" render="doctorbirthdateMessage" onevent="ajaxCall"/>
+                    </h:inputText>
+                    <h:message id="doctorbirthdateMessage" for="doctorbirthdate" errorClass="error"/>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <h:selectOneMenu styleClass="selectpicker form-control" value="#{login.doctorModel.secretQuestion}">
+                      <f:selectItems value="#{login.secretQuestionEnums}" var="secretQuestionGroup" itemValue="#{secretQuestionGroup}" itemLabel="#{messages['string.'.concat(secretQuestionGroup)]}"/>
+                    </h:selectOneMenu>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group" data-message="">
+                    <h:inputText id="doctorquestionanswer" value="#{login.doctorModel.questionAnswer}" p:placeholder="Gizli soru cevabı giriniz" required="true" requiredMessage="Gizli soru cevabı giriniz" styleClass="form-control">
+                      <f:ajax event="blur" execute="@this" render="doctorquestionanswerMessage" onevent="ajaxCall"/>
+                    </h:inputText>
+                    <h:message id="doctorquestionanswerMessage" for="doctorquestionanswer" errorClass="error"/>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <h:selectOneMenu styleClass="selectpicker form-control" value="#{login.doctorModel.gender}">
+                      <f:selectItems value="#{login.genderEnums}" var="genderGroup" itemValue="#{genderGroup}" itemLabel="#{messages['string.'.concat(genderGroup)]}"/>
+                    </h:selectOneMenu>
+                  </div>
+                </div>
+              </div>
+              <div class="card-block-header border">İş Bilgileri</div>
+              <div class="row mb-3">
+                <div class="col-md-3">
+                  <label>Sicil No</label>
+                  <div class="input-disabled">${login.doctorModel.recordNumber}</div>
+                </div>
+                <div class="col-md-3">
+                  <label>Bölüm</label>
+                  <div class="input-disabled">${login.doctorModel.branch.branchName}</div>
+                </div>
+                <div class="col-md-3">
+                  <label>Uzmanlık Seviyesi</label>
+                  <div class="input-disabled">${messages['string.'.concat(login.doctorModel.level)]}</div>
+                </div>
+                <div class="col-md-3">
+                  <label>Çalışma Odası</label>
+                  <div class="input-disabled">${login.doctorModel.inspectionPlace.placeName}</div>
+                </div>
+              </div>
+              <h:commandButton value="Güncelle" styleClass="btn btn-success" action="#{doctor.doctorUpdate}">
+                <f:ajax execute="@form" render="@form" onevent="selectPickerToast"/>
+              </h:commandButton>
+              <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
+            </h:form>
           </div>
         </div>
       </div>
     </div>
-    <!-- Modal -->
-    <div class="modal fade" id="change-password">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Şifre Değiştir</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></button>
-          </div>
-          <h:form prependId="false">
-            <div class="modal-body">
-              <div class="form-group" data-message="">
-                <h:inputSecret id="password" value="#{login.password}" p:placeholder="Yeni şifrenizi giriniz" required="true" requiredMessage="Yeni şifrenizi giriniz" styleClass="form-control" binding="#{passwordConfirm}">
-                  <f:ajax event="blur" execute="@this passwordConfirm" render="passwordMessage passwordConfirmMessage" onevent="ajaxCall"/>
-                </h:inputSecret>
-                <h:message id="passwordMessage" for="password" errorClass="error"/>
-              </div>
-              <div class="form-group" data-message="">
-                <h:inputSecret id="passwordConfirm" p:placeholder="Yeni şifrenizi tekrar giriniz" required="#{not empty passwordConfirm}" requiredMessage="Yeni şifrenizi tekrar giriniz" styleClass="form-control">
-                  <f:validator validatorId="password"/>
-                  <f:attribute name="otherValue" value="#{passwordConfirm}"/>
-                  <f:ajax event="blur" execute="@this password" render="passwordMessage passwordConfirmMessage" onevent="ajaxCall"/>
-                </h:inputSecret>
-                <h:message id="passwordConfirmMessage" for="passwordConfirm" errorClass="error"/>
-              </div>
-              <div class="form-group d-flex">
-                <h:commandButton styleClass="btn btn-success ml-auto" value="Değiştir" action="#{login.patientPasswordUpdate}">
-                  <f:ajax execute="@form" render="@form" onevent="toast"/>
-                </h:commandButton>
-                <button type="button" class="btn btn-danger ml-2" data-dismiss="modal">Kapat</button>
-              </div>
+    <h:panelGroup rendered="#{session.getAttribute('userType') == 'patient'}">
+      <!-- Modal -->
+      <div class="modal fade" id="change-password">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Şifre Değiştir</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></button>
             </div>
-            <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
-          </h:form>
+            <h:form prependId="false">
+              <div class="modal-body">
+                <div class="form-group" data-message="">
+                  <h:inputSecret id="password" value="#{login.password}" p:placeholder="Yeni şifrenizi giriniz" required="true" requiredMessage="Yeni şifrenizi giriniz" styleClass="form-control" binding="#{passwordConfirm}">
+                    <f:ajax event="blur" execute="@this passwordConfirm" render="passwordMessage passwordConfirmMessage" onevent="ajaxCall"/>
+                  </h:inputSecret>
+                  <h:message id="passwordMessage" for="password" errorClass="error"/>
+                </div>
+                <div class="form-group" data-message="">
+                  <h:inputSecret id="passwordConfirm" p:placeholder="Yeni şifrenizi tekrar giriniz" required="#{not empty passwordConfirm}" requiredMessage="Yeni şifrenizi tekrar giriniz" styleClass="form-control">
+                    <f:validator validatorId="password"/>
+                    <f:attribute name="otherValue" value="#{passwordConfirm}"/>
+                    <f:ajax event="blur" execute="@this password" render="passwordMessage passwordConfirmMessage" onevent="ajaxCall"/>
+                  </h:inputSecret>
+                  <h:message id="passwordConfirmMessage" for="passwordConfirm" errorClass="error"/>
+                </div>
+                <div class="form-group d-flex">
+                  <h:commandButton styleClass="btn btn-success ml-auto" value="Değiştir" action="#{login.patientPasswordUpdate}">
+                    <f:ajax execute="@form" render="@form" onevent="toast"/>
+                  </h:commandButton>
+                  <button type="button" class="btn btn-danger ml-2" data-dismiss="modal">Kapat</button>
+                </div>
+              </div>
+              <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
+            </h:form>
+          </div>
         </div>
       </div>
-    </div>
+    </h:panelGroup>
   </ui:define>
 </ui:composition>

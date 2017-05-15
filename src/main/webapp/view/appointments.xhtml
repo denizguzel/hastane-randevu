@@ -9,7 +9,7 @@
         </div>
         <div class="card">
           <div class="card-block">
-            <h:form prependId="false">
+            <h:form prependId="false" rendered="#{session.getAttribute('userType') == 'patient'}">
               <div class="table-responsive">
                 <h:dataTable styleClass="table table-appointment" binding="#{table}" value="#{appointment.appointmentHistory}" var="history">
                   <h:column>
@@ -61,52 +61,105 @@
               </div>
               <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
             </h:form>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="cancel-modal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Randevu İptal</h5>
-            <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
-          </div>
-          <div class="modal-body">
-            <h:form prependId="false">
-              <p>Randevuyu iptal etmek istediğinize emin misiniz?</p>
-              <div class="buttons">
-                <h:commandButton value="Evet" styleClass="btn btn-success" action="#{appointment.cancelAppointment}"/>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Hayır</button>
+            <h:form prependId="false" rendered="#{session.getAttribute('userType') == 'doctor'}">
+              <div class="table-responsive">
+                <h:dataTable styleClass="table table-appointment" binding="#{table2}" value="#{doctor.appointmentHistory}" var="history">
+                  <h:column>
+                    <f:facet name="header">#</f:facet>
+                    <h:outputText value="#{table2.rowIndex + 1}"/>
+                  </h:column>
+                  <h:column>
+                    <f:facet name="header">Hasta İsmi</f:facet>
+                    <h:outputText value="#{history.patient.firstName} #{history.patient.lastName}"/>
+                  </h:column>
+                  <h:column>
+                    <f:facet name="header">T.C. No</f:facet>
+                    <h:outputText value="#{history.patient.tcNumber}"/>
+                  </h:column>
+                  <h:column>
+                    <f:facet name="header">Doğum Yeri ve Tarihi</f:facet>
+                    <h:outputText value="#{history.patient.placeOfBirth}/"/>
+                    <h:outputText value="#{history.patient.dateOfBirth}">
+                      <f:convertDateTime timeZone="GMT+3" pattern="dd-MM-yyyy"/>
+                    </h:outputText>
+                  </h:column>
+                  <h:column>
+                    <f:facet name="header">Muayene Yeri</f:facet>
+                    <h:outputText value="#{history.inspectionPlace.placeName}"/>
+                  </h:column>
+                  <h:column>
+                    <f:facet name="header">Randevu Tarihi</f:facet>
+                    <h:outputText value="#{history.appointmentDate}">
+                      <f:convertDateTime timeZone="GMT+3" pattern="dd-MM-yyyy HH:mm"/>
+                    </h:outputText>
+                  </h:column>
+                  <h:column>
+                    <f:facet name="header">Doktora Not</f:facet>
+                    <h:outputText styleClass="doctor-message" p:data-toggle="tooltip" p:title="#{history.messageToDoctor == null ? '-Not yok-' : history.messageToDoctor}" value="#{history.messageToDoctor == null ? '-Not yok-' : history.messageToDoctor}"/>
+                  </h:column>
+                  <h:column headerClass="text-center">
+                    <f:facet name="header">Durum</f:facet>
+                    <h:panelGroup rendered="#{history.appointmentStatus == 'RESERVED'}" styleClass="badge badge-warning">
+                      <h:outputText value="Randevu Beklemede"/>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{history.appointmentStatus == 'COMPLETED'}" styleClass="badge badge-success">
+                      <h:outputText value="Randevu Tamamlandı"/>
+                    </h:panelGroup>
+                  </h:column>
+                </h:dataTable>
               </div>
+              <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
             </h:form>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="comment-modal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Doktor Hakkında Yorum</h5>
-            <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
-          </div>
-          <div class="modal-body">
-            <h:form prependId="false">
-              <div class="form-group">
-                <h:inputTextarea value="#{appointment.reviewsAboutDoctorsModel.review}" styleClass="form-control" p:placeholder="Yorumunuz"/>
-              </div>
-              <div class="buttons">
-                <h:commandButton value="Gönder" styleClass="btn btn-success" action="#{appointment.sendDoctorComment}"/>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Kapat</button>
-              </div>
-            </h:form>
+    <h:panelGroup rendered="#{session.getAttribute('userType') == 'patient'}">
+      <!-- Modal -->
+      <div class="modal fade" id="cancel-modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Randevu İptal</h5>
+              <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
+            </div>
+            <div class="modal-body">
+              <h:form prependId="false" rendered="#{session.getAttribute('userType') == 'patient'}">
+                <p>Randevuyu iptal etmek istediğinize emin misiniz?</p>
+                <div class="buttons">
+                  <h:commandButton value="Evet" styleClass="btn btn-success" action="#{appointment.cancelAppointment}"/>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Hayır</button>
+                </div>
+              </h:form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="comment-modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Doktor Hakkında Yorum</h5>
+              <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
+            </div>
+            <div class="modal-body">
+              <h:form prependId="false">
+                <div class="form-group">
+                  <h:inputTextarea value="#{appointment.reviewsAboutDoctorsModel.review}" styleClass="form-control" p:placeholder="Yorumunuz"/>
+                </div>
+                <div class="buttons">
+                  <h:commandButton value="Gönder" styleClass="btn btn-success" action="#{appointment.sendDoctorComment}"/>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Kapat</button>
+                </div>
+              </h:form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </h:panelGroup>
+
   </ui:define></ui:composition>
