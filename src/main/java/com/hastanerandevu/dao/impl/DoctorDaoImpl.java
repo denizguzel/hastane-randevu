@@ -1,11 +1,15 @@
 package com.hastanerandevu.dao.impl;
 
 import com.hastanerandevu.converter.Encryptor;
+import com.hastanerandevu.enums.AppointmentStatusEnum;
 import com.hastanerandevu.model.AppointmentModel;
 import com.hastanerandevu.model.DoctorModel;
 import com.hastanerandevu.model.InspectionPlaceModel;
 
 import javax.persistence.Query;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class DoctorDaoImpl extends BaseDaoImpl<DoctorModel> {
@@ -21,10 +25,14 @@ public class DoctorDaoImpl extends BaseDaoImpl<DoctorModel> {
     }
   }
 
-  public List<AppointmentModel> getAppointmentHistoryByDoctor(InspectionPlaceModel inspectionPlaceModel) {
-    Query query = getEntitymanager().createQuery("SELECT e FROM AppointmentModel e " + "WHERE e.inspectionPlace = :inspectionPlace " + "AND e.appointmentStatus = 'RESERVED'");
+  public List<AppointmentModel> getAppointmentHistoryByDoctor(DoctorModel doctorModel) {
 
-    query.setParameter("inspectionPlace", inspectionPlaceModel);
+    List<AppointmentStatusEnum> appointmentStatusEnums = Arrays.asList(AppointmentStatusEnum.COMPLETED, AppointmentStatusEnum.RESERVED);
+
+    Query query = getEntitymanager().createQuery("SELECT e FROM AppointmentModel e " + "" + "WHERE e.inspectionPlace.doctor = :DOCTOR " + "AND e.appointmentStatus IN :APPOINTMENT_STATUS ORDER BY e.appointmentDate DESC");
+
+    query.setParameter("DOCTOR", doctorModel);
+    query.setParameter("APPOINTMENT_STATUS", appointmentStatusEnums);
 
     return query.getResultList();
   }

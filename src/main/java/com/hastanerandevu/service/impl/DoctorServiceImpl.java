@@ -41,7 +41,7 @@ public class DoctorServiceImpl implements BaseService<DoctorModel> {
     return doctorDao.loginDoctor(doctorModel);
   }
 
-  public List<AppointmentModel> getAppointmentHistoryByDoctor(InspectionPlaceModel inspectionPlaceModel) {
-    return doctorDao.getAppointmentHistoryByDoctor(inspectionPlaceModel);
+  public List<AppointmentModel> getAppointmentHistoryByDoctor(DoctorModel doctorModel) {
+    return doctorDao.getAppointmentHistoryByDoctor(doctorModel);
   }
 }
