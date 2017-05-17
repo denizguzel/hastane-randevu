@@ -6417,6 +6417,14 @@ body.page-404 .container {
       padding: 0;
       color: #fff; }
 
+.navbar-login .dropdown .dropdown-toggle:hover {
+  background-color: transparent;
+}
+
+.navbar-login .dropdown .dropdown-toggle:after {
+  content: '';
+}
+
 .page-wrapper {
   height: 100vh;
   margin-left: 230px;
@@ -6733,7 +6741,10 @@ footer {
       color: #565656;
       word-wrap: break-word; }
       .modal .modal-dialog .modal-content .modal-body .form-group .detail .badge {
-        border: 0; }
+        border: 0;
+        margin-right: 5px;
+        margin-bottom: 2px;
+      }
     .modal .modal-dialog .modal-content .modal-body .buttons {
       display: flex; }
       .modal .modal-dialog .modal-content .modal-body .buttons .btn {
@@ -6836,15 +6847,12 @@ nav.sidebar .brand {
   .swiper-container .swiper-wrapper .swiper-slide .caption h2 {
     font-size: 48px;
   }
-
   .survey .survey-header {
     font-size: 14px;
   }
-
   .survey .survey-block table tbody tr td label {
     font-size: 13px;
   }
-
   .page-wrapper .card .small-card {
     padding: 0 0 15px 0;
     margin-bottom: 30px;
@@ -6863,7 +6871,6 @@ nav.sidebar .brand {
   .swiper-container .swiper-wrapper .swiper-slide .caption p {
     font-size: 16px;
   }
-
   .page-wrapper .card .card-block .appointment-clocks.active ul {
     max-width: 100%;
   }
@@ -6873,19 +6880,9 @@ nav.sidebar .brand {
   .container-fluid {
     padding: 0 15px 15px 15px;
   }
-
   .navbar-login {
     padding: 0 15px 0 0;
   }
-
-  .navbar-login .dropdown .dropdown-toggle:after {
-    content: '';
-  }
-
-  .navbar-login .dropdown .dropdown-toggle i {
-    display: none;
-  }
-
   .navbar-toggleable-sm {
     flex-direction: column;
   }
@@ -6922,7 +6919,6 @@ nav.sidebar .brand {
   .navbar-toggleable-sm .navbar-collapse .navbar-nav .nav-item .nav-link:hover {
     background-color: transparent;
   }
-
   .swiper-container .swiper-wrapper .swiper-slide .caption {
     max-width: 260px;
   }
@@ -6934,7 +6930,6 @@ nav.sidebar .brand {
   .swiper-container .swiper-wrapper .swiper-slide .caption p {
     font-size: 13px;
   }
-
   .page-wrapper {
     margin-left: 0;
     height: initial;
@@ -6954,7 +6949,6 @@ nav.sidebar .brand {
     background-color: transparent;
     font-size: 18px;
   }
-
   nav.sidebar {
     padding-top: 0;
     width: 100%;
@@ -6977,11 +6971,9 @@ nav.sidebar .brand {
     transform: translateY(-50%);
     font-size: 30px;
   }
-
   nav.sidebar.active {
     transform: translateX(0);
   }
-
   .search-form .buttons {
     display: flex;
   }
@@ -6989,7 +6981,6 @@ nav.sidebar .brand {
   .search-form .buttons .btn {
     flex-grow: 1;
   }
-
   .modal .modal-dialog .modal-content .modal-body .buttons .btn {
     font-size: 13px;
     padding: 10.5px 0;
@@ -7000,7 +6991,6 @@ nav.sidebar .brand {
   .modal-dialog {
     margin: 30px auto;
   }
-
   footer .footer-bottom .container {
     display: flex;
     flex-direction: column;

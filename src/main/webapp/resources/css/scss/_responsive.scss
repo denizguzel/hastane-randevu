@@ -69,16 +69,6 @@
   }
   .navbar-login {
     padding: 0 15px 0 0;
-    .dropdown {
-      .dropdown-toggle {
-        &:after {
-          content: '';
-        }
-        i {
-          display: none;
-        }
-      }
-    }
   }
   .navbar-toggleable-sm {
     flex-direction: column;

@@ -6,9 +6,7 @@
       <img src="#{facesContext.externalContext.requestContextPath}/resources/img/white-logo.png"/>
     </a>
     <div class="dropdown">
-      <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
-        <i class="fa fa-user-circle-o"></i>${login.loggedUsername}
-      </button>
+      <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">${login.loggedUsername}</button>
       <div class="dropdown-menu dropdown-menu-right">
         <div class="dropdown-item">
           <a href="#{facesContext.externalContext.requestContextPath}/view/profile"><i class="fa fa-user-o"></i>Profil</a>

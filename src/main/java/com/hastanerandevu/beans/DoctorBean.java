@@ -2,7 +2,9 @@ package com.hastanerandevu.beans;
 
 import com.hastanerandevu.converter.NameConverter;
 import com.hastanerandevu.model.*;
-import com.hastanerandevu.service.impl.*;
+import com.hastanerandevu.service.impl.DoctorServiceImpl;
+import com.hastanerandevu.service.impl.PatientServiceImpl;
+import com.hastanerandevu.utility.SessionUtils;
 import org.apache.log4j.Logger;
 
 import javax.annotation.PostConstruct;
@@ -25,9 +27,6 @@ public class DoctorBean implements Serializable {
   private LoginBean loginBean;
 
   private DoctorServiceImpl doctorService;
-  private PatientAlergyRelServiceImpl patientAlergyRelService;
-  private PatientAssayRelServiceImpl patientAssayRelService;
-  private PatientDiseaseRelServiceImpl patientDiseaseRelService;
   private PatientServiceImpl patientService;
   private DoctorModel doctorModel;
   private AppointmentModel appointmentModel;
@@ -43,22 +42,20 @@ public class DoctorBean implements Serializable {
   @PostConstruct
   public void init() {
     doctorService = new DoctorServiceImpl();
-    patientAlergyRelService = new PatientAlergyRelServiceImpl();
-    patientAssayRelService = new PatientAssayRelServiceImpl();
-    patientDiseaseRelService = new PatientDiseaseRelServiceImpl();
     patientService = new PatientServiceImpl();
-    doctorModel = loginBean.getDoctorModel();
     appointmentModel = new AppointmentModel();
-
 
     appointmentHistory = new LinkedList<>();
     patientAlergies = new LinkedList<>();
     patientAssays = new LinkedList<>();
     patientDiseases = new LinkedList<>();
 
-    for(AppointmentModel appointmentModel : doctorService.getAppointmentHistoryByDoctor(doctorModel)) {
-      appointmentHistory.add(appointmentModel);
-      appointmentCount++;
+    if(SessionUtils.getSession().getAttribute("userType").equals("doctor")) {
+      doctorModel = loginBean.getDoctorModel();
+      for(AppointmentModel appointmentModel : doctorService.getAppointmentHistoryByDoctor(doctorModel)) {
+        appointmentHistory.add(appointmentModel);
+        appointmentCount++;
+      }
     }
   }
 
