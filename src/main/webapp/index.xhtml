@@ -3,7 +3,7 @@
 
   <ui:define name="content">
     <!-- Swiper Slider -->
-    <div id="swiper-main" class="swiper-container">
+    <div id="swiper-main" class="swiper-container hidden-xs-down">
       <div class="swiper-wrapper">
         <div class="swiper-slide">
           <img src="resources/img/slider1.jpg" class="img-fluid"/>
@@ -34,20 +34,20 @@
         <h3 class="border">e-Randevu Sistemi</h3>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci commodi cum debitis dolore, exercitationem iusto laudantium pariatur, perspiciatis quae rerum, saepe sint temporibus! Dolor molestias porro repellendus unde vitae! Libero?</p>
         <div class="row mt-5">
-          <div class="col-xl-4">
+          <div class="col-md-4">
             <i class="fa fa-stethoscope"></i>
             <h4>Sağlığınız Hakkında Bilgiler</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, alias culpa cupiditate dolorem eius excepturi ipsum modi nam nisi nostrum nulla possimus quia quisquam velit veritatis? Amet atque eos fugiat.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, alias culpa cupiditate dolorem eius excepturi ipsum modi?</p>
           </div>
-          <div class="col-xl-4">
+          <div class="col-md-4">
             <i class="fa fa-heartbeat"></i>
             <h4>Dünya Standartlarında Sağlık Servisi</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, alias culpa cupiditate dolorem eius excepturi ipsum modi nam nisi nostrum nulla possimus quia quisquam velit veritatis? Amet atque eos fugiat.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, alias culpa cupiditate dolorem eius excepturi ipsum modi?</p>
           </div>
-          <div class="col-xl-4">
+          <div class="col-md-4">
             <i class="fa fa-ambulance"></i>
             <h4>7/24 Randevu Alabilme</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, alias culpa cupiditate dolorem eius excepturi ipsum modi nam nisi nostrum nulla possimus quia quisquam velit veritatis? Amet atque eos fugiat.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, alias culpa cupiditate dolorem eius excepturi ipsum modi?</p>
           </div>
         </div>
       </div>
@@ -57,7 +57,7 @@
     <section class="questions">
       <div class="container">
         <div class="row">
-          <div class="col-xl-8">
+          <div class="col-md-8 mb-4 mb-md-0">
             <h3 class="border">Sıkça Sorulan Sorular</h3>
             <div id="accordion">
               <ui:repeat value="#{home.askedQuestions}" var="askedQuestion" varStatus="askedQuestionStatus">
@@ -74,7 +74,7 @@
               </ui:repeat>
             </div>
           </div>
-          <div class="col-xl-4">
+          <div class="col-md-4">
             <h3 class="border">Anket</h3>
             <h:panelGroup layout="block" rendered="#{!home.cookieCheck}">
               <!-- Swiper Slider -->
@@ -113,10 +113,10 @@
     <footer>
       <div class="container">
         <div class="row">
-          <div class="col-xl-4">
+          <div class="col-md-12 col-lg-4 d-flex justify-content-center mb-4 mb-lg-0">
             <a href="#{facesContext.externalContext.requestContextPath}/"><img src="resources/img/white-logo.png"/></a>
           </div>
-          <div class="col-xl-4">
+          <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
             <h4 class="border">YARARLI LİNKLER</h4>
             <ul class="footer-widget">
               <li><a href="#">e-Devlet</a></li>
@@ -124,7 +124,7 @@
               <li><a href="#">e-Devlet</a></li>
             </ul>
           </div>
-          <div class="col-xl-4">
+          <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
             <h4 class="border">İLETİŞİM</h4>
             <ul class="footer-widget footer-widget-map">
               <li>

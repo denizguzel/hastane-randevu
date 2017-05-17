@@ -2,6 +2,10 @@
 <html lang="tr" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
 <ui:composition>
   <nav class="sidebar">
+    <div class="brand">
+      <img src="#{facesContext.externalContext.requestContextPath}/resources/img/logo.png"/>
+      <button type="button" class="close"><i class="fa fa-close"></i></button>
+    </div>
     <ul class="nav-menu">
       <ui:repeat value="#{pagebean.pageList}" var="page">
         <li class="#{pagebean.viewId eq page.link ? 'active' : ''}">

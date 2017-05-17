@@ -7,7 +7,10 @@ nav.sidebar {
   height: 100%;
   overflow-y: auto;
   box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08);
-  z-index: 1;
+  z-index: 2;
+  .brand {
+    display: none;
+  }
   ul.nav-menu {
     li {
       border-left: 3px solid transparent;

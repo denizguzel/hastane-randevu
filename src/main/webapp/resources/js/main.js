@@ -198,6 +198,7 @@ function tableData(data) {
     $(".btn-popover").popover({
       html: true,
       trigger: "focus",
+      placement: "bottom",
       content: function () {
         return $(".popover-content").html();
       },
@@ -264,3 +265,11 @@ window.onload = function () {
     systemMessageElement.text("");
   }
 };
+
+$(".sidebar-toggler").click(function () {
+  $("nav.sidebar").addClass("active");
+});
+
+$("nav.sidebar .close").click(function () {
+  $("nav.sidebar").removeClass("active");
+});

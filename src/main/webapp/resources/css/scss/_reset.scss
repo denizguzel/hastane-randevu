@@ -21,6 +21,12 @@ button, select, input.btn {
   cursor: pointer;
 }
 
+.table {
+  th, td {
+    white-space: nowrap;
+  }
+}
+
 .form-control {
   height: 40px;
   border: 0;

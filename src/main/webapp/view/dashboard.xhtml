@@ -6,11 +6,12 @@
       <div class="container-fluid">
         <div class="page-title">
           <h4>Hoşgeldin</h4>
+          <button class="sidebar-toggler" type="button"><i class="fa fa-bars"></i></button>
         </div>
         <div class="card p-4">
           <h:panelGroup rendered="#{session.getAttribute('userType') == 'patient'}">
             <div class="row">
-              <div class="col-xl-3">
+              <div class="col-lg-6 col-xl-3">
                 <div class="small-card text-danger">
                   <div class="left">
                     <i class="fa fa-calendar-check-o"></i>
@@ -28,7 +29,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-xl-3 d-flex align-content-stretch">
+              <div class="col-lg-6 col-xl-3 d-flex align-content-stretch">
                 <div class="small-card text-info">
                   <div class="left">
                     <i class="fa fa-thermometer-half"></i>
@@ -39,7 +40,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-xl-3 d-flex align-content-stretch">
+              <div class="col-lg-6 col-xl-3 d-flex align-content-stretch">
                 <div class="small-card text-muted">
                   <div class="left">
                     <i class="fa fa-thermometer-three-quarters"></i>
@@ -50,7 +51,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-xl-3 d-flex align-content-stretch">
+              <div class="col-lg-6 col-xl-3 d-flex align-content-stretch">
                 <div class="small-card text-primary">
                   <div class="left">
                     <i class="fa fa-thermometer-full"></i>
@@ -65,7 +66,7 @@
           </h:panelGroup>
           <h:panelGroup rendered="#{session.getAttribute('userType') == 'doctor'}">
             <div class="row">
-              <div class="col-xl-3">
+              <div class="col-lg-6 col-xl-3">
                 <div class="small-card text-danger">
                   <div class="left">
                     <i class="fa fa-calendar-check-o"></i>
@@ -76,7 +77,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-xl-3 d-flex align-content-stretch">
+              <div class="col-lg-6 col-xl-3 d-flex align-content-stretch">
                 <div class="small-card text-info">
                   <div class="left">
                     <i class="fa fa-thermometer-half"></i>
@@ -87,7 +88,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-xl-3 d-flex align-content-stretch">
+              <div class="col-lg-6 col-xl-3 d-flex align-content-stretch">
                 <div class="small-card text-muted">
                   <div class="left">
                     <i class="fa fa-thermometer-three-quarters"></i>
@@ -98,7 +99,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-xl-3 d-flex align-content-stretch">
+              <div class="col-lg-6 col-xl-3 d-flex align-content-stretch">
                 <div class="small-card text-primary">
                   <div class="left">
                     <i class="fa fa-thermometer-full"></i>

@@ -6004,6 +6004,10 @@ a:hover, a:focus {
 button, select, input.btn {
   cursor: pointer; }
 
+.table th, .table td {
+  white-space: nowrap;
+}
+
 .form-control {
   height: 40px;
   border: 0; }
@@ -6410,7 +6414,7 @@ body.page-404 .container {
       background-color: transparent;
       border: 0;
       border-radius: 0;
-      padding: 0 10px;
+      padding: 0;
       color: #fff; }
 
 .page-wrapper {
@@ -6419,11 +6423,16 @@ body.page-404 .container {
   background-color: #EDF1F5; }
   .page-wrapper .page-title {
     margin: 0 -30px 30px -30px;
-    padding: 20px;
+    padding: 20px 30px;
     background-color: #fff; }
     .page-wrapper .page-title h4 {
       font-size: 20px;
       color: #7F7F7F; }
+
+.page-wrapper .page-title .sidebar-toggler {
+  display: none;
+  padding: 0;
+}
   .page-wrapper .card .card-header {
     font-size: 24px; }
   .page-wrapper .card .card-block .card-block-header {
@@ -6741,7 +6750,12 @@ nav.sidebar {
   height: 100%;
   overflow-y: auto;
   box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08);
-  z-index: 1; }
+  z-index: 2;
+}
+
+nav.sidebar .brand {
+  display: none;
+}
   nav.sidebar ul.nav-menu li {
     border-left: 3px solid transparent; }
     nav.sidebar ul.nav-menu li a {
@@ -6817,3 +6831,187 @@ nav.sidebar {
     cursor: default; }
   .table-appointment tbody tr td:last-child {
     text-align: center; }
+
+@media (max-width: 1200px) {
+  .swiper-container .swiper-wrapper .swiper-slide .caption h2 {
+    font-size: 48px;
+  }
+
+  .survey .survey-header {
+    font-size: 14px;
+  }
+
+  .survey .survey-block table tbody tr td label {
+    font-size: 13px;
+  }
+
+  .page-wrapper .card .small-card {
+    padding: 0 0 15px 0;
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 992px) {
+  .swiper-container .swiper-wrapper .swiper-slide .caption {
+    max-width: 450px;
+  }
+
+  .swiper-container .swiper-wrapper .swiper-slide .caption h2 {
+    font-size: 40px;
+  }
+
+  .swiper-container .swiper-wrapper .swiper-slide .caption p {
+    font-size: 16px;
+  }
+
+  .page-wrapper .card .card-block .appointment-clocks.active ul {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .container-fluid {
+    padding: 0 15px 15px 15px;
+  }
+
+  .navbar-login {
+    padding: 0 15px 0 0;
+  }
+
+  .navbar-login .dropdown .dropdown-toggle:after {
+    content: '';
+  }
+
+  .navbar-login .dropdown .dropdown-toggle i {
+    display: none;
+  }
+
+  .navbar-toggleable-sm {
+    flex-direction: column;
+  }
+
+  .navbar-toggleable-sm .mobile-top {
+    display: inherit;
+  }
+
+  .navbar-toggleable-sm .mobile-top .navbar-toggler {
+    margin-left: auto;
+    align-self: center;
+  }
+
+  .navbar-toggleable-sm .mobile-top .navbar-toggler:focus {
+    outline: 0;
+  }
+
+  .navbar-toggleable-sm .navbar-collapse .navbar-nav {
+    margin-top: 10px;
+  }
+
+  .navbar-toggleable-sm .navbar-collapse .navbar-nav .nav-item {
+    margin: 0 0 5px 0;
+    width: 100%;
+    border-bottom: 1px solid #42ebc9;
+  }
+
+  .navbar-toggleable-sm .navbar-collapse .navbar-nav .nav-item .nav-link {
+    border-radius: 0;
+    background-color: transparent;
+    color: #000;
+  }
+
+  .navbar-toggleable-sm .navbar-collapse .navbar-nav .nav-item .nav-link:hover {
+    background-color: transparent;
+  }
+
+  .swiper-container .swiper-wrapper .swiper-slide .caption {
+    max-width: 260px;
+  }
+
+  .swiper-container .swiper-wrapper .swiper-slide .caption h2 {
+    font-size: 24px;
+  }
+
+  .swiper-container .swiper-wrapper .swiper-slide .caption p {
+    font-size: 13px;
+  }
+
+  .page-wrapper {
+    margin-left: 0;
+    height: initial;
+  }
+
+  .page-wrapper .page-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 -15px 30px -15px;
+    padding: 20px 15px;
+  }
+
+  .page-wrapper .page-title .sidebar-toggler {
+    display: inline-block;
+    border: 0;
+    background-color: transparent;
+    font-size: 18px;
+  }
+
+  nav.sidebar {
+    padding-top: 0;
+    width: 100%;
+    background-color: #fff;
+    transition: transform 0.2s;
+    transform: translateX(-100%);
+  }
+
+  nav.sidebar .brand {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 15px 0;
+  }
+
+  nav.sidebar .brand .close {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    font-size: 30px;
+  }
+
+  nav.sidebar.active {
+    transform: translateX(0);
+  }
+
+  .search-form .buttons {
+    display: flex;
+  }
+
+  .search-form .buttons .btn {
+    flex-grow: 1;
+  }
+
+  .modal .modal-dialog .modal-content .modal-body .buttons .btn {
+    font-size: 13px;
+    padding: 10.5px 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .modal-dialog {
+    margin: 30px auto;
+  }
+
+  footer .footer-bottom .container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  footer .footer-bottom .container .copyright {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  footer .footer-bottom .container .social-links {
+    margin: 0;
+  }
+}

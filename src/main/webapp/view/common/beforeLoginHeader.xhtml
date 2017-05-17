@@ -4,12 +4,14 @@
   <ui:insert name="header">
     <div class="container">
       <nav class="navbar navbar-toggleable-sm">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="brand" href="#{facesContext.externalContext.requestContextPath}/">
-          <img src="#{facesContext.externalContext.requestContextPath}/resources/img/logo.png"/>
-        </a>
+        <div class="mobile-top">
+          <a class="brand" href="#{facesContext.externalContext.requestContextPath}/">
+            <img src="#{facesContext.externalContext.requestContextPath}/resources/img/logo.png"/>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
+            <i class="fa fa-bars"></i>
+          </button>
+        </div>
         <h:panelGroup layout="block" rendered="#{!login.verifyLogin}">
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">

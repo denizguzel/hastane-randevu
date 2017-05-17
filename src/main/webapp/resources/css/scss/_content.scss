@@ -4,11 +4,15 @@
   background-color: #EDF1F5;
   .page-title {
     margin: 0 -30px 30px -30px;
-    padding: 20px;
+    padding: 20px 30px;
     background-color: #fff;
     h4 {
       font-size: 20px;
       color: #7F7F7F;
+    }
+    .sidebar-toggler {
+      display: none;
+      padding: 0;
     }
   }
   .card {
