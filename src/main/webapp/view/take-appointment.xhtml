@@ -67,11 +67,9 @@
                     <div class="form-group">
                       <label class="form-control-label">Tarih Aralığı Seçiniz</label>
                       <h:inputText id="appointmentDateStart" value="#{appointment.appointmentDateStart}" p:placeholder="Başlangıç Tarihi" styleClass="form-control">
-                        <f:ajax execute="@this" event="change" listener="#{appointment.startDate}"/>
                         <f:convertDateTime pattern="dd-MM-yyyy"/>
                       </h:inputText>
                       <h:inputText id="appointmentDateEnd" value="#{appointment.appointmentDateEnd}" p:placeholder="Bitiş Tarihi" styleClass="form-control">
-                        <f:ajax execute="@this" event="change" listener="#{appointment.endDate}"/>
                         <f:convertDateTime pattern="dd-MM-yyyy"/>
                       </h:inputText>
                     </div>

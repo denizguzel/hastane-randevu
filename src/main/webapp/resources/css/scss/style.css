@@ -6443,6 +6443,21 @@ body.page-404 .container {
 }
   .page-wrapper .card .card-header {
     font-size: 24px; }
+
+.page-wrapper .card .card-block .alert {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 30px 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.page-wrapper .card .card-block .alert i {
+  display: block;
+  font-size: 50px;
+  margin-bottom: 10px;
+}
   .page-wrapper .card .card-block .card-block-header {
     margin-bottom: 15px; }
   .page-wrapper .card .card-block .btn-transparent {
@@ -6508,17 +6523,6 @@ body.page-404 .container {
       flex-wrap: wrap; }
   .page-wrapper .card .card-block .alergy-list .table-responsive {
     display: none; }
-  .page-wrapper .card .card-block .alergy-list .alert {
-    max-width: 500px;
-    margin: 0 auto;
-    text-align: center;
-    padding: 30px 0;
-    font-size: 16px;
-    font-weight: 500; }
-    .page-wrapper .card .card-block .alergy-list .alert i {
-      display: block;
-      font-size: 50px;
-      margin-bottom: 10px; }
   .page-wrapper .card .card-block .alergy-list.active {
     display: block; }
     .page-wrapper .card .card-block .alergy-list.active .alert {

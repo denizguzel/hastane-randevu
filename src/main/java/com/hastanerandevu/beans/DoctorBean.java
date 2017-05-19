@@ -4,6 +4,7 @@ import com.hastanerandevu.converter.NameConverter;
 import com.hastanerandevu.model.*;
 import com.hastanerandevu.service.impl.DoctorServiceImpl;
 import com.hastanerandevu.service.impl.PatientServiceImpl;
+import com.hastanerandevu.service.impl.ReviewsAboutDoctorsServiceImpl;
 import com.hastanerandevu.utility.SessionUtils;
 import org.apache.log4j.Logger;
 
@@ -14,6 +15,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -28,27 +30,32 @@ public class DoctorBean implements Serializable {
 
   private DoctorServiceImpl doctorService;
   private PatientServiceImpl patientService;
+  private ReviewsAboutDoctorsServiceImpl reviewsAboutDoctorsService;
   private DoctorModel doctorModel;
   private AppointmentModel appointmentModel;
 
   private int appointmentCount;
+  private long remainingAppointment;
   private String password;
 
   private List<AppointmentModel> appointmentHistory;
   private List<PatientAlergyRelModel> patientAlergies;
   private List<PatientAssayRelModel> patientAssays;
   private List<PatientDiseaseRelModel> patientDiseases;
+  private List<ReviewsAboutDoctorsModel> doctorReviews;
 
   @PostConstruct
   public void init() {
     doctorService = new DoctorServiceImpl();
     patientService = new PatientServiceImpl();
+    reviewsAboutDoctorsService = new ReviewsAboutDoctorsServiceImpl();
     appointmentModel = new AppointmentModel();
 
     appointmentHistory = new LinkedList<>();
     patientAlergies = new LinkedList<>();
     patientAssays = new LinkedList<>();
     patientDiseases = new LinkedList<>();
+    doctorReviews = new LinkedList<>();
 
     if(SessionUtils.getSession().getAttribute("userType").equals("doctor")) {
       doctorModel = loginBean.getDoctorModel();
@@ -56,6 +63,9 @@ public class DoctorBean implements Serializable {
         appointmentHistory.add(appointmentModel);
         appointmentCount++;
       }
+      remainingAppointment = doctorService.remainingAppointment(doctorModel, new Date());
+
+      doctorReviews.addAll(reviewsAboutDoctorsService.getReviewsAboutDoctor(doctorModel));
     }
   }
 
@@ -113,6 +123,18 @@ public class DoctorBean implements Serializable {
 
   public void setPatientDiseases(List<PatientDiseaseRelModel> patientDiseases) {
     this.patientDiseases = patientDiseases;
+  }
+
+  public List<ReviewsAboutDoctorsModel> getDoctorReviews() {
+    return doctorReviews;
+  }
+
+  public void setDoctorReviews(List<ReviewsAboutDoctorsModel> doctorReviews) {
+    this.doctorReviews = doctorReviews;
+  }
+
+  public long getRemainingAppointment() {
+    return remainingAppointment;
   }
 
   private void clearListComponentsWithChange(List... lists) {

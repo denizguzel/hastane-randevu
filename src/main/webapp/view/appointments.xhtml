@@ -50,7 +50,7 @@
                       <f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>
                       <f:ajax execute="@this"/>
                     </h:commandButton>
-                    <h:commandLink rendered="#{history.appointmentStatus == 'COMPLETED' and !appointment.patientHaveReviewAboutDoctor(history.patient, history.inspectionPlace.doctor)}" value="Yorum Yap" styleClass="btn btn-sm btn-info mr-1" p:data-toggle="modal" p:data-target="#comment-modal">
+                    <h:commandLink rendered="#{history.appointmentStatus == 'COMPLETED' and !appointment.patientHaveReviewAboutDoctor(history.patient, history.inspectionPlace.doctor)}" value="Yorum Yap" styleClass="badge badge-info mr-1" p:data-toggle="modal" p:data-target="#comment-modal">
                       <f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>
                       <f:ajax execute="@this"/>
                     </h:commandLink>

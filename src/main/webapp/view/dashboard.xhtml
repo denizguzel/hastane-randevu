@@ -70,10 +70,21 @@
                 <div class="small-card text-danger">
                   <div class="left">
                     <i class="fa fa-calendar-check-o"></i>
-                    <h4>Randevu Sayınız</h4>
+                    <h4>Tüm Randevularınız</h4>
                   </div>
                   <div class="right">
                     <span class="count">${doctor.appointmentCount}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-xl-3 d-flex align-content-stretch">
+                <div class="small-card text-muted">
+                  <div class="left">
+                    <i class="fa fa-chain-broken"></i>
+                    <h4>Bugün Kalan Randevularım</h4>
+                  </div>
+                  <div class="right">
+                    <span class="count">${doctor.remainingAppointment}</span>
                   </div>
                 </div>
               </div>

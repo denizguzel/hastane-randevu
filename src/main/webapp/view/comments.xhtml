@@ -1,0 +1,39 @@
+<ui:composition template="/view/master/afterLoginTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://xmlns.jcp.org/jsf/passthrough" xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <ui:define name="title">Hasta Yorumları</ui:define>
+
+  <ui:define name="content">
+    <div class="page-wrapper">
+      <div class="container-fluid">
+        <div class="page-title">
+          <h4>Hasta Yorumları</h4>
+          <button class="sidebar-toggler" type="button"><i class="fa fa-bars"></i></button>
+        </div>
+        <div class="card">
+          <div class="card-block">
+            <h:form prependId="false">
+              <div class="table-responsive">
+                <h:dataTable styleClass="table" binding="#{table}" value="#{doctor.doctorReviews}" var="review" rendered="#{not empty doctor.doctorReviews}">
+                  <h:column>
+                    <f:facet name="header">#</f:facet>
+                    <h:outputText value="#{table.rowIndex + 1}"/>
+                  </h:column>
+                  <h:column>
+                    <f:facet name="header">Hasta İsmi</f:facet>
+                    <h:outputText value="#{review.patient.firstName} #{review.patient.lastName}"/>
+                  </h:column>
+                  <h:column>
+                    <f:facet name="header">Hasta Yorumu</f:facet>
+                    <h:outputText value="#{review.review}"/>
+                  </h:column>
+                </h:dataTable>
+                <h:panelGroup layout="block" styleClass="alert" rendered="#{empty doctor.doctorReviews}">
+                  <i class="fa fa-meh-o"></i>Henüz hakkınızda yorum yapılmamış.
+                </h:panelGroup>
+              </div>
+            </h:form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </ui:define></ui:composition>

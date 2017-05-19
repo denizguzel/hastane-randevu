@@ -3,7 +3,6 @@ package com.hastanerandevu.dao.impl;
 import com.hastanerandevu.constants.ProjectConstants;
 import com.hastanerandevu.enums.AppointmentStatusEnum;
 import com.hastanerandevu.model.AppointmentModel;
-import com.hastanerandevu.model.HospitalPoliclinicRelModel;
 import com.hastanerandevu.model.InspectionPlaceModel;
 
 import javax.persistence.Query;

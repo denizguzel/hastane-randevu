@@ -67,4 +67,14 @@
     <view-id value="/view/assay.xhtml"/>
   </url-mapping>
 
+  <url-mapping id="notes">
+    <pattern value="/view/notes"/>
+    <view-id value="/view/notes.xhtml"/>
+  </url-mapping>
+
+  <url-mapping id="comments">
+    <pattern value="/view/comments"/>
+    <view-id value="/view/comments.xhtml"/>
+  </url-mapping>
+
 </pretty-config>

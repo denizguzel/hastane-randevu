@@ -121,7 +121,7 @@ public class LoginBean {
   public void patientUpdate() {
     try {
       patientService.update(patientModel);
-      loggedUsername = NameConverter.getName(patientModel.getFirstName(),patientModel.getLastName());
+      loggedUsername = NameConverter.getName(patientModel.getFirstName(), patientModel.getLastName());
 
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Güncelleme Başarılı", null));
     } catch(Exception e) {

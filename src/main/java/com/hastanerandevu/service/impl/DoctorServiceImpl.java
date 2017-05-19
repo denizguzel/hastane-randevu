@@ -3,9 +3,9 @@ package com.hastanerandevu.service.impl;
 import com.hastanerandevu.dao.impl.DoctorDaoImpl;
 import com.hastanerandevu.model.AppointmentModel;
 import com.hastanerandevu.model.DoctorModel;
-import com.hastanerandevu.model.InspectionPlaceModel;
 import com.hastanerandevu.service.BaseService;
 
+import java.util.Date;
 import java.util.List;
 
 public class DoctorServiceImpl implements BaseService<DoctorModel> {
@@ -43,5 +43,9 @@ public class DoctorServiceImpl implements BaseService<DoctorModel> {
 
   public List<AppointmentModel> getAppointmentHistoryByDoctor(DoctorModel doctorModel) {
     return doctorDao.getAppointmentHistoryByDoctor(doctorModel);
+  }
+
+  public long remainingAppointment(DoctorModel doctorModel, Date date) {
+    return doctorDao.remainingAppointment(doctorModel, date);
   }
 }

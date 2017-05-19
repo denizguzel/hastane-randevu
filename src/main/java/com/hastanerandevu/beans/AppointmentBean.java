@@ -403,24 +403,6 @@ public class AppointmentBean implements Serializable {
     appointmentSearchNull = false;
   }
 
-  public void startDate(AjaxBehaviorEvent event) {
-    if(event == null) {
-      System.out.println("Ajax event is null");
-    } else {
-      UIInput input = (UIInput) event.getSource();
-      appointmentDateStart = (Date) input.getValue();
-    }
-  }
-
-  public void endDate(AjaxBehaviorEvent event) {
-    if(event == null) {
-      System.out.println("Ajax event is null");
-    } else {
-      UIInput input = (UIInput) event.getSource();
-      appointmentDateEnd = (Date) input.getValue();
-    }
-  }
-
   public void searchAppointment() {
 
     clearListComponentsWithChange(appointmentTimes, appointmentsHeaders, appointmentDays, doctorReviewList);
