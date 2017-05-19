@@ -1,5 +1,6 @@
 package com.hastanerandevu.dao.impl;
 
+import com.hastanerandevu.enums.AppointmentStatusEnum;
 import com.hastanerandevu.model.AppointmentModel;
 import com.hastanerandevu.model.HospitalPoliclinicRelModel;
 import com.hastanerandevu.model.InspectionPlaceModel;
@@ -28,12 +29,13 @@ public class PoliclinicDaoImpl extends BaseDaoImpl<PoliclinicModel> {
     return query.getResultList();
   }
 
-  public List<AppointmentModel> getAppointmentsByDate(HospitalPoliclinicRelModel hospitalPoliclinicRelModel, Date startDate, Date endDate) {
-    Query query = getEntitymanager().createQuery("SELECT e, e.inspectionPlace FROM AppointmentModel e WHERE " + "e.inspectionPlace.hospitalPoliclinicRel = :hospitalPoliclinicRel " + "AND e.appointmentDate >= :startDate AND e.appointmentDate <= :endDate GROUP BY e.inspectionPlace ORDER BY e.appointmentDate");
+  public List<InspectionPlaceModel> getAppointmentHeadersByPoliclinic(HospitalPoliclinicRelModel hospitalPoliclinicRelModel, Date startDate, Date endDate) {
+    Query query = getEntitymanager().createQuery("SELECT DISTINCT(ip) FROM AppointmentModel ap INNER JOIN ap.inspectionPlace ip WHERE ip.hospitalPoliclinicRel = :HOSPITAL_POLICLINIC_REL AND ap.appointmentStatus = :APPOINTMENT_STATUS AND ap.appointmentDate BETWEEN :START_DATE AND :END_DATE");
 
-    query.setParameter("hospitalPoliclinicRel", hospitalPoliclinicRelModel);
-    query.setParameter("startDate", startDate);
-    query.setParameter("endDate", endDate);
+    query.setParameter("HOSPITAL_POLICLINIC_REL", hospitalPoliclinicRelModel);
+    query.setParameter("APPOINTMENT_STATUS", AppointmentStatusEnum.NOT_RESERVED);
+    query.setParameter("START_DATE", startDate);
+    query.setParameter("END_DATE", endDate);
 
     return query.getResultList();
   }

@@ -166,15 +166,15 @@
                     </h:column>
                     <h:column>
                       <f:facet name="header">Doktor</f:facet>
-                      <h:outputText styleClass="d-inline-block" value="#{appointmentsHeader.inspectionPlace.doctor.firstName} #{appointmentsHeader.inspectionPlace.doctor.lastName}"/>
-                      <small><h:outputText value="(#{messages['string.'.concat(appointmentsHeader.inspectionPlace.doctor.level)]})"/></small>
+                      <h:outputText styleClass="d-inline-block" value="#{appointmentsHeader.doctor.firstName} #{appointmentsHeader.doctor.lastName}"/>
+                      <small><h:outputText value="(#{messages['string.'.concat(appointmentsHeader.doctor.level)]})"/></small>
                     </h:column>
-                    <h:column><f:facet name="header">Kurum Adı</f:facet>${appointmentsHeader.inspectionPlace.hospitalPoliclinicRel.hospital.hospitalName}</h:column>
-                    <h:column><f:facet name="header">Klinik Adı</f:facet>${appointmentsHeader.inspectionPlace.hospitalPoliclinicRel.policlinic.policlinicName}</h:column>
-                    <h:column><f:facet name="header">Muayene Yeri</f:facet>${appointmentsHeader.inspectionPlace.placeName}</h:column>
+                    <h:column><f:facet name="header">Kurum Adı</f:facet>${appointmentsHeader.hospitalPoliclinicRel.hospital.hospitalName}</h:column>
+                    <h:column><f:facet name="header">Klinik Adı</f:facet>${appointmentsHeader.hospitalPoliclinicRel.policlinic.policlinicName}</h:column>
+                    <h:column><f:facet name="header">Muayene Yeri</f:facet>${appointmentsHeader.placeName}</h:column>
                     <h:column>
                       <f:facet name="header"></f:facet>
-                      <h:commandLink value="Yorumlar" styleClass="btn btn-warning mr-1" action="#{appointment.doctorReviews(appointmentsHeader.inspectionPlace.doctor)}" p:data-toggle="modal" p:data-target="#comment-modal">
+                      <h:commandLink value="Yorumlar" styleClass="btn btn-warning mr-1" action="#{appointment.doctorReviews(appointmentsHeader.doctor)}" p:data-toggle="modal" p:data-target="#comment-modal">
                         <f:ajax execute="@this" render="doctor-comment"/>
                       </h:commandLink>
                       <h:commandLink value="Seç" styleClass="btn btn-success" action="#{appointment.selectAppointment(appointmentsHeader)}">

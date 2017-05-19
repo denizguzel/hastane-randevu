@@ -3,6 +3,7 @@ package com.hastanerandevu.dao.impl;
 import com.hastanerandevu.constants.ProjectConstants;
 import com.hastanerandevu.enums.AppointmentStatusEnum;
 import com.hastanerandevu.model.AppointmentModel;
+import com.hastanerandevu.model.HospitalPoliclinicRelModel;
 import com.hastanerandevu.model.InspectionPlaceModel;
 
 import javax.persistence.Query;
@@ -16,16 +17,6 @@ public class AppointmentDaoImpl extends BaseDaoImpl<AppointmentModel> {
 
     query.setParameter("inspectionPlace", inspectionPlaceModel);
     query.setParameter("date", new Date());
-
-    return query.getResultList();
-  }
-
-  public List<AppointmentModel> getAppointmentsByDate(InspectionPlaceModel inspectionPlaceModel, Date startDate, Date endDate) {
-    Query query = getEntitymanager().createQuery("SELECT e FROM AppointmentModel e WHERE " + "e.inspectionPlace = :inspectionPlace AND " + "e.appointmentDate >= :startDate AND e.appointmentDate <= :endDate ORDER BY e.appointmentDate");
-
-    query.setParameter("inspectionPlace", inspectionPlaceModel);
-    query.setParameter("startDate", startDate);
-    query.setParameter("endDate", endDate);
 
     return query.getResultList();
   }

@@ -4,6 +4,7 @@ import com.hastanerandevu.dao.impl.InspectionPlaceDaoImpl;
 import com.hastanerandevu.model.InspectionPlaceModel;
 import com.hastanerandevu.service.BaseService;
 
+import java.util.Date;
 import java.util.List;
 
 public class InspectionPlaceServiceImpl implements BaseService<InspectionPlaceModel> {
@@ -37,5 +38,9 @@ public class InspectionPlaceServiceImpl implements BaseService<InspectionPlaceMo
 
   public List<InspectionPlaceModel> getAppointments(InspectionPlaceModel inspectionPlaceModel) {
     return inspectionPlaceDao.getAppointments(inspectionPlaceModel);
+  }
+
+  public List<InspectionPlaceModel> getAppointmentHeaderByInspectionPlace(InspectionPlaceModel inspectionPlaceModel, Date startDate, Date endDate) {
+    return inspectionPlaceDao.getAppointmentHeaderByInspectionPlace(inspectionPlaceModel, startDate, endDate);
   }
 }

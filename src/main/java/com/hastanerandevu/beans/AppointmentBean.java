@@ -58,7 +58,7 @@ public class AppointmentBean implements Serializable {
   private Map<Long, String> hospitals;
   private Map<Long, String> policlinics;
   private Map<Long, String> inspectionPlaces;
-  private List<AppointmentModel> appointmentsHeaders;
+  private List<InspectionPlaceModel> appointmentsHeaders;
   private List<List<AppointmentModel>> appointmentTimes;
   private List<AppointmentModel> appointmentDays;
   private List<AppointmentModel> appointmentHistory;
@@ -200,11 +200,11 @@ public class AppointmentBean implements Serializable {
     this.inspectionPlaces = inspectionPlaces;
   }
 
-  public List<AppointmentModel> getAppointmentsHeaders() {
+  public List<InspectionPlaceModel> getAppointmentsHeaders() {
     return appointmentsHeaders;
   }
 
-  public void setAppointmentsHeaders(List<AppointmentModel> appointmentsHeaders) {
+  public void setAppointmentsHeaders(List<InspectionPlaceModel> appointmentsHeaders) {
     this.appointmentsHeaders = appointmentsHeaders;
   }
 
@@ -427,14 +427,14 @@ public class AppointmentBean implements Serializable {
 
     if(selectedInspectionPlace != null && !selectedInspectionPlace.isEmpty()) {
       inspectionPlaceModel = inspectionPlaceService.find(Long.parseLong(selectedInspectionPlace));
-      if(appointmentService.getAppointmentsByDate(inspectionPlaceModel, appointmentDateStart, appointmentDateEnd).size() > 0) {
-        appointmentsHeaders.add(appointmentService.getAppointmentsByDate(inspectionPlaceModel, appointmentDateStart, appointmentDateEnd).get(0));
+      if(inspectionPlaceService.getAppointmentHeaderByInspectionPlace(inspectionPlaceModel, appointmentDateStart, appointmentDateEnd).size() > 0) {
+        appointmentsHeaders.add(inspectionPlaceService.getAppointmentHeaderByInspectionPlace(inspectionPlaceModel, appointmentDateStart, appointmentDateEnd).get(0));
       } else {
         appointmentSearchNull = true;
       }
     } else if(selectedPoliclinic != null && !selectedPoliclinic.isEmpty()) {
-      if(policlinicService.getAppointmentsByDate(hospitalPoliclinicRelService.find(Long.parseLong(selectedPoliclinic)), appointmentDateStart, appointmentDateEnd).size() > 0) {
-        appointmentsHeaders.addAll(policlinicService.getAppointmentsByDate(hospitalPoliclinicRelService.find(Long.parseLong(selectedPoliclinic)), appointmentDateStart, appointmentDateEnd));
+      if(policlinicService.getAppointmentHeadersByPoliclinic(hospitalPoliclinicRelService.find(Long.parseLong(selectedPoliclinic)), appointmentDateStart, appointmentDateEnd).size() > 0) {
+        appointmentsHeaders.addAll(policlinicService.getAppointmentHeadersByPoliclinic(hospitalPoliclinicRelService.find(Long.parseLong(selectedPoliclinic)), appointmentDateStart, appointmentDateEnd));
       } else {
         appointmentSearchNull = true;
       }

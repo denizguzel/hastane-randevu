@@ -80,7 +80,4 @@ public class AppointmentServiceImpl implements BaseService<AppointmentModel> {
     return appointmentDao.getAllSuspendedAppointments();
   }
 
-  public List<AppointmentModel> getAppointmentsByDate(InspectionPlaceModel inspectionPlaceModel, Date startDate, Date endDate) {
-    return appointmentDao.getAppointmentsByDate(inspectionPlaceModel, startDate, endDate);
-  }
 }
