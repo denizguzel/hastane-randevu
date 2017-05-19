@@ -7,6 +7,7 @@ import com.hastanerandevu.model.InspectionPlaceModel;
 import com.hastanerandevu.model.PoliclinicModel;
 import com.hastanerandevu.service.BaseService;
 
+import java.util.Date;
 import java.util.List;
 
 public class PoliclinicServiceImpl implements BaseService<PoliclinicModel> {
@@ -39,6 +40,10 @@ public class PoliclinicServiceImpl implements BaseService<PoliclinicModel> {
 
   public List<InspectionPlaceModel> getInspectionPlacesByHospitalPoliclinicRel(HospitalPoliclinicRelModel hospitalPoliclinicRelModel) {
     return policlinicDao.getInspectionPlacesByHospitalPoliclinicRel(hospitalPoliclinicRelModel);
+  }
+
+  public List<AppointmentModel> getAppointmentsByDate(HospitalPoliclinicRelModel hospitalPoliclinicRelModel, Date startDate, Date endDate) {
+    return policlinicDao.getAppointmentsByDate(hospitalPoliclinicRelModel, startDate, endDate);
   }
 
   public List<AppointmentModel> getAppointmentsByPoliclinic(HospitalPoliclinicRelModel hospitalPoliclinicRelModel) {

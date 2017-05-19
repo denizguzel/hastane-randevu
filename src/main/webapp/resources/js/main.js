@@ -1,6 +1,5 @@
 // Datepicker
 $(".datepicker").datetimepicker({
-  useCurrent: false,
   locale: "tr",
   format: 'DD-MM-YYYY',
   icons: {
@@ -30,6 +29,82 @@ $(".datepicker").datetimepicker({
     prevCentury: 'Önceki Yüzyıl',
     nextCentury: 'Sonraki Yüzyıl'
   }
+});
+
+$("#appointmentDateStart").datetimepicker({
+  useCurrent: false,
+  minDate: moment().add(1, "d"),
+  daysOfWeekDisabled: [0, 6],
+  locale: "tr",
+  format: 'DD-MM-YYYY',
+  icons: {
+    time: 'fa fa-timer',
+    date: 'fa fa-calendar',
+    up: 'fa fa-arrow-up',
+    down: 'fa fa-arrow-down',
+    previous: 'fa fa-arrow-left',
+    next: 'fa fa-arrow-right',
+    today: 'fa fa-calendar',
+    clear: 'fa fa-trash-o',
+    close: 'fa fa-close'
+  },
+  tooltips: {
+    today: 'Bugünü Seç',
+    clear: 'Temizle',
+    close: 'Kapat',
+    selectMonth: 'Ay Seç',
+    prevMonth: 'Önceki Ay',
+    nextMonth: 'Sonraki Ay',
+    selectYear: 'Yıl Seç',
+    prevYear: 'Önceki Yıl',
+    nextYear: 'Sonraki Yıl',
+    selectDecade: 'Onyıl Seç',
+    prevDecade: 'Önceki Onyıl',
+    nextDecade: 'Sonraki Onyıl',
+    prevCentury: 'Önceki Yüzyıl',
+    nextCentury: 'Sonraki Yüzyıl'
+  }
+});
+
+$("#appointmentDateEnd").datetimepicker({
+  useCurrent: false,
+  daysOfWeekDisabled: [0, 6],
+  locale: "tr",
+  format: 'DD-MM-YYYY',
+  icons: {
+    time: 'fa fa-timer',
+    date: 'fa fa-calendar',
+    up: 'fa fa-arrow-up',
+    down: 'fa fa-arrow-down',
+    previous: 'fa fa-arrow-left',
+    next: 'fa fa-arrow-right',
+    today: 'fa fa-calendar',
+    clear: 'fa fa-trash-o',
+    close: 'fa fa-close'
+  },
+  tooltips: {
+    today: 'Bugünü Seç',
+    clear: 'Temizle',
+    close: 'Kapat',
+    selectMonth: 'Ay Seç',
+    prevMonth: 'Önceki Ay',
+    nextMonth: 'Sonraki Ay',
+    selectYear: 'Yıl Seç',
+    prevYear: 'Önceki Yıl',
+    nextYear: 'Sonraki Yıl',
+    selectDecade: 'Onyıl Seç',
+    prevDecade: 'Önceki Onyıl',
+    nextDecade: 'Sonraki Onyıl',
+    prevCentury: 'Önceki Yüzyıl',
+    nextCentury: 'Sonraki Yüzyıl'
+  }
+});
+
+$("#appointmentDateStart").on("dp.change", function (e) {
+  $('#appointmentDateEnd').data("DateTimePicker").minDate(e.date);
+});
+$("#appointmentDateEnd").on("dp.change", function (e) {
+  $('#appointmentDateStart').data("DateTimePicker").maxDate(e.date);
 });
 
 // Swiper
@@ -249,6 +324,88 @@ function changeActiveTab(data) {
 
 function popoverCall() {
   $('[data-toggle="popover"]').popover();
+}
+
+function appointment(data) {
+  if (data.status === "success") {
+    $('.selectpicker').selectpicker("render");
+
+    $("#appointmentDateStart").datetimepicker({
+      useCurrent: false,
+      minDate: moment().add(1, "d"),
+      daysOfWeekDisabled: [0, 6],
+      locale: "tr",
+      format: 'DD-MM-YYYY',
+      icons: {
+        time: 'fa fa-timer',
+        date: 'fa fa-calendar',
+        up: 'fa fa-arrow-up',
+        down: 'fa fa-arrow-down',
+        previous: 'fa fa-arrow-left',
+        next: 'fa fa-arrow-right',
+        today: 'fa fa-calendar',
+        clear: 'fa fa-trash-o',
+        close: 'fa fa-close'
+      },
+      tooltips: {
+        today: 'Bugünü Seç',
+        clear: 'Temizle',
+        close: 'Kapat',
+        selectMonth: 'Ay Seç',
+        prevMonth: 'Önceki Ay',
+        nextMonth: 'Sonraki Ay',
+        selectYear: 'Yıl Seç',
+        prevYear: 'Önceki Yıl',
+        nextYear: 'Sonraki Yıl',
+        selectDecade: 'Onyıl Seç',
+        prevDecade: 'Önceki Onyıl',
+        nextDecade: 'Sonraki Onyıl',
+        prevCentury: 'Önceki Yüzyıl',
+        nextCentury: 'Sonraki Yüzyıl'
+      }
+    });
+
+    $("#appointmentDateEnd").datetimepicker({
+      useCurrent: false,
+      daysOfWeekDisabled: [0, 6],
+      locale: "tr",
+      format: 'DD-MM-YYYY',
+      icons: {
+        time: 'fa fa-timer',
+        date: 'fa fa-calendar',
+        up: 'fa fa-arrow-up',
+        down: 'fa fa-arrow-down',
+        previous: 'fa fa-arrow-left',
+        next: 'fa fa-arrow-right',
+        today: 'fa fa-calendar',
+        clear: 'fa fa-trash-o',
+        close: 'fa fa-close'
+      },
+      tooltips: {
+        today: 'Bugünü Seç',
+        clear: 'Temizle',
+        close: 'Kapat',
+        selectMonth: 'Ay Seç',
+        prevMonth: 'Önceki Ay',
+        nextMonth: 'Sonraki Ay',
+        selectYear: 'Yıl Seç',
+        prevYear: 'Önceki Yıl',
+        nextYear: 'Sonraki Yıl',
+        selectDecade: 'Onyıl Seç',
+        prevDecade: 'Önceki Onyıl',
+        nextDecade: 'Sonraki Onyıl',
+        prevCentury: 'Önceki Yüzyıl',
+        nextCentury: 'Sonraki Yüzyıl'
+      }
+    });
+
+    $("#appointmentDateStart").on("dp.change", function (e) {
+      $('#appointmentDateEnd').data("DateTimePicker").minDate(e.date);
+    });
+    $("#appointmentDateEnd").on("dp.change", function (e) {
+      $('#appointmentDateStart').data("DateTimePicker").maxDate(e.date);
+    });
+  }
 }
 
 window.onload = function () {

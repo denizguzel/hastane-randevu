@@ -39,6 +39,7 @@ public class AppointmentBean implements Serializable {
   private AppointmentModel appointmentModel;
   private ReviewsAboutDoctorsModel reviewsAboutDoctorsModel;
   private PatientModel patientModel;
+  private InspectionPlaceModel inspectionPlaceModel;
 
   private boolean appointmentClockPanel = false;
   private boolean appointmentPanel = false;
@@ -49,13 +50,15 @@ public class AppointmentBean implements Serializable {
   private String selectedPoliclinic;
   private String selectedInspectionPlace;
   private String appointmentCounter;
+  private Date appointmentDateStart;
+  private Date appointmentDateEnd;
 
   private Map<Long, String> cities;
   private Map<Long, String> districts;
   private Map<Long, String> hospitals;
   private Map<Long, String> policlinics;
   private Map<Long, String> inspectionPlaces;
-  private List<InspectionPlaceModel> appointmentsHeaders;
+  private List<AppointmentModel> appointmentsHeaders;
   private List<List<AppointmentModel>> appointmentTimes;
   private List<AppointmentModel> appointmentDays;
   private List<AppointmentModel> appointmentHistory;
@@ -82,6 +85,7 @@ public class AppointmentBean implements Serializable {
     appointmentModel = new AppointmentModel();
     reviewsAboutDoctorsModel = new ReviewsAboutDoctorsModel();
     patientModel = loginBean.getPatientModel();
+    inspectionPlaceModel = new InspectionPlaceModel();
 
     appointmentsHeaders = new ArrayList<>();
     appointmentDays = new ArrayList<>();
@@ -196,11 +200,11 @@ public class AppointmentBean implements Serializable {
     this.inspectionPlaces = inspectionPlaces;
   }
 
-  public List<InspectionPlaceModel> getAppointmentsHeaders() {
+  public List<AppointmentModel> getAppointmentsHeaders() {
     return appointmentsHeaders;
   }
 
-  public void setAppointmentsHeaders(List<InspectionPlaceModel> appointmentsHeaders) {
+  public void setAppointmentsHeaders(List<AppointmentModel> appointmentsHeaders) {
     this.appointmentsHeaders = appointmentsHeaders;
   }
 
@@ -272,8 +276,20 @@ public class AppointmentBean implements Serializable {
     return appointmentCounter;
   }
 
-  public void setAppointmentCounter(String appointmentCounter) {
-    this.appointmentCounter = appointmentCounter;
+  public Date getAppointmentDateStart() {
+    return appointmentDateStart;
+  }
+
+  public void setAppointmentDateStart(Date appointmentDateStart) {
+    this.appointmentDateStart = appointmentDateStart;
+  }
+
+  public Date getAppointmentDateEnd() {
+    return appointmentDateEnd;
+  }
+
+  public void setAppointmentDateEnd(Date appointmentDateEnd) {
+    this.appointmentDateEnd = appointmentDateEnd;
   }
 
   // Functions
@@ -387,24 +403,40 @@ public class AppointmentBean implements Serializable {
     appointmentSearchNull = false;
   }
 
+  public void startDate(AjaxBehaviorEvent event) {
+    if(event == null) {
+      System.out.println("Ajax event is null");
+    } else {
+      UIInput input = (UIInput) event.getSource();
+      appointmentDateStart = (Date) input.getValue();
+    }
+  }
+
+  public void endDate(AjaxBehaviorEvent event) {
+    if(event == null) {
+      System.out.println("Ajax event is null");
+    } else {
+      UIInput input = (UIInput) event.getSource();
+      appointmentDateEnd = (Date) input.getValue();
+    }
+  }
+
   public void searchAppointment() {
 
     clearListComponentsWithChange(appointmentTimes, appointmentsHeaders, appointmentDays, doctorReviewList);
 
     if(selectedInspectionPlace != null && !selectedInspectionPlace.isEmpty()) {
-      InspectionPlaceModel inspectionPlaceModel = inspectionPlaceService.find(Long.parseLong(selectedInspectionPlace));
-      if(inspectionPlaceModel.getDoctor() != null) {
-        appointmentsHeaders.add(inspectionPlaceModel);
+      inspectionPlaceModel = inspectionPlaceService.find(Long.parseLong(selectedInspectionPlace));
+      if(appointmentService.getAppointmentsByDate(inspectionPlaceModel, appointmentDateStart, appointmentDateEnd).size() > 0) {
+        appointmentsHeaders.add(appointmentService.getAppointmentsByDate(inspectionPlaceModel, appointmentDateStart, appointmentDateEnd).get(0));
       } else {
         appointmentSearchNull = true;
       }
-    } else {
-      for(InspectionPlaceModel inspectionPlaceModel : policlinicService.getInspectionPlacesByHospitalPoliclinicRel(hospitalPoliclinicRelService.find(Long.parseLong(selectedPoliclinic)))) {
-        if(inspectionPlaceModel.getDoctor() != null) {
-          appointmentsHeaders.add(inspectionPlaceModel);
-        } else {
-          appointmentSearchNull = true;
-        }
+    } else if(selectedPoliclinic != null && !selectedPoliclinic.isEmpty()) {
+      if(policlinicService.getAppointmentsByDate(hospitalPoliclinicRelService.find(Long.parseLong(selectedPoliclinic)), appointmentDateStart, appointmentDateEnd).size() > 0) {
+        appointmentsHeaders.addAll(policlinicService.getAppointmentsByDate(hospitalPoliclinicRelService.find(Long.parseLong(selectedPoliclinic)), appointmentDateStart, appointmentDateEnd));
+      } else {
+        appointmentSearchNull = true;
       }
     }
     appointmentPanel = true;

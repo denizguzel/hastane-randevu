@@ -12,10 +12,20 @@ import java.util.List;
 
 public class AppointmentDaoImpl extends BaseDaoImpl<AppointmentModel> {
   public List<AppointmentModel> getAllAppointmentsByInspectionPlace(InspectionPlaceModel inspectionPlaceModel) {
-    Query query = getEntitymanager().createQuery("SELECT e FROM AppointmentModel e WHERE " + "e.inspectionPlace = :INSPECTION_PLACE AND " + "e.appointmentDate > :date ORDER BY e.appointmentDate");
+    Query query = getEntitymanager().createQuery("SELECT e FROM AppointmentModel e WHERE " + "e.inspectionPlace = :inspectionPlace AND " + "e.appointmentDate > :date ORDER BY e.appointmentDate");
 
-    query.setParameter("INSPECTION_PLACE", inspectionPlaceModel);
+    query.setParameter("inspectionPlace", inspectionPlaceModel);
     query.setParameter("date", new Date());
+
+    return query.getResultList();
+  }
+
+  public List<AppointmentModel> getAppointmentsByDate(InspectionPlaceModel inspectionPlaceModel, Date startDate, Date endDate) {
+    Query query = getEntitymanager().createQuery("SELECT e FROM AppointmentModel e WHERE " + "e.inspectionPlace = :inspectionPlace AND " + "e.appointmentDate >= :startDate AND e.appointmentDate <= :endDate ORDER BY e.appointmentDate");
+
+    query.setParameter("inspectionPlace", inspectionPlaceModel);
+    query.setParameter("startDate", startDate);
+    query.setParameter("endDate", endDate);
 
     return query.getResultList();
   }

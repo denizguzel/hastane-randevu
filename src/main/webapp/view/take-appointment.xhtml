@@ -17,7 +17,7 @@
                     <div class="form-group">
                       <label class="form-control-label">İl Seçiniz</label>
                       <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedCity}">
-                        <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeCity}" onevent="selectPicker"/>
+                        <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeCity}" onevent="appointment"/>
                         <f:selectItem itemLabel="İl Seçiniz"/>
                         <f:selectItems value="#{appointment.cities.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
                       </h:selectOneMenu>
@@ -27,7 +27,7 @@
                     <div class="form-group">
                       <label class="form-control-label">İlçe Seçiniz</label>
                       <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedDistrict}">
-                        <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeDistrict}" onevent="selectPicker"/>
+                        <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeDistrict}" onevent="appointment"/>
                         <f:selectItem itemLabel="İlçe seçiniz"/>
                         <f:selectItems value="#{appointment.districts.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
                       </h:selectOneMenu>
@@ -37,7 +37,7 @@
                     <div class="form-group">
                       <label class="form-control-label">Hastane Seçiniz</label>
                       <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedHospital}">
-                        <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeHospital}" onevent="selectPicker"/>
+                        <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeHospital}" onevent="appointment"/>
                         <f:selectItem itemLabel="Hastane seçiniz"/>
                         <f:selectItems value="#{appointment.hospitals.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
                       </h:selectOneMenu>
@@ -47,7 +47,7 @@
                     <div class="form-group">
                       <label class="form-control-label">Poliklinik Seçiniz</label>
                       <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedPoliclinic}">
-                        <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changePoliclinic}" onevent="selectPicker"/>
+                        <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changePoliclinic}" onevent="appointment"/>
                         <f:selectItem itemLabel="Poliklinik seçiniz"/>
                         <f:selectItems value="#{appointment.policlinics.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
                       </h:selectOneMenu>
@@ -57,19 +57,32 @@
                     <div class="form-group">
                       <label class="form-control-label">Muayene Yeri Seçiniz</label>
                       <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedInspectionPlace}">
-                        <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeInspectionPlace}" onevent="selectPicker"/>
+                        <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeInspectionPlace}" onevent="appointment"/>
                         <f:selectItem itemLabel="Muayene yeri seçiniz"/>
                         <f:selectItems value="#{appointment.inspectionPlaces.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
                       </h:selectOneMenu>
                     </div>
                   </div>
+                  <div class="col-xl-6">
+                    <div class="form-group">
+                      <label class="form-control-label">Tarih Aralığı Seçiniz</label>
+                      <h:inputText id="appointmentDateStart" value="#{appointment.appointmentDateStart}" p:placeholder="Başlangıç Tarihi" styleClass="form-control">
+                        <f:ajax execute="@this" event="change" listener="#{appointment.startDate}"/>
+                        <f:convertDateTime pattern="dd-MM-yyyy"/>
+                      </h:inputText>
+                      <h:inputText id="appointmentDateEnd" value="#{appointment.appointmentDateEnd}" p:placeholder="Bitiş Tarihi" styleClass="form-control">
+                        <f:ajax execute="@this" event="change" listener="#{appointment.endDate}"/>
+                        <f:convertDateTime pattern="dd-MM-yyyy"/>
+                      </h:inputText>
+                    </div>
+                  </div>
                 </div>
                 <div class="buttons">
                   <h:commandButton id="appointment-search" value="Randevu Ara" styleClass="btn btn-success mr-3" action="#{appointment.searchAppointment}">
-                    <f:ajax execute="@this" render="appointmentTable" onevent="selectPicker"/>
+                    <f:ajax execute="@form" render="@form" onevent="appointment"/>
                   </h:commandButton>
                   <h:commandButton value="Temizle" styleClass="btn btn-success" action="#{appointment.clearSearch}">
-                    <f:ajax execute="@form" render="@form" onevent="selectPicker"/>
+                    <f:ajax execute="@this" render="@form" onevent="appointment"/>
                   </h:commandButton>
                 </div>
               </div>
@@ -153,15 +166,15 @@
                     </h:column>
                     <h:column>
                       <f:facet name="header">Doktor</f:facet>
-                      <h:outputText styleClass="d-inline-block" value="#{appointmentsHeader.doctor.firstName} #{appointmentsHeader.doctor.lastName}"/>
-                      <small><h:outputText value="(#{messages['string.'.concat(appointmentsHeader.doctor.level)]})"/></small>
+                      <h:outputText styleClass="d-inline-block" value="#{appointmentsHeader.inspectionPlace.doctor.firstName} #{appointmentsHeader.inspectionPlace.doctor.lastName}"/>
+                      <small><h:outputText value="(#{messages['string.'.concat(appointmentsHeader.inspectionPlace.doctor.level)]})"/></small>
                     </h:column>
-                    <h:column><f:facet name="header">Kurum Adı</f:facet>${appointmentsHeader.hospitalPoliclinicRel.hospital.hospitalName}</h:column>
-                    <h:column><f:facet name="header">Klinik Adı</f:facet>${appointmentsHeader.hospitalPoliclinicRel.policlinic.policlinicName}</h:column>
-                    <h:column><f:facet name="header">Muayene Yeri</f:facet>${appointmentsHeader.placeName}</h:column>
+                    <h:column><f:facet name="header">Kurum Adı</f:facet>${appointmentsHeader.inspectionPlace.hospitalPoliclinicRel.hospital.hospitalName}</h:column>
+                    <h:column><f:facet name="header">Klinik Adı</f:facet>${appointmentsHeader.inspectionPlace.hospitalPoliclinicRel.policlinic.policlinicName}</h:column>
+                    <h:column><f:facet name="header">Muayene Yeri</f:facet>${appointmentsHeader.inspectionPlace.placeName}</h:column>
                     <h:column>
                       <f:facet name="header"></f:facet>
-                      <h:commandLink value="Yorumlar" styleClass="btn btn-warning mr-1" action="#{appointment.doctorReviews(appointmentsHeader.doctor)}" p:data-toggle="modal" p:data-target="#comment-modal">
+                      <h:commandLink value="Yorumlar" styleClass="btn btn-warning mr-1" action="#{appointment.doctorReviews(appointmentsHeader.inspectionPlace.doctor)}" p:data-toggle="modal" p:data-target="#comment-modal">
                         <f:ajax execute="@this" render="doctor-comment"/>
                       </h:commandLink>
                       <h:commandLink value="Seç" styleClass="btn btn-success" action="#{appointment.selectAppointment(appointmentsHeader)}">

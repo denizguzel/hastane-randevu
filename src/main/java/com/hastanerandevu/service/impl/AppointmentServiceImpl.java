@@ -79,4 +79,8 @@ public class AppointmentServiceImpl implements BaseService<AppointmentModel> {
   public List<AppointmentModel> getAllSuspendedAppointments() {
     return appointmentDao.getAllSuspendedAppointments();
   }
+
+  public List<AppointmentModel> getAppointmentsByDate(InspectionPlaceModel inspectionPlaceModel, Date startDate, Date endDate) {
+    return appointmentDao.getAppointmentsByDate(inspectionPlaceModel, startDate, endDate);
+  }
 }
