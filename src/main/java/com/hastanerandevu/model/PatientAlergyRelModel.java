@@ -1,11 +1,20 @@
 package com.hastanerandevu.model;
 
+import com.hastanerandevu.listeners.Creatable;
+import com.hastanerandevu.listeners.CreationTimeListener;
+import com.hastanerandevu.listeners.ModifiedTimeListener;
+import com.hastanerandevu.listeners.Updatable;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@EntityListeners({
+  CreationTimeListener.class,
+  ModifiedTimeListener.class
+})
 @Table(name = "T_PATIENT_ALERGY_REL")
-public class PatientAlergyRelModel {
+public class PatientAlergyRelModel implements Creatable,Updatable {
 
   @Id
   @Column(name = "PK")

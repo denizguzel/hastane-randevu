@@ -3,14 +3,19 @@ package com.hastanerandevu.model;
 import com.hastanerandevu.enums.GenderEnum;
 import com.hastanerandevu.enums.LevelEnum;
 import com.hastanerandevu.enums.SecretQuestionEnum;
+import com.hastanerandevu.listeners.*;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 @Entity
+@EntityListeners({
+  CreationTimeListener.class,
+  ModifiedTimeListener.class
+})
 @Table(name = "T_DOCTOR")
-public class DoctorModel {
+public class DoctorModel implements Creatable,Updatable{
 
   @Id
   @GeneratedValue(generator = "doctor_pk")
@@ -36,10 +41,10 @@ public class DoctorModel {
   @Column(name = "QUESTION_ANSWER")
   private String questionAnswer;
 
-  @Column(name = "CREATION_TIME", insertable = false, updatable = false)
+  @Column(name = "CREATION_TIME")
   private Date creationTime;
 
-  @Column(name = "MODIFIED_TIME", insertable = false, updatable = false)
+  @Column(name = "MODIFIED_TIME")
   private Date modifiedTime;
 
   @Column(name = "IS_ACTIVE", insertable = false)
@@ -116,22 +121,6 @@ public class DoctorModel {
     this.questionAnswer = questionAnswer;
   }
 
-  public Date getCreationTime() {
-    return creationTime;
-  }
-
-  public void setCreationTime(Date creationTime) {
-    this.creationTime = creationTime;
-  }
-
-  public Date getModifiedTime() {
-    return modifiedTime;
-  }
-
-  public void setModifiedTime(Date modifiedTime) {
-    this.modifiedTime = modifiedTime;
-  }
-
   public char getIsActive() {
     return isActive;
   }
@@ -196,4 +185,19 @@ public class DoctorModel {
     this.password = password;
   }
 
+  public Date getCreationTime() {
+    return creationTime;
+  }
+
+  public void setCreationTime(Date creationTime) {
+    this.creationTime = creationTime;
+  }
+
+  public Date getModifiedTime() {
+    return modifiedTime;
+  }
+
+  public void setModifiedTime(Date modifiedTime) {
+    this.modifiedTime = modifiedTime;
+  }
 }

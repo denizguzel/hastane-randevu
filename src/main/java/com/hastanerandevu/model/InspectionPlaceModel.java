@@ -1,12 +1,21 @@
 package com.hastanerandevu.model;
 
+import com.hastanerandevu.listeners.Creatable;
+import com.hastanerandevu.listeners.CreationTimeListener;
+import com.hastanerandevu.listeners.ModifiedTimeListener;
+import com.hastanerandevu.listeners.Updatable;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 @Entity
+@EntityListeners({
+  CreationTimeListener.class,
+  ModifiedTimeListener.class
+})
 @Table(name = "T_INSPECTION_PLACE")
-public class InspectionPlaceModel {
+public class InspectionPlaceModel implements Creatable,Updatable {
 
   @Id
   @Column(name = "PK")

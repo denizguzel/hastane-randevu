@@ -1,11 +1,20 @@
 package com.hastanerandevu.model;
 
+import com.hastanerandevu.listeners.Creatable;
+import com.hastanerandevu.listeners.CreationTimeListener;
+import com.hastanerandevu.listeners.ModifiedTimeListener;
+import com.hastanerandevu.listeners.Updatable;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@EntityListeners({
+  CreationTimeListener.class,
+  ModifiedTimeListener.class
+})
 @Table(name = "T_OPTION")
-public class OptionModel {
+public class OptionModel implements Creatable,Updatable {
 
   @Id
   @Column(name = "PK")

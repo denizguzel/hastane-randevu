@@ -48,4 +48,8 @@ public class DoctorServiceImpl implements BaseService<DoctorModel> {
   public long remainingAppointment(DoctorModel doctorModel) {
     return doctorDao.remainingAppointment(doctorModel);
   }
+
+  public List<AppointmentModel> getAppointmentsNote(DoctorModel doctorModel){
+    return doctorDao.getAppointmentsNote(doctorModel);
+  }
 }

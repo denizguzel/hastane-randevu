@@ -3,14 +3,22 @@ package com.hastanerandevu.model;
 import com.hastanerandevu.enums.BloodGroupEnum;
 import com.hastanerandevu.enums.GenderEnum;
 import com.hastanerandevu.enums.SecretQuestionEnum;
+import com.hastanerandevu.listeners.Creatable;
+import com.hastanerandevu.listeners.CreationTimeListener;
+import com.hastanerandevu.listeners.ModifiedTimeListener;
+import com.hastanerandevu.listeners.Updatable;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 @Entity
+@EntityListeners({
+  CreationTimeListener.class,
+  ModifiedTimeListener.class
+})
 @Table(name = "T_PATIENT")
-public class PatientModel {
+public class PatientModel implements Creatable,Updatable {
   @Id
   @GeneratedValue(generator = "patient_pk")
   @SequenceGenerator(name = "patient_pk", sequenceName = "SEQ_PATIENT_PK", allocationSize = 1)

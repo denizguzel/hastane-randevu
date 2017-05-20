@@ -1,13 +1,21 @@
 package com.hastanerandevu.model;
 
 import com.hastanerandevu.enums.AppointmentStatusEnum;
+import com.hastanerandevu.listeners.Creatable;
+import com.hastanerandevu.listeners.CreationTimeListener;
+import com.hastanerandevu.listeners.ModifiedTimeListener;
+import com.hastanerandevu.listeners.Updatable;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@EntityListeners({
+  CreationTimeListener.class,
+  ModifiedTimeListener.class
+})
 @Table(name = "T_APPOINTMENT")
-public class AppointmentModel {
+public class AppointmentModel implements Creatable,Updatable {
 
   @Id
   @Column(name = "PK")

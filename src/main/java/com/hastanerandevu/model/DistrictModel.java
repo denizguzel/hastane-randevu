@@ -1,12 +1,21 @@
 package com.hastanerandevu.model;
 
+import com.hastanerandevu.listeners.Creatable;
+import com.hastanerandevu.listeners.CreationTimeListener;
+import com.hastanerandevu.listeners.ModifiedTimeListener;
+import com.hastanerandevu.listeners.Updatable;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 @Entity
+@EntityListeners({
+  CreationTimeListener.class,
+  ModifiedTimeListener.class
+})
 @Table(name = "T_DISTRICT")
-public class DistrictModel {
+public class DistrictModel implements Creatable,Updatable {
   @Id
   @GeneratedValue(generator = "district_pk")
   @SequenceGenerator(name = "district_pk", sequenceName = "SEQ_DISTRICT_PK", allocationSize = 1)

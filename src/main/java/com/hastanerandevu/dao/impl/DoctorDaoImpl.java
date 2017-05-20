@@ -51,4 +51,13 @@ public class DoctorDaoImpl extends BaseDaoImpl<DoctorModel> {
 
     return (long) query.getResultList().get(0);
   }
+
+  public List<AppointmentModel> getAppointmentsNote(DoctorModel doctorModel) {
+    Query query = getEntitymanager().createQuery("SELECT ap FROM AppointmentModel ap " + "WHERE ap.inspectionPlace.doctor = :DOCTOR AND ap.appointmentStatus = :APPOINTMENT_STATUS AND ap.messageToDoctor IS NOT NULL ORDER BY ap.creationTime DESC");
+
+    query.setParameter("DOCTOR", doctorModel);
+    query.setParameter("APPOINTMENT_STATUS", AppointmentStatusEnum.RESERVED);
+
+    return query.getResultList();
+  }
 }
