@@ -4,9 +4,14 @@ import com.hastanerandevu.converter.Encryptor;
 import com.hastanerandevu.enums.AppointmentStatusEnum;
 import com.hastanerandevu.model.AppointmentModel;
 import com.hastanerandevu.model.DoctorModel;
+import com.hastanerandevu.utility.DateUtil;
 
 import javax.persistence.Query;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -35,12 +40,14 @@ public class DoctorDaoImpl extends BaseDaoImpl<DoctorModel> {
     return query.getResultList();
   }
 
-  public long remainingAppointment(DoctorModel doctorModel, Date date) {
-    Query query = getEntitymanager().createQuery("SELECT COUNT (id) FROM AppointmentModel e WHERE e.inspectionPlace.doctor = :doctor AND e.appointmentStatus = :status AND e.appointmentDate <= :date");
+  public long remainingAppointment(DoctorModel doctorModel) {
 
-    query.setParameter("doctor", doctorModel);
-    query.setParameter("status", AppointmentStatusEnum.RESERVED);
-    query.setParameter("date", date);
+    Query query = getEntitymanager().createQuery("SELECT COUNT (e) FROM AppointmentModel e WHERE e.inspectionPlace.doctor = :DOCTOR AND e.appointmentStatus = :APPOINTMENT_STATUS AND e.appointmentDate BETWEEN :NOW AND :END_OF_DAY");
+
+    query.setParameter("DOCTOR", doctorModel);
+    query.setParameter("APPOINTMENT_STATUS", AppointmentStatusEnum.RESERVED);
+    query.setParameter("NOW", new Date());
+    query.setParameter("END_OF_DAY", DateUtil.getEndOfDay());
 
     return (long) query.getResultList().get(0);
   }

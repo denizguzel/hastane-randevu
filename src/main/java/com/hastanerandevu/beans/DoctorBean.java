@@ -63,7 +63,7 @@ public class DoctorBean implements Serializable {
         appointmentHistory.add(appointmentModel);
         appointmentCount++;
       }
-      remainingAppointment = doctorService.remainingAppointment(doctorModel, new Date());
+      remainingAppointment = doctorService.remainingAppointment(doctorModel);
 
       doctorReviews.addAll(reviewsAboutDoctorsService.getReviewsAboutDoctor(doctorModel));
     }

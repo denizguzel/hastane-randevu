@@ -45,7 +45,7 @@ public class DoctorServiceImpl implements BaseService<DoctorModel> {
     return doctorDao.getAppointmentHistoryByDoctor(doctorModel);
   }
 
-  public long remainingAppointment(DoctorModel doctorModel, Date date) {
-    return doctorDao.remainingAppointment(doctorModel, date);
+  public long remainingAppointment(DoctorModel doctorModel) {
+    return doctorDao.remainingAppointment(doctorModel);
   }
 }
