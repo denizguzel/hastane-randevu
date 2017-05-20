@@ -104,6 +104,11 @@ body.page-404 {
     border-color: $input-border-color;
     background-color: $input-bg;
     border-radius: 0;
+    .bs-searchbox {
+      .form-control {
+        border: 1px solid $main-color;
+      }
+    }
     .dropdown-menu.inner {
       background-color: $input-bg;
       li {
@@ -119,6 +124,9 @@ body.page-404 {
             outline: 0;
           }
         }
+      }
+      li.hidden {
+        display: none;
       }
     }
   }

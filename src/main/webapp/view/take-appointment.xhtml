@@ -16,7 +16,7 @@
                   <div class="col-xl-6">
                     <div class="form-group">
                       <label class="form-control-label">İl Seçiniz</label>
-                      <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedCity}">
+                      <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedCity}" p:data-live-search="true">
                         <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeCity}" onevent="appointment"/>
                         <f:selectItem itemLabel="İl Seçiniz"/>
                         <f:selectItems value="#{appointment.cities.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
@@ -26,7 +26,7 @@
                   <div class="col-xl-6">
                     <div class="form-group">
                       <label class="form-control-label">İlçe Seçiniz</label>
-                      <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedDistrict}">
+                      <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedDistrict}" p:data-live-search="true">
                         <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeDistrict}" onevent="appointment"/>
                         <f:selectItem itemLabel="İlçe seçiniz"/>
                         <f:selectItems value="#{appointment.districts.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
@@ -66,12 +66,18 @@
                   <div class="col-xl-6">
                     <div class="form-group">
                       <label class="form-control-label">Tarih Aralığı Seçiniz</label>
-                      <h:inputText id="appointmentDateStart" value="#{appointment.appointmentDateStart}" p:placeholder="Başlangıç Tarihi" styleClass="form-control">
-                        <f:convertDateTime pattern="dd-MM-yyyy"/>
-                      </h:inputText>
-                      <h:inputText id="appointmentDateEnd" value="#{appointment.appointmentDateEnd}" p:placeholder="Bitiş Tarihi" styleClass="form-control">
-                        <f:convertDateTime pattern="dd-MM-yyyy"/>
-                      </h:inputText>
+                      <div class="row">
+                        <div class="col-6">
+                          <h:inputText id="appointmentDateStart" value="#{appointment.appointmentDateStart}" p:placeholder="Başlangıç Tarihi" styleClass="form-control">
+                            <f:convertDateTime pattern="dd-MM-yyyy"/>
+                          </h:inputText>
+                        </div>
+                        <div class="col-6">
+                          <h:inputText id="appointmentDateEnd" value="#{appointment.appointmentDateEnd}" p:placeholder="Bitiş Tarihi" styleClass="form-control">
+                            <f:convertDateTime pattern="dd-MM-yyyy"/>
+                          </h:inputText>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -86,7 +92,7 @@
               </div>
               <div class="col-lg-6 mt-4 mt-lg-0">
                 <h:panelGroup layout="block" id="appointmentTimes" class="appointment-clocks#{appointment.appointmentClockPanel ? ' active' : ''}">
-                  <p class="lead">Randevu alabilmek için lütfen arama yapınız</p>
+                  <p class="lead">Randevu alabilmek için arama yapınız</p>
                   <h4>Randevu Saatleri</h4>
                   <ul class="nav nav-tabs" id="week-tabs">
                     <c:forEach items="#{appointment.appointmentDays}" var="day" varStatus="dayIndex">

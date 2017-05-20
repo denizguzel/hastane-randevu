@@ -32,6 +32,16 @@
         padding: 0 0 15px 0;
         margin-bottom: 30px;
       }
+      .card-block {
+        .appointment-clocks {
+          ul {
+            max-width: initial;
+            li {
+              margin-right: 4px;
+            }
+          }
+        }
+      }
     }
   }
 }

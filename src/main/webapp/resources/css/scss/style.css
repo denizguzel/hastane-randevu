@@ -6040,6 +6040,16 @@ button, input, optgroup, select, textarea {
   .bootstrap-datetimepicker-widget.dropdown-menu table td.day.active {
     background-color: #03A9F3; }
 
+.badge {
+  padding: 8px 12px;
+  border-radius: 25px;
+  font-weight: 600;
+}
+
+.badge:focus {
+  outline: 0;
+}
+
 .gradient {
   background: radial-gradient(ellipse at center, #18E2BA 0%, #008080 100%); }
 
@@ -6113,6 +6123,10 @@ body.page-404 .container {
   border-color: #e4e7ea;
   background-color: #fff;
   border-radius: 0; }
+
+.bootstrap-select .dropdown-menu.open .bs-searchbox .form-control {
+  border: 1px solid #18E2BA;
+}
   .bootstrap-select .dropdown-menu.open .dropdown-menu.inner {
     background-color: #fff; }
     .bootstrap-select .dropdown-menu.open .dropdown-menu.inner li a {
@@ -6124,6 +6138,10 @@ body.page-404 .container {
         background-color: #ddd; }
       .bootstrap-select .dropdown-menu.open .dropdown-menu.inner li a:focus {
         outline: 0; }
+
+.bootstrap-select .dropdown-menu.open .dropdown-menu.inner li.hidden {
+  display: none;
+}
 
 .bootstrap-select.show .dropdown-menu {
   display: block; }
@@ -6426,7 +6444,7 @@ body.page-404 .container {
 }
 
 .page-wrapper {
-  height: 100vh;
+  height: calc(100% - 50px);
   margin-left: 230px;
   background-color: #EDF1F5; }
   .page-wrapper .page-title {
@@ -6492,9 +6510,12 @@ body.page-404 .container {
           padding: 10px;
           color: #686868;
           background-color: #F7FAFC;
-          border: 0; }
+          font-weight: 400;
+          border: 1px solid #03A9F3;
+          border-radius: 2px;
+        }
         .page-wrapper .card .card-block .appointment-clocks .nav-tabs .nav-item .nav-link.active {
-          background-color: #FB9678;
+          background-color: #03A9F3;
           color: #fff; }
           .page-wrapper .card .card-block .appointment-clocks .nav-tabs .nav-item .nav-link.active:before {
             content: '\f0d7';
@@ -6502,11 +6523,15 @@ body.page-404 .container {
             position: absolute;
             bottom: -13px;
             left: 50%;
-            color: #FB9678; }
+            color: #03A9F3;
+          }
     .page-wrapper .card .card-block .appointment-clocks .tab-content .tab-pane {
       padding: 0; }
       .page-wrapper .card .card-block .appointment-clocks .tab-content .tab-pane .btn {
-        font-weight: 400; }
+        font-weight: 400;
+        border-radius: 2px;
+        font-size: 12px;
+      }
       .page-wrapper .card .card-block .appointment-clocks .tab-content .tab-pane .btn-disabled {
         background-color: #AAAAAA;
         color: #333; }
@@ -6764,7 +6789,6 @@ nav.sidebar {
   padding-top: 50px;
   height: 100%;
   overflow-y: auto;
-  box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08);
   z-index: 2;
 }
 
@@ -6860,6 +6884,14 @@ nav.sidebar .brand {
   .page-wrapper .card .small-card {
     padding: 0 0 15px 0;
     margin-bottom: 30px;
+  }
+
+  .page-wrapper .card .card-block .appointment-clocks ul {
+    max-width: initial;
+  }
+
+  .page-wrapper .card .card-block .appointment-clocks ul li {
+    margin-right: 4px;
   }
 }
 

@@ -1,5 +1,5 @@
 .page-wrapper {
-  height: 100vh;
+  height: calc(100% - 50px);
   margin-left: 230px;
   background-color: #EDF1F5;
   .page-title {
@@ -76,10 +76,12 @@
               padding: 10px;
               color: #686868;
               background-color: #F7FAFC;
-              border: 0;
+              font-weight: 400;
+              border: 1px solid $brand-primary;
+              border-radius: 2px;
             }
             .nav-link.active {
-              background-color: $brand-danger;
+              background-color: $brand-primary;
               color: #fff;
               &:before {
                 content: '\f0d7';
@@ -87,7 +89,7 @@
                 position: absolute;
                 bottom: -13px;
                 left: 50%;
-                color: $brand-danger;
+                color: $brand-primary;
               }
             }
           }
@@ -97,6 +99,8 @@
             padding: 0;
             .btn {
               font-weight: 400;
+              border-radius: 2px;
+              font-size: 12px;
             }
             .btn-disabled {
               background-color: #AAAAAA;

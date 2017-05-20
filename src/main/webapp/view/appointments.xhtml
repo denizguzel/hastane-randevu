@@ -10,7 +10,7 @@
         </div>
         <div class="card">
           <div class="card-block">
-            <h:form prependId="false" rendered="#{session.getAttribute('userType') == 'patient'}">
+            <h:form prependId="false" rendered="#{session.getAttribute('userType') == 'patient' and not empty appointment.appointmentHistory}">
               <div class="table-responsive">
                 <h:dataTable styleClass="table table-appointment" binding="#{table}" value="#{appointment.appointmentHistory}" var="history">
                   <h:column>
@@ -62,6 +62,9 @@
               </div>
               <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
             </h:form>
+            <h:panelGroup layout="block" styleClass="alert" rendered="#{session.getAttribute('userType') == 'patient' and empty appointment.appointmentHistory}">
+              <i class="fa fa-smile-o"></i>Henüz herhangi bir randevu almadınız
+            </h:panelGroup>
 
             <h:form prependId="false" rendered="#{session.getAttribute('userType') == 'doctor'}">
               <div class="table-responsive">
@@ -108,7 +111,7 @@
                   </h:column>
                   <h:column headerClass="text-center">
                     <f:facet name="header">Durum</f:facet>
-                    <h:panelGroup rendered="#{history.appointmentStatus == 'RESERVED'}" styleClass="badge badge-warning">
+                    <h:panelGroup rendered="#{history.appointmentStatus == 'RESERVED'}" styleClass="badge badge-default">
                       <h:outputText value="Randevu Beklemede"/>
                     </h:panelGroup>
                     <h:panelGroup rendered="#{history.appointmentStatus == 'COMPLETED'}" styleClass="badge badge-success">

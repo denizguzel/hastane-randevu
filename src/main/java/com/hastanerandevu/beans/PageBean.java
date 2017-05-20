@@ -20,10 +20,10 @@ public class PageBean {
     if(SessionUtils.getSession().getAttribute("userType").equals("patient")) {
       pageList.add(new PageModel("/view/take-appointment.xhtml", "Randevu Al", "fa fa-book fa-fw"));
       pageList.add(new PageModel("/view/appointments.xhtml", "Randevularım", "fa fa-calendar fa-fw"));
-      pageList.add(new PageModel("/view/alergy.xhtml", "Alerjilerim", "fa fa-thermometer-2 fa-fw"));
-      pageList.add(new PageModel("/view/disease.xhtml", "Hastalıklarım", "fa fa-thermometer-3 fa-fw"));
-      pageList.add(new PageModel("/view/assay.xhtml", "Tahlillerim", "fa fa-thermometer-4 fa-fw"));
-      pageList.add(new PageModel("/view/vaccine.xhtml", "Aşı Takvimi", "fa fa-calendar-check-o fa-fw"));
+      pageList.add(new PageModel("/view/alergy.xhtml", "Alerjilerim", "fa fa-bug fa-fw"));
+      pageList.add(new PageModel("/view/disease.xhtml", "Hastalıklarım", "fa fa-bed fa-fw"));
+      pageList.add(new PageModel("/view/assay.xhtml", "Tahlillerim", "fa fa-flask fa-fw"));
+      pageList.add(new PageModel("/view/vaccine.xhtml", "Aşı Takvimi", "fa fa-eyedropper fa-fw"));
     } else if(SessionUtils.getSession().getAttribute("userType").equals("doctor")) {
       pageList.add(new PageModel("/view/appointments.xhtml", "Hasta Randevularım", "fa fa-calendar fa-fw"));
       pageList.add(new PageModel("/view/notes.xhtml", "Hasta Notları", "fa fa-sticky-note-o fa-fw"));
