@@ -23,10 +23,10 @@ public class HospitalPoliclinicRelModel implements Creatable,Updatable {
   @SequenceGenerator(name = "hospital_policlinic_pk", sequenceName = "SEQ_HOSPITAL_POLICLINIC_PK", allocationSize = 1)
   private long pk;
 
-  @Column(name = "CREATION_TIME", insertable = false, updatable = false)
+  @Column(name = "CREATION_TIME")
   private Date creationTime;
 
-  @Column(name = "MODIFIED_TIME", insertable = false, updatable = false)
+  @Column(name = "MODIFIED_TIME")
   private Date modifiedTime;
 
   @Column(name = "IS_ACTIVE", insertable = false)

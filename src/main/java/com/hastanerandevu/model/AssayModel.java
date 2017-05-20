@@ -26,10 +26,10 @@ public class AssayModel implements Creatable,Updatable {
   @Column(name = "ASSAY_NAME")
   private String assayName;
 
-  @Column(name = "CREATION_TIME", insertable = false, updatable = false)
+  @Column(name = "CREATION_TIME")
   private Date creationTime;
 
-  @Column(name = "MODIFIED_TIME", insertable = false, updatable = false)
+  @Column(name = "MODIFIED_TIME")
   private Date modifiedTime;
 
   @Column(name = "IS_ACTIVE", insertable = false)

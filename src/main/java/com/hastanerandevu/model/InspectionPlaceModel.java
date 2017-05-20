@@ -29,10 +29,10 @@ public class InspectionPlaceModel implements Creatable,Updatable {
   @Column(name = "IS_ACTIVE", insertable = false)
   private char isActive;
 
-  @Column(name = "CREATION_TIME", insertable = false, updatable = false)
+  @Column(name = "CREATION_TIME")
   private Date creationTime;
 
-  @Column(name = "MODIFIED_TIME", insertable = false, updatable = false)
+  @Column(name = "MODIFIED_TIME")
   private Date modifiedTime;
 
   @OneToOne(fetch = FetchType.LAZY)

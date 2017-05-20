@@ -26,10 +26,10 @@ public class CityModel implements Creatable,Updatable {
   @Column(name = "CITY_NAME")
   private String cityName;
 
-  @Column(name = "CREATION_TIME", insertable = false, updatable = false)
+  @Column(name = "CREATION_TIME")
   private Date modifiedTime;
 
-  @Column(name = "MODIFIED_TIME", insertable = false, updatable = false)
+  @Column(name = "MODIFIED_TIME")
   private Date creationTime;
 
   @Column(name = "IS_ACTIVE", insertable = false)

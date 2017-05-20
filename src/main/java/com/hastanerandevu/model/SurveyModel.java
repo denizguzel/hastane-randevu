@@ -26,10 +26,10 @@ public class SurveyModel implements Creatable,Updatable {
   @Column(name = "SURVEY_QUESTION")
   private String surveyQuestion;
 
-  @Column(name = "CREATION_TIME", insertable = false, updatable = false)
+  @Column(name = "CREATION_TIME")
   private Date creationTime;
 
-  @Column(name = "MODIFIED_TIME", insertable = false, updatable = false)
+  @Column(name = "MODIFIED_TIME")
   private Date modifiedTime;
 
   @Column(name = "EXPIRATION_TIME")
