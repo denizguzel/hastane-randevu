@@ -53,7 +53,7 @@ public class TreatmentBean implements Serializable {
       treatments.put(treatmentModel.getPk(), treatmentModel.getTreatmentName());
     }
 
-    if(patientService.getPatientTreatments(patientModel).size() > 0) {
+    if(patientTreatments.size() > 0) {
       treatmentPanel = true;
     }
   }

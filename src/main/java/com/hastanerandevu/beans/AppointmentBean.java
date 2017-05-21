@@ -36,20 +36,24 @@ public class AppointmentBean implements Serializable {
   private AppointmentServiceImpl appointmentService;
   private PatientServiceImpl patientService;
   private ReviewsAboutDoctorsServiceImpl reviewsAboutDoctorsService;
+
   private AppointmentModel appointmentModel;
   private ReviewsAboutDoctorsModel reviewsAboutDoctorsModel;
   private PatientModel patientModel;
   private InspectionPlaceModel inspectionPlaceModel;
+  private HospitalPoliclinicRelModel hospitalPoliclinicRelModel;
 
   private boolean appointmentClockPanel = false;
   private boolean appointmentPanel = false;
   private boolean appointmentSearchNull = false;
+
   private String selectedCity;
   private String selectedDistrict;
   private String selectedHospital;
   private String selectedPoliclinic;
   private String selectedInspectionPlace;
   private String appointmentCounter;
+
   private Date appointmentDateStart;
   private Date appointmentDateEnd;
 
@@ -58,6 +62,7 @@ public class AppointmentBean implements Serializable {
   private Map<Long, String> hospitals;
   private Map<Long, String> policlinics;
   private Map<Long, String> inspectionPlaces;
+
   private List<InspectionPlaceModel> appointmentsHeaders;
   private List<List<AppointmentModel>> appointmentTimes;
   private List<AppointmentModel> appointmentDays;
@@ -82,10 +87,12 @@ public class AppointmentBean implements Serializable {
     appointmentService = new AppointmentServiceImpl();
     patientService = new PatientServiceImpl();
     reviewsAboutDoctorsService = new ReviewsAboutDoctorsServiceImpl();
+
     appointmentModel = new AppointmentModel();
     reviewsAboutDoctorsModel = new ReviewsAboutDoctorsModel();
     patientModel = loginBean.getPatientModel();
     inspectionPlaceModel = new InspectionPlaceModel();
+    hospitalPoliclinicRelModel = new HospitalPoliclinicRelModel();
 
     appointmentsHeaders = new ArrayList<>();
     appointmentDays = new ArrayList<>();
@@ -409,25 +416,24 @@ public class AppointmentBean implements Serializable {
 
     if(selectedInspectionPlace != null && !selectedInspectionPlace.isEmpty()) {
       inspectionPlaceModel = inspectionPlaceService.find(Long.parseLong(selectedInspectionPlace));
-      if (appointmentDateStart != null && appointmentDateEnd == null){
-        appointmentsHeaders.addAll(inspectionPlaceService.getAppointmentHeaderByInspectionPlace(inspectionPlaceModel,appointmentDateStart));
-      }
-      else if(appointmentDateStart == null && appointmentDateEnd == null){
+      if(appointmentDateStart != null && appointmentDateEnd == null) {
+        appointmentsHeaders.addAll(inspectionPlaceService.getAppointmentHeaderByInspectionPlace(inspectionPlaceModel, appointmentDateStart));
+      } else if(appointmentDateStart == null && appointmentDateEnd == null) {
         appointmentsHeaders.addAll(inspectionPlaceService.getAppointmentHeaderByInspectionPlace(inspectionPlaceModel));
-      }
-      else if(appointmentDateStart != null && appointmentDateEnd != null){
-        appointmentsHeaders.addAll(inspectionPlaceService.getAppointmentHeaderByInspectionPlace(inspectionPlaceModel,appointmentDateStart,appointmentDateEnd));
+      } else if(appointmentDateStart != null && appointmentDateEnd != null) {
+        appointmentsHeaders.addAll(inspectionPlaceService.getAppointmentHeaderByInspectionPlace(inspectionPlaceModel, appointmentDateStart, appointmentDateEnd));
       }
       if(appointmentsHeaders.size() == 0) {
         appointmentSearchNull = true;
       }
     } else if(selectedPoliclinic != null && !selectedPoliclinic.isEmpty()) {
+      hospitalPoliclinicRelModel = hospitalPoliclinicRelService.find(Long.parseLong(selectedPoliclinic));
       if(appointmentDateStart != null && appointmentDateEnd == null) {
-        appointmentsHeaders.addAll(policlinicService.getAppointmentHeadersByPoliclinic(hospitalPoliclinicRelService.find(Long.parseLong(selectedPoliclinic)), appointmentDateStart));
+        appointmentsHeaders.addAll(policlinicService.getAppointmentHeadersByPoliclinic(hospitalPoliclinicRelModel, appointmentDateStart));
       } else if(appointmentDateStart == null && appointmentDateEnd == null) {
-        appointmentsHeaders.addAll(policlinicService.getAppointmentHeadersByPoliclinic(hospitalPoliclinicRelService.find(Long.parseLong(selectedPoliclinic))));
+        appointmentsHeaders.addAll(policlinicService.getAppointmentHeadersByPoliclinic(hospitalPoliclinicRelModel));
       } else if(appointmentDateStart != null && appointmentDateEnd != null) {
-        appointmentsHeaders.addAll(policlinicService.getAppointmentHeadersByPoliclinic(hospitalPoliclinicRelService.find(Long.parseLong(selectedPoliclinic)), appointmentDateStart, appointmentDateEnd));
+        appointmentsHeaders.addAll(policlinicService.getAppointmentHeadersByPoliclinic(hospitalPoliclinicRelModel, appointmentDateStart, appointmentDateEnd));
       }
       if(appointmentsHeaders.size() == 0) {
         appointmentSearchNull = true;

@@ -35,7 +35,6 @@ public class AssayBean implements Serializable {
   private PatientModel patientModel;
 
   private String selectedAssay;
-  private int assayCount;
   private boolean assayPanel = false;
   private AssayResultEnum[] assayResultEnums = AssayResultEnum.values();
 
@@ -53,16 +52,13 @@ public class AssayBean implements Serializable {
     patientAssays = new ArrayList<>();
     assays = new LinkedHashMap<>();
 
-    for(PatientAssayRelModel patientAssayRelModel : patientService.getPatientAssays(patientModel)) {
-      patientAssays.add(patientAssayRelModel);
-      assayCount++;
-    }
+    patientAssays.addAll(patientService.getPatientAssays(patientModel));
 
     for(AssayModel assayModel : assayService.findAll()) {
       assays.put(assayModel.getPk(), assayModel.getAssayName());
     }
 
-    if(patientService.getPatientAssays(patientModel).size() > 0) {
+    if(patientAssays.size() > 0) {
       assayPanel = true;
     }
   }
@@ -109,10 +105,6 @@ public class AssayBean implements Serializable {
 
   public void setAssays(Map<Long, String> assays) {
     this.assays = assays;
-  }
-
-  public int getAssayCount() {
-    return assayCount;
   }
 
   public AssayResultEnum[] getAssayResultEnums() {

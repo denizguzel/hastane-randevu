@@ -3,6 +3,7 @@ package com.hastanerandevu.dao.impl;
 import com.hastanerandevu.converter.Encryptor;
 import com.hastanerandevu.enums.AppointmentStatusEnum;
 import com.hastanerandevu.model.*;
+import com.hastanerandevu.utility.DateUtil;
 
 import javax.persistence.Query;
 import java.util.Date;
@@ -43,11 +44,12 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientModel> {
 
   // HASTANIN O GUNE GECERLI RANDEVUSU OLUP OLMADIGI BILGISI.. AYNI GUNE RANDEVU ALINAMAMASI KONTROLU BURDAN YAPILACAK.
   public boolean haveAnAppointmentForThatDay(PatientModel patientModel, Date date) {
-    Query query = getEntitymanager().createQuery("SELECT e FROM AppointmentModel e WHERE e.appointmentStatus = :APPOINTMENT_STATUS" + " AND e.patient = :PATIENT AND e.isActive = :IS_ACTIVE AND e.appointmentDate =:DATE");
+    Query query = getEntitymanager().createQuery("SELECT e FROM AppointmentModel e WHERE e.appointmentStatus = :APPOINTMENT_STATUS" + " AND e.patient = :PATIENT AND e.isActive = :IS_ACTIVE AND e.appointmentDate BETWEEN :START_OF_DAY AND :END_OF_DAY");
 
     query.setParameter("APPOINTMENT_STATUS", AppointmentStatusEnum.RESERVED);
+    query.setParameter("START_OF_DAY", DateUtil.getStartOfDay(date));
+    query.setParameter("END_OF_DAY", DateUtil.getEndOfDay(date));
     query.setParameter("PATIENT", patientModel);
-    query.setParameter("DATE", date);
     query.setParameter("IS_ACTIVE", '1');
 
     return query.getResultList().size() > 0;

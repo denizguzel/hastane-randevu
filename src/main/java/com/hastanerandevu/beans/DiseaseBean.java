@@ -34,7 +34,6 @@ public class DiseaseBean implements Serializable {
   private PatientModel patientModel;
 
   private String selectedDisease;
-  private int diseaseCount;
   private char diseaseStillPass;
   private boolean diseasePanel = false;
 
@@ -52,16 +51,13 @@ public class DiseaseBean implements Serializable {
     patientDiseases = new ArrayList<>();
     diseases = new LinkedHashMap<>();
 
-    for(PatientDiseaseRelModel patientDiseaseRelModel : patientService.getPatientDiseases(patientModel)) {
-      patientDiseases.add(patientDiseaseRelModel);
-      diseaseCount++;
-    }
+    patientDiseases.addAll(patientService.getPatientDiseases(patientModel));
 
     for(DiseaseModel diseaseModel : diseaseService.findAll()) {
       diseases.put(diseaseModel.getPk(), diseaseModel.getDiseaseName());
     }
 
-    if(patientService.getPatientDiseases(patientModel).size() > 0) {
+    if(patientDiseases.size() > 0) {
       diseasePanel = true;
     }
   }
@@ -116,10 +112,6 @@ public class DiseaseBean implements Serializable {
 
   public void setDiseases(Map<Long, String> diseases) {
     this.diseases = diseases;
-  }
-
-  public int getDiseaseCount() {
-    return diseaseCount;
   }
 
   public String saveDisease() {
