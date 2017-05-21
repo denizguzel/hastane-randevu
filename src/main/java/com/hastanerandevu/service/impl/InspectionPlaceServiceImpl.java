@@ -43,4 +43,13 @@ public class InspectionPlaceServiceImpl implements BaseService<InspectionPlaceMo
   public List<InspectionPlaceModel> getAppointmentHeaderByInspectionPlace(InspectionPlaceModel inspectionPlaceModel, Date startDate, Date endDate) {
     return inspectionPlaceDao.getAppointmentHeaderByInspectionPlace(inspectionPlaceModel, startDate, endDate);
   }
+
+  public List<InspectionPlaceModel> getAppointmentHeaderByInspectionPlace(InspectionPlaceModel inspectionPlaceModel, Date startDate) {
+    return inspectionPlaceDao.getAppointmentHeaderByInspectionPlace(inspectionPlaceModel, startDate);
+  }
+
+  public List<InspectionPlaceModel> getAppointmentHeaderByInspectionPlace(InspectionPlaceModel inspectionPlaceModel) {
+    return inspectionPlaceDao.getAppointmentHeaderByInspectionPlace(inspectionPlaceModel);
+  }
+
 }

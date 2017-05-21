@@ -12,13 +12,13 @@ public class CityDaoImpl extends BaseDaoImpl<CityModel> {
 
   public List<CityModel> getCities() {
 
-    Query query = getEntitymanager().createQuery("SELECT e FROM CityModel e ORDER BY e.cityName");
+    Query query = getEntitymanager().createQuery("SELECT e FROM CityModel e ORDER BY e.pk ASC");
 
     return query.getResultList();
   }
 
   public List<DistrictModel> getAllDistrictsByCity(CityModel cityModel) {
-    Query query = getEntitymanager().createQuery("SELECT e FROM DistrictModel e WHERE e.cityModel = :cityModel ORDER BY e.districtName");
+    Query query = getEntitymanager().createQuery("SELECT e FROM DistrictModel e WHERE e.cityModel = :cityModel ORDER BY e.pk ASC");
     query.setParameter("cityModel", cityModel);
 
     return query.getResultList();
@@ -37,14 +37,4 @@ public class CityDaoImpl extends BaseDaoImpl<CityModel> {
 
     return query.getResultList();
   }
-
-  /*public void createDistricts(List<DistrictModel> districtModels, CityModel cityModel) {
-    getEntitymanager().getTransaction().begin();
-
-    for(DistrictModel districtModel : districtModels) {
-      getEntitymanager().persist(districtModel);
-    }
-
-    getEntitymanager().getTransaction().commit();
-  }*/
 }

@@ -46,6 +46,14 @@ public class PoliclinicServiceImpl implements BaseService<PoliclinicModel> {
     return policlinicDao.getAppointmentHeadersByPoliclinic(hospitalPoliclinicRelModel, startDate, endDate);
   }
 
+  public List<InspectionPlaceModel> getAppointmentHeadersByPoliclinic(HospitalPoliclinicRelModel hospitalPoliclinicRelModel, Date startDate) {
+    return policlinicDao.getAppointmentHeadersByPoliclinic(hospitalPoliclinicRelModel, startDate);
+  }
+
+  public List<InspectionPlaceModel> getAppointmentHeadersByPoliclinic(HospitalPoliclinicRelModel hospitalPoliclinicRelModel) {
+    return policlinicDao.getAppointmentHeadersByPoliclinic(hospitalPoliclinicRelModel);
+  }
+
   public List<AppointmentModel> getAppointmentsByPoliclinic(HospitalPoliclinicRelModel hospitalPoliclinicRelModel) {
     return policlinicDao.getAppointmentsByPoliclinic(hospitalPoliclinicRelModel);
   }
