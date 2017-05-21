@@ -1,5 +1,4 @@
 package com.hastanerandevu.beans;
-
 import com.hastanerandevu.converter.NameConverter;
 import com.hastanerandevu.model.*;
 import com.hastanerandevu.service.impl.DoctorServiceImpl;
@@ -7,6 +6,7 @@ import com.hastanerandevu.service.impl.PatientServiceImpl;
 import com.hastanerandevu.service.impl.ReviewsAboutDoctorsServiceImpl;
 import com.hastanerandevu.utility.SessionUtils;
 import org.apache.log4j.Logger;
+import redis.clients.jedis.Jedis;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -15,7 +15,6 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,6 +33,8 @@ public class DoctorBean implements Serializable {
   private DoctorModel doctorModel;
   private AppointmentModel appointmentModel;
 
+  private Jedis jedis;
+
   private int appointmentCount;
   private long remainingAppointment;
   private String password;
@@ -46,6 +47,7 @@ public class DoctorBean implements Serializable {
 
   @PostConstruct
   public void init() {
+    jedis = new Jedis("localhost");
     doctorService = new DoctorServiceImpl();
     patientService = new PatientServiceImpl();
     reviewsAboutDoctorsService = new ReviewsAboutDoctorsServiceImpl();

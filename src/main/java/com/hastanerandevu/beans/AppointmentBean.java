@@ -5,6 +5,8 @@ import com.hastanerandevu.model.*;
 import com.hastanerandevu.service.impl.*;
 import com.hastanerandevu.utility.Mailer;
 import org.apache.log4j.Logger;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.SortingParams;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -53,25 +55,36 @@ public class AppointmentBean implements Serializable {
   private Date appointmentDateStart;
   private Date appointmentDateEnd;
 
-  private Map<Long, String> cities;
-  private Map<Long, String> districts;
-  private Map<Long, String> hospitals;
-  private Map<Long, String> policlinics;
-  private Map<Long, String> inspectionPlaces;
+  private String[] selectedItems = new String[5];
+
+  public String[] getSelectedItems() {
+    return selectedItems;
+  }
+
+  public void setSelectedItems(String[] selectedItems) {
+    this.selectedItems = selectedItems;
+  }
+
   private List<InspectionPlaceModel> appointmentsHeaders;
   private List<List<AppointmentModel>> appointmentTimes;
   private List<AppointmentModel> appointmentDays;
   private List<AppointmentModel> appointmentHistory;
   private List<ReviewsAboutDoctorsModel> doctorReviewList;
 
+  Jedis jedis;
+
+  public Jedis getJedis() {
+    return jedis;
+  }
+
+  public void setJedis(Jedis jedis) {
+    this.jedis = jedis;
+  }
+
   @SuppressWarnings("unchecked")
   @PostConstruct
   public void init() {
-    cities = new LinkedHashMap();
-    districts = new LinkedHashMap();
-    hospitals = new LinkedHashMap();
-    policlinics = new LinkedHashMap();
-    inspectionPlaces = new LinkedHashMap();
+    jedis =  new Jedis("localhost");
 
     cityService = new CityServiceImpl();
     districtService = new DistrictServiceImpl();
@@ -94,7 +107,7 @@ public class AppointmentBean implements Serializable {
     appointmentHistory = new LinkedList<>();
 
     for(CityModel cityModel : cityService.getCities()) {
-      cities.put(cityModel.getPk(), cityModel.getCityName());
+      jedis.hset("cities", String.valueOf(cityModel.getPk()),cityModel.getCityName());
     }
 
     if(patientService.getAppointmentHistory(patientModel).size() > 0) {
@@ -158,46 +171,6 @@ public class AppointmentBean implements Serializable {
 
   public void setSelectedInspectionPlace(String selectedInspectionPlace) {
     this.selectedInspectionPlace = selectedInspectionPlace;
-  }
-
-  public Map<Long, String> getCities() {
-    return cities;
-  }
-
-  public void setCities(Map<Long, String> cities) {
-    this.cities = cities;
-  }
-
-  public Map<Long, String> getDistricts() {
-    return districts;
-  }
-
-  public void setDistricts(Map<Long, String> districts) {
-    this.districts = districts;
-  }
-
-  public Map<Long, String> getHospitals() {
-    return hospitals;
-  }
-
-  public void setHospitals(Map<Long, String> hospitals) {
-    this.hospitals = hospitals;
-  }
-
-  public Map<Long, String> getPoliclinics() {
-    return policlinics;
-  }
-
-  public void setPoliclinics(Map<Long, String> policlinics) {
-    this.policlinics = policlinics;
-  }
-
-  public Map<Long, String> getInspectionPlaces() {
-    return inspectionPlaces;
-  }
-
-  public void setInspectionPlaces(Map<Long, String> inspectionPlaces) {
-    this.inspectionPlaces = inspectionPlaces;
   }
 
   public List<InspectionPlaceModel> getAppointmentsHeaders() {
@@ -307,17 +280,20 @@ public class AppointmentBean implements Serializable {
 
   public void changeCity(AjaxBehaviorEvent event) {
 
-    clearMapComponentsWithChange(districts, hospitals, policlinics, inspectionPlaces);
+    selectedDistrict = null;
 
     if(event == null) {
       System.out.println("Ajax event is null");
     } else {
       UIInput input = (UIInput) event.getSource();
-      selectedCity = input.getValue().toString();
+      selectedItems[0] = input.getValue().toString();
     }
 
-    for(DistrictModel districtModel : cityService.getAllDistrictsByCity(cityService.find(Long.parseLong(selectedCity)))) {
-      districts.put(districtModel.getPk(), districtModel.getDistrictName());
+    //System.out.println(selectedCity);
+    if (jedis.hgetAll(selectedItems[0]).isEmpty()){
+      for(DistrictModel districtModel : cityService.getAllDistrictsByCity(cityService.find(Long.parseLong(selectedItems[0])))) {
+        jedis.hset(selectedItems[0], String.valueOf(districtModel.getPk()),districtModel.getDistrictName());
+      }
     }
 
     appointmentPanel = false;
@@ -327,19 +303,18 @@ public class AppointmentBean implements Serializable {
 
   public void changeDistrict(AjaxBehaviorEvent event) {
 
-    clearMapComponentsWithChange(hospitals, policlinics, inspectionPlaces);
-
     if(event == null) {
       System.out.println("Ajax event is null");
     } else {
       UIInput input = (UIInput) event.getSource();
-      selectedDistrict = input.getValue().toString();
+      selectedItems[1] = input.getValue().toString();
     }
 
-    for(HospitalModel hospitalModel : districtService.getHospitalsByDistrict(districtService.find(Long.parseLong(selectedDistrict)))) {
-      hospitals.put(hospitalModel.getPk(), hospitalModel.getHospitalName());
+    if (jedis.hgetAll(selectedItems[1]).isEmpty()){
+      for(HospitalModel hospitalModel : districtService.getHospitalsByDistrict(districtService.find(Long.parseLong(selectedItems[1])))) {
+        jedis.hset(selectedItems[1], String.valueOf(hospitalModel.getPk()),hospitalModel.getHospitalName());
+      }
     }
-
     appointmentPanel = false;
     appointmentClockPanel = false;
     appointmentSearchNull = false;
@@ -347,19 +322,18 @@ public class AppointmentBean implements Serializable {
 
   public void changeHospital(AjaxBehaviorEvent event) {
 
-    clearMapComponentsWithChange(policlinics, inspectionPlaces);
-
     if(event == null) {
       System.out.println("Ajax event is null");
     } else {
       UIInput input = (UIInput) event.getSource();
-      selectedHospital = input.getValue().toString();
+      selectedItems[2] = input.getValue().toString();
     }
 
-    for(HospitalPoliclinicRelModel hospitalPoliclinicRelModel : hospitalService.getPoliclinicByHospital(hospitalService.find(Long.parseLong(selectedHospital)))) {
-      policlinics.put(hospitalPoliclinicRelModel.getPk(), hospitalPoliclinicRelModel.getPoliclinic().getPoliclinicName());
+    if (jedis.hgetAll(selectedItems[2]).isEmpty()){
+      for(HospitalPoliclinicRelModel hospitalPoliclinicRelModel : hospitalService.getPoliclinicByHospital(hospitalService.find(Long.parseLong(selectedItems[2])))) {
+        jedis.hset(selectedItems[2], String.valueOf(hospitalPoliclinicRelModel.getPk()),hospitalPoliclinicRelModel.getPoliclinic().getPoliclinicName());
+      }
     }
-
     appointmentPanel = false;
     appointmentClockPanel = false;
     appointmentSearchNull = false;
@@ -367,23 +341,22 @@ public class AppointmentBean implements Serializable {
 
   public void changePoliclinic(AjaxBehaviorEvent event) {
 
-    clearMapComponentsWithChange(inspectionPlaces);
-
     if(event == null) {
       System.out.println("Ajax event is null");
     } else {
       UIInput input = (UIInput) event.getSource();
-      selectedPoliclinic = input.getValue().toString();
+      selectedItems[3] = input.getValue().toString();
     }
 
-    for(InspectionPlaceModel inspectionPlaceModel : policlinicService.getInspectionPlacesByHospitalPoliclinicRel(hospitalPoliclinicRelService.find(Long.parseLong(selectedPoliclinic)))) {
-      StringBuilder str = new StringBuilder(inspectionPlaceModel.getPlaceName());
-      if(inspectionPlaceModel.getDoctor() != null) {
-        str.append(" ").append(NameConverter.getName(inspectionPlaceModel.getDoctor().getFirstName(), inspectionPlaceModel.getDoctor().getLastName()));
+    if (jedis.hgetAll(selectedItems[3]).isEmpty()){
+      for(InspectionPlaceModel inspectionPlaceModel : policlinicService.getInspectionPlacesByHospitalPoliclinicRel(hospitalPoliclinicRelService.find(Long.parseLong(selectedItems[3])))) {
+        StringBuilder str = new StringBuilder(inspectionPlaceModel.getPlaceName());
+        if(inspectionPlaceModel.getDoctor() != null) {
+          str.append(" ").append(NameConverter.getName(inspectionPlaceModel.getDoctor().getFirstName(), inspectionPlaceModel.getDoctor().getLastName()));
+        }
+        jedis.hset(selectedItems[3], String.valueOf(inspectionPlaceModel.getPk()),String.valueOf(str));
       }
-      inspectionPlaces.put(inspectionPlaceModel.getPk(), String.valueOf(str));
     }
-
     appointmentPanel = false;
     appointmentClockPanel = false;
     appointmentSearchNull = false;
@@ -395,7 +368,7 @@ public class AppointmentBean implements Serializable {
       System.out.println("Ajax event is null");
     } else {
       UIInput input = (UIInput) event.getSource();
-      selectedInspectionPlace = input.getValue().toString();
+      selectedItems[4] = input.getValue().toString();
     }
 
     appointmentPanel = false;
@@ -407,16 +380,16 @@ public class AppointmentBean implements Serializable {
 
     clearListComponentsWithChange(appointmentTimes, appointmentsHeaders, appointmentDays, doctorReviewList);
 
-    if(selectedInspectionPlace != null && !selectedInspectionPlace.isEmpty()) {
-      inspectionPlaceModel = inspectionPlaceService.find(Long.parseLong(selectedInspectionPlace));
+    if(selectedItems[4] != null && !selectedItems[4].isEmpty()) {
+      inspectionPlaceModel = inspectionPlaceService.find(Long.parseLong(selectedItems[4]));
       if(inspectionPlaceService.getAppointmentHeaderByInspectionPlace(inspectionPlaceModel, appointmentDateStart, appointmentDateEnd).size() > 0) {
         appointmentsHeaders.add(inspectionPlaceService.getAppointmentHeaderByInspectionPlace(inspectionPlaceModel, appointmentDateStart, appointmentDateEnd).get(0));
       } else {
         appointmentSearchNull = true;
       }
-    } else if(selectedPoliclinic != null && !selectedPoliclinic.isEmpty()) {
-      if(policlinicService.getAppointmentHeadersByPoliclinic(hospitalPoliclinicRelService.find(Long.parseLong(selectedPoliclinic)), appointmentDateStart, appointmentDateEnd).size() > 0) {
-        appointmentsHeaders.addAll(policlinicService.getAppointmentHeadersByPoliclinic(hospitalPoliclinicRelService.find(Long.parseLong(selectedPoliclinic)), appointmentDateStart, appointmentDateEnd));
+    } else if(selectedItems[3] != null && !selectedItems[3].isEmpty()) {
+      if(policlinicService.getAppointmentHeadersByPoliclinic(hospitalPoliclinicRelService.find(Long.parseLong(selectedItems[3])), appointmentDateStart, appointmentDateEnd).size() > 0) {
+        appointmentsHeaders.addAll(policlinicService.getAppointmentHeadersByPoliclinic(hospitalPoliclinicRelService.find(Long.parseLong(selectedItems[3])), appointmentDateStart, appointmentDateEnd));
       } else {
         appointmentSearchNull = true;
       }
@@ -462,16 +435,15 @@ public class AppointmentBean implements Serializable {
   }
 
   public void clearSearch() {
-    clearMapComponentsWithChange(cities, districts, hospitals, policlinics, inspectionPlaces);
     clearListComponentsWithChange(appointmentsHeaders, appointmentTimes, appointmentDays, doctorReviewList);
     appointmentPanel = false;
     appointmentClockPanel = false;
     appointmentSearchNull = false;
 
-    for(CityModel cityModel : cityService.getCities()) {
+    /*for(CityModel cityModel : cityService.getCities()) {
       cities.put(cityModel.getPk(), cityModel.getCityName());
     }
-    selectedCity = "İl Seçiniz";
+    selectedCity = "İl Seçiniz";*/
   }
 
   public String cancelAppointment() {

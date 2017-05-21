@@ -12,7 +12,7 @@ public class CityDaoImpl extends BaseDaoImpl<CityModel> {
 
   public List<CityModel> getCities() {
 
-    Query query = getEntitymanager().createQuery("SELECT e FROM CityModel e ORDER BY e.cityName");
+    Query query = getEntitymanager().createQuery("SELECT e FROM CityModel e ORDER BY e.pk");
 
     return query.getResultList();
   }
