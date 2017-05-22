@@ -413,11 +413,11 @@ public class AppointmentBean implements Serializable {
 
     if(selectedInspectionPlace != null && !selectedInspectionPlace.isEmpty()) {
       inspectionPlaceModel = inspectionPlaceService.find(Long.parseLong(selectedInspectionPlace));
-      if(appointmentDateStart != null && appointmentDateEnd == null) {
-        appointmentsHeaders.addAll(inspectionPlaceService.getAppointmentHeaderByInspectionPlace(inspectionPlaceModel, appointmentDateStart));
-      } else if(appointmentDateStart == null && appointmentDateEnd == null) {
+      if(appointmentDateStart == null && appointmentDateEnd == null) {
         appointmentsHeaders.addAll(inspectionPlaceService.getAppointmentHeaderByInspectionPlace(inspectionPlaceModel));
-      } else if(appointmentDateStart != null && appointmentDateEnd != null) {
+      } else if(appointmentDateStart != null && appointmentDateEnd == null) {
+        appointmentsHeaders.addAll(inspectionPlaceService.getAppointmentHeaderByInspectionPlace(inspectionPlaceModel, appointmentDateStart));
+      } else {
         appointmentsHeaders.addAll(inspectionPlaceService.getAppointmentHeaderByInspectionPlace(inspectionPlaceModel, appointmentDateStart, appointmentDateEnd));
       }
       if(appointmentsHeaders.size() == 0) {
@@ -425,11 +425,11 @@ public class AppointmentBean implements Serializable {
       }
     } else if(selectedPoliclinic != null && !selectedPoliclinic.isEmpty()) {
       hospitalPoliclinicRelModel = hospitalPoliclinicRelService.find(Long.parseLong(selectedPoliclinic));
-      if(appointmentDateStart != null && appointmentDateEnd == null) {
-        appointmentsHeaders.addAll(policlinicService.getAppointmentHeadersByPoliclinic(hospitalPoliclinicRelModel, appointmentDateStart));
-      } else if(appointmentDateStart == null && appointmentDateEnd == null) {
+      if(appointmentDateStart == null && appointmentDateEnd == null) {
         appointmentsHeaders.addAll(policlinicService.getAppointmentHeadersByPoliclinic(hospitalPoliclinicRelModel));
-      } else if(appointmentDateStart != null && appointmentDateEnd != null) {
+      } else if(appointmentDateStart != null && appointmentDateEnd == null) {
+        appointmentsHeaders.addAll(policlinicService.getAppointmentHeadersByPoliclinic(hospitalPoliclinicRelModel, appointmentDateStart));
+      } else {
         appointmentsHeaders.addAll(policlinicService.getAppointmentHeadersByPoliclinic(hospitalPoliclinicRelModel, appointmentDateStart, appointmentDateEnd));
       }
       if(appointmentsHeaders.size() == 0) {
