@@ -14,7 +14,7 @@ import java.util.Date;
   ModifiedTimeListener.class
 })
 @Table(name = "T_ASKED_QUESTIONS")
-public class FrequentlyAskedQuestionsModel implements Creatable,Updatable {
+public class FrequentlyAskedQuestionsModel implements Creatable, Updatable {
 
   @Id
   @Column(name = "PK")

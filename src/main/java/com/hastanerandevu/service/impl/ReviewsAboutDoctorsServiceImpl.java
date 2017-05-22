@@ -8,9 +8,6 @@ import com.hastanerandevu.service.BaseService;
 
 import java.util.List;
 
-/**
- * Created by ouzun on 5/10/2017.
- */
 public class ReviewsAboutDoctorsServiceImpl implements BaseService<ReviewsAboutDoctorsModel> {
 
   private ReviewsAboutDoctorsDaoImpl reviewsAboutDoctorsDao = new ReviewsAboutDoctorsDaoImpl();

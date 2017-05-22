@@ -1,33 +1,33 @@
 // Datepicker
 $(".datepicker").datetimepicker({
   locale: "tr",
-  format: 'DD-MM-YYYY',
+  format: "DD-MM-YYYY",
   icons: {
-    time: 'fa fa-timer',
-    date: 'fa fa-calendar',
-    up: 'fa fa-arrow-up',
-    down: 'fa fa-arrow-down',
-    previous: 'fa fa-arrow-left',
-    next: 'fa fa-arrow-right',
-    today: 'fa fa-calendar',
-    clear: 'fa fa-trash-o',
-    close: 'fa fa-close'
+    time: "fa fa-timer",
+    date: "fa fa-calendar",
+    up: "fa fa-arrow-up",
+    down: "fa fa-arrow-down",
+    previous: "fa fa-arrow-left",
+    next: "fa fa-arrow-right",
+    today: "fa fa-calendar",
+    clear: "fa fa-trash-o",
+    close: "fa fa-close"
   },
   tooltips: {
-    today: 'Bugünü Seç',
-    clear: 'Temizle',
-    close: 'Kapat',
-    selectMonth: 'Ay Seç',
-    prevMonth: 'Önceki Ay',
-    nextMonth: 'Sonraki Ay',
-    selectYear: 'Yıl Seç',
-    prevYear: 'Önceki Yıl',
-    nextYear: 'Sonraki Yıl',
-    selectDecade: 'Onyıl Seç',
-    prevDecade: 'Önceki Onyıl',
-    nextDecade: 'Sonraki Onyıl',
-    prevCentury: 'Önceki Yüzyıl',
-    nextCentury: 'Sonraki Yüzyıl'
+    today: "Bugünü Seç",
+    clear: "Temizle",
+    close: "Kapat",
+    selectMonth: "Ay Seç",
+    prevMonth: "Önceki Ay",
+    nextMonth: "Sonraki Ay",
+    selectYear: "Yıl Seç",
+    prevYear: "Önceki Yıl",
+    nextYear: "Sonraki Yıl",
+    selectDecade: "Onyıl Seç",
+    prevDecade: "Önceki Onyıl",
+    nextDecade: "Sonraki Onyıl",
+    prevCentury: "Önceki Yüzyıl",
+    nextCentury: "Sonraki Yüzyıl"
   }
 });
 
@@ -36,33 +36,33 @@ $("#appointmentDateStart").datetimepicker({
   minDate: moment().add(1, "d"),
   daysOfWeekDisabled: [0, 6],
   locale: "tr",
-  format: 'DD-MM-YYYY',
+  format: "DD-MM-YYYY",
   icons: {
-    time: 'fa fa-timer',
-    date: 'fa fa-calendar',
-    up: 'fa fa-arrow-up',
-    down: 'fa fa-arrow-down',
-    previous: 'fa fa-arrow-left',
-    next: 'fa fa-arrow-right',
-    today: 'fa fa-calendar',
-    clear: 'fa fa-trash-o',
-    close: 'fa fa-close'
+    time: "fa fa-timer",
+    date: "fa fa-calendar",
+    up: "fa fa-arrow-up",
+    down: "fa fa-arrow-down",
+    previous: "fa fa-arrow-left",
+    next: "fa fa-arrow-right",
+    today: "fa fa-calendar",
+    clear: "fa fa-trash-o",
+    close: "fa fa-close"
   },
   tooltips: {
-    today: 'Bugünü Seç',
-    clear: 'Temizle',
-    close: 'Kapat',
-    selectMonth: 'Ay Seç',
-    prevMonth: 'Önceki Ay',
-    nextMonth: 'Sonraki Ay',
-    selectYear: 'Yıl Seç',
-    prevYear: 'Önceki Yıl',
-    nextYear: 'Sonraki Yıl',
-    selectDecade: 'Onyıl Seç',
-    prevDecade: 'Önceki Onyıl',
-    nextDecade: 'Sonraki Onyıl',
-    prevCentury: 'Önceki Yüzyıl',
-    nextCentury: 'Sonraki Yüzyıl'
+    today: "Bugünü Seç",
+    clear: "Temizle",
+    close: "Kapat",
+    selectMonth: "Ay Seç",
+    prevMonth: "Önceki Ay",
+    nextMonth: "Sonraki Ay",
+    selectYear: "Yıl Seç",
+    prevYear: "Önceki Yıl",
+    nextYear: "Sonraki Yıl",
+    selectDecade: "Onyıl Seç",
+    prevDecade: "Önceki Onyıl",
+    nextDecade: "Sonraki Onyıl",
+    prevCentury: "Önceki Yüzyıl",
+    nextCentury: "Sonraki Yüzyıl"
   }
 });
 
@@ -101,21 +101,21 @@ $("#appointmentDateEnd").datetimepicker({
 });
 
 $("#appointmentDateStart").on("dp.change", function (e) {
-  $('#appointmentDateEnd').data("DateTimePicker").minDate(e.date);
+  $("#appointmentDateEnd").data("DateTimePicker").minDate(e.date);
 });
 $("#appointmentDateEnd").on("dp.change", function (e) {
-  $('#appointmentDateStart').data("DateTimePicker").maxDate(e.date);
+  $("#appointmentDateStart").data("DateTimePicker").maxDate(e.date);
 });
 
 // Swiper
-new Swiper('#swiper-main', {
-  pagination: '.swiper-pagination',
+new Swiper("#swiper-main", {
+  pagination: ".swiper-pagination",
   paginationClickable: true,
   autoplay: 3000,
   autoplayDisableOnInteraction: false
 });
 
-new Swiper('#swiper-survey', {
+new Swiper("#swiper-survey", {
   autoplay: 3000,
   autoplayDisableOnInteraction: false,
   observer: true
@@ -133,21 +133,21 @@ function ToastBuilder(options) {
   var opts = options || {};
 
   // setup some defaults
-  opts.defaultText = opts.defaultText || 'default text';
+  opts.defaultText = opts.defaultText || "default text";
   opts.displayTime = opts.displayTime || 3000;
-  opts.target = opts.target || 'body';
+  opts.target = opts.target || "body";
 
   return function (text) {
-    $('<div/>').addClass('toast').prependTo($(opts.target)).text(text || opts.defaultText).queue(function (next) {
+    $("<div/>").addClass("toast").prependTo($(opts.target)).text(text || opts.defaultText).queue(function (next) {
       $(this).css({
-        'opacity': 1
+        "opacity": 1
       });
       var topOffset = 50;
-      $('.toast').each(function () {
+      $(".toast").each(function () {
         var $this = $(this);
         var height = $this.outerHeight();
         var offset = 15;
-        $this.css('top', topOffset + 'px');
+        $this.css("top", topOffset + "px");
 
         topOffset += height + offset;
       });
@@ -156,8 +156,8 @@ function ToastBuilder(options) {
       var $this = $(this);
       var width = $this.outerWidth() + 20;
       $this.css({
-        'right': '-' + width + 'px',
-        'opacity': 0
+        "right": "-" + width + "px",
+        "opacity": 0
       });
       next();
     }).delay(600).queue(function (next) {
@@ -186,7 +186,7 @@ $("#swiper-survey").find(".btn").click(function () {
 });
 
 $("#swiper-survey .swiper-slide").each(function () {
-  if (Cookies.get('surveyPk' + $(this).attr("id"))) {
+  if (Cookies.get("surveyPk" + $(this).attr("id"))) {
     $(this).remove();
   }
   if (!$("#swiper-survey .swiper-slide").length) {
@@ -195,13 +195,13 @@ $("#swiper-survey .swiper-slide").each(function () {
 });
 
 // Empty error/info messages when modal closed
-$(".modal").on('hidden.bs.modal', function () {
+$(".modal").on("hidden.bs.modal", function () {
   $(this).find(".error,.info").text("");
   $(this).find(".form-group").attr("data-message", "");
 });
 
 // Tooltip
-$('[data-toggle="tooltip"], [data-tooltip="tooltip"]').tooltip();
+$("[data-toggle='tooltip'], [data-tooltip='tooltip']").tooltip();
 
 // Custom
 function toast(data) {
@@ -224,16 +224,9 @@ function toast(data) {
   }
 }
 
-function selectPicker(data) {
-  if (data.status === "success") {
-    data.source.disabled = true;
-    $('.selectpicker').selectpicker("render");
-  }
-}
-
 function selectPickerToast(data) {
   if (data.status === "success") {
-    $('.selectpicker').selectpicker("render");
+    $(".selectpicker").selectpicker("render");
     var systemMessageElement = $(".global-message li");
     if (systemMessageElement.length) {
       var message = systemMessageElement.text();
@@ -269,7 +262,7 @@ function tableData(data) {
     var ajaxElement = document.getElementById(data.source.id);
     var columnData = [];
     data.source.disabled = true;
-    $('[data-toggle="tooltip"]').tooltip();
+    $("[data-toggle='tooltip']").tooltip();
     $(".btn-popover").popover({
       html: true,
       trigger: "focus",
@@ -295,14 +288,14 @@ function tableData(data) {
       var date = $(this).find("span:last-child").text();
       date = moment(date, "DD-MM-YYYY").format("DD-MM-YYYY");
 
-      $(".popover-date, #appointment-modal .detail-date").text(date + ' ' + clock);
+      $(".popover-date, #appointment-modal .detail-date").text(date + " " + clock);
     });
   }
 }
 
 function changeActiveTab(data) {
   if (data.status === "success") {
-    $('.selectpicker').selectpicker("render");
+    $(".selectpicker").selectpicker("render");
     var systemMessageElement = $(".global-message li");
     if (systemMessageElement.length) {
       var message = systemMessageElement.text();
@@ -323,7 +316,7 @@ function changeActiveTab(data) {
 }
 
 function popoverCall() {
-  $('[data-toggle="popover"]').popover();
+  $("[data-toggle='popover']").popover();
 }
 
 function appointment(data) {
@@ -335,33 +328,33 @@ function appointment(data) {
       minDate: moment().add(1, "d"),
       daysOfWeekDisabled: [0, 6],
       locale: "tr",
-      format: 'DD-MM-YYYY',
+      format: "DD-MM-YYYY",
       icons: {
-        time: 'fa fa-timer',
-        date: 'fa fa-calendar',
-        up: 'fa fa-arrow-up',
-        down: 'fa fa-arrow-down',
-        previous: 'fa fa-arrow-left',
-        next: 'fa fa-arrow-right',
-        today: 'fa fa-calendar',
-        clear: 'fa fa-trash-o',
-        close: 'fa fa-close'
+        time: "fa fa-timer",
+        date: "fa fa-calendar",
+        up: "fa fa-arrow-up",
+        down: "fa fa-arrow-down",
+        previous: "fa fa-arrow-left",
+        next: "fa fa-arrow-right",
+        today: "fa fa-calendar",
+        clear: "fa fa-trash-o",
+        close: "fa fa-close"
       },
       tooltips: {
-        today: 'Bugünü Seç',
-        clear: 'Temizle',
-        close: 'Kapat',
-        selectMonth: 'Ay Seç',
-        prevMonth: 'Önceki Ay',
-        nextMonth: 'Sonraki Ay',
-        selectYear: 'Yıl Seç',
-        prevYear: 'Önceki Yıl',
-        nextYear: 'Sonraki Yıl',
-        selectDecade: 'Onyıl Seç',
-        prevDecade: 'Önceki Onyıl',
-        nextDecade: 'Sonraki Onyıl',
-        prevCentury: 'Önceki Yüzyıl',
-        nextCentury: 'Sonraki Yüzyıl'
+        today: "Bugünü Seç",
+        clear: "Temizle",
+        close: "Kapat",
+        selectMonth: "Ay Seç",
+        prevMonth: "Önceki Ay",
+        nextMonth: "Sonraki Ay",
+        selectYear: "Yıl Seç",
+        prevYear: "Önceki Yıl",
+        nextYear: "Sonraki Yıl",
+        selectDecade: "Onyıl Seç",
+        prevDecade: "Önceki Onyıl",
+        nextDecade: "Sonraki Onyıl",
+        prevCentury: "Önceki Yüzyıl",
+        nextCentury: "Sonraki Yüzyıl"
       }
     });
 
@@ -369,41 +362,41 @@ function appointment(data) {
       useCurrent: false,
       daysOfWeekDisabled: [0, 6],
       locale: "tr",
-      format: 'DD-MM-YYYY',
+      format: "DD-MM-YYYY",
       icons: {
-        time: 'fa fa-timer',
-        date: 'fa fa-calendar',
-        up: 'fa fa-arrow-up',
-        down: 'fa fa-arrow-down',
-        previous: 'fa fa-arrow-left',
-        next: 'fa fa-arrow-right',
-        today: 'fa fa-calendar',
-        clear: 'fa fa-trash-o',
-        close: 'fa fa-close'
+        time: "fa fa-timer",
+        date: "fa fa-calendar",
+        up: "fa fa-arrow-up",
+        down: "fa fa-arrow-down",
+        previous: "fa fa-arrow-left",
+        next: "fa fa-arrow-right",
+        today: "fa fa-calendar",
+        clear: "fa fa-trash-o",
+        close: "fa fa-close"
       },
       tooltips: {
-        today: 'Bugünü Seç',
-        clear: 'Temizle',
-        close: 'Kapat',
-        selectMonth: 'Ay Seç',
-        prevMonth: 'Önceki Ay',
-        nextMonth: 'Sonraki Ay',
-        selectYear: 'Yıl Seç',
-        prevYear: 'Önceki Yıl',
-        nextYear: 'Sonraki Yıl',
-        selectDecade: 'Onyıl Seç',
-        prevDecade: 'Önceki Onyıl',
-        nextDecade: 'Sonraki Onyıl',
-        prevCentury: 'Önceki Yüzyıl',
-        nextCentury: 'Sonraki Yüzyıl'
+        today: "Bugünü Seç",
+        clear: "Temizle",
+        close: "Kapat",
+        selectMonth: "Ay Seç",
+        prevMonth: "Önceki Ay",
+        nextMonth: "Sonraki Ay",
+        selectYear: "Yıl Seç",
+        prevYear: "Önceki Yıl",
+        nextYear: "Sonraki Yıl",
+        selectDecade: "Onyıl Seç",
+        prevDecade: "Önceki Onyıl",
+        nextDecade: "Sonraki Onyıl",
+        prevCentury: "Önceki Yüzyıl",
+        nextCentury: "Sonraki Yüzyıl"
       }
     });
 
     $("#appointmentDateStart").on("dp.change", function (e) {
-      $('#appointmentDateEnd').data("DateTimePicker").minDate(e.date);
+      $("#appointmentDateEnd").data("DateTimePicker").minDate(e.date);
     });
     $("#appointmentDateEnd").on("dp.change", function (e) {
-      $('#appointmentDateStart').data("DateTimePicker").maxDate(e.date);
+      $("#appointmentDateStart").data("DateTimePicker").maxDate(e.date);
     });
   }
 }

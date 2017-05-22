@@ -7,11 +7,7 @@ import com.hastanerandevu.model.DoctorModel;
 import com.hastanerandevu.utility.DateUtil;
 
 import javax.persistence.Query;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +15,7 @@ public class DoctorDaoImpl extends BaseDaoImpl<DoctorModel> {
   public DoctorModel loginDoctor(DoctorModel doctorModel) {
     Query query = getEntitymanager().createQuery("SELECT e FROM DoctorModel e WHERE e.recordNumber = :RECORD_NUMBER AND e.password = :PASSWORD");
     query.setParameter("RECORD_NUMBER", doctorModel.getRecordNumber());
-    query.setParameter("PASSWORD", Encryptor.encryptPassword(doctorModel.getPassword()));
+    query.setParameter("PASSWORD", Encryptor.encrypt(doctorModel.getPassword()));
 
     if(query.getResultList().size() > 0) {
       return (DoctorModel) query.getResultList().get(0);

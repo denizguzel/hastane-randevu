@@ -5,8 +5,8 @@
   justify-content: space-between;
   padding: 15px 0;
   .brand {
-    display: inherit;
     align-items: center;
+    display: inherit;
   }
   .dropdown {
     display: inherit;
@@ -26,7 +26,7 @@
       &:focus {
         box-shadow: none;
       }
-      &:after {
+      &::after {
         content: none;
       }
     }
@@ -36,7 +36,7 @@
         padding: 0 15px;
         line-height: 20px;
         &:hover {
-          background-color: #F8F8F8;
+          background-color: #f8f8f8;
         }
         a {
           display: block;
@@ -101,7 +101,7 @@
       &:hover {
         background-color: transparent;
       }
-      &:after {
+      &::after {
         content: '';
       }
     }

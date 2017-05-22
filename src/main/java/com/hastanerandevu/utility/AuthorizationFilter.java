@@ -15,7 +15,7 @@ public class AuthorizationFilter implements Filter {
 
   @Override
   public void init(FilterConfig filterConfig) throws ServletException {
-
+    // empty
   }
 
   @Override
@@ -52,6 +52,6 @@ public class AuthorizationFilter implements Filter {
 
   @Override
   public void destroy() {
-
+    // empty
   }
 }

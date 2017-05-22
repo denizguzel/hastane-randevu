@@ -15,7 +15,7 @@ import java.util.List;
   ModifiedTimeListener.class
 })
 @Table(name = "T_BRANCH")
-public class BranchModel implements Creatable,Updatable {
+public class BranchModel implements Creatable, Updatable {
 
   @Id
   @Column(name = "PK")

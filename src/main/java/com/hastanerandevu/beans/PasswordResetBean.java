@@ -72,12 +72,12 @@ public class PasswordResetBean {
   }
 
   public void passwordUpdate() throws URISyntaxException {
-    String encryptedSalt = Encryptor.encryptEmail(ProjectConstants.SALT + getEmail());
+    String encryptedSalt = Encryptor.encrypt(ProjectConstants.SALT + getEmail());
     try {
       PatientModel patientModel = patientService.getUserByEmail(getEmail());
       if(urlParam.equals(encryptedSalt) && patientService.changingPasswordIsAvailable(patientModel)) {
 
-        patientModel.setPassword(Encryptor.encryptPassword(getPassword()));
+        patientModel.setPassword(Encryptor.encrypt(getPassword()));
         patientService.update(patientModel);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Şifreniz değiştirildi.", null));
 

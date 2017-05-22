@@ -15,7 +15,7 @@ import java.util.List;
   ModifiedTimeListener.class
 })
 @Table(name = "T_DISEASE")
-public class DiseaseModel implements Creatable,Updatable {
+public class DiseaseModel implements Creatable, Updatable {
 
   @Id
   @Column(name = "PK")

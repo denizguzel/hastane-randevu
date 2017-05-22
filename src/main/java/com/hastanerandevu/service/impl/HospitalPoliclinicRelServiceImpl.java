@@ -6,12 +6,9 @@ import com.hastanerandevu.service.BaseService;
 
 import java.util.List;
 
-/**
- * Created by Okan on 19.4.2017.
- */
 public class HospitalPoliclinicRelServiceImpl implements BaseService<HospitalPoliclinicRelModel> {
 
-  HospitalPoliclinicRelDaoImpl hospitalPoliclinicRelDao = new HospitalPoliclinicRelDaoImpl();
+  private HospitalPoliclinicRelDaoImpl hospitalPoliclinicRelDao = new HospitalPoliclinicRelDaoImpl();
 
   @Override
   public void create(HospitalPoliclinicRelModel model) {

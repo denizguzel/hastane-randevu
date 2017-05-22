@@ -1,6 +1,6 @@
 footer {
   padding-top: 50px;
-  background-color: #2D2D2D;
+  background-color: #2d2d2d;
   h4 {
     font-size: 24px;
     color: #fff;
@@ -14,7 +14,7 @@ footer {
       &:last-child {
         margin-bottom: 0;
       }
-      &:before {
+      &::before {
         content: '\f101';
         font-family: 'FontAwesome';
         color: $main-color;
@@ -37,11 +37,11 @@ footer {
     }
   }
   .footer-widget-map {
-    background: url(/resources/img/map.png) center center no-repeat;
+    background: url("/resources/img/map.png") center center no-repeat;
     height: 188px;
     background-size: contain;
     li {
-      &:before {
+      &::before {
         content: none;
       }
     }
@@ -77,7 +77,7 @@ footer {
               color: #999;
               border-radius: 50%;
               font-size: 20px;
-              transition: all linear 0.1s;
+              transition: all linear .1s;
             }
           }
         }

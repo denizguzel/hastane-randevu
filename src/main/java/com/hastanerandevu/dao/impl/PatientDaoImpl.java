@@ -13,7 +13,7 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientModel> {
 
   public PatientModel loginPatient(PatientModel patientModel) {
     Query query = getEntitymanager().createQuery("SELECT e FROM PatientModel e WHERE e.tcNumber = :TC_NUMBER AND e.password = :PASSWORD");
-    query.setParameter("TC_NUMBER", patientModel.getTcNumber()).setParameter("PASSWORD", Encryptor.encryptPassword(patientModel.getPassword()));
+    query.setParameter("TC_NUMBER", patientModel.getTcNumber()).setParameter("PASSWORD", Encryptor.encrypt(patientModel.getPassword()));
 
     if(query.getResultList().size() > 0) {
       return (PatientModel) query.getResultList().get(0);

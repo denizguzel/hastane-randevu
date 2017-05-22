@@ -6,7 +6,6 @@ import com.hastanerandevu.model.PatientModel;
 import com.hastanerandevu.service.impl.DiseaseServiceImpl;
 import com.hastanerandevu.service.impl.PatientDiseaseRelServiceImpl;
 import com.hastanerandevu.service.impl.PatientServiceImpl;
-import org.apache.log4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -23,12 +22,10 @@ import java.util.Map;
 @ManagedBean(name = "disease")
 @ViewScoped
 public class DiseaseBean implements Serializable {
-  private static final Logger LOG = Logger.getLogger(DiseaseBean.class);
   @ManagedProperty(value = "#{login}")
   private LoginBean loginBean;
 
   private PatientDiseaseRelServiceImpl patientDiseaseRelService;
-  private PatientServiceImpl patientService;
   private DiseaseServiceImpl diseaseService;
   private PatientDiseaseRelModel patientDiseaseRelModel;
   private PatientModel patientModel;
@@ -43,7 +40,7 @@ public class DiseaseBean implements Serializable {
   @PostConstruct
   public void init() {
     patientDiseaseRelService = new PatientDiseaseRelServiceImpl();
-    patientService = new PatientServiceImpl();
+    PatientServiceImpl patientService = new PatientServiceImpl();
     diseaseService = new DiseaseServiceImpl();
     patientDiseaseRelModel = new PatientDiseaseRelModel();
     patientModel = loginBean.getPatientModel();

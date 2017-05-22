@@ -53,7 +53,7 @@ public class PoliclinicDaoImpl extends BaseDaoImpl<PoliclinicModel> {
     return query.getResultList();
   }
 
-  public List<InspectionPlaceModel> getAppointmentHeadersByPoliclinic(HospitalPoliclinicRelModel hospitalPoliclinicRelModel,Date startDate) {
+  public List<InspectionPlaceModel> getAppointmentHeadersByPoliclinic(HospitalPoliclinicRelModel hospitalPoliclinicRelModel, Date startDate) {
 
     Query query = getEntitymanager().createQuery("SELECT DISTINCT(ip) FROM InspectionPlaceModel ip INNER JOIN ip.appointmentModels ap WHERE ip.hospitalPoliclinicRel = :HOSPITAL_POLICLINIC_REL AND ap.appointmentStatus = :APPOINTMENT_STATUS AND ap.appointmentDate > :START_DATE");
 

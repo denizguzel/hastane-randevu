@@ -14,7 +14,7 @@ import java.util.Date;
   ModifiedTimeListener.class
 })
 @Table(name = "T_REVIEWS_ABOUT_DOCTOR")
-public class ReviewsAboutDoctorsModel implements Creatable,Updatable {
+public class ReviewsAboutDoctorsModel implements Creatable, Updatable {
 
   @Id
   @Column(name = "PK")

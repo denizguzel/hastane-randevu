@@ -12,7 +12,7 @@ public class UpdateAppointmentStatusToComplete implements Job {
 
   private static final Logger LOG = Logger.getLogger(UpdateAppointmentStatusToComplete.class);
 
-  AppointmentServiceImpl appointmentService = new AppointmentServiceImpl();
+  private AppointmentServiceImpl appointmentService = new AppointmentServiceImpl();
 
   @Override
   public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {

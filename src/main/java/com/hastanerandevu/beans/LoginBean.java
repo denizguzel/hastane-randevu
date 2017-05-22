@@ -105,7 +105,7 @@ public class LoginBean {
     if(patientService.haveUserRegistration(patientModel)) {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bu kullanıcı sistemde zaten kayıtlı", null));
     } else {
-      patientModel.setPassword(Encryptor.encryptPassword(patientModel.getPassword()));
+      patientModel.setPassword(Encryptor.encrypt(patientModel.getPassword()));
       try {
         patientService.create(patientModel);
         mailer.sendRegisterMail(patientModel);
@@ -132,7 +132,7 @@ public class LoginBean {
 
   public void patientPasswordUpdate() {
     try {
-      patientModel.setPassword(Encryptor.encryptPassword(getPassword()));
+      patientModel.setPassword(Encryptor.encrypt(getPassword()));
       patientService.update(patientModel);
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Şifre Değiştirildi", null));
     } catch(Exception e) {

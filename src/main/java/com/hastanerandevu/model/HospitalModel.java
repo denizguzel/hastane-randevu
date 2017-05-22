@@ -16,7 +16,7 @@ import java.util.List;
   ModifiedTimeListener.class
 })
 @Table(name = "T_HOSPITAL")
-public class HospitalModel implements Creatable,Updatable {
+public class HospitalModel implements Creatable, Updatable {
 
   @Id
   @GeneratedValue(generator = "hospital_pk")

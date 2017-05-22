@@ -15,7 +15,7 @@ import java.util.List;
   ModifiedTimeListener.class
 })
 @Table(name = "T_CITY")
-public class CityModel implements Creatable,Updatable {
+public class CityModel implements Creatable, Updatable {
 
   @Id
   @GeneratedValue(generator = "city_pk")

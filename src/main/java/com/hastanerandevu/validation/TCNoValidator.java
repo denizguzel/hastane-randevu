@@ -16,7 +16,11 @@ public class TCNoValidator implements Validator {
   private static boolean isValidTckn(String tckn) {
     int totalOdd = 0;
     int totalEven = 0;
-    int val, total, lastDigit, check;
+    int val,
+      total,
+      lastDigit,
+      check;
+
     try {
       if(tckn.length() == 11) {
         for(int i = 0; i < 9; i++) {

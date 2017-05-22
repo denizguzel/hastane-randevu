@@ -1,13 +1,19 @@
-body {
-  height: 100vh;
-}
-
-ul, ol, li, p, h1, h2, h3, h4, h5, h6 {
+ul,
+ol,
+li,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   padding: 0;
   margin: 0;
 }
 
-ul, ol {
+ul,
+ol {
   list-style-type: none;
 }
 
@@ -17,7 +23,9 @@ a {
   }
 }
 
-button, select, input.btn {
+button,
+select,
+input.btn {
   cursor: pointer;
 }
 
@@ -37,7 +45,11 @@ button, select, input.btn {
   font-weight: 300;
 }
 
-button, input, optgroup, select, textarea {
+button,
+input,
+optgroup,
+select,
+textarea {
   font-family: 'Poppins', sans-serif;
 }
 
@@ -59,16 +71,16 @@ button, input, optgroup, select, textarea {
       height: 30px;
       line-height: 30px;
       padding: 0;
-    }
-    td.day.today {
-      background-color: $green;
-      color: #fff;
-      &:before {
-        content: none;
+      &.today {
+        background-color: $green;
+        color: #fff;
+        &::before {
+          content: none;
+        }
       }
-    }
-    td.day.active {
-      background-color: $blue;
+      &.active {
+        background-color: $blue;
+      }
     }
   }
 }

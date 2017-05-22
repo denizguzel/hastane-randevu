@@ -3,12 +3,10 @@ package com.hastanerandevu.utility;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- * Created by ouzun on 5/20/2017.
- */
 public class DateUtil {
-  static Calendar calendar = Calendar.getInstance();
-  public static Date getEndOfDay(){
+  private static Calendar calendar = Calendar.getInstance();
+
+  public static Date getEndOfDay() {
     calendar.setTime(new Date());
     calendar.set(Calendar.HOUR_OF_DAY, 23);
     calendar.set(Calendar.MINUTE, 59);
@@ -18,7 +16,7 @@ public class DateUtil {
     return calendar.getTime();
   }
 
-  public static Date getEndOfDay(Date date){
+  public static Date getEndOfDay(Date date) {
     calendar.setTime(date);
     calendar.set(Calendar.HOUR_OF_DAY, 23);
     calendar.set(Calendar.MINUTE, 59);
@@ -28,7 +26,7 @@ public class DateUtil {
     return calendar.getTime();
   }
 
-  public static Date getStartOfDay(Date date){
+  public static Date getStartOfDay(Date date) {
     calendar.setTime(date);
     calendar.set(Calendar.HOUR_OF_DAY, 0);
     calendar.set(Calendar.MINUTE, 0);

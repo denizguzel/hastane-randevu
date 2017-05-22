@@ -4,7 +4,6 @@ import com.hastanerandevu.converter.NameConverter;
 import com.hastanerandevu.model.*;
 import com.hastanerandevu.service.impl.*;
 import com.hastanerandevu.utility.Mailer;
-import org.apache.log4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -21,8 +20,6 @@ import java.util.concurrent.TimeUnit;
 @ManagedBean(name = "appointment")
 @ViewScoped
 public class AppointmentBean implements Serializable {
-
-  private static final Logger LOG = Logger.getLogger(AppointmentBean.class);
 
   @ManagedProperty(value = "#{login}")
   private LoginBean loginBean;

@@ -20,16 +20,16 @@ nav.sidebar {
           margin-right: 10px;
         }
         &:hover {
-          background-color: #F8F8F8;
+          background-color: #f8f8f8;
           color: $main-color;
         }
       }
-    }
-    li.active {
-      border-color: $main-color;
-      a {
-        i {
-          color: $main-color;
+      &.active {
+        border-color: $main-color;
+        a {
+          i {
+            color: $main-color;
+          }
         }
       }
     }

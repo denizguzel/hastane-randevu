@@ -18,7 +18,7 @@ import java.util.List;
   ModifiedTimeListener.class
 })
 @Table(name = "T_PATIENT")
-public class PatientModel implements Creatable,Updatable {
+public class PatientModel implements Creatable, Updatable {
   @Id
   @GeneratedValue(generator = "patient_pk")
   @SequenceGenerator(name = "patient_pk", sequenceName = "SEQ_PATIENT_PK", allocationSize = 1)
@@ -102,9 +102,6 @@ public class PatientModel implements Creatable,Updatable {
 
   @OneToMany(mappedBy = "patient")
   private List<ReviewsAboutDoctorsModel> reviewsAboutDoctorsModels;
-
-  public PatientModel() {
-  }
 
   public long getPk() {
     return pk;

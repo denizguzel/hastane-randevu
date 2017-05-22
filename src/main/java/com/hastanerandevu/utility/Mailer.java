@@ -106,7 +106,7 @@ public class Mailer implements Runnable {
     try {
       patientModel = patientService.getUserByEmail(email);
 
-      String encryptedSalt = Encryptor.encryptEmail(ProjectConstants.SALT + patientModel.getEmail());
+      String encryptedSalt = Encryptor.encrypt(ProjectConstants.SALT + patientModel.getEmail());
 
       VelocityEngine ve = new VelocityEngine();
       VelocityContext context = new VelocityContext();

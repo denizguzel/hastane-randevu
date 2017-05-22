@@ -1,14 +1,14 @@
 .page-wrapper {
   height: calc(100% - 50px);
   margin-left: 230px;
-  background-color: #EDF1F5;
+  background-color: #edf1f5;
   .page-title {
-    margin: 0 -30px 30px -30px;
+    margin: 0 -30px 30px;
     padding: 20px 30px;
     background-color: #fff;
     h4 {
       font-size: 20px;
-      color: #7F7F7F;
+      color: #7f7f7f;
     }
     .sidebar-toggler {
       display: none;
@@ -60,7 +60,7 @@
             }
             .btn-primary {
               &:focus {
-                color: #fff;
+                color: $white;
                 background-color: $brand-primary;
               }
             }
@@ -75,21 +75,21 @@
             .nav-link {
               padding: 10px;
               color: #686868;
-              background-color: #F7FAFC;
+              background-color: #f7fafc;
               font-weight: 400;
               border: 1px solid $brand-primary;
               border-radius: 2px;
-            }
-            .nav-link.active {
-              background-color: $brand-primary;
-              color: #fff;
-              &:before {
-                content: '\f0d7';
-                font-family: 'FontAwesome';
-                position: absolute;
-                bottom: -13px;
-                left: 50%;
-                color: $brand-primary;
+              &.active {
+                background-color: $brand-primary;
+                color: #fff;
+                &::before {
+                  content: '\f0d7';
+                  font-family: 'FontAwesome';
+                  position: absolute;
+                  bottom: -13px;
+                  left: 50%;
+                  color: $brand-primary;
+                }
               }
             }
           }
@@ -257,7 +257,7 @@ section.features {
     font-size: 36px;
     font-weight: 700;
     text-transform: uppercase;
-    &:after {
+    &::after {
       margin: 15px auto;
     }
   }
@@ -293,7 +293,7 @@ section.questions {
         h5 {
           a {
             display: flex;
-            &:after {
+            &::after {
               content: '\f0d8';
               font-family: 'FontAwesome';
               color: #c0c9cf;
@@ -301,7 +301,7 @@ section.questions {
             }
           }
           a.collapsed {
-            &:after {
+            &::after {
               content: '\f0d7';
             }
           }

@@ -5,7 +5,6 @@ import com.hastanerandevu.model.AppointmentModel;
 import com.hastanerandevu.model.DoctorModel;
 import com.hastanerandevu.service.BaseService;
 
-import java.util.Date;
 import java.util.List;
 
 public class DoctorServiceImpl implements BaseService<DoctorModel> {
@@ -49,7 +48,7 @@ public class DoctorServiceImpl implements BaseService<DoctorModel> {
     return doctorDao.remainingAppointment(doctorModel);
   }
 
-  public List<AppointmentModel> getAppointmentsNote(DoctorModel doctorModel){
+  public List<AppointmentModel> getAppointmentsNote(DoctorModel doctorModel) {
     return doctorDao.getAppointmentsNote(doctorModel);
   }
 }

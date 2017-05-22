@@ -15,7 +15,6 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,7 +29,6 @@ public class DoctorBean implements Serializable {
 
   private DoctorServiceImpl doctorService;
   private PatientServiceImpl patientService;
-  private ReviewsAboutDoctorsServiceImpl reviewsAboutDoctorsService;
   private DoctorModel doctorModel;
   private AppointmentModel appointmentModel;
 
@@ -48,7 +46,7 @@ public class DoctorBean implements Serializable {
   public void init() {
     doctorService = new DoctorServiceImpl();
     patientService = new PatientServiceImpl();
-    reviewsAboutDoctorsService = new ReviewsAboutDoctorsServiceImpl();
+    ReviewsAboutDoctorsServiceImpl reviewsAboutDoctorsService = new ReviewsAboutDoctorsServiceImpl();
     appointmentModel = new AppointmentModel();
 
     appointmentHistory = new LinkedList<>();

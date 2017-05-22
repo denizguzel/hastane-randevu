@@ -3,7 +3,10 @@ package com.hastanerandevu.model;
 import com.hastanerandevu.enums.GenderEnum;
 import com.hastanerandevu.enums.LevelEnum;
 import com.hastanerandevu.enums.SecretQuestionEnum;
-import com.hastanerandevu.listeners.*;
+import com.hastanerandevu.listeners.Creatable;
+import com.hastanerandevu.listeners.CreationTimeListener;
+import com.hastanerandevu.listeners.ModifiedTimeListener;
+import com.hastanerandevu.listeners.Updatable;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,7 +18,7 @@ import java.util.List;
   ModifiedTimeListener.class
 })
 @Table(name = "T_DOCTOR")
-public class DoctorModel implements Creatable,Updatable{
+public class DoctorModel implements Creatable, Updatable {
 
   @Id
   @GeneratedValue(generator = "doctor_pk")

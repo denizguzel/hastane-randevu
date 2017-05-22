@@ -15,7 +15,7 @@ import java.util.List;
   ModifiedTimeListener.class
 })
 @Table(name = "T_DISTRICT")
-public class DistrictModel implements Creatable,Updatable {
+public class DistrictModel implements Creatable, Updatable {
   @Id
   @GeneratedValue(generator = "district_pk")
   @SequenceGenerator(name = "district_pk", sequenceName = "SEQ_DISTRICT_PK", allocationSize = 1)
