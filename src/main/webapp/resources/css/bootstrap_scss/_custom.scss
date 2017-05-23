@@ -4,20 +4,20 @@
 // without modifying source files.
 
 // Colors
-$main-color: #18E2BA;
+
 $white: #fff;
-$black: #000;
-$red: #FB9678;
-$orange: #FEC107;
-$yellow: #FDD835;
-$green: #00C292;
-$blue: #03A9F3;
-$cyan: #13DAFE;
+$black: rgba(0, 0, 0, .87);
+$red: #DB2828;
+$yellow: #FBBD08;
+$green: #21BA45;
+$blue: #2185D0;
+$cyan: #00B5AD;
 $grey: #797C94;
+$main-color: lighten($green, 10%);
 
 // Body
 $body-color: $black;
-$font-family-sans-serif: 'Poppins', sans-serif;
+$font-family-sans-serif: "Roboto", sans-serif;
 $font-family-base: $font-family-sans-serif;
 $font-size-base: 14px;
 $font-size-lg: $font-size-base;
@@ -36,12 +36,12 @@ $btn-font-weight: $font-weight-normal;
 $btn-box-shadow: none;
 $btn-focus-box-shadow: none;
 $btn-active-box-shadow: none;
-$btn-padding-y: 10.5px;
+$btn-padding-y: 9.5px;
 $btn-padding-y-sm: 6.5px;
 $btn-padding-y-lg: 15.5px;
-$btn-border-radius: 2px;
-$btn-border-radius-lg: 2px;
-$btn-border-radius-sm: 2px;
+$btn-border-radius: 4px;
+$btn-border-radius-lg: 4px;
+$btn-border-radius-sm: 4px;
 
 $btn-primary-color: $white;
 $btn-primary-bg: $brand-primary;
@@ -75,14 +75,14 @@ $link-hover-decoration: none;
 
 // Forms
 $input-bg: $white;
-$input-color: #565656;
+$input-color: rgba(0,0,0,.87);
 $input-border-color: #e4e7ea;
 $input-bg-focus: $input-bg;
-$input-border-focus: $input-color;
+$input-border-focus: #85b7d9;
 $input-box-shadow: none;
-$input-box-shadow-focus: none;
-$input-color-placeholder: $grey;
-$input-color-focus: $input-color;
+$input-box-shadow-focus: 0 0 0 0 rgba(34,36,38,.35) inset;
+$input-color-placeholder: rgba(0,0,0,.6);
+$input-color-focus: rgba(0,0,0,.95);
 $input-line-height: 2;
 $input-border-radius: 0;
 $input-btn-border-width: 1px; // For form controls and buttons

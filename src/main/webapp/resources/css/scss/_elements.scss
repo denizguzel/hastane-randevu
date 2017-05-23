@@ -15,7 +15,7 @@ body.page-404 {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    color: #fff;
+    color: $white;
     h1 {
       font-size: 160px;
     }
@@ -37,36 +37,36 @@ body.page-404 {
 .btn-inverse {
   background-color: #333;
   border-color: #333;
-  color: #fff;
+  color: $white;
 }
 
 .btn-success {
   &:focus {
-    color: #fff;
+    color: $white;
   }
 }
 
 .btn-primary {
   &:focus {
-    color: #fff;
+    color: $white;
   }
 }
 
 .btn-info {
   &:focus {
-    color: #fff;
+    color: $white;
   }
 }
 
 .btn-warning {
   &:focus {
-    color: #fff;
+    color: $white;
   }
 }
 
 .btn-danger {
   &:focus {
-    color: #fff;
+    color: $white;
   }
 }
 
@@ -76,25 +76,23 @@ body.page-404 {
 
 .btn-transparent {
   background-color: transparent;
-  color: #fff;
-  border: 1px solid #fff;
+  color: $white;
+  border: 1px solid $white;
   &:hover {
-    color: #fff;
+    color: $white;
     background: rgba(255, 255, 255, .3);
   }
 }
 
 .bootstrap-select {
   .btn {
-    color: $input-color !important;
-    padding: 11.5px 25px 11.5px 12px !important;
-    border: 0;
-    border-bottom: 2px solid lighten($main-color, 20%);
-    background-color: $input-bg;
-    border-radius: 0;
+    padding: 9px 25px 9px 12px !important;
+    width: 100% !important;
+    background: $white;
+    border: 1px solid rgba(34,36,38,.15);
+    border-radius: 4px;
+    color: rgba(0,0,0,.87);
     font-size: 13px;
-    text-transform: initial !important;
-    font-weight: 400 !important;
     &:focus {
       outline: 0 !important;
       border-bottom-color: $main-color;
@@ -103,7 +101,7 @@ body.page-404 {
   .dropdown-menu.open {
     border-color: $input-border-color;
     background-color: $input-bg;
-    border-radius: 0;
+    border-radius: 4px;
     .bs-searchbox {
       .form-control {
         border: 1px solid $main-color;
@@ -142,16 +140,6 @@ body.page-404 {
   span.error {
     display: none;
   }
-  .form-control {
-    border-bottom: 2px solid lighten($main-color, 20%);
-    font-size: 13px;
-    &:focus {
-      border-bottom-color: $main-color;
-    }
-    ::placeholder {
-      font-size: 13px;
-    }
-  }
   i {
     position: absolute;
     top: 10px;
@@ -178,13 +166,13 @@ body.page-404 {
   &::before {
     content: attr(data-message);
     position: absolute;
-    top: 5px;
-    right: 0;
-    background-color: #000;
-    color: #fff;
+    top: 7px;
+    right: 5px;
+    background-color: $black;
+    color: $white;
     border-radius: 25px;
     padding: 5px 10px;
-    font-size: 8px;
+    font-size: 8.5px;
   }
 }
 
@@ -259,7 +247,7 @@ body.page-404 {
   display: flex;
   align-items: center;
   padding-left: 10.5px;
-  height: 40px;
+  height: 36px;
   background-color: #ECEEEF;
   color: $input-color;
   border: 1px solid $input-border-color;
@@ -268,7 +256,7 @@ body.page-404 {
 
 .toast {
   padding: 15px 20px;
-  color: #fff;
+  color: $white;
   background-color: rgba(0, 0, 0, 0.6);
   position: fixed;
   top: -300px;
@@ -280,19 +268,19 @@ body.page-404 {
 
 .toast.error {
   background-color: rgba(244, 67, 54, 0.6);
-  color: #fff;
+  color: $white;
 }
 
 .toast.info {
   background-color: rgba(139, 195, 74, 0.6);
-  color: #fff;
+  color: $white;
 }
 
 .card-form {
   margin-top: 50px;
   .card-header {
     background-color: darken($main-color, 10%);
-    color: #fff;
+    color: $white;
     text-align: center;
     padding: 20px 10px;
     text-transform: uppercase;
@@ -321,7 +309,7 @@ body.page-404 {
       border-radius: 0;
       text-align: center;
       background-color: $main-color;
-      color: #fff;
+      color: $white;
       padding: 20px 10px;
       text-transform: uppercase;
       font-weight: 500;
@@ -348,7 +336,7 @@ body.page-404 {
 }
 
 .survey {
-  background-color: #fff;
+  background-color: $white;
   border-radius: 4px;
   border-bottom: 4px solid #ccc;
   .survey-header {
@@ -404,7 +392,7 @@ body.page-404 {
 
 .survey-done {
   text-align: center;
-  background-color: #fff;
+  background-color: $white;
   border-bottom: 5px solid #DDDDDD;
   padding: 15px;
   i {

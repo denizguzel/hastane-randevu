@@ -28,6 +28,11 @@
       &:hover {
         background-color: #f2f2f2;
       }
+      &:nth-last-child(2) {
+        td {
+          border-bottom: 1px solid #ECEEEF;
+        }
+      }
       td {
         border-right: 1px solid #ECEEEF;
         &:first-child {

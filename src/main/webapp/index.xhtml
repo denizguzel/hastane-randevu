@@ -60,7 +60,7 @@
           <div class="col-md-8 mb-4 mb-md-0">
             <h3 class="border">Sıkça Sorulan Sorular</h3>
             <div id="accordion">
-              <ui:repeat value="#{home.askedQuestions}" var="askedQuestion" varStatus="askedQuestionStatus">
+              <c:forEach items="#{home.askedQuestions}" var="askedQuestion" varStatus="askedQuestionStatus">
                 <div class="card">
                   <div class="card-header">
                     <h5><a data-toggle="collapse" data-parent="#accordion" href="#collapse#{askedQuestionStatus.index}">#{askedQuestion.question}</a></h5>
@@ -71,7 +71,7 @@
                     </div>
                   </div>
                 </div>
-              </ui:repeat>
+              </c:forEach>
             </div>
           </div>
           <div class="col-md-4">

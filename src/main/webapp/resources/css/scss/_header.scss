@@ -16,7 +16,7 @@
       border: 0;
       border-radius: 25px;
       padding: 9px 20px;
-      color: #fff;
+      color: $white;
       i {
         margin-right: 5px;
       }
@@ -31,16 +31,18 @@
       }
     }
     .dropdown-menu {
-      border-radius: 0;
+      border-radius: 4px;
+      margin-top: 0;
+      padding: 0;
+      box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.15);
       .dropdown-item {
-        padding: 0 15px;
-        line-height: 20px;
+        padding: 0;
         &:hover {
-          background-color: #f8f8f8;
+          background-color: #f2f2f2;
         }
         a {
           display: block;
-          padding: 10px 0;
+          padding: 10px 15px;
           i {
             margin-right: 5px;
           }
@@ -66,7 +68,7 @@
         .nav-link {
           display: inherit;
           align-items: center;
-          color: #fff;
+          color: $white;
           padding: 7px 20px;
           border-radius: 25px;
           background-color: $main-color;
@@ -83,7 +85,7 @@
   background-color: $main-color;
   padding: 0 30px 0 0;
   height: 50px;
-  z-index: 2;
+  z-index: 3;
   .brand {
     width: 230px;
     img {
@@ -97,12 +99,13 @@
       border: 0;
       border-radius: 0;
       padding: 0;
-      color: #fff;
+      color: $white;
+      font-size: 14px;
       &:hover {
         background-color: transparent;
       }
       &::after {
-        content: '';
+        content: "";
       }
     }
   }

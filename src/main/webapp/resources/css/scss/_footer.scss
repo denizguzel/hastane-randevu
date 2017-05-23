@@ -3,7 +3,7 @@ footer {
   background-color: #2d2d2d;
   h4 {
     font-size: 24px;
-    color: #fff;
+    color: $white;
     margin-bottom: 40px;
   }
   .footer-widget {
@@ -21,7 +21,7 @@ footer {
         margin-right: 10px;
       }
       a {
-        color: #fff;
+        color: $white;
         &:hover {
           text-decoration: underline;
         }
@@ -54,7 +54,7 @@ footer {
       display: flex;
       align-items: center;
       .copyright {
-        color: #fff;
+        color: $white;
       }
       .social-links {
         display: inherit;
@@ -65,7 +65,7 @@ footer {
             &:hover {
               i {
                 background-color: darken(#383838, 10%);
-                color: #fff;
+                color: $white;
               }
             }
             i {

@@ -5,7 +5,7 @@
   .page-title {
     margin: 0 -30px 30px;
     padding: 20px 30px;
-    background-color: #fff;
+    background-color: $white;
     h4 {
       font-size: 20px;
       color: #7f7f7f;
@@ -50,9 +50,8 @@
         }
         ul {
           display: none;
-          max-width: 50%;
           li {
-            margin-right: 10px;
+            margin-right: 6px;
             margin-bottom: 10px;
             .btn {
               width: 55px;
@@ -67,39 +66,44 @@
           }
         }
         .nav-tabs {
-          margin-bottom: 10px;
           width: 100%;
+          z-index: 2;
           .nav-item {
-            position: relative;
-            margin: 0 5px 0 0;
+            margin: 0 0 -1px 0;
+            flex-grow: 0;
             .nav-link {
               padding: 10px;
-              color: #686868;
-              background-color: #f7fafc;
+              background-color: transparent;
+              color: $black;
               font-weight: 400;
-              border: 1px solid $brand-primary;
-              border-radius: 2px;
+              border: 1px solid transparent;
+              text-transform: capitalize;
+              text-align: left;
               &.active {
-                background-color: $brand-primary;
-                color: #fff;
-                &::before {
-                  content: '\f0d7';
-                  font-family: 'FontAwesome';
-                  position: absolute;
-                  bottom: -13px;
-                  left: 50%;
-                  color: $brand-primary;
-                }
+                border-color: #D4D4D5;
+                border-bottom-color: $white;
+                border-top-left-radius: 4px;
+                border-top-right-radius: 4px;
               }
             }
           }
         }
         .tab-content {
+          z-index: 1;
+          max-width: 50%;
           .tab-pane {
-            padding: 0;
+            border: 1px solid #D4D4D5;
+            border-radius: 4px;
+            padding: 10.5px 10px;
+            &:first-child.active {
+              border-top-left-radius: 0;
+            }
+            &:last-child.active {
+              border-bottom-left-radius: 0;
+            }
             .btn {
               font-weight: 400;
-              border-radius: 2px;
+              border-radius: 4px;
               font-size: 12px;
             }
             .btn-disabled {
@@ -108,35 +112,95 @@
             }
           }
         }
-      }
-      .appointment-clocks.active {
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        p.lead {
-          display: none;
-        }
-        h4 {
-          display: block;
-        }
-        ul {
-          display: flex;
-          flex-wrap: wrap;
+        &.active {
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-start;
+          p.lead {
+            display: none;
+          }
+          h4 {
+            display: block;
+          }
+          ul {
+            display: flex;
+            flex-wrap: wrap;
+          }
         }
       }
       .alergy-list {
         .table-responsive {
           display: none;
         }
-      }
-      .alergy-list.active {
-        display: block;
-        .alert {
-          display: none;
-        }
-        .table-responsive {
+        &.active {
           display: block;
+          .alert {
+            display: none;
+          }
+          .table-responsive {
+            display: block;
+          }
         }
+      }
+      .form-group[data-message]:not([data-message=""])::before {
+        top: 34px;
+        right: 5px;
+      }
+    }
+    .card-profile {
+      > form {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .nav-tabs {
+        width: 100px;
+        flex-direction: column;
+        z-index: 2;
+        .nav-item {
+          margin: 0 -1px 0 0;
+          flex-grow: 0;
+          .nav-link {
+            padding: 10px;
+            background-color: transparent;
+            color: $black;
+            font-weight: 400;
+            border: 1px solid transparent;
+            text-transform: capitalize;
+            text-align: left;
+            &.active {
+              background-color: transparent;
+              border-color: #D4D4D5;
+              border-right-color: $white;
+              border-top-left-radius: 4px;
+              border-bottom-left-radius: 4px;
+            }
+          }
+        }
+      }
+      .tab-content {
+        width: calc(100% - 100px);
+        z-index: 1;
+        .tab-pane {
+          border: 1px solid #D4D4D5;
+          border-radius: 4px;
+          padding: 10.5px 10px;
+          &:first-child.active {
+            border-top-left-radius: 0;
+          }
+          &:last-child.active {
+            border-bottom-left-radius: 0;
+          }
+          .btn {
+            width: initial;
+            height: 36px;
+            text-transform: capitalize;
+            padding: 10.5px 14px;
+            font-weight: 400;
+          }
+        }
+      }
+      .btn-save {
+        margin: 15px 0 0 100px;
       }
     }
     .small-card {
@@ -178,42 +242,6 @@
       }
     }
   }
-  .card-user {
-    text-align: center;
-    .card-block {
-      .row {
-        margin: 0 0 15px;
-        padding-bottom: 15px;
-        border-bottom: 1px solid #EEEFF0;
-        div[class^="col-"] {
-          padding: 10px 15px;
-          &:first-child {
-            border-right: 1px solid #EEEFF0;
-          }
-        }
-        &:last-of-type {
-          margin-bottom: 0;
-          padding-bottom: 0;
-          border-bottom: 0;
-          div[class^="col-"] {
-            border-right: 0;
-          }
-        }
-      }
-      strong {
-        color: #686868;
-      }
-      p {
-        font-weight: 300;
-        color: #686868;
-      }
-      hr {
-        margin: 20px 0;
-        border: 0;
-        border-top: 1px solid #EEEFF0;
-      }
-    }
-  }
 }
 
 .swiper-container {
@@ -244,9 +272,9 @@
     .swiper-pagination-bullet {
       width: 10px;
       height: 10px;
-    }
-    .swiper-pagination-bullet-active {
-      background-color: $main-color;
+      &.active {
+        background-color: $main-color;
+      }
     }
   }
 }
@@ -299,10 +327,10 @@ section.questions {
               color: #c0c9cf;
               margin-left: auto;
             }
-          }
-          a.collapsed {
-            &::after {
-              content: '\f0d7';
+            &.collapsed {
+              &::after {
+                content: '\f0d7';
+              }
             }
           }
         }

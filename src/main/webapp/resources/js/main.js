@@ -70,33 +70,33 @@ $("#appointmentDateEnd").datetimepicker({
   useCurrent: false,
   daysOfWeekDisabled: [0, 6],
   locale: "tr",
-  format: 'DD-MM-YYYY',
+  format: "DD-MM-YYYY",
   icons: {
-    time: 'fa fa-timer',
-    date: 'fa fa-calendar',
-    up: 'fa fa-arrow-up',
-    down: 'fa fa-arrow-down',
-    previous: 'fa fa-arrow-left',
-    next: 'fa fa-arrow-right',
-    today: 'fa fa-calendar',
-    clear: 'fa fa-trash-o',
-    close: 'fa fa-close'
+    time: "fa fa-timer",
+    date: "fa fa-calendar",
+    up: "fa fa-arrow-up",
+    down: "fa fa-arrow-down",
+    previous: "fa fa-arrow-left",
+    next: "fa fa-arrow-right",
+    today: "fa fa-calendar",
+    clear: "fa fa-trash-o",
+    close: "fa fa-close"
   },
   tooltips: {
-    today: 'Bugünü Seç',
-    clear: 'Temizle',
-    close: 'Kapat',
-    selectMonth: 'Ay Seç',
-    prevMonth: 'Önceki Ay',
-    nextMonth: 'Sonraki Ay',
-    selectYear: 'Yıl Seç',
-    prevYear: 'Önceki Yıl',
-    nextYear: 'Sonraki Yıl',
-    selectDecade: 'Onyıl Seç',
-    prevDecade: 'Önceki Onyıl',
-    nextDecade: 'Sonraki Onyıl',
-    prevCentury: 'Önceki Yüzyıl',
-    nextCentury: 'Sonraki Yüzyıl'
+    today: "Bugünü Seç",
+    clear: "Temizle",
+    close: "Kapat",
+    selectMonth: "Ay Seç",
+    prevMonth: "Önceki Ay",
+    nextMonth: "Sonraki Ay",
+    selectYear: "Yıl Seç",
+    prevYear: "Önceki Yıl",
+    nextYear: "Sonraki Yıl",
+    selectDecade: "Onyıl Seç",
+    prevDecade: "Önceki Onyıl",
+    nextDecade: "Sonraki Onyıl",
+    prevCentury: "Önceki Yüzyıl",
+    nextCentury: "Sonraki Yüzyıl"
   }
 });
 
@@ -321,7 +321,7 @@ function popoverCall() {
 
 function appointment(data) {
   if (data.status === "success") {
-    $('.selectpicker').selectpicker("render");
+    $(".selectpicker").selectpicker("render");
 
     $("#appointmentDateStart").datetimepicker({
       useCurrent: false,
