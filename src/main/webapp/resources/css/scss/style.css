@@ -9142,10 +9142,6 @@ body.page-404 .container .btn-transparent {
   color: #fff;
 }
 
-.btn.disabled {
-  border: 1px solid #ccc;
-}
-
 .btn-transparent {
   background-color: transparent;
   color: #fff;
@@ -9325,15 +9321,17 @@ body.page-404 .container .btn-transparent {
   color: #2D2D2D;
 }
 
-.input-disabled {
+.area-disabled {
   display: flex;
   align-items: center;
   padding-left: 10.5px;
   height: 36px;
-  background-color: #ECEEEF;
-  color: rgba(0, 0, 0, 0.87);
+  background-color: #e0e1e2;
+  color: rgba(0, 0, 0, 0.6);
   border: 1px solid #e4e7ea;
-  cursor: not-allowed;
+  border-radius: 4px;
+  opacity: .45;
+  pointer-events: none;
 }
 
 .toast {
@@ -9698,7 +9696,9 @@ body.page-404 .container .btn-transparent {
 }
 
 .page-wrapper .card .card-block .appointment-clocks ul li .btn {
+  justify-content: center;
   width: 55px;
+  height: initial;
   padding: 5px;
 }
 
@@ -10348,7 +10348,7 @@ nav.sidebar ul.nav-menu li.active a i {
 }
 
 .table-appointment tbody tr td .doctor-message {
-  display: inline-flex;
+  display: inline-block;
   width: 150px;
   overflow: hidden;
   white-space: nowrap;

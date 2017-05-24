@@ -70,10 +70,6 @@ body.page-404 {
   }
 }
 
-.btn.disabled {
-  border: 1px solid #ccc;
-}
-
 .btn-transparent {
   background-color: transparent;
   color: $white;
@@ -89,9 +85,9 @@ body.page-404 {
     padding: 9px 25px 9px 12px !important;
     width: 100% !important;
     background: $white;
-    border: 1px solid rgba(34,36,38,.15);
+    border: 1px solid rgba(34, 36, 38, .15);
     border-radius: 4px;
-    color: rgba(0,0,0,.87);
+    color: rgba(0, 0, 0, .87);
     font-size: 13px;
     text-transform: capitalize !important;
     &:focus {
@@ -244,15 +240,17 @@ body.page-404 {
   }
 }
 
-.input-disabled {
+.area-disabled {
   display: flex;
   align-items: center;
   padding-left: 10.5px;
   height: 36px;
-  background-color: #ECEEEF;
-  color: $input-color;
+  background-color: #e0e1e2;
+  color: rgba(0, 0, 0, .6);
   border: 1px solid $input-border-color;
-  cursor: not-allowed;
+  border-radius: 4px;
+  opacity: .45;
+  pointer-events: none;
 }
 
 .toast {

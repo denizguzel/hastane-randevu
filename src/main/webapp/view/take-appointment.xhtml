@@ -112,7 +112,7 @@
                           <c:forEach items="#{row}" var="col" varStatus="colIndex">
                             <li class="nav-item">
                               <h:panelGroup layout="block" styleClass="tooltip-wrapper" rendered="#{col.appointmentStatus != 'NOT_RESERVED'}" p:data-toggle="tooltip" p:data-placement="top" p:title="Randevu Alınmış">
-                                <h:outputText styleClass="btn btn-secondary disabled" value="#{col.appointmentDate}">
+                                <h:outputText styleClass="btn btn-secondary area-disabled" value="#{col.appointmentDate}">
                                   <f:convertDateTime timeZone="GMT+3" pattern="HH:mm"/>
                                 </h:outputText>
                               </h:panelGroup>
