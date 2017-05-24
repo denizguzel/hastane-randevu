@@ -31,7 +31,7 @@
                   </h:column>
                   <h:column>
                     <f:facet name="header">Sil</f:facet>
-                    <h:commandButton value="Sil" styleClass="btn btn-sm btn-danger" p:data-toggle="modal" p:data-target="#cancel-modal">
+                    <h:commandButton value="Sil" styleClass="badge badge-danger" p:data-toggle="modal" p:data-target="#cancel-modal">
                       <f:setPropertyActionListener value="#{patientDisease}" target="#{disease.patientDiseaseRelModel}"/>
                       <f:ajax execute="@this"/>
                     </h:commandButton>

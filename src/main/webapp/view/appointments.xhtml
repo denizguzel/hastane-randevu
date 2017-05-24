@@ -46,7 +46,7 @@
                   </h:column>
                   <h:column headerClass="text-center">
                     <f:facet name="header">Durum</f:facet>
-                    <h:commandButton rendered="#{history.appointmentStatus != 'COMPLETED'}" value="İptal Et" styleClass="btn btn-sm btn-danger" p:data-tooltip="tooltip" p:title="Randevu 1 Gün Öncesine Kadar İptal Edilebilir" p:data-toggle="modal" p:data-target="#cancel-modal">
+                    <h:commandButton rendered="#{history.appointmentStatus != 'COMPLETED'}" value="İptal Et" styleClass="badge badge-danger" p:data-tooltip="tooltip" p:title="Randevu 1 Gün Öncesine Kadar İptal Edilebilir" p:data-toggle="modal" p:data-target="#cancel-modal">
                       <f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>
                       <f:ajax execute="@this"/>
                     </h:commandButton>

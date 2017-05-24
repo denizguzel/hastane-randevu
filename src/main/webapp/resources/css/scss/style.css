@@ -9061,6 +9061,19 @@ textarea {
   outline: 0;
 }
 
+.badge:empty {
+  display: inline-block;
+}
+
+input.badge {
+  cursor: pointer;
+  border: 0;
+}
+
+input.badge-danger:hover {
+  background-color: #b21e1e;
+}
+
 label {
   margin-bottom: 5px;
   color: rgba(0, 0, 0, 0.87);
@@ -9152,6 +9165,7 @@ body.page-404 .container .btn-transparent {
   border-radius: 4px;
   color: rgba(0, 0, 0, 0.87);
   font-size: 13px;
+  text-transform: capitalize !important;
 }
 
 .bootstrap-select .btn:focus {
@@ -10109,23 +10123,15 @@ footer .footer-bottom .container .social-links li a i {
   border-top-right-radius: 5px;
 }
 
-.modal .modal-dialog .modal-content .modal-body .comments .alert {
-  display: none;
-}
-
-.modal .modal-dialog .modal-content .modal-body .comments.empty .alert {
+.modal .modal-dialog .modal-content .modal-body .alert {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.modal .modal-dialog .modal-content .modal-body .comments.empty .alert i {
+.modal .modal-dialog .modal-content .modal-body .alert i {
   font-size: 34px;
   margin-bottom: 10px;
-}
-
-.modal .modal-dialog .modal-content .modal-body .comments.empty .table {
-  display: none;
 }
 
 .modal .modal-dialog .modal-content .modal-body p {
@@ -10134,10 +10140,6 @@ footer .footer-bottom .container .social-links li a i {
 
 .modal .modal-dialog .modal-content .modal-body .form-group:last-child {
   margin-bottom: 0;
-}
-
-.modal .modal-dialog .modal-content .modal-body .form-group label {
-  font-weight: 500;
 }
 
 .modal .modal-dialog .modal-content .modal-body .form-group label small {
@@ -10163,8 +10165,58 @@ footer .footer-bottom .container .social-links li a i {
   flex-grow: 1;
 }
 
-.modal .modal-dialog .modal-content .modal-body .buttons .btn:first-of-type {
+.modal .modal-dialog .modal-content .modal-body .buttons .btn:first-child {
   margin-right: 5px;
+}
+
+.modal .modal-dialog .modal-content .modal-body .comment {
+  display: inherit;
+  flex-direction: column;
+  width: 100%;
+}
+
+.modal .modal-dialog .modal-content .modal-body .comment .btn {
+  position: relative;
+  display: inherit;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 10px;
+  border: 1px solid rgba(34, 36, 38, 0.15);
+}
+
+.modal .modal-dialog .modal-content .modal-body .comment .btn:hover {
+  border-color: #85b7d9;
+}
+
+.modal .modal-dialog .modal-content .modal-body .comment .btn::after {
+  content: '\f0d8';
+  font-family: "FontAwesome";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.modal .modal-dialog .modal-content .modal-body .comment .btn.collapsed::after {
+  content: '\f0d7';
+}
+
+.modal .modal-dialog .modal-content .modal-body .comment .btn .patient {
+  margin-right: 15px;
+}
+
+.modal .modal-dialog .modal-content .modal-body .comment .btn .detail {
+  display: inline-block;
+  width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.modal .modal-dialog .modal-content .modal-body .comment p {
+  padding: 10px;
+  background-color: rgba(34, 36, 38, 0.07);
+  border-radius: 4px;
+  font-size: 13px;
+  margin-bottom: 10px;
 }
 
 nav.sidebar {

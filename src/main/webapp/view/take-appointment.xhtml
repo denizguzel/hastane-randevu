@@ -179,7 +179,7 @@
                     <h:column>
                       <f:facet name="header"></f:facet>
                       <h:commandLink value="Yorumlar" styleClass="btn btn-warning mr-1" action="#{appointment.doctorReviews(appointmentsHeader.doctor)}" p:data-toggle="modal" p:data-target="#comment-modal">
-                        <f:ajax execute="@this" render="doctor-comment"/>
+                        <f:ajax execute="@this" render="doctor-comment" onevent="function collapse() { $('.collapse').collapse({toggle: false}) }"/>
                       </h:commandLink>
                       <h:commandLink value="Seç" styleClass="btn btn-success" action="#{appointment.selectAppointment(appointmentsHeader)}">
                         <f:ajax execute="@this" render="appointmentTimes" onevent="tableData"/>
@@ -285,18 +285,23 @@
             <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
           </div>
           <div class="modal-body">
-            <h:panelGroup layout="block" id="doctor-comment" class="comments#{not empty appointment.doctorReviewList ? '' : ' empty'}">
-              <div class="alert"><i class="fa fa-question-circle-o"></i>Doktor hakkında yorum yapılmamış</div>
-              <h:dataTable styleClass="table" value="#{appointment.doctorReviewList}" var="review" binding="#{commentTable}">
-                <h:column>
-                  <f:facet name="header">#</f:facet>
-                  <h:outputText value="#{commentTable.rowIndex + 1}"/>
-                </h:column>
-                <h:column>
-                  <f:facet name="header">Yorum</f:facet>
-                  <h:outputText value="#{review.review}"/>
-                </h:column>
-              </h:dataTable>
+            <h:panelGroup layout="block" id="doctor-comment" styleClass="d-flex flex-column">
+              <h:panelGroup layout="block" styleClass="alert" rendered="#{empty appointment.doctorReviewList}">
+                <i class="fa fa-question-circle-o"></i>Doktor hakkında yorum yapılmamış
+              </h:panelGroup>
+              <h:panelGroup rendered="#{not empty appointment.doctorReviewList}">
+                <ui:repeat value="#{appointment.doctorReviewList}" var="review">
+                  <div class="comment">
+                    <h:outputLink styleClass="btn" p:data-toggle="collapse" value="&#35;comment#{review.pk}">
+                      <span class="patient">${review.patient.firstName} ${review.patient.lastName}</span>
+                      <span class="detail"><b>Yorum: </b>${review.review}</span>
+                    </h:outputLink>
+                    <h:panelGroup layout="block" styleClass="collapse" p:id="comment#{review.pk}">
+                      <p>${review.review}</p>
+                    </h:panelGroup>
+                  </div>
+                </ui:repeat>
+              </h:panelGroup>
             </h:panelGroup>
             <div class="form-group d-flex">
               <button type="button" class="btn btn-danger ml-auto" data-dismiss="modal">Kapat</button>

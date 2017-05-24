@@ -93,6 +93,7 @@ body.page-404 {
     border-radius: 4px;
     color: rgba(0,0,0,.87);
     font-size: 13px;
+    text-transform: capitalize !important;
     &:focus {
       outline: 0 !important;
       border-bottom-color: $main-color;

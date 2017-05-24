@@ -103,6 +103,20 @@ textarea {
   &:focus {
     outline: 0;
   }
+  &:empty {
+    display: inline-block;
+  }
+}
+
+input.badge {
+  cursor: pointer;
+  border: 0;
+}
+
+input.badge-danger {
+  &:hover {
+    background-color: darken($brand-danger, 10%);
+  }
 }
 
 label {
