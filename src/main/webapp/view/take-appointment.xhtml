@@ -292,7 +292,7 @@
               <h:panelGroup rendered="#{not empty appointment.doctorReviewList}">
                 <c:forEach items="#{appointment.doctorReviewList}" var="review">
                   <div class="comment">
-                    <h:outputLink styleClass="btn" p:data-toggle="collapse" value="&#35;comment#{review.pk}">
+                    <h:outputLink styleClass="btn" p:data-toggle="collapse" value="#comment#{review.pk}">
                       <span class="patient">${review.patient.firstName} ${review.patient.lastName}</span>
                       <span class="detail"><b>Yorum: </b>${review.review}</span>
                     </h:outputLink>
