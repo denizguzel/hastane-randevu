@@ -290,7 +290,7 @@
                 <i class="fa fa-question-circle-o"></i>Doktor hakkında yorum yapılmamış
               </h:panelGroup>
               <h:panelGroup rendered="#{not empty appointment.doctorReviewList}">
-                <ui:repeat value="#{appointment.doctorReviewList}" var="review">
+                <c:forEach items="#{appointment.doctorReviewList}" var="review">
                   <div class="comment">
                     <h:outputLink styleClass="btn" p:data-toggle="collapse" value="&#35;comment#{review.pk}">
                       <span class="patient">${review.patient.firstName} ${review.patient.lastName}</span>
@@ -300,7 +300,7 @@
                       <p>${review.review}</p>
                     </h:panelGroup>
                   </div>
-                </ui:repeat>
+                </c:forEach>
               </h:panelGroup>
             </h:panelGroup>
             <div class="form-group d-flex">
