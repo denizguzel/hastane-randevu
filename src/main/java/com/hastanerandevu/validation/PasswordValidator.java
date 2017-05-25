@@ -32,7 +32,7 @@ public class PasswordValidator implements Validator {
 
     Matcher matcher = pattern.matcher(value.toString());
 
-    if(value == null || otherValue == null) {
+    if(otherValue == null) {
       return;
     }
 

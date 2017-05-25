@@ -21,9 +21,7 @@ import java.util.List;
 @ManagedBean(name = "doctor")
 @ViewScoped
 public class DoctorBean implements Serializable {
-
   private static final Logger LOG = Logger.getLogger(DoctorBean.class);
-
   @ManagedProperty(value = "#{login}")
   private LoginBean loginBean;
 

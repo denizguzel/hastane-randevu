@@ -22,11 +22,8 @@ import java.util.List;
 @ManagedBean(name = "home")
 @ViewScoped
 public class HomeBean implements Serializable {
-
   private static final Logger LOG = Logger.getLogger(HomeBean.class);
-
   private SurveyServiceImpl surveyService;
-  private FrequentlyAskedQuestionsServiceImpl frequentlyAskedQuestionsService;
   private OptionServiceImpl optionService;
 
   private String selectedOption;
@@ -39,7 +36,7 @@ public class HomeBean implements Serializable {
   @PostConstruct
   public void init() {
     surveyService = new SurveyServiceImpl();
-    frequentlyAskedQuestionsService = new FrequentlyAskedQuestionsServiceImpl();
+    FrequentlyAskedQuestionsServiceImpl frequentlyAskedQuestionsService = new FrequentlyAskedQuestionsServiceImpl();
     optionService = new OptionServiceImpl();
 
     askedQuestions = new ArrayList<>();

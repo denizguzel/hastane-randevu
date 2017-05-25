@@ -27,7 +27,7 @@ public class PasswordResetBean {
   private String email;
 
   @PostConstruct
-  public void init(){
+  public void init() {
     patientService = new PatientServiceImpl();
   }
 

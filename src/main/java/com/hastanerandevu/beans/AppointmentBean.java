@@ -1,8 +1,6 @@
 package com.hastanerandevu.beans;
 
-import com.hastanerandevu.comparators.AppointmentDateComparator;
 import com.hastanerandevu.converter.NameConverter;
-import com.hastanerandevu.enums.AppointmentStatusEnum;
 import com.hastanerandevu.model.*;
 import com.hastanerandevu.service.impl.*;
 import com.hastanerandevu.utility.Mailer;
@@ -18,7 +16,6 @@ import javax.faces.event.AjaxBehaviorEvent;
 import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 @ManagedBean(name = "appointment")
 @ViewScoped
@@ -42,7 +39,6 @@ public class AppointmentBean implements Serializable {
   private PatientModel patientModel;
   private InspectionPlaceModel inspectionPlaceModel;
   private HospitalPoliclinicRelModel hospitalPoliclinicRelModel;
-
   private AppointmentModel closestAppointment;
 
   private boolean appointmentClockPanel = false;
@@ -54,11 +50,11 @@ public class AppointmentBean implements Serializable {
   private String selectedHospital;
   private String selectedPoliclinic;
   private String selectedInspectionPlace;
-
   private String daysLeft;
 
   private Date appointmentDateStart;
   private Date appointmentDateEnd;
+  private Date closestDate;
 
   private Map<Long, String> cities;
   private Map<Long, String> districts;
@@ -71,11 +67,6 @@ public class AppointmentBean implements Serializable {
   private List<AppointmentModel> appointmentDays;
   private List<AppointmentModel> appointmentHistory;
   private List<ReviewsAboutDoctorsModel> doctorReviewList;
-
-  private List<AppointmentModel> reservedAppointments;
-
-  Date closestDate;
-  Date today;
 
   @SuppressWarnings("unchecked")
   @PostConstruct
@@ -114,17 +105,14 @@ public class AppointmentBean implements Serializable {
 
     if(patientService.getAppointmentHistory(patientModel).size() > 0) {
       appointmentHistory.addAll(patientService.getAppointmentHistory(patientModel));
-
+    }
+    if (patientService.getActiveAppointmentsOfPatient(patientModel).size() > 0) {
       closestAppointment = patientService.getActiveAppointmentsOfPatient(patientModel).get(0);
+      closestDate = closestAppointment.getAppointmentDate();
+      Date today = new Date();
 
-      if(closestAppointment != null) {
-
-        closestDate = closestAppointment.getAppointmentDate();
-        today = new Date();
-
-        long diff = closestDate.getTime() - today.getTime();
-        daysLeft = String.valueOf(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
-      }
+      long diff = closestDate.getTime() - today.getTime();
+      daysLeft = String.valueOf(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
     }
   }
 

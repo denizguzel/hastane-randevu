@@ -25,9 +25,7 @@ import java.io.IOException;
 @ManagedBean(name = "login")
 @SessionScoped
 public class LoginBean {
-
   private static final Logger LOG = Logger.getLogger(LoginBean.class);
-
   private Mailer mailer;
   private PatientServiceImpl patientService;
   private DoctorServiceImpl doctorService;
@@ -46,7 +44,7 @@ public class LoginBean {
   private String password;
 
   @PostConstruct
-  public void init(){
+  public void init() {
     mailer = new Mailer();
 
     patientService = new PatientServiceImpl();
