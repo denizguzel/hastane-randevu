@@ -46,6 +46,7 @@ public class AssayBean implements Serializable {
     patientAssayRelService = new PatientAssayRelServiceImpl();
     patientService = new PatientServiceImpl();
     assayService = new AssayServiceImpl();
+
     patientAssayRelModel = new PatientAssayRelModel();
     patientModel = loginBean.getPatientModel();
 

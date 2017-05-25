@@ -3,6 +3,7 @@ package com.hastanerandevu.beans;
 import com.hastanerandevu.model.PageModel;
 import com.hastanerandevu.utility.SessionUtils;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -13,9 +14,12 @@ import java.util.List;
 @ViewScoped
 public class PageBean {
 
-  private List<PageModel> pageList = new ArrayList<>();
+  private List<PageModel> pageList;
 
-  public PageBean() {
+  @PostConstruct
+  public void init() {
+    pageList = new ArrayList<>();
+
     pageList.add(new PageModel("/view/dashboard.xhtml", "Ana Sayfa", "fa fa-home fa-fw"));
     if(SessionUtils.getSession().getAttribute("userType").equals("patient")) {
       pageList.add(new PageModel("/view/take-appointment.xhtml", "Randevu Al", "fa fa-book fa-fw"));

@@ -8,6 +8,7 @@ import com.hastanerandevu.service.impl.PatientServiceImpl;
 import com.hastanerandevu.utility.Mailer;
 import org.apache.log4j.Logger;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -20,10 +21,15 @@ import java.util.Date;
 @ViewScoped
 public class PasswordResetBean {
   private static final Logger LOG = Logger.getLogger(PasswordResetBean.class);
-  private PatientServiceImpl patientService = new PatientServiceImpl();
+  private PatientServiceImpl patientService;
   private String urlParam;
   private String password;
   private String email;
+
+  @PostConstruct
+  public void init(){
+    patientService = new PatientServiceImpl();
+  }
 
   public String getUrlParam() {
     return urlParam;

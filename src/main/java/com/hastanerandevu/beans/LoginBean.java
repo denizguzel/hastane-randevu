@@ -14,6 +14,7 @@ import com.hastanerandevu.utility.SessionUtils;
 import com.hastanerandevu.validation.CaptchaValidator;
 import org.apache.log4j.Logger;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -27,15 +28,15 @@ public class LoginBean {
 
   private static final Logger LOG = Logger.getLogger(LoginBean.class);
 
-  private Mailer mailer = new Mailer();
-  private PatientServiceImpl patientService = new PatientServiceImpl();
-  private DoctorServiceImpl doctorService = new DoctorServiceImpl();
-  private PatientModel patientModel = new PatientModel();
-  private DoctorModel doctorModel = new DoctorModel();
+  private Mailer mailer;
+  private PatientServiceImpl patientService;
+  private DoctorServiceImpl doctorService;
+  private PatientModel patientModel;
+  private DoctorModel doctorModel;
 
-  private BloodGroupEnum[] bloodGroupEnums = BloodGroupEnum.values();
-  private GenderEnum[] genderEnums = GenderEnum.values();
-  private SecretQuestionEnum[] secretQuestionEnums = SecretQuestionEnum.values();
+  private BloodGroupEnum[] bloodGroupEnums;
+  private GenderEnum[] genderEnums;
+  private SecretQuestionEnum[] secretQuestionEnums;
 
   private byte loginCounter = 0;
   private boolean showCaptcha = false;
@@ -43,6 +44,22 @@ public class LoginBean {
   private boolean verifyLogin = false;
   private String loggedUsername;
   private String password;
+
+  @PostConstruct
+  public void init(){
+    mailer = new Mailer();
+
+    patientService = new PatientServiceImpl();
+    doctorService = new DoctorServiceImpl();
+
+    patientModel = new PatientModel();
+    doctorModel = new DoctorModel();
+
+    bloodGroupEnums = BloodGroupEnum.values();
+    genderEnums = GenderEnum.values();
+    secretQuestionEnums = SecretQuestionEnum.values();
+  }
+
 
   public String getPassword() {
     return password;

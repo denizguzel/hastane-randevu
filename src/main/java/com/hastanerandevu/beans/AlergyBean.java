@@ -25,8 +25,10 @@ public class AlergyBean implements Serializable {
   @ManagedProperty(value = "#{login}")
   private LoginBean loginBean;
 
+  private PatientServiceImpl patientService;
   private PatientAlergyRelServiceImpl patientAlergyRelService;
   private AlergyServiceImpl alergyService;
+
   private PatientAlergyRelModel patientAlergyRelModel;
   private PatientModel patientModel;
 
@@ -40,7 +42,7 @@ public class AlergyBean implements Serializable {
   @PostConstruct
   public void init() {
     patientAlergyRelService = new PatientAlergyRelServiceImpl();
-    PatientServiceImpl patientService = new PatientServiceImpl();
+    patientService = new PatientServiceImpl();
     alergyService = new AlergyServiceImpl();
     patientAlergyRelModel = new PatientAlergyRelModel();
     patientModel = loginBean.getPatientModel();

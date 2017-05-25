@@ -41,8 +41,8 @@ public class PatientServiceImpl implements BaseService<PatientModel> {
     return patientDao.findAll();
   }
 
-  public long getNumberOfPatientAppointments(PatientModel patientModel) {
-    return patientDao.getNumberOfPatientAppointments(patientModel);
+  public List<AppointmentModel> getActiveAppointmentsOfPatient(PatientModel patientModel) {
+    return patientDao.getActiveAppointmentsOfPatient(patientModel);
   }
 
   public boolean haveAnAppointmentForThatDay(PatientModel patientModel, Date date) {

@@ -1,6 +1,8 @@
 package com.hastanerandevu.beans;
 
+import com.hastanerandevu.comparators.AppointmentDateComparator;
 import com.hastanerandevu.converter.NameConverter;
+import com.hastanerandevu.enums.AppointmentStatusEnum;
 import com.hastanerandevu.model.*;
 import com.hastanerandevu.service.impl.*;
 import com.hastanerandevu.utility.Mailer;
@@ -16,6 +18,7 @@ import javax.faces.event.AjaxBehaviorEvent;
 import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @ManagedBean(name = "appointment")
 @ViewScoped
@@ -40,6 +43,8 @@ public class AppointmentBean implements Serializable {
   private InspectionPlaceModel inspectionPlaceModel;
   private HospitalPoliclinicRelModel hospitalPoliclinicRelModel;
 
+  private AppointmentModel closestAppointment;
+
   private boolean appointmentClockPanel = false;
   private boolean appointmentPanel = false;
   private boolean appointmentSearchNull = false;
@@ -49,7 +54,8 @@ public class AppointmentBean implements Serializable {
   private String selectedHospital;
   private String selectedPoliclinic;
   private String selectedInspectionPlace;
-  private String appointmentCounter;
+
+  private String daysLeft;
 
   private Date appointmentDateStart;
   private Date appointmentDateEnd;
@@ -65,6 +71,11 @@ public class AppointmentBean implements Serializable {
   private List<AppointmentModel> appointmentDays;
   private List<AppointmentModel> appointmentHistory;
   private List<ReviewsAboutDoctorsModel> doctorReviewList;
+
+  private List<AppointmentModel> reservedAppointments;
+
+  Date closestDate;
+  Date today;
 
   @SuppressWarnings("unchecked")
   @PostConstruct
@@ -104,11 +115,16 @@ public class AppointmentBean implements Serializable {
     if(patientService.getAppointmentHistory(patientModel).size() > 0) {
       appointmentHistory.addAll(patientService.getAppointmentHistory(patientModel));
 
-      Date closestDate = appointmentHistory.get(0).getAppointmentDate();
-      Date today = new Date();
+      closestAppointment = patientService.getActiveAppointmentsOfPatient(patientModel).get(0);
 
-      long diff = closestDate.getTime() - today.getTime();
-      appointmentCounter = String.valueOf(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+      if(closestAppointment != null) {
+
+        closestDate = closestAppointment.getAppointmentDate();
+        today = new Date();
+
+        long diff = closestDate.getTime() - today.getTime();
+        daysLeft = String.valueOf(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+      }
     }
   }
 
@@ -276,8 +292,8 @@ public class AppointmentBean implements Serializable {
     this.doctorReviewList = doctorReviewList;
   }
 
-  public String getAppointmentCounter() {
-    return appointmentCounter;
+  public String getDaysLeft() {
+    return daysLeft;
   }
 
   public Date getAppointmentDateStart() {
@@ -294,6 +310,14 @@ public class AppointmentBean implements Serializable {
 
   public void setAppointmentDateEnd(Date appointmentDateEnd) {
     this.appointmentDateEnd = appointmentDateEnd;
+  }
+
+  public Date getClosestDate() {
+    return closestDate;
+  }
+
+  public AppointmentModel getClosestAppointment() {
+    return closestAppointment;
   }
 
   // Functions
@@ -464,7 +488,7 @@ public class AppointmentBean implements Serializable {
     if(patientService.haveAnAppointmentForThatDay(patientModel, appointmentModel.getAppointmentDate())) {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aynı güne birden fazla randevu alamazsınız.", null));
       appointmentService.clearAppointment(appointmentModel);
-    } else if(patientService.getNumberOfPatientAppointments(patientModel) >= 3) {
+    } else if(patientService.getActiveAppointmentsOfPatient(patientModel).size() >= 3) {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "En fazla 3 randevu alabilirsiniz.", null));
       appointmentService.clearAppointment(appointmentModel);
     } else {

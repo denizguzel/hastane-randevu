@@ -32,14 +32,14 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientModel> {
   }
 
   // HASTANIN HALI HAZIRDA OLAN RANDEVU SAYISI. ÜÇÜ GEÇİP GEÇMEDİĞİNİN KONTROLU BURDAN YAPILACAK.
-  public long getNumberOfPatientAppointments(PatientModel patientModel) {
-    Query query = getEntitymanager().createQuery("SELECT COUNT(id) FROM AppointmentModel e WHERE e.appointmentStatus = :APPOINTMENT_STATUS" + " AND e.patient = :PATIENT AND e.isActive = :IS_ACTIVE");
+  public List<AppointmentModel> getActiveAppointmentsOfPatient(PatientModel patientModel) {
+    Query query = getEntitymanager().createQuery("SELECT e FROM AppointmentModel e WHERE e.appointmentStatus = :APPOINTMENT_STATUS" + " AND e.patient = :PATIENT AND e.isActive = :IS_ACTIVE ORDER BY e.appointmentDate");
 
     query.setParameter("APPOINTMENT_STATUS", AppointmentStatusEnum.RESERVED);
     query.setParameter("PATIENT", patientModel);
     query.setParameter("IS_ACTIVE", '1');
 
-    return (long) query.getResultList().get(0);
+    return query.getResultList();
   }
 
   // HASTANIN O GUNE GECERLI RANDEVUSU OLUP OLMADIGI BILGISI.. AYNI GUNE RANDEVU ALINAMAMASI KONTROLU BURDAN YAPILACAK.

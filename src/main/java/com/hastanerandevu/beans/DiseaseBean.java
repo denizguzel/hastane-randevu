@@ -27,6 +27,8 @@ public class DiseaseBean implements Serializable {
 
   private PatientDiseaseRelServiceImpl patientDiseaseRelService;
   private DiseaseServiceImpl diseaseService;
+  private PatientServiceImpl patientService;
+
   private PatientDiseaseRelModel patientDiseaseRelModel;
   private PatientModel patientModel;
 
@@ -40,7 +42,7 @@ public class DiseaseBean implements Serializable {
   @PostConstruct
   public void init() {
     patientDiseaseRelService = new PatientDiseaseRelServiceImpl();
-    PatientServiceImpl patientService = new PatientServiceImpl();
+    patientService = new PatientServiceImpl();
     diseaseService = new DiseaseServiceImpl();
     patientDiseaseRelModel = new PatientDiseaseRelModel();
     patientModel = loginBean.getPatientModel();

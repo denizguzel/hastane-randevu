@@ -18,12 +18,12 @@
                     <h4>En Yakın Randevunuz</h4>
                   </div>
                   <div class="right">
-                    <h:panelGroup rendered="#{not empty appointment.appointmentHistory}">
-                    <span class="count">${appointment.appointmentCounter}
+                    <h:panelGroup rendered="#{not empty appointment.closestAppointment}">
+                    <span class="count">${appointment.daysLeft}
                       <small> gün sonra</small></span>
                     </h:panelGroup>
-                    <h:outputText rendered="#{empty appointment.appointmentHistory}" value="Randevu Yok"/>
-                    <h:outputText styleClass="date" value="#{appointment.appointmentHistory.get(0).appointmentDate}" rendered="#{not empty appointment.appointmentHistory}">
+                    <h:outputText rendered="#{empty appointment.closestAppointment}" value="Randevu Yok"/>
+                    <h:outputText styleClass="date" value="#{appointment.closestDate}" rendered="#{not empty appointment.closestAppointment}">
                       <f:convertDateTime timeZone="GMT+3" pattern="dd-MM-yyyy HH:mm"/>
                     </h:outputText>
                   </div>
