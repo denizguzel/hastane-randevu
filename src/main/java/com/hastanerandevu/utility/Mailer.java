@@ -26,11 +26,17 @@ import java.util.ResourceBundle;
 
 public class Mailer implements Runnable {
 
-  private final static int port = SessionUtils.getRequest().getLocalPort();
+  private final int port = SessionUtils.getRequest().getLocalPort();
+  private final String serverName = SessionUtils.getRequest().getServerName();
   private static final Logger LOG = Logger.getLogger(Mailer.class);
   private PatientServiceImpl patientService = new PatientServiceImpl();
-  private PatientModel patientModel = new PatientModel();
-  private String to;
+  private VelocityEngine velocityEngine = new VelocityEngine();
+  private VelocityContext velocityContext = new VelocityContext();
+  private StringWriter stringWriter = new StringWriter();
+  private Thread thread;
+  private Template template;
+
+  private String recipient;
   private String subject;
   private String content;
 
@@ -39,8 +45,8 @@ public class Mailer implements Runnable {
     this.mailSettings();
   }
 
-  private void setParameters(String to, String subject, String content) {
-    this.to = to;
+  private void setParameters(String recipient, String subject, String content) {
+    this.recipient = recipient;
     this.subject = subject;
     this.content = content;
   }
@@ -65,72 +71,58 @@ public class Mailer implements Runnable {
       Message message = new MimeMessage(session);
 
       message.setFrom(new InternetAddress("hastanerandevu.iu@gmail.com"));
-      message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+      message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipient));
       message.setSubject(subject);
       message.setSentDate(new Date());
       message.setContent(content, "text/html;charset=utf-8");
       Transport.send(message);
 
-      LOG.info("Mail sent");
+      LOG.info("Mail sent to \"" + recipient + "\", subject is: \"" + subject + "\"");
     } catch(Exception e) {
       LOG.error(e.getMessage());
     }
   }
 
   public void sendRegisterMail(PatientModel patientModel) {
-    VelocityEngine ve = new VelocityEngine();
-    VelocityContext context = new VelocityContext();
+    velocityEngine.setProperty("resource.loader", "file");
+    velocityEngine.setProperty("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+    velocityEngine.init();
 
-    ve.setProperty("resource.loader", "file");
-    ve.setProperty("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+    velocityContext.put("userName", NameConverter.getName(patientModel.getFirstName(), patientModel.getLastName()));
+    velocityContext.put("port", port);
+    velocityContext.put("serverName", serverName);
 
-    ve.init();
-
-    context.put("userName", NameConverter.getName(patientModel.getFirstName(), patientModel.getLastName()));
-    context.put("port", port);
-
-    Template t = ve.getTemplate("com/hastanerandevu/template/registrationMail.vm", "UTF-8");
-
-    StringWriter stringWriter = new StringWriter();
-
-    t.merge(context, stringWriter);
+    template = velocityEngine.getTemplate("com/hastanerandevu/template/registrationMail.vm", "UTF-8");
+    template.merge(velocityContext, stringWriter);
 
     Mailer mailer = new Mailer();
     mailer.setParameters(patientModel.getEmail(), "e-Randevu Sistemi", stringWriter.toString());
 
-    Thread thread = new Thread(mailer);
+    thread = new Thread(mailer);
     thread.start();
   }
 
   public void sendPasswordResetMail(String email) {
     try {
-      patientModel = patientService.getUserByEmail(email);
-
+      PatientModel patientModel = patientService.getUserByEmail(email);
       String encryptedSalt = Encryptor.encrypt(ProjectConstants.SALT + patientModel.getEmail());
 
-      VelocityEngine ve = new VelocityEngine();
-      VelocityContext context = new VelocityContext();
+      velocityEngine.setProperty("resource.loader", "file");
+      velocityEngine.setProperty("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+      velocityEngine.init();
 
-      ve.setProperty("resource.loader", "file");
-      ve.setProperty("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+      velocityContext.put("userName", NameConverter.getName(patientModel.getFirstName(), patientModel.getLastName()));
+      velocityContext.put("encryptedSalt", encryptedSalt);
+      velocityContext.put("port", port);
+      velocityContext.put("serverName", serverName);
 
-      ve.init();
-
-      context.put("userName", NameConverter.getName(patientModel.getFirstName(), patientModel.getLastName()));
-      context.put("encryptedSalt", encryptedSalt);
-      context.put("port", port);
-
-      Template t = ve.getTemplate("com/hastanerandevu/template/passwordResetMail.vm", "UTF-8");
-
-      StringWriter stringWriter = new StringWriter();
-
-      t.merge(context, stringWriter);
-
+      template = velocityEngine.getTemplate("com/hastanerandevu/template/passwordResetMail.vm", "UTF-8");
+      template.merge(velocityContext, stringWriter);
 
       Mailer mailer = new Mailer();
       mailer.setParameters(patientModel.getEmail(), "e-Randevu Şifre Sıfırlama", stringWriter.toString());
 
-      Thread thread = new Thread(mailer);
+      thread = new Thread(mailer);
       thread.start();
     } catch(NoUserException e) {
       LOG.warn(e.getMessage());
@@ -138,36 +130,30 @@ public class Mailer implements Runnable {
   }
 
   public void sendAppointmentMail(AppointmentModel appointmentModel) {
-    VelocityEngine ve = new VelocityEngine();
-    VelocityContext context = new VelocityContext();
     ResourceBundle bundle = ResourceBundle.getBundle("com.hastanerandevu.messages");
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
-    ve.setProperty("resource.loader", "file");
-    ve.setProperty("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+    velocityEngine.setProperty("resource.loader", "file");
+    velocityEngine.setProperty("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+    velocityEngine.init();
 
-    ve.init();
-
-    context.put("userName", NameConverter.getName(appointmentModel.getPatient().getFirstName(), appointmentModel.getPatient().getLastName()));
-    context.put("hospital", appointmentModel.getInspectionPlace().getHospitalPoliclinicRel().getHospital().getHospitalName());
-    context.put("policlinic", appointmentModel.getInspectionPlace().getHospitalPoliclinicRel().getPoliclinic().getPoliclinicName());
-    context.put("inspectionPlace", appointmentModel.getInspectionPlace().getPlaceName());
-    context.put("doctor", NameConverter.getName(appointmentModel.getInspectionPlace().getDoctor().getFirstName(), appointmentModel.getInspectionPlace().getDoctor().getLastName()));
-    context.put("doctorLevel", bundle.getString("string." + appointmentModel.getInspectionPlace().getDoctor().getLevel()));
-    context.put("appointmentDate", sdf.format(appointmentModel.getAppointmentDate()));
+    velocityContext.put("userName", NameConverter.getName(appointmentModel.getPatient().getFirstName(), appointmentModel.getPatient().getLastName()));
+    velocityContext.put("hospital", appointmentModel.getInspectionPlace().getHospitalPoliclinicRel().getHospital().getHospitalName());
+    velocityContext.put("policlinic", appointmentModel.getInspectionPlace().getHospitalPoliclinicRel().getPoliclinic().getPoliclinicName());
+    velocityContext.put("inspectionPlace", appointmentModel.getInspectionPlace().getPlaceName());
+    velocityContext.put("doctor", NameConverter.getName(appointmentModel.getInspectionPlace().getDoctor().getFirstName(), appointmentModel.getInspectionPlace().getDoctor().getLastName()));
+    velocityContext.put("doctorLevel", bundle.getString("string." + appointmentModel.getInspectionPlace().getDoctor().getLevel()));
+    velocityContext.put("appointmentDate", sdf.format(appointmentModel.getAppointmentDate()));
     if(appointmentModel.getMessageToDoctor() != null)
-      context.put("message", appointmentModel.getMessageToDoctor());
+      velocityContext.put("message", appointmentModel.getMessageToDoctor());
 
-    Template t = ve.getTemplate("com/hastanerandevu/template/appointmentMail.vm", "UTF-8");
-
-    StringWriter stringWriter = new StringWriter();
-
-    t.merge(context, stringWriter);
+    template = velocityEngine.getTemplate("com/hastanerandevu/template/appointmentMail.vm", "UTF-8");
+    template.merge(velocityContext, stringWriter);
 
     Mailer mailer = new Mailer();
     mailer.setParameters(appointmentModel.getPatient().getEmail(), "e-Randevu Sistemi - Randevu", stringWriter.toString());
 
-    Thread thread = new Thread(mailer);
+    thread = new Thread(mailer);
     thread.start();
   }
 }
