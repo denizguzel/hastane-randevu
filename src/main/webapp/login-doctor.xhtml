@@ -1,27 +1,27 @@
 <ui:composition template="/view/master/beforeLoginTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
-  <ui:define name="title">Doktor Giriş</ui:define>
+  <ui:define name="title">#{messages["title.doctorLogin"]}</ui:define>
 
   <ui:define name="content">
     <div class="container">
       <div class="col-md-6 offset-md-3 col-lg-4 offset-lg-4">
         <div class="card card-form shadow">
-          <div class="card-header">Doktor Giriş</div>
+          <div class="card-header">#{messages["login.doctorLogin"]}</div>
           <div class="card-block">
             <h:form prependId="false">
               <div class="form-group" data-message="">
-                <h:inputText id="recordNumber" value="#{login.doctorModel.recordNumber}" p:placeholder="Sicil no giriniz" required="true" requiredMessage="Sicil no giriniz" styleClass="form-control">
+                <h:inputText id="recordNumber" value="#{login.doctorModel.recordNumber}" p:placeholder="#{messages['form.record']}" required="true" requiredMessage="#{messages['form.record']}" styleClass="form-control">
                   <f:ajax event="blur" execute="@this" render="recordNumberMessage" onevent="ajaxCall"/>
                 </h:inputText>
                 <h:message id="recordNumberMessage" for="recordNumber" errorClass="error"/>
               </div>
               <div class="form-group" data-message="">
-                <h:inputSecret id="password" value="#{login.doctorModel.password}" p:placeholder="Şifre giriniz" required="true" requiredMessage="Şifrenizi giriniz" styleClass="form-control">
+                <h:inputSecret id="password" value="#{login.doctorModel.password}" p:placeholder="#{messages['form.password']}" required="true" requiredMessage="#{messages['form.password']}" styleClass="form-control">
                   <f:ajax event="blur" execute="@this" render="passwordMessage" onevent="ajaxCall"/>
                 </h:inputSecret>
                 <h:message id="passwordMessage" for="password" errorClass="error"/>
               </div>
               <div class="form-group d-flex">
-                <a href="#{facesContext.externalContext.requestContextPath}/recovery/forgot" class="forgot ml-auto">Şifremi Unuttum</a>
+                <a href="#{facesContext.externalContext.requestContextPath}/recovery/forgot" class="forgot ml-auto">#{messages["login.link.forgot"]}</a>
               </div>
               <h:panelGroup layout="block" rendered="#{login.showCaptcha}">
                 <div class="g-recaptcha" data-sitekey="6LcjxBcUAAAAAKrzn6mU3wRdUiqEdCsxkKojNKeJ"></div>
@@ -29,7 +29,7 @@
               </h:panelGroup>
               <input type="hidden" name="loginCheck" value="doctor"/>
               <h:messages globalOnly="true" errorClass="error"/>
-              <h:commandButton value="Giriş Yap" styleClass="btn btn-success" action="#{login.login}">
+              <h:commandButton value="#{messages['button.login']}" styleClass="btn btn-success" action="#{login.login}">
                 <f:ajax execute="@form" render="@form"/>
               </h:commandButton>
             </h:form>

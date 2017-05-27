@@ -10,24 +10,20 @@ import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
-/**
- * Created by ouzun on 27.05.2017.
- */
 public class UTF8Control extends ResourceBundle.Control {
   public ResourceBundle newBundle
     (String baseName, Locale locale, String format, ClassLoader loader, boolean reload)
-    throws IllegalAccessException, InstantiationException, IOException
-  {
+    throws IllegalAccessException, InstantiationException, IOException {
     // The below is a copy of the default implementation.
     String bundleName = toBundleName(baseName, locale);
     String resourceName = toResourceName(bundleName, "properties");
     ResourceBundle bundle = null;
     InputStream stream = null;
-    if (reload) {
+    if(reload) {
       URL url = loader.getResource(resourceName);
-      if (url != null) {
+      if(url != null) {
         URLConnection connection = url.openConnection();
-        if (connection != null) {
+        if(connection != null) {
           connection.setUseCaches(false);
           stream = connection.getInputStream();
         }
@@ -35,7 +31,7 @@ public class UTF8Control extends ResourceBundle.Control {
     } else {
       stream = loader.getResourceAsStream(resourceName);
     }
-    if (stream != null) {
+    if(stream != null) {
       try {
         // Only this line is changed to make it to read properties files as UTF-8.
         bundle = new PropertyResourceBundle(new InputStreamReader(stream, "UTF-8"));

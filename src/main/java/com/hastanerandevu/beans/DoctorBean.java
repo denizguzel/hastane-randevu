@@ -27,7 +27,7 @@ public class DoctorBean implements Serializable {
   @ManagedProperty(value = "#{login}")
   private LoginBean loginBean;
 
-  ResourceBundle bundle = ResourceBundle.getBundle("com.hastanerandevu.messages",new UTF8Control());
+  private ResourceBundle bundle = ResourceBundle.getBundle("com.hastanerandevu.messages", FacesContext.getCurrentInstance().getViewRoot().getLocale(), new UTF8Control());
 
   private DoctorServiceImpl doctorService;
   private PatientServiceImpl patientService;
@@ -153,7 +153,7 @@ public class DoctorBean implements Serializable {
 
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("doctor.update.successful"), null));
     } catch(Exception e) {
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("doctor.update.unsuccessful"), null));
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("check.error"), null));
       LOG.error(e.getMessage());
     }
   }

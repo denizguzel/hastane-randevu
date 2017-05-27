@@ -1,21 +1,19 @@
 <!DOCTYPE html>
-<html lang="tr" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+<html lang="#{language.locale}" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
 <ui:composition>
   <nav class="navbar navbar-login">
     <a class="brand" href="#{facesContext.externalContext.requestContextPath}/">
       <img src="#{facesContext.externalContext.requestContextPath}/resources/img/white-logo.png"/>
     </a>
     <div class="dropdown">
-      <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">${login.loggedUsername}</button>
+      <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">#{login.loggedUsername}</button>
       <div class="dropdown-menu dropdown-menu-right">
         <div class="dropdown-item">
-          <a href="#{facesContext.externalContext.requestContextPath}/view/profile"><i class="fa fa-user-o"></i>Profil</a>
+          <a href="#{facesContext.externalContext.requestContextPath}/view/profile"><i class="fa fa-user-o"></i>#{messages["header.profile"]}</a>
         </div>
         <div class="dropdown-item">
           <h:form prependId="false">
-            <h:commandLink action="#{login.logout}">
-              <i class="fa fa-sign-out"></i>Çıkış Yap
-            </h:commandLink>
+            <h:commandLink action="#{login.logout}"><i class="fa fa-sign-out"></i>#{messages["header.logout"]}</h:commandLink>
           </h:form>
         </div>
       </div>

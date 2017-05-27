@@ -29,7 +29,7 @@ import java.util.ResourceBundle;
 public class LoginBean {
   private static final Logger LOG = Logger.getLogger(LoginBean.class);
 
-  ResourceBundle bundle = ResourceBundle.getBundle("com.hastanerandevu.messages",new UTF8Control());
+  private ResourceBundle bundle = ResourceBundle.getBundle("com.hastanerandevu.messages", FacesContext.getCurrentInstance().getViewRoot().getLocale(), new UTF8Control());
 
   private Mailer mailer;
   private PatientServiceImpl patientService;
@@ -62,7 +62,6 @@ public class LoginBean {
     genderEnums = GenderEnum.values();
     secretQuestionEnums = SecretQuestionEnum.values();
   }
-
 
   public String getPassword() {
     return password;
@@ -132,7 +131,7 @@ public class LoginBean {
         patientModel = new PatientModel(); // form reset
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("patient.create.successful"), null));
       } catch(Exception e) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("patient.create.unsuccessful"), null));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("check.error"), null));
         LOG.info(e.getMessage());
       }
     }
@@ -145,7 +144,7 @@ public class LoginBean {
 
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("patient.update.successful"), null));
     } catch(Exception e) {
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("patient.update.unsuccessful"), null));
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("check.error"), null));
       LOG.error(e.getMessage());
     }
   }
@@ -156,7 +155,7 @@ public class LoginBean {
       patientService.update(patientModel);
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("patient.changepassword.successful"), null));
     } catch(Exception e) {
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("patient.changepassword.unsuccessful"), null));
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("check.error"), null));
       LOG.error(e.getMessage());
     }
   }

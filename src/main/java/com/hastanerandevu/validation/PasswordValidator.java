@@ -1,6 +1,7 @@
 package com.hastanerandevu.validation;
 
 import com.hastanerandevu.constants.ProjectConstants;
+import com.hastanerandevu.utility.UTF8Control;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -8,6 +9,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,6 +17,7 @@ import java.util.regex.Pattern;
 public class PasswordValidator implements Validator {
 
   private Pattern pattern = Pattern.compile(ProjectConstants.PASSWORD_PATTERN);
+  private ResourceBundle bundle = ResourceBundle.getBundle("com.hastanerandevu.messages", FacesContext.getCurrentInstance().getViewRoot().getLocale(), new UTF8Control());
 
   /*
   (?=.*[0-9]) a digit must occur at least once
@@ -37,11 +40,11 @@ public class PasswordValidator implements Validator {
     }
 
     if(!matcher.matches()) {
-      FacesMessage msg = new FacesMessage(null, "Şifrenizi kontrol ediniz");
+      FacesMessage msg = new FacesMessage(null, bundle.getString("validation.password.unsuccessful"));
       msg.setSeverity(FacesMessage.SEVERITY_ERROR);
       throw new ValidatorException(msg);
     } else if(!value.equals(otherValue)) {
-      FacesMessage msg = new FacesMessage(null, "Şifreleriniz eşleşmiyor");
+      FacesMessage msg = new FacesMessage(null, bundle.getString("validation.password.notmatch"));
       msg.setSeverity(FacesMessage.SEVERITY_ERROR);
       throw new ValidatorException(msg);
     }

@@ -23,7 +23,7 @@ public class DiseaseBean implements Serializable {
   @ManagedProperty(value = "#{login}")
   private LoginBean loginBean;
 
-  ResourceBundle bundle = ResourceBundle.getBundle("com.hastanerandevu.messages",new UTF8Control());
+  private ResourceBundle bundle = ResourceBundle.getBundle("com.hastanerandevu.messages", FacesContext.getCurrentInstance().getViewRoot().getLocale(), new UTF8Control());
 
   private PatientDiseaseRelServiceImpl patientDiseaseRelService;
   private DiseaseServiceImpl diseaseService;

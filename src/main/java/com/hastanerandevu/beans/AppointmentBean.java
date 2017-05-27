@@ -25,7 +25,7 @@ public class AppointmentBean implements Serializable {
   @ManagedProperty(value = "#{login}")
   private LoginBean loginBean;
 
-  ResourceBundle bundle = ResourceBundle.getBundle("com.hastanerandevu.messages",new UTF8Control());
+  private ResourceBundle bundle = ResourceBundle.getBundle("com.hastanerandevu.messages", FacesContext.getCurrentInstance().getViewRoot().getLocale(), new UTF8Control());
 
   private HospitalPoliclinicRelServiceImpl hospitalPoliclinicRelService;
   private CityServiceImpl cityService;
@@ -106,21 +106,17 @@ public class AppointmentBean implements Serializable {
       cities.put(cityModel.getPk(), cityModel.getCityName());
     }
 
-    appointmentHistory.addAll(patientService.getAppointmentHistory(patientModel));
-
-    if(appointmentHistory.size() > 0) {
-      closestAppointment = patientService.getActiveAppointmentsOfPatient(patientModel).get(0);
-
-      if(closestAppointment != null) {
-
-        closestDate = closestAppointment.getAppointmentDate();
-        Date today = new Date();
-
-        long diff = closestDate.getTime() - today.getTime();
-        daysLeft = String.valueOf(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
-      }
+    if(patientService.getAppointmentHistory(patientModel).size() > 0) {
+      appointmentHistory.addAll(patientService.getAppointmentHistory(patientModel));
     }
+    if(patientService.getActiveAppointmentsOfPatient(patientModel).size() > 0) {
+      closestAppointment = patientService.getActiveAppointmentsOfPatient(patientModel).get(0);
+      closestDate = closestAppointment.getAppointmentDate();
+      Date today = new Date();
 
+      long diff = closestDate.getTime() - today.getTime();
+      daysLeft = String.valueOf(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+    }
   }
 
   public void setLoginBean(LoginBean loginBean) {

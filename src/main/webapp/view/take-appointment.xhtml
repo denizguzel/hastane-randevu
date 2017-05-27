@@ -1,11 +1,11 @@
 <ui:composition template="/view/master/afterLoginTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://xmlns.jcp.org/jsf/passthrough" xmlns:c="http://java.sun.com/jsp/jstl/core">
-  <ui:define name="title">Randevu Alma</ui:define>
+  <ui:define name="title">#{messages["page.title.takeAppointment"]}</ui:define>
 
   <ui:define name="content">
     <div class="page-wrapper">
       <div class="container-fluid">
         <div class="page-title">
-          <h4>Randevu Alma</h4>
+          <h4>#{messages["page.title.takeAppointment"]}</h4>
           <button class="sidebar-toggler" type="button"><i class="fa fa-bars"></i></button>
         </div>
         <div class="card">
@@ -15,65 +15,65 @@
                 <div class="row">
                   <div class="col-xl-6">
                     <div class="form-group">
-                      <label class="form-control-label">İl Seçiniz</label>
+                      <label class="form-control-label">#{messages["label.selectCity"]}</label>
                       <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedCity}" p:data-live-search="true">
                         <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeCity}" onevent="appointment"/>
-                        <f:selectItem itemLabel="İl Seçiniz"/>
+                        <f:selectItem itemLabel="#{messages['label.selectCity']}"/>
                         <f:selectItems value="#{appointment.cities.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
                       </h:selectOneMenu>
                     </div>
                   </div>
                   <div class="col-xl-6">
                     <div class="form-group">
-                      <label class="form-control-label">İlçe Seçiniz</label>
+                      <label class="form-control-label">#{messages["label.selectDistrict"]}</label>
                       <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedDistrict}" p:data-live-search="true">
                         <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeDistrict}" onevent="appointment"/>
-                        <f:selectItem itemLabel="İlçe seçiniz"/>
+                        <f:selectItem itemLabel="#{messages['label.selectDistrict']}"/>
                         <f:selectItems value="#{appointment.districts.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
                       </h:selectOneMenu>
                     </div>
                   </div>
                   <div class="col-xl-6">
                     <div class="form-group">
-                      <label class="form-control-label">Hastane Seçiniz</label>
+                      <label class="form-control-label">#{messages['label.selectHospital']}</label>
                       <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedHospital}">
                         <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeHospital}" onevent="appointment"/>
-                        <f:selectItem itemLabel="Hastane seçiniz"/>
+                        <f:selectItem itemLabel="#{messages['label.selectHospital']}"/>
                         <f:selectItems value="#{appointment.hospitals.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
                       </h:selectOneMenu>
                     </div>
                   </div>
                   <div class="col-xl-6">
                     <div class="form-group">
-                      <label class="form-control-label">Poliklinik Seçiniz</label>
+                      <label class="form-control-label">#{messages['label.selectPoliclinic']}</label>
                       <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedPoliclinic}">
                         <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changePoliclinic}" onevent="appointment"/>
-                        <f:selectItem itemLabel="Poliklinik seçiniz"/>
+                        <f:selectItem itemLabel="#{messages['label.selectPoliclinic']}"/>
                         <f:selectItems value="#{appointment.policlinics.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
                       </h:selectOneMenu>
                     </div>
                   </div>
                   <div class="col-xl-6">
                     <div class="form-group">
-                      <label class="form-control-label">Muayene Yeri Seçiniz</label>
+                      <label class="form-control-label">#{messages['label.selectInspectionPlace']}</label>
                       <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedInspectionPlace}">
                         <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeInspectionPlace}" onevent="appointment"/>
-                        <f:selectItem itemLabel="Muayene yeri seçiniz"/>
+                        <f:selectItem itemLabel="#{messages['label.selectInspectionPlace']}"/>
                         <f:selectItems value="#{appointment.inspectionPlaces.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
                       </h:selectOneMenu>
                     </div>
                   </div>
                   <div class="col-xl-6">
                     <div class="form-group">
-                      <label class="form-control-label">Tarih Aralığı Seçiniz</label>
+                      <label class="form-control-label">#{messages['label.selectDateRange']}</label>
                       <div class="row">
                         <div class="col-6">
-                          <h:inputText id="appointmentDateStart" value="#{appointment.appointmentDateStart}" p:placeholder="Başlangıç Tarihi" styleClass="form-control">
+                          <h:inputText id="appointmentDateStart" value="#{appointment.appointmentDateStart}" p:placeholder="#{messages['form.startDate']}" styleClass="form-control">
                             <f:convertDateTime pattern="dd-MM-yyyy"/>
                           </h:inputText>
                         </div>
                         <div class="col-6">
-                          <h:inputText id="appointmentDateEnd" value="#{appointment.appointmentDateEnd}" p:placeholder="Bitiş Tarihi" styleClass="form-control">
+                          <h:inputText id="appointmentDateEnd" value="#{appointment.appointmentDateEnd}" p:placeholder="#{messages['form.endDate']}" styleClass="form-control">
                             <f:convertDateTime pattern="dd-MM-yyyy"/>
                           </h:inputText>
                         </div>
@@ -82,18 +82,18 @@
                   </div>
                 </div>
                 <div class="buttons">
-                  <h:commandButton id="appointment-search" value="Randevu Ara" styleClass="btn btn-success mr-3" action="#{appointment.searchAppointment}">
+                  <h:commandButton id="appointment-search" value="#{messages['button.search']}" styleClass="btn btn-success mr-3" action="#{appointment.searchAppointment}">
                     <f:ajax execute="@form" render="@form" onevent="appointment"/>
                   </h:commandButton>
-                  <h:commandButton value="Temizle" styleClass="btn btn-success" action="#{appointment.clearSearch}">
+                  <h:commandButton value="#{messages['button.cleanSearch']}" styleClass="btn btn-success" action="#{appointment.clearSearch}">
                     <f:ajax execute="@this" render="@form" onevent="appointment"/>
                   </h:commandButton>
                 </div>
               </div>
               <div class="col-lg-6 mt-4 mt-lg-0">
                 <h:panelGroup layout="block" id="appointmentTimes" class="appointment-clocks#{appointment.appointmentClockPanel ? ' active' : ''}">
-                  <p class="lead">Randevu alabilmek için arama yapınız</p>
-                  <h4>Randevu Saatleri</h4>
+                  <p class="lead">#{messages['card.appointmentSearchInfo']}</p>
+                  <h4>#{messages['card.appointmentTimes']}</h4>
                   <ul class="nav nav-tabs" id="week-tabs">
                     <c:forEach items="#{appointment.appointmentDays}" var="day" varStatus="dayIndex">
                       <li class="nav-item">
@@ -111,7 +111,7 @@
                         <ul>
                           <c:forEach items="#{row}" var="col" varStatus="colIndex">
                             <li class="nav-item">
-                              <h:panelGroup layout="block" styleClass="tooltip-wrapper" rendered="#{col.appointmentStatus != 'NOT_RESERVED'}" p:data-toggle="tooltip" p:data-placement="top" p:title="Randevu Alınmış">
+                              <h:panelGroup layout="block" styleClass="tooltip-wrapper" rendered="#{col.appointmentStatus != 'NOT_RESERVED'}" p:data-toggle="tooltip" p:data-placement="top" p:title="#{messages['tooltip.appointment']}">
                                 <h:outputText styleClass="btn btn-secondary area-disabled" value="#{col.appointmentDate}">
                                   <f:convertDateTime timeZone="GMT+3" pattern="HH:mm"/>
                                 </h:outputText>
@@ -132,36 +132,36 @@
                       </div>
                     </c:forEach>
                   </div>
-                  <div class="popover-title d-none">Alınabilecek Randevu</div>
+                  <div class="popover-title d-none">#{messages['popover.title']}</div>
                   <div class="popover-content d-none">
                     <div class="popover-row">
-                      <label>Hastane</label>
+                      <label>#{messages['label.hospital']}</label>
                       <span class="popover-hospital"></span>
                     </div>
                     <div class="popover-row">
-                      <label>Poliklinik</label>
+                      <label>#{messages['label.policlinic']}</label>
                       <span class="popover-policlinic"></span>
                     </div>
                     <div class="popover-row">
-                      <label>Muayene Yeri</label>
+                      <label>#{messages['label.inspectionPlace']}</label>
                       <span class="popover-place"></span>
                     </div>
                     <div class="popover-row">
-                      <label>Doktor</label>
+                      <label>#{messages['label.doctor']}</label>
                       <span class="popover-doctor"></span>
                     </div>
                     <div class="popover-row">
-                      <label>Randevu Tarihi</label>
+                      <label>#{messages['label.appointmentDate']}</label>
                       <span class="d-block popover-date"></span>
                     </div>
-                    <h:commandLink value="Randevu Almak İçin Tıklayınız" styleClass="btn btn-sm btn-success" p:data-toggle="modal" p:data-target="#appointment-modal" p:data-backdrop="static" p:data-keyboard="false" action="#{appointment.holdAppointment}">
+                    <h:commandLink value="#{messages['button.takeAppointment']}" styleClass="btn btn-sm btn-success" p:data-toggle="modal" p:data-target="#appointment-modal" p:data-backdrop="static" p:data-keyboard="false" action="#{appointment.holdAppointment}">
                       <f:ajax execute="@this"/>
                     </h:commandLink>
                   </div>
                 </h:panelGroup>
               </div>
               <h:panelGroup layout="block" id="appointmentTable" styleClass="col-12 mt-4#{appointment.appointmentPanel ? '' : ' d-none'}">
-                <h3 class="text-center#{appointment.appointmentSearchNull ? '' : ' d-none'}">Aradığınız kriterlere ait randevu bulunamadı.</h3>
+                <h3 class="text-center#{appointment.appointmentSearchNull ? '' : ' d-none'}">#{messages['card.appointmentNull']}</h3>
                 <div class="table-responsive#{appointment.appointmentSearchNull ? ' d-none' : ''}">
                   <h:dataTable styleClass="table" rowClasses="table-row" binding="#{table}" value="#{appointment.appointmentsHeaders}" var="appointmentsHeader">
                     <h:column>
@@ -169,19 +169,19 @@
                       <h:outputText value="#{table.rowIndex + 1}"/>
                     </h:column>
                     <h:column>
-                      <f:facet name="header">Doktor</f:facet>
+                      <f:facet name="header">#{messages['label.doctor']}</f:facet>
                       <h:outputText styleClass="d-inline-block" value="#{appointmentsHeader.doctor.firstName} #{appointmentsHeader.doctor.lastName}"/>
                       <small><h:outputText value="(#{messages['string.'.concat(appointmentsHeader.doctor.level)]})"/></small>
                     </h:column>
-                    <h:column><f:facet name="header">Kurum Adı</f:facet>${appointmentsHeader.hospitalPoliclinicRel.hospital.hospitalName}</h:column>
-                    <h:column><f:facet name="header">Klinik Adı</f:facet>${appointmentsHeader.hospitalPoliclinicRel.policlinic.policlinicName}</h:column>
-                    <h:column><f:facet name="header">Muayene Yeri</f:facet>${appointmentsHeader.placeName}</h:column>
+                    <h:column><f:facet name="header">#{messages['label.hospital']}</f:facet>#{appointmentsHeader.hospitalPoliclinicRel.hospital.hospitalName}</h:column>
+                    <h:column><f:facet name="header">#{messages['label.policlinic']}</f:facet>#{appointmentsHeader.hospitalPoliclinicRel.policlinic.policlinicName}</h:column>
+                    <h:column><f:facet name="header">#{messages['label.inspectionPlace']}</f:facet>#{appointmentsHeader.placeName}</h:column>
                     <h:column>
                       <f:facet name="header"></f:facet>
-                      <h:commandLink value="Yorumlar" styleClass="btn btn-warning mr-1" action="#{appointment.doctorReviews(appointmentsHeader.doctor)}" p:data-toggle="modal" p:data-target="#comment-modal">
+                      <h:commandLink value="#{messages['button.comments']}" styleClass="btn btn-warning mr-1" action="#{appointment.doctorReviews(appointmentsHeader.doctor)}" p:data-toggle="modal" p:data-target="#comment-modal">
                         <f:ajax execute="@this" render="doctor-comment" onevent="function collapse() { $('.collapse').collapse({toggle: false}) }"/>
                       </h:commandLink>
-                      <h:commandLink value="Seç" styleClass="btn btn-success" action="#{appointment.selectAppointment(appointmentsHeader)}">
+                      <h:commandLink value="#{messages['button.select']}" styleClass="btn btn-success" action="#{appointment.selectAppointment(appointmentsHeader)}">
                         <f:ajax execute="@this" render="appointmentTimes" onevent="tableData"/>
                       </h:commandLink>
                     </h:column>
@@ -201,7 +201,7 @@
         <div class="modal-content">
           <h:form prependId="false">
             <div class="modal-header">
-              <h5 class="modal-title">Randevu Onay</h5>
+              <h5 class="modal-title">#{messages['modal.header.title.appointment']}</h5>
               <h:commandLink styleClass="close" action="#{appointment.clearAppointment}" p:data-dismiss="modal">
                 <i class="fa fa-close"></i>
                 <f:ajax execute="@this"/>
@@ -209,41 +209,41 @@
             </div>
             <div class="modal-body">
               <div class="form-group">
-                <label>Hastane</label>
+                <label>#{messages['label.hospital']}</label>
                 <div class="detail detail-hospital"></div>
               </div>
               <div class="form-group">
-                <label>Poliklinik</label>
+                <label>#{messages['label.policlinic']}</label>
                 <div class="detail detail-policlinic"></div>
               </div>
               <div class="form-group">
-                <label>Muayene Yeri</label>
+                <label>#{messages['label.inspectionPlace']}</label>
                 <div class="detail detail-place"></div>
               </div>
               <div class="form-group">
-                <label>Doktor</label>
+                <label>#{messages['label.doctor']}</label>
                 <div class="detail detail-doctor"></div>
               </div>
               <div class="form-group">
-                <label>Randevu Zamanı</label>
+                <label>#{messages['label.appointmentDate']}</label>
                 <div class="detail detail-date"></div>
               </div>
               <div class="form-group">
-                <label>Hasta T.C. Kimlik No</label>
-                <div class="detail">${login.patientModel.tcNumber}</div>
+                <label>#{messages['label.patientTc']}</label>
+                <div class="detail">#{login.patientModel.tcNumber}</div>
               </div>
               <div class="form-group">
-                <label>Hasta Adı ve Soyadı</label>
-                <div class="detail">${login.patientModel.firstName} ${login.patientModel.lastName}</div>
+                <label>#{messages['label.patientName']}</label>
+                <div class="detail">#{login.patientModel.firstName} #{login.patientModel.lastName}</div>
               </div>
               <div class="form-group">
-                <label>Hasta Cinsiyeti</label>
+                <label>#{messages['label.patientGender']}</label>
                 <div class="detail">
                   <h:outputText value="#{messages['string.'.concat(login.patientModel.gender)]}"/>
                 </div>
               </div>
               <div class="form-group">
-                <label>Hasta Doğum Tarihi</label>
+                <label>#{messages['label.patientBirthDate']}</label>
                 <div class="detail">
                   <h:outputText value="#{login.patientModel.dateOfBirth}">
                     <f:convertDateTime pattern="dd-MM-yyyy"/>
@@ -251,22 +251,22 @@
                 </div>
               </div>
               <div class="form-group">
-                <label>Telefon</label>
-                <div class="detail">${login.patientModel.phoneNumber}</div>
+                <label>#{messages['label.phone']}</label>
+                <div class="detail">#{login.patientModel.phoneNumber}</div>
               </div>
               <div class="form-group">
-                <label>E-Posta Adresi</label>
-                <div class="detail">${login.patientModel.email}</div>
+                <label>#{messages['label.email']}</label>
+                <div class="detail">#{login.patientModel.email}</div>
               </div>
               <div class="form-group">
-                <label>Doktorunuza Not
-                  <small>(İsteğe Bağlı)</small>
+                <label>#{messages['label.messageToDoctor']}
+                  <small>(#{messages['label.optional']})</small>
                 </label>
                 <h:inputTextarea styleClass="form-control" rows="2" value="#{appointment.appointmentModel.messageToDoctor}"/>
               </div>
               <div class="form-group buttons">
-                <h:commandButton value="Randevuyu Kaydet" styleClass="btn btn-success" action="#{appointment.confirmAppointment}"/>
-                <h:commandButton value="Randevuyu İptal Et" styleClass="btn btn-danger" action="#{appointment.clearAppointment}" p:data-dismiss="modal">
+                <h:commandButton value="#{messages['button.registerAppointment']}" styleClass="btn btn-success" action="#{appointment.confirmAppointment}"/>
+                <h:commandButton value="#{messages['button.cancelAppointment']}" styleClass="btn btn-danger" action="#{appointment.clearAppointment}" p:data-dismiss="modal">
                   <f:ajax execute="@this"/>
                 </h:commandButton>
               </div>
@@ -281,30 +281,30 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Doktor Hakkında Yorumlar</h5>
+            <h5 class="modal-title">#{messages['modal.header.title.comments']}</h5>
             <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
           </div>
           <div class="modal-body">
             <h:panelGroup layout="block" id="doctor-comment" styleClass="d-flex flex-column">
               <h:panelGroup layout="block" styleClass="alert" rendered="#{empty appointment.doctorReviewList}">
-                <i class="fa fa-question-circle-o"></i>Doktor hakkında yorum yapılmamış
+                <i class="fa fa-question-circle-o"></i>#{messages['modal.body.comments.info']}
               </h:panelGroup>
               <h:panelGroup rendered="#{not empty appointment.doctorReviewList}">
                 <c:forEach items="#{appointment.doctorReviewList}" var="review">
                   <div class="comment">
                     <h:outputLink styleClass="btn" p:data-toggle="collapse" value="#comment#{review.pk}">
-                      <span class="patient">${review.patient.firstName} ${review.patient.lastName}</span>
-                      <span class="detail"><b>Yorum: </b>${review.review}</span>
+                      <span class="patient">#{review.patient.firstName} #{review.patient.lastName}</span>
+                      <span class="detail"><b>#{messages['label.comment']}: </b>#{review.review}</span>
                     </h:outputLink>
                     <h:panelGroup layout="block" styleClass="collapse" p:id="comment#{review.pk}">
-                      <p>${review.review}</p>
+                      <p>#{review.review}</p>
                     </h:panelGroup>
                   </div>
                 </c:forEach>
               </h:panelGroup>
             </h:panelGroup>
             <div class="form-group d-flex">
-              <button type="button" class="btn btn-danger ml-auto" data-dismiss="modal">Kapat</button>
+              <button type="button" class="btn btn-danger ml-auto" data-dismiss="modal">#{messages['button.close']}</button>
             </div>
           </div>
         </div>

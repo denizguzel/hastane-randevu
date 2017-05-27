@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 public class PasswordResetBean {
   private static final Logger LOG = Logger.getLogger(PasswordResetBean.class);
 
-  ResourceBundle bundle = ResourceBundle.getBundle("com.hastanerandevu.messages",new UTF8Control());
+  private ResourceBundle bundle = ResourceBundle.getBundle("com.hastanerandevu.messages", FacesContext.getCurrentInstance().getViewRoot().getLocale(), new UTF8Control());
 
   private PatientServiceImpl patientService;
   private String urlParam;
@@ -76,7 +76,7 @@ public class PasswordResetBean {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("patient.sendpasswordlink.nothave"), null));
         LOG.warn(e.getMessage());
       } else {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("patient.sendpasswordlink.unsuccessful"), null));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("check.error"), null));
         LOG.error(e.getMessage());
       }
 

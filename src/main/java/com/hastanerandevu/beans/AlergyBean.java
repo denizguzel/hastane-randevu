@@ -23,7 +23,7 @@ public class AlergyBean implements Serializable {
   @ManagedProperty(value = "#{login}")
   private LoginBean loginBean;
 
-  ResourceBundle bundle = ResourceBundle.getBundle("com.hastanerandevu.messages",new UTF8Control());
+  private ResourceBundle bundle = ResourceBundle.getBundle("com.hastanerandevu.messages", FacesContext.getCurrentInstance().getViewRoot().getLocale(), new UTF8Control());
 
   private PatientAlergyRelServiceImpl patientAlergyRelService;
   private AlergyServiceImpl alergyService;
@@ -114,7 +114,7 @@ public class AlergyBean implements Serializable {
 
   public String saveAlergy() {
     if(patientAlergyRelService.patientHaveAlergy(patientModel, alergyService.find(Long.parseLong(selectedAlergy)))) {
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,bundle.getString("alergy.save.alreadyhave") , null));
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("alergy.save.alreadyhave"), null));
     } else {
       patientAlergyRelModel.setAlergy(alergyService.find(Long.parseLong(selectedAlergy)));
       patientAlergyRelModel.setPatient(patientModel);

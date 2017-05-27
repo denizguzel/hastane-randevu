@@ -5,7 +5,7 @@
     <div class="page-wrapper">
       <div class="container-fluid">
         <div class="page-title">
-          <h4>Hoşgeldin</h4>
+          <h4>#{messages["page.title.dashboard"]}</h4>
           <button class="sidebar-toggler" type="button"><i class="fa fa-bars"></i></button>
         </div>
         <div class="card p-4">
@@ -15,12 +15,12 @@
                 <div class="small-card text-warning">
                   <div class="left">
                     <i class="fa fa-calendar-check-o"></i>
-                    <h4>En Yakın Randevunuz</h4>
+                    <h4>#{messages["card.title.appointment"]}</h4>
                   </div>
                   <div class="right">
                     <h:panelGroup rendered="#{not empty appointment.closestAppointment}">
-                    <span class="count">${appointment.daysLeft}
-                      <small> gün sonra</small></span>
+                    <span class="count">#{appointment.daysLeft}
+                      <small> #{messages["card.title.appointment.small"]}</small></span>
                     </h:panelGroup>
                     <h:outputText rendered="#{empty appointment.closestAppointment}" value="Randevu Yok"/>
                     <h:outputText styleClass="date" value="#{appointment.closestDate}" rendered="#{not empty appointment.closestAppointment}">
@@ -33,10 +33,10 @@
                 <div class="small-card text-info">
                   <div class="left">
                     <i class="fa fa-bug"></i>
-                    <h4>Alerjileriniz</h4>
+                    <h4>#{messages["label.alergy"]}</h4>
                   </div>
                   <div class="right">
-                    <span class="count">${alergy.patientAlergies.size()}</span>
+                    <span class="count">#{alergy.patientAlergies.size()}</span>
                   </div>
                 </div>
               </div>
@@ -44,10 +44,10 @@
                 <div class="small-card text-muted">
                   <div class="left">
                     <i class="fa fa-bed"></i>
-                    <h4>Hastalıklarınız</h4>
+                    <h4>#{messages["label.disease"]}</h4>
                   </div>
                   <div class="right">
-                    <span class="count">${disease.patientDiseases.size()}</span>
+                    <span class="count">#{disease.patientDiseases.size()}</span>
                   </div>
                 </div>
               </div>
@@ -55,10 +55,10 @@
                 <div class="small-card text-primary">
                   <div class="left">
                     <i class="fa fa-flask"></i>
-                    <h4>Tahlilleriniz</h4>
+                    <h4>#{messages["label.assay"]}</h4>
                   </div>
                   <div class="right">
-                    <span class="count">${assay.patientAssays.size()}</span>
+                    <span class="count">#{assay.patientAssays.size()}</span>
                   </div>
                 </div>
               </div>
@@ -70,10 +70,10 @@
                 <div class="small-card text-warning">
                   <div class="left">
                     <i class="fa fa-calendar-check-o"></i>
-                    <h4>Tüm Randevularınız</h4>
+                    <h4>#{messages["card.title.allAppointment"]}</h4>
                   </div>
                   <div class="right">
-                    <span class="count">${doctor.appointmentCount}</span>
+                    <span class="count">#{doctor.appointmentCount}</span>
                   </div>
                 </div>
               </div>
@@ -81,10 +81,10 @@
                 <div class="small-card text-muted">
                   <div class="left">
                     <i class="fa fa-chain-broken"></i>
-                    <h4>Bugün Kalan Randevularım</h4>
+                    <h4>#{messages["card.title.remainingAppointment"]}</h4>
                   </div>
                   <div class="right">
-                    <span class="count">${doctor.remainingAppointment}</span>
+                    <span class="count">#{doctor.remainingAppointment}</span>
                   </div>
                 </div>
               </div>

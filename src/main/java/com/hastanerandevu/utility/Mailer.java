@@ -26,9 +26,9 @@ import java.util.ResourceBundle;
 
 public class Mailer implements Runnable {
 
+  private static final Logger LOG = Logger.getLogger(Mailer.class);
   private final int port = SessionUtils.getRequest().getLocalPort();
   private final String serverName = SessionUtils.getRequest().getServerName();
-  private static final Logger LOG = Logger.getLogger(Mailer.class);
   private PatientServiceImpl patientService = new PatientServiceImpl();
   private VelocityEngine velocityEngine = new VelocityEngine();
   private VelocityContext velocityContext = new VelocityContext();

@@ -1,11 +1,11 @@
 <ui:composition template="/view/master/afterLoginTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://xmlns.jcp.org/jsf/passthrough" xmlns:c="http://java.sun.com/jsp/jstl/core">
-  <ui:define name="title">Hasta Notları</ui:define>
+  <ui:define name="title">#{messages['sidebar.doctorNotes']}</ui:define>
 
   <ui:define name="content">
     <div class="page-wrapper">
       <div class="container-fluid">
         <div class="page-title">
-          <h4>Hasta Notları</h4>
+          <h4>#{messages['sidebar.doctorNotes']}</h4>
           <button class="sidebar-toggler" type="button"><i class="fa fa-bars"></i></button>
         </div>
         <div class="card">
@@ -18,11 +18,11 @@
                     <h:outputText value="#{table.rowIndex + 1}"/>
                   </h:column>
                   <h:column>
-                    <f:facet name="header">Hasta İsmi</f:facet>
+                    <f:facet name="header">#{messages['label.patientName']}</f:facet>
                     <h:outputText value="#{history.patient.firstName} #{history.patient.lastName}"/>
                   </h:column>
                   <h:column>
-                    <f:facet name="header">Hasta Notu</f:facet>
+                    <f:facet name="header">#{messages['label.patientNote']}</f:facet>
                     <h:outputText value="#{history.messageToDoctor == null ? '-Not Yok-' : history.messageToDoctor}"/>
                   </h:column>
                 </h:dataTable>

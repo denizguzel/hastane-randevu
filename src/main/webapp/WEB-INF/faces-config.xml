@@ -5,6 +5,11 @@
     http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 
   <application>
+    <locale-config>
+      <default-locale>tr</default-locale>
+      <supported-locale>en</supported-locale>
+    </locale-config>
+
     <resource-bundle>
       <base-name>com.hastanerandevu.messages</base-name>
       <var>messages</var>

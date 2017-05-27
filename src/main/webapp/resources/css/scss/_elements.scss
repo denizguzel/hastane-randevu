@@ -89,7 +89,7 @@ body.page-404 {
     border-radius: 4px;
     color: rgba(0, 0, 0, .87);
     font-size: 13px;
-    text-transform: capitalize !important;
+    text-transform: initial !important;
     &:focus {
       outline: 0 !important;
       border-bottom-color: $main-color;
@@ -137,7 +137,7 @@ body.page-404 {
   span.error {
     display: none;
   }
-  i {
+  .info-tooltip {
     position: absolute;
     top: 10px;
     right: -30px;
@@ -401,5 +401,29 @@ body.page-404 {
   }
   p {
     font-size: 18px;
+  }
+}
+
+.language {
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+  .form-control {
+    display: inherit !important;
+    align-items: inherit;
+    .dropdown-toggle {
+      padding: 5px 5px !important;
+      width: 50px !important;
+      &::after {
+        margin-left: -15px;
+      }
+    }
+    .dropdown-menu {
+      li {
+        a {
+          padding: 0 10px !important;
+        }
+      }
+    }
   }
 }

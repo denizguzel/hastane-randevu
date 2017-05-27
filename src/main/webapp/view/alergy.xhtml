@@ -1,20 +1,20 @@
 <ui:composition template="/view/master/afterLoginTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://xmlns.jcp.org/jsf/passthrough" xmlns:c="http://java.sun.com/jsp/jstl/core">
-  <ui:define name="title">Alerjilerim</ui:define>
+  <ui:define name="title">#{messages['label.alergy']}</ui:define>
 
   <ui:define name="content">
     <div class="page-wrapper">
       <div class="container-fluid">
         <div class="page-title">
-          <h4>Alerjilerim</h4>
+          <h4>#{messages['label.alergy']}</h4>
           <button class="sidebar-toggler" type="button"><i class="fa fa-bars"></i></button>
         </div>
         <div class="card">
           <div class="card-header">
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#alergy-modal">Alerji Ekle</button>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#alergy-modal">#{messages['button.addAlergy']}</button>
           </div>
           <div class="card-block">
             <h:form prependId="false" styleClass="alergy-list#{alergy.alergyPanel ? ' active' : ''}">
-              <div class="alert"><i class="fa fa-thermometer-empty"></i>Henüz kayıtlı alerjiniz bulunmamaktadır.</div>
+              <div class="alert"><i class="fa fa-thermometer-empty"></i>#{messages['card.alergyEmpty']}</div>
               <div class="table-responsive">
                 <h:dataTable styleClass="table" binding="#{table}" value="#{alergy.patientAlergies}" var="patientAlergy">
                   <h:column>
@@ -22,16 +22,16 @@
                     <h:outputText value="#{table.rowIndex + 1}"/>
                   </h:column>
                   <h:column>
-                    <f:facet name="header">Alerji İsmi</f:facet>
+                    <f:facet name="header">#{messages['table.alergyName']}</f:facet>
                     <h:outputText value="#{patientAlergy.alergy.alergyName}"/>
                   </h:column>
                   <h:column>
-                    <f:facet name="header">Hala Devam Ediyor mu?</f:facet>
-                    <span class="badge #{patientAlergy.isStillPass eq 49 ? 'badge-danger' : 'badge-success'}">#{patientAlergy.isStillPass eq 49 ? "Evet" : "Hayır"}</span>
+                    <f:facet name="header">#{messages['table.isStillActive']}</f:facet>
+                    <span class="badge #{patientAlergy.isStillPass eq 49 ? 'badge-danger' : 'badge-success'}">#{patientAlergy.isStillPass eq 49 ? messages['label.yes'] : messages['label.no']}</span>
                   </h:column>
                   <h:column>
-                    <f:facet name="header">Sil</f:facet>
-                    <h:commandButton value="Sil" styleClass="badge badge-danger" p:data-toggle="modal" p:data-target="#cancel-modal">
+                    <f:facet name="header">#{messages['label.remove']}</f:facet>
+                    <h:commandButton value="#{messages['label.remove']}" styleClass="badge badge-danger" p:data-toggle="modal" p:data-target="#cancel-modal">
                       <f:setPropertyActionListener value="#{patientAlergy}" target="#{alergy.patientAlergyRelModel}"/>
                       <f:ajax execute="@this"/>
                     </h:commandButton>
@@ -51,27 +51,27 @@
         <div class="modal-content">
           <h:form prependId="false">
             <div class="modal-header">
-              <h5 class="modal-title">Alerji Ekle</h5>
+              <h5 class="modal-title">#{messages['button.addAlergy']}</h5>
               <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
             </div>
             <div class="modal-body">
               <div class="form-group">
-                <label class="form-control-label">Alerji Seçiniz</label>
+                <label class="form-control-label">#{messages['label.selectAlergy']}</label>
                 <h:selectOneMenu styleClass="selectpicker form-control" value="#{alergy.selectedAlergy}">
                   <f:selectItems value="#{alergy.alergies.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
                 </h:selectOneMenu>
               </div>
               <div class="form-group">
-                <label class="form-control-label">Alerjiniz hala devam ediyor mu?</label>
+                <label class="form-control-label">#{messages['table.isStillActive']}</label>
                 <h:selectOneMenu styleClass="selectpicker form-control" value="#{alergy.alergyStillPass}">
-                  <f:selectItem itemLabel="Evet" itemValue="1"/>
-                  <f:selectItem itemLabel="Hayır" itemValue="0"/>
+                  <f:selectItem itemLabel="#{messages['label.yes']}" itemValue="1"/>
+                  <f:selectItem itemLabel="#{messages['label.no']}" itemValue="0"/>
                 </h:selectOneMenu>
               </div>
             </div>
             <div class="modal-footer">
-              <h:commandButton styleClass="btn btn-success" value="Kaydet" action="#{alergy.saveAlergy}"/>
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Kapat</button>
+              <h:commandButton styleClass="btn btn-success" value="#{messages['button.register']}" action="#{alergy.saveAlergy}"/>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">#{messages['button.close']}</button>
             </div>
           </h:form>
         </div>
@@ -82,15 +82,15 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Alerji Sil</h5>
+            <h5 class="modal-title">#{messages['label.removeAlergy']}</h5>
             <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
           </div>
           <div class="modal-body">
             <h:form prependId="false" id="modal-form">
-              <p>Alerjiyi silmek istediğinize emin misiniz?</p>
+              <p>#{messages['modal.body.alergy.info']}</p>
               <div class="buttons">
-                <h:commandButton value="Evet" styleClass="btn btn-success" action="#{alergy.deleteAlergy}"/>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Hayır</button>
+                <h:commandButton value="#{messages['label.yes']}" styleClass="btn btn-success" action="#{alergy.deleteAlergy}"/>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">#{messages['label.no']}</button>
               </div>
             </h:form>
           </div>

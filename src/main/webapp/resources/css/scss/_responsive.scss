@@ -218,6 +218,13 @@
     font-size: 13px;
     padding: 10.5px 0;
   }
+  .language {
+    justify-content: flex-end;
+    margin-left: 0;
+    .form-control {
+      width: initial !important;
+    }
+  }
 }
 
 @media (max-width: 576px) {

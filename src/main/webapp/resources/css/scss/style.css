@@ -9161,7 +9161,7 @@ body.page-404 .container .btn-transparent {
   border-radius: 4px;
   color: rgba(0, 0, 0, 0.87);
   font-size: 13px;
-  text-transform: capitalize !important;
+  text-transform: initial !important;
 }
 
 .bootstrap-select .btn:focus {
@@ -9214,7 +9214,7 @@ body.page-404 .container .btn-transparent {
   display: none;
 }
 
-.form-group i {
+.form-group .info-tooltip {
   position: absolute;
   top: 10px;
   right: -30px;
@@ -9488,6 +9488,30 @@ body.page-404 .container .btn-transparent {
 
 .survey-done p {
   font-size: 18px;
+}
+
+.language {
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+}
+
+.language .form-control {
+  display: inherit !important;
+  align-items: inherit;
+}
+
+.language .form-control .dropdown-toggle {
+  padding: 5px 5px !important;
+  width: 50px !important;
+}
+
+.language .form-control .dropdown-toggle::after {
+  margin-left: -15px;
+}
+
+.language .form-control .dropdown-menu li a {
+  padding: 0 10px !important;
 }
 
 .navbar {
@@ -10556,6 +10580,15 @@ nav.sidebar ul.nav-menu li.active a i {
   .modal .modal-dialog .modal-content .modal-body .buttons .btn {
     font-size: 13px;
     padding: 10.5px 0;
+  }
+
+  .language {
+    justify-content: flex-end;
+    margin-left: 0;
+  }
+
+  .language .form-control {
+    width: initial !important;
   }
 }
 

@@ -1,11 +1,11 @@
 <ui:composition template="/view/master/afterLoginTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://xmlns.jcp.org/jsf/passthrough" xmlns:c="http://java.sun.com/jsp/jstl/core">
-  <ui:define name="title">Randevularım</ui:define>
+  <ui:define name="title">#{messages['page.title.appointments']}</ui:define>
 
   <ui:define name="content">
     <div class="page-wrapper">
       <div class="container-fluid">
         <div class="page-title">
-          <h4>Randevularım</h4>
+          <h4>#{messages['page.title.appointments']}</h4>
           <button class="sidebar-toggler" type="button"><i class="fa fa-bars"></i></button>
         </div>
         <div class="card">
@@ -18,44 +18,44 @@
                     <h:outputText value="#{table.rowIndex + 1}"/>
                   </h:column>
                   <h:column>
-                    <f:facet name="header">Doktor</f:facet>
+                    <f:facet name="header">#{messages['label.doctor']}</f:facet>
                     <h:outputText value="#{history.inspectionPlace.doctor.firstName} #{history.inspectionPlace.doctor.lastName}"/>
                     <small><h:outputText value="(#{messages['string.'.concat(history.inspectionPlace.doctor.level)]})"/></small>
                   </h:column>
                   <h:column>
-                    <f:facet name="header">Kurum Adı</f:facet>
+                    <f:facet name="header">#{messages['label.hospital']}</f:facet>
                     <h:outputText value="#{history.inspectionPlace.hospitalPoliclinicRel.hospital.hospitalName}"/>
                   </h:column>
                   <h:column>
-                    <f:facet name="header">Klinik Adı</f:facet>
+                    <f:facet name="header">#{messages['label.policlinic']}</f:facet>
                     <h:outputText value="#{history.inspectionPlace.hospitalPoliclinicRel.policlinic.policlinicName}"/>
                   </h:column>
                   <h:column>
-                    <f:facet name="header">Muayene Yeri</f:facet>
+                    <f:facet name="header">#{messages['label.inspectionPlace']}</f:facet>
                     <h:outputText value="#{history.inspectionPlace.placeName}"/>
                   </h:column>
                   <h:column>
-                    <f:facet name="header">Randevu Tarihi</f:facet>
+                    <f:facet name="header">#{messages['label.appointmentDate']}</f:facet>
                     <h:outputText value="#{history.appointmentDate}">
                       <f:convertDateTime timeZone="GMT+3" pattern="dd-MM-yyyy HH:mm"/>
                     </h:outputText>
                   </h:column>
                   <h:column>
-                    <f:facet name="header">Doktora Not</f:facet>
-                    <h:outputText styleClass="doctor-message" p:data-toggle="tooltip" p:title="#{history.messageToDoctor == null ? 'Not yok' : history.messageToDoctor}" value="#{history.messageToDoctor == null ? 'Not yok' : history.messageToDoctor}"/>
+                    <f:facet name="header">#{messages['label.messageToDoctor']}</f:facet>
+                    <h:outputText styleClass="doctor-message" p:data-toggle="tooltip" p:title="#{history.messageToDoctor == null ? messages['label.nullNote'] : history.messageToDoctor}" value="#{history.messageToDoctor == null ? messages['label.nullNote'] : history.messageToDoctor}"/>
                   </h:column>
                   <h:column headerClass="text-center">
-                    <f:facet name="header">Durum</f:facet>
-                    <h:commandButton rendered="#{history.appointmentStatus != 'COMPLETED'}" value="İptal Et" styleClass="badge badge-danger" p:data-tooltip="tooltip" p:title="Randevu 1 Gün Öncesine Kadar İptal Edilebilir" p:data-toggle="modal" p:data-target="#cancel-modal">
+                    <f:facet name="header">#{messages['label.status']}</f:facet>
+                    <h:commandButton rendered="#{history.appointmentStatus != 'COMPLETED'}" value="#{messages['button.cancel']}" styleClass="badge badge-danger" p:data-tooltip="tooltip" p:title="#{messages['appointment.cancel.info']}" p:data-toggle="modal" p:data-target="#cancel-modal">
                       <f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>
                       <f:ajax execute="@this"/>
                     </h:commandButton>
-                    <h:commandLink rendered="#{history.appointmentStatus == 'COMPLETED' and !appointment.patientHaveReviewAboutDoctor(history.patient, history.inspectionPlace.doctor)}" value="Yorum Yap" styleClass="badge badge-info mr-1" p:data-toggle="modal" p:data-target="#comment-modal">
+                    <h:commandLink rendered="#{history.appointmentStatus == 'COMPLETED' and !appointment.patientHaveReviewAboutDoctor(history.patient, history.inspectionPlace.doctor)}" value="#{messages['button.makeComment']}" styleClass="badge badge-info mr-1" p:data-toggle="modal" p:data-target="#comment-modal">
                       <f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>
                       <f:ajax execute="@this"/>
                     </h:commandLink>
                     <h:panelGroup rendered="#{history.appointmentStatus == 'COMPLETED'}" styleClass="badge badge-success">
-                      <h:outputText value="Randevu Tamamlandı"/>
+                      <h:outputText value="#{messages['label.appointmentCompleted']}"/>
                     </h:panelGroup>
                   </h:column>
                 </h:dataTable>
@@ -63,7 +63,7 @@
               <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
             </h:form>
             <h:panelGroup layout="block" styleClass="alert" rendered="#{session.getAttribute('userType') == 'patient' and empty appointment.appointmentHistory}">
-              <i class="fa fa-smile-o"></i>Henüz herhangi bir randevu almadınız
+              <i class="fa fa-smile-o"></i>#{messages['card.appointmentEmpty']}
             </h:panelGroup>
 
             <h:form prependId="false" rendered="#{session.getAttribute('userType') == 'doctor'}">
@@ -74,48 +74,48 @@
                     <h:outputText value="#{table2.rowIndex + 1}"/>
                   </h:column>
                   <h:column>
-                    <f:facet name="header">Hasta İsmi</f:facet>
+                    <f:facet name="header">#{messages['label.patientName']}</f:facet>
                     <h:outputText value="#{history.patient.firstName} #{history.patient.lastName}"/>
                   </h:column>
                   <h:column>
-                    <f:facet name="header">Hasta T.C. No</f:facet>
+                    <f:facet name="header">#{messages['label.patientTc']}</f:facet>
                     <h:outputText value="#{history.patient.tcNumber}"/>
                   </h:column>
                   <h:column>
-                    <f:facet name="header">Doğum Yeri ve Tarihi</f:facet>
+                    <f:facet name="header">#{messages['label.patientBirthdateBirthPlace']}</f:facet>
                     <h:outputText value="#{history.patient.placeOfBirth}/"/>
                     <h:outputText value="#{history.patient.dateOfBirth}">
                       <f:convertDateTime timeZone="GMT+3" pattern="dd-MM-yyyy"/>
                     </h:outputText>
                   </h:column>
                   <h:column>
-                    <f:facet name="header">Muayene Yeri</f:facet>
+                    <f:facet name="header">#{messages['label.inspectionPlace']}</f:facet>
                     <h:outputText value="#{history.inspectionPlace.placeName}"/>
                   </h:column>
                   <h:column>
-                    <f:facet name="header">Randevu Tarihi</f:facet>
+                    <f:facet name="header">#{messages['label.appointmentDate']}</f:facet>
                     <h:outputText value="#{history.appointmentDate}">
                       <f:convertDateTime timeZone="GMT+3" pattern="dd-MM-yyyy HH:mm"/>
                     </h:outputText>
                   </h:column>
                   <h:column>
-                    <f:facet name="header">Doktora Not</f:facet>
-                    <h:outputText styleClass="doctor-message" p:data-toggle="tooltip" p:title="#{history.messageToDoctor == null ? 'Not yok' : history.messageToDoctor}" value="#{history.messageToDoctor == null ? 'Not yok' : history.messageToDoctor}"/>
+                    <f:facet name="header">#{messages['label.messageToDoctor']}</f:facet>
+                    <h:outputText styleClass="doctor-message" p:data-toggle="tooltip" p:title="#{history.messageToDoctor == null ? messages['label.nullNote'] : history.messageToDoctor}" value="#{history.messageToDoctor == null ? messages['label.nullNote'] : history.messageToDoctor}"/>
                   </h:column>
                   <h:column>
-                    <f:facet name="header">Hasta Bilgileri</f:facet>
-                    <h:commandLink value="Hasta Bilgileri" styleClass="badge badge-primary" p:data-toggle="modal" p:data-target="#info-modal" action="#{doctor.patientInfo}">
+                    <f:facet name="header">#{messages['label.patientInfo']}</f:facet>
+                    <h:commandLink value="#{messages['label.patientInfo']}" styleClass="badge badge-primary" p:data-toggle="modal" p:data-target="#info-modal" action="#{doctor.patientInfo}">
                       <f:setPropertyActionListener value="#{history}" target="#{doctor.appointmentModel}"/>
                       <f:ajax execute="@this" render="patient-info" onevent="popoverCall"/>
                     </h:commandLink>
                   </h:column>
                   <h:column headerClass="text-center">
-                    <f:facet name="header">Durum</f:facet>
+                    <f:facet name="header">#{messages['label.status']}</f:facet>
                     <h:panelGroup rendered="#{history.appointmentStatus == 'RESERVED'}" styleClass="badge badge-default">
-                      <h:outputText value="Randevu Beklemede"/>
+                      <h:outputText value="#{messages['label.appointmentWaiting']}"/>
                     </h:panelGroup>
                     <h:panelGroup rendered="#{history.appointmentStatus == 'COMPLETED'}" styleClass="badge badge-success">
-                      <h:outputText value="Randevu Tamamlandı"/>
+                      <h:outputText value="#{messages['label.appointmentCompleted']}"/>
                     </h:panelGroup>
                   </h:column>
                 </h:dataTable>
@@ -133,17 +133,16 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Randevu İptal</h5>
+              <h5 class="modal-title">#{messages['modal.header.title.cancelAppointment']}</h5>
               <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
             </div>
             <div class="modal-body">
               <h:form prependId="false">
-                <p>Randevuyu iptal etmek istediğinize emin misiniz?</p>
+                <p>#{messages['modal.body.appointmentCancel.info']}</p>
                 <div class="buttons">
-                  <h:commandButton value="Evet" styleClass="btn btn-success" action="#{appointment.cancelAppointment}"/>
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">Hayır</button>
+                  <h:commandButton value="#{messages['label.yes']}" styleClass="btn btn-success" action="#{appointment.cancelAppointment}"/>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">#{messages['label.no']}</button>
                 </div>
-                <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
               </h:form>
             </div>
           </div>
@@ -155,17 +154,17 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Doktor Hakkında Yorum</h5>
+              <h5 class="modal-title">#{messages['modal.header.title.comment']}</h5>
               <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
             </div>
             <div class="modal-body">
               <h:form prependId="false">
                 <div class="form-group">
-                  <h:inputTextarea value="#{appointment.reviewsAboutDoctorsModel.review}" styleClass="form-control" p:placeholder="Yorumunuz"/>
+                  <h:inputTextarea value="#{appointment.reviewsAboutDoctorsModel.review}" styleClass="form-control" p:placeholder="#{messages['label.comment']}"/>
                 </div>
                 <div class="buttons">
-                  <h:commandButton value="Gönder" styleClass="btn btn-success" action="#{appointment.sendDoctorComment}"/>
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">Kapat</button>
+                  <h:commandButton value="#{messages['button.send']}" styleClass="btn btn-success" action="#{appointment.sendDoctorComment}"/>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">#{messages['button.close']}</button>
                 </div>
               </h:form>
             </div>
@@ -180,63 +179,63 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Hasta Bilgileri</h5>
+              <h5 class="modal-title">#{messages['label.patientInfo']}</h5>
               <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
             </div>
             <div class="modal-body">
               <h:panelGroup id="patient-info">
                 <div class="form-group">
-                  <label>Hasta İsmi</label>
-                  <div class="detail">${doctor.appointmentModel.patient.firstName} ${doctor.appointmentModel.patient.lastName}</div>
+                  <label>#{messages['label.patientName']}</label>
+                  <div class="detail">#{doctor.appointmentModel.patient.firstName} #{doctor.appointmentModel.patient.lastName}</div>
                 </div>
                 <div class="form-group">
-                  <label>T.C No</label>
-                  <div class="detail">${doctor.appointmentModel.patient.tcNumber}</div>
+                  <label>#{messages['label.patientTc']}</label>
+                  <div class="detail">#{doctor.appointmentModel.patient.tcNumber}</div>
                 </div>
                 <div class="form-group">
-                  <label>Doğum Yeri ve Tarihi</label>
+                  <label>#{messages['label.patientBirthdateBirthPlace']}</label>
                   <div class="detail">
-                    ${doctor.appointmentModel.patient.placeOfBirth}/
+                    #{doctor.appointmentModel.patient.placeOfBirth}/
                     <h:outputText value="#{doctor.appointmentModel.patient.dateOfBirth}">
                       <f:convertDateTime timeZone="GMT+3" pattern="dd-MM-yyyy"/>
                     </h:outputText>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label>Alerjileri</label>
+                  <label>#{messages['label.alergy']}</label>
                   <div class="detail">
                     <c:forEach items="#{doctor.patientAlergies}" var="patientAlergy">
-                      <span class="badge badge-info">${patientAlergy.alergy.alergyName}</span>
+                      <span class="badge badge-info">#{patientAlergy.alergy.alergyName}</span>
                     </c:forEach>
-                    <h:outputText value="Kayıtlı Alerji Yok" rendered="#{empty doctor.patientAlergies}"/>
+                    <h:outputText value="#{messages['label.emptyAlergy']}" rendered="#{empty doctor.patientAlergies}"/>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label>Hastalıkları</label>
+                  <label>#{messages['label.disease']}</label>
                   <div class="detail">
                     <c:forEach items="#{doctor.patientDiseases}" var="patientDisease">
-                      <span class="badge badge-info">${patientDisease.disease.diseaseName}</span>
+                      <span class="badge badge-info">#{patientDisease.disease.diseaseName}</span>
                     </c:forEach>
-                    <h:outputText value="Kayıtlı Hastalık Yok" rendered="#{empty doctor.patientDiseases}"/>
+                    <h:outputText value="#{messages['label.emptyDisease']}" rendered="#{empty doctor.patientDiseases}"/>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label>Tahlilleri</label>
+                  <label>#{messages['label.assay']}</label>
                   <div class="detail">
                     <c:forEach items="#{doctor.patientAssays}" var="patientAssay">
-                      <button type="button" class="badge badge-info" data-toggle="popover" data-trigger="focus" title="#{patientAssay.assay.assayName}" data-content="#{patientAssay.assayDetail}">${patientAssay.assay.assayName}</button>
+                      <button type="button" class="badge badge-info" data-toggle="popover" data-trigger="focus" title="#{patientAssay.assay.assayName}" data-content="#{patientAssay.assayDetail}">#{patientAssay.assay.assayName}</button>
                     </c:forEach>
-                    <h:outputText value="Kayıtlı Tahlil Yok" rendered="#{empty doctor.patientAssays}"/>
+                    <h:outputText value="#{messages['label.emptyAssay']}" rendered="#{empty doctor.patientAssays}"/>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label>Doktora Not</label>
+                  <label>#{messages['label.messageToDoctor']}</label>
                   <div class="detail">
-                    <h:outputText value="#{doctor.appointmentModel.messageToDoctor == null ? '-Not Yok-' : doctor.appointmentModel.messageToDoctor}"/>
+                    <h:outputText value="#{doctor.appointmentModel.messageToDoctor == null ? messages['label.nullNote'] : doctor.appointmentModel.messageToDoctor}"/>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label>Randevu Tarihi ve Yeri</label>
+                  <label>#{messages['label.appointmentDate']}</label>
                   <div class="detail">
                     <h:outputText value="#{doctor.appointmentModel.appointmentDate}">
                       <f:convertDateTime timeZone="GMT+3" pattern="dd-MM-yyyy HH:mm"/>

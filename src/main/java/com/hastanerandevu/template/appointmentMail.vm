@@ -24,7 +24,7 @@
           <tr>
             <td style="padding: 5px; border-bottom: 1px solid #f6f6f6;">Doktor</td>
             <td style="padding: 5px; border-bottom: 1px solid #f6f6f6;">$doctor
-              <small>$doctorLevel</small>
+              <small>($doctorLevel)</small>
             </td>
           </tr>
           <tr>

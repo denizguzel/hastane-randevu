@@ -1,11 +1,11 @@
 <ui:composition template="/view/master/afterLoginTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
-  <ui:define name="title">${login.loggedUsername} - Profil</ui:define>
+  <ui:define name="title">#{login.loggedUsername} - #{messages['header.profile']}</ui:define>
 
   <ui:define name="content">
     <div class="page-wrapper">
       <div class="container-fluid">
         <div class="page-title">
-          <h4>Profil</h4>
+          <h4>#{messages['header.profile']}</h4>
           <button class="sidebar-toggler" type="button"><i class="fa fa-bars"></i></button>
         </div>
         <div class="card">
@@ -13,36 +13,36 @@
             <h:form prependId="false" rendered="#{session.getAttribute('userType') == 'patient'}">
               <ul class="nav nav-tabs">
                 <li class="nav-item">
-                  <a class="nav-link active" data-toggle="tab" href="#user">Kullanıcı</a>
+                  <a class="nav-link active" data-toggle="tab" href="#user">#{messages['label.user']}</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#personal">Kişisel</a>
+                  <a class="nav-link" data-toggle="tab" href="#personal">#{messages['label.personal']}</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#contact">İletişim</a>
+                  <a class="nav-link" data-toggle="tab" href="#contact">#{messages['label.contact']}</a>
                 </li>
               </ul>
 
               <div class="tab-content">
                 <div class="tab-pane fade show active" id="user">
-                  <div class="card-block-header border">Kullanıcı Bilgileri</div>
+                  <div class="card-block-header border">#{messages['form.title1']}</div>
                   <div class="row">
                     <div class="col-md-6 col-lg-4 col-xl-3">
-                      <label>T.C. No</label>
-                      <div class="area-disabled">${login.patientModel.tcNumber}</div>
+                      <label>#{messages['label.patientTc']}</label>
+                      <div class="area-disabled">#{login.patientModel.tcNumber}</div>
                     </div>
                     <div class="col-md-6 col-lg-4 col-xl-3 d-flex align-items-end">
-                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#change-password">Şifreni Değiştir</button>
+                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#change-password">#{messages['button.changePassword']}</button>
                     </div>
                   </div>
                 </div>
                 <div class="tab-pane fade" id="personal">
-                  <div class="card-block-header border">Kişisel Bilgiler</div>
+                  <div class="card-block-header border">#{messages['form.title2']}</div>
                   <div class="row">
                     <div class="col-md-6 col-lg-4 col-xl-3">
                       <div class="form-group" data-message="">
-                        <label>İsim</label>
-                        <h:inputText id="firstname" value="#{login.patientModel.firstName}" p:placeholder="Adınızı giriniz" required="true" requiredMessage="Adınızı giriniz" styleClass="form-control">
+                        <label>#{messages['label.name']}</label>
+                        <h:inputText id="firstname" value="#{login.patientModel.firstName}" p:placeholder="#{messages['form.name']}" required="true" requiredMessage="#{messages['form.name']}" styleClass="form-control">
                           <f:ajax event="blur" execute="@this" render="firstnameMessage" onevent="ajaxCall"/>
                         </h:inputText>
                         <h:message id="firstnameMessage" for="firstname" errorClass="error"/>
@@ -50,8 +50,8 @@
                     </div>
                     <div class="col-md-6 col-lg-4 col-xl-3">
                       <div class="form-group" data-message="">
-                        <label>Soyisim</label>
-                        <h:inputText id="lastname" value="#{login.patientModel.lastName}" p:placeholder="Soyadınızı giriniz" required="true" requiredMessage="Soyadınızı giriniz" styleClass="form-control">
+                        <label>#{messages['label.surname']}</label>
+                        <h:inputText id="lastname" value="#{login.patientModel.lastName}" p:placeholder="#{messages['form.surname']}" required="true" requiredMessage="#{messages['form.surname']}" styleClass="form-control">
                           <f:ajax event="blur" execute="@this" render="lastnameMessage" onevent="ajaxCall"/>
                         </h:inputText>
                         <h:message id="lastnameMessage" for="lastname" errorClass="error"/>
@@ -59,8 +59,8 @@
                     </div>
                     <div class="col-md-6 col-lg-4 col-xl-3">
                       <div class="form-group" data-message="">
-                        <label>Doğum Tarihi</label>
-                        <h:inputText id="birthdate" value="#{login.patientModel.dateOfBirth}" p:placeholder="Doğum tarihinizi giriniz" required="true" requiredMessage="Doğum tarihinizi giriniz" styleClass="form-control datepicker">
+                        <label>#{messages['label.birthdate']}</label>
+                        <h:inputText id="birthdate" value="#{login.patientModel.dateOfBirth}" p:placeholder="#{messages['form.birthdate']}" required="true" requiredMessage="#{messages['form.birthdate']}" styleClass="form-control datepicker">
                           <f:convertDateTime pattern="dd-MM-yyyy"/>
                           <f:ajax event="blur" execute="@this" render="birthdateMessage" onevent="ajaxCall"/>
                         </h:inputText>
@@ -69,8 +69,8 @@
                     </div>
                     <div class="col-md-6 col-lg-4 col-xl-3">
                       <div class="form-group" data-message="">
-                        <label>Doğum Yeri</label>
-                        <h:inputText id="birthplace" value="#{login.patientModel.placeOfBirth}" p:placeholder="Doğum yerinizi giriniz" required="true" requiredMessage="Doğum yerinizi giriniz" styleClass="form-control">
+                        <label>#{messages['label.birthplace']}</label>
+                        <h:inputText id="birthplace" value="#{login.patientModel.placeOfBirth}" p:placeholder="#{messages['label.birthplace']}" required="true" requiredMessage="#{messages['label.birthplace']}" styleClass="form-control">
                           <f:ajax event="blur" execute="@this" render="birthplaceMessage" onevent="ajaxCall"/>
                         </h:inputText>
                         <h:message id="birthplaceMessage" for="birthplace" errorClass="error"/>
@@ -78,8 +78,8 @@
                     </div>
                     <div class="col-md-6 col-lg-4 col-xl-3">
                       <div class="form-group" data-message="">
-                        <label>Baba İsmi</label>
-                        <h:inputText id="fathername" value="#{login.patientModel.fatherName}" p:placeholder="Baba adı giriniz" required="true" requiredMessage="Baba adınızı giriniz" styleClass="form-control">
+                        <label>#{messages['label.father']}</label>
+                        <h:inputText id="fathername" value="#{login.patientModel.fatherName}" p:placeholder="#{messages['form.father']}" required="true" requiredMessage="#{messages['form.father']}" styleClass="form-control">
                           <f:ajax event="blur" execute="@this" render="fathernameMessage" onevent="ajaxCall"/>
                         </h:inputText>
                         <h:message id="fathernameMessage" for="fathername" errorClass="error"/>
@@ -87,8 +87,8 @@
                     </div>
                     <div class="col-md-6 col-lg-4 col-xl-3">
                       <div class="form-group" data-message="">
-                        <label>Anne İsmi</label>
-                        <h:inputText id="mothername" value="#{login.patientModel.motherName}" p:placeholder="Anne adı giriniz" required="true" requiredMessage="Anne adınızı giriniz" styleClass="form-control">
+                        <label>#{messages['label.mother']}</label>
+                        <h:inputText id="mothername" value="#{login.patientModel.motherName}" p:placeholder="#{messages['form.mother']}" required="true" requiredMessage="#{messages['form.mother']}" styleClass="form-control">
                           <f:ajax event="blur" execute="@this" render="mothernameMessage" onevent="ajaxCall"/>
                         </h:inputText>
                         <h:message id="mothernameMessage" for="mothername" errorClass="error"/>
@@ -96,7 +96,7 @@
                     </div>
                     <div class="col-md-6 col-lg-4 col-xl-3">
                       <div class="form-group">
-                        <label>Gizli Soru</label>
+                        <label>#{messages['label.secretQuestion']}</label>
                         <h:selectOneMenu styleClass="selectpicker form-control" value="#{login.patientModel.secretQuestion}">
                           <f:selectItems value="#{login.secretQuestionEnums}" var="secretQuestionGroup" itemValue="#{secretQuestionGroup}" itemLabel="#{messages['string.'.concat(secretQuestionGroup)]}"/>
                         </h:selectOneMenu>
@@ -104,8 +104,8 @@
                     </div>
                     <div class="col-md-6 col-lg-4 col-xl-3">
                       <div class="form-group" data-message="">
-                        <label>Gizli Cevap</label>
-                        <h:inputText id="questionanswer" value="#{login.patientModel.questionAnswer}" p:placeholder="Gizli soru cevabı giriniz" required="true" requiredMessage="Gizli soru cevabı giriniz" styleClass="form-control">
+                        <label>#{messages['label.secretAnswer']}</label>
+                        <h:inputText id="questionanswer" value="#{login.patientModel.questionAnswer}" p:placeholder="#{messages['form.secretAnswer']}" required="true" requiredMessage="#{messages['form.secretAnswer']}" styleClass="form-control">
                           <f:ajax event="blur" execute="@this" render="questionanswerMessage" onevent="ajaxCall"/>
                         </h:inputText>
                         <h:message id="questionanswerMessage" for="questionanswer" errorClass="error"/>
@@ -113,7 +113,7 @@
                     </div>
                     <div class="col-md-6 col-lg-4 col-xl-3">
                       <div class="form-group">
-                        <label>Cinsiyet</label>
+                        <label>#{messages['label.gender']}</label>
                         <h:selectOneMenu styleClass="selectpicker form-control" value="#{login.patientModel.gender}">
                           <f:selectItems value="#{login.genderEnums}" var="genderGroup" itemValue="#{genderGroup}" itemLabel="#{messages['string.'.concat(genderGroup)]}"/>
                         </h:selectOneMenu>
@@ -121,7 +121,7 @@
                     </div>
                     <div class="col-md-6 col-lg-4 col-xl-3">
                       <div class="form-group">
-                        <label>Kan Grubu</label>
+                        <label>#{messages['label.blood']}</label>
                         <h:selectOneMenu styleClass="selectpicker form-control" value="#{login.patientModel.bloodGroup}">
                           <f:selectItems value="#{login.bloodGroupEnums}" var="bloodGroup" itemValue="#{bloodGroup}" itemLabel="#{messages['string.'.concat(bloodGroup)]}"/>
                         </h:selectOneMenu>
@@ -130,12 +130,12 @@
                   </div>
                 </div>
                 <div class="tab-pane fade" id="contact">
-                  <div class="card-block-header border">İletişim Bilgileri</div>
+                  <div class="card-block-header border">#{messages['form.title3']}</div>
                   <div class="row">
                     <div class="col-md-6 col-lg-4 col-xl-3">
                       <div class="form-group" data-message="">
-                        <label>E-Posta</label>
-                        <h:inputText id="email" value="#{login.patientModel.email}" p:placeholder="Email giriniz" required="true" requiredMessage="Email giriniz" styleClass="form-control">
+                        <label>#{messages['label.email']}</label>
+                        <h:inputText id="email" value="#{login.patientModel.email}" p:placeholder="#{messages['form.email']}" required="true" requiredMessage="#{messages['form.email']}" styleClass="form-control">
                           <f:validator validatorId="email"/>
                           <f:ajax event="blur" execute="@this" render="emailMessage" onevent="ajaxCall"/>
                         </h:inputText>
@@ -144,8 +144,8 @@
                     </div>
                     <div class="col-md-6 col-lg-4 col-xl-3">
                       <div class="form-group" data-message="">
-                        <label>Telefon</label>
-                        <h:inputText id="phone" value="#{login.patientModel.phoneNumber}" p:placeholder="Telefon no giriniz" required="true" requiredMessage="Telefon no giriniz" styleClass="form-control">
+                        <label>#{messages['label.phone']}</label>
+                        <h:inputText id="phone" value="#{login.patientModel.phoneNumber}" p:placeholder="#{messages['form.phone']}" required="true" requiredMessage="#{messages['form.phone']}" styleClass="form-control">
                           <f:ajax event="blur" execute="@this" render="phoneMessage" onevent="ajaxCall"/>
                         </h:inputText>
                         <h:message id="phoneMessage" for="phone" errorClass="error"/>
@@ -153,8 +153,8 @@
                     </div>
                     <div class="col-md-6 col-lg-4 col-xl-3">
                       <div class="form-group" data-message="">
-                        <label>Adres</label>
-                        <h:inputTextarea id="address" value="#{login.patientModel.address}" p:placeholder="Adres giriniz" required="true" requiredMessage="Adres giriniz" styleClass="form-control">
+                        <label>#{messages['label.address']}</label>
+                        <h:inputTextarea id="address" value="#{login.patientModel.address}" p:placeholder="#{messages['form.address']}" required="true" requiredMessage="#{messages['form.address']}" styleClass="form-control">
                           <f:ajax event="blur" execute="@this" render="addressMessage" onevent="ajaxCall"/>
                         </h:inputTextarea>
                         <h:message id="addressMessage" for="address" errorClass="error"/>
@@ -163,31 +163,30 @@
                   </div>
                 </div>
               </div>
-              <h:commandButton value="Güncelle" styleClass="btn btn-success btn-save" action="#{login.patientUpdate}">
+              <h:commandButton value="#{messages['button.update']}" styleClass="btn btn-success btn-save" action="#{login.patientUpdate}">
                 <f:ajax execute="@form" render="@form" onevent="selectPickerToast"/>
               </h:commandButton>
               <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
             </h:form>
 
             <h:form prependId="false" rendered="#{session.getAttribute('userType') == 'doctor'}">
-
               <ul class="nav nav-tabs">
                 <li class="nav-item">
-                  <a class="nav-link active" data-toggle="tab" href="#doctorPersonal">Kişisel</a>
+                  <a class="nav-link active" data-toggle="tab" href="#doctorPersonal">#{messages['label.personal']}</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#doctorJob">İş</a>
+                  <a class="nav-link" data-toggle="tab" href="#doctorJob">#{messages['label.job']}</a>
                 </li>
               </ul>
 
               <div class="tab-content">
                 <div class="tab-pane fade show active" id="doctorPersonal">
-                  <div class="card-block-header border">Kişisel Bilgiler</div>
+                  <div class="card-block-header border">#{messages['form.title2']}</div>
                   <div class="row">
                     <div class="col-md-6 col-lg-4 col-xl-3">
                       <div class="form-group" data-message="">
-                        <label>İsim</label>
-                        <h:inputText id="doctorfirstname" value="#{login.doctorModel.firstName}" p:placeholder="Adınızı giriniz" required="true" requiredMessage="Adınızı giriniz" styleClass="form-control">
+                        <label>#{messages['label.name']}</label>
+                        <h:inputText id="doctorfirstname" value="#{login.doctorModel.firstName}" p:placeholder="#{messages['form.name']}" required="true" requiredMessage="#{messages['form.name']}" styleClass="form-control">
                           <f:ajax event="blur" execute="@this" render="doctorfirstnameMessage" onevent="ajaxCall"/>
                         </h:inputText>
                         <h:message id="doctorfirstnameMessage" for="doctorfirstname" errorClass="error"/>
@@ -195,8 +194,8 @@
                     </div>
                     <div class="col-md-6 col-lg-4 col-xl-3">
                       <div class="form-group" data-message="">
-                        <label>Soyisim</label>
-                        <h:inputText id="doctorlastname" value="#{login.doctorModel.lastName}" p:placeholder="Soyadınızı giriniz" required="true" requiredMessage="Soyadınızı giriniz" styleClass="form-control">
+                        <label>#{messages['label.surname']}</label>
+                        <h:inputText id="doctorlastname" value="#{login.doctorModel.lastName}" p:placeholder="#{messages['form.surname']}" required="true" requiredMessage="#{messages['form.surname']}" styleClass="form-control">
                           <f:ajax event="blur" execute="@this" render="doctorlastnameMessage" onevent="ajaxCall"/>
                         </h:inputText>
                         <h:message id="doctorlastnameMessage" for="doctorlastname" errorClass="error"/>
@@ -204,8 +203,8 @@
                     </div>
                     <div class="col-md-6 col-lg-4 col-xl-3">
                       <div class="form-group" data-message="">
-                        <label>Doğum Tarihi</label>
-                        <h:inputText id="doctorbirthdate" value="#{login.doctorModel.dateOfBirth}" p:placeholder="Doğum tarihinizi giriniz" required="true" requiredMessage="Doğum tarihinizi giriniz" styleClass="form-control datepicker">
+                        <label>#{messages['label.birthdate']}</label>
+                        <h:inputText id="doctorbirthdate" value="#{login.doctorModel.dateOfBirth}" p:placeholder="#{messages['form.birthdate']}" required="true" requiredMessage="#{messages['form.birthdate']}" styleClass="form-control datepicker">
                           <f:convertDateTime pattern="dd-MM-yyyy"/>
                           <f:ajax event="blur" execute="@this" render="doctorbirthdateMessage" onevent="ajaxCall"/>
                         </h:inputText>
@@ -214,7 +213,7 @@
                     </div>
                     <div class="col-md-6 col-lg-4 col-xl-3">
                       <div class="form-group">
-                        <label>Gizli Soru</label>
+                        <label>#{messages['label.secretQuestion']}</label>
                         <h:selectOneMenu styleClass="selectpicker form-control" value="#{login.doctorModel.secretQuestion}">
                           <f:selectItems value="#{login.secretQuestionEnums}" var="secretQuestionGroup" itemValue="#{secretQuestionGroup}" itemLabel="#{messages['string.'.concat(secretQuestionGroup)]}"/>
                         </h:selectOneMenu>
@@ -222,8 +221,8 @@
                     </div>
                     <div class="col-md-6 col-lg-4 col-xl-3">
                       <div class="form-group" data-message="">
-                        <label>Gizli Cevap</label>
-                        <h:inputText id="doctorquestionanswer" value="#{login.doctorModel.questionAnswer}" p:placeholder="Gizli soru cevabı giriniz" required="true" requiredMessage="Gizli soru cevabı giriniz" styleClass="form-control">
+                        <label>#{messages['label.secretAnswer']}</label>
+                        <h:inputText id="doctorquestionanswer" value="#{login.doctorModel.questionAnswer}" p:placeholder="#{messages['form.secretAnswer']}" required="true" requiredMessage="#{messages['form.secretAnswer']}" styleClass="form-control">
                           <f:ajax event="blur" execute="@this" render="doctorquestionanswerMessage" onevent="ajaxCall"/>
                         </h:inputText>
                         <h:message id="doctorquestionanswerMessage" for="doctorquestionanswer" errorClass="error"/>
@@ -231,7 +230,7 @@
                     </div>
                     <div class="col-md-6 col-lg-4 col-xl-3">
                       <div class="form-group">
-                        <label>Cinsiyet</label>
+                        <label>#{messages['label.gender']}</label>
                         <h:selectOneMenu styleClass="selectpicker form-control" value="#{login.doctorModel.gender}">
                           <f:selectItems value="#{login.genderEnums}" var="genderGroup" itemValue="#{genderGroup}" itemLabel="#{messages['string.'.concat(genderGroup)]}"/>
                         </h:selectOneMenu>
@@ -240,28 +239,28 @@
                   </div>
                 </div>
                 <div class="tab-pane fade" id="doctorJob">
-                  <div class="card-block-header border">İş Bilgileri</div>
+                  <div class="card-block-header border">#{messages['form.title4']}</div>
                   <div class="row">
                     <div class="col-md-6 col-lg-4 col-xl-3 mb-2 mb-2 mb-xl-0">
-                      <label>Sicil No</label>
-                      <div class="area-disabled">${login.doctorModel.recordNumber}</div>
+                      <label>#{messages['label.record']}</label>
+                      <div class="area-disabled">#{login.doctorModel.recordNumber}</div>
                     </div>
                     <div class="col-md-6 col-lg-4 col-xl-3 mb-2 mb-2 mb-xl-0">
-                      <label>Bölüm</label>
-                      <div class="area-disabled">${login.doctorModel.branch.branchName}</div>
+                      <label>#{messages['label.section']}</label>
+                      <div class="area-disabled">#{login.doctorModel.branch.branchName}</div>
                     </div>
                     <div class="col-md-6 col-lg-4 col-xl-3 mb-2 mb-2 mb-xl-0">
-                      <label>Uzmanlık Seviyesi</label>
-                      <div class="area-disabled">${messages['string.'.concat(login.doctorModel.level)]}</div>
+                      <label>#{messages['label.level']}</label>
+                      <div class="area-disabled">#{messages['string.'.concat(login.doctorModel.level)]}</div>
                     </div>
                     <div class="col-md-6 col-lg-4 col-xl-3 mb-2 mb-2 mb-xl-0">
-                      <label>Çalışma Odası</label>
-                      <div class="area-disabled">${login.doctorModel.inspectionPlace.placeName}</div>
+                      <label>#{messages['label.room']}</label>
+                      <div class="area-disabled">#{login.doctorModel.inspectionPlace.placeName}</div>
                     </div>
                   </div>
                 </div>
               </div>
-              <h:commandButton value="Güncelle" styleClass="btn btn-success btn-save" action="#{doctor.doctorUpdate}">
+              <h:commandButton value="#{messages['button.update']}" styleClass="btn btn-success btn-save" action="#{doctor.doctorUpdate}">
                 <f:ajax execute="@form" render="@form" onevent="selectPickerToast"/>
               </h:commandButton>
               <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
@@ -276,19 +275,19 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Şifre Değiştir</h5>
+              <h5 class="modal-title">#{messages['button.changePassword']}</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></button>
             </div>
             <h:form prependId="false">
               <div class="modal-body">
                 <div class="form-group" data-message="">
-                  <h:inputSecret id="password" value="#{login.password}" p:placeholder="Yeni şifrenizi giriniz" required="true" requiredMessage="Yeni şifrenizi giriniz" styleClass="form-control" binding="#{passwordConfirm}">
+                  <h:inputSecret id="password" value="#{login.password}" p:placeholder="#{messages['form.newPassword']}" required="true" requiredMessage="#{messages['form.newPassword']}" styleClass="form-control" binding="#{passwordConfirm}">
                     <f:ajax event="blur" execute="@this passwordConfirm" render="passwordMessage passwordConfirmMessage" onevent="ajaxCall"/>
                   </h:inputSecret>
                   <h:message id="passwordMessage" for="password" errorClass="error"/>
                 </div>
                 <div class="form-group" data-message="">
-                  <h:inputSecret id="passwordConfirm" p:placeholder="Yeni şifrenizi tekrar giriniz" required="#{not empty passwordConfirm}" requiredMessage="Yeni şifrenizi tekrar giriniz" styleClass="form-control">
+                  <h:inputSecret id="passwordConfirm" p:placeholder="#{messages['form.newPasswordAgain']}" required="#{not empty passwordConfirm}" requiredMessage="#{messages['form.newPasswordAgain']}" styleClass="form-control">
                     <f:validator validatorId="password"/>
                     <f:attribute name="otherValue" value="#{passwordConfirm}"/>
                     <f:ajax event="blur" execute="@this password" render="passwordMessage passwordConfirmMessage" onevent="ajaxCall"/>
@@ -296,10 +295,10 @@
                   <h:message id="passwordConfirmMessage" for="passwordConfirm" errorClass="error"/>
                 </div>
                 <div class="form-group d-flex">
-                  <h:commandButton styleClass="btn btn-success ml-auto" value="Değiştir" action="#{login.patientPasswordUpdate}">
+                  <h:commandButton styleClass="btn btn-success ml-auto" value="#{messages['button.update']}" action="#{login.patientPasswordUpdate}">
                     <f:ajax execute="@form" render="@form" onevent="toast"/>
                   </h:commandButton>
-                  <button type="button" class="btn btn-danger ml-2" data-dismiss="modal">Kapat</button>
+                  <button type="button" class="btn btn-danger ml-2" data-dismiss="modal">#{messages['button.close']}</button>
                 </div>
               </div>
               <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
