@@ -6,6 +6,7 @@ import com.hastanerandevu.service.impl.DoctorServiceImpl;
 import com.hastanerandevu.service.impl.PatientServiceImpl;
 import com.hastanerandevu.service.impl.ReviewsAboutDoctorsServiceImpl;
 import com.hastanerandevu.utility.SessionUtils;
+import com.hastanerandevu.utility.UTF8Control;
 import org.apache.log4j.Logger;
 
 import javax.annotation.PostConstruct;
@@ -17,6 +18,7 @@ import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 @ManagedBean(name = "doctor")
 @ViewScoped
@@ -24,6 +26,8 @@ public class DoctorBean implements Serializable {
   private static final Logger LOG = Logger.getLogger(DoctorBean.class);
   @ManagedProperty(value = "#{login}")
   private LoginBean loginBean;
+
+  ResourceBundle bundle = ResourceBundle.getBundle("com.hastanerandevu.messages",new UTF8Control());
 
   private DoctorServiceImpl doctorService;
   private PatientServiceImpl patientService;
@@ -147,9 +151,9 @@ public class DoctorBean implements Serializable {
       doctorService.update(doctorModel);
       loginBean.setLoggedUsername(NameConverter.getName(doctorModel.getFirstName(), doctorModel.getLastName()));
 
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Güncelleme Başarılı", null));
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("doctor.update.successful"), null));
     } catch(Exception e) {
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Güncelleme Başarısız", null));
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("doctor.update.unsuccessful"), null));
       LOG.error(e.getMessage());
     }
   }

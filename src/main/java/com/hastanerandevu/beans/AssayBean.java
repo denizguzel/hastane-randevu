@@ -7,6 +7,7 @@ import com.hastanerandevu.model.PatientModel;
 import com.hastanerandevu.service.impl.AssayServiceImpl;
 import com.hastanerandevu.service.impl.PatientAssayRelServiceImpl;
 import com.hastanerandevu.service.impl.PatientServiceImpl;
+import com.hastanerandevu.utility.UTF8Control;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -15,16 +16,15 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @ManagedBean(name = "assay")
 @ViewScoped
 public class AssayBean implements Serializable {
   @ManagedProperty(value = "#{login}")
   private LoginBean loginBean;
+
+  ResourceBundle bundle = ResourceBundle.getBundle("com.hastanerandevu.messages",new UTF8Control());
 
   private PatientAssayRelServiceImpl patientAssayRelService;
   private AssayServiceImpl assayService;
@@ -115,12 +115,12 @@ public class AssayBean implements Serializable {
 
   public String saveAssay() {
     if(patientAssayRelService.patientHaveAssay(patientModel, assayService.find(Long.parseLong(selectedAssay)))) {
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Tahlil zaten kayıtlı", null));
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("assay.save.alreadyhave"), null));
     } else {
       patientAssayRelModel.setAssay(assayService.find(Long.parseLong(selectedAssay)));
       patientAssayRelModel.setPatient(patientModel);
       patientAssayRelService.create(patientAssayRelModel);
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Tahlil kaydı başarılı", null));
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("assay.save.successful"), null));
     }
     FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
     return "/view/assay?faces-redirect=true";
@@ -128,7 +128,7 @@ public class AssayBean implements Serializable {
 
   public String deleteAssay() {
     patientAssayRelService.delete(patientAssayRelModel);
-    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Tahlil silindi", null));
+    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("assay.delete.successful"), null));
     FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
     return "/view/assay?faces-redirect=true";
   }

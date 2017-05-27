@@ -42,7 +42,7 @@
                   </h:column>
                   <h:column>
                     <f:facet name="header">Doktora Not</f:facet>
-                    <h:outputText styleClass="doctor-message" p:data-toggle="tooltip" p:title="#{history.messageToDoctor == null ? '-Not yok-' : history.messageToDoctor}" value="#{history.messageToDoctor == null ? '-Not yok-' : history.messageToDoctor}"/>
+                    <h:outputText styleClass="doctor-message" p:data-toggle="tooltip" p:title="#{history.messageToDoctor == null ? 'Not yok' : history.messageToDoctor}" value="#{history.messageToDoctor == null ? 'Not yok' : history.messageToDoctor}"/>
                   </h:column>
                   <h:column headerClass="text-center">
                     <f:facet name="header">Durum</f:facet>
@@ -100,7 +100,7 @@
                   </h:column>
                   <h:column>
                     <f:facet name="header">Doktora Not</f:facet>
-                    <h:outputText styleClass="doctor-message" p:data-toggle="tooltip" p:title="#{history.messageToDoctor == null ? '-Not yok-' : history.messageToDoctor}" value="#{history.messageToDoctor == null ? '-Not yok-' : history.messageToDoctor}"/>
+                    <h:outputText styleClass="doctor-message" p:data-toggle="tooltip" p:title="#{history.messageToDoctor == null ? 'Not yok' : history.messageToDoctor}" value="#{history.messageToDoctor == null ? 'Not yok' : history.messageToDoctor}"/>
                   </h:column>
                   <h:column>
                     <f:facet name="header">Hasta Bilgileri</f:facet>
@@ -143,6 +143,7 @@
                   <h:commandButton value="Evet" styleClass="btn btn-success" action="#{appointment.cancelAppointment}"/>
                   <button type="button" class="btn btn-danger" data-dismiss="modal">Hayır</button>
                 </div>
+                <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
               </h:form>
             </div>
           </div>

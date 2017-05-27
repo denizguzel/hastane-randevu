@@ -6,6 +6,7 @@ import com.hastanerandevu.exceptions.NoUserException;
 import com.hastanerandevu.model.PatientModel;
 import com.hastanerandevu.service.impl.PatientServiceImpl;
 import com.hastanerandevu.utility.Mailer;
+import com.hastanerandevu.utility.UTF8Control;
 import org.apache.log4j.Logger;
 
 import javax.annotation.PostConstruct;
@@ -16,11 +17,15 @@ import javax.faces.context.FacesContext;
 import java.net.URISyntaxException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.ResourceBundle;
 
 @ManagedBean(name = "passwordReset")
 @ViewScoped
 public class PasswordResetBean {
   private static final Logger LOG = Logger.getLogger(PasswordResetBean.class);
+
+  ResourceBundle bundle = ResourceBundle.getBundle("com.hastanerandevu.messages",new UTF8Control());
+
   private PatientServiceImpl patientService;
   private String urlParam;
   private String password;
@@ -64,13 +69,14 @@ public class PasswordResetBean {
       long t = date.getTimeInMillis();
       patientModel.setForgottenExpirationDate(new Date(t + (ProjectConstants.PASSWORD_RESET_DURATION * ProjectConstants.ONE_MINUTE_IN_MILLIS)));
       patientService.update(patientModel);
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Şifre sıfırlama maili gönderildi.", null));
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("patient.sendpasswordlink.successful"), null));
 
     } catch(Exception e) {
       if(e instanceof NoUserException) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email sistemde kayıtlı değil.", null));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("patient.sendpasswordlink.nothave"), null));
         LOG.warn(e.getMessage());
       } else {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("patient.sendpasswordlink.unsuccessful"), null));
         LOG.error(e.getMessage());
       }
 
@@ -85,10 +91,10 @@ public class PasswordResetBean {
 
         patientModel.setPassword(Encryptor.encrypt(getPassword()));
         patientService.update(patientModel);
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Şifreniz değiştirildi.", null));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("patient.changepassword.successful"), null));
 
       } else {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Şifreniz değiştirilemedi.", null));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("patient.changepassword.expire"), null));
       }
     } catch(Exception e) {
       if(e instanceof NoUserException) {

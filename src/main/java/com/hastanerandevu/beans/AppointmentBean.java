@@ -4,6 +4,7 @@ import com.hastanerandevu.converter.NameConverter;
 import com.hastanerandevu.model.*;
 import com.hastanerandevu.service.impl.*;
 import com.hastanerandevu.utility.Mailer;
+import com.hastanerandevu.utility.UTF8Control;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -23,6 +24,8 @@ public class AppointmentBean implements Serializable {
 
   @ManagedProperty(value = "#{login}")
   private LoginBean loginBean;
+
+  ResourceBundle bundle = ResourceBundle.getBundle("com.hastanerandevu.messages",new UTF8Control());
 
   private HospitalPoliclinicRelServiceImpl hospitalPoliclinicRelService;
   private CityServiceImpl cityService;
@@ -103,17 +106,21 @@ public class AppointmentBean implements Serializable {
       cities.put(cityModel.getPk(), cityModel.getCityName());
     }
 
-    if(patientService.getAppointmentHistory(patientModel).size() > 0) {
-      appointmentHistory.addAll(patientService.getAppointmentHistory(patientModel));
-    }
-    if (patientService.getActiveAppointmentsOfPatient(patientModel).size() > 0) {
-      closestAppointment = patientService.getActiveAppointmentsOfPatient(patientModel).get(0);
-      closestDate = closestAppointment.getAppointmentDate();
-      Date today = new Date();
+    appointmentHistory.addAll(patientService.getAppointmentHistory(patientModel));
 
-      long diff = closestDate.getTime() - today.getTime();
-      daysLeft = String.valueOf(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+    if(appointmentHistory.size() > 0) {
+      closestAppointment = patientService.getActiveAppointmentsOfPatient(patientModel).get(0);
+
+      if(closestAppointment != null) {
+
+        closestDate = closestAppointment.getAppointmentDate();
+        Date today = new Date();
+
+        long diff = closestDate.getTime() - today.getTime();
+        daysLeft = String.valueOf(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+      }
     }
+
   }
 
   public void setLoginBean(LoginBean loginBean) {
@@ -474,15 +481,15 @@ public class AppointmentBean implements Serializable {
 
   public String confirmAppointment() {
     if(patientService.haveAnAppointmentForThatDay(patientModel, appointmentModel.getAppointmentDate())) {
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aynı güne birden fazla randevu alamazsınız.", null));
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("appointment.confirm.sameday"), null));
       appointmentService.clearAppointment(appointmentModel);
     } else if(patientService.getActiveAppointmentsOfPatient(patientModel).size() >= 3) {
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "En fazla 3 randevu alabilirsiniz.", null));
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("appointment.confirm.maxlimit"), null));
       appointmentService.clearAppointment(appointmentModel);
     } else {
       appointmentService.confirmAppointment(appointmentModel, patientModel);
       new Mailer().sendAppointmentMail(appointmentModel);
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Randevu Alımı Başarılı", null));
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("appointment.confirm.successful"), null));
     }
     FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
     return "/view/take-appointment?faces-redirect=true";
@@ -511,10 +518,10 @@ public class AppointmentBean implements Serializable {
     boolean sameDay = today.get(Calendar.YEAR) == appointmentDate.get(Calendar.YEAR) && today.get(Calendar.DAY_OF_YEAR) == appointmentDate.get(Calendar.DAY_OF_YEAR);
 
     if(sameDay) {
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Randevunuz bugün olduğu için iptal edilemedi", null));
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("appointment.cancel.sameday"), null));
     } else {
       appointmentService.clearAppointment(appointmentModel);
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Randevunuz iptal edildi", null));
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("appointment.cancel.successful"), null));
     }
 
     FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);

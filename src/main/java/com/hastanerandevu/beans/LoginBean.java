@@ -11,6 +11,7 @@ import com.hastanerandevu.service.impl.DoctorServiceImpl;
 import com.hastanerandevu.service.impl.PatientServiceImpl;
 import com.hastanerandevu.utility.Mailer;
 import com.hastanerandevu.utility.SessionUtils;
+import com.hastanerandevu.utility.UTF8Control;
 import com.hastanerandevu.validation.CaptchaValidator;
 import org.apache.log4j.Logger;
 
@@ -21,11 +22,15 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 @ManagedBean(name = "login")
 @SessionScoped
 public class LoginBean {
   private static final Logger LOG = Logger.getLogger(LoginBean.class);
+
+  ResourceBundle bundle = ResourceBundle.getBundle("com.hastanerandevu.messages",new UTF8Control());
+
   private Mailer mailer;
   private PatientServiceImpl patientService;
   private DoctorServiceImpl doctorService;
@@ -118,16 +123,16 @@ public class LoginBean {
   // Functions
   public void patientCreate() {
     if(patientService.haveUserRegistration(patientModel)) {
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bu kullanıcı sistemde zaten kayıtlı", null));
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("patient.create.alreadyhave"), null));
     } else {
       patientModel.setPassword(Encryptor.encrypt(patientModel.getPassword()));
       try {
         patientService.create(patientModel);
         mailer.sendRegisterMail(patientModel);
         patientModel = new PatientModel(); // form reset
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Kayıt Başarılı", null));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("patient.create.successful"), null));
       } catch(Exception e) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Kayıt Başarısız", null));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("patient.create.unsuccessful"), null));
         LOG.info(e.getMessage());
       }
     }
@@ -138,9 +143,9 @@ public class LoginBean {
       patientService.update(patientModel);
       loggedUsername = NameConverter.getName(patientModel.getFirstName(), patientModel.getLastName());
 
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Güncelleme Başarılı", null));
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("patient.update.successful"), null));
     } catch(Exception e) {
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Güncelleme Başarısız", null));
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("patient.update.unsuccessful"), null));
       LOG.error(e.getMessage());
     }
   }
@@ -149,9 +154,9 @@ public class LoginBean {
     try {
       patientModel.setPassword(Encryptor.encrypt(getPassword()));
       patientService.update(patientModel);
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Şifre Değiştirildi", null));
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("patient.changepassword.successful"), null));
     } catch(Exception e) {
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Şifre Değiştirilemedi", null));
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("patient.changepassword.unsuccessful"), null));
       LOG.error(e.getMessage());
     }
   }
@@ -185,14 +190,14 @@ public class LoginBean {
         if(verifyCaptcha && verifyLogin) {
           return "view/dashboard?faces-redirect=true";
         } else {
-          FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bilgileri kontrol ediniz", null));
+          FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("check.information"), null));
           return "/login/patient";
         }
       }
       if(verifyLogin) {
         return "view/dashboard?faces-redirect=true";
       } else {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bilgileri kontrol ediniz", null));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("check.information"), null));
         return "/login/patient";
       }
     } else if(loginCheck.equals("doctor")) {
@@ -208,14 +213,14 @@ public class LoginBean {
         if(verifyCaptcha) {
           return "view/dashboard?faces-redirect=true";
         } else {
-          FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bilgileri kontrol ediniz", null));
+          FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("check.information"), null));
           return "/login/doctor";
         }
       }
       if(verifyLogin) {
         return "view/dashboard?faces-redirect=true";
       } else {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bilgileri kontrol ediniz", null));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("check.information"), null));
         return "/login/doctor";
       }
     }

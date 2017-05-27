@@ -6,6 +6,7 @@ import com.hastanerandevu.model.PatientModel;
 import com.hastanerandevu.service.impl.AlergyServiceImpl;
 import com.hastanerandevu.service.impl.PatientAlergyRelServiceImpl;
 import com.hastanerandevu.service.impl.PatientServiceImpl;
+import com.hastanerandevu.utility.UTF8Control;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -14,16 +15,15 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @ManagedBean(name = "alergy")
 @ViewScoped
 public class AlergyBean implements Serializable {
   @ManagedProperty(value = "#{login}")
   private LoginBean loginBean;
+
+  ResourceBundle bundle = ResourceBundle.getBundle("com.hastanerandevu.messages",new UTF8Control());
 
   private PatientAlergyRelServiceImpl patientAlergyRelService;
   private AlergyServiceImpl alergyService;
@@ -114,13 +114,13 @@ public class AlergyBean implements Serializable {
 
   public String saveAlergy() {
     if(patientAlergyRelService.patientHaveAlergy(patientModel, alergyService.find(Long.parseLong(selectedAlergy)))) {
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerji zaten kayıtlı", null));
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,bundle.getString("alergy.save.alreadyhave") , null));
     } else {
       patientAlergyRelModel.setAlergy(alergyService.find(Long.parseLong(selectedAlergy)));
       patientAlergyRelModel.setPatient(patientModel);
       patientAlergyRelModel.setIsStillPass(alergyStillPass);
       patientAlergyRelService.create(patientAlergyRelModel);
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerji kaydı başarılı", null));
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("alergy.save.successful"), null));
     }
     FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
     return "/view/alergy?faces-redirect=true";
@@ -128,7 +128,7 @@ public class AlergyBean implements Serializable {
 
   public String deleteAlergy() {
     patientAlergyRelService.delete(patientAlergyRelModel);
-    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerji silindi", null));
+    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("alergy.delete.successful"), null));
     FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
     return "/view/alergy?faces-redirect=true";
   }
