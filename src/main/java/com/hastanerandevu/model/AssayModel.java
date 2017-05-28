@@ -42,10 +42,6 @@ public class AssayModel implements Creatable, Updatable {
     return pk;
   }
 
-  public void setPk(long pk) {
-    this.pk = pk;
-  }
-
   public String getAssayName() {
     return assayName;
   }

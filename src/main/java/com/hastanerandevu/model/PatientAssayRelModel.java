@@ -50,10 +50,6 @@ public class PatientAssayRelModel implements Creatable, Updatable {
     return pk;
   }
 
-  public void setPk(long pk) {
-    this.pk = pk;
-  }
-
   public String getAssayResult() {
     return assayResult;
   }

@@ -46,10 +46,6 @@ public class PatientAlergyRelModel implements Creatable, Updatable {
     return pk;
   }
 
-  public void setPk(long pk) {
-    this.pk = pk;
-  }
-
   public char getIsStillPass() {
     return isStillPass;
   }

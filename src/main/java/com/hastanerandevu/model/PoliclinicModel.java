@@ -42,10 +42,6 @@ public class PoliclinicModel implements Creatable, Updatable {
     return pk;
   }
 
-  public void setPk(long pk) {
-    this.pk = pk;
-  }
-
   public String getPoliclinicName() {
     return policlinicName;
   }

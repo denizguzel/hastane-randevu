@@ -15,8 +15,11 @@ import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @ManagedBean(name = "appointment")
 @ViewScoped
@@ -458,11 +461,25 @@ public class AppointmentBean implements Serializable {
 
     clearListComponentsWithChange(appointmentTimes, appointmentDays);
 
+    List<AppointmentModel> appointmentsByFilter = appointmentService.getAllAppointmentsByInspectionPlace(inspectionPlaceModel);
+
     byte partitionSize = 17;
-    int totalSize = appointmentService.getAllAppointmentsByInspectionPlace(inspectionPlaceModel).size();
+
+    int totalSize;
+
+
+    if(appointmentDateStart != null && appointmentDateEnd != null) {
+      appointmentsByFilter = appointmentsByFilter.stream().filter(p -> p.getAppointmentDate().after(appointmentDateStart) && p.getAppointmentDate().before(appointmentDateEnd)).collect(Collectors.toList());
+    } else if(appointmentDateStart != null && appointmentDateEnd == null) {
+      appointmentsByFilter = appointmentsByFilter.stream().filter(p -> p.getAppointmentDate().after(appointmentDateStart)).collect(Collectors.toList());
+    }
+
+    totalSize = appointmentsByFilter.size();
+
+
     for(int i = 0; i < totalSize; i += partitionSize) {
-      appointmentTimes.add(appointmentService.getAllAppointmentsByInspectionPlace(inspectionPlaceModel).subList(i, Math.min(i + partitionSize, totalSize)));
-      appointmentDays.add(appointmentService.getAllAppointmentsByInspectionPlace(inspectionPlaceModel).get(i));
+      appointmentTimes.add(appointmentsByFilter.subList(i, Math.min(i + partitionSize, totalSize)));
+      appointmentDays.add(appointmentsByFilter.get(i));
     }
     appointmentClockPanel = true;
   }
@@ -501,7 +518,7 @@ public class AppointmentBean implements Serializable {
     for(CityModel cityModel : cityService.getCities()) {
       cities.put(cityModel.getPk(), cityModel.getCityName());
     }
-    selectedCity = "İl Seçiniz";
+    selectedCity = bundle.getString("label.selectCity");
   }
 
   public String cancelAppointment() {

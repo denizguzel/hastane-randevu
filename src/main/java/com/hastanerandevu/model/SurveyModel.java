@@ -45,10 +45,6 @@ public class SurveyModel implements Creatable, Updatable {
     return pk;
   }
 
-  public void setPk(long pk) {
-    this.pk = pk;
-  }
-
   public Date getCreationTime() {
     return creationTime;
   }

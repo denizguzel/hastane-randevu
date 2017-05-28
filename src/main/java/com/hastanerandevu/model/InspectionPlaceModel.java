@@ -50,10 +50,6 @@ public class InspectionPlaceModel implements Creatable, Updatable {
     return pk;
   }
 
-  public void setPk(long pk) {
-    this.pk = pk;
-  }
-
   public String getPlaceName() {
     return placeName;
   }

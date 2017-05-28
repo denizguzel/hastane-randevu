@@ -48,10 +48,6 @@ public class OptionModel implements Creatable, Updatable {
     return pk;
   }
 
-  public void setPk(long pk) {
-    this.pk = pk;
-  }
-
   public String getOptionText() {
     return optionText;
   }
