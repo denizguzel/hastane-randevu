@@ -9518,7 +9518,6 @@ body.page-404 .container .btn-transparent {
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  justify-content: space-between;
   padding: 15px 0;
 }
 

@@ -287,7 +287,7 @@
           <div class="modal-body">
             <h:panelGroup layout="block" id="doctor-comment" styleClass="d-flex flex-column">
               <h:panelGroup layout="block" styleClass="alert" rendered="#{empty appointment.doctorReviewList}">
-                <i class="fa fa-question-circle-o"></i>#{messages['modal.body.comments.info']}
+                #{messages['modal.body.comments.info']}
               </h:panelGroup>
               <h:panelGroup rendered="#{not empty appointment.doctorReviewList}">
                 <c:forEach items="#{appointment.doctorReviewList}" var="review">

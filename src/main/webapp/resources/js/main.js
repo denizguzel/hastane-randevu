@@ -32,7 +32,6 @@ $(".datepicker").datetimepicker({
 });
 
 $("#appointmentDateStart").datetimepicker({
-  useCurrent: false,
   minDate: moment().add(1, "d"),
   daysOfWeekDisabled: [0, 6],
   locale: "tr",
@@ -324,7 +323,6 @@ function appointment(data) {
     $(".selectpicker").selectpicker("render");
 
     $("#appointmentDateStart").datetimepicker({
-      useCurrent: false,
       minDate: moment().add(1, "d"),
       daysOfWeekDisabled: [0, 6],
       locale: "tr",
