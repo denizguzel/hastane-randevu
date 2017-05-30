@@ -148,17 +148,13 @@
                         </div>
                       </div>
                       <div class="bottom">
-                        <h:panelGroup rendered="#{history.appointmentStatus eq 'COMPLETED' and not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor)}">
-                          <h:commandLink value="#{messages['button.makeComment']}" styleClass="#{not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor) ? 'btn btn-sm area-disabled' : 'btn btn-sm btn-info'}" p:data-toggle="modal" p:data-target="#comment-modal">
-                            <f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>
-                            <f:ajax execute="@this"/>
-                          </h:commandLink>
-                        </h:panelGroup>
+                        <h:commandLink rendered="#{history.appointmentStatus eq 'COMPLETED' and empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor)}" value="#{messages['button.makeComment']}" styleClass="btn btn-sm btn-info" p:data-toggle="modal" p:data-target="#comment-modal">
+                          <f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>
+                          <f:ajax execute="@this"/>
+                        </h:commandLink>
+                        <h:panelGroup rendered="#{history.appointmentStatus eq 'COMPLETED' and not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor)}" styleClass="btn btn-sm area-disabled">#{messages['button.makeComment']}</h:panelGroup>
                         <h:panelGroup rendered="#{history.appointmentStatus ne 'COMPLETED'}">
-                          <h:commandLink value="#{messages['button.makeComment']}" styleClass="btn btn-sm area-disabled" p:data-toggle="modal" p:data-target="#comment-modal">
-                            <f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>
-                            <f:ajax execute="@this"/>
-                          </h:commandLink>
+                          <span class="btn btn-sm area-disabled">#{messages['button.makeComment']}</span>
                         </h:panelGroup>
                         <h:outputText styleClass="date" value="#{history.appointmentDate}">
                           <f:convertDateTime timeZone="GMT+3" pattern="MMM d, yyyy"/>

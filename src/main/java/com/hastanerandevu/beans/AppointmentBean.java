@@ -109,7 +109,7 @@ public class AppointmentBean implements Serializable {
       cities.put(cityModel.getPk(), cityModel.getCityName());
     }
 
-    if (SessionUtils.getSession().getAttribute("userType").equals("patient")){
+    if(SessionUtils.getSession().getAttribute("userType").equals("patient")) {
       if(patientService.getAppointmentHistory(patientModel).size() > 0) {
         appointmentHistory.addAll(patientService.getAppointmentHistory(patientModel));
       }
@@ -555,19 +555,23 @@ public class AppointmentBean implements Serializable {
     return "/view/appointments?faces-redirect=true";
   }
 
-  public void sendDoctorComment() {
-    if (getPatientReviewAboutDoctor(patientModel, appointmentModel.getInspectionPlace().getDoctor()).size() > 0) {
+  public String sendDoctorComment() {
+    if(getPatientReviewAboutDoctor(patientModel, appointmentModel.getInspectionPlace().getDoctor()).size() > 0) {
       reviewsAboutDoctorsModel = getPatientReviewAboutDoctor(patientModel, appointmentModel.getInspectionPlace().getDoctor()).get(0);
       reviewsAboutDoctorsModel.setReview(doctorComment);
       reviewsAboutDoctorsModel.setIsAppropriate('0');
       reviewsAboutDoctorsService.update(reviewsAboutDoctorsModel);
-    }
-    else {
+    } else {
       reviewsAboutDoctorsModel.setPatient(patientModel);
       reviewsAboutDoctorsModel.setDoctor(appointmentModel.getInspectionPlace().getDoctor());
       reviewsAboutDoctorsModel.setReview(doctorComment);
       reviewsAboutDoctorsService.create(reviewsAboutDoctorsModel);
     }
+
+    if(FacesContext.getCurrentInstance().getViewRoot().getViewId().equals("/view/dashboard.xhtml")) {
+      return "/view/dashboard?faces-redirect=true";
+    } else
+      return "/view/appointments?faces-redirect=true";
   }
 
   public List<ReviewsAboutDoctorsModel> getPatientReviewAboutDoctor(PatientModel patientModel, DoctorModel doctorModel) {
