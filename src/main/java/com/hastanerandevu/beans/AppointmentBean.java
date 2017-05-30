@@ -4,6 +4,7 @@ import com.hastanerandevu.converter.NameConverter;
 import com.hastanerandevu.model.*;
 import com.hastanerandevu.service.impl.*;
 import com.hastanerandevu.utility.Mailer;
+import com.hastanerandevu.utility.SessionUtils;
 import com.hastanerandevu.utility.UTF8Control;
 
 import javax.annotation.PostConstruct;
@@ -108,16 +109,18 @@ public class AppointmentBean implements Serializable {
       cities.put(cityModel.getPk(), cityModel.getCityName());
     }
 
-    if(patientService.getAppointmentHistory(patientModel).size() > 0) {
-      appointmentHistory.addAll(patientService.getAppointmentHistory(patientModel));
-    }
-    if(patientService.getActiveAppointmentsOfPatient(patientModel).size() > 0) {
-      closestAppointment = patientService.getActiveAppointmentsOfPatient(patientModel).get(0);
-      closestDate = closestAppointment.getAppointmentDate();
-      Date today = new Date();
+    if (SessionUtils.getSession().getAttribute("userType").equals("patient")){
+      if(patientService.getAppointmentHistory(patientModel).size() > 0) {
+        appointmentHistory.addAll(patientService.getAppointmentHistory(patientModel));
+      }
+      if(patientService.getActiveAppointmentsOfPatient(patientModel).size() > 0) {
+        closestAppointment = patientService.getActiveAppointmentsOfPatient(patientModel).get(0);
+        closestDate = closestAppointment.getAppointmentDate();
+        Date today = new Date();
 
-      long diff = closestDate.getTime() - today.getTime();
-      daysLeft = String.valueOf(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+        long diff = closestDate.getTime() - today.getTime();
+        daysLeft = String.valueOf(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+      }
     }
   }
 
