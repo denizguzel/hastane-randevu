@@ -95,6 +95,9 @@
         &:last-child {
           text-align: center;
         }
+        &:nth-last-child(2) {
+          text-align: center;
+        }
       }
     }
   }

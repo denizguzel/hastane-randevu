@@ -1,5 +1,5 @@
-<ui:composition template="/view/master/afterLoginTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
-  <ui:define name="title">Dashboard</ui:define>
+<ui:composition template="/view/master/afterLoginTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://xmlns.jcp.org/jsf/passthrough" xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <ui:define name="title">#{messages['sidebar.main']}</ui:define>
 
   <ui:define name="content">
     <div class="page-wrapper">
@@ -8,90 +8,218 @@
           <h4>#{messages["page.title.dashboard"]}</h4>
           <button class="sidebar-toggler" type="button"><i class="fa fa-bars"></i></button>
         </div>
-        <div class="card p-4">
-          <h:panelGroup rendered="#{session.getAttribute('userType') == 'patient'}">
-            <div class="row">
-              <div class="col-lg-6 col-xl-3">
-                <div class="small-card text-warning">
-                  <div class="left">
-                    <i class="fa fa-calendar-check-o"></i>
-                    <h4>#{messages["card.title.appointment"]}</h4>
-                  </div>
-                  <div class="right">
-                    <h:panelGroup rendered="#{not empty appointment.closestAppointment}">
+        <div class="card">
+          <div class="card-block">
+            <h:panelGroup rendered="#{session.getAttribute('userType') eq 'patient'}">
+              <div class="row">
+                <div class="col-lg-6 col-xl-3">
+                  <div class="small-card text-warning">
+                    <div class="left">
+                      <i class="fa fa-calendar-check-o"></i>
+                      <h4>#{messages["card.title.appointment"]}</h4>
+                    </div>
+                    <div class="right">
+                      <h:panelGroup rendered="#{not empty appointment.closestAppointment}">
                     <span class="count">#{appointment.daysLeft}
                       <small> #{messages["card.title.appointment.small"]}</small></span>
-                    </h:panelGroup>
-                    <h:outputText rendered="#{empty appointment.closestAppointment}" value="Randevu Yok"/>
-                    <h:outputText styleClass="date" value="#{appointment.closestDate}" rendered="#{not empty appointment.closestAppointment}">
-                      <f:convertDateTime timeZone="GMT+3" pattern="dd-MM-yyyy HH:mm"/>
-                    </h:outputText>
+                      </h:panelGroup>
+                      <h:outputText rendered="#{empty appointment.closestAppointment}" value="Randevu Yok"/>
+                      <h:outputText styleClass="date" value="#{appointment.closestDate}" rendered="#{not empty appointment.closestAppointment}">
+                        <f:convertDateTime timeZone="GMT+3" pattern="dd-MM-yyyy HH:mm"/>
+                      </h:outputText>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-xl-3 d-flex align-content-stretch">
+                  <div class="small-card text-info">
+                    <div class="left">
+                      <i class="fa fa-bug"></i>
+                      <h4>#{messages["label.alergy"]}</h4>
+                    </div>
+                    <div class="right">
+                      <span class="count">#{alergy.patientAlergies.size()}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-xl-3 d-flex align-content-stretch">
+                  <div class="small-card text-muted">
+                    <div class="left">
+                      <i class="fa fa-bed"></i>
+                      <h4>#{messages["label.disease"]}</h4>
+                    </div>
+                    <div class="right">
+                      <span class="count">#{disease.patientDiseases.size()}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-xl-3 d-flex align-content-stretch">
+                  <div class="small-card text-primary">
+                    <div class="left">
+                      <i class="fa fa-flask"></i>
+                      <h4>#{messages["label.assay"]}</h4>
+                    </div>
+                    <div class="right">
+                      <span class="count">#{assay.patientAssays.size()}</span>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-6 col-xl-3 d-flex align-content-stretch">
-                <div class="small-card text-info">
-                  <div class="left">
-                    <i class="fa fa-bug"></i>
-                    <h4>#{messages["label.alergy"]}</h4>
+            </h:panelGroup>
+            <h:panelGroup rendered="#{session.getAttribute('userType') eq 'doctor'}">
+              <div class="row">
+                <div class="col-lg-6 col-xl-3">
+                  <div class="small-card text-warning">
+                    <div class="left">
+                      <i class="fa fa-calendar-check-o"></i>
+                      <h4>#{messages["card.title.allAppointment"]}</h4>
+                    </div>
+                    <div class="right">
+                      <span class="count">#{doctor.appointmentCount}</span>
+                    </div>
                   </div>
-                  <div class="right">
-                    <span class="count">#{alergy.patientAlergies.size()}</span>
+                </div>
+                <div class="col-lg-6 col-xl-3 d-flex align-content-stretch">
+                  <div class="small-card text-muted">
+                    <div class="left">
+                      <i class="fa fa-chain-broken"></i>
+                      <h4>#{messages["card.title.remainingAppointment"]}</h4>
+                    </div>
+                    <div class="right">
+                      <span class="count">#{doctor.remainingAppointment}</span>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-6 col-xl-3 d-flex align-content-stretch">
-                <div class="small-card text-muted">
-                  <div class="left">
-                    <i class="fa fa-bed"></i>
-                    <h4>#{messages["label.disease"]}</h4>
-                  </div>
-                  <div class="right">
-                    <span class="count">#{disease.patientDiseases.size()}</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6 col-xl-3 d-flex align-content-stretch">
-                <div class="small-card text-primary">
-                  <div class="left">
-                    <i class="fa fa-flask"></i>
-                    <h4>#{messages["label.assay"]}</h4>
-                  </div>
-                  <div class="right">
-                    <span class="count">#{assay.patientAssays.size()}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </h:panelGroup>
-          <h:panelGroup rendered="#{session.getAttribute('userType') == 'doctor'}">
-            <div class="row">
-              <div class="col-lg-6 col-xl-3">
-                <div class="small-card text-warning">
-                  <div class="left">
-                    <i class="fa fa-calendar-check-o"></i>
-                    <h4>#{messages["card.title.allAppointment"]}</h4>
-                  </div>
-                  <div class="right">
-                    <span class="count">#{doctor.appointmentCount}</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6 col-xl-3 d-flex align-content-stretch">
-                <div class="small-card text-muted">
-                  <div class="left">
-                    <i class="fa fa-chain-broken"></i>
-                    <h4>#{messages["card.title.remainingAppointment"]}</h4>
-                  </div>
-                  <div class="right">
-                    <span class="count">#{doctor.remainingAppointment}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </h:panelGroup>
+            </h:panelGroup>
+          </div>
         </div>
+        <h:panelGroup rendered="#{session.getAttribute('userType') eq 'patient'}">
+          <div class="card mt-3">
+            <div class="card-header">#{messages['label.healthHistory']}
+              <small>(#{messages['label.lastThree']})</small>
+            </div>
+            <div class="card-block">
+              <h:panelGroup layout="block" styleClass="alert" rendered="#{session.getAttribute('userType') eq 'patient' and empty appointment.appointmentHistory}">
+                <i class="fa fa-smile-o"></i>#{messages['card.appointmentEmpty']}
+              </h:panelGroup>
+              <h:form prependId="false" rendered="#{not empty appointment.appointmentHistory}">
+                <ul class="list-group">
+                  <c:forEach items="#{appointment.appointmentHistory}" var="history" begin="0" end="2" step="1">
+                    <li class="list-group-item">
+                      <h5>#{history.inspectionPlace.hospitalPoliclinicRel.hospital.hospitalName}</h5>
+                      <div class="middle">
+                        <div class="detail">
+                          <b>#{messages['label.section']}:</b>
+                          <div class="detail-info">
+                            #{history.inspectionPlace.hospitalPoliclinicRel.policlinic.policlinicName}
+                          </div>
+                        </div>
+                        <div class="detail">
+                          <b>#{messages['label.doctor']}:</b>
+                          <div class="detail-info">
+                            #{history.inspectionPlace.doctor.firstName} #{history.inspectionPlace.doctor.lastName}
+                            <small>(#{messages['string.'.concat(history.inspectionPlace.doctor.level)]})</small>
+                          </div>
+                        </div>
+                        <div class="detail comment">
+                          <b>#{messages['label.comment']}:</b>
+                          <div class="detail-info">
+                            <h:panelGroup rendered="#{empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor)}">
+                              <abbr title="#{messages['label.commentAbbr']}">#{messages['modal.body.comments.info']}</abbr>
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor) and appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).isAppropriate eq 49}">
+                              #{appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).review}
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor) and appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).isAppropriate eq 48}">
+                              #{messages['label.commentAppropriate']}
+                            </h:panelGroup>
+                            <h:commandLink styleClass="btn btn-sm btn-warning" rendered="#{not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor) and appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).isAppropriate eq 49}" p:data-target="#comment-edit" p:data-toggle="modal" p:data-comment="#{appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).review}">
+                              #{messages['label.edit']}
+                              <f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>
+                              <f:ajax execute="@this"/>
+                            </h:commandLink>
+                          </div>
+                        </div>
+                        <div class="detail">
+                          <b>#{messages['label.status']}:</b>
+                          <div class="detail-info">
+                            #{history.appointmentStatus ne 'COMPLETED' ? messages['label.appointmentWaiting'] : messages['label.appointmentCompleted']}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="bottom">
+                        <h:panelGroup rendered="#{history.appointmentStatus eq 'COMPLETED' and not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor)}">
+                          <h:commandLink value="#{messages['button.makeComment']}" styleClass="#{not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor) ? 'btn btn-sm area-disabled' : 'btn btn-sm btn-info'}" p:data-toggle="modal" p:data-target="#comment-modal">
+                            <f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>
+                            <f:ajax execute="@this"/>
+                          </h:commandLink>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{history.appointmentStatus ne 'COMPLETED'}">
+                          <h:commandLink value="#{messages['button.makeComment']}" styleClass="btn btn-sm area-disabled" p:data-toggle="modal" p:data-target="#comment-modal">
+                            <f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>
+                            <f:ajax execute="@this"/>
+                          </h:commandLink>
+                        </h:panelGroup>
+                        <h:outputText styleClass="date" value="#{history.appointmentDate}">
+                          <f:convertDateTime timeZone="GMT+3" pattern="MMM d, yyyy"/>
+                        </h:outputText>
+                      </div>
+                    </li>
+                  </c:forEach>
+                </ul>
+              </h:form>
+            </div>
+          </div>
+        </h:panelGroup>
       </div>
     </div>
+
+    <h:panelGroup rendered="#{session.getAttribute('userType') eq 'patient'}">
+      <!-- Modal -->
+      <div class="modal fade" id="comment-modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">#{messages['modal.header.title.comment']}</h5>
+              <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
+            </div>
+            <div class="modal-body">
+              <h:form prependId="false">
+                <div class="form-group">
+                  <h:inputTextarea value="#{appointment.doctorComment}" styleClass="form-control" p:placeholder="#{messages['label.comment']}"/>
+                </div>
+                <div class="buttons">
+                  <h:commandButton value="#{messages['button.send']}" styleClass="btn btn-success" action="#{appointment.sendDoctorComment}"/>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">#{messages['button.close']}</button>
+                </div>
+              </h:form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="comment-edit">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">#{messages['modal.header.title.commentEdit']}</h5>
+              <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
+            </div>
+            <div class="modal-body">
+              <h:form prependId="false">
+                <div class="form-group">
+                  <h:inputTextarea value="#{appointment.doctorComment}" styleClass="form-control" p:placeholder="#{messages['label.comment']}"/>
+                </div>
+                <div class="buttons">
+                  <h:commandButton value="#{messages['button.send']}" styleClass="btn btn-success" action="#{appointment.sendDoctorComment}"/>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">#{messages['button.close']}</button>
+                </div>
+              </h:form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </h:panelGroup>
   </ui:define>
 </ui:composition>

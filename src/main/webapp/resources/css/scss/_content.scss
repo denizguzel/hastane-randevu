@@ -1,5 +1,4 @@
 .page-wrapper {
-  height: calc(100% - 50px);
   margin-left: 230px;
   background-color: #edf1f5;
   .page-title {
@@ -17,7 +16,13 @@
   }
   .card {
     .card-header {
-      font-size: 24px;
+      border-radius: 0;
+      text-transform: uppercase;
+      font-weight: 500;
+      small {
+        text-transform: none;
+        margin-left: 5px;
+      }
     }
     .card-block {
       .alert {
@@ -147,6 +152,68 @@
       .form-group[data-message]:not([data-message=""])::before {
         top: 34px;
         right: 5px;
+      }
+      .list-group {
+        .list-group-item {
+          flex-direction: column;
+          align-items: stretch;
+          border-radius: 0;
+          border: 0;
+          border-bottom: 1px solid #EEEFF0;
+          margin-bottom: 0;
+          padding: 10px;
+          color: #848A96;
+          &:hover {
+            background-color: #F7FAFC;
+          }
+          &:last-child {
+            border-bottom: 0;
+          }
+          .btn {
+            padding: 5px 12px;
+            border-radius: 25px;
+            font-weight: 600;
+            height: initial;
+          }
+          .middle {
+            display: inherit;
+            flex-direction: inherit;
+            margin: 10px 0;
+            .detail {
+              position: relative;
+              display: inherit;
+              padding: 5px 0;
+              .detail-info {
+                display: inherit;
+                align-items: center;
+                margin-left: 5px;
+                small {
+                  margin-left: 5px;
+                }
+                .btn {
+                  position: absolute;
+                  top: 5px;
+                  right: 0;
+                  padding: 3px 12px;
+                  font-size: 11px;
+                }
+              }
+              &.comment {
+                padding-right: 75px;
+              }
+            }
+          }
+          .bottom {
+            display: inherit;
+            justify-content: space-between;
+            align-items: center;
+            .date {
+              font-size: 10px;
+              font-weight: 300;
+              margin-left: auto;
+            }
+          }
+        }
       }
     }
     .card-profile {

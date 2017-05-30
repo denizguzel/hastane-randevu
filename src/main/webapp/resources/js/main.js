@@ -421,3 +421,10 @@ $(".sidebar-toggler").click(function () {
 $("nav.sidebar .close").click(function () {
   $("nav.sidebar").removeClass("active");
 });
+
+$('#comment-edit').on("show.bs.modal", function (event) {
+  var button = $(event.relatedTarget); // Button that triggered the modal
+  var comment = button.data("comment");
+  var modal = $(this);
+  modal.find(".modal-body textarea").val(comment);
+});

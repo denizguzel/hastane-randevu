@@ -45,7 +45,7 @@ public class ReviewsAboutDoctorsServiceImpl implements BaseService<ReviewsAboutD
     return reviewsAboutDoctorsDao.getReviewsOfPatient(patientModel);
   }
 
-  public boolean patientHaveReviewAboutDoctor(PatientModel patientModel, DoctorModel doctorModel) {
-    return reviewsAboutDoctorsDao.patientHaveReviewAboutDoctor(patientModel, doctorModel);
+  public List<ReviewsAboutDoctorsModel> getPatientReviewAboutDoctor(PatientModel patientModel, DoctorModel doctorModel) {
+    return reviewsAboutDoctorsDao.getPatientReviewAboutDoctor(patientModel, doctorModel);
   }
 }

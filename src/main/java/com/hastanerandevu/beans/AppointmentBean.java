@@ -15,8 +15,6 @@ import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -57,6 +55,7 @@ public class AppointmentBean implements Serializable {
   private String selectedPoliclinic;
   private String selectedInspectionPlace;
   private String daysLeft;
+  private String doctorComment;
 
   private Date appointmentDateStart;
   private Date appointmentDateEnd;
@@ -314,6 +313,18 @@ public class AppointmentBean implements Serializable {
     return closestAppointment;
   }
 
+  public ReviewsAboutDoctorsServiceImpl getReviewsAboutDoctorsService() {
+    return reviewsAboutDoctorsService;
+  }
+
+  public String getDoctorComment() {
+    return doctorComment;
+  }
+
+  public void setDoctorComment(String doctorComment) {
+    this.doctorComment = doctorComment;
+  }
+
   // Functions
   private void clearMapComponentsWithChange(Map... maps) {
     for(Map map : maps) {
@@ -541,16 +552,23 @@ public class AppointmentBean implements Serializable {
     return "/view/appointments?faces-redirect=true";
   }
 
-  public String sendDoctorComment() {
-    reviewsAboutDoctorsModel.setPatient(patientModel);
-    reviewsAboutDoctorsModel.setDoctor(appointmentModel.getInspectionPlace().getDoctor());
-    reviewsAboutDoctorsService.create(reviewsAboutDoctorsModel);
-
-    return "/view/appointments?faces-redirect=true";
+  public void sendDoctorComment() {
+    if (getPatientReviewAboutDoctor(patientModel, appointmentModel.getInspectionPlace().getDoctor()).size() > 0) {
+      reviewsAboutDoctorsModel = getPatientReviewAboutDoctor(patientModel, appointmentModel.getInspectionPlace().getDoctor()).get(0);
+      reviewsAboutDoctorsModel.setReview(doctorComment);
+      reviewsAboutDoctorsModel.setIsAppropriate('0');
+      reviewsAboutDoctorsService.update(reviewsAboutDoctorsModel);
+    }
+    else {
+      reviewsAboutDoctorsModel.setPatient(patientModel);
+      reviewsAboutDoctorsModel.setDoctor(appointmentModel.getInspectionPlace().getDoctor());
+      reviewsAboutDoctorsModel.setReview(doctorComment);
+      reviewsAboutDoctorsService.create(reviewsAboutDoctorsModel);
+    }
   }
 
-  public boolean patientHaveReviewAboutDoctor(PatientModel patientModel, DoctorModel doctorModel) {
-    return reviewsAboutDoctorsService.patientHaveReviewAboutDoctor(patientModel, doctorModel);
+  public List<ReviewsAboutDoctorsModel> getPatientReviewAboutDoctor(PatientModel patientModel, DoctorModel doctorModel) {
+    return reviewsAboutDoctorsService.getPatientReviewAboutDoctor(patientModel, doctorModel);
   }
 
   public void doctorReviews(DoctorModel doctorModel) {

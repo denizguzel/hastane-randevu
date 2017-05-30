@@ -65,7 +65,7 @@
                   <div class="card-header">
                     <h5><a data-toggle="collapse" data-parent="#accordion" href="#collapse#{askedQuestionStatus.index}">#{askedQuestion.question}</a></h5>
                   </div>
-                  <div id="collapse#{askedQuestionStatus.index}" class="collapse #{askedQuestionStatus.index == 0 ? 'show' : ''}">
+                  <div id="collapse#{askedQuestionStatus.index}" class="collapse #{askedQuestionStatus.index eq 0 ? 'show' : ''}">
                     <div class="card-block">
                       #{askedQuestion.answer}
                     </div>

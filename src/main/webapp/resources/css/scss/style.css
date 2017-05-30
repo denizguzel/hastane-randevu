@@ -8952,11 +8952,6 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
   }
 }
 
-html,
-body {
-  height: 100%;
-}
-
 ul,
 ol,
 li,
@@ -9065,7 +9060,8 @@ textarea {
   display: inline-block;
 }
 
-input.badge {
+input.badge,
+button.badge {
   cursor: pointer;
   border: 0;
 }
@@ -9649,7 +9645,6 @@ body.page-404 .container .btn-transparent {
 }
 
 .page-wrapper {
-  height: calc(100% - 50px);
   margin-left: 230px;
   background-color: #edf1f5;
 }
@@ -9671,7 +9666,14 @@ body.page-404 .container .btn-transparent {
 }
 
 .page-wrapper .card .card-header {
-  font-size: 24px;
+  border-radius: 0;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.page-wrapper .card .card-header small {
+  text-transform: none;
+  margin-left: 5px;
 }
 
 .page-wrapper .card .card-block .alert {
@@ -9825,6 +9827,78 @@ body.page-404 .container .btn-transparent {
 .page-wrapper .card .card-block .form-group[data-message]:not([data-message=""])::before {
   top: 34px;
   right: 5px;
+}
+
+.page-wrapper .card .card-block .list-group .list-group-item {
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 0;
+  border: 0;
+  border-bottom: 1px solid #EEEFF0;
+  margin-bottom: 0;
+  padding: 10px;
+  color: #848A96;
+}
+
+.page-wrapper .card .card-block .list-group .list-group-item:hover {
+  background-color: #F7FAFC;
+}
+
+.page-wrapper .card .card-block .list-group .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+.page-wrapper .card .card-block .list-group .list-group-item .btn {
+  padding: 5px 12px;
+  border-radius: 25px;
+  font-weight: 600;
+  height: initial;
+}
+
+.page-wrapper .card .card-block .list-group .list-group-item .middle {
+  display: inherit;
+  flex-direction: inherit;
+  margin: 10px 0;
+}
+
+.page-wrapper .card .card-block .list-group .list-group-item .middle .detail {
+  position: relative;
+  display: inherit;
+  padding: 5px 0;
+}
+
+.page-wrapper .card .card-block .list-group .list-group-item .middle .detail .detail-info {
+  display: inherit;
+  align-items: center;
+  margin-left: 5px;
+}
+
+.page-wrapper .card .card-block .list-group .list-group-item .middle .detail .detail-info small {
+  margin-left: 5px;
+}
+
+.page-wrapper .card .card-block .list-group .list-group-item .middle .detail .detail-info .btn {
+  position: absolute;
+  top: 5px;
+  right: 0;
+  padding: 3px 12px;
+  font-size: 11px;
+}
+
+.page-wrapper .card .card-block .list-group .list-group-item .middle .detail.comment {
+  padding-right: 75px;
+}
+
+.page-wrapper .card .card-block .list-group .list-group-item .bottom {
+  display: inherit;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-wrapper .card .card-block .list-group .list-group-item .bottom .date {
+  font-size: 10px;
+  font-weight: 300;
+  margin-left: auto;
 }
 
 .page-wrapper .card .card-profile > form {
@@ -10380,6 +10454,10 @@ nav.sidebar ul.nav-menu li.active a i {
 }
 
 .table-appointment tbody tr td:last-child {
+  text-align: center;
+}
+
+.table-appointment tbody tr td:nth-last-child(2) {
   text-align: center;
 }
 

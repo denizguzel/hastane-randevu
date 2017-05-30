@@ -25,11 +25,11 @@ public class ReviewsAboutDoctorsDaoImpl extends BaseDaoImpl<ReviewsAboutDoctorsM
     return query.getResultList();
   }
 
-  public boolean patientHaveReviewAboutDoctor(PatientModel patientModel, DoctorModel doctorModel) {
+  public List<ReviewsAboutDoctorsModel> getPatientReviewAboutDoctor(PatientModel patientModel, DoctorModel doctorModel) {
     Query query = getEntitymanager().createQuery("SELECT e FROM ReviewsAboutDoctorsModel e WHERE e.patient = :PATIENT AND e.doctor = :DOCTOR");
     query.setParameter("PATIENT", patientModel);
     query.setParameter("DOCTOR", doctorModel);
 
-    return query.getResultList().size() > 0;
+    return query.getResultList();
   }
 }

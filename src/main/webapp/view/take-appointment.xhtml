@@ -97,7 +97,7 @@
                   <ul class="nav nav-tabs" id="week-tabs">
                     <c:forEach items="#{appointment.appointmentDays}" var="day" varStatus="dayIndex">
                       <li class="nav-item">
-                        <h:outputLink styleClass="nav-link#{dayIndex.index == 0 ? ' active' : ''}" p:data-toggle="tab" value="#day#{dayIndex.index}">
+                        <h:outputLink styleClass="nav-link#{dayIndex.index eq 0 ? ' active' : ''}" p:data-toggle="tab" value="#day#{dayIndex.index}">
                           <h:outputText value="#{day.appointmentDate}">
                             <f:convertDateTime timeZone="GMT+3" pattern="dd-MM-yyyy"/>
                           </h:outputText>
@@ -107,7 +107,7 @@
                   </ul>
                   <div class="tab-content">
                     <c:forEach items="#{appointment.appointmentTimes}" var="row" varStatus="rowIndex">
-                      <div class="tab-pane fade#{rowIndex.index == 0 ? ' show active' : ''}" id="day#{rowIndex.index}">
+                      <div class="tab-pane fade#{rowIndex.index eq 0 ? ' show active' : ''}" id="day#{rowIndex.index}">
                         <ul>
                           <c:forEach items="#{row}" var="col" varStatus="colIndex">
                             <li class="nav-item">
@@ -116,7 +116,7 @@
                                   <f:convertDateTime timeZone="GMT+3" pattern="HH:mm"/>
                                 </h:outputText>
                               </h:panelGroup>
-                              <h:commandLink rendered="#{col.appointmentStatus == 'NOT_RESERVED'}" styleClass="btn btn-success btn-popover">
+                              <h:commandLink rendered="#{col.appointmentStatus eq 'NOT_RESERVED'}" styleClass="btn btn-success btn-popover">
                                 <f:ajax execute="@this"/>
                                 <f:setPropertyActionListener value="#{col}" target="#{appointment.appointmentModel}"/>
                                 <h:outputText styleClass="d-inline-block" value="#{col.appointmentDate}">

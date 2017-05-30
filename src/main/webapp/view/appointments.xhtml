@@ -10,7 +10,7 @@
         </div>
         <div class="card">
           <div class="card-block">
-            <h:form prependId="false" rendered="#{session.getAttribute('userType') == 'patient' and not empty appointment.appointmentHistory}">
+            <h:form prependId="false" rendered="#{session.getAttribute('userType') eq 'patient' and not empty appointment.appointmentHistory}">
               <div class="table-responsive">
                 <h:dataTable styleClass="table table-appointment" binding="#{table}" value="#{appointment.appointmentHistory}" var="history">
                   <h:column>
@@ -42,19 +42,33 @@
                   </h:column>
                   <h:column>
                     <f:facet name="header">#{messages['label.messageToDoctor']}</f:facet>
-                    <h:outputText styleClass="doctor-message" p:data-toggle="tooltip" p:title="#{history.messageToDoctor == null ? messages['label.nullNote'] : history.messageToDoctor}" value="#{history.messageToDoctor == null ? messages['label.nullNote'] : history.messageToDoctor}"/>
+                    <h:outputText styleClass="doctor-message" p:data-toggle="tooltip" p:title="#{history.messageToDoctor eq null ? messages['label.nullNote'] : history.messageToDoctor}" value="#{history.messageToDoctor eq null ? messages['label.nullNote'] : history.messageToDoctor}"/>
                   </h:column>
                   <h:column headerClass="text-center">
-                    <f:facet name="header">#{messages['label.status']}</f:facet>
-                    <h:commandButton rendered="#{history.appointmentStatus != 'COMPLETED'}" value="#{messages['button.cancel']}" styleClass="badge badge-danger" p:data-tooltip="tooltip" p:title="#{messages['appointment.cancel.info']}" p:data-toggle="modal" p:data-target="#cancel-modal">
-                      <f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>
-                      <f:ajax execute="@this"/>
-                    </h:commandButton>
-                    <h:commandLink rendered="#{history.appointmentStatus == 'COMPLETED' and !appointment.patientHaveReviewAboutDoctor(history.patient, history.inspectionPlace.doctor)}" value="#{messages['button.makeComment']}" styleClass="badge badge-info mr-1" p:data-toggle="modal" p:data-target="#comment-modal">
+                    <f:facet name="header">#{messages['label.comment']}</f:facet>
+                    <h:panelGroup rendered="#{history.appointmentStatus ne 'COMPLETED'}" styleClass="badge badge-default">
+                      <h:outputText value="#{messages['label.appointmentWaiting']}"/>
+                    </h:panelGroup>
+                    <h:commandLink styleClass="badge badge-warning" rendered="#{not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor) and appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).isAppropriate eq 49}" p:data-target="#comment-edit" p:data-toggle="modal" p:data-comment="#{appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).review}">
+                      #{messages['label.edit']}
                       <f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>
                       <f:ajax execute="@this"/>
                     </h:commandLink>
-                    <h:panelGroup rendered="#{history.appointmentStatus == 'COMPLETED'}" styleClass="badge badge-success">
+                    <h:commandLink styleClass="badge badge-info" rendered="#{history.appointmentStatus eq 'COMPLETED' and empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor)}" value="#{messages['button.makeComment']}" p:data-toggle="modal" p:data-target="#comment-modal">
+                      <f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>
+                      <f:ajax execute="@this"/>
+                    </h:commandLink>
+                    <h:panelGroup rendered="#{history.appointmentStatus eq 'COMPLETED' and appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).isAppropriate eq 48}">
+                      <span class="badge badge-default">#{messages['label.commentAppropriate']}</span>
+                    </h:panelGroup>
+                  </h:column>
+                  <h:column headerClass="text-center">
+                    <f:facet name="header">#{messages['label.status']}</f:facet>
+                    <h:commandButton rendered="#{history.appointmentStatus ne 'COMPLETED'}" value="#{messages['button.cancel']}" styleClass="badge badge-danger" p:data-tooltip="tooltip" p:title="#{messages['appointment.cancel.info']}" p:data-toggle="modal" p:data-target="#cancel-modal">
+                      <f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>
+                      <f:ajax execute="@this"/>
+                    </h:commandButton>
+                    <h:panelGroup rendered="#{history.appointmentStatus eq 'COMPLETED'}" styleClass="badge badge-success">
                       <h:outputText value="#{messages['label.appointmentCompleted']}"/>
                     </h:panelGroup>
                   </h:column>
@@ -62,11 +76,11 @@
               </div>
               <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
             </h:form>
-            <h:panelGroup layout="block" styleClass="alert" rendered="#{session.getAttribute('userType') == 'patient' and empty appointment.appointmentHistory}">
+            <h:panelGroup layout="block" styleClass="alert" rendered="#{session.getAttribute('userType') eq 'patient' and empty appointment.appointmentHistory}">
               <i class="fa fa-smile-o"></i>#{messages['card.appointmentEmpty']}
             </h:panelGroup>
 
-            <h:form prependId="false" rendered="#{session.getAttribute('userType') == 'doctor'}">
+            <h:form prependId="false" rendered="#{session.getAttribute('userType') eq 'doctor'}">
               <div class="table-responsive">
                 <h:dataTable styleClass="table table-appointment" binding="#{table2}" value="#{doctor.appointmentHistory}" var="history">
                   <h:column>
@@ -100,7 +114,7 @@
                   </h:column>
                   <h:column>
                     <f:facet name="header">#{messages['label.messageToDoctor']}</f:facet>
-                    <h:outputText styleClass="doctor-message" p:data-toggle="tooltip" p:title="#{history.messageToDoctor == null ? messages['label.nullNote'] : history.messageToDoctor}" value="#{history.messageToDoctor == null ? messages['label.nullNote'] : history.messageToDoctor}"/>
+                    <h:outputText styleClass="doctor-message" p:data-toggle="tooltip" p:title="#{history.messageToDoctor eq null ? messages['label.nullNote'] : history.messageToDoctor}" value="#{history.messageToDoctor eq null ? messages['label.nullNote'] : history.messageToDoctor}"/>
                   </h:column>
                   <h:column>
                     <f:facet name="header">#{messages['label.patientInfo']}</f:facet>
@@ -111,10 +125,10 @@
                   </h:column>
                   <h:column headerClass="text-center">
                     <f:facet name="header">#{messages['label.status']}</f:facet>
-                    <h:panelGroup rendered="#{history.appointmentStatus == 'RESERVED'}" styleClass="badge badge-default">
+                    <h:panelGroup rendered="#{history.appointmentStatus ne 'COMPLETED'}" styleClass="badge badge-default">
                       <h:outputText value="#{messages['label.appointmentWaiting']}"/>
                     </h:panelGroup>
-                    <h:panelGroup rendered="#{history.appointmentStatus == 'COMPLETED'}" styleClass="badge badge-success">
+                    <h:panelGroup rendered="#{history.appointmentStatus eq 'COMPLETED'}" styleClass="badge badge-success">
                       <h:outputText value="#{messages['label.appointmentCompleted']}"/>
                     </h:panelGroup>
                   </h:column>
@@ -127,7 +141,7 @@
       </div>
     </div>
 
-    <h:panelGroup rendered="#{session.getAttribute('userType') == 'patient'}">
+    <h:panelGroup rendered="#{session.getAttribute('userType') eq 'patient'}">
       <!-- Modal -->
       <div class="modal fade" id="cancel-modal">
         <div class="modal-dialog">
@@ -160,7 +174,30 @@
             <div class="modal-body">
               <h:form prependId="false">
                 <div class="form-group">
-                  <h:inputTextarea value="#{appointment.reviewsAboutDoctorsModel.review}" styleClass="form-control" p:placeholder="#{messages['label.comment']}"/>
+                  <h:inputTextarea value="#{appointment.doctorComment}" styleClass="form-control" p:placeholder="#{messages['label.comment']}"/>
+                </div>
+                <div class="buttons">
+                  <h:commandButton value="#{messages['button.send']}" styleClass="btn btn-success" action="#{appointment.sendDoctorComment}"/>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">#{messages['button.close']}</button>
+                </div>
+              </h:form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="comment-edit">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">#{messages['modal.header.title.commentEdit']}</h5>
+              <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
+            </div>
+            <div class="modal-body">
+              <h:form prependId="false">
+                <div class="form-group">
+                  <h:inputTextarea value="#{appointment.doctorComment}" styleClass="form-control" p:placeholder="#{messages['label.comment']}"/>
                 </div>
                 <div class="buttons">
                   <h:commandButton value="#{messages['button.send']}" styleClass="btn btn-success" action="#{appointment.sendDoctorComment}"/>
@@ -173,7 +210,7 @@
       </div>
     </h:panelGroup>
 
-    <h:panelGroup rendered="#{session.getAttribute('userType') == 'doctor'}">
+    <h:panelGroup rendered="#{session.getAttribute('userType') eq 'doctor'}">
       <!-- Modal -->
       <div class="modal fade" id="info-modal">
         <div class="modal-dialog">
@@ -231,7 +268,7 @@
                 <div class="form-group">
                   <label>#{messages['label.messageToDoctor']}</label>
                   <div class="detail">
-                    <h:outputText value="#{doctor.appointmentModel.messageToDoctor == null ? messages['label.nullNote'] : doctor.appointmentModel.messageToDoctor}"/>
+                    <h:outputText value="#{doctor.appointmentModel.messageToDoctor eq null ? messages['label.nullNote'] : doctor.appointmentModel.messageToDoctor}"/>
                   </div>
                 </div>
                 <div class="form-group">

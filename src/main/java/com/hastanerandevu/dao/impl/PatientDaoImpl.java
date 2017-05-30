@@ -57,9 +57,8 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientModel> {
 
   // HASTANIN RANDEVU GECMISI
   public List<AppointmentModel> getAppointmentHistory(PatientModel patientModel) {
-    Query query = getEntitymanager().createQuery("SELECT e FROM AppointmentModel e WHERE e.patient = :PATIENT  AND e.isActive = :IS_ACTIVE ORDER BY e.creationTime");
+    Query query = getEntitymanager().createQuery("SELECT e FROM AppointmentModel e WHERE e.patient = :PATIENT ORDER BY e.appointmentStatus DESC, e.appointmentDate DESC");
     query.setParameter("PATIENT", patientModel);
-    query.setParameter("IS_ACTIVE", '1');
 
     return query.getResultList();
   }

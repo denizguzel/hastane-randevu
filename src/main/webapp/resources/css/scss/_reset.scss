@@ -1,8 +1,3 @@
-html,
-body {
-  height: 100%;
-}
-
 ul,
 ol,
 li,
@@ -108,7 +103,8 @@ textarea {
   }
 }
 
-input.badge {
+input.badge,
+button.badge {
   cursor: pointer;
   border: 0;
 }

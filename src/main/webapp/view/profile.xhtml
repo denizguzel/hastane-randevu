@@ -10,7 +10,7 @@
         </div>
         <div class="card">
           <div class="card-block card-profile">
-            <h:form prependId="false" rendered="#{session.getAttribute('userType') == 'patient'}">
+            <h:form prependId="false" rendered="#{session.getAttribute('userType') eq 'patient'}">
               <ul class="nav nav-tabs">
                 <li class="nav-item">
                   <a class="nav-link active" data-toggle="tab" href="#user">#{messages['label.user']}</a>
@@ -169,7 +169,7 @@
               <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
             </h:form>
 
-            <h:form prependId="false" rendered="#{session.getAttribute('userType') == 'doctor'}">
+            <h:form prependId="false" rendered="#{session.getAttribute('userType') eq 'doctor'}">
               <ul class="nav nav-tabs">
                 <li class="nav-item">
                   <a class="nav-link active" data-toggle="tab" href="#doctorPersonal">#{messages['label.personal']}</a>
@@ -269,7 +269,7 @@
         </div>
       </div>
     </div>
-    <h:panelGroup rendered="#{session.getAttribute('userType') == 'patient'}">
+    <h:panelGroup rendered="#{session.getAttribute('userType') eq 'patient'}">
       <!-- Modal -->
       <div class="modal fade" id="change-password">
         <div class="modal-dialog">

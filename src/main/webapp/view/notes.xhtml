@@ -23,7 +23,7 @@
                   </h:column>
                   <h:column>
                     <f:facet name="header">#{messages['label.patientNote']}</f:facet>
-                    <h:outputText value="#{history.messageToDoctor == null ? '-Not Yok-' : history.messageToDoctor}"/>
+                    <h:outputText value="#{history.messageToDoctor eq null ? messages['label.nullNote'] : history.messageToDoctor}"/>
                   </h:column>
                 </h:dataTable>
               </div>
