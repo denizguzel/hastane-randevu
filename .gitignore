@@ -2,5 +2,5 @@ hastane-randevu.iml
 .idea/
 out/
 src/main/webapp/resources/css/bootstrap_scss/
+src/main/webapp/resources/css/scss/style.css
 target/
-.editorconfig
