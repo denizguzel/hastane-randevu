@@ -4,3 +4,5 @@ out/
 src/main/webapp/resources/css/bootstrap_scss/
 src/main/webapp/resources/css/scss/style.css
 target/
+src/main/webapp/resources/js/closure-compiler.jar
+src/main/webapp/resources/js/compiler-text.txt
