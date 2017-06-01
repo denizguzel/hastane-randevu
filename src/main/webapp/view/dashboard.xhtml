@@ -20,8 +20,8 @@
                     </div>
                     <div class="right">
                       <h:panelGroup rendered="#{not empty appointment.closestAppointment}">
-                    <span class="count">#{appointment.daysLeft}
-                      <small> #{messages["card.title.appointment.small"]}</small></span>
+                        <span class="count">#{appointment.daysLeft}
+                          <small>#{messages["card.title.appointment.small"]}</small></span>
                       </h:panelGroup>
                       <h:outputText rendered="#{empty appointment.closestAppointment}" value="Randevu Yok"/>
                       <h:outputText styleClass="date" value="#{appointment.closestDate}" rendered="#{not empty appointment.closestAppointment}">
@@ -104,61 +104,66 @@
               </h:panelGroup>
               <h:form prependId="false" rendered="#{not empty appointment.appointmentHistory}">
                 <ul class="list-group">
-                  <c:forEach items="#{appointment.appointmentHistory}" var="history" begin="0" end="2" step="1">
+                  <c:forEach items="#{appointment.appointmentHistory}" var="history" varStatus="historyIndex" begin="0" end="2" step="1">
                     <li class="list-group-item">
-                      <h5>#{history.inspectionPlace.hospitalPoliclinicRel.hospital.hospitalName}</h5>
-                      <div class="middle">
-                        <div class="detail">
-                          <b>#{messages['label.section']}:</b>
-                          <div class="detail-info">
-                            #{history.inspectionPlace.hospitalPoliclinicRel.policlinic.policlinicName}
+                      <div class="left">
+                        <h5>#{history.inspectionPlace.hospitalPoliclinicRel.hospital.hospitalName}</h5>
+                        <div class="middle">
+                          <div class="detail">
+                            <b>#{messages['label.section']}:</b>
+                            <div class="detail-info">
+                              #{history.inspectionPlace.hospitalPoliclinicRel.policlinic.policlinicName}
+                            </div>
+                          </div>
+                          <div class="detail">
+                            <b>#{messages['label.doctor']}:</b>
+                            <div class="detail-info">
+                              #{history.inspectionPlace.doctor.firstName} #{history.inspectionPlace.doctor.lastName}
+                              <small>(#{messages['string.'.concat(history.inspectionPlace.doctor.level)]})</small>
+                            </div>
+                          </div>
+                          <div class="detail comment">
+                            <b>#{messages['label.comment']}:</b>
+                            <div class="detail-info">
+                              <h:panelGroup rendered="#{empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor)}">
+                                <abbr title="#{messages['label.commentAbbr']}">#{messages['modal.body.comments.info']}</abbr>
+                              </h:panelGroup>
+                              <h:panelGroup rendered="#{not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor) and appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).isAppropriate eq 49}">
+                                #{appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).review}
+                              </h:panelGroup>
+                              <h:panelGroup rendered="#{not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor) and appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).isAppropriate eq 48}">
+                                #{messages['label.commentAppropriate']}
+                              </h:panelGroup>
+                              <h:commandLink styleClass="btn btn-sm btn-warning" rendered="#{not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor) and appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).isAppropriate eq 49}" p:data-target="#comment-edit" p:data-toggle="modal" p:data-comment="#{appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).review}">
+                                #{messages['label.edit']}
+                                <f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>
+                                <f:ajax execute="@this"/>
+                              </h:commandLink>
+                            </div>
+                          </div>
+                          <div class="detail">
+                            <b>#{messages['label.status']}:</b>
+                            <div class="detail-info">
+                              #{history.appointmentStatus ne 'COMPLETED' ? messages['label.appointmentWaiting'] : messages['label.appointmentCompleted']}
+                            </div>
                           </div>
                         </div>
-                        <div class="detail">
-                          <b>#{messages['label.doctor']}:</b>
-                          <div class="detail-info">
-                            #{history.inspectionPlace.doctor.firstName} #{history.inspectionPlace.doctor.lastName}
-                            <small>(#{messages['string.'.concat(history.inspectionPlace.doctor.level)]})</small>
-                          </div>
-                        </div>
-                        <div class="detail comment">
-                          <b>#{messages['label.comment']}:</b>
-                          <div class="detail-info">
-                            <h:panelGroup rendered="#{empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor)}">
-                              <abbr title="#{messages['label.commentAbbr']}">#{messages['modal.body.comments.info']}</abbr>
-                            </h:panelGroup>
-                            <h:panelGroup rendered="#{not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor) and appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).isAppropriate eq 49}">
-                              #{appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).review}
-                            </h:panelGroup>
-                            <h:panelGroup rendered="#{not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor) and appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).isAppropriate eq 48}">
-                              #{messages['label.commentAppropriate']}
-                            </h:panelGroup>
-                            <h:commandLink styleClass="btn btn-sm btn-warning" rendered="#{not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor) and appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).isAppropriate eq 49}" p:data-target="#comment-edit" p:data-toggle="modal" p:data-comment="#{appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).review}">
-                              #{messages['label.edit']}
-                              <f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>
-                              <f:ajax execute="@this"/>
-                            </h:commandLink>
-                          </div>
-                        </div>
-                        <div class="detail">
-                          <b>#{messages['label.status']}:</b>
-                          <div class="detail-info">
-                            #{history.appointmentStatus ne 'COMPLETED' ? messages['label.appointmentWaiting'] : messages['label.appointmentCompleted']}
-                          </div>
+                        <div class="bottom">
+                          <h:commandLink rendered="#{history.appointmentStatus eq 'COMPLETED' and empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor)}" value="#{messages['button.makeComment']}" styleClass="btn btn-sm btn-info" p:data-toggle="modal" p:data-target="#comment-modal">
+                            <f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>
+                            <f:ajax execute="@this"/>
+                          </h:commandLink>
+                          <h:panelGroup rendered="#{history.appointmentStatus eq 'COMPLETED' and not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor)}" styleClass="btn btn-sm area-disabled">#{messages['button.makeComment']}</h:panelGroup>
+                          <h:panelGroup rendered="#{history.appointmentStatus ne 'COMPLETED'}">
+                            <span class="btn btn-sm area-disabled">#{messages['button.makeComment']}</span>
+                          </h:panelGroup>
+                          <h:outputText styleClass="date" value="#{history.appointmentDate}">
+                            <f:convertDateTime timeZone="GMT+3" pattern="MMM d, yyyy"/>
+                          </h:outputText>
                         </div>
                       </div>
-                      <div class="bottom">
-                        <h:commandLink rendered="#{history.appointmentStatus eq 'COMPLETED' and empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor)}" value="#{messages['button.makeComment']}" styleClass="btn btn-sm btn-info" p:data-toggle="modal" p:data-target="#comment-modal">
-                          <f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>
-                          <f:ajax execute="@this"/>
-                        </h:commandLink>
-                        <h:panelGroup rendered="#{history.appointmentStatus eq 'COMPLETED' and not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor)}" styleClass="btn btn-sm area-disabled">#{messages['button.makeComment']}</h:panelGroup>
-                        <h:panelGroup rendered="#{history.appointmentStatus ne 'COMPLETED'}">
-                          <span class="btn btn-sm area-disabled">#{messages['button.makeComment']}</span>
-                        </h:panelGroup>
-                        <h:outputText styleClass="date" value="#{history.appointmentDate}">
-                          <f:convertDateTime timeZone="GMT+3" pattern="MMM d, yyyy"/>
-                        </h:outputText>
+                      <div class="right">
+                        <div class="map" style="height: 200px; width: 500px;"></div>
                       </div>
                     </li>
                   </c:forEach>
@@ -217,5 +222,8 @@
         </div>
       </div>
     </h:panelGroup>
+  </ui:define>
+  <ui:define name="js">
+    <script async="async" defer="defer" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlyHFSSNyn4Jd6d1t2gFtlIX5clKpNsAE&amp;libraries=places"></script>
   </ui:define>
 </ui:composition>

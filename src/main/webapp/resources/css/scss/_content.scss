@@ -155,8 +155,6 @@
       }
       .list-group {
         .list-group-item {
-          flex-direction: column;
-          align-items: stretch;
           border-radius: 0;
           border: 0;
           border-bottom: 1px solid #EEEFF0;
@@ -175,43 +173,52 @@
             font-weight: 600;
             height: initial;
           }
-          .middle {
+          .left {
             display: inherit;
-            flex-direction: inherit;
-            margin: 10px 0;
-            .detail {
-              position: relative;
+            flex-grow: 1;
+            flex-direction: column;
+            margin-right: 10px;
+            .middle {
               display: inherit;
-              padding: 5px 0;
-              .detail-info {
+              flex-direction: inherit;
+              margin: 10px 0;
+              .detail {
+                position: relative;
                 display: inherit;
-                align-items: center;
-                margin-left: 5px;
-                small {
+                padding: 5px 0;
+                .detail-info {
+                  display: inherit;
+                  align-items: center;
                   margin-left: 5px;
+                  small {
+                    margin-left: 5px;
+                  }
+                  .btn {
+                    position: absolute;
+                    top: 5px;
+                    right: 0;
+                    padding: 3px 12px;
+                    font-size: 11px;
+                  }
                 }
-                .btn {
-                  position: absolute;
-                  top: 5px;
-                  right: 0;
-                  padding: 3px 12px;
-                  font-size: 11px;
+                &.comment {
+                  padding-right: 75px;
                 }
               }
-              &.comment {
-                padding-right: 75px;
+            }
+            .bottom {
+              display: inherit;
+              justify-content: space-between;
+              align-items: center;
+              .date {
+                font-size: 10px;
+                font-weight: 300;
+                margin-left: auto;
               }
             }
           }
-          .bottom {
+          .right {
             display: inherit;
-            justify-content: space-between;
-            align-items: center;
-            .date {
-              font-size: 10px;
-              font-weight: 300;
-              margin-left: auto;
-            }
           }
         }
       }

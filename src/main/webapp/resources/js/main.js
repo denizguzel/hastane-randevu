@@ -428,3 +428,36 @@ $('#comment-edit').on("show.bs.modal", function (event) {
   var modal = $(this);
   modal.find(".modal-body textarea").val(comment);
 });
+
+// Dashboard google map render
+$(document).ready(function () {
+  $lists = $(".list-group-item");
+  $maps = $('.map');
+  $maps.each(function (index, element) {
+    var hospital = $lists.find('h5').text();
+    var mapOptions = {
+      zoom: 15,
+      center: new google.maps.LatLng(38.963745, 35.243322),
+      scrollwheel: false,
+      navigationControl: false,
+      mapTypeControl: false,
+      scaleControl: false,
+      streetViewControl: false
+    };
+    var map;
+    var geocoder;
+    var marker;
+
+    geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'address': hospital}, function (results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        mapOptions.center = results[0].geometry.location;
+        map = new google.maps.Map(element, mapOptions);
+        marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+        });
+      }
+    });
+  });
+});
