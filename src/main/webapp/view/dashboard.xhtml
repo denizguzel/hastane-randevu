@@ -99,12 +99,12 @@
               <small>(#{messages['label.lastThree']})</small>
             </div>
             <div class="card-block">
-              <h:panelGroup layout="block" styleClass="alert" rendered="#{session.getAttribute('userType') eq 'patient' and empty appointment.appointmentHistory}">
+              <h:panelGroup layout="block" styleClass="alert" rendered="#{session.getAttribute('userType') eq 'patient' and empty appointment.completedAppointments}">
                 <i class="fa fa-smile-o"></i>#{messages['card.appointmentEmpty']}
               </h:panelGroup>
-              <h:form prependId="false" rendered="#{not empty appointment.appointmentHistory}">
+              <h:form prependId="false" rendered="#{not empty appointment.completedAppointments}">
                 <ul class="list-group">
-                  <c:forEach items="#{appointment.appointmentHistory}" var="history" varStatus="historyIndex" begin="0" end="2" step="1">
+                  <c:forEach items="#{appointment.completedAppointments}" var="history" varStatus="historyIndex" begin="0" end="2" step="1">
                     <li class="list-group-item">
                       <div class="left">
                         <h5>#{history.inspectionPlace.hospitalPoliclinicRel.hospital.hospitalName}</h5>

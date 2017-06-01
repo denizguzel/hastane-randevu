@@ -1,6 +1,7 @@
 package com.hastanerandevu.beans;
 
 import com.hastanerandevu.converter.NameConverter;
+import com.hastanerandevu.enums.AppointmentStatusEnum;
 import com.hastanerandevu.model.*;
 import com.hastanerandevu.service.impl.*;
 import com.hastanerandevu.utility.Mailer;
@@ -72,6 +73,7 @@ public class AppointmentBean implements Serializable {
   private List<List<AppointmentModel>> appointmentTimes;
   private List<AppointmentModel> appointmentDays;
   private List<AppointmentModel> appointmentHistory;
+  private List<AppointmentModel> completedAppointments;
   private List<ReviewsAboutDoctorsModel> doctorReviewList;
 
   @SuppressWarnings("unchecked")
@@ -104,6 +106,7 @@ public class AppointmentBean implements Serializable {
     doctorReviewList = new ArrayList<>();
     appointmentTimes = new LinkedList<>();
     appointmentHistory = new LinkedList<>();
+    completedAppointments = new ArrayList<>();
 
     for(CityModel cityModel : cityService.getCities()) {
       cities.put(cityModel.getPk(), cityModel.getCityName());
@@ -112,14 +115,15 @@ public class AppointmentBean implements Serializable {
     if(SessionUtils.getSession().getAttribute("userType").equals("patient")) {
       if(patientService.getAppointmentHistory(patientModel).size() > 0) {
         appointmentHistory.addAll(patientService.getAppointmentHistory(patientModel));
-      }
-      if(patientService.getActiveAppointmentsOfPatient(patientModel).size() > 0) {
-        closestAppointment = patientService.getActiveAppointmentsOfPatient(patientModel).get(0);
-        closestDate = closestAppointment.getAppointmentDate();
-        Date today = new Date();
+        completedAppointments = appointmentHistory.stream().filter(p -> p.getAppointmentStatus().equals(AppointmentStatusEnum.COMPLETED)).collect(Collectors.toList());
+        if(patientService.getActiveAppointmentsOfPatient(patientModel).size() > 0) {
+          closestAppointment = patientService.getActiveAppointmentsOfPatient(patientModel).get(0);
+          closestDate = closestAppointment.getAppointmentDate();
+          Date today = new Date();
 
-        long diff = closestDate.getTime() - today.getTime();
-        daysLeft = String.valueOf(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+          long diff = closestDate.getTime() - today.getTime();
+          daysLeft = String.valueOf(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+        }
       }
     }
   }
@@ -326,6 +330,10 @@ public class AppointmentBean implements Serializable {
 
   public void setDoctorComment(String doctorComment) {
     this.doctorComment = doctorComment;
+  }
+
+  public List<AppointmentModel> getCompletedAppointments() {
+    return completedAppointments;
   }
 
   // Functions

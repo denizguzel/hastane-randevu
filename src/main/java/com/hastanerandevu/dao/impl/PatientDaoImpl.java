@@ -57,7 +57,7 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientModel> {
 
   // HASTANIN RANDEVU GECMISI
   public List<AppointmentModel> getAppointmentHistory(PatientModel patientModel) {
-    Query query = getEntitymanager().createQuery("SELECT e FROM AppointmentModel e WHERE e.patient = :PATIENT ORDER BY e.appointmentStatus DESC, e.appointmentDate DESC");
+    Query query = getEntitymanager().createQuery("SELECT e FROM AppointmentModel e WHERE e.patient = :PATIENT ORDER BY e.appointmentDate DESC");
     query.setParameter("PATIENT", patientModel);
 
     return query.getResultList();
@@ -65,10 +65,12 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientModel> {
 
   // GIRILEN BILGILERE DAIR SISTEMDE HASTA KAYDI VAR MI?
   public boolean haveUserRegistration(PatientModel patientModel) {
-    Query tcQuery = getEntitymanager().createQuery("SELECT e FROM PatientModel e WHERE e.tcNumber = :TC_NUMBER").setParameter("TC_NUMBER", patientModel.getTcNumber());
-    Query emailQuery = getEntitymanager().createQuery("SELECT e FROM PatientModel e WHERE e.email = :E_MAIL").setParameter("E_MAIL", patientModel.getEmail());
+    Query query = getEntitymanager().createQuery("SELECT e FROM PatientModel e WHERE e.tcNumber = :TC_NUMBER OR e.email = :E_MAIL");
 
-    return emailQuery.getResultList().size() > 0 || tcQuery.getResultList().size() > 0;
+    query.setParameter("TC_NUMBER",patientModel.getTcNumber());
+    query.setParameter("E_MAIL",patientModel.getEmail());
+
+    return query.getResultList().size() > 0;
   }
 
   public PatientModel getUserByEmail(String email) {
