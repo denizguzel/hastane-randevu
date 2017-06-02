@@ -6,7 +6,7 @@
    http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 
   <persistence-unit name="Hibernate_JPA" transaction-type="RESOURCE_LOCAL">
-    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <class>com.hastanerandevu.model.PatientModel</class>
     <class>com.hastanerandevu.model.CityModel</class>
     <class>com.hastanerandevu.model.DistrictModel</class>

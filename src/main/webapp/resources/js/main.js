@@ -431,10 +431,9 @@ $('#comment-edit').on("show.bs.modal", function (event) {
 
 // Dashboard google map render
 $(document).ready(function () {
-  $lists = $(".list-group-item");
+  var closestAppointment = $(".closest-appointment").text();
   $maps = $('.map');
   $maps.each(function (index, element) {
-    var hospital = $lists.find('h5').text();
     var mapOptions = {
       zoom: 15,
       center: new google.maps.LatLng(38.963745, 35.243322),
@@ -449,7 +448,7 @@ $(document).ready(function () {
     var marker;
 
     geocoder = new google.maps.Geocoder();
-    geocoder.geocode({'address': hospital}, function (results, status) {
+    geocoder.geocode({'address': closestAppointment}, function (results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         mapOptions.center = results[0].geometry.location;
         map = new google.maps.Map(element, mapOptions);

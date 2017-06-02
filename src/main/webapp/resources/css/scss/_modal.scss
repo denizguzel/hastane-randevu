@@ -1,4 +1,5 @@
 .modal {
+  z-index: 1080; // tooltip is 1070, this needs to be over tooltip
   .modal-dialog {
     max-width: 400px;
     .modal-content {

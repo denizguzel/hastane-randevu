@@ -4,17 +4,23 @@
   <ui:define name="content">
     <div class="page-wrapper">
       <div class="container-fluid">
+        <!-- Page Title -->
         <div class="page-title">
           <h4>#{messages['label.assay']}</h4>
           <button class="sidebar-toggler" type="button"><i class="fa fa-bars"></i></button>
-        </div>
+        </div><!---->
+
         <div class="card">
           <div class="card-header">
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#assay-modal">#{messages['button.addAssay']}</button>
           </div>
           <div class="card-block">
-            <h:form prependId="false" styleClass="alergy-list#{assay.assayPanel ? ' active' : ''}">
-              <div class="alert"><i class="fa fa-thermometer-empty"></i>#{messages['card.assayEmpty']}</div>
+            <!-- Render if assay list is empty -->
+            <h:panelGroup styleClass="alert" rendered="#{empty assay.patientAssays}">
+              <i class="fa fa-thermometer-empty"></i>#{messages['card.assayEmpty']}
+            </h:panelGroup><!---->
+            <!-- Render if assay list is not empty -->
+            <h:form prependId="false" rendered="#{not empty assay.patientAssays}">
               <div class="table-responsive">
                 <h:dataTable styleClass="table" binding="#{table}" value="#{assay.patientAssays}" var="patientAssay">
                   <h:column>
@@ -43,13 +49,13 @@
                 </h:dataTable>
               </div>
               <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
-            </h:form>
+            </h:form><!---->
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Add Assay Modal -->
     <div class="modal fade" id="assay-modal">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -83,8 +89,9 @@
           </h:form>
         </div>
       </div>
-    </div>
-    <!-- Modal -->
+    </div><!---->
+
+    <!-- Remove Assay Modal -->
     <div class="modal fade" id="cancel-modal">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -103,6 +110,6 @@
           </div>
         </div>
       </div>
-    </div>
+    </div><!---->
   </ui:define>
 </ui:composition>

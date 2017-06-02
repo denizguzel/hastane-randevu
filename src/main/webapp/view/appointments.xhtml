@@ -4,13 +4,16 @@
   <ui:define name="content">
     <div class="page-wrapper">
       <div class="container-fluid">
+        <!-- Page Title -->
         <div class="page-title">
           <h4>#{messages['page.title.appointments']}</h4>
           <button class="sidebar-toggler" type="button"><i class="fa fa-bars"></i></button>
-        </div>
+        </div><!---->
+
         <div class="card">
           <div class="card-block">
             <h:form prependId="false" rendered="#{session.getAttribute('userType') eq 'patient' and not empty appointment.appointmentHistory}">
+              <!-- Appointment History Table -->
               <div class="table-responsive">
                 <h:dataTable styleClass="table table-appointment" binding="#{table}" value="#{appointment.appointmentHistory}" var="history">
                   <h:column>
@@ -46,21 +49,25 @@
                   </h:column>
                   <h:column headerClass="text-center">
                     <f:facet name="header">#{messages['label.comment']}</f:facet>
-                    <h:panelGroup rendered="#{history.appointmentStatus ne 'COMPLETED'}" styleClass="badge badge-default">
+                    <!-- Check if appointment not completed and comment is empty then render "Waiting" -->
+                    <h:panelGroup rendered="#{history.appointmentStatus ne 'COMPLETED' and empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor)}" styleClass="badge badge-default">
                       <h:outputText value="#{messages['label.appointmentWaiting']}"/>
-                    </h:panelGroup>
+                    </h:panelGroup><!---->
+                    <!-- Check if comment is not empty and appropriate then render edit comment button -->
                     <h:commandLink styleClass="badge badge-warning" rendered="#{not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor) and appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).isAppropriate eq 49}" p:data-target="#comment-edit" p:data-toggle="modal" p:data-comment="#{appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).review}">
                       #{messages['label.edit']}
                       <f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>
                       <f:ajax execute="@this"/>
-                    </h:commandLink>
+                    </h:commandLink><!---->
+                    <!-- Check if appointment completed and comment is empty then render make comment button -->
                     <h:commandLink styleClass="badge badge-info" rendered="#{history.appointmentStatus eq 'COMPLETED' and empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor)}" value="#{messages['button.makeComment']}" p:data-toggle="modal" p:data-target="#comment-modal">
                       <f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>
                       <f:ajax execute="@this"/>
-                    </h:commandLink>
-                    <h:panelGroup rendered="#{history.appointmentStatus eq 'COMPLETED' and appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).isAppropriate eq 48}">
+                    </h:commandLink><!---->
+                    <!-- Check if appointment completed and (patient comment is not empty and not appropriate) then render "Comment Waiting Approval" -->
+                    <h:panelGroup rendered="#{history.appointmentStatus eq 'COMPLETED' and (not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor) and appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).isAppropriate eq 48)}">
                       <span class="badge badge-default">#{messages['label.commentAppropriate']}</span>
-                    </h:panelGroup>
+                    </h:panelGroup><!---->
                   </h:column>
                   <h:column headerClass="text-center">
                     <f:facet name="header">#{messages['label.status']}</f:facet>
@@ -73,12 +80,13 @@
                     </h:panelGroup>
                   </h:column>
                 </h:dataTable>
-              </div>
+              </div><!---->
               <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
             </h:form>
+            <!-- Render if Appointment History is Empty -->
             <h:panelGroup layout="block" styleClass="alert" rendered="#{session.getAttribute('userType') eq 'patient' and empty appointment.appointmentHistory}">
               <i class="fa fa-smile-o"></i>#{messages['card.appointmentEmpty']}
-            </h:panelGroup>
+            </h:panelGroup><!---->
 
             <h:form prependId="false" rendered="#{session.getAttribute('userType') eq 'doctor'}">
               <div class="table-responsive">
@@ -142,7 +150,7 @@
     </div>
 
     <h:panelGroup rendered="#{session.getAttribute('userType') eq 'patient'}">
-      <!-- Modal -->
+      <!-- Appointment Cancel Modal -->
       <div class="modal fade" id="cancel-modal">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -161,9 +169,9 @@
             </div>
           </div>
         </div>
-      </div>
+      </div><!---->
 
-      <!-- Modal -->
+      <!-- Appointment Comment Modal -->
       <div class="modal fade" id="comment-modal">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -174,7 +182,7 @@
             <div class="modal-body">
               <h:form prependId="false">
                 <div class="form-group">
-                  <h:inputTextarea value="#{appointment.doctorComment}" styleClass="form-control" p:placeholder="#{messages['label.comment']}"/>
+                  <h:inputTextarea rows="5" value="#{appointment.doctorComment}" styleClass="form-control" p:placeholder="#{messages['label.comment']}"/>
                 </div>
                 <div class="buttons">
                   <h:commandButton value="#{messages['button.send']}" styleClass="btn btn-success" action="#{appointment.sendDoctorComment}"/>
@@ -184,9 +192,9 @@
             </div>
           </div>
         </div>
-      </div>
+      </div><!---->
 
-      <!-- Modal -->
+      <!-- Comment Edit Modal -->
       <div class="modal fade" id="comment-edit">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -197,7 +205,7 @@
             <div class="modal-body">
               <h:form prependId="false">
                 <div class="form-group">
-                  <h:inputTextarea value="#{appointment.doctorComment}" styleClass="form-control" p:placeholder="#{messages['label.comment']}"/>
+                  <h:inputTextarea rows="5" value="#{appointment.doctorComment}" styleClass="form-control" p:placeholder="#{messages['label.comment']}"/>
                 </div>
                 <div class="buttons">
                   <h:commandButton value="#{messages['button.send']}" styleClass="btn btn-success" action="#{appointment.sendDoctorComment}"/>
@@ -207,11 +215,11 @@
             </div>
           </div>
         </div>
-      </div>
+      </div><!---->
     </h:panelGroup>
 
     <h:panelGroup rendered="#{session.getAttribute('userType') eq 'doctor'}">
-      <!-- Modal -->
+      <!-- Patient Info Modal -->
       <div class="modal fade" id="info-modal">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -284,7 +292,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div><!---->
     </h:panelGroup>
 
   </ui:define></ui:composition>

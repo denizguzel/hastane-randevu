@@ -4,17 +4,25 @@
   <ui:define name="content">
     <div class="page-wrapper">
       <div class="container-fluid">
+        <!-- Page Title -->
         <div class="page-title">
           <h4>#{messages['label.alergy']}</h4>
           <button class="sidebar-toggler" type="button"><i class="fa fa-bars"></i></button>
-        </div>
+        </div><!---->
+
         <div class="card">
           <div class="card-header">
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#alergy-modal">#{messages['button.addAlergy']}</button>
           </div>
           <div class="card-block">
-            <h:form prependId="false" styleClass="alergy-list#{alergy.alergyPanel ? ' active' : ''}">
-              <div class="alert"><i class="fa fa-thermometer-empty"></i>#{messages['card.alergyEmpty']}</div>
+            <!-- Render if alergy list is empty -->
+            <h:panelGroup styleClass="alert" rendered="#{empty alergy.patientAlergies}">
+              <i class="fa fa-thermometer-empty"></i>#{messages['card.alergyEmpty']}
+            </h:panelGroup><!---->
+
+            <!-- Render if alergy list is not empty -->
+            <h:form prependId="false" rendered="#{not empty alergy.patientAlergies}">
+              <!---->
               <div class="table-responsive">
                 <h:dataTable styleClass="table" binding="#{table}" value="#{alergy.patientAlergies}" var="patientAlergy">
                   <h:column>
@@ -39,13 +47,13 @@
                 </h:dataTable>
               </div>
               <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
-            </h:form>
+            </h:form><!---->
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Add Alergy Modal -->
     <div class="modal fade" id="alergy-modal">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -76,8 +84,9 @@
           </h:form>
         </div>
       </div>
-    </div>
-    <!-- Modal -->
+    </div><!---->
+
+    <!-- Remove Alergy Modal -->
     <div class="modal fade" id="cancel-modal">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -96,6 +105,6 @@
           </div>
         </div>
       </div>
-    </div>
+    </div><!---->
   </ui:define>
 </ui:composition>

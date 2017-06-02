@@ -3,6 +3,12 @@
   flex-direction: row;
   align-items: stretch;
   padding: 15px 0;
+  .mobile-top {
+    display: inherit;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
   .brand {
     align-items: center;
     display: inherit;
@@ -59,6 +65,7 @@
     }
   }
   .navbar-collapse {
+    margin-left: auto;
     .navbar-nav {
       margin-left: auto;
       align-items: center;

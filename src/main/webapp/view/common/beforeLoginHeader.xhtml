@@ -8,9 +8,28 @@
           <a class="brand" href="#{facesContext.externalContext.requestContextPath}/">
             <img src="#{facesContext.externalContext.requestContextPath}/resources/img/logo.png"/>
           </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
-            <i class="fa fa-bars"></i>
-          </button>
+          <h:panelGroup rendered="#{!login.verifyLogin}">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
+              <i class="fa fa-bars"></i>
+            </button>
+          </h:panelGroup>
+          <h:panelGroup layout="block" rendered="#{login.verifyLogin}">
+            <div class="dropdown ml-auto">
+              <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+                <i class="fa fa-user-circle-o"></i>#{login.loggedUsername}
+              </button>
+              <div class="dropdown-menu dropdown-menu-right">
+                <div class="dropdown-item">
+                  <a href="#{facesContext.externalContext.requestContextPath}/view"><i class="fa fa-user-o"></i>#{messages["header.profile"]}</a>
+                </div>
+                <div class="dropdown-item">
+                  <h:form prependId="false">
+                    <h:commandLink action="#{login.logout}"><i class="fa fa-sign-out"></i>#{messages["header.logout"]}</h:commandLink>
+                  </h:form>
+                </div>
+              </div>
+            </div>
+          </h:panelGroup>
         </div>
         <h:panelGroup layout="block" rendered="#{!login.verifyLogin}">
           <div class="collapse navbar-collapse" id="navbarNav">
@@ -22,23 +41,6 @@
                 <a class="nav-link" href="#{facesContext.externalContext.requestContextPath}/login/doctor">#{messages["header.doctorlogin"]}</a>
               </li>
             </ul>
-          </div>
-        </h:panelGroup>
-        <h:panelGroup layout="block" rendered="#{login.verifyLogin}">
-          <div class="dropdown ml-auto">
-            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
-              <i class="fa fa-user-circle-o"></i>#{login.loggedUsername}
-            </button>
-            <div class="dropdown-menu dropdown-menu-right">
-              <div class="dropdown-item">
-                <a href="#{facesContext.externalContext.requestContextPath}/view"><i class="fa fa-user-o"></i>#{messages["header.profile"]}</a>
-              </div>
-              <div class="dropdown-item">
-                <h:form prependId="false">
-                  <h:commandLink action="#{login.logout}"><i class="fa fa-sign-out"></i>#{messages["header.logout"]}</h:commandLink>
-                </h:form>
-              </div>
-            </div>
           </div>
         </h:panelGroup>
         <h:form prependId="false" styleClass="language">

@@ -4,17 +4,23 @@
   <ui:define name="content">
     <div class="page-wrapper">
       <div class="container-fluid">
+        <!-- Page Title -->
         <div class="page-title">
           <h4>#{messages['label.disease']}</h4>
           <button class="sidebar-toggler" type="button"><i class="fa fa-bars"></i></button>
-        </div>
+        </div><!---->
+        
         <div class="card">
           <div class="card-header">
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#disease-modal">#{messages['button.addDisease']}</button>
           </div>
           <div class="card-block">
-            <h:form prependId="false" styleClass="alergy-list#{disease.diseasePanel ? ' active' : ''}">
-              <div class="alert"><i class="fa fa-thermometer-empty"></i>#{messages['card.diseaseEmpty']}</div>
+            <!-- Render if disease list is empty -->
+            <h:panelGroup styleClass="alert" rendered="#{empty disease.patientDiseases}">
+              <i class="fa fa-thermometer-empty"></i>#{messages['card.diseaseEmpty']}
+            </h:panelGroup><!---->
+            <!-- Render if disease list is not empty -->
+            <h:form prependId="false" rendered="#{not empty disease.patientDiseases}">
               <div class="table-responsive">
                 <h:dataTable styleClass="table" binding="#{table}" value="#{disease.patientDiseases}" var="patientDisease">
                   <h:column>
@@ -39,13 +45,13 @@
                 </h:dataTable>
               </div>
               <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
-            </h:form>
+            </h:form><!---->
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Add Disease Modal -->
     <div class="modal fade" id="disease-modal">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -76,8 +82,9 @@
           </h:form>
         </div>
       </div>
-    </div>
-    <!-- Modal -->
+    </div><!---->
+
+    <!-- Remove Disease Modal -->
     <div class="modal fade" id="cancel-modal">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -96,6 +103,6 @@
           </div>
         </div>
       </div>
-    </div>
+    </div><!---->
   </ui:define>
 </ui:composition>

@@ -82,10 +82,14 @@
   .navbar-login {
     padding: 0 15px 0 0;
   }
+  .navbar {
+    .dropdown {
+      order: 2;
+    }
+  }
   .navbar-toggleable-sm {
     flex-direction: column;
     .mobile-top {
-      display: inherit;
       .navbar-toggler {
         margin-left: auto;
         align-self: center;
@@ -95,6 +99,9 @@
       }
     }
     .navbar-collapse {
+      width: initial;
+      margin-left: initial;
+      order: 2;
       .navbar-nav {
         margin-top: 10px;
         .nav-item {
@@ -169,11 +176,6 @@
         }
         .tab-content {
           width: 100%;
-          .tab-pane {
-            .btn {
-              margin-top: 15px;
-            }
-          }
         }
         .btn-save {
           margin: 15px 0 0 0;
@@ -219,8 +221,8 @@
     padding: 10.5px 0;
   }
   .language {
-    justify-content: flex-end;
-    margin-left: 0;
+    margin-left: auto;
+    order: 1;
     .form-control {
       width: initial !important;
     }

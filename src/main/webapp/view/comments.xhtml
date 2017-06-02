@@ -10,9 +10,12 @@
         </div>
         <div class="card">
           <div class="card-block">
-            <h:form prependId="false">
+            <h:panelGroup styleClass="alert" rendered="#{empty doctor.doctorReviews}">
+              <i class="fa fa-meh-o"></i>#{messages['card.commentEmpty']}
+            </h:panelGroup>
+            <h:form prependId="false" rendered="#{not empty doctor.doctorReviews}">
               <div class="table-responsive">
-                <h:dataTable styleClass="table" binding="#{table}" value="#{doctor.doctorReviews}" var="review" rendered="#{not empty doctor.doctorReviews}">
+                <h:dataTable styleClass="table" binding="#{table}" value="#{doctor.doctorReviews}" var="review">
                   <h:column>
                     <f:facet name="header">#</f:facet>
                     <h:outputText value="#{table.rowIndex + 1}"/>
@@ -26,9 +29,6 @@
                     <h:outputText value="#{review.review}"/>
                   </h:column>
                 </h:dataTable>
-                <h:panelGroup layout="block" styleClass="alert" rendered="#{empty doctor.doctorReviews}">
-                  <i class="fa fa-meh-o"></i>#{messages['card.commentEmpty']}
-                </h:panelGroup>
               </div>
             </h:form>
           </div>

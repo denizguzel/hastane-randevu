@@ -4,13 +4,16 @@
   <ui:define name="content">
     <div class="page-wrapper">
       <div class="container-fluid">
+        <!-- Page Title -->
         <div class="page-title">
           <h4>#{messages["page.title.takeAppointment"]}</h4>
           <button class="sidebar-toggler" type="button"><i class="fa fa-bars"></i></button>
-        </div>
+        </div><!---->
+
         <div class="card">
           <div class="card-block">
             <h:form styleClass="row search-form" prependId="false">
+              <!-- Appointment Search Form -->
               <div class="col-lg-6">
                 <div class="row">
                   <div class="col-xl-6">
@@ -89,7 +92,9 @@
                     <f:ajax execute="@this" render="@form" onevent="appointment"/>
                   </h:commandButton>
                 </div>
-              </div>
+              </div><!---->
+
+              <!-- Appointment Clock Panel -->
               <div class="col-lg-6 mt-4 mt-lg-0">
                 <h:panelGroup layout="block" id="appointmentTimes" class="appointment-clocks#{appointment.appointmentClockPanel ? ' active' : ''}">
                   <p class="lead">#{messages['card.appointmentSearchInfo']}</p>
@@ -159,7 +164,9 @@
                     </h:commandLink>
                   </div>
                 </h:panelGroup>
-              </div>
+              </div><!---->
+
+              <!-- Available Appointment Table -->
               <h:panelGroup layout="block" id="appointmentTable" styleClass="col-12 mt-4#{appointment.appointmentPanel ? '' : ' d-none'}">
                 <h3 class="text-center#{appointment.appointmentSearchNull ? '' : ' d-none'}">#{messages['card.appointmentNull']}</h3>
                 <div class="table-responsive#{appointment.appointmentSearchNull ? ' d-none' : ''}">
@@ -187,7 +194,7 @@
                     </h:column>
                   </h:dataTable>
                 </div>
-              </h:panelGroup>
+              </h:panelGroup><!---->
               <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
             </h:form>
           </div>
@@ -195,7 +202,7 @@
       </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Appointment Modal -->
     <div class="modal fade" id="appointment-modal">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -274,9 +281,9 @@
           </h:form>
         </div>
       </div>
-    </div>
+    </div><!---->
 
-    <!-- Modal -->
+    <!-- Doctor Comment Modal -->
     <div class="modal fade" id="comment-modal">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -309,5 +316,5 @@
           </div>
         </div>
       </div>
-    </div>
+    </div><!---->
   </ui:define></ui:composition>
