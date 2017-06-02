@@ -1,10 +1,8 @@
 package com.hastanerandevu.beans;
 
-import com.hastanerandevu.comparators.AppointmentDateComparator;
 import com.hastanerandevu.enums.AppointmentStatusEnum;
 import com.hastanerandevu.model.*;
 import com.hastanerandevu.service.impl.*;
-import com.hastanerandevu.utility.DateUtil;
 import com.hastanerandevu.utility.Mailer;
 import com.hastanerandevu.utility.SessionUtils;
 import com.hastanerandevu.utility.UTF8Control;

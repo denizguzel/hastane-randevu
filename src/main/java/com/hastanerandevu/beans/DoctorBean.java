@@ -31,6 +31,7 @@ public class DoctorBean implements Serializable {
 
   private DoctorServiceImpl doctorService;
   private ReviewsAboutDoctorsServiceImpl reviewsAboutDoctorsService;
+  private PatientServiceImpl patientService;
 
   private DoctorModel doctorModel;
   private AppointmentModel appointmentModel;
@@ -153,5 +154,13 @@ public class DoctorBean implements Serializable {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("check.error"), null));
       LOG.error(e.getMessage());
     }
+  }
+
+  public void patientInfo() {
+    clearListComponentsWithChange(patientAlergies, patientAssays, patientDiseases);
+    patientService = new PatientServiceImpl();
+    patientAlergies.addAll(patientService.getPatientAlergies(appointmentModel.getPatient()));
+    patientAssays.addAll(patientService.getPatientAssays(appointmentModel.getPatient()));
+    patientDiseases.addAll(patientService.getPatientDiseases(appointmentModel.getPatient()));
   }
 }
