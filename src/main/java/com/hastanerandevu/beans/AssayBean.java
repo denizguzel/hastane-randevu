@@ -32,7 +32,6 @@ public class AssayBean implements Serializable {
   private PatientModel patientModel;
 
   private String selectedAssay;
-  private boolean assayPanel = false;
   private AssayResultEnum[] assayResultEnums = AssayResultEnum.values();
 
   private List<PatientAssayRelModel> patientAssays;
@@ -55,10 +54,6 @@ public class AssayBean implements Serializable {
     for(AssayModel assayModel : assayService.findAll()) {
       assays.put(assayModel.getPk(), assayModel.getAssayName());
     }
-
-    if(patientAssays.size() > 0) {
-      assayPanel = true;
-    }
   }
 
   public void setLoginBean(LoginBean loginBean) {
@@ -79,14 +74,6 @@ public class AssayBean implements Serializable {
 
   public void setSelectedAssay(String selectedAssay) {
     this.selectedAssay = selectedAssay;
-  }
-
-  public boolean isAssayPanel() {
-    return assayPanel;
-  }
-
-  public void setAssayPanel(boolean assayPanel) {
-    this.assayPanel = assayPanel;
   }
 
   public List<PatientAssayRelModel> getPatientAssays() {

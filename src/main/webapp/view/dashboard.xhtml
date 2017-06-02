@@ -164,7 +164,7 @@
                               <h:panelGroup styleClass="detail-info" rendered="#{empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor)}">
                                 <abbr title="#{messages['label.commentAbbr']}">#{messages['modal.body.comments.info']}</abbr>
                               </h:panelGroup>
-                              <h:panelGroup styleClass="detail-info" rendered="#{not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor)}" p:title="#{appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).review}">
+                              <h:panelGroup styleClass="detail-info" rendered="#{not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor)}" p:title="#{appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).isAppropriate eq 48 ? messages['label.commentAppropriate'] : appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).review}">
                                 <h:panelGroup rendered="#{not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor) and appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).isAppropriate eq 49}">
                                   #{appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).review}
                                 </h:panelGroup>

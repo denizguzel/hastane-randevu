@@ -33,7 +33,6 @@ public class AlergyBean implements Serializable {
 
   private String selectedAlergy;
   private char alergyStillPass;
-  private boolean alergyPanel = false;
 
   private List<PatientAlergyRelModel> patientAlergies;
   private Map<Long, String> alergies;
@@ -53,10 +52,6 @@ public class AlergyBean implements Serializable {
 
     for(AlergyModel alergyModel : alergyService.findAll()) {
       alergies.put(alergyModel.getPk(), alergyModel.getAlergyName());
-    }
-
-    if(patientAlergies.size() > 0) {
-      alergyPanel = true;
     }
   }
 
@@ -86,14 +81,6 @@ public class AlergyBean implements Serializable {
 
   public void setAlergyStillPass(char alergyStillPass) {
     this.alergyStillPass = alergyStillPass;
-  }
-
-  public boolean isAlergyPanel() {
-    return alergyPanel;
-  }
-
-  public void setAlergyPanel(boolean alergyPanel) {
-    this.alergyPanel = alergyPanel;
   }
 
   public List<PatientAlergyRelModel> getPatientAlergies() {

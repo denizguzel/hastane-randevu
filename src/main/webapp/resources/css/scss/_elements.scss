@@ -428,3 +428,7 @@ body.page-404 {
     }
   }
 }
+
+.popover {
+  z-index: 1081; // over modal
+}

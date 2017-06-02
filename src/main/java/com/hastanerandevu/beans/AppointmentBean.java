@@ -263,14 +263,6 @@ public class AppointmentBean implements Serializable {
     this.appointmentHistory = appointmentHistory;
   }
 
-  public ReviewsAboutDoctorsModel getReviewsAboutDoctorsModel() {
-    return reviewsAboutDoctorsModel;
-  }
-
-  public void setReviewsAboutDoctorsModel(ReviewsAboutDoctorsModel reviewsAboutDoctorsModel) {
-    this.reviewsAboutDoctorsModel = reviewsAboutDoctorsModel;
-  }
-
   public List<ReviewsAboutDoctorsModel> getDoctorReviewList() {
     return doctorReviewList;
   }
@@ -305,10 +297,6 @@ public class AppointmentBean implements Serializable {
 
   public AppointmentModel getClosestAppointment() {
     return closestAppointment;
-  }
-
-  public ReviewsAboutDoctorsServiceImpl getReviewsAboutDoctorsService() {
-    return reviewsAboutDoctorsService;
   }
 
   public String getDoctorComment() {

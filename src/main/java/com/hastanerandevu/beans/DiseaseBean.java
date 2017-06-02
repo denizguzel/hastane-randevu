@@ -33,7 +33,6 @@ public class DiseaseBean implements Serializable {
 
   private String selectedDisease;
   private char diseaseStillPass;
-  private boolean diseasePanel = false;
 
   private List<PatientDiseaseRelModel> patientDiseases;
   private Map<Long, String> diseases;
@@ -53,10 +52,6 @@ public class DiseaseBean implements Serializable {
 
     for(DiseaseModel diseaseModel : diseaseService.findAll()) {
       diseases.put(diseaseModel.getPk(), diseaseModel.getDiseaseName());
-    }
-
-    if(patientDiseases.size() > 0) {
-      diseasePanel = true;
     }
   }
 
@@ -86,14 +81,6 @@ public class DiseaseBean implements Serializable {
 
   public void setDiseaseStillPass(char diseaseStillPass) {
     this.diseaseStillPass = diseaseStillPass;
-  }
-
-  public boolean isDiseasePanel() {
-    return diseasePanel;
-  }
-
-  public void setDiseasePanel(boolean diseasePanel) {
-    this.diseasePanel = diseasePanel;
   }
 
   public List<PatientDiseaseRelModel> getPatientDiseases() {
