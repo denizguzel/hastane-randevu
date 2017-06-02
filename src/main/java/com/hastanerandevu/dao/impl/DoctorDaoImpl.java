@@ -28,7 +28,7 @@ public class DoctorDaoImpl extends BaseDaoImpl<DoctorModel> {
 
     List<AppointmentStatusEnum> appointmentStatusEnums = Arrays.asList(AppointmentStatusEnum.COMPLETED, AppointmentStatusEnum.RESERVED);
 
-    Query query = getEntitymanager().createQuery("SELECT e FROM AppointmentModel e WHERE e.inspectionPlace.doctor = :DOCTOR AND e.appointmentStatus IN :APPOINTMENT_STATUS ORDER BY e.appointmentDate DESC");
+    Query query = getEntitymanager().createQuery("SELECT e FROM AppointmentModel e WHERE e.inspectionPlace.doctor = :DOCTOR AND e.appointmentStatus IN :APPOINTMENT_STATUS AND e.patient IS NOT NULL ORDER BY e.appointmentDate DESC");
 
     query.setParameter("DOCTOR", doctorModel);
     query.setParameter("APPOINTMENT_STATUS", appointmentStatusEnums);

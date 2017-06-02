@@ -128,11 +128,13 @@ public class LoginBean {
       try {
         patientService.create(patientModel);
         mailer.sendRegisterMail(patientModel);
-        patientModel = new PatientModel(); // form reset
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("patient.create.successful"), null));
       } catch(Exception e) {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("check.error"), null));
         LOG.info(e.getMessage());
+      }
+      finally {
+        patientModel = new PatientModel(); // form reset
       }
     }
   }
@@ -140,8 +142,7 @@ public class LoginBean {
   public void patientUpdate() {
     try {
       patientService.update(patientModel);
-      loggedUsername = NameConverter.getName(patientModel.getFirstName(), patientModel.getLastName());
-
+      loggedUsername = patientModel.getName();
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("patient.update.successful"), null));
     } catch(Exception e) {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("check.error"), null));
@@ -177,10 +178,9 @@ public class LoginBean {
     SessionUtils.getSession().setAttribute("userType", loginCheck);
 
     if(loginCheck.equals("patient")) {
-      if(patientService.loginPatient(patientModel) != null) {
-        patientModel = patientService.loginPatient(patientModel);
-        loggedUsername = NameConverter.getName(patientModel.getFirstName(), patientModel.getLastName());
-        SessionUtils.getSession().setAttribute("loggedUsername", loggedUsername);
+      patientModel = ((patientModel = patientService.loginPatient(patientModel)) != null) ? patientModel : null;
+      if(patientModel != null) {
+        setLoggerUserAndSession(patientModel.getName());
         verifyLogin = true;
       } else
         verifyLogin = false;
@@ -199,11 +199,11 @@ public class LoginBean {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("check.information"), null));
         return "/login/patient";
       }
-    } else if(loginCheck.equals("doctor")) {
-      if(doctorService.loginDoctor(doctorModel) != null) {
-        doctorModel = doctorService.loginDoctor(doctorModel);
-        loggedUsername = doctorModel.getFirstName() + " " + doctorModel.getLastName();
-        SessionUtils.getSession().setAttribute("loggedUsername", loggedUsername);
+    }
+    else if(loginCheck.equals("doctor")) {
+      doctorModel = ((doctorModel = doctorService.loginDoctor(doctorModel)) != null) ? doctorModel : null;
+      if(doctorModel != null) {
+        setLoggerUserAndSession(doctorModel.getName());
         verifyLogin = true;
       } else
         verifyLogin = false;
@@ -230,5 +230,10 @@ public class LoginBean {
     HttpSession session = SessionUtils.getSession();
     session.invalidate();
     return "/index?faces-redirect=true";
+  }
+
+  private void setLoggerUserAndSession(String name){
+    loggedUsername = name;
+    SessionUtils.getSession().setAttribute("loggedUsername", loggedUsername);
   }
 }

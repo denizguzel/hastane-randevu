@@ -1,9 +1,10 @@
 package com.hastanerandevu.beans;
 
-import com.hastanerandevu.converter.NameConverter;
+import com.hastanerandevu.comparators.AppointmentDateComparator;
 import com.hastanerandevu.enums.AppointmentStatusEnum;
 import com.hastanerandevu.model.*;
 import com.hastanerandevu.service.impl.*;
+import com.hastanerandevu.utility.DateUtil;
 import com.hastanerandevu.utility.Mailer;
 import com.hastanerandevu.utility.SessionUtils;
 import com.hastanerandevu.utility.UTF8Control;
@@ -42,6 +43,7 @@ public class AppointmentBean implements Serializable {
 
   private AppointmentModel appointmentModel;
   private ReviewsAboutDoctorsModel reviewsAboutDoctorsModel;
+  ReviewsAboutDoctorsModel patientReviewAboutDoctor;
   private PatientModel patientModel;
   private InspectionPlaceModel inspectionPlaceModel;
   private HospitalPoliclinicRelModel hospitalPoliclinicRelModel;
@@ -75,6 +77,7 @@ public class AppointmentBean implements Serializable {
   private List<AppointmentModel> appointmentHistory;
   private List<AppointmentModel> completedAppointments;
   private List<ReviewsAboutDoctorsModel> doctorReviewList;
+  private List<AppointmentModel> appointmentsByFilter;
 
   @SuppressWarnings("unchecked")
   @PostConstruct
@@ -108,24 +111,10 @@ public class AppointmentBean implements Serializable {
     appointmentHistory = new LinkedList<>();
     completedAppointments = new ArrayList<>();
 
-    for(CityModel cityModel : cityService.getCities()) {
-      cities.put(cityModel.getPk(), cityModel.getCityName());
-    }
+    populateCities();
 
-    if(SessionUtils.getSession().getAttribute("userType").equals("patient")) {
-      if(patientService.getAppointmentHistory(patientModel).size() > 0) {
-        appointmentHistory.addAll(patientService.getAppointmentHistory(patientModel));
-        completedAppointments = appointmentHistory.stream().filter(p -> p.getAppointmentStatus().equals(AppointmentStatusEnum.COMPLETED)).collect(Collectors.toList());
-        if(patientService.getActiveAppointmentsOfPatient(patientModel).size() > 0) {
-          closestAppointment = patientService.getActiveAppointmentsOfPatient(patientModel).get(0);
-          closestDate = closestAppointment.getAppointmentDate();
-          Date today = new Date();
+    populateAppointmentHistoryOfPatient(patientModel);
 
-          long diff = closestDate.getTime() - today.getTime();
-          daysLeft = String.valueOf(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
-        }
-      }
-    }
   }
 
   public void setLoginBean(LoginBean loginBean) {
@@ -360,9 +349,7 @@ public class AppointmentBean implements Serializable {
       selectedCity = input.getValue().toString();
     }
 
-    for(DistrictModel districtModel : cityService.getAllDistrictsByCity(cityService.find(Long.parseLong(selectedCity)))) {
-      districts.put(districtModel.getPk(), districtModel.getDistrictName());
-    }
+    populateDistrictsBySelectedCity(selectedCity);
 
     appointmentPanel = false;
     appointmentClockPanel = false;
@@ -380,9 +367,7 @@ public class AppointmentBean implements Serializable {
       selectedDistrict = input.getValue().toString();
     }
 
-    for(HospitalModel hospitalModel : districtService.getHospitalsByDistrict(districtService.find(Long.parseLong(selectedDistrict)))) {
-      hospitals.put(hospitalModel.getPk(), hospitalModel.getHospitalName());
-    }
+    populateHospitalsBySelectedDistrict(selectedDistrict);
 
     appointmentPanel = false;
     appointmentClockPanel = false;
@@ -400,9 +385,7 @@ public class AppointmentBean implements Serializable {
       selectedHospital = input.getValue().toString();
     }
 
-    for(HospitalPoliclinicRelModel hospitalPoliclinicRelModel : hospitalService.getPoliclinicByHospital(hospitalService.find(Long.parseLong(selectedHospital)))) {
-      policlinics.put(hospitalPoliclinicRelModel.getPk(), hospitalPoliclinicRelModel.getPoliclinic().getPoliclinicName());
-    }
+    populatePoliclinicsBySelectedHospital(selectedHospital);
 
     appointmentPanel = false;
     appointmentClockPanel = false;
@@ -420,13 +403,7 @@ public class AppointmentBean implements Serializable {
       selectedPoliclinic = input.getValue().toString();
     }
 
-    for(InspectionPlaceModel inspectionPlaceModel : policlinicService.getInspectionPlacesByHospitalPoliclinicRel(hospitalPoliclinicRelService.find(Long.parseLong(selectedPoliclinic)))) {
-      StringBuilder str = new StringBuilder(inspectionPlaceModel.getPlaceName());
-      if(inspectionPlaceModel.getDoctor() != null) {
-        str.append(" ").append(NameConverter.getName(inspectionPlaceModel.getDoctor().getFirstName(), inspectionPlaceModel.getDoctor().getLastName()));
-      }
-      inspectionPlaces.put(inspectionPlaceModel.getPk(), String.valueOf(str));
-    }
+    populateInspectionPlacesBySelectedPoliclinic(selectedPoliclinic);
 
     appointmentPanel = false;
     appointmentClockPanel = false;
@@ -451,6 +428,168 @@ public class AppointmentBean implements Serializable {
 
     clearListComponentsWithChange(appointmentTimes, appointmentsHeaders, appointmentDays, doctorReviewList);
 
+    populateAppointmentHeadersByCriterias();
+
+    appointmentPanel = true;
+  }
+
+  public void selectAppointment(InspectionPlaceModel inspectionPlaceModel) {
+
+    clearListComponentsWithChange(appointmentTimes, appointmentDays);
+
+    filterAppointmentsByCriterias(inspectionPlaceModel);
+
+    appointmentClockPanel = true;
+  }
+
+  public void holdAppointment() {
+    appointmentService.holdAppointmentForPatient(appointmentModel, patientModel);
+  }
+
+  public void clearAppointment() {
+    appointmentService.clearAppointment(appointmentModel);
+  }
+
+  public String confirmAppointment() {
+
+    if(haveAnAppointmentForThatDay(patientModel)) {
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("appointment.confirm.sameday"), null));
+      appointmentService.clearAppointment(appointmentModel);
+    } else if(getNumberOfActiveAppointments(patientModel).size() >= 3) {
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("appointment.confirm.maxlimit"), null));
+      appointmentService.clearAppointment(appointmentModel);
+    } else {
+      appointmentService.confirmAppointment(appointmentModel, patientModel);
+      new Mailer().sendAppointmentMail(appointmentModel);
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("appointment.confirm.successful"), null));
+    }
+    FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+    return "/view/take-appointment?faces-redirect=true";
+  }
+
+  public void clearSearch() {
+    clearMapComponentsWithChange(cities, districts, hospitals, policlinics, inspectionPlaces);
+    clearListComponentsWithChange(appointmentsHeaders, appointmentTimes, appointmentDays, doctorReviewList);
+
+    appointmentPanel = false;
+    appointmentClockPanel = false;
+    appointmentSearchNull = false;
+
+    populateCities();
+
+    selectedCity = bundle.getString("label.selectCity");
+  }
+
+  public String cancelAppointment() {
+    Calendar today = Calendar.getInstance();
+    Calendar appointmentDate = Calendar.getInstance();
+
+    today.setTime(new Date());
+    appointmentDate.setTime(appointmentModel.getAppointmentDate());
+
+    boolean sameDay = today.get(Calendar.YEAR) == appointmentDate.get(Calendar.YEAR) && today.get(Calendar.DAY_OF_YEAR) == appointmentDate.get(Calendar.DAY_OF_YEAR);
+
+    if(sameDay) {
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("appointment.cancel.sameday"), null));
+    } else {
+      appointmentService.clearAppointment(appointmentModel);
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("appointment.cancel.successful"), null));
+    }
+
+    FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+    return "/view/appointments?faces-redirect=true";
+  }
+
+  public String sendDoctorComment() {
+    patientReviewAboutDoctor = reviewsAboutDoctorsService.getPatientReviewAboutDoctor(patientModel, appointmentModel.getInspectionPlace().getDoctor()).get(0);
+    if(patientReviewAboutDoctor != null) {
+      reviewsAboutDoctorsModel = patientReviewAboutDoctor;
+      reviewsAboutDoctorsModel.setReview(doctorComment);
+      reviewsAboutDoctorsModel.setIsAppropriate('0');
+      reviewsAboutDoctorsService.update(reviewsAboutDoctorsModel);
+    } else {
+      reviewsAboutDoctorsModel.setPatient(patientModel);
+      reviewsAboutDoctorsModel.setDoctor(appointmentModel.getInspectionPlace().getDoctor());
+      reviewsAboutDoctorsModel.setReview(doctorComment);
+      reviewsAboutDoctorsService.create(reviewsAboutDoctorsModel);
+    }
+
+    if(FacesContext.getCurrentInstance().getViewRoot().getViewId().equals("/view/dashboard.xhtml")) {
+      return "/view/dashboard?faces-redirect=true";
+    } else
+      return "/view/appointments?faces-redirect=true";
+  }
+
+  public void doctorReviews(DoctorModel doctorModel) {
+    clearListComponentsWithChange(doctorReviewList);
+    doctorReviewList.addAll(reviewsAboutDoctorsService.getReviewsAboutDoctor(doctorModel));
+  }
+
+  private void populateCities() {
+    for(CityModel cityModel : cityService.getCities()) {
+      cities.put(cityModel.getPk(), cityModel.getCityName());
+    }
+  }
+
+  private void populateAppointmentHistoryOfPatient(PatientModel patient) {
+    if(SessionUtils.getSession().getAttribute("userType").equals("patient")) {
+      if(patientService.getAppointmentHistory(patient).size() > 0) {
+        appointmentHistory.addAll(patientService.getAppointmentHistory(patient));
+        populateCompletedAppointmentsOfPatient(appointmentHistory);
+        findClosestAppointment(patient);
+      }
+    }
+  }
+
+  private void populateCompletedAppointmentsOfPatient(List<AppointmentModel> appointmentHistory) {
+    completedAppointments = appointmentHistory.stream().filter(p -> p.getAppointmentStatus().equals(AppointmentStatusEnum.COMPLETED)).collect(Collectors.toList());
+  }
+
+  private void findClosestAppointment(PatientModel patient) {
+    if(getNumberOfActiveAppointments(patient).size() > 0) {
+      List<AppointmentModel> sortedActiveAppointments = getNumberOfActiveAppointments(patientModel);
+
+      closestAppointment = sortedActiveAppointments.get(0);
+      closestDate = closestAppointment.getAppointmentDate();
+      Date today = new Date();
+
+      long diff = closestDate.getTime() - today.getTime();
+      daysLeft = String.valueOf(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+    }
+  }
+
+  private void populateDistrictsBySelectedCity(String selectedCity) {
+    for(DistrictModel districtModel : cityService.getAllDistrictsByCity(cityService.find(Long.parseLong(selectedCity)))) {
+      districts.put(districtModel.getPk(), districtModel.getDistrictName());
+    }
+  }
+
+  private void populateHospitalsBySelectedDistrict(String selectedDistrict) {
+
+    for(HospitalModel hospitalModel : districtService.getHospitalsByDistrict(districtService.find(Long.parseLong(selectedDistrict)))) {
+      hospitals.put(hospitalModel.getPk(), hospitalModel.getHospitalName());
+    }
+  }
+
+  private void populatePoliclinicsBySelectedHospital(String selectedHospital) {
+
+    for(HospitalPoliclinicRelModel hospitalPoliclinicRelModel : hospitalService.getPoliclinicByHospital(hospitalService.find(Long.parseLong(selectedHospital)))) {
+      policlinics.put(hospitalPoliclinicRelModel.getPk(), hospitalPoliclinicRelModel.getPoliclinic().getPoliclinicName());
+    }
+  }
+
+  private void populateInspectionPlacesBySelectedPoliclinic(String selectedPoliclinic) {
+
+    for(InspectionPlaceModel inspectionPlaceModel : policlinicService.getInspectionPlacesByHospitalPoliclinicRel(hospitalPoliclinicRelService.find(Long.parseLong(selectedPoliclinic)))) {
+      StringBuilder str = new StringBuilder(inspectionPlaceModel.getPlaceName());
+      if(inspectionPlaceModel.getDoctor() != null) {
+        str.append(" ").append(inspectionPlaceModel.getDoctor().getName());
+      }
+      inspectionPlaces.put(inspectionPlaceModel.getPk(), String.valueOf(str));
+    }
+  }
+
+  private void populateAppointmentHeadersByCriterias() {
     if(selectedInspectionPlace != null && !selectedInspectionPlace.isEmpty()) {
       inspectionPlaceModel = inspectionPlaceService.find(Long.parseLong(selectedInspectionPlace));
       if(appointmentDateStart == null && appointmentDateEnd == null) {
@@ -476,19 +615,10 @@ public class AppointmentBean implements Serializable {
         appointmentSearchNull = true;
       }
     }
-    appointmentPanel = true;
   }
 
-  public void selectAppointment(InspectionPlaceModel inspectionPlaceModel) {
-
-    clearListComponentsWithChange(appointmentTimes, appointmentDays);
-
-    List<AppointmentModel> appointmentsByFilter = appointmentService.getAllAppointmentsByInspectionPlace(inspectionPlaceModel);
-
-    byte partitionSize = 17;
-
-    int totalSize;
-
+  private void filterAppointmentsByCriterias(InspectionPlaceModel inspectionPlaceModel) {
+    appointmentsByFilter = appointmentService.getAllAppointmentsByInspectionPlace(inspectionPlaceModel);
 
     if(appointmentDateStart != null && appointmentDateEnd != null) {
       appointmentsByFilter = appointmentsByFilter.stream().filter(p -> p.getAppointmentDate().after(appointmentDateStart) && p.getAppointmentDate().before(appointmentDateEnd)).collect(Collectors.toList());
@@ -496,98 +626,49 @@ public class AppointmentBean implements Serializable {
       appointmentsByFilter = appointmentsByFilter.stream().filter(p -> p.getAppointmentDate().after(appointmentDateStart)).collect(Collectors.toList());
     }
 
-    totalSize = appointmentsByFilter.size();
+    segmentAppointments(appointmentsByFilter);
+  }
 
+  private void segmentAppointments(List<AppointmentModel> appointments) {
 
-    for(int i = 0; i < totalSize; i += partitionSize) {
-      appointmentTimes.add(appointmentsByFilter.subList(i, Math.min(i + partitionSize, totalSize)));
-      appointmentDays.add(appointmentsByFilter.get(i));
+    Byte partitionSize = 1;
+    int totalSize = appointments.size();
+    int from = 0;
+
+    Calendar cal1 = Calendar.getInstance();
+    Calendar cal2 = Calendar.getInstance();
+
+    for(int i = 0; i < totalSize; i++) {
+      cal1.setTime(appointments.get(i).getAppointmentDate());
+      if(i == (totalSize - 1)) {
+        populateAppointmentDaysAndTimes(appointments, from, i + 1);
+        break;
+      }
+      cal2.setTime(appointments.get(i + 1).getAppointmentDate());
+      if(cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) && cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR)) {
+        partitionSize++;
+      } else {
+        populateAppointmentDaysAndTimes(appointments, from, i + 1);
+        from += (partitionSize);
+        partitionSize = 1;
+      }
     }
-    appointmentClockPanel = true;
   }
 
-  public void holdAppointment() {
-    appointmentService.holdAppointmentForPatient(appointmentModel, patientModel);
+  private void populateAppointmentDaysAndTimes(List<AppointmentModel> appointments, int from, int to) {
+    appointmentTimes.add(appointments.subList(from, to));
+    appointmentDays.add(appointments.get(from));
   }
 
-  public void clearAppointment() {
-    appointmentService.clearAppointment(appointmentModel);
+  private boolean haveAnAppointmentForThatDay(PatientModel patientModel) {
+    return patientService.haveAnAppointmentForThatDay(patientModel,appointmentModel.getAppointmentDate());
   }
 
-  public String confirmAppointment() {
-    if(patientService.haveAnAppointmentForThatDay(patientModel, appointmentModel.getAppointmentDate())) {
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("appointment.confirm.sameday"), null));
-      appointmentService.clearAppointment(appointmentModel);
-    } else if(patientService.getActiveAppointmentsOfPatient(patientModel).size() >= 3) {
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("appointment.confirm.maxlimit"), null));
-      appointmentService.clearAppointment(appointmentModel);
-    } else {
-      appointmentService.confirmAppointment(appointmentModel, patientModel);
-      new Mailer().sendAppointmentMail(appointmentModel);
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("appointment.confirm.successful"), null));
-    }
-    FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
-    return "/view/take-appointment?faces-redirect=true";
-  }
-
-  public void clearSearch() {
-    clearMapComponentsWithChange(cities, districts, hospitals, policlinics, inspectionPlaces);
-    clearListComponentsWithChange(appointmentsHeaders, appointmentTimes, appointmentDays, doctorReviewList);
-    appointmentPanel = false;
-    appointmentClockPanel = false;
-    appointmentSearchNull = false;
-
-    for(CityModel cityModel : cityService.getCities()) {
-      cities.put(cityModel.getPk(), cityModel.getCityName());
-    }
-    selectedCity = bundle.getString("label.selectCity");
-  }
-
-  public String cancelAppointment() {
-    Calendar today = Calendar.getInstance();
-    today.setTime(new Date());
-
-    Calendar appointmentDate = Calendar.getInstance();
-    appointmentDate.setTime(appointmentModel.getAppointmentDate());
-
-    boolean sameDay = today.get(Calendar.YEAR) == appointmentDate.get(Calendar.YEAR) && today.get(Calendar.DAY_OF_YEAR) == appointmentDate.get(Calendar.DAY_OF_YEAR);
-
-    if(sameDay) {
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("appointment.cancel.sameday"), null));
-    } else {
-      appointmentService.clearAppointment(appointmentModel);
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("appointment.cancel.successful"), null));
-    }
-
-    FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
-    return "/view/appointments?faces-redirect=true";
-  }
-
-  public String sendDoctorComment() {
-    if(getPatientReviewAboutDoctor(patientModel, appointmentModel.getInspectionPlace().getDoctor()).size() > 0) {
-      reviewsAboutDoctorsModel = getPatientReviewAboutDoctor(patientModel, appointmentModel.getInspectionPlace().getDoctor()).get(0);
-      reviewsAboutDoctorsModel.setReview(doctorComment);
-      reviewsAboutDoctorsModel.setIsAppropriate('0');
-      reviewsAboutDoctorsService.update(reviewsAboutDoctorsModel);
-    } else {
-      reviewsAboutDoctorsModel.setPatient(patientModel);
-      reviewsAboutDoctorsModel.setDoctor(appointmentModel.getInspectionPlace().getDoctor());
-      reviewsAboutDoctorsModel.setReview(doctorComment);
-      reviewsAboutDoctorsService.create(reviewsAboutDoctorsModel);
-    }
-
-    if(FacesContext.getCurrentInstance().getViewRoot().getViewId().equals("/view/dashboard.xhtml")) {
-      return "/view/dashboard?faces-redirect=true";
-    } else
-      return "/view/appointments?faces-redirect=true";
+  private List<AppointmentModel> getNumberOfActiveAppointments(PatientModel patientModel) {
+    return patientService.getActiveAppointmentsOfPatient(patientModel);
   }
 
   public List<ReviewsAboutDoctorsModel> getPatientReviewAboutDoctor(PatientModel patientModel, DoctorModel doctorModel) {
     return reviewsAboutDoctorsService.getPatientReviewAboutDoctor(patientModel, doctorModel);
-  }
-
-  public void doctorReviews(DoctorModel doctorModel) {
-    clearListComponentsWithChange(doctorReviewList);
-    doctorReviewList.addAll(reviewsAboutDoctorsService.getReviewsAboutDoctor(doctorModel));
   }
 }

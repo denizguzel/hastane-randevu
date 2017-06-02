@@ -22,15 +22,6 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientModel> {
     }
   }
 
-  public boolean changingPasswordIsAvailable(PatientModel patientModel) {
-    Query query = getEntitymanager().createQuery("SELECT e FROM PatientModel e WHERE e.pk = :PK" + " AND e.forgottenExpirationDate > :date");
-
-    query.setParameter("date", new Date());
-    query.setParameter("PK", patientModel.getPk());
-
-    return query.getResultList().size() > 0;
-  }
-
   // HASTANIN HALI HAZIRDA OLAN RANDEVU SAYISI. ÜÇÜ GEÇİP GEÇMEDİĞİNİN KONTROLU BURDAN YAPILACAK.
   public List<AppointmentModel> getActiveAppointmentsOfPatient(PatientModel patientModel) {
     Query query = getEntitymanager().createQuery("SELECT e FROM AppointmentModel e WHERE e.appointmentStatus = :APPOINTMENT_STATUS" + " AND e.patient = :PATIENT AND e.isActive = :IS_ACTIVE ORDER BY e.appointmentDate");
@@ -81,13 +72,6 @@ public class PatientDaoImpl extends BaseDaoImpl<PatientModel> {
     } else {
       return (PatientModel) query.getResultList().get(0);
     }
-  }
-
-  public List<PatientTreatmentRelModel> getPatientTreatments(PatientModel patientModel) {
-    Query query = getEntitymanager().createQuery("SELECT e FROM PatientTreatmentRelModel e WHERE e.patient = :PATIENT ORDER BY e.treatment.treatmentName");
-    query.setParameter("PATIENT", patientModel);
-
-    return query.getResultList();
   }
 
   public List<PatientAlergyRelModel> getPatientAlergies(PatientModel patientModel) {

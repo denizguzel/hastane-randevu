@@ -76,6 +76,9 @@ public class DoctorModel implements Creatable, Updatable {
   @OneToMany(mappedBy = "doctor")
   private List<ReviewsAboutDoctorsModel> reviewsAboutDoctorsModels;
 
+  @Transient
+  private String name;
+
   public long getPk() {
     return pk;
   }
@@ -198,5 +201,14 @@ public class DoctorModel implements Creatable, Updatable {
 
   public void setModifiedTime(Date modifiedTime) {
     this.modifiedTime = modifiedTime;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  @PostLoad
+  public void onLoad(){
+    this.name = this.firstName + " " + this.lastName;
   }
 }

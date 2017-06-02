@@ -30,7 +30,6 @@ public class DoctorBean implements Serializable {
   private ResourceBundle bundle = ResourceBundle.getBundle("com.hastanerandevu.messages", FacesContext.getCurrentInstance().getViewRoot().getLocale(), new UTF8Control());
 
   private DoctorServiceImpl doctorService;
-  private PatientServiceImpl patientService;
   private ReviewsAboutDoctorsServiceImpl reviewsAboutDoctorsService;
 
   private DoctorModel doctorModel;
@@ -49,7 +48,6 @@ public class DoctorBean implements Serializable {
   @PostConstruct
   public void init() {
     doctorService = new DoctorServiceImpl();
-    patientService = new PatientServiceImpl();
     reviewsAboutDoctorsService = new ReviewsAboutDoctorsServiceImpl();
 
     appointmentModel = new AppointmentModel();
@@ -62,18 +60,13 @@ public class DoctorBean implements Serializable {
 
     if(SessionUtils.getSession().getAttribute("userType").equals("doctor")) {
       doctorModel = loginBean.getDoctorModel();
-      for(AppointmentModel appointmentModel : doctorService.getAppointmentHistoryByDoctor(doctorModel)) {
-        appointmentHistory.add(appointmentModel);
-        appointmentCount++;
-      }
+
+      appointmentHistory.addAll(doctorService.getAppointmentHistoryByDoctor(doctorModel));
+      appointmentCount = appointmentHistory.size();
       remainingAppointment = doctorService.remainingAppointment(doctorModel);
 
       doctorReviews.addAll(reviewsAboutDoctorsService.getReviewsAboutDoctor(doctorModel));
     }
-  }
-
-  public void setLoginBean(LoginBean loginBean) {
-    this.loginBean = loginBean;
   }
 
   public int getAppointmentCount() {
@@ -140,6 +133,10 @@ public class DoctorBean implements Serializable {
     return remainingAppointment;
   }
 
+  public void setLoginBean(LoginBean loginBean) {
+    this.loginBean = loginBean;
+  }
+
   private void clearListComponentsWithChange(List... lists) {
     for(List list : lists) {
       list.clear();
@@ -149,20 +146,12 @@ public class DoctorBean implements Serializable {
   public void doctorUpdate() {
     try {
       doctorService.update(doctorModel);
-      loginBean.setLoggedUsername(NameConverter.getName(doctorModel.getFirstName(), doctorModel.getLastName()));
+      loginBean.setLoggedUsername(doctorModel.getName());
 
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("doctor.update.successful"), null));
     } catch(Exception e) {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("check.error"), null));
       LOG.error(e.getMessage());
     }
-  }
-
-  public void patientInfo() {
-    clearListComponentsWithChange(patientAlergies, patientAssays, patientDiseases);
-
-    patientAlergies.addAll(patientService.getPatientAlergies(appointmentModel.getPatient()));
-    patientAssays.addAll(patientService.getPatientAssays(appointmentModel.getPatient()));
-    patientDiseases.addAll(patientService.getPatientDiseases(appointmentModel.getPatient()));
   }
 }

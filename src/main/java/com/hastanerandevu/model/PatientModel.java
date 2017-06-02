@@ -103,6 +103,9 @@ public class PatientModel implements Creatable, Updatable {
   @OneToMany(mappedBy = "patient")
   private List<ReviewsAboutDoctorsModel> reviewsAboutDoctorsModels;
 
+  @Transient
+  private String name;
+
   public long getPk() {
     return pk;
   }
@@ -305,5 +308,14 @@ public class PatientModel implements Creatable, Updatable {
 
   public void setForgottenExpirationDate(Date forgottenExpirationDate) {
     this.forgottenExpirationDate = forgottenExpirationDate;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  @PostLoad
+  private void onLoad(){
+    this.name = this.firstName + " " + this.lastName;
   }
 }

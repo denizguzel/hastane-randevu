@@ -132,4 +132,8 @@ public class AssayBean implements Serializable {
     FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
     return "/view/assay?faces-redirect=true";
   }
+
+  private void populateAssays() {
+
+  }
 }

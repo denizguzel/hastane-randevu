@@ -87,7 +87,7 @@ public class PasswordResetBean {
     String encryptedSalt = Encryptor.encrypt(ProjectConstants.SALT + getEmail());
     try {
       PatientModel patientModel = patientService.getUserByEmail(getEmail());
-      if(urlParam.equals(encryptedSalt) && patientService.changingPasswordIsAvailable(patientModel)) {
+      if(urlParam.equals(encryptedSalt) && patientModel.getForgottenExpirationDate().before(new Date())) {
 
         patientModel.setPassword(Encryptor.encrypt(getPassword()));
         patientService.update(patientModel);
