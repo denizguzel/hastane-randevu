@@ -64,8 +64,8 @@
                       <f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>
                       <f:ajax execute="@this"/>
                     </h:commandLink><!---->
-                    <!-- Check if appointment completed and (patient comment is not empty and not appropriate) then render "Comment Waiting Approval" -->
-                    <h:panelGroup rendered="#{history.appointmentStatus eq 'COMPLETED' and (not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor) and appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).isAppropriate eq 48)}">
+                    <!-- Check if patient comment is not empty and not appropriate then render "Comment Waiting Approval" -->
+                    <h:panelGroup rendered="#{not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor) and appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).isAppropriate eq 48}">
                       <span class="badge badge-default">#{messages['label.commentAppropriate']}</span>
                     </h:panelGroup><!---->
                   </h:column>

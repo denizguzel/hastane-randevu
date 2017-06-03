@@ -80,7 +80,7 @@
               <!-- Swiper Slider -->
               <div id="swiper-survey" class="swiper-container">
                 <div class="swiper-wrapper">
-                  <c:forEach items="#{home.surveys}" var="survey" varStatus="surveyStatus">
+                  <c:forEach items="#{home.surveys}" var="survey">
                     <div class="swiper-slide" id="#{survey.pk}">
                       <h:form prependId="false">
                         <div class="survey">

@@ -6,22 +6,20 @@ import com.hastanerandevu.model.SurveyModel;
 import com.hastanerandevu.service.impl.FrequentlyAskedQuestionsServiceImpl;
 import com.hastanerandevu.service.impl.OptionServiceImpl;
 import com.hastanerandevu.service.impl.SurveyServiceImpl;
+import com.hastanerandevu.utility.SessionUtils;
 import org.apache.log4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 @ManagedBean(name = "home")
 @ViewScoped
-public class HomeBean implements Serializable {
+public class HomeBean {
   private static final Logger LOG = Logger.getLogger(HomeBean.class);
   private SurveyServiceImpl surveyService;
   private OptionServiceImpl optionService;
@@ -47,10 +45,9 @@ public class HomeBean implements Serializable {
     surveys.addAll(surveyService.getSurveys());
 
     try {
-      HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
       String cookieName = "surveysDone";
       List<Cookie> userCookies = new ArrayList<>();
-      Collections.addAll(userCookies, request.getCookies());
+      Collections.addAll(userCookies, SessionUtils.getRequest().getCookies());
       if(userCookies.size() > 0) {
         for(Cookie userCookie : userCookies) {
           if(userCookie.getName().equals(cookieName) && userCookie.getValue().equals("yes")) {

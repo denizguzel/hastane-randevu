@@ -1,6 +1,5 @@
 package com.hastanerandevu.beans;
 
-import com.hastanerandevu.converter.NameConverter;
 import com.hastanerandevu.model.*;
 import com.hastanerandevu.service.impl.DoctorServiceImpl;
 import com.hastanerandevu.service.impl.PatientServiceImpl;
@@ -15,14 +14,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 @ManagedBean(name = "doctor")
 @ViewScoped
-public class DoctorBean implements Serializable {
+public class DoctorBean {
   private static final Logger LOG = Logger.getLogger(DoctorBean.class);
   @ManagedProperty(value = "#{login}")
   private LoginBean loginBean;

@@ -15,14 +15,13 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
-import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @ManagedBean(name = "appointment")
 @ViewScoped
-public class AppointmentBean implements Serializable {
+public class AppointmentBean {
 
   @ManagedProperty(value = "#{login}")
   private LoginBean loginBean;

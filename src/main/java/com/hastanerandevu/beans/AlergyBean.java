@@ -14,12 +14,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import java.io.Serializable;
 import java.util.*;
 
 @ManagedBean(name = "alergy")
 @ViewScoped
-public class AlergyBean implements Serializable {
+public class AlergyBean {
   @ManagedProperty(value = "#{login}")
   private LoginBean loginBean;
 

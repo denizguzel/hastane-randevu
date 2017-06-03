@@ -108,7 +108,7 @@
             <!-- Closest Appointment Map -->
             <div class="col-lg-5 col-xl-3 mb-3 mb-lg-0">
               <div class="card">
-                <div class="map" style="width: 100%; height: 200px;"></div>
+                <div class="map" style="width: 100%; height: 226px;"></div>
                 <div class="card-block">
                   <div class="small-card text-warning">
                     <div class="left">
@@ -119,11 +119,11 @@
                       <h:panelGroup rendered="#{not empty appointment.closestAppointment}">
                         <span class="count">#{appointment.daysLeft}<small>#{messages["card.title.appointment.small"]}</small></span>
                       </h:panelGroup>
-                      <h:outputText rendered="#{empty appointment.closestAppointment}" value="Randevu Yok"/>
+                      <h:outputText rendered="#{empty appointment.closestAppointment}" value="#{messages['label.noAppointment']}"/>
                       <h:outputText styleClass="date" value="#{appointment.closestDate}" rendered="#{not empty appointment.closestAppointment}">
                         <f:convertDateTime timeZone="GMT+3" pattern="dd-MM-yyyy HH:mm"/>
                       </h:outputText>
-                      <h:outputText styleClass="closest-appointment hidden-xl-down" rendered="#{not empty appointment.closestAppointment}" value="#{appointment.closestAppointment.inspectionPlace.hospitalPoliclinicRel.hospital.hospitalName}"/>
+                      <h:outputText styleClass="closest-appointment hidden-xl-down#{empty appointment.closestAppointment ? ' empty' : ''}" rendered="#{not empty appointment.closestAppointment}" value="#{appointment.closestAppointment.inspectionPlace.hospitalPoliclinicRel.hospital.hospitalName}"/>
                     </div>
                   </div>
                 </div>

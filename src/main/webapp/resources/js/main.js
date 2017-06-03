@@ -178,10 +178,6 @@ $("#swiper-survey").find(".btn").click(function () {
     expires: 7,
     path: "/"
   });
-
-  if (!$("#swiper-survey .swiper-slide").length) {
-    Cookies.set("surveysDone", "yes");
-  }
 });
 
 $("#swiper-survey .swiper-slide").each(function () {
@@ -412,6 +408,42 @@ window.onload = function () {
     }
     systemMessageElement.text("");
   }
+
+  // Dashboard google map render
+  $closestAppointment = $(".closest-appointment");
+  if (!$closestAppointment.hasClass("empty")) {
+    var hospitalName = $closestAppointment.text();
+    $maps = $(".map");
+    $maps.each(function (index, element) {
+      var mapOptions = {
+        zoom: 15,
+        center: new google.maps.LatLng(38.963745, 35.243322),
+        scrollwheel: false,
+        navigationControl: false,
+        mapTypeControl: false,
+        scaleControl: false,
+        streetViewControl: false
+      };
+      var map;
+      var geocoder;
+      var marker;
+
+      geocoder = new google.maps.Geocoder();
+      geocoder.geocode({"address": hospitalName}, function (results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          mapOptions.center = results[0].geometry.location;
+          map = new google.maps.Map(element, mapOptions);
+          marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+          });
+        }
+      });
+    });
+  }
+  else {
+    $maps.css("display", "none");
+  }
 };
 
 $(".sidebar-toggler").click(function () {
@@ -422,41 +454,9 @@ $("nav.sidebar .close").click(function () {
   $("nav.sidebar").removeClass("active");
 });
 
-$('#comment-edit').on("show.bs.modal", function (event) {
+$("#comment-edit").on("show.bs.modal", function (event) {
   var button = $(event.relatedTarget); // Button that triggered the modal
   var comment = button.data("comment");
   var modal = $(this);
   modal.find(".modal-body textarea").val(comment);
-});
-
-// Dashboard google map render
-$(document).ready(function () {
-  var closestAppointment = $(".closest-appointment").text();
-  $maps = $('.map');
-  $maps.each(function (index, element) {
-    var mapOptions = {
-      zoom: 15,
-      center: new google.maps.LatLng(38.963745, 35.243322),
-      scrollwheel: false,
-      navigationControl: false,
-      mapTypeControl: false,
-      scaleControl: false,
-      streetViewControl: false
-    };
-    var map;
-    var geocoder;
-    var marker;
-
-    geocoder = new google.maps.Geocoder();
-    geocoder.geocode({'address': closestAppointment}, function (results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        mapOptions.center = results[0].geometry.location;
-        map = new google.maps.Map(element, mapOptions);
-        marker = new google.maps.Marker({
-          map: map,
-          position: results[0].geometry.location
-        });
-      }
-    });
-  });
 });
