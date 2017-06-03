@@ -19,9 +19,9 @@
                   <div class="col-xl-6">
                     <div class="form-group">
                       <label class="form-control-label">#{messages["label.selectCity"]}</label>
-                      <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedCity}" p:data-live-search="true">
+                      <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedItems[0]}" p:data-live-search="true">
                         <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeCity}" onevent="appointment"/>
-                        <f:selectItem itemLabel="#{messages['label.selectCity']}"/>
+                        <f:selectItem itemLabel="#{messages['label.selectCity']}" itemValue=""/>
                         <f:selectItems value="#{appointment.cities.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
                       </h:selectOneMenu>
                     </div>
@@ -29,9 +29,9 @@
                   <div class="col-xl-6">
                     <div class="form-group">
                       <label class="form-control-label">#{messages["label.selectDistrict"]}</label>
-                      <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedDistrict}" p:data-live-search="true">
+                      <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedItems[1]}" p:data-live-search="true">
                         <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeDistrict}" onevent="appointment"/>
-                        <f:selectItem itemLabel="#{messages['label.selectDistrict']}"/>
+                        <f:selectItem itemLabel="#{messages['label.selectDistrict']}" itemValue=""/>
                         <f:selectItems value="#{appointment.districts.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
                       </h:selectOneMenu>
                     </div>
@@ -39,9 +39,9 @@
                   <div class="col-xl-6">
                     <div class="form-group">
                       <label class="form-control-label">#{messages['label.selectHospital']}</label>
-                      <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedHospital}">
+                      <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedItems[2]}">
                         <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeHospital}" onevent="appointment"/>
-                        <f:selectItem itemLabel="#{messages['label.selectHospital']}"/>
+                        <f:selectItem itemLabel="#{messages['label.selectHospital']}" itemValue=""/>
                         <f:selectItems value="#{appointment.hospitals.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
                       </h:selectOneMenu>
                     </div>
@@ -49,9 +49,9 @@
                   <div class="col-xl-6">
                     <div class="form-group">
                       <label class="form-control-label">#{messages['label.selectPoliclinic']}</label>
-                      <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedPoliclinic}">
+                      <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedItems[3]}">
                         <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changePoliclinic}" onevent="appointment"/>
-                        <f:selectItem itemLabel="#{messages['label.selectPoliclinic']}"/>
+                        <f:selectItem itemLabel="#{messages['label.selectPoliclinic']}" itemValue=""/>
                         <f:selectItems value="#{appointment.policlinics.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
                       </h:selectOneMenu>
                     </div>
@@ -59,9 +59,9 @@
                   <div class="col-xl-6">
                     <div class="form-group">
                       <label class="form-control-label">#{messages['label.selectInspectionPlace']}</label>
-                      <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedInspectionPlace}">
+                      <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedItems[4]}">
                         <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeInspectionPlace}" onevent="appointment"/>
-                        <f:selectItem itemLabel="#{messages['label.selectInspectionPlace']}"/>
+                        <f:selectItem itemLabel="#{messages['label.selectInspectionPlace']}" itemValue=""/>
                         <f:selectItems value="#{appointment.inspectionPlaces.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
                       </h:selectOneMenu>
                     </div>

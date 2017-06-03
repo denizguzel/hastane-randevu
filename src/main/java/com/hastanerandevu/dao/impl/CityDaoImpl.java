@@ -31,7 +31,7 @@ public class CityDaoImpl extends BaseDaoImpl<CityModel> {
     return query.getResultList();
   }
 
-  public List<HospitalModel> getHospitalByCity(CityModel cityModel) {
+  public List<HospitalModel> getHospitalsByCity(CityModel cityModel) {
     Query query = getEntitymanager().createQuery("SELECT e FROM HospitalModel e WHERE e.districtModel.cityModel = :cityModel ORDER BY e.hospitalName");
     query.setParameter("cityModel", cityModel);
 

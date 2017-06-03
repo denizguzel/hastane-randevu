@@ -50,11 +50,22 @@ public class AppointmentBean {
   private boolean appointmentPanel = false;
   private boolean appointmentSearchNull = false;
 
-  private String selectedCity;
+  /*private String selectedCity;
   private String selectedDistrict;
   private String selectedHospital;
   private String selectedPoliclinic;
-  private String selectedInspectionPlace;
+  private String selectedInspectionPlace;*/
+
+  private String[] selectedItems = new String[5];
+
+  public String[] getSelectedItems() {
+    return selectedItems;
+  }
+
+  public void setSelectedItems(String[] selectedItems) {
+    this.selectedItems = selectedItems;
+  }
+
   private String daysLeft;
   private String doctorComment;
 
@@ -126,7 +137,7 @@ public class AppointmentBean {
     this.appointmentModel = appointmentModel;
   }
 
-  public String getSelectedCity() {
+  /*public String getSelectedCity() {
     return selectedCity;
   }
 
@@ -164,7 +175,7 @@ public class AppointmentBean {
 
   public void setSelectedInspectionPlace(String selectedInspectionPlace) {
     this.selectedInspectionPlace = selectedInspectionPlace;
-  }
+  }*/
 
   public Map<Long, String> getCities() {
     return cities;
@@ -331,11 +342,14 @@ public class AppointmentBean {
       System.out.println("Ajax event is null");
     } else {
       UIInput input = (UIInput) event.getSource();
-      selectedCity = input.getValue().toString();
+      selectedItems[0] = input.getValue().toString();
     }
-
-    populateDistrictsBySelectedCity(selectedCity);
-
+    if(!selectedItems[0].equals("")) {
+      populateDistrictsBySelectedCity(selectedItems[0]);
+      /*if(selectedDistrict.equals("")) {
+        populateHospitalsBySelectedCity(selectedCity);
+      }*/
+    }
     appointmentPanel = false;
     appointmentClockPanel = false;
     appointmentSearchNull = false;
@@ -349,10 +363,18 @@ public class AppointmentBean {
       System.out.println("Ajax event is null");
     } else {
       UIInput input = (UIInput) event.getSource();
-      selectedDistrict = input.getValue().toString();
+      selectedItems[1] = input.getValue().toString();
     }
 
-    populateHospitalsBySelectedDistrict(selectedDistrict);
+    if(!selectedItems[1].equals("")) {
+      populateHospitalsBySelectedDistrict(selectedItems[1]);
+    }
+    else if(!selectedItems[0].equals("")){
+      populateHospitalsBySelectedCity(selectedItems[0]);
+      if (!selectedItems[2].equals("")){
+        populatePoliclinicsBySelectedHospital(selectedItems[2]);
+      }
+    }
 
     appointmentPanel = false;
     appointmentClockPanel = false;
@@ -367,11 +389,12 @@ public class AppointmentBean {
       System.out.println("Ajax event is null");
     } else {
       UIInput input = (UIInput) event.getSource();
-      selectedHospital = input.getValue().toString();
+      selectedItems[2] = input.getValue().toString();
     }
 
-    populatePoliclinicsBySelectedHospital(selectedHospital);
-
+    if(!selectedItems[2].equals("")) {
+      populatePoliclinicsBySelectedHospital(selectedItems[2]);
+    }
     appointmentPanel = false;
     appointmentClockPanel = false;
     appointmentSearchNull = false;
@@ -385,10 +408,12 @@ public class AppointmentBean {
       System.out.println("Ajax event is null");
     } else {
       UIInput input = (UIInput) event.getSource();
-      selectedPoliclinic = input.getValue().toString();
+      selectedItems[3] = input.getValue().toString();
     }
 
-    populateInspectionPlacesBySelectedPoliclinic(selectedPoliclinic);
+    if (!selectedItems[3].equals("")){
+      populateInspectionPlacesBySelectedPoliclinic(selectedItems[3]);
+    }
 
     appointmentPanel = false;
     appointmentClockPanel = false;
@@ -401,7 +426,7 @@ public class AppointmentBean {
       System.out.println("Ajax event is null");
     } else {
       UIInput input = (UIInput) event.getSource();
-      selectedInspectionPlace = input.getValue().toString();
+      selectedItems[4] = input.getValue().toString();
     }
 
     appointmentPanel = false;
@@ -462,7 +487,7 @@ public class AppointmentBean {
 
     populateCities();
 
-    selectedCity = bundle.getString("label.selectCity");
+    selectedItems[0] = bundle.getString("label.selectCity");
   }
 
   public String cancelAppointment() {
@@ -549,6 +574,12 @@ public class AppointmentBean {
     }
   }
 
+  private void populateHospitalsBySelectedCity(String selectedCity) {
+    for(HospitalModel hospitalModel : cityService.getHospitalsByCity(cityService.find(Long.parseLong(selectedCity)))) {
+      hospitals.put(hospitalModel.getPk(), hospitalModel.getHospitalName());
+    }
+  }
+
   private void populateHospitalsBySelectedDistrict(String selectedDistrict) {
 
     for(HospitalModel hospitalModel : districtService.getHospitalsByDistrict(districtService.find(Long.parseLong(selectedDistrict)))) {
@@ -575,8 +606,8 @@ public class AppointmentBean {
   }
 
   private void populateAppointmentHeadersByCriterias() {
-    if(selectedInspectionPlace != null && !selectedInspectionPlace.isEmpty()) {
-      inspectionPlaceModel = inspectionPlaceService.find(Long.parseLong(selectedInspectionPlace));
+    if(selectedItems[4] != null && !selectedItems[4].isEmpty()) {
+      inspectionPlaceModel = inspectionPlaceService.find(Long.parseLong(selectedItems[4]));
       if(appointmentDateStart == null && appointmentDateEnd == null) {
         appointmentsHeaders.addAll(inspectionPlaceService.getAppointmentHeaderByInspectionPlace(inspectionPlaceModel));
       } else if(appointmentDateStart != null && appointmentDateEnd == null) {
@@ -587,8 +618,8 @@ public class AppointmentBean {
       if(appointmentsHeaders.size() == 0) {
         appointmentSearchNull = true;
       }
-    } else if(selectedPoliclinic != null && !selectedPoliclinic.isEmpty()) {
-      hospitalPoliclinicRelModel = hospitalPoliclinicRelService.find(Long.parseLong(selectedPoliclinic));
+    } else if(selectedItems[3] != null && !selectedItems[3].isEmpty()) {
+      hospitalPoliclinicRelModel = hospitalPoliclinicRelService.find(Long.parseLong(selectedItems[3]));
       if(appointmentDateStart == null && appointmentDateEnd == null) {
         appointmentsHeaders.addAll(policlinicService.getAppointmentHeadersByPoliclinic(hospitalPoliclinicRelModel));
       } else if(appointmentDateStart != null && appointmentDateEnd == null) {
@@ -646,7 +677,7 @@ public class AppointmentBean {
   }
 
   private boolean haveAnAppointmentForThatDay(PatientModel patientModel) {
-    return patientService.haveAnAppointmentForThatDay(patientModel,appointmentModel.getAppointmentDate());
+    return patientService.haveAnAppointmentForThatDay(patientModel, appointmentModel.getAppointmentDate());
   }
 
   private List<AppointmentModel> getNumberOfActiveAppointments(PatientModel patientModel) {
