@@ -54,13 +54,13 @@
                       <h:outputText value="#{messages['label.appointmentWaiting']}"/>
                     </h:panelGroup><!---->
                     <!-- Check if comment is not empty and appropriate then render edit comment button -->
-                    <h:commandLink styleClass="badge badge-warning" rendered="#{not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor) and appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).isAppropriate eq 49}" p:data-target="#comment-edit" p:data-toggle="modal" p:data-comment="#{appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).review}">
+                    <h:commandLink styleClass="badge badge-warning" rendered="#{not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor) and appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).isAppropriate eq 49}" p:data-target="#edit-comment" p:data-toggle="modal" p:data-comment="#{appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).review}">
                       #{messages['label.edit']}
                       <f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>
                       <f:ajax execute="@this"/>
                     </h:commandLink><!---->
                     <!-- Check if appointment completed and comment is empty then render make comment button -->
-                    <h:commandLink styleClass="badge badge-info" rendered="#{history.appointmentStatus eq 'COMPLETED' and empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor)}" value="#{messages['button.makeComment']}" p:data-toggle="modal" p:data-target="#comment-modal">
+                    <h:commandLink styleClass="badge badge-info" rendered="#{history.appointmentStatus eq 'COMPLETED' and empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor)}" value="#{messages['button.makeComment']}" p:data-toggle="modal" p:data-target="#make-comment">
                       <f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>
                       <f:ajax execute="@this"/>
                     </h:commandLink><!---->
@@ -172,7 +172,7 @@
       </div><!---->
 
       <!-- Appointment Comment Modal -->
-      <div class="modal fade" id="comment-modal">
+      <div class="modal fade" id="make-comment">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -182,7 +182,10 @@
             <div class="modal-body">
               <h:form prependId="false">
                 <div class="form-group">
-                  <h:inputTextarea rows="5" value="#{appointment.doctorComment}" styleClass="form-control" p:placeholder="#{messages['label.comment']}"/>
+                  <h:inputTextarea rows="5" p:maxlength="250" value="#{appointment.doctorComment}" styleClass="form-control counter" p:placeholder="#{messages['label.comment']}"/>
+                </div>
+                <div class="form-group">
+                  <div class="character-count">#{messages['label.remainingCharacter']}:<span class="count"></span></div>
                 </div>
                 <div class="buttons">
                   <h:commandButton value="#{messages['button.send']}" styleClass="btn btn-success" action="#{appointment.sendDoctorComment}"/>
@@ -195,7 +198,7 @@
       </div><!---->
 
       <!-- Comment Edit Modal -->
-      <div class="modal fade" id="comment-edit">
+      <div class="modal fade" id="edit-comment">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -205,7 +208,10 @@
             <div class="modal-body">
               <h:form prependId="false">
                 <div class="form-group">
-                  <h:inputTextarea rows="5" value="#{appointment.doctorComment}" styleClass="form-control" p:placeholder="#{messages['label.comment']}"/>
+                  <h:inputTextarea rows="5" p:maxlength="250" value="#{appointment.doctorComment}" styleClass="form-control counter" p:placeholder="#{messages['label.comment']}"/>
+                </div>
+                <div class="form-group">
+                  <div class="character-count">#{messages['label.remainingCharacter']}:<span class="count"></span></div>
                 </div>
                 <div class="buttons">
                   <h:commandButton value="#{messages['button.send']}" styleClass="btn btn-success" action="#{appointment.sendDoctorComment}"/>

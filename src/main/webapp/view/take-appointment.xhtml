@@ -186,7 +186,7 @@
                     <h:column>
                       <f:facet name="header"></f:facet>
                       <h:commandLink value="#{messages['button.comments']}" styleClass="btn btn-warning mr-1" action="#{appointment.doctorReviews(appointmentsHeader.doctor)}" p:data-toggle="modal" p:data-target="#comment-modal">
-                        <f:ajax execute="@this" render="doctor-comment" onevent="function collapse() { $('.collapse').collapse({toggle: false}) }"/>
+                        <f:ajax execute="@this" render="doctor-comment"/>
                       </h:commandLink>
                       <h:commandLink value="#{messages['button.select']}" styleClass="btn btn-success" action="#{appointment.selectAppointment(appointmentsHeader)}">
                         <f:ajax execute="@this" render="appointmentTimes" onevent="tableData"/>
@@ -292,26 +292,26 @@
             <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
           </div>
           <div class="modal-body">
-            <h:panelGroup layout="block" id="doctor-comment" styleClass="d-flex flex-column">
+            <h:panelGroup layout="block" id="doctor-comment" style="max-height: calc(100vh - 195px); overflow-y: auto;">
               <h:panelGroup layout="block" styleClass="alert" rendered="#{empty appointment.doctorReviewList}">
                 #{messages['modal.body.comments.info']}
               </h:panelGroup>
               <h:panelGroup rendered="#{not empty appointment.doctorReviewList}">
                 <c:forEach items="#{appointment.doctorReviewList}" var="review">
                   <div class="comment">
-                    <h:outputLink styleClass="btn" p:data-toggle="collapse" value="#comment#{review.pk}">
-                      <span class="patient">#{review.patient.firstName} #{review.patient.lastName}</span>
-                      <span class="detail"><b>#{messages['label.comment']}: </b>#{review.review}</span>
-                    </h:outputLink>
-                    <h:panelGroup layout="block" styleClass="collapse" p:id="comment#{review.pk}">
-                      <p>#{review.review}</p>
-                    </h:panelGroup>
+                    <div class="author">
+                      <div class="name">#{review.patient.firstName} #{review.patient.lastName}</div>
+                      <h:outputText styleClass="date" value="#{review.modifiedTime}">
+                        <f:convertDateTime timeZone="GMT+3" pattern="MMM d, yyyy"/>
+                      </h:outputText>
+                    </div>
+                    <div class="text">#{review.review}</div>
                   </div>
                 </c:forEach>
               </h:panelGroup>
             </h:panelGroup>
-            <div class="form-group d-flex">
-              <button type="button" class="btn btn-danger ml-auto" data-dismiss="modal">#{messages['button.close']}</button>
+            <div class="form-group d-flex justify-content-end mt-3">
+              <button type="button" class="btn btn-danger d-flex" data-dismiss="modal">#{messages['button.close']}</button>
             </div>
           </div>
         </div>

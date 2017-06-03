@@ -432,3 +432,13 @@ body.page-404 {
 .popover {
   z-index: 1081; // over modal
 }
+
+.character-count {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 12px;
+  color: #797979;
+  .count {
+    margin-left: 5px;
+  }
+}

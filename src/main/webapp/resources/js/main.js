@@ -454,9 +454,22 @@ $("nav.sidebar .close").click(function () {
   $("nav.sidebar").removeClass("active");
 });
 
-$("#comment-edit").on("show.bs.modal", function (event) {
+$("#edit-comment").on("show.bs.modal", function (event) {
   var button = $(event.relatedTarget); // Button that triggered the modal
   var comment = button.data("comment");
   var modal = $(this);
   modal.find(".modal-body textarea").val(comment);
+});
+
+$("#edit-comment, #make-comment").on("show.bs.modal",function () {
+  var modal = $(this);
+  var max = 250;
+  var len = modal.find("textarea.counter").val().length;
+  $(".character-count").find(".count").text(max - len + "/250");
+});
+
+$("textarea.counter").keyup(function () {
+  var max = 250;
+  var len = $(this).val().length;
+  $(".character-count").find(".count").text(max - len + "/250");
 });
