@@ -1,0 +1,90 @@
+<ui:composition template="/view/master/afterLoginTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://xmlns.jcp.org/jsf/passthrough" xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <ui:define name="title">Anketler</ui:define>
+
+  <ui:define name="content">
+    <div class="page-wrapper">
+      <div class="container-fluid">
+        <!-- Page Title -->
+        <div class="page-title">
+          <h4>Anketler</h4>
+          <button class="sidebar-toggler" type="button"><i class="fa fa-bars"></i></button>
+        </div><!---->
+
+        <div class="card">
+          <div class="card-header">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#survey-modal">Anket Oluştur</button>
+          </div>
+          <div class="card-block">
+            <!-- Render if survey list is empty -->
+            <h:panelGroup styleClass="alert" rendered="#{empty admin.surveys}">
+              <i class="fa fa-thermometer-empty"></i>Heniz hiç anket oluşturulmamış
+            </h:panelGroup><!---->
+
+            <!-- Render if survey list is not empty -->
+            <h:form prependId="false" rendered="#{not empty admin.surveys}">
+              <!---->
+              <div class="table-responsive"></div>
+              <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
+            </h:form><!---->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Survey Modal -->
+    <div class="modal fade" id="survey-modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <h:form prependId="false">
+            <div class="modal-header">
+              <h5 class="modal-title">Anket Oluştur</h5>
+              <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label class="form-control-label">Anket Adı</label>
+                <h:inputText styleClass="form-control" p:placeholder="Anket Adı Giriniz" required="true" requiredMessage="Anket Adı Giriniz" value="#{admin.surveyModel.surveyQuestion}"/>
+              </div>
+              <div class="form-group">
+                <label class="form-control-label">Anket Cevapları</label>
+                <c:forEach items="#{admin.options}" begin="0" step="1" end="3" varStatus="optionIndex">
+                  <h:inputText styleClass="form-control" p:placeholder="Seçenek #{optionIndex.index+1} Giriniz" required="true" requiredMessage="Seçenek #{optionIndex.index+1} Giriniz" value="#{admin.options[optionIndex.index].optionText}"/>
+                </c:forEach>
+              </div>
+              <div class="form-group">
+                <h:inputText value="#{admin.surveyModel.expirationTime}" p:placeholder="Anket Bitiş Tarihi" styleClass="form-control datepicker">
+                  <f:convertDateTime pattern="dd-MM-yyyy"/>
+                </h:inputText>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <h:commandButton styleClass="btn btn-success" value="#{messages['button.register']}" action="#{admin.createSurvey}"/>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">#{messages['button.close']}</button>
+            </div>
+          </h:form>
+        </div>
+      </div>
+    </div><!---->
+
+    <!-- Remove Survey Modal -->
+    <div class="modal fade" id="cancel-modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">#{messages['label.removeAlergy']}</h5>
+            <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
+          </div>
+          <div class="modal-body">
+            <h:form prependId="false" id="modal-form">
+              <p>#{messages['modal.body.alergy.info']}</p>
+              <div class="buttons">
+                <h:commandButton value="#{messages['label.yes']}" styleClass="btn btn-success" action="#{alergy.deleteAlergy}"/>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">#{messages['label.no']}</button>
+              </div>
+            </h:form>
+          </div>
+        </div>
+      </div>
+    </div><!---->
+  </ui:define>
+</ui:composition>

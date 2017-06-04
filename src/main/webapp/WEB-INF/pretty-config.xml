@@ -77,4 +77,9 @@
     <view-id value="/view/comments.xhtml"/>
   </url-mapping>
 
+  <url-mapping id="admin">
+    <pattern value="/login/admin"/>
+    <view-id value="/admin.xhtml"/>
+  </url-mapping>
+
 </pretty-config>

@@ -23,6 +23,7 @@ public class PageBean {
     pageList = new ArrayList<>();
 
     pageList.add(new PageModel("/view/dashboard.xhtml", bundle.getString("sidebar.main"), "fa fa-home fa-fw"));
+
     if(SessionUtils.getSession().getAttribute("userType").equals("patient")) {
       pageList.add(new PageModel("/view/take-appointment.xhtml", bundle.getString("sidebar.takeAppointment"), "fa fa-book fa-fw"));
       pageList.add(new PageModel("/view/appointments.xhtml", bundle.getString("sidebar.appoinments"), "fa fa-calendar fa-fw"));
@@ -33,6 +34,9 @@ public class PageBean {
     } else if(SessionUtils.getSession().getAttribute("userType").equals("doctor")) {
       pageList.add(new PageModel("/view/appointments.xhtml", bundle.getString("sidebar.doctorAppointments"), "fa fa-calendar fa-fw"));
       pageList.add(new PageModel("/view/notes.xhtml", bundle.getString("sidebar.doctorNotes"), "fa fa-sticky-note-o fa-fw"));
+      pageList.add(new PageModel("/view/comments.xhtml", bundle.getString("sidebar.doctorComments"), "fa fa-comment-o fa-fw"));
+    } else if(SessionUtils.getSession().getAttribute("userType").equals("admin")) {
+      pageList.add(new PageModel("/view/survey.xhtml", "Anketler", "fa fa-calendar fa-fw"));
       pageList.add(new PageModel("/view/comments.xhtml", bundle.getString("sidebar.doctorComments"), "fa fa-comment-o fa-fw"));
     }
   }

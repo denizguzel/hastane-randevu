@@ -1,12 +1,13 @@
 package com.hastanerandevu.beans;
 
 import com.hastanerandevu.converter.Encryptor;
-import com.hastanerandevu.converter.NameConverter;
 import com.hastanerandevu.enums.BloodGroupEnum;
 import com.hastanerandevu.enums.GenderEnum;
 import com.hastanerandevu.enums.SecretQuestionEnum;
+import com.hastanerandevu.model.AdminModel;
 import com.hastanerandevu.model.DoctorModel;
 import com.hastanerandevu.model.PatientModel;
+import com.hastanerandevu.service.impl.AdminServiceImpl;
 import com.hastanerandevu.service.impl.DoctorServiceImpl;
 import com.hastanerandevu.service.impl.PatientServiceImpl;
 import com.hastanerandevu.utility.Mailer;
@@ -34,8 +35,11 @@ public class LoginBean {
   private Mailer mailer;
   private PatientServiceImpl patientService;
   private DoctorServiceImpl doctorService;
+  private AdminServiceImpl adminService;
+
   private PatientModel patientModel;
   private DoctorModel doctorModel;
+  private AdminModel adminModel;
 
   private BloodGroupEnum[] bloodGroupEnums;
   private GenderEnum[] genderEnums;
@@ -54,9 +58,11 @@ public class LoginBean {
 
     patientService = new PatientServiceImpl();
     doctorService = new DoctorServiceImpl();
+    adminService = new AdminServiceImpl();
 
     patientModel = new PatientModel();
     doctorModel = new DoctorModel();
+    adminModel = new AdminModel();
 
     bloodGroupEnums = BloodGroupEnum.values();
     genderEnums = GenderEnum.values();
@@ -119,6 +125,14 @@ public class LoginBean {
     return secretQuestionEnums;
   }
 
+  public AdminModel getAdminModel() {
+    return adminModel;
+  }
+
+  public void setAdminModel(AdminModel adminModel) {
+    this.adminModel = adminModel;
+  }
+
   // Functions
   public void patientCreate() {
     if(patientService.haveUserRegistration(patientModel)) {
@@ -132,8 +146,7 @@ public class LoginBean {
       } catch(Exception e) {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("check.error"), null));
         LOG.info(e.getMessage());
-      }
-      finally {
+      } finally {
         patientModel = new PatientModel(); // form reset
       }
     }
@@ -199,8 +212,7 @@ public class LoginBean {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("check.information"), null));
         return "/login/patient";
       }
-    }
-    else if(loginCheck.equals("doctor")) {
+    } else if(loginCheck.equals("doctor")) {
       doctorModel = ((doctorModel = doctorService.loginDoctor(doctorModel)) != null) ? doctorModel : null;
       if(doctorModel != null) {
         setLoggerUserAndSession(doctorModel.getName());
@@ -222,6 +234,28 @@ public class LoginBean {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("check.information"), null));
         return "/login/doctor";
       }
+    } else if(loginCheck.equals("admin")) {
+      adminModel = ((adminModel = adminService.loginAdmin(adminModel)) != null) ? adminModel : null;
+      if(adminModel != null) {
+        setLoggerUserAndSession(adminModel.getUserId());
+        verifyLogin = true;
+      } else
+        verifyLogin = false;
+
+      if(showCaptcha) {
+        if(verifyCaptcha) {
+          return "view/dashboard?faces-redirect=true";
+        } else {
+          FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("check.information"), null));
+          return "/login/admin";
+        }
+      }
+      if(verifyLogin) {
+        return "view/dashboard?faces-redirect=true";
+      } else {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("check.information"), null));
+        return "/login/admin";
+      }
     }
     return null;
   }
@@ -232,7 +266,7 @@ public class LoginBean {
     return "/index?faces-redirect=true";
   }
 
-  private void setLoggerUserAndSession(String name){
+  private void setLoggerUserAndSession(String name) {
     loggedUsername = name;
     SessionUtils.getSession().setAttribute("loggedUsername", loggedUsername);
   }
