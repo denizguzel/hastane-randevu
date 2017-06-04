@@ -1,5 +1,8 @@
 package com.hastanerandevu.utility;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -34,5 +37,12 @@ public class DateUtil {
     calendar.set(Calendar.MILLISECOND, 0);
 
     return calendar.getTime();
+  }
+
+  public static int calculateAge(Date date){
+    LocalDate birthDay = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    LocalDate now = LocalDate.now();
+
+    return Period.between(birthDay,now).getYears();
   }
 }

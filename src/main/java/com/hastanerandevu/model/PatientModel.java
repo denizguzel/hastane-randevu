@@ -7,6 +7,7 @@ import com.hastanerandevu.listeners.Creatable;
 import com.hastanerandevu.listeners.CreationTimeListener;
 import com.hastanerandevu.listeners.ModifiedTimeListener;
 import com.hastanerandevu.listeners.Updatable;
+import com.hastanerandevu.utility.DateUtil;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -105,6 +106,9 @@ public class PatientModel implements Creatable, Updatable {
 
   @Transient
   private String name;
+
+  @Transient
+  private Integer age;
 
   public long getPk() {
     return pk;
@@ -314,8 +318,13 @@ public class PatientModel implements Creatable, Updatable {
     return name;
   }
 
+  public Integer getAge() {
+    return age;
+  }
+
   @PostLoad
   private void onLoad(){
     this.name = this.firstName + " " + this.lastName;
+    this.age = DateUtil.calculateAge(this.getDateOfBirth());
   }
 }

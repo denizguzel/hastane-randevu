@@ -56,4 +56,11 @@ public class SurveyServiceImpl implements BaseService<SurveyModel> {
       optionService.create(option);
     }
   }
+
+  public void deleteSurvey(SurveyModel survey){
+    this.delete(survey);
+    for(OptionModel option : survey.getOptionModels()){
+      optionService.delete(option);
+    }
+  }
 }
