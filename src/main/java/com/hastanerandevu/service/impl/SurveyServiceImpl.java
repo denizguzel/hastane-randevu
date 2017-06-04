@@ -58,9 +58,9 @@ public class SurveyServiceImpl implements BaseService<SurveyModel> {
   }
 
   public void deleteSurvey(SurveyModel survey){
-    this.delete(survey);
     for(OptionModel option : survey.getOptionModels()){
       optionService.delete(option);
     }
+    this.delete(survey);
   }
 }
