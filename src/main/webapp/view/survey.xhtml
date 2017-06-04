@@ -28,7 +28,7 @@
             <h:form prependId="false" rendered="#{not empty admin.surveys}">
               <!---->
               <div class="table-responsive">
-                <h:dataTable value="#{admin.surveys}" var="survey" binding="#{table}" styleClass="table">
+                <h:dataTable value="#{admin.surveys}" var="survey" binding="#{table}" styleClass="table table-survey">
                   <h:column>
                     <f:facet name="header">#</f:facet>
                     <h:outputText value="#{table.rowIndex + 1}"/>
@@ -39,19 +39,35 @@
                   </h:column>
                   <h:column>
                     <f:facet name="header">#{messages['label.choice']} 1</f:facet>
-                    <h:outputText value="#{admin.surveyService.getOptionsBySurvey(survey).get(0).optionText}"/>
+                    <div class="survey-option">
+                      <h:outputText value="#{admin.surveyService.getOptionsBySurvey(survey).get(0).optionText}"/>
+                      <h:outputText styleClass="badge badge-primary" value="#{admin.surveyService.getOptionsBySurvey(survey).get(0).count}"/>
+                    </div>
                   </h:column>
                   <h:column>
                     <f:facet name="header">#{messages['label.choice']} 2</f:facet>
-                    <h:outputText value="#{admin.surveyService.getOptionsBySurvey(survey).get(1).optionText}"/>
+                    <div class="survey-option">
+                      <h:outputText value="#{admin.surveyService.getOptionsBySurvey(survey).get(1).optionText}"/>
+                      <h:outputText styleClass="badge badge-primary" value="#{admin.surveyService.getOptionsBySurvey(survey).get(1).count}"/>
+                    </div>
                   </h:column>
                   <h:column>
                     <f:facet name="header">#{messages['label.choice']} 3</f:facet>
-                    <h:outputText value="#{admin.surveyService.getOptionsBySurvey(survey).get(2).optionText}"/>
+                    <div class="survey-option">
+                      <h:outputText value="#{admin.surveyService.getOptionsBySurvey(survey).get(2).optionText}"/>
+                      <h:outputText styleClass="badge badge-primary" value="#{admin.surveyService.getOptionsBySurvey(survey).get(2).count}"/>
+                    </div>
                   </h:column>
                   <h:column>
                     <f:facet name="header">#{messages['label.choice']} 4</f:facet>
-                    <h:outputText value="#{admin.surveyService.getOptionsBySurvey(survey).get(3).optionText}"/>
+                    <div class="survey-option">
+                      <h:outputText value="#{admin.surveyService.getOptionsBySurvey(survey).get(3).optionText}"/>
+                      <h:outputText styleClass="badge badge-primary" value="#{admin.surveyService.getOptionsBySurvey(survey).get(3).count}"/>
+                    </div>
+                  </h:column>
+                  <h:column headerClass="text-center">
+                    <f:facet name="header">Toplam Oy Sayısı</f:facet>
+                    <h:outputText styleClass="d-flex justify-content-center" value="#{admin.surveyService.getNumberOfVotes(survey).get(0)}"/>
                   </h:column>
                   <h:column>
                     <f:facet name="header"></f:facet>

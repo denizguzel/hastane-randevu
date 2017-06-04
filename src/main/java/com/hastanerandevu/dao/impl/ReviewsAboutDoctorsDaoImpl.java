@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ReviewsAboutDoctorsDaoImpl extends BaseDaoImpl<ReviewsAboutDoctorsModel> {
   public List<ReviewsAboutDoctorsModel> getReviewsAboutDoctor(DoctorModel doctorModel) {
-    Query query = getEntitymanager().createQuery("SELECT e FROM ReviewsAboutDoctorsModel e " + "WHERE e.doctor = :DOCTOR_MODEL AND e.isAppropriate = :IS_APPROPRIATE ORDER BY e.creationTime DESC");
+    Query query = getEntitymanager().createQuery("SELECT e FROM ReviewsAboutDoctorsModel e WHERE e.doctor = :DOCTOR_MODEL AND e.isAppropriate = :IS_APPROPRIATE ORDER BY e.creationTime DESC");
 
     query.setParameter("DOCTOR_MODEL", doctorModel);
     query.setParameter("IS_APPROPRIATE", '1');
@@ -18,7 +18,7 @@ public class ReviewsAboutDoctorsDaoImpl extends BaseDaoImpl<ReviewsAboutDoctorsM
   }
 
   public List<ReviewsAboutDoctorsModel> getReviewsOfPatient(PatientModel patientModel) {
-    Query query = getEntitymanager().createQuery("SELECT e FROM ReviewsAboutDoctorsModel e " + "WHERE e.patient = :PATIENT_MODEL ORDER BY e.creationTime DESC");
+    Query query = getEntitymanager().createQuery("SELECT e FROM ReviewsAboutDoctorsModel e WHERE e.patient = :PATIENT_MODEL ORDER BY e.creationTime DESC");
 
     query.setParameter("PATIENT_MODEL", patientModel);
 

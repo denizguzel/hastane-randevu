@@ -22,4 +22,12 @@ public class SurveyDaoImpl extends BaseDaoImpl<SurveyModel> {
 
     return query.getResultList();
   }
+
+  public List<OptionModel> getNumberOfVotes(SurveyModel surveyModel) {
+    Query query = getEntitymanager().createQuery("SELECT SUM(e.count) FROM OptionModel e WHERE e.survey = :survey_model");
+
+    query.setParameter("survey_model", surveyModel);
+
+    return query.getResultList();
+  }
 }

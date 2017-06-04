@@ -71,4 +71,8 @@ public class SurveyServiceImpl implements BaseService<SurveyModel> {
     }
     this.delete(survey);
   }
+
+  public List<OptionModel> getNumberOfVotes(SurveyModel survey) {
+    return surveyDao.getNumberOfVotes(survey);
+  }
 }

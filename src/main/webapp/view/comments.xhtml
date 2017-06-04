@@ -32,13 +32,12 @@
                     </h:column>
                     <h:column>
                       <f:facet name="header">#{messages['label.status']}</f:facet>
-                      <h:outputText value="#{messages['label.commentAppropriate']}" rendered="#{review.isAppropriate eq 48}"/>
-                      <h:outputText value="#{messages['label.commentAppropriate']}" rendered="#{review.isAppropriate eq 49}"/>
+                      <h:outputText value="#{review.isAppropriate eq 48 ? messages['label.commentAppropriate'] : messages['label.approved']}"/>
                     </h:column>
                     <h:column>
                       <f:facet name="header"></f:facet>
-                      <h:commandButton styleClass="badge #{review.isAppropriate eq 49 ? 'area-disabled' : 'badge-success'} mr-1" action="#{admin.commentApprove(review)}" value="Onayla"/>
-                      <h:commandButton styleClass="badge #{review.isAppropriate eq 49 ? 'area-disabled' : 'badge-danger'}" action="#{admin.commentReject(review)}" value="Reddet"/>
+                      <h:commandButton styleClass="badge #{review.isAppropriate eq 49 ? 'area-disabled' : 'badge-success'} mr-1" action="#{admin.commentApprove(review)}" value="#{messages['button.approve']}"/>
+                      <h:commandButton styleClass="badge #{review.isAppropriate eq 49 ? 'area-disabled' : 'badge-danger'}" action="#{admin.commentReject(review)}" value="#{messages['button.reject']}"/>
                     </h:column>
                   </h:dataTable>
                 </div>

@@ -102,3 +102,24 @@
     }
   }
 }
+
+.table-survey {
+  tbody {
+    tr {
+      td {
+        .survey-option {
+          display: flex;
+          justify-content: space-between;
+          .badge {
+            display: inherit;
+            align-items: center;
+            padding: 0 7px;
+            border-radius: 50%;
+            font-weight: 600;
+            font-size: 10px;
+          }
+        }
+      }
+    }
+  }
+}

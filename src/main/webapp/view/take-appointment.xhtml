@@ -186,7 +186,7 @@
                     <h:column>
                       <f:facet name="header"></f:facet>
                       <h:commandLink value="#{messages['button.comments']}" styleClass="btn btn-warning mr-1" action="#{appointment.doctorReviews(appointmentsHeader.doctor)}" p:data-toggle="modal" p:data-target="#comment-modal">
-                        <f:ajax execute="@this" render="doctor-comment"/>
+                        <f:ajax execute="@this" render="doctor-comment" onevent="nameSplit"/>
                       </h:commandLink>
                       <h:commandLink value="#{messages['button.select']}" styleClass="btn btn-success" action="#{appointment.selectAppointment(appointmentsHeader)}">
                         <f:ajax execute="@this" render="appointmentTimes" onevent="tableData"/>
@@ -299,13 +299,18 @@
               <h:panelGroup rendered="#{not empty appointment.doctorReviewList}">
                 <c:forEach items="#{appointment.doctorReviewList}" var="review">
                   <div class="comment">
-                    <div class="author">
-                      <div class="name">#{review.patient.firstName} #{review.patient.lastName}</div>
-                      <h:outputText styleClass="date" value="#{review.modifiedTime}">
-                        <f:convertDateTime timeZone="GMT+3" pattern="MMM d, yyyy"/>
-                      </h:outputText>
+                    <div class="left">
+                      <span class="avatar"></span>
                     </div>
-                    <div class="text">#{review.review}</div>
+                    <div class="right">
+                      <div class="author">
+                        <div class="name">#{review.patient.firstName} #{review.patient.lastName}</div>
+                        <h:outputText styleClass="date" value="#{review.modifiedTime}">
+                          <f:convertDateTime timeZone="GMT+3" pattern="MMM d, yyyy"/>
+                        </h:outputText>
+                      </div>
+                      <div class="text">#{review.review}</div>
+                    </div>
                   </div>
                 </c:forEach>
               </h:panelGroup>
@@ -317,4 +322,5 @@
         </div>
       </div>
     </div><!---->
-  </ui:define></ui:composition>
+  </ui:define>
+</ui:composition>

@@ -395,6 +395,17 @@ function appointment(data) {
   }
 }
 
+function nameSplit() {
+  $(".comment").each(function () {
+    var name = "";
+    var text = $(this).find(".name").text().split(" ");
+    for (var i = 0; i < text.length; i++)
+      name += text[i].substr(0, 1);
+
+    $(this).find(".avatar").text(name);
+  });
+}
+
 window.onload = function () {
   var systemMessageElement = $(".global-message li");
   if (systemMessageElement.length) {
@@ -456,7 +467,7 @@ $("#edit-comment").on("show.bs.modal", function (event) {
   modal.find(".modal-body textarea").val(comment);
 });
 
-$("#edit-comment, #make-comment").on("show.bs.modal",function () {
+$("#edit-comment, #make-comment").on("show.bs.modal", function () {
   var modal = $(this);
   var max = 250;
   var len = modal.find("textarea.counter").val().length;

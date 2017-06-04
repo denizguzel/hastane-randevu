@@ -57,11 +57,12 @@ public class AdminBean {
     askedQuestions = new ArrayList<>();
     surveys = new ArrayList<>();
     options = new ArrayList<>();
+    doctorReviews = new ArrayList<>();
 
     for(int i = 0; i < 4; i++)
       options.add(new OptionModel());
 
-//    doctorReviews.addAll(reviewsAboutDoctorsService.findAll());
+    doctorReviews.addAll(reviewsAboutDoctorsService.findAll());
     askedQuestions.addAll(frequentlyAskedQuestionsService.getAllAskedQuestions());
     surveys.addAll(surveyService.getSurveys());
   }
@@ -162,6 +163,7 @@ public class AdminBean {
   }
 
   public String commentApprove(ReviewsAboutDoctorsModel review) {
+    review.setIsAppropriate('1');
     reviewsAboutDoctorsService.update(review);
 
     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Yorum Onaylandı", null));
@@ -170,6 +172,7 @@ public class AdminBean {
   }
 
   public String commentReject(ReviewsAboutDoctorsModel review) {
+    review.setIsAppropriate('0');
     reviewsAboutDoctorsService.update(review);
 
     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Yorum Reddedildi", null));
