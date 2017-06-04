@@ -52,6 +52,7 @@ public class SurveyServiceImpl implements BaseService<SurveyModel> {
   public void createSurvey(SurveyModel survey, List<OptionModel> surveyOptions){
     this.create(survey);
     for (OptionModel option : surveyOptions){
+      option.setSurvey(survey);
       optionService.create(option);
     }
   }
