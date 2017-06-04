@@ -28,6 +28,7 @@
     <class>com.hastanerandevu.model.AppointmentModel</class>
     <class>com.hastanerandevu.model.FrequentlyAskedQuestionsModel</class>
     <class>com.hastanerandevu.model.ReviewsAboutDoctorsModel</class>
+    <class>com.hastanerandevu.model.AdminModel</class>
 
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@//localhost:1521/orcl"/>
