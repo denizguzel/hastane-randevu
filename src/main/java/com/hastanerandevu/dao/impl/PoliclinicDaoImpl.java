@@ -14,7 +14,7 @@ import java.util.List;
 public class PoliclinicDaoImpl extends BaseDaoImpl<PoliclinicModel> {
 
   public List<InspectionPlaceModel> getInspectionPlacesByHospitalPoliclinicRel(HospitalPoliclinicRelModel hospitalPoliclinicRelModel) {
-    Query query = getEntitymanager().createQuery("SELECT e FROM InspectionPlaceModel e WHERE e.hospitalPoliclinicRel = :hospitalPoliclinicRel ORDER BY e.placeName");
+    Query query = getEntitymanager().createQuery("SELECT e FROM InspectionPlaceModel e WHERE e.hospitalPoliclinicRel = :hospitalPoliclinicRel AND e.doctor IS NOT NULL ORDER BY e.placeName");
 
     query.setParameter("hospitalPoliclinicRel", hospitalPoliclinicRelModel);
 
@@ -32,7 +32,7 @@ public class PoliclinicDaoImpl extends BaseDaoImpl<PoliclinicModel> {
 
   public List<InspectionPlaceModel> getAppointmentHeadersByPoliclinic(HospitalPoliclinicRelModel hospitalPoliclinicRelModel, Date startDate, Date endDate) {
 
-    Query query = getEntitymanager().createQuery("SELECT DISTINCT(ip) FROM InspectionPlaceModel ip INNER JOIN ip.appointmentModels ap WHERE ip.hospitalPoliclinicRel = :HOSPITAL_POLICLINIC_REL AND ap.appointmentStatus = :APPOINTMENT_STATUS AND ap.appointmentDate BETWEEN :START_DATE AND :END_DATE");
+    Query query = getEntitymanager().createQuery("SELECT DISTINCT(ip) FROM InspectionPlaceModel ip INNER JOIN ip.appointmentModels ap WHERE ip.hospitalPoliclinicRel = :HOSPITAL_POLICLINIC_REL AND ap.appointmentStatus = :APPOINTMENT_STATUS AND ap.appointmentDate BETWEEN :START_DATE AND :END_DATE ORDER BY ip.placeName ASC");
 
     query.setParameter("HOSPITAL_POLICLINIC_REL", hospitalPoliclinicRelModel);
     query.setParameter("APPOINTMENT_STATUS", AppointmentStatusEnum.NOT_RESERVED);
@@ -44,7 +44,7 @@ public class PoliclinicDaoImpl extends BaseDaoImpl<PoliclinicModel> {
 
   public List<InspectionPlaceModel> getAppointmentHeadersByPoliclinic(HospitalPoliclinicRelModel hospitalPoliclinicRelModel) {
 
-    Query query = getEntitymanager().createQuery("SELECT DISTINCT(ip) FROM InspectionPlaceModel ip INNER JOIN ip.appointmentModels ap WHERE ip.hospitalPoliclinicRel = :HOSPITAL_POLICLINIC_REL AND ap.appointmentStatus = :APPOINTMENT_STATUS AND ap.appointmentDate > :START_DATE");
+    Query query = getEntitymanager().createQuery("SELECT DISTINCT(ip) FROM InspectionPlaceModel ip INNER JOIN ip.appointmentModels ap WHERE ip.hospitalPoliclinicRel = :HOSPITAL_POLICLINIC_REL AND ap.appointmentStatus = :APPOINTMENT_STATUS AND ap.appointmentDate > :START_DATE ORDER BY ip.placeName ASC");
 
     query.setParameter("HOSPITAL_POLICLINIC_REL", hospitalPoliclinicRelModel);
     query.setParameter("APPOINTMENT_STATUS", AppointmentStatusEnum.NOT_RESERVED);
@@ -55,7 +55,7 @@ public class PoliclinicDaoImpl extends BaseDaoImpl<PoliclinicModel> {
 
   public List<InspectionPlaceModel> getAppointmentHeadersByPoliclinic(HospitalPoliclinicRelModel hospitalPoliclinicRelModel, Date startDate) {
 
-    Query query = getEntitymanager().createQuery("SELECT DISTINCT(ip) FROM InspectionPlaceModel ip INNER JOIN ip.appointmentModels ap WHERE ip.hospitalPoliclinicRel = :HOSPITAL_POLICLINIC_REL AND ap.appointmentStatus = :APPOINTMENT_STATUS AND ap.appointmentDate > :START_DATE");
+    Query query = getEntitymanager().createQuery("SELECT DISTINCT(ip) FROM InspectionPlaceModel ip INNER JOIN ip.appointmentModels ap WHERE ip.hospitalPoliclinicRel = :HOSPITAL_POLICLINIC_REL AND ap.appointmentStatus = :APPOINTMENT_STATUS AND ap.appointmentDate > :START_DATE ORDER BY ip.placeName ASC");
 
     query.setParameter("HOSPITAL_POLICLINIC_REL", hospitalPoliclinicRelModel);
     query.setParameter("APPOINTMENT_STATUS", AppointmentStatusEnum.NOT_RESERVED);
