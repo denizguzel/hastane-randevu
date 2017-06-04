@@ -40,7 +40,6 @@ public class AppointmentBean {
 
   private AppointmentModel appointmentModel;
   private ReviewsAboutDoctorsModel reviewsAboutDoctorsModel;
-  ReviewsAboutDoctorsModel patientReviewAboutDoctor;
   private PatientModel patientModel;
   private InspectionPlaceModel inspectionPlaceModel;
   private HospitalPoliclinicRelModel hospitalPoliclinicRelModel;
@@ -368,10 +367,9 @@ public class AppointmentBean {
 
     if(!selectedItems[1].equals("")) {
       populateHospitalsBySelectedDistrict(selectedItems[1]);
-    }
-    else if(!selectedItems[0].equals("")){
+    } else if(!selectedItems[0].equals("")) {
       populateHospitalsBySelectedCity(selectedItems[0]);
-      if (!selectedItems[2].equals("")){
+      if(!selectedItems[2].equals("")) {
         populatePoliclinicsBySelectedHospital(selectedItems[2]);
       }
     }
@@ -411,7 +409,7 @@ public class AppointmentBean {
       selectedItems[3] = input.getValue().toString();
     }
 
-    if (!selectedItems[3].equals("")){
+    if(!selectedItems[3].equals("")) {
       populateInspectionPlacesBySelectedPoliclinic(selectedItems[3]);
     }
 
@@ -511,18 +509,19 @@ public class AppointmentBean {
   }
 
   public String sendDoctorComment() {
-    patientReviewAboutDoctor = reviewsAboutDoctorsService.getPatientReviewAboutDoctor(patientModel, appointmentModel.getInspectionPlace().getDoctor()).get(0);
-    if(patientReviewAboutDoctor != null) {
-      reviewsAboutDoctorsModel = patientReviewAboutDoctor;
-      reviewsAboutDoctorsModel.setReview(doctorComment);
-      reviewsAboutDoctorsModel.setIsAppropriate('0');
-      reviewsAboutDoctorsService.update(reviewsAboutDoctorsModel);
-    } else {
+    if(reviewsAboutDoctorsService.getPatientReviewAboutDoctor(patientModel, appointmentModel.getInspectionPlace().getDoctor()) == null) {
       reviewsAboutDoctorsModel.setPatient(patientModel);
       reviewsAboutDoctorsModel.setDoctor(appointmentModel.getInspectionPlace().getDoctor());
       reviewsAboutDoctorsModel.setReview(doctorComment);
       reviewsAboutDoctorsService.create(reviewsAboutDoctorsModel);
+    } else {
+      reviewsAboutDoctorsModel = reviewsAboutDoctorsService.getPatientReviewAboutDoctor(patientModel, appointmentModel.getInspectionPlace().getDoctor());
+      reviewsAboutDoctorsModel.setReview(doctorComment);
+      reviewsAboutDoctorsModel.setIsAppropriate('0');
+      reviewsAboutDoctorsService.update(reviewsAboutDoctorsModel);
     }
+    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Yorumunuz Kaydedildi", null));
+    FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
 
     if(FacesContext.getCurrentInstance().getViewRoot().getViewId().equals("/view/dashboard.xhtml")) {
       return "/view/dashboard?faces-redirect=true";
@@ -684,7 +683,7 @@ public class AppointmentBean {
     return patientService.getActiveAppointmentsOfPatient(patientModel);
   }
 
-  public List<ReviewsAboutDoctorsModel> getPatientReviewAboutDoctor(PatientModel patientModel, DoctorModel doctorModel) {
+  public ReviewsAboutDoctorsModel getPatientReviewAboutDoctor(PatientModel patientModel, DoctorModel doctorModel) {
     return reviewsAboutDoctorsService.getPatientReviewAboutDoctor(patientModel, doctorModel);
   }
 }

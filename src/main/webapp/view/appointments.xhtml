@@ -54,7 +54,7 @@
                       <h:outputText value="#{messages['label.appointmentWaiting']}"/>
                     </h:panelGroup><!---->
                     <!-- Check if comment is not empty and appropriate then render edit comment button -->
-                    <h:commandLink styleClass="badge badge-warning" rendered="#{not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor) and appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).isAppropriate eq 49}" p:data-target="#edit-comment" p:data-toggle="modal" p:data-comment="#{appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).review}">
+                    <h:commandLink styleClass="badge badge-warning" rendered="#{not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor) and appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).isAppropriate eq 49}" p:data-target="#edit-comment" p:data-toggle="modal" p:data-comment="#{appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).review}">
                       #{messages['label.edit']}
                       <f:setPropertyActionListener value="#{history}" target="#{appointment.appointmentModel}"/>
                       <f:ajax execute="@this"/>
@@ -65,7 +65,7 @@
                       <f:ajax execute="@this"/>
                     </h:commandLink><!---->
                     <!-- Check if patient comment is not empty and not appropriate then render "Comment Waiting Approval" -->
-                    <h:panelGroup rendered="#{not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor) and appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).isAppropriate eq 48}">
+                    <h:panelGroup rendered="#{not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor) and appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).isAppropriate eq 48}">
                       <span class="badge badge-default">#{messages['label.commentAppropriate']}</span>
                     </h:panelGroup><!---->
                   </h:column>

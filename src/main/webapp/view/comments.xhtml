@@ -10,27 +10,64 @@
         </div>
         <div class="card">
           <div class="card-block">
-            <h:panelGroup layout="block" styleClass="alert" rendered="#{empty doctor.doctorReviews}">
-              <i class="fa fa-meh-o"></i>#{messages['card.commentEmpty']}
+            <h:panelGroup rendered="#{session.getAttribute('userType') eq 'admin'}">
+              <h:panelGroup layout="block" styleClass="alert" rendered="#{empty admin.doctorReviews}">
+                <i class="fa fa-meh-o"></i>#{messages['modal.body.comments.info']}
+              </h:panelGroup>
+
+              <h:form prependId="false" rendered="#{not empty admin.doctorReviews}">
+                <div class="table-responsive">
+                  <h:dataTable styleClass="table" binding="#{table}" value="#{admin.doctorReviews}" var="review">
+                    <h:column>
+                      <f:facet name="header">#</f:facet>
+                      <h:outputText value="#{table.rowIndex + 1}"/>
+                    </h:column>
+                    <h:column>
+                      <f:facet name="header">#{messages['label.patientName']}</f:facet>
+                      <h:outputText value="#{review.patient.firstName} #{review.patient.lastName}"/>
+                    </h:column>
+                    <h:column>
+                      <f:facet name="header">#{messages['label.patientComment']}</f:facet>
+                      <h:outputText value="#{review.review}"/>
+                    </h:column>
+                    <h:column>
+                      <f:facet name="header">#{messages['label.status']}</f:facet>
+                      <h:outputText value="#{messages['label.commentAppropriate']}" rendered="#{review.isAppropriate eq 48}"/>
+                      <h:outputText value="#{messages['label.commentAppropriate']}" rendered="#{review.isAppropriate eq 49}"/>
+                    </h:column>
+                    <h:column>
+                      <f:facet name="header"></f:facet>
+                      <h:commandButton styleClass="badge #{review.isAppropriate eq 49 ? 'area-disabled' : 'badge-success'} mr-1" action="#{admin.commentApprove(review)}" value="Onayla"/>
+                      <h:commandButton styleClass="badge #{review.isAppropriate eq 49 ? 'area-disabled' : 'badge-danger'}" action="#{admin.commentReject(review)}" value="Reddet"/>
+                    </h:column>
+                  </h:dataTable>
+                </div>
+              </h:form>
             </h:panelGroup>
-            <h:form prependId="false" rendered="#{not empty doctor.doctorReviews}">
-              <div class="table-responsive">
-                <h:dataTable styleClass="table" binding="#{table}" value="#{doctor.doctorReviews}" var="review">
-                  <h:column>
-                    <f:facet name="header">#</f:facet>
-                    <h:outputText value="#{table.rowIndex + 1}"/>
-                  </h:column>
-                  <h:column>
-                    <f:facet name="header">#{messages['label.patientName']}</f:facet>
-                    <h:outputText value="#{review.patient.firstName} #{review.patient.lastName}"/>
-                  </h:column>
-                  <h:column>
-                    <f:facet name="header">#{messages['label.patientComment']}</f:facet>
-                    <h:outputText value="#{review.review}"/>
-                  </h:column>
-                </h:dataTable>
-              </div>
-            </h:form>
+
+            <h:panelGroup rendered="#{session.getAttribute('userType') eq 'doctor'}">
+              <h:panelGroup layout="block" styleClass="alert" rendered="#{empty doctor.doctorReviews}">
+                <i class="fa fa-meh-o"></i>#{messages['card.commentEmpty']}
+              </h:panelGroup>
+              <h:form prependId="false" rendered="#{not empty doctor.doctorReviews}">
+                <div class="table-responsive">
+                  <h:dataTable styleClass="table" binding="#{table1}" value="#{doctor.doctorReviews}" var="review">
+                    <h:column>
+                      <f:facet name="header">#</f:facet>
+                      <h:outputText value="#{table1.rowIndex + 1}"/>
+                    </h:column>
+                    <h:column>
+                      <f:facet name="header">#{messages['label.patientName']}</f:facet>
+                      <h:outputText value="#{review.patient.firstName} #{review.patient.lastName}"/>
+                    </h:column>
+                    <h:column>
+                      <f:facet name="header">#{messages['label.patientComment']}</f:facet>
+                      <h:outputText value="#{review.review}"/>
+                    </h:column>
+                  </h:dataTable>
+                </div>
+              </h:form>
+            </h:panelGroup>
           </div>
         </div>
       </div>

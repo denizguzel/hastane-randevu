@@ -38,6 +38,7 @@ public class PageBean {
     } else if(SessionUtils.getSession().getAttribute("userType").equals("admin")) {
       pageList.add(new PageModel("/view/survey.xhtml", "Anketler", "fa fa-calendar fa-fw"));
       pageList.add(new PageModel("/view/comments.xhtml", bundle.getString("sidebar.doctorComments"), "fa fa-comment-o fa-fw"));
+      pageList.add(new PageModel("/view/faq.xhtml", bundle.getString("sidebar.faq"), "fa fa-comment-o fa-fw"));
     }
   }
 

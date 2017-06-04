@@ -82,4 +82,9 @@
     <view-id value="/admin.xhtml"/>
   </url-mapping>
 
+  <url-mapping id="faq">
+    <pattern value="/view/faq"/>
+    <view-id value="/view/faq.xhtml"/>
+  </url-mapping>
+
 </pretty-config>

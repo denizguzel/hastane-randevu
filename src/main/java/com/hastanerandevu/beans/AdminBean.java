@@ -2,7 +2,6 @@ package com.hastanerandevu.beans;
 
 import com.hastanerandevu.model.*;
 import com.hastanerandevu.service.impl.*;
-import com.hastanerandevu.utility.SessionUtils;
 import com.hastanerandevu.utility.UTF8Control;
 
 import javax.annotation.PostConstruct;
@@ -11,7 +10,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -25,6 +23,7 @@ public class AdminBean {
   private SurveyModel surveyModel;
   private OptionModel optionModel;
   private FrequentlyAskedQuestionsModel frequentlyAskedQuestionsModel;
+  private ReviewsAboutDoctorsModel reviewsAboutDoctorsModel;
 
   private AdminServiceImpl adminService;
   private SurveyServiceImpl surveyService;
@@ -32,11 +31,12 @@ public class AdminBean {
   private FrequentlyAskedQuestionsServiceImpl frequentlyAskedQuestionsService;
   private PatientServiceImpl patientService;
   private AppointmentServiceImpl appointmentService;
+  private ReviewsAboutDoctorsServiceImpl reviewsAboutDoctorsService;
 
   private List<FrequentlyAskedQuestionsModel> askedQuestions;
   private List<SurveyModel> surveys;
   private List<OptionModel> options;
-  private List<AppointmentModel> appointments;
+  private List<ReviewsAboutDoctorsModel> doctorReviews;
 
   @PostConstruct
   public void init() {
@@ -44,6 +44,7 @@ public class AdminBean {
     surveyModel = new SurveyModel();
     optionModel = new OptionModel();
     frequentlyAskedQuestionsModel = new FrequentlyAskedQuestionsModel();
+    reviewsAboutDoctorsModel = new ReviewsAboutDoctorsModel();
 
     adminService = new AdminServiceImpl();
     surveyService = new SurveyServiceImpl();
@@ -51,20 +52,16 @@ public class AdminBean {
     optionService = new OptionServiceImpl();
     patientService = new PatientServiceImpl();
     appointmentService = new AppointmentServiceImpl();
+    reviewsAboutDoctorsService = new ReviewsAboutDoctorsServiceImpl();
 
     askedQuestions = new ArrayList<>();
     surveys = new ArrayList<>();
     options = new ArrayList<>();
-    if(SessionUtils.getSession().getAttribute("userType").equals("admib")) {
-      for(AppointmentModel appointmentModel : appointmentService.findAll()) {
-        if(appointmentModel.getPatient() != null)
-          appointments.addAll((Collection<? extends AppointmentModel>) appointmentModel);
-      }
-    }
 
     for(int i = 0; i < 4; i++)
       options.add(new OptionModel());
 
+//    doctorReviews.addAll(reviewsAboutDoctorsService.findAll());
     askedQuestions.addAll(frequentlyAskedQuestionsService.getAllAskedQuestions());
     surveys.addAll(surveyService.getSurveys());
   }
@@ -113,14 +110,19 @@ public class AdminBean {
     return patientService;
   }
 
-  public List<AppointmentModel> getAppointments() {
-    return appointments;
-  }
-
   public SurveyServiceImpl getSurveyService() {
     return surveyService;
   }
 
+  public List<ReviewsAboutDoctorsModel> getDoctorReviews() {
+    return doctorReviews;
+  }
+
+  public void setDoctorReviews(List<ReviewsAboutDoctorsModel> doctorReviews) {
+    this.doctorReviews = doctorReviews;
+  }
+
+  // Functions
   private void clearListComponentsWithChange(List... lists) {
     for(List list : lists) {
       list.clear();
@@ -157,5 +159,45 @@ public class AdminBean {
     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Anket Silindi", null));
     FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
     return "/view/survey?faces-redirect=true";
+  }
+
+  public String commentApprove(ReviewsAboutDoctorsModel review) {
+    reviewsAboutDoctorsService.update(review);
+
+    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Yorum Onaylandı", null));
+    FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+    return "/view/comments?faces-redirect=true";
+  }
+
+  public String commentReject(ReviewsAboutDoctorsModel review) {
+    reviewsAboutDoctorsService.update(review);
+
+    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Yorum Reddedildi", null));
+    FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+    return "/view/comments?faces-redirect=true";
+  }
+
+  public String faqSave() {
+    frequentlyAskedQuestionsService.create(frequentlyAskedQuestionsModel);
+
+    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("label.questionSave"), null));
+    FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+    return "/view/faq?faces-redirect=true";
+  }
+
+  public String faqDelete() {
+    frequentlyAskedQuestionsService.delete(frequentlyAskedQuestionsModel);
+
+    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("label.questionDelete"), null));
+    FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+    return "/view/faq?faces-redirect=true";
+  }
+
+  public String faqUpdate() {
+    frequentlyAskedQuestionsService.update(frequentlyAskedQuestionsModel);
+
+    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("label.questionUpdate"), null));
+    FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+    return "/view/faq?faces-redirect=true";
   }
 }

@@ -37,11 +37,7 @@
                       <h4>En Fazla Randevu Alınan Poliklinikler</h4>
                     </div>
                     <div class="right">
-                      <c:forEach items="#{admin.appointments}" var="policlinic" varStatus="policlinicIndex">
-                        <li>
-                          #{policlinic.inspectionPlace.placeName}
-                        </li>
-                      </c:forEach>
+
                     </div>
                   </div>
                 </div>
@@ -188,7 +184,7 @@
                 </div>
                 <div class="card-block">
                   <h:panelGroup layout="block" styleClass="alert" rendered="#{session.getAttribute('userType') eq 'patient' and empty appointment.completedAppointments}">
-                    <i class="fa fa-smile-o"></i>#{messages['card.appointmentEmpty']}
+                    <i class="fa fa-smile-o"></i>#{messages['label.noCompletedAppointment']}
                   </h:panelGroup>
                   <h:form prependId="false" rendered="#{not empty appointment.completedAppointments}">
                     <ul class="list-group">
@@ -214,11 +210,11 @@
                               <h:panelGroup styleClass="detail-info" rendered="#{empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor)}">
                                 <abbr title="#{messages['label.commentAbbr']}">#{messages['modal.body.comments.info']}</abbr>
                               </h:panelGroup>
-                              <h:panelGroup styleClass="detail-info" rendered="#{not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor)}" p:title="#{appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).isAppropriate eq 48 ? messages['label.commentAppropriate'] : appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).review}">
-                                <h:panelGroup rendered="#{not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor) and appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).isAppropriate eq 49}">
-                                  #{appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).review}
+                              <h:panelGroup styleClass="detail-info" rendered="#{not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor)}" p:title="#{appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).isAppropriate eq 48 ? messages['label.commentAppropriate'] : appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).review}">
+                                <h:panelGroup rendered="#{not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor) and appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).isAppropriate eq 49}">
+                                  #{appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).review}
                                 </h:panelGroup>
-                                <h:panelGroup rendered="#{not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor) and appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).get(0).isAppropriate eq 48}">
+                                <h:panelGroup rendered="#{not empty appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor) and appointment.getPatientReviewAboutDoctor(history.patient, history.inspectionPlace.doctor).isAppropriate eq 48}">
                                   #{messages['label.commentAppropriate']}
                                 </h:panelGroup>
                               </h:panelGroup>

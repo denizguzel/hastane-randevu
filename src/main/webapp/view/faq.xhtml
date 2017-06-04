@@ -1,0 +1,134 @@
+<ui:composition template="/view/master/afterLoginTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://xmlns.jcp.org/jsf/passthrough" xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <ui:define name="title">#{messages['home.faq']}</ui:define>
+
+  <ui:define name="content">
+    <div class="page-wrapper">
+      <div class="container-fluid">
+        <!-- Page Title -->
+        <div class="page-title">
+          <h4>#{messages['home.faq']}</h4>
+          <button class="sidebar-toggler" type="button"><i class="fa fa-bars"></i></button>
+        </div><!---->
+
+        <div class="card">
+          <div class="card-header">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#question-modal">#{messages['label.add']}</button>
+          </div>
+          <div class="card-block">
+            <h:panelGroup layout="block" styleClass="alert" rendered="#{empty admin.askedQuestions}">
+              <i class="fa fa-thermometer-empty"></i>#{messages['label.noRecord']}
+            </h:panelGroup>
+
+            <h:form prependId="false" rendered="#{not empty admin.askedQuestions}">
+              <div class="table-responsive">
+                <h:dataTable styleClass="table" binding="#{table}" value="#{admin.askedQuestions}" var="question">
+                  <h:column>
+                    <f:facet name="header">#</f:facet>
+                    <h:outputText value="#{table.rowIndex + 1}"/>
+                  </h:column>
+                  <h:column>
+                    <f:facet name="header">#{messages['label.question']}</f:facet>
+                    <h:outputText value="#{question.question}"/>
+                  </h:column>
+                  <h:column>
+                    <f:facet name="header">#{messages['label.answer']}</f:facet>
+                    <h:outputText value="#{question.answer}"/>
+                  </h:column>
+                  <h:column>
+                    <f:facet name="header">#{messages['label.remove']}</f:facet>
+                    <h:commandButton value="#{messages['label.edit']}" styleClass="badge badge-warning mr-1" p:data-toggle="modal" p:data-target="#edit-modal">
+                      <f:setPropertyActionListener value="#{question}" target="#{admin.frequentlyAskedQuestionsModel}"/>
+                      <f:ajax execute="@this" render="faq-edit-form"/>
+                    </h:commandButton>
+                    <h:commandButton value="#{messages['label.remove']}" styleClass="badge badge-danger" p:data-toggle="modal" p:data-target="#cancel-modal">
+                      <f:setPropertyActionListener value="#{question}" target="#{admin.frequentlyAskedQuestionsModel}"/>
+                      <f:ajax execute="@this"/>
+                    </h:commandButton>
+                  </h:column>
+                </h:dataTable>
+              </div>
+              <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
+            </h:form><!---->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Question Modal -->
+    <div class="modal fade" id="question-modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <h:form prependId="false">
+            <div class="modal-header">
+              <h5 class="modal-title">#{messages['modal.header.title.question']}</h5>
+              <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group" data-message="">
+                <label class="form-control-label">#{messages['label.question']}</label>
+                <h:inputText styleClass="form-control" p:placeholder="Soru Giriniz" required="true" requiredMessage="Soru Giriniz" value="#{admin.frequentlyAskedQuestionsModel.question}"/>
+              </div>
+              <div class="form-group" data-message="">
+                <label class="form-control-label">#{messages['label.answer']}</label>
+                <h:inputTextarea rows="5" styleClass="form-control" p:placeholder="Cevap Giriniz" required="true" requiredMessage="Cevap Giriniz" value="#{admin.frequentlyAskedQuestionsModel.answer}"/>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <h:commandButton styleClass="btn btn-success" value="#{messages['button.register']}" action="#{admin.faqSave}"/>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">#{messages['button.close']}</button>
+            </div>
+          </h:form>
+        </div>
+      </div>
+    </div><!---->
+
+    <!-- Remove Question Modal -->
+    <div class="modal fade" id="cancel-modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">#{messages['modal.header.title.questionDelete']}</h5>
+            <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
+          </div>
+          <div class="modal-body">
+            <h:form prependId="false" id="modal-form">
+              <p>#{messages['modal.body.faq.info']}</p>
+              <div class="buttons">
+                <h:commandButton value="#{messages['label.yes']}" styleClass="btn btn-success" action="#{admin.faqDelete}"/>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">#{messages['label.no']}</button>
+              </div>
+            </h:form>
+          </div>
+        </div>
+      </div>
+    </div><!---->
+
+    <!-- Edit Question Modal -->
+    <div class="modal fade" id="edit-modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <h:form prependId="false" id="faq-edit-form">
+            <div class="modal-header">
+              <h5 class="modal-title">#{messages['modal.header.title.questionEdit']}</h5>
+              <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group" data-message="">
+                <label class="form-control-label">#{messages['label.question']}</label>
+                <h:inputText styleClass="form-control" p:placeholder="Soru Giriniz" required="true" requiredMessage="Soru Giriniz" value="#{admin.frequentlyAskedQuestionsModel.question}"/>
+              </div>
+              <div class="form-group" data-message="">
+                <label class="form-control-label">#{messages['label.answer']}</label>
+                <h:inputTextarea rows="5" styleClass="form-control" p:placeholder="Cevap Giriniz" required="true" requiredMessage="Cevap Giriniz" value="#{admin.frequentlyAskedQuestionsModel.answer}"/>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <h:commandButton styleClass="btn btn-success" value="#{messages['button.register']}" action="#{admin.faqUpdate}"/>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">#{messages['button.close']}</button>
+            </div>
+          </h:form>
+        </div>
+      </div>
+    </div><!---->
+  </ui:define>
+</ui:composition>
