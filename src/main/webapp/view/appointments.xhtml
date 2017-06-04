@@ -117,7 +117,7 @@
                     <f:facet name="header">#{messages['label.messageToDoctor']}</f:facet>
                     <h:outputText styleClass="doctor-message" p:data-toggle="tooltip" p:title="#{history.messageToDoctor eq null ? messages['label.nullNote'] : history.messageToDoctor}" value="#{history.messageToDoctor eq null ? messages['label.nullNote'] : history.messageToDoctor}"/>
                   </h:column>
-                  <h:column>
+                  <h:column headerClass="text-center">
                     <f:facet name="header">#{messages['label.patientInfo']}</f:facet>
                     <h:commandLink value="#{messages['label.patientInfo']}" styleClass="badge badge-primary" p:data-toggle="modal" p:data-target="#info-modal" action="#{doctor.patientInfo}">
                       <f:setPropertyActionListener value="#{history}" target="#{doctor.appointmentModel}"/>

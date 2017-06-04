@@ -411,39 +411,34 @@ window.onload = function () {
 
   // Dashboard google map render
   $closestAppointment = $(".closest-appointment");
-  if (!$closestAppointment.hasClass("empty")) {
-    var hospitalName = $closestAppointment.text();
-    $maps = $(".map");
-    $maps.each(function (index, element) {
-      var mapOptions = {
-        zoom: 15,
-        center: new google.maps.LatLng(38.963745, 35.243322),
-        scrollwheel: false,
-        navigationControl: false,
-        mapTypeControl: false,
-        scaleControl: false,
-        streetViewControl: false
-      };
-      var map;
-      var geocoder;
-      var marker;
+  $maps = $(".map");
+  var hospitalName = $closestAppointment.text();
+  $maps.each(function (index, element) {
+    var mapOptions = {
+      zoom: 15,
+      center: new google.maps.LatLng(38.963745, 35.243322),
+      scrollwheel: false,
+      navigationControl: false,
+      mapTypeControl: false,
+      scaleControl: false,
+      streetViewControl: false
+    };
+    var map;
+    var geocoder;
+    var marker;
 
-      geocoder = new google.maps.Geocoder();
-      geocoder.geocode({"address": hospitalName}, function (results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-          mapOptions.center = results[0].geometry.location;
-          map = new google.maps.Map(element, mapOptions);
-          marker = new google.maps.Marker({
-            map: map,
-            position: results[0].geometry.location
-          });
-        }
-      });
+    geocoder = new google.maps.Geocoder();
+    geocoder.geocode({"address": hospitalName}, function (results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        mapOptions.center = results[0].geometry.location;
+        map = new google.maps.Map(element, mapOptions);
+        marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+        });
+      }
     });
-  }
-  else {
-    $maps.css("display", "none");
-  }
+  });
 };
 
 $(".sidebar-toggler").click(function () {

@@ -49,7 +49,7 @@
                   <div class="col-xl-6">
                     <div class="form-group">
                       <label class="form-control-label">#{messages['label.selectPoliclinic']}</label>
-                      <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedItems[3]}">
+                      <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedItems[3]}" p:data-live-search="true">
                         <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changePoliclinic}" onevent="appointment"/>
                         <f:selectItem itemLabel="#{messages['label.selectPoliclinic']}" itemValue=""/>
                         <f:selectItems value="#{appointment.policlinics.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>

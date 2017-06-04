@@ -16,7 +16,7 @@
           </div>
           <div class="card-block">
             <!-- Render if alergy list is empty -->
-            <h:panelGroup styleClass="alert" rendered="#{empty alergy.patientAlergies}">
+            <h:panelGroup layout="block" styleClass="alert" rendered="#{empty alergy.patientAlergies}">
               <i class="fa fa-thermometer-empty"></i>#{messages['card.alergyEmpty']}
             </h:panelGroup><!---->
 

@@ -10,7 +10,7 @@
         </div>
         <div class="card">
           <div class="card-block">
-            <h:panelGroup styleClass="alert" rendered="#{empty doctor.doctorReviews}">
+            <h:panelGroup layout="block" styleClass="alert" rendered="#{empty doctor.doctorReviews}">
               <i class="fa fa-meh-o"></i>#{messages['card.commentEmpty']}
             </h:panelGroup>
             <h:form prependId="false" rendered="#{not empty doctor.doctorReviews}">

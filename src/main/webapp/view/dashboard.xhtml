@@ -10,28 +10,76 @@
           <button class="sidebar-toggler" type="button"><i class="fa fa-bars"></i></button>
         </div><!---->
 
+        <h:panelGroup rendered="#{session.getAttribute('userType') eq 'admin'}">
+          <!-- Admin Statistics -->
+          <div class="row">
+            <div class="col-lg-6 col-xl-3">
+              <div class="card">
+                <div class="card-block">
+                  <div class="small-card text-warning">
+                    <div class="left">
+                      <i class="fa fa-user-circle"></i>
+                      <h4>Kayıtlı Kullanıcı Sayısı</h4>
+                    </div>
+                    <div class="right">
+                      <span class="count">#{admin.patientService.findAll().size()}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="card">
+                <div class="card-block">
+                  <div class="small-card text-info">
+                    <div class="left">
+                      <i class="fa fa-user-circle"></i>
+                      <h4>En Fazla Randevu Alınan Poliklinikler</h4>
+                    </div>
+                    <div class="right">
+                      <c:forEach items="#{admin.appointments}" var="policlinic" varStatus="policlinicIndex">
+                        <li>
+                          #{policlinic.inspectionPlace.placeName}
+                        </li>
+                      </c:forEach>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!---->
+        </h:panelGroup>
+
         <h:panelGroup rendered="#{session.getAttribute('userType') eq 'doctor'}">
           <!-- Doctor Statistics -->
           <div class="row">
             <div class="col-lg-6 col-xl-3">
-              <div class="small-card text-warning">
-                <div class="left">
-                  <i class="fa fa-calendar-check-o"></i>
-                  <h4>#{messages["card.title.allAppointment"]}</h4>
-                </div>
-                <div class="right">
-                  <span class="count">#{doctor.appointmentCount}</span>
+              <div class="card">
+                <div class="card-block">
+                  <div class="small-card text-warning">
+                    <div class="left">
+                      <i class="fa fa-calendar-check-o"></i>
+                      <h4>#{messages["card.title.allAppointment"]}</h4>
+                    </div>
+                    <div class="right">
+                      <span class="count">#{doctor.appointmentCount}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="col-lg-6 col-xl-3 d-flex align-content-stretch">
-              <div class="small-card text-muted">
-                <div class="left">
-                  <i class="fa fa-chain-broken"></i>
-                  <h4>#{messages["card.title.remainingAppointment"]}</h4>
-                </div>
-                <div class="right">
-                  <span class="count">#{doctor.remainingAppointment}</span>
+              <div class="card">
+                <div class="card-block">
+                  <div class="small-card text-muted">
+                    <div class="left">
+                      <i class="fa fa-chain-broken"></i>
+                      <h4>#{messages["card.title.remainingAppointment"]}</h4>
+                    </div>
+                    <div class="right">
+                      <span class="count">#{doctor.remainingAppointment}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -108,7 +156,9 @@
             <!-- Closest Appointment Map -->
             <div class="col-lg-5 col-xl-3 mb-3 mb-lg-0">
               <div class="card">
-                <div class="map" style="width: 100%; height: 226px;"></div>
+                <h:panelGroup rendered="#{not empty appointment.closestAppointment}">
+                  <div class="map" style="width: 100%; height: 226px;"></div>
+                </h:panelGroup>
                 <div class="card-block">
                   <div class="small-card text-warning">
                     <div class="left">
@@ -123,7 +173,7 @@
                       <h:outputText styleClass="date" value="#{appointment.closestDate}" rendered="#{not empty appointment.closestAppointment}">
                         <f:convertDateTime timeZone="GMT+3" pattern="dd-MM-yyyy HH:mm"/>
                       </h:outputText>
-                      <h:outputText styleClass="closest-appointment hidden-xl-down#{empty appointment.closestAppointment ? ' empty' : ''}" rendered="#{not empty appointment.closestAppointment}" value="#{appointment.closestAppointment.inspectionPlace.hospitalPoliclinicRel.hospital.hospitalName}"/>
+                      <h:outputText styleClass="closest-appointment hidden-xl-down" rendered="#{not empty appointment.closestAppointment}" value="#{appointment.closestAppointment.inspectionPlace.hospitalPoliclinicRel.hospital.hospitalName}"/>
                     </div>
                   </div>
                 </div>

@@ -16,7 +16,7 @@
           </div>
           <div class="card-block">
             <!-- Render if assay list is empty -->
-            <h:panelGroup styleClass="alert" rendered="#{empty assay.patientAssays}">
+            <h:panelGroup layout="block" styleClass="alert" rendered="#{empty assay.patientAssays}">
               <i class="fa fa-thermometer-empty"></i>#{messages['card.assayEmpty']}
             </h:panelGroup><!---->
             <!-- Render if assay list is not empty -->

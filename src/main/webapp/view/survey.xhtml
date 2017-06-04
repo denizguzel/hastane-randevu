@@ -1,4 +1,4 @@
-<ui:composition template="/view/master/afterLoginTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://xmlns.jcp.org/jsf/passthrough" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<ui:composition template="/view/master/afterLoginTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://xmlns.jcp.org/jsf/passthrough" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:d="http://java.sun.com/jsp/jstl/core">
   <ui:define name="title">Anketler</ui:define>
 
   <ui:define name="content">
@@ -12,18 +12,61 @@
 
         <div class="card">
           <div class="card-header">
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#survey-modal">Anket Oluştur</button>
+            <h:form prependId="false">
+              <h:commandButton value="Anket Oluştur" styleClass="btn btn-success" p:data-toggle="modal" p:data-target="#survey-modal" action="#{admin.resetSurvey}">
+                <f:ajax execute="@this"/>
+              </h:commandButton>
+            </h:form>
           </div>
           <div class="card-block">
             <!-- Render if survey list is empty -->
-            <h:panelGroup styleClass="alert" rendered="#{empty admin.surveys}">
+            <h:panelGroup layout="block" styleClass="alert" rendered="#{empty admin.surveys}">
               <i class="fa fa-thermometer-empty"></i>Heniz hiç anket oluşturulmamış
             </h:panelGroup><!---->
 
             <!-- Render if survey list is not empty -->
             <h:form prependId="false" rendered="#{not empty admin.surveys}">
               <!---->
-              <div class="table-responsive"></div>
+              <div class="table-responsive">
+                <h:dataTable value="#{admin.surveys}" var="survey" binding="#{table}" styleClass="table">
+                  <h:column>
+                    <f:facet name="header">#</f:facet>
+                    <h:outputText value="#{table.rowIndex + 1}"/>
+                  </h:column>
+                  <h:column>
+                    <f:facet name="header">Anket Sorusu</f:facet>
+                    <h:outputText value="#{survey.surveyQuestion}"/>
+                  </h:column>
+                  <h:column>
+                    <f:facet name="header">Seçenek 1</f:facet>
+                    <h:outputText value="#{admin.surveyService.getOptionsBySurvey(survey).get(0).optionText}"/>
+                  </h:column>
+                  <h:column>
+                    <f:facet name="header">Seçenek 2</f:facet>
+                    <h:outputText value="#{admin.surveyService.getOptionsBySurvey(survey).get(1).optionText}"/>
+                  </h:column>
+                  <h:column>
+                    <f:facet name="header">Seçenek 3</f:facet>
+                    <h:outputText value="#{admin.surveyService.getOptionsBySurvey(survey).get(2).optionText}"/>
+                  </h:column>
+                  <h:column>
+                    <f:facet name="header">Seçenek 4</f:facet>
+                    <h:outputText value="#{admin.surveyService.getOptionsBySurvey(survey).get(3).optionText}"/>
+                  </h:column>
+                  <h:column>
+                    <f:facet name="header"></f:facet>
+                    <h:commandButton value="#{messages['label.edit']}" styleClass="badge badge-warning mr-1" p:data-toggle="modal" p:data-target="#edit-survey">
+                      <f:setPropertyActionListener value="#{survey}" target="#{admin.surveyModel}"/>
+                      <f:setPropertyActionListener value="#{admin.surveyService.getOptionsBySurvey(survey)}" target="#{admin.options}"/>
+                      <f:ajax execute="@this" render="survey-edit-form"/>
+                    </h:commandButton>
+                    <h:commandButton value="#{messages['label.remove']}" styleClass="badge badge-danger" p:data-toggle="modal" p:data-target="#cancel-modal">
+                      <f:setPropertyActionListener value="#{survey}" target="#{admin.surveyModel}"/>
+                      <f:ajax execute="@this"/>
+                    </h:commandButton>
+                  </h:column>
+                </h:dataTable>
+              </div>
               <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
             </h:form><!---->
           </div>
@@ -48,7 +91,12 @@
               <div class="form-group">
                 <label class="form-control-label">Anket Cevapları</label>
                 <c:forEach items="#{admin.options}" begin="0" step="1" end="3" varStatus="optionIndex">
-                  <h:inputText styleClass="form-control" p:placeholder="Seçenek #{optionIndex.index+1} Giriniz" required="true" requiredMessage="Seçenek #{optionIndex.index+1} Giriniz" value="#{admin.options[optionIndex.index].optionText}"/>
+                  <div class="input-group">
+                    <h:inputText styleClass="form-control" p:placeholder="Seçenek #{optionIndex.index+1} Giriniz" required="true" requiredMessage="Seçenek #{optionIndex.index+1} Giriniz" value="#{admin.options[optionIndex.index].optionText}"/>
+                    <span class="input-group-addon">
+                      <h:inputText styleClass="form-control" p:placeholder="Sıra No" required="true" requiredMessage="Sıra No Giriniz" value="#{admin.options[optionIndex.index].sortOrderNo}"/>
+                    </span>
+                  </div>
                 </c:forEach>
               </div>
               <div class="form-group">
@@ -71,18 +119,58 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">#{messages['label.removeAlergy']}</h5>
+            <h5 class="modal-title">Anketi Sil</h5>
             <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
           </div>
           <div class="modal-body">
             <h:form prependId="false" id="modal-form">
-              <p>#{messages['modal.body.alergy.info']}</p>
+              <p>Anketi silmek istediğinize emin misiniz?</p>
               <div class="buttons">
-                <h:commandButton value="#{messages['label.yes']}" styleClass="btn btn-success" action="#{alergy.deleteAlergy}"/>
+                <h:commandButton value="#{messages['label.yes']}" styleClass="btn btn-success" action="#{admin.deleteSurvey}"/>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">#{messages['label.no']}</button>
               </div>
             </h:form>
           </div>
+        </div>
+      </div>
+    </div><!---->
+
+    <!-- Edit Survey Modal -->
+    <div class="modal fade" id="edit-survey">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Anketi Düzenle</h5>
+            <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
+          </div>
+          <h:form prependId="false" id="survey-edit-form">
+            <div class="modal-body">
+              <div class="form-group">
+                <label class="form-control-label">Anket Adı</label>
+                <h:inputText styleClass="form-control" p:placeholder="Anket Adı Giriniz" required="true" requiredMessage="Anket Adı Giriniz" value="#{admin.surveyModel.surveyQuestion}"/>
+              </div>
+              <div class="form-group">
+                <label class="form-control-label">Anket Cevapları</label>
+                <c:forEach items="#{admin.options}" begin="0" step="1" end="3" varStatus="optionIndex">
+                  <div class="input-group">
+                    <h:inputText styleClass="form-control" p:placeholder="Seçenek #{optionIndex.index+1} Giriniz" required="true" requiredMessage="Seçenek #{optionIndex.index+1} Giriniz" value="#{admin.options[optionIndex.index].optionText}"/>
+                    <span class="input-group-addon">
+                      <h:inputText styleClass="form-control" p:placeholder="Sıra No" required="true" requiredMessage="Sıra No Giriniz" value="#{admin.options[optionIndex.index].sortOrderNo}"/>
+                    </span>
+                  </div>
+                </c:forEach>
+              </div>
+              <div class="form-group">
+                <h:inputText value="#{admin.surveyModel.expirationTime}" p:placeholder="Anket Bitiş Tarihi" styleClass="form-control datepicker">
+                  <f:convertDateTime pattern="dd-MM-yyyy"/>
+                </h:inputText>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <h:commandButton styleClass="btn btn-success" value="#{messages['button.register']}" action="#{admin.updateSurvey}"/>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">#{messages['button.close']}</button>
+            </div>
+          </h:form>
         </div>
       </div>
     </div><!---->

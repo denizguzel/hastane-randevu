@@ -38,7 +38,7 @@ public class OptionModel implements Creatable, Updatable {
   private char isActive;
 
   @Column(name = "SORT_ORDER_NO")
-  private int sortOrderNo = 999;
+  private int sortOrderNo;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "FK_SURVEY")
