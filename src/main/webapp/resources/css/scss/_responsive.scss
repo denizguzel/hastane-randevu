@@ -241,6 +241,11 @@
     right: 50%;
     transform: translateX(50%);
   }
+  .gradient {
+    header .navbar-toggleable-sm .navbar-collapse .navbar-nav .nav-item .nav-link {
+      border-bottom: 1px solid #fff;
+    }
+  }
 }
 
 @media (max-width: 576px) {

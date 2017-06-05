@@ -1,6 +1,7 @@
 .gradient {
   header .navbar .navbar-collapse .navbar-nav .nav-item .nav-link,
-  .language .bootstrap-select .dropdown-toggle {
+  .language .bootstrap-select .dropdown-toggle,
+  header .navbar-toggleable-sm .mobile-top .navbar-toggler{
     color: $white;
   }
 }
