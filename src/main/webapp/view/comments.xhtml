@@ -36,8 +36,8 @@
                     </h:column>
                     <h:column>
                       <f:facet name="header"></f:facet>
-                      <h:commandButton styleClass="badge #{review.isAppropriate eq 49 ? 'area-disabled' : 'badge-success'} mr-1" action="#{admin.commentApprove(review)}" value="#{messages['button.approve']}"/>
-                      <h:commandButton styleClass="badge #{review.isAppropriate eq 49 ? 'area-disabled' : 'badge-danger'}" action="#{admin.commentReject(review)}" value="#{messages['button.reject']}"/>
+                      <h:commandButton styleClass="badge #{review.isAppropriate eq 49 ? 'badge-disabled' : 'badge-success'} mr-1" action="#{admin.commentApprove(review)}" value="#{messages['button.approve']}"/>
+                      <h:commandButton styleClass="badge #{review.isAppropriate eq 49 ? 'badge-disabled' : 'badge-danger'}" action="#{admin.commentReject(review)}" value="#{messages['button.reject']}"/>
                     </h:column>
                   </h:dataTable>
                 </div>

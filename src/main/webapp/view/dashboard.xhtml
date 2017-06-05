@@ -16,9 +16,9 @@
             <div class="col-lg-6 col-xl-3">
               <div class="card">
                 <div class="card-block">
-                  <div class="small-card text-warning">
+                  <div class="small-card text-success">
                     <div class="left">
-                      <i class="fa fa-user-circle"></i>
+                      <i class="fa fa-user-o"></i>
                       <h4>#{messages['label.totalUser']}</h4>
                     </div>
                     <div class="right">
@@ -28,16 +28,46 @@
                 </div>
               </div>
             </div>
-            <div class="col-6">
+            <div class="col-lg-6 col-xl-3">
               <div class="card">
                 <div class="card-block">
                   <div class="small-card text-info">
                     <div class="left">
-                      <i class="fa fa-user-circle"></i>
-                      <h4>En Fazla Randevu Alınan Poliklinikler</h4>
+                      <i class="fa fa-list-ol"></i>
+                      <h4>#{messages['card.title.surveyCount']}</h4>
                     </div>
                     <div class="right">
-
+                      <span class="count">#{admin.surveyService.findAll().size()}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-xl-3">
+              <div class="card">
+                <div class="card-block">
+                  <div class="small-card text-warning">
+                    <div class="left">
+                      <i class="fa fa-comment-o"></i>
+                      <h4>#{messages['card.title.commentCount']}</h4>
+                    </div>
+                    <div class="right">
+                      <span class="count">#{admin.reviewsAboutDoctorsService.findAll().size()}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-xl-3">
+              <div class="card">
+                <div class="card-block">
+                  <div class="small-card text-primary">
+                    <div class="left">
+                      <i class="fa fa-question"></i>
+                      <h4>#{messages['card.title.faqCount']}</h4>
+                    </div>
+                    <div class="right">
+                      <span class="count">#{admin.frequentlyAskedQuestionsService.findAll().size()}</span>
                     </div>
                   </div>
                 </div>
@@ -258,7 +288,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title">#{messages['modal.header.title.comment']}</h5>
-              <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
+              <button type="button" class="close" data-dismiss="modal"></button>
             </div>
             <div class="modal-body">
               <h:form prependId="false">

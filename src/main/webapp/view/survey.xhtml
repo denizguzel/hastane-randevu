@@ -66,7 +66,7 @@
                     </div>
                   </h:column>
                   <h:column headerClass="text-center">
-                    <f:facet name="header">Toplam Oy Sayısı</f:facet>
+                    <f:facet name="header">#{messages['label.totalVoteCount']}</f:facet>
                     <h:outputText styleClass="d-flex justify-content-center" value="#{admin.surveyService.getNumberOfVotes(survey)}"/>
                   </h:column>
                   <h:column>
@@ -97,12 +97,12 @@
           <h:form prependId="false">
             <div class="modal-header">
               <h5 class="modal-title">#{messages['modal.header.title.survey']}</h5>
-              <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
+              <button type="button" class="close" data-dismiss="modal"></button>
             </div>
             <div class="modal-body">
               <div class="form-group">
                 <label class="form-control-label">#{messages['label.surveyName']}</label>
-                <h:inputText styleClass="form-control" p:placeholder="Anket Adı Giriniz" required="true" requiredMessage="Anket Adı Giriniz" value="#{admin.surveyModel.surveyQuestion}"/>
+                <h:inputText styleClass="form-control" p:placeholder="#{messages['label.surveyName']}" required="true" requiredMessage="#{messages['label.surveyName']}" value="#{admin.surveyModel.surveyQuestion}"/>
               </div>
               <div class="form-group">
                 <label class="form-control-label">#{messages['label.surveyChoices']}</label>
@@ -116,7 +116,7 @@
                 </c:forEach>
               </div>
               <div class="form-group">
-                <h:inputText value="#{admin.surveyModel.expirationTime}" p:placeholder="Anket Bitiş Tarihi" styleClass="form-control datepicker">
+                <h:inputText value="#{admin.surveyModel.expirationTime}" p:placeholder="#{messages['label.surveyDateEnd']}" styleClass="form-control datepicker">
                   <f:convertDateTime pattern="dd-MM-yyyy"/>
                 </h:inputText>
               </div>
@@ -136,7 +136,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">#{messages['modal.header.title.surveyDelete']}</h5>
-            <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
+            <button type="button" class="close" data-dismiss="modal"></button>
           </div>
           <div class="modal-body">
             <h:form prependId="false" id="modal-form">
@@ -157,7 +157,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">#{messages['modal.header.title.surveyEdit']}</h5>
-            <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
+            <button type="button" class="close" data-dismiss="modal"></button>
           </div>
           <h:form prependId="false" id="survey-edit-form">
             <div class="modal-body">

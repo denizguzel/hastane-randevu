@@ -115,6 +115,14 @@ public class AdminBean {
     return surveyService;
   }
 
+  public ReviewsAboutDoctorsServiceImpl getReviewsAboutDoctorsService() {
+    return reviewsAboutDoctorsService;
+  }
+
+  public FrequentlyAskedQuestionsServiceImpl getFrequentlyAskedQuestionsService() {
+    return frequentlyAskedQuestionsService;
+  }
+
   public List<ReviewsAboutDoctorsModel> getDoctorReviews() {
     return doctorReviews;
   }

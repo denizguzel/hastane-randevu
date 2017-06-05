@@ -254,6 +254,13 @@ body.page-404 {
   pointer-events: none;
 }
 
+.badge-disabled {
+  background-color: #e0e1e2;
+  color: rgba(0, 0, 0, .6);
+  opacity: .45;
+  pointer-events: none;
+}
+
 .toast {
   padding: 15px 20px;
   color: $white;
@@ -336,9 +343,9 @@ body.page-404 {
 }
 
 .survey {
-  background-color: $white;
-  border-radius: 4px;
-  border-bottom: 4px solid #ccc;
+  background-color: darken(#fff, 1%);
+  border-radius: 2px;
+  border-bottom: 1px solid #ddd;
   .survey-header {
     padding: 10px;
     text-align: center;
@@ -409,21 +416,52 @@ body.page-404 {
   display: flex;
   align-items: center;
   margin-left: 15px;
-  .form-control {
+  .bootstrap-select {
     display: inherit !important;
     align-items: inherit;
+    background-color: transparent;
     .dropdown-toggle {
       padding: 5px 5px !important;
       width: 50px !important;
+      background-color: transparent;
+      border: 0;
       &::after {
         margin-left: -15px;
       }
     }
     .dropdown-menu {
+      margin: 0;
+      padding: 0;
+      border-radius: 2px;
+      left: auto;
+      right: 0;
       li {
+        display: inherit;
+        border-bottom: 1px solid #ddd;
+        border-left: 3px solid transparent;
+        &:hover {
+          &:not(.selected) {
+            border-left-color: #ddd;
+          }
+        }
+        &:last-child {
+          border-bottom: 0;
+        }
         a {
+          display: inherit;
+          justify-content: center;
+          width: 100%;
           padding: 0 10px !important;
         }
+        &.selected {
+          border-left-color: $main-color;
+        }
+      }
+    }
+    &.show {
+      .dropdown-menu {
+        display: flex;
+        flex-direction: column;
       }
     }
   }
@@ -441,4 +479,10 @@ body.page-404 {
   .count {
     margin-left: 5px;
   }
+}
+
+.close {
+  width: 20px;
+  height: 20px;
+  background: transparent url("/resources/img/custom-icons/cross.svg") no-repeat !important;
 }

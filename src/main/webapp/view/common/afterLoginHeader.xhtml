@@ -8,9 +8,11 @@
     <div class="dropdown ml-auto">
       <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">#{login.loggedUsername}</button>
       <div class="dropdown-menu dropdown-menu-right">
-        <div class="dropdown-item">
-          <a href="#{facesContext.externalContext.requestContextPath}/view/profile"><i class="fa fa-user-o"></i>#{messages["header.profile"]}</a>
-        </div>
+        <h:panelGroup rendered="#{!session.getAttribute('userType') eq 'admin'}">
+          <div class="dropdown-item">
+            <a href="#{facesContext.externalContext.requestContextPath}/view/profile"><i class="fa fa-user-o"></i>#{messages["header.profile"]}</a>
+          </div>
+        </h:panelGroup>
         <div class="dropdown-item">
           <h:form prependId="false">
             <h:commandLink action="#{login.logout}"><i class="fa fa-sign-out"></i>#{messages["header.logout"]}</h:commandLink>

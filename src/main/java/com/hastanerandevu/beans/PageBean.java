@@ -36,7 +36,7 @@ public class PageBean {
       pageList.add(new PageModel("/view/notes.xhtml", bundle.getString("sidebar.doctorNotes"), "fa fa-sticky-note-o fa-fw"));
       pageList.add(new PageModel("/view/comments.xhtml", bundle.getString("sidebar.doctorComments"), "fa fa-comment-o fa-fw"));
     } else if(SessionUtils.getSession().getAttribute("userType").equals("admin")) {
-      pageList.add(new PageModel("/view/survey.xhtml", "Anketler", "fa fa-list-ol fa-fw"));
+      pageList.add(new PageModel("/view/survey.xhtml", bundle.getString("page.title.survey"), "fa fa-list-ol fa-fw"));
       pageList.add(new PageModel("/view/comments.xhtml", bundle.getString("sidebar.doctorComments"), "fa fa-comment-o fa-fw"));
       pageList.add(new PageModel("/view/faq.xhtml", bundle.getString("sidebar.faq"), "fa fa-question fa-fw"));
     }

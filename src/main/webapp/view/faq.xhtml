@@ -61,7 +61,7 @@
           <h:form prependId="false">
             <div class="modal-header">
               <h5 class="modal-title">#{messages['modal.header.title.question']}</h5>
-              <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
+              <button type="button" class="close" data-dismiss="modal"></button>
             </div>
             <div class="modal-body">
               <div class="form-group" data-message="">
@@ -88,7 +88,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">#{messages['modal.header.title.questionDelete']}</h5>
-            <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
+            <button type="button" class="close" data-dismiss="modal"></button>
           </div>
           <div class="modal-body">
             <h:form prependId="false" id="modal-form">
@@ -110,16 +110,16 @@
           <h:form prependId="false" id="faq-edit-form">
             <div class="modal-header">
               <h5 class="modal-title">#{messages['modal.header.title.questionEdit']}</h5>
-              <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
+              <button type="button" class="close" data-dismiss="modal"></button>
             </div>
             <div class="modal-body">
               <div class="form-group" data-message="">
                 <label class="form-control-label">#{messages['label.question']}</label>
-                <h:inputText styleClass="form-control" p:placeholder="Soru Giriniz" required="true" requiredMessage="Soru Giriniz" value="#{admin.frequentlyAskedQuestionsModel.question}"/>
+                <h:inputText styleClass="form-control" p:placeholder="#{messages['label.question']}" required="true" requiredMessage="#{messages['label.question']}" value="#{admin.frequentlyAskedQuestionsModel.question}"/>
               </div>
               <div class="form-group" data-message="">
                 <label class="form-control-label">#{messages['label.answer']}</label>
-                <h:inputTextarea rows="5" styleClass="form-control" p:placeholder="Cevap Giriniz" required="true" requiredMessage="Cevap Giriniz" value="#{admin.frequentlyAskedQuestionsModel.answer}"/>
+                <h:inputTextarea rows="5" styleClass="form-control" p:placeholder="#{messages['label.answer']}" required="true" requiredMessage="#{messages['label.answer']}" value="#{admin.frequentlyAskedQuestionsModel.answer}"/>
               </div>
             </div>
             <div class="modal-footer">

@@ -1,5 +1,11 @@
+html,
+body {
+  height: 100%;
+}
+
 body {
   position: relative;
+  background-color: darken(#fff, 1%);
 }
 
 ul,

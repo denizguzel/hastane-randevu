@@ -1,85 +1,85 @@
-.navbar {
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  padding: 15px 0;
-  .mobile-top {
-    display: inherit;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-  }
-  .brand {
-    align-items: center;
-    display: inherit;
-  }
-  .dropdown {
-    display: inherit;
-    align-items: center;
-    .dropdown-toggle {
-      background-color: $main-color;
-      border: 0;
-      border-radius: 25px;
-      padding: 9px 20px;
-      color: $white;
-      i {
-        margin-right: 5px;
-      }
-      &:hover {
-        background-color: darken($main-color, 5%);
-      }
-      &:focus {
-        box-shadow: none;
-      }
-      &::after {
-        content: none;
-      }
+header {
+  background-color: $white;
+  .navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    padding: 5px 0;
+    .mobile-top {
+      display: inherit;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
     }
-    .dropdown-menu {
-      border-radius: 2px;
-      margin-top: 0;
-      padding: 0;
-      box-shadow: 0 2px 4px 0 rgba(34, 36, 38, .12), 0 2px 10px 0 rgba(34, 36, 38, .15);
-      .dropdown-item {
-        padding: 0;
-        &:hover {
-          background-color: #f2f2f2;
+    .brand {
+      align-items: center;
+      display: inherit;
+    }
+    .dropdown {
+      display: inherit;
+      align-items: center;
+      .dropdown-toggle {
+        color: $black;
+        padding: 7px;
+        font-weight: 300;
+        border-bottom: 1px solid #ddd;
+        background-color: transparent;
+        font-size: 14px;
+        i {
+          margin-right: 5px;
         }
-        a {
-          display: block;
-          padding: 10px 15px;
-          i {
-            margin-right: 5px;
+        &:focus {
+          box-shadow: none;
+        }
+        &::after {
+          content: none;
+        }
+      }
+      .dropdown-menu {
+        border-radius: 2px;
+        margin: 0;
+        padding: 0;
+        .dropdown-item {
+          padding: 0;
+          &:hover {
+            a {
+              background-color: #f2f2f2;
+            }
+          }
+          a {
+            display: block;
+            padding: 10px 20px;
+            font-weight: 300;
+            i {
+              margin-right: 5px;
+            }
+          }
+          .btn {
+            width: 100%;
+            background-color: transparent;
+            text-align: left;
+            padding: 10px 0;
+          }
+          &:active {
+            background-color: #F8F8F8;
           }
         }
-        .btn {
-          width: 100%;
-          background-color: transparent;
-          text-align: left;
-          padding: 10px 0;
-        }
-        &:active {
-          background-color: #F8F8F8;
-        }
       }
     }
-  }
-  .navbar-collapse {
-    margin-left: auto;
-    .navbar-nav {
+    .navbar-collapse {
       margin-left: auto;
-      align-items: center;
-      .nav-item {
-        margin-left: 10px;
-        .nav-link {
-          display: inherit;
-          align-items: center;
-          color: $white;
-          padding: 7px 20px;
-          border-radius: 25px;
-          background-color: $main-color;
-          &:hover {
-            background-color: darken($main-color, 2%);
+      .navbar-nav {
+        margin-left: auto;
+        align-items: center;
+        .nav-item {
+          margin-left: 10px;
+          .nav-link {
+            display: inherit;
+            align-items: center;
+            color: $black;
+            padding: 7px;
+            font-weight: 300;
+            border-bottom: 1px solid #ddd;
           }
         }
       }
@@ -88,6 +88,7 @@
 }
 
 .navbar-login {
+  flex-direction: row;
   background-color: $main-color;
   padding: 0 30px 0 0;
   height: 50px;
@@ -99,6 +100,7 @@
     }
   }
   .dropdown {
+    display: inherit;
     align-items: stretch;
     .dropdown-toggle {
       background-color: transparent;
@@ -112,6 +114,25 @@
       }
       &::after {
         content: "";
+      }
+    }
+    .dropdown-menu {
+      margin: 0;
+      padding: 0;
+      border-radius: 2px;
+      .dropdown-item {
+        padding: 0;
+        a {
+          display: block;
+          width: 100%;
+          padding: 10px 20px;
+          i {
+            margin-right: 5px;
+          }
+        }
+        &:active {
+          background-color: transparent;
+        }
       }
     }
   }
