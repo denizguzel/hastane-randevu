@@ -72,7 +72,11 @@ public class SurveyServiceImpl implements BaseService<SurveyModel> {
     this.delete(survey);
   }
 
-  public List<OptionModel> getNumberOfVotes(SurveyModel survey) {
-    return surveyDao.getNumberOfVotes(survey);
+  public Integer getNumberOfVotes(SurveyModel survey) {
+    int i = 0;
+    for (OptionModel optionModel : survey.getOptionModels()){
+      i += optionModel.getCount();
+    }
+    return i;
   }
 }

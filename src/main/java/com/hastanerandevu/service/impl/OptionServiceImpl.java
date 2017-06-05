@@ -33,4 +33,13 @@ public class OptionServiceImpl implements BaseService<OptionModel> {
   public List<OptionModel> findAll() {
     return optionDao.findAll();
   }
+
+
+  public Integer getOptionRate(OptionModel option){
+    int i = 0;
+    for (OptionModel optionModel : option.getSurvey().getOptionModels()){
+      i += optionModel.getCount();
+    }
+    return (int)((option.getCount() * 100.0f) / i);
+  }
 }

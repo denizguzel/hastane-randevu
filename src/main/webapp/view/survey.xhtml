@@ -41,33 +41,33 @@
                     <f:facet name="header">#{messages['label.choice']} 1</f:facet>
                     <div class="survey-option">
                       <h:outputText value="#{admin.surveyService.getOptionsBySurvey(survey).get(0).optionText}"/>
-                      <h:outputText styleClass="badge badge-primary" value="#{admin.surveyService.getOptionsBySurvey(survey).get(0).count}"/>
+                      <h:outputText styleClass="badge badge-primary" value="#{admin.getOptionRate(survey.optionModels.get(0))}"/>
                     </div>
                   </h:column>
                   <h:column>
                     <f:facet name="header">#{messages['label.choice']} 2</f:facet>
                     <div class="survey-option">
                       <h:outputText value="#{admin.surveyService.getOptionsBySurvey(survey).get(1).optionText}"/>
-                      <h:outputText styleClass="badge badge-primary" value="#{admin.surveyService.getOptionsBySurvey(survey).get(1).count}"/>
+                      <h:outputText styleClass="badge badge-primary" value="#{admin.getOptionRate(survey.optionModels.get(1))}"/>
                     </div>
                   </h:column>
                   <h:column>
                     <f:facet name="header">#{messages['label.choice']} 3</f:facet>
                     <div class="survey-option">
                       <h:outputText value="#{admin.surveyService.getOptionsBySurvey(survey).get(2).optionText}"/>
-                      <h:outputText styleClass="badge badge-primary" value="#{admin.surveyService.getOptionsBySurvey(survey).get(2).count}"/>
+                      <h:outputText styleClass="badge badge-primary" value="#{admin.getOptionRate(survey.optionModels.get(2))}"/>
                     </div>
                   </h:column>
                   <h:column>
                     <f:facet name="header">#{messages['label.choice']} 4</f:facet>
                     <div class="survey-option">
                       <h:outputText value="#{admin.surveyService.getOptionsBySurvey(survey).get(3).optionText}"/>
-                      <h:outputText styleClass="badge badge-primary" value="#{admin.surveyService.getOptionsBySurvey(survey).get(3).count}"/>
+                      <h:outputText styleClass="badge badge-primary" value="#{admin.getOptionRate(survey.optionModels.get(3))}"/>
                     </div>
                   </h:column>
                   <h:column headerClass="text-center">
                     <f:facet name="header">Toplam Oy Sayısı</f:facet>
-                    <h:outputText styleClass="d-flex justify-content-center" value="#{admin.surveyService.getNumberOfVotes(survey).get(0)}"/>
+                    <h:outputText styleClass="d-flex justify-content-center" value="#{admin.surveyService.getNumberOfVotes(survey)}"/>
                   </h:column>
                   <h:column>
                     <f:facet name="header"></f:facet>

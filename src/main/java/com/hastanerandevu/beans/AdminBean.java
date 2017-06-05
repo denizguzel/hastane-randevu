@@ -203,4 +203,8 @@ public class AdminBean {
     FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
     return "/view/faq?faces-redirect=true";
   }
+
+  public Integer getOptionRate(OptionModel option){
+    return optionService.getOptionRate(option);
+  }
 }
