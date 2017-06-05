@@ -19,7 +19,7 @@ public class FrequentlyAskedQuestionsModel implements Creatable, Updatable {
   @Id
   @Column(name = "PK")
   @GeneratedValue(generator = "asked_question_pk")
-  @SequenceGenerator(name = "asked_question_pk", sequenceName = "SEQ_ASKEDQUESTION_PK", allocationSize = 1)
+  @SequenceGenerator(name = "asked_question_pk", sequenceName = "SEQ_ASKED_QUESTION_PK", allocationSize = 1)
   private long pk;
 
   @Column(name = "QUESTION")
