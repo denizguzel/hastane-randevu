@@ -49,12 +49,6 @@ public class AppointmentBean {
   private boolean appointmentPanel = false;
   private boolean appointmentSearchNull = false;
 
-  /*private String selectedCity;
-  private String selectedDistrict;
-  private String selectedHospital;
-  private String selectedPoliclinic;
-  private String selectedInspectionPlace;*/
-
   private String[] selectedItems = new String[5];
 
   public String[] getSelectedItems() {
@@ -135,46 +129,6 @@ public class AppointmentBean {
   public void setAppointmentModel(AppointmentModel appointmentModel) {
     this.appointmentModel = appointmentModel;
   }
-
-  /*public String getSelectedCity() {
-    return selectedCity;
-  }
-
-  public void setSelectedCity(String selectedCity) {
-    this.selectedCity = selectedCity;
-  }
-
-  public String getSelectedDistrict() {
-    return selectedDistrict;
-  }
-
-  public void setSelectedDistrict(String selectedDistrict) {
-    this.selectedDistrict = selectedDistrict;
-  }
-
-  public String getSelectedHospital() {
-    return selectedHospital;
-  }
-
-  public void setSelectedHospital(String selectedHospital) {
-    this.selectedHospital = selectedHospital;
-  }
-
-  public String getSelectedPoliclinic() {
-    return selectedPoliclinic;
-  }
-
-  public void setSelectedPoliclinic(String selectedPoliclinic) {
-    this.selectedPoliclinic = selectedPoliclinic;
-  }
-
-  public String getSelectedInspectionPlace() {
-    return selectedInspectionPlace;
-  }
-
-  public void setSelectedInspectionPlace(String selectedInspectionPlace) {
-    this.selectedInspectionPlace = selectedInspectionPlace;
-  }*/
 
   public Map<Long, String> getCities() {
     return cities;
@@ -345,10 +299,11 @@ public class AppointmentBean {
     }
     if(!selectedItems[0].equals("")) {
       populateDistrictsBySelectedCity(selectedItems[0]);
-      /*if(selectedDistrict.equals("")) {
-        populateHospitalsBySelectedCity(selectedCity);
-      }*/
+       if(selectedItems[1].equals("")) {
+        populateHospitalsBySelectedCity(selectedItems[0]);
+      }
     }
+
     appointmentPanel = false;
     appointmentClockPanel = false;
     appointmentSearchNull = false;
