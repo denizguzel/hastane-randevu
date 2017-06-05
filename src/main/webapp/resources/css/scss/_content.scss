@@ -46,95 +46,6 @@
       .btn-transparent {
         border-radius: 25px;
       }
-      .appointment-clocks {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        h4 {
-          display: none;
-          margin-bottom: 15px;
-        }
-        ul {
-          display: none;
-          li {
-            margin-right: 4px;
-            margin-bottom: 10px;
-            .btn {
-              justify-content: center;
-              width: 55px;
-              height: initial;
-              padding: 5px;
-            }
-            .btn-primary {
-              &:focus {
-                color: $white;
-                background-color: $brand-primary;
-              }
-            }
-          }
-        }
-        .nav-tabs {
-          width: 100%;
-          z-index: 2;
-          .nav-item {
-            margin: 0 0 -1px 0;
-            flex-grow: 0;
-            .nav-link {
-              padding: 10px;
-              background-color: transparent;
-              color: $black;
-              font-weight: 400;
-              border: 1px solid transparent;
-              text-transform: capitalize;
-              text-align: left;
-              &.active {
-                border-color: #D4D4D5;
-                border-bottom-color: $white;
-                border-top-left-radius: 2px;
-                border-top-right-radius: 2px;
-              }
-            }
-          }
-        }
-        .tab-content {
-          z-index: 1;
-          .tab-pane {
-            border: 1px solid #D4D4D5;
-            border-radius: 2px;
-            padding: 10.5px 10px 0 10px;
-            &:first-child.active {
-              border-top-left-radius: 0;
-            }
-            &:last-child.active {
-              border-bottom-left-radius: 0;
-            }
-            .btn {
-              font-weight: 400;
-              border-radius: 2px;
-            }
-            .btn-disabled {
-              background-color: #AAAAAA;
-              color: #333;
-            }
-          }
-        }
-        &.active {
-          flex-direction: column;
-          align-items: flex-start;
-          justify-content: flex-start;
-          p.lead {
-            display: none;
-          }
-          h4 {
-            display: block;
-          }
-          ul {
-            display: flex;
-            flex-wrap: wrap;
-          }
-        }
-      }
       .form-group[data-message]:not([data-message=""])::before {
         top: 34px;
         right: 5px;
@@ -268,6 +179,98 @@
       }
       .btn-save {
         margin: 15px 0 0 100px;
+      }
+    }
+    .appointment-clocks {
+      display: flex;
+      align-items: center;
+      .card-header {
+        display: none;
+        margin-bottom: 15px;
+      }
+      .card-block {
+        .lead {
+          text-align: center;
+        }
+        ul {
+          display: none;
+          li {
+            margin-right: 4px;
+            margin-bottom: 10px;
+            .btn {
+              justify-content: center;
+              width: 55px;
+              height: initial;
+              padding: 5px;
+            }
+            .btn-primary {
+              &:focus {
+                color: $white;
+                background-color: $brand-primary;
+              }
+            }
+          }
+        }
+        .nav-tabs {
+          width: 100%;
+          z-index: 2;
+          .nav-item {
+            margin: 0 0 -1px 0;
+            flex-grow: 0;
+            .nav-link {
+              padding: 10px;
+              background-color: transparent;
+              color: $black;
+              font-weight: 400;
+              border: 1px solid transparent;
+              text-transform: capitalize;
+              text-align: left;
+              &.active {
+                border-color: #D4D4D5;
+                border-top-left-radius: 2px;
+                border-top-right-radius: 2px;
+                background-color: #f5f5f5;
+              }
+            }
+          }
+        }
+        .tab-content {
+          z-index: 1;
+          .tab-pane {
+            border: 1px solid #D4D4D5;
+            border-radius: 2px;
+            padding: 10.5px 10px 0 10px;
+            &:first-child.active {
+              border-top-left-radius: 0;
+            }
+            &:last-child.active {
+              border-bottom-left-radius: 0;
+            }
+            .btn {
+              font-weight: 400;
+              border-radius: 2px;
+            }
+            .btn-disabled {
+              background-color: #AAAAAA;
+              color: #333;
+            }
+          }
+        }
+      }
+      &.active {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        p.lead {
+          display: none;
+        }
+        .card-header {
+          display: flex;
+        }
+        ul {
+          display: flex;
+          flex-wrap: wrap;
+        }
       }
     }
   }

@@ -8,7 +8,7 @@
     <div class="dropdown ml-auto">
       <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">#{login.loggedUsername}</button>
       <div class="dropdown-menu dropdown-menu-right">
-        <h:panelGroup rendered="#{!session.getAttribute('userType') eq 'admin'}">
+        <h:panelGroup rendered="#{session.getAttribute('userType') ne 'admin'}">
           <div class="dropdown-item">
             <a href="#{facesContext.externalContext.requestContextPath}/view/profile"><i class="fa fa-user-o"></i>#{messages["header.profile"]}</a>
           </div>
