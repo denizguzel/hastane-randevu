@@ -1,3 +1,10 @@
+.gradient {
+  header .navbar .navbar-collapse .navbar-nav .nav-item .nav-link,
+  .language .bootstrap-select .dropdown-toggle {
+    color: $white;
+  }
+}
+
 header {
   background-color: $white;
   .navbar {
@@ -21,8 +28,6 @@ header {
       .dropdown-toggle {
         color: $black;
         padding: 7px;
-        font-weight: 300;
-        border-bottom: 1px solid #ddd;
         background-color: transparent;
         font-size: 14px;
         i {
@@ -30,9 +35,6 @@ header {
         }
         &:focus {
           box-shadow: none;
-        }
-        &::after {
-          content: none;
         }
       }
       .dropdown-menu {
@@ -78,8 +80,6 @@ header {
             align-items: center;
             color: $black;
             padding: 7px;
-            font-weight: 300;
-            border-bottom: 1px solid #ddd;
           }
         }
       }

@@ -294,9 +294,9 @@
                   <h:message id="passwordMessage" for="password" errorClass="error"/>
                 </div>
                 <div class="form-group" data-message="">
-                  <h:inputSecret id="passwordConfirm" p:placeholder="#{messages['form.newPasswordAgain']}" required="#{not empty passwordConfirm}" requiredMessage="#{messages['form.newPasswordAgain']}" styleClass="form-control">
+                  <h:inputSecret id="passwordConfirm" p:placeholder="#{messages['form.newPasswordAgain']}" required="#{not empty passwordConfirm.value}" requiredMessage="#{messages['form.newPasswordAgain']}" styleClass="form-control">
                     <f:validator validatorId="password"/>
-                    <f:attribute name="otherValue" value="#{passwordConfirm}"/>
+                    <f:attribute name="otherValue" value="#{passwordConfirm.value}"/>
                     <f:ajax event="blur" execute="@this password" render="passwordMessage passwordConfirmMessage" onevent="ajaxCall"/>
                   </h:inputSecret>
                   <h:message id="passwordConfirmMessage" for="passwordConfirm" errorClass="error"/>

@@ -165,7 +165,7 @@ public class LoginBean {
 
   public void patientPasswordUpdate() {
     try {
-      patientModel.setPassword(Encryptor.encrypt(getPassword()));
+      patientModel.setPassword(Encryptor.encrypt(password));
       patientService.update(patientModel);
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("patient.changepassword.successful"), null));
     } catch(Exception e) {

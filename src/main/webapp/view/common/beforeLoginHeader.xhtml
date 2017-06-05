@@ -2,12 +2,12 @@
 <html lang="#{language.locale}" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
 <ui:composition>
   <ui:insert name="header">
-    <header>
+    <header style="#{pagebean.viewId ne '/index.xhtml' ? 'background-color:transparent;' : ''}">
       <div class="container">
         <nav class="navbar navbar-toggleable-sm">
           <div class="mobile-top">
             <a class="brand" href="#{facesContext.externalContext.requestContextPath}/">
-              <img src="#{facesContext.externalContext.requestContextPath}/resources/img/logo.png"/>
+              <img src="#{facesContext.externalContext.requestContextPath}/resources/img/#{pagebean.viewId ne '/index.xhtml' ? 'white-logo.png' : 'logo.png'}"/>
             </a>
             <h:panelGroup rendered="#{!login.verifyLogin}">
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">

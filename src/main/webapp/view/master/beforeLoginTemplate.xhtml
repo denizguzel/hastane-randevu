@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/css/scss/style.min.css"/>
   </h:head>
 
-  <h:body>
+  <h:body styleClass="#{pagebean.viewId ne '/index.xhtml' ? 'gradient' : ''}">
     <ui:include src="/view/common/beforeLoginHeader.xhtml"/>
     <ui:insert name="content"/>
     <ui:include src="/view/common/footer.xhtml"/>
