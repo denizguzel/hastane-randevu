@@ -10,164 +10,173 @@
           <button class="sidebar-toggler" type="button"><i class="fa fa-bars"></i></button>
         </div><!---->
 
-        <div class="card">
-          <div class="card-block">
-            <h:form styleClass="row search-form" prependId="false">
-              <!-- Appointment Search Form -->
-              <div class="col-lg-6">
-                <div class="row">
-                  <div class="col-xl-6">
-                    <div class="form-group">
-                      <label class="form-control-label">#{messages["label.selectCity"]}</label>
-                      <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedItems[0]}" p:data-live-search="true">
-                        <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeCity}" onevent="appointment"/>
-                        <f:selectItem itemLabel="#{messages['label.selectCity']}" itemValue=""/>
-                        <f:selectItems value="#{appointment.cities.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
-                      </h:selectOneMenu>
+        <h:form styleClass="row search-form" prependId="false">
+          <div class="card">
+            <div class="card-block">
+              <div class="row">
+                <!-- Appointment Search Form -->
+                <div class="col-lg-6">
+                  <div class="row">
+                    <div class="col-xl-6">
+                      <div class="form-group">
+                        <label class="form-control-label">#{messages["label.selectCity"]}</label>
+                        <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedItems[0]}" p:data-live-search="true">
+                          <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeCity}" onevent="appointment"/>
+                          <f:selectItem itemLabel="#{messages['label.selectCity']}" itemValue=""/>
+                          <f:selectItems value="#{appointment.cities.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
+                        </h:selectOneMenu>
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-xl-6">
-                    <div class="form-group">
-                      <label class="form-control-label">#{messages["label.selectDistrict"]}</label>
-                      <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedItems[1]}" p:data-live-search="true">
-                        <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeDistrict}" onevent="appointment"/>
-                        <f:selectItem itemLabel="#{messages['label.selectDistrict']}" itemValue=""/>
-                        <f:selectItems value="#{appointment.districts.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
-                      </h:selectOneMenu>
+                    <div class="col-xl-6">
+                      <div class="form-group">
+                        <label class="form-control-label">#{messages["label.selectDistrict"]}</label>
+                        <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedItems[1]}" p:data-live-search="true">
+                          <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeDistrict}" onevent="appointment"/>
+                          <f:selectItem itemLabel="#{messages['label.selectDistrict']}" itemValue=""/>
+                          <f:selectItems value="#{appointment.districts.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
+                        </h:selectOneMenu>
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-xl-6">
-                    <div class="form-group">
-                      <label class="form-control-label">#{messages['label.selectHospital']}</label>
-                      <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedItems[2]}">
-                        <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeHospital}" onevent="appointment"/>
-                        <f:selectItem itemLabel="#{messages['label.selectHospital']}" itemValue=""/>
-                        <f:selectItems value="#{appointment.hospitals.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
-                      </h:selectOneMenu>
+                    <div class="col-xl-6">
+                      <div class="form-group">
+                        <label class="form-control-label">#{messages['label.selectHospital']}</label>
+                        <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedItems[2]}">
+                          <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeHospital}" onevent="appointment"/>
+                          <f:selectItem itemLabel="#{messages['label.selectHospital']}" itemValue=""/>
+                          <f:selectItems value="#{appointment.hospitals.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
+                        </h:selectOneMenu>
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-xl-6">
-                    <div class="form-group">
-                      <label class="form-control-label">#{messages['label.selectPoliclinic']}</label>
-                      <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedItems[3]}" p:data-live-search="true">
-                        <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changePoliclinic}" onevent="appointment"/>
-                        <f:selectItem itemLabel="#{messages['label.selectPoliclinic']}" itemValue=""/>
-                        <f:selectItems value="#{appointment.policlinics.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
-                      </h:selectOneMenu>
+                    <div class="col-xl-6">
+                      <div class="form-group">
+                        <label class="form-control-label">#{messages['label.selectPoliclinic']}</label>
+                        <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedItems[3]}" p:data-live-search="true">
+                          <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changePoliclinic}" onevent="appointment"/>
+                          <f:selectItem itemLabel="#{messages['label.selectPoliclinic']}" itemValue=""/>
+                          <f:selectItems value="#{appointment.policlinics.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
+                        </h:selectOneMenu>
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-xl-6">
-                    <div class="form-group">
-                      <label class="form-control-label">#{messages['label.selectInspectionPlace']}</label>
-                      <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedItems[4]}">
-                        <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeInspectionPlace}" onevent="appointment"/>
-                        <f:selectItem itemLabel="#{messages['label.selectInspectionPlace']}" itemValue=""/>
-                        <f:selectItems value="#{appointment.inspectionPlaces.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
-                      </h:selectOneMenu>
+                    <div class="col-xl-6">
+                      <div class="form-group">
+                        <label class="form-control-label">#{messages['label.selectInspectionPlace']}</label>
+                        <h:selectOneMenu styleClass="selectpicker form-control" value="#{appointment.selectedItems[4]}">
+                          <f:ajax execute="@form" event="change" render="@form" listener="#{appointment.changeInspectionPlace}" onevent="appointment"/>
+                          <f:selectItem itemLabel="#{messages['label.selectInspectionPlace']}" itemValue=""/>
+                          <f:selectItems value="#{appointment.inspectionPlaces.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
+                        </h:selectOneMenu>
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-xl-6">
-                    <div class="form-group">
-                      <label class="form-control-label">#{messages['label.selectDateRange']}</label>
-                      <div class="row">
-                        <div class="col-6">
-                          <h:inputText id="appointmentDateStart" value="#{appointment.appointmentDateStart}" p:placeholder="#{messages['form.startDate']}" styleClass="form-control">
-                            <f:convertDateTime pattern="dd-MM-yyyy"/>
-                          </h:inputText>
-                        </div>
-                        <div class="col-6">
-                          <h:inputText id="appointmentDateEnd" value="#{appointment.appointmentDateEnd}" p:placeholder="#{messages['form.endDate']}" styleClass="form-control">
-                            <f:convertDateTime pattern="dd-MM-yyyy"/>
-                          </h:inputText>
+                    <div class="col-xl-6">
+                      <div class="form-group">
+                        <label class="form-control-label">#{messages['label.selectDateRange']}</label>
+                        <div class="row">
+                          <div class="col-6">
+                            <h:inputText id="appointmentDateStart" value="#{appointment.appointmentDateStart}" p:placeholder="#{messages['form.startDate']}" styleClass="form-control">
+                              <f:convertDateTime pattern="dd-MM-yyyy"/>
+                            </h:inputText>
+                          </div>
+                          <div class="col-6">
+                            <h:inputText id="appointmentDateEnd" value="#{appointment.appointmentDateEnd}" p:placeholder="#{messages['form.endDate']}" styleClass="form-control">
+                              <f:convertDateTime pattern="dd-MM-yyyy"/>
+                            </h:inputText>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="buttons">
-                  <h:commandButton id="appointment-search" value="#{messages['button.search']}" styleClass="btn btn-success mr-3" action="#{appointment.searchAppointment}">
-                    <f:ajax execute="@form" render="@form" onevent="appointment"/>
-                  </h:commandButton>
-                  <h:commandButton value="#{messages['button.cleanSearch']}" styleClass="btn btn-success" action="#{appointment.clearSearch}">
-                    <f:ajax execute="@this" render="@form" onevent="appointment"/>
-                  </h:commandButton>
-                </div>
-              </div><!---->
+                  <div class="buttons">
+                    <h:commandButton id="appointment-search" value="#{messages['button.search']}" styleClass="btn btn-success mr-3" action="#{appointment.searchAppointment}">
+                      <f:ajax execute="@form" render="@form" onevent="appointment"/>
+                    </h:commandButton>
+                    <h:commandButton value="#{messages['button.cleanSearch']}" styleClass="btn btn-success" action="#{appointment.clearSearch}">
+                      <f:ajax execute="@this" render="@form" onevent="appointment"/>
+                    </h:commandButton>
+                  </div>
+                </div><!---->
 
-              <!-- Appointment Clock Panel -->
-              <div class="col-lg-6 mt-4 mt-lg-0">
-                <h:panelGroup layout="block" id="appointmentTimes" class="appointment-clocks#{appointment.appointmentClockPanel ? ' active' : ''}">
-                  <p class="lead">#{messages['card.appointmentSearchInfo']}</p>
-                  <h4>#{messages['card.appointmentTimes']}</h4>
-                  <ul class="nav nav-tabs" id="week-tabs">
-                    <c:forEach items="#{appointment.appointmentDays}" var="day" varStatus="dayIndex">
-                      <li class="nav-item">
-                        <h:outputLink styleClass="nav-link#{dayIndex.index eq 0 ? ' active' : ''}" p:data-toggle="tab" value="#day#{dayIndex.index}">
-                          <h:outputText value="#{day.appointmentDate}">
-                            <f:convertDateTime timeZone="GMT+3" pattern="dd-MM-yyyy"/>
-                          </h:outputText>
-                        </h:outputLink>
-                      </li>
-                    </c:forEach>
-                  </ul>
-                  <div class="tab-content">
-                    <c:forEach items="#{appointment.appointmentTimes}" var="row" varStatus="rowIndex">
-                      <div class="tab-pane fade#{rowIndex.index eq 0 ? ' show active' : ''}" id="day#{rowIndex.index}">
-                        <ul>
-                          <c:forEach items="#{row}" var="col" varStatus="colIndex">
-                            <li class="nav-item">
-                              <h:panelGroup layout="block" styleClass="tooltip-wrapper" rendered="#{col.appointmentStatus != 'NOT_RESERVED'}" p:data-toggle="tooltip" p:data-placement="top" p:title="#{messages['tooltip.appointment']}">
-                                <h:outputText styleClass="btn btn-secondary area-disabled" value="#{col.appointmentDate}">
-                                  <f:convertDateTime timeZone="GMT+3" pattern="HH:mm"/>
-                                </h:outputText>
-                              </h:panelGroup>
-                              <h:commandLink rendered="#{col.appointmentStatus eq 'NOT_RESERVED'}" styleClass="btn btn-success btn-popover">
-                                <f:ajax execute="@this"/>
-                                <f:setPropertyActionListener value="#{col}" target="#{appointment.appointmentModel}"/>
-                                <h:outputText styleClass="d-inline-block" value="#{col.appointmentDate}">
-                                  <f:convertDateTime timeZone="GMT+3" pattern="HH:mm"/>
-                                </h:outputText>
-                                <h:outputText styleClass="d-none" value="#{col.appointmentDate}">
-                                  <f:convertDateTime timeZone="GMT+3" pattern="dd-MM-yyyy HH:mm"/>
-                                </h:outputText>
-                              </h:commandLink>
-                            </li>
-                          </c:forEach>
-                        </ul>
+                <!-- Appointment Clock Panel -->
+                <div class="col-lg-6 mt-4 mt-lg-0">
+                  <h:panelGroup layout="block" id="appointmentTimes" class="appointment-clocks#{appointment.appointmentClockPanel ? ' active' : ''}">
+                    <p class="lead">#{messages['card.appointmentSearchInfo']}</p>
+                    <h4>#{messages['card.appointmentTimes']}</h4>
+                    <ul class="nav nav-tabs" id="week-tabs">
+                      <c:forEach items="#{appointment.appointmentDays}" var="day" varStatus="dayIndex">
+                        <li class="nav-item">
+                          <h:outputLink styleClass="nav-link#{dayIndex.index eq 0 ? ' active' : ''}" p:data-toggle="tab" value="#day#{dayIndex.index}">
+                            <h:outputText value="#{day.appointmentDate}">
+                              <f:convertDateTime timeZone="GMT+3" pattern="dd-MM-yyyy"/>
+                            </h:outputText>
+                          </h:outputLink>
+                        </li>
+                      </c:forEach>
+                    </ul>
+                    <div class="tab-content">
+                      <c:forEach items="#{appointment.appointmentTimes}" var="row" varStatus="rowIndex">
+                        <div class="tab-pane fade#{rowIndex.index eq 0 ? ' show active' : ''}" id="day#{rowIndex.index}">
+                          <ul>
+                            <c:forEach items="#{row}" var="col" varStatus="colIndex">
+                              <li class="nav-item">
+                                <h:panelGroup layout="block" styleClass="tooltip-wrapper" rendered="#{col.appointmentStatus != 'NOT_RESERVED'}" p:data-toggle="tooltip" p:data-placement="top" p:title="#{messages['tooltip.appointment']}">
+                                  <h:outputText styleClass="btn btn-secondary area-disabled" value="#{col.appointmentDate}">
+                                    <f:convertDateTime timeZone="GMT+3" pattern="HH:mm"/>
+                                  </h:outputText>
+                                </h:panelGroup>
+                                <h:commandLink rendered="#{col.appointmentStatus eq 'NOT_RESERVED'}" styleClass="btn btn-success btn-popover">
+                                  <f:ajax execute="@this"/>
+                                  <f:setPropertyActionListener value="#{col}" target="#{appointment.appointmentModel}"/>
+                                  <h:outputText styleClass="d-inline-block" value="#{col.appointmentDate}">
+                                    <f:convertDateTime timeZone="GMT+3" pattern="HH:mm"/>
+                                  </h:outputText>
+                                  <h:outputText styleClass="d-none" value="#{col.appointmentDate}">
+                                    <f:convertDateTime timeZone="GMT+3" pattern="dd-MM-yyyy HH:mm"/>
+                                  </h:outputText>
+                                </h:commandLink>
+                              </li>
+                            </c:forEach>
+                          </ul>
+                        </div>
+                      </c:forEach>
+                    </div>
+                    <div class="popover-title d-none">#{messages['popover.title']}</div>
+                    <div class="popover-content d-none">
+                      <div class="popover-row">
+                        <label>#{messages['label.hospital']}</label>
+                        <span class="popover-hospital"></span>
                       </div>
-                    </c:forEach>
-                  </div>
-                  <div class="popover-title d-none">#{messages['popover.title']}</div>
-                  <div class="popover-content d-none">
-                    <div class="popover-row">
-                      <label>#{messages['label.hospital']}</label>
-                      <span class="popover-hospital"></span>
+                      <div class="popover-row">
+                        <label>#{messages['label.policlinic']}</label>
+                        <span class="popover-policlinic"></span>
+                      </div>
+                      <div class="popover-row">
+                        <label>#{messages['label.inspectionPlace']}</label>
+                        <span class="popover-place"></span>
+                      </div>
+                      <div class="popover-row">
+                        <label>#{messages['label.doctor']}</label>
+                        <span class="popover-doctor"></span>
+                      </div>
+                      <div class="popover-row">
+                        <label>#{messages['label.appointmentDate']}</label>
+                        <span class="d-block popover-date"></span>
+                      </div>
+                      <h:commandLink value="#{messages['button.takeAppointment']}" styleClass="btn btn-sm btn-success" p:data-toggle="modal" p:data-target="#appointment-modal" p:data-backdrop="static" p:data-keyboard="false" action="#{appointment.holdAppointment}">
+                        <f:ajax execute="@this"/>
+                      </h:commandLink>
                     </div>
-                    <div class="popover-row">
-                      <label>#{messages['label.policlinic']}</label>
-                      <span class="popover-policlinic"></span>
-                    </div>
-                    <div class="popover-row">
-                      <label>#{messages['label.inspectionPlace']}</label>
-                      <span class="popover-place"></span>
-                    </div>
-                    <div class="popover-row">
-                      <label>#{messages['label.doctor']}</label>
-                      <span class="popover-doctor"></span>
-                    </div>
-                    <div class="popover-row">
-                      <label>#{messages['label.appointmentDate']}</label>
-                      <span class="d-block popover-date"></span>
-                    </div>
-                    <h:commandLink value="#{messages['button.takeAppointment']}" styleClass="btn btn-sm btn-success" p:data-toggle="modal" p:data-target="#appointment-modal" p:data-backdrop="static" p:data-keyboard="false" action="#{appointment.holdAppointment}">
-                      <f:ajax execute="@this"/>
-                    </h:commandLink>
-                  </div>
-                </h:panelGroup>
-              </div><!---->
+                  </h:panelGroup>
+                </div><!---->
 
+                <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="card mt-4#{appointment.appointmentPanel ? '' : ' d-none'}">
+            <div class="card-block">
               <!-- Available Appointment Table -->
-              <h:panelGroup layout="block" id="appointmentTable" styleClass="col-12 mt-4#{appointment.appointmentPanel ? '' : ' d-none'}">
+              <h:panelGroup layout="block" id="appointmentTable">
                 <h3 class="text-center#{appointment.appointmentSearchNull ? '' : ' d-none'}">#{messages['card.appointmentNull']}</h3>
                 <div class="table-responsive#{appointment.appointmentSearchNull ? ' d-none' : ''}">
                   <h:dataTable styleClass="table" rowClasses="table-row" binding="#{table}" value="#{appointment.appointmentsHeaders}" var="appointmentsHeader">
@@ -195,10 +204,9 @@
                   </h:dataTable>
                 </div>
               </h:panelGroup><!---->
-              <h:messages globalOnly="true" styleClass="global-message" errorClass="error" infoClass="info"/>
-            </h:form>
+            </div>
           </div>
-        </div>
+        </h:form>
       </div>
     </div>
 
