@@ -14,18 +14,18 @@
           <div class="card-block">
             <h:form prependId="false">
               <div class="table-responsive">
-                <h:dataTable styleClass="table" binding="#{table}" value="#{doctor.appointmentHistory}" var="history">
+                <h:dataTable styleClass="table" binding="#{table}" value="#{doctor.patientNotes}" var="note">
                   <h:column>
                     <f:facet name="header">#</f:facet>
                     <h:outputText value="#{table.rowIndex + 1}"/>
                   </h:column>
                   <h:column>
                     <f:facet name="header">#{messages['label.patientName']}</f:facet>
-                    <h:outputText value="#{history.patient.firstName} #{history.patient.lastName}"/>
+                    <h:outputText value="#{note.patient.firstName} #{note.patient.lastName}"/>
                   </h:column>
                   <h:column>
                     <f:facet name="header">#{messages['label.patientNote']}</f:facet>
-                    <h:outputText value="#{history.messageToDoctor eq null ? messages['label.nullNote'] : history.messageToDoctor}"/>
+                    <h:outputText value="#{note.messageToDoctor}"/>
                   </h:column>
                 </h:dataTable>
               </div>

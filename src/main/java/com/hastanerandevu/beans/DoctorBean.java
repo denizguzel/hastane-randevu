@@ -14,9 +14,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 @ManagedBean(name = "doctor")
 @ViewScoped
@@ -39,6 +41,7 @@ public class DoctorBean {
   private String password;
 
   private List<AppointmentModel> appointmentHistory;
+  private List<AppointmentModel> patientNotes;
   private List<PatientAlergyRelModel> patientAlergies;
   private List<PatientAssayRelModel> patientAssays;
   private List<PatientDiseaseRelModel> patientDiseases;
@@ -51,11 +54,13 @@ public class DoctorBean {
 
     appointmentModel = new AppointmentModel();
 
-    appointmentHistory = new LinkedList<>();
+    appointmentHistory = new ArrayList<>();
     patientAlergies = new LinkedList<>();
     patientAssays = new LinkedList<>();
     patientDiseases = new LinkedList<>();
     doctorReviews = new LinkedList<>();
+
+    patientNotes = new ArrayList<>();
 
     if(SessionUtils.getSession().getAttribute("userType").equals("doctor")) {
       doctorModel = loginBean.getDoctorModel();
@@ -63,6 +68,8 @@ public class DoctorBean {
       appointmentHistory.addAll(doctorService.getAppointmentHistoryByDoctor(doctorModel));
       appointmentCount = appointmentHistory.size();
       remainingAppointment = doctorService.remainingAppointment(doctorModel);
+
+      patientNotes = appointmentHistory.stream().filter(p -> p.getMessageToDoctor() != null).collect(Collectors.toList());
 
       doctorReviews.addAll(reviewsAboutDoctorsService.getReviewsAboutDoctor(doctorModel));
     }
@@ -134,6 +141,14 @@ public class DoctorBean {
 
   public void setLoginBean(LoginBean loginBean) {
     this.loginBean = loginBean;
+  }
+
+  public List<AppointmentModel> getPatientNotes() {
+    return patientNotes;
+  }
+
+  public void setPatientNotes(List<AppointmentModel> patientNotes) {
+    this.patientNotes = patientNotes;
   }
 
   private void clearListComponentsWithChange(List... lists) {
