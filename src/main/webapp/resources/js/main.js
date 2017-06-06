@@ -459,7 +459,7 @@ $(".sidebar-toggler").click(function () {
 
 $("nav.sidebar .close").click(function () {
   $("nav.sidebar").removeClass("active");
-  $("body").css("overflow", "hidden");
+  $("body").css("overflow", "auto");
 });
 
 $(".navbar-toggler").click(function () {
@@ -469,7 +469,7 @@ $(".navbar-toggler").click(function () {
 
 $("header .navbar .bottom .close").click(function () {
   $("header .navbar .bottom").removeClass("active");
-  $("body").css("overflow", "hidden");
+  $("body").css("overflow", "auto");
 });
 
 $("#edit-comment").on("show.bs.modal", function (event) {
