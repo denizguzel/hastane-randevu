@@ -4,49 +4,53 @@
   <ui:insert name="header">
     <header style="#{pagebean.viewId ne '/index.xhtml' ? 'background-color:transparent;' : ''}">
       <div class="container">
-        <nav class="navbar navbar-toggleable-sm">
-          <div class="mobile-top">
+        <nav class="navbar">
+          <div class="top">
             <a class="brand" href="#{facesContext.externalContext.requestContextPath}/">
               <img src="#{facesContext.externalContext.requestContextPath}/resources/img/#{pagebean.viewId ne '/index.xhtml' ? 'white-logo.png' : 'logo.png'}"/>
             </a>
+            <h:form prependId="false" styleClass="language">
+              <h:selectOneMenu styleClass="form-control selectpicker" value="#{language.locale}" valueChangeListener="#{language.localeChanged}" onchange="submit()">
+                <f:selectItems value="#{language.countries}"/>
+              </h:selectOneMenu>
+            </h:form>
             <h:panelGroup rendered="#{!login.verifyLogin}">
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
-                <i class="fa fa-bars"></i>
-              </button>
+              <button class="navbar-toggler" type="button"><i class="fa fa-bars"></i></button>
             </h:panelGroup>
-            <h:panelGroup layout="block" rendered="#{login.verifyLogin}">
-              <div class="dropdown ml-auto">
-                <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">#{login.loggedUsername}</button>
-                <div class="dropdown-menu dropdown-menu-right">
-                  <div class="dropdown-item">
-                    <a href="#{facesContext.externalContext.requestContextPath}/view"><i class="fa fa-user-o"></i>#{messages["header.profile"]}</a>
-                  </div>
-                  <div class="dropdown-item">
-                    <h:form prependId="false">
-                      <h:commandLink action="#{login.logout}"><i class="fa fa-sign-out"></i>#{messages["header.logout"]}</h:commandLink>
-                    </h:form>
-                  </div>
-                </div>
+          </div>
+          <div class="bottom">
+            <button type="button" class="close"></button>
+            <a href="#{facesContext.externalContext.requestContextPath}/" class="brand">
+              <img src="#{facesContext.externalContext.requestContextPath}/resources/img/logo.png"/>
+            </a>
+            <h:panelGroup layout="block" rendered="#{!login.verifyLogin}">
+              <div class="navbar-collapse">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" href="#{facesContext.externalContext.requestContextPath}/login/patient"><i class="fa fa-calendar-plus-o"></i>#{messages["header.bookappointment"]}</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#{facesContext.externalContext.requestContextPath}/login/doctor"><i class="fa fa-user-md"></i>#{messages["header.doctorlogin"]}</a>
+                  </li>
+                </ul>
               </div>
             </h:panelGroup>
           </div>
-          <h:panelGroup layout="block" rendered="#{!login.verifyLogin}">
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav">
-                <li class="nav-item">
-                  <a class="nav-link" href="#{facesContext.externalContext.requestContextPath}/login/patient">#{messages["header.bookappointment"]}</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#{facesContext.externalContext.requestContextPath}/login/doctor">#{messages["header.doctorlogin"]}</a>
-                </li>
-              </ul>
+          <h:panelGroup layout="block" rendered="#{login.verifyLogin}">
+            <div class="dropdown">
+              <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">#{login.loggedUsername}</button>
+              <div class="dropdown-menu dropdown-menu-right">
+                <div class="dropdown-item">
+                  <a href="#{facesContext.externalContext.requestContextPath}/view"><i class="fa fa-user-o"></i>#{messages["header.profile"]}</a>
+                </div>
+                <div class="dropdown-item">
+                  <h:form prependId="false">
+                    <h:commandLink action="#{login.logout}"><i class="fa fa-sign-out"></i>#{messages["header.logout"]}</h:commandLink>
+                  </h:form>
+                </div>
+              </div>
             </div>
           </h:panelGroup>
-          <h:form prependId="false" styleClass="language">
-            <h:selectOneMenu styleClass="form-control selectpicker" value="#{language.locale}" valueChangeListener="#{language.localeChanged}" onchange="submit()">
-              <f:selectItems value="#{language.countries}"/>
-            </h:selectOneMenu>
-          </h:form>
         </nav>
       </div>
     </header>

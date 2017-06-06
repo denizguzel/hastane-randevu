@@ -1,7 +1,7 @@
 .gradient {
-  header .navbar .navbar-collapse .navbar-nav .nav-item .nav-link,
+  header .navbar .bottom .navbar-collapse .navbar-nav .nav-item .nav-link,
   .language .bootstrap-select .dropdown-toggle,
-  header .navbar-toggleable-sm .mobile-top .navbar-toggler{
+  header .top .navbar-toggler{
     color: $white;
   }
 }
@@ -13,15 +13,42 @@ header {
     flex-direction: row;
     align-items: stretch;
     padding: 5px 0;
-    .mobile-top {
+    .top {
       display: inherit;
-      flex-wrap: wrap;
-      justify-content: center;
-      width: 100%;
+      .brand {
+        align-items: center;
+        display: inherit;
+      }
+      .navbar-toggler {
+        display: none;
+      }
     }
-    .brand {
-      align-items: center;
+    .bottom {
       display: inherit;
+      align-items: center;
+      margin-left: auto;
+      .close,
+      .brand {
+        display: none;
+      }
+      .navbar-collapse {
+        display: inherit;
+        .navbar-nav {
+          flex-direction: row;
+          .nav-item {
+            margin-left: 10px;
+            .nav-link {
+              display: inherit;
+              align-items: center;
+              color: $black;
+              padding: 7px;
+              i {
+                display: none;
+              }
+            }
+          }
+        }
+      }
     }
     .dropdown {
       display: inherit;
@@ -65,22 +92,6 @@ header {
           }
           &:active {
             background-color: #F8F8F8;
-          }
-        }
-      }
-    }
-    .navbar-collapse {
-      margin-left: auto;
-      .navbar-nav {
-        margin-left: auto;
-        align-items: center;
-        .nav-item {
-          margin-left: 10px;
-          .nav-link {
-            display: inherit;
-            align-items: center;
-            color: $black;
-            padding: 7px;
           }
         }
       }

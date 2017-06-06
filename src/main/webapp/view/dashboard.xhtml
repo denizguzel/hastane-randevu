@@ -307,7 +307,9 @@
     </h:panelGroup>
   </ui:define>
   <ui:define name="js">
-    <!-- Google Map Js -->
-    <script async="async" defer="defer" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlyHFSSNyn4Jd6d1t2gFtlIX5clKpNsAE&amp;libraries=places"></script><!---->
+    <h:panelGroup rendered="#{session.getAttribute('userType') eq 'patient'}">
+      <!-- Google Map Js -->
+      <script async="async" defer="defer" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlyHFSSNyn4Jd6d1t2gFtlIX5clKpNsAE&amp;libraries=places"></script><!---->
+    </h:panelGroup>
   </ui:define>
 </ui:composition>

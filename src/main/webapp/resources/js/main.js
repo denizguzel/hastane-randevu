@@ -454,10 +454,22 @@ window.onload = function () {
 
 $(".sidebar-toggler").click(function () {
   $("nav.sidebar").addClass("active");
+  $("body").css("overflow", "hidden");
 });
 
 $("nav.sidebar .close").click(function () {
   $("nav.sidebar").removeClass("active");
+  $("body").css("overflow", "hidden");
+});
+
+$(".navbar-toggler").click(function () {
+  $("header .navbar .bottom").addClass("active");
+  $("body").css("overflow", "hidden");
+});
+
+$("header .navbar .bottom .close").click(function () {
+  $("header .navbar .bottom").removeClass("active");
+  $("body").css("overflow", "hidden");
 });
 
 $("#edit-comment").on("show.bs.modal", function (event) {
