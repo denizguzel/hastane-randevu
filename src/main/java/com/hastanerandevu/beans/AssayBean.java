@@ -118,8 +118,4 @@ public class AssayBean {
     FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
     return "/view/assay?faces-redirect=true";
   }
-
-  private void populateAssays() {
-
-  }
 }

@@ -8,9 +8,6 @@ import com.hastanerandevu.listeners.Updatable;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * Created by ouzun on 4.06.2017.
- */
 @Entity
 @EntityListeners({
   CreationTimeListener.class,

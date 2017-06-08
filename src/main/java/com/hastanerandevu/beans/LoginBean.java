@@ -190,7 +190,7 @@ public class LoginBean {
     String loginCheck = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("loginCheck");
     SessionUtils.getSession().setAttribute("userType", loginCheck);
 
-    if(loginCheck.equals("patient")) {
+    if("patient".equals(loginCheck)) {
       patientModel = ((patientModel = patientService.loginPatient(patientModel)) != null) ? patientModel : null;
       if(patientModel != null) {
         setLoggerUserAndSession(patientModel.getName());
@@ -212,7 +212,7 @@ public class LoginBean {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("check.information"), null));
         return "/login/patient";
       }
-    } else if(loginCheck.equals("doctor")) {
+    } else if("doctor".equals(loginCheck)) {
       doctorModel = ((doctorModel = doctorService.loginDoctor(doctorModel)) != null) ? doctorModel : null;
       if(doctorModel != null) {
         setLoggerUserAndSession(doctorModel.getName());
@@ -234,7 +234,7 @@ public class LoginBean {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, bundle.getString("check.information"), null));
         return "/login/doctor";
       }
-    } else if(loginCheck.equals("admin")) {
+    } else if("admin".equals(loginCheck)) {
       adminModel = ((adminModel = adminService.loginAdmin(adminModel)) != null) ? adminModel : null;
       if(adminModel != null) {
         setLoggerUserAndSession(adminModel.getUserId());

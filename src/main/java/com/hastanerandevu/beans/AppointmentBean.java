@@ -50,15 +50,6 @@ public class AppointmentBean {
   private boolean appointmentSearchNull = false;
 
   private String[] selectedItems = new String[5];
-
-  public String[] getSelectedItems() {
-    return selectedItems;
-  }
-
-  public void setSelectedItems(String[] selectedItems) {
-    this.selectedItems = selectedItems;
-  }
-
   private String daysLeft;
   private String doctorComment;
 
@@ -275,6 +266,14 @@ public class AppointmentBean {
   }
 
   // Functions
+  public String[] getSelectedItems() {
+    return selectedItems;
+  }
+
+  public void setSelectedItems(String[] selectedItems) {
+    this.selectedItems = selectedItems;
+  }
+
   private void clearMapComponentsWithChange(Map... maps) {
     for(Map map : maps) {
       map.clear();

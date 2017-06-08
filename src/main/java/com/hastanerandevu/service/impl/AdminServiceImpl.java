@@ -6,12 +6,9 @@ import com.hastanerandevu.service.BaseService;
 
 import java.util.List;
 
-/**
- * Created by ouzun on 4.06.2017.
- */
 public class AdminServiceImpl implements BaseService<AdminModel> {
 
-  AdminDaoImpl adminDao = new AdminDaoImpl();
+  private AdminDaoImpl adminDao = new AdminDaoImpl();
 
   @Override
   public void create(AdminModel model) {

@@ -107,14 +107,14 @@ $("#appointmentDateEnd").on("dp.change", function (e) {
 });
 
 // Swiper
-new Swiper("#swiper-main", {
+var swiperMain = new Swiper("#swiper-main", {
   pagination: ".swiper-pagination",
   paginationClickable: true,
   autoplay: 3000,
   autoplayDisableOnInteraction: false
 });
 
-new Swiper("#swiper-survey", {
+var swiperSurvey = new Swiper("#swiper-survey", {
   autoplay: 3000,
   autoplayDisableOnInteraction: false,
   observer: true
@@ -399,8 +399,9 @@ function nameSplit() {
   $(".comment").each(function () {
     var name = "";
     var text = $(this).find(".name").text().split(" ");
-    for (var i = 0; i < text.length; i++)
+    for (var i = 0; i < text.length; i++) {
       name += text[i].substr(0, 1);
+    }
 
     $(this).find(".avatar").text(name);
   });
@@ -440,7 +441,7 @@ window.onload = function () {
 
     geocoder = new google.maps.Geocoder();
     geocoder.geocode({"address": hospitalName}, function (results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
+      if (status === google.maps.GeocoderStatus.OK) {
         mapOptions.center = results[0].geometry.location;
         map = new google.maps.Map(element, mapOptions);
         marker = new google.maps.Marker({

@@ -19,18 +19,13 @@ public class AdminBean {
 
   private ResourceBundle bundle = ResourceBundle.getBundle("com.hastanerandevu.messages", FacesContext.getCurrentInstance().getViewRoot().getLocale(), new UTF8Control());
 
-  private AdminModel adminModel;
   private SurveyModel surveyModel;
-  private OptionModel optionModel;
   private FrequentlyAskedQuestionsModel frequentlyAskedQuestionsModel;
-  private ReviewsAboutDoctorsModel reviewsAboutDoctorsModel;
 
-  private AdminServiceImpl adminService;
   private SurveyServiceImpl surveyService;
   private OptionServiceImpl optionService;
   private FrequentlyAskedQuestionsServiceImpl frequentlyAskedQuestionsService;
   private PatientServiceImpl patientService;
-  private AppointmentServiceImpl appointmentService;
   private ReviewsAboutDoctorsServiceImpl reviewsAboutDoctorsService;
 
   private List<FrequentlyAskedQuestionsModel> askedQuestions;
@@ -40,18 +35,13 @@ public class AdminBean {
 
   @PostConstruct
   public void init() {
-    adminModel = new AdminModel();
     surveyModel = new SurveyModel();
-    optionModel = new OptionModel();
     frequentlyAskedQuestionsModel = new FrequentlyAskedQuestionsModel();
-    reviewsAboutDoctorsModel = new ReviewsAboutDoctorsModel();
 
-    adminService = new AdminServiceImpl();
     surveyService = new SurveyServiceImpl();
     frequentlyAskedQuestionsService = new FrequentlyAskedQuestionsServiceImpl();
     optionService = new OptionServiceImpl();
     patientService = new PatientServiceImpl();
-    appointmentService = new AppointmentServiceImpl();
     reviewsAboutDoctorsService = new ReviewsAboutDoctorsServiceImpl();
 
     askedQuestions = new ArrayList<>();
